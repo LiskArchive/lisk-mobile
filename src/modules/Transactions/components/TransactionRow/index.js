@@ -5,11 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'hooks/useTheme';
 import { stringShortener } from 'utilities/helpers';
+import { fromRawLsk } from 'utilities/conversions';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionRowStyles from './styles';
 import { TransactionAmount, TransactionStatus } from './components';
+import DiscreteModeComponent from '../../../../components/shared/DiscreteModeComponent';
 
 export default function TransactionRow({ transaction }) {
   const navigation = useNavigation();
@@ -42,7 +44,12 @@ export default function TransactionRow({ transaction }) {
       </View>
 
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
-        <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />
+        <DiscreteModeComponent
+          blurVariant={transactionAssets.amount.sign === '-' ? 'outgoing' : 'incoming'}
+          data={transaction.notRawLisk ? transaction.amount : fromRawLsk(transaction.params.amount)}
+        >
+          <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />
+        </DiscreteModeComponent>
 
         <TransactionStatus transaction={transaction} />
       </View>

@@ -50,8 +50,8 @@ export default function Home() {
       })
     );
   };
-  const requestTokens = () => navigation.navigate('Request');
-  const sendTokens = () => navigation.navigate('Send');
+  const handleRequestTokensClick = () => navigation.navigate('Request');
+  const handleSendTokensClick = () => navigation.navigate('Send');
 
   return (
     <>
@@ -92,11 +92,14 @@ export default function Home() {
             </View>
 
             <View style={[styles.row, styles.buttonContainer]}>
-              <TouchableOpacity style={[styles.button]} onPress={requestTokens}>
+              <TouchableOpacity style={[styles.button]} onPress={handleRequestTokensClick}>
                 <P style={[styles.buttonText]}>Request</P>
               </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
+              <TouchableOpacity
+                style={[styles.button, styles.sendButton]}
+                onPress={handleSendTokensClick}
+              >
                 <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
               </TouchableOpacity>
             </View>
