@@ -11,8 +11,7 @@ export default function getSendTokenSummaryStepStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
+        padding: boxes.boxPadding,
       },
     },
     [themes.light]: {

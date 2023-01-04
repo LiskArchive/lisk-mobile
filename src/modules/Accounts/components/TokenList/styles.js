@@ -10,6 +10,9 @@ export default function getTokenListStyles() {
         justifyContent: 'space-between',
         marginBottom: 8,
       },
+      headerExtraMargin: {
+        marginBottom: 24,
+      },
       tabsContainer: {
         flexDirection: 'row',
       },

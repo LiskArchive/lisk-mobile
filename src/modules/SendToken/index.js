@@ -7,14 +7,18 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'hooks/useTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
+import DataRenderer from 'components/shared/DataRenderer';
+import ResultScreen from 'components/screens/ResultScreen';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
+import { P } from 'components/shared/toolBox/typography';
+import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
-import { getSendTokenStyles } from './styles';
+import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
-import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
-import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
+import { getSendTokenStyles } from './styles';
 
 export default function SendToken({ route }) {
   const navigation = useNavigation();
@@ -66,15 +70,33 @@ export default function SendToken({ route }) {
         containerStyle={[styles.header]}
       />
 
-      {accountIsMultisignature ? (
-        <SendTokenOnMultisignatureAccount />
-      ) : (
-        <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
-          {steps.map((step) => (
-            <step.component key={step.title} route={route} form={form} transaction={transaction} />
-          ))}
-        </Stepper>
-      )}
+      <DataRenderer
+        data={transaction}
+        isLoading={transaction.isLoading}
+        error={transaction.isError}
+        renderData={(data) => (
+          <>
+            {accountIsMultisignature ? (
+              <SendTokenOnMultisignatureAccount />
+            ) : (
+              <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
+                {steps.map((step) => (
+                  <step.component key={step.title} route={route} form={form} transaction={data} />
+                ))}
+              </Stepper>
+            )}
+          </>
+        )}
+        renderLoading={() => (
+          <P style={[styles.loadingText, styles.theme.loadingText]}>Loading...</P>
+        )}
+        renderError={() => (
+          <ResultScreen
+            illustration={<ErrorIllustrationSvg />}
+            description={'Error loading transaction data. Please try again.'}
+          />
+        )}
+      />
     </SafeAreaView>
   );
 }

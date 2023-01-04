@@ -18,7 +18,7 @@ export function useAccountTransactionsQueryParams({ config: customConfig = {} } 
     ...customConfig,
     params: {
       limit: LIMIT,
-      senderAddress: currentAccount.metadata.address,
+      address: currentAccount.metadata.address,
       ...(customConfig?.params || {}),
     },
   };

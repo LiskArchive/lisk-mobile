@@ -1,10 +1,11 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
+import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
 export function getSignTransactionSuccessStyles() {
   return {
     common: {
       container: {
         flex: 1,
+        padding: boxes.boxPadding,
       },
       title: {
         textAlign: 'center',
@@ -57,6 +58,7 @@ export function getSignTransactionErrorStyles() {
       container: {
         flex: 1,
         width: '100%',
+        padding: boxes.boxPadding,
       },
       title: {
         textAlign: 'center',
