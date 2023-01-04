@@ -121,13 +121,11 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
-        dryRunTransactionMutation.mutate(
-          { transaction: encodedTransaction },
-          {
-            onSuccess: () =>
-              broadcastTransactionMutation.mutate({ transaction: encodedTransaction }),
-          }
-        );
+        await dryRunTransactionMutation.mutate({ transaction: encodedTransaction });
+
+        if (dryRunTransactionMutation.isSuccess) {
+          broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+        }
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
@@ -138,6 +136,11 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   });
 
   const handleReset = () => form.reset(defaultValues);
+
+  const handleMutationsReset = () => {
+    dryRunTransactionMutation.reset();
+    broadcastTransactionMutation.reset();
+  };
 
   useEffect(() => {
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
@@ -176,5 +179,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     handleSubmit,
     handleReset,
     broadcastTransactionMutation,
+    dryRunTransactionMutation,
+    handleMutationsReset,
   };
 }

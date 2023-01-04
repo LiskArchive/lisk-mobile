@@ -1,9 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import i18next from 'i18next';
 
 import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
-import DropDownHolder from 'utilities/alert';
+import { useMemo } from 'react';
 
 /**
  * Verifies if a transaction is valid or not based on its params and schema.
@@ -12,7 +11,7 @@ import DropDownHolder from 'utilities/alert';
  * @returns The mutation to trigger the API call.
  */
 export default function useDryRunTransactionMutation({ onSuccess, onError, ...options } = {}) {
-  return useMutation(
+  const mutation = useMutation(
     ({ transaction }) => {
       const config = {
         url: `${API_URL}/transactions/dryrun`,
@@ -25,25 +24,11 @@ export default function useDryRunTransactionMutation({ onSuccess, onError, ...op
     },
     {
       onSuccess: ({ data }) => {
-        if (data.result === 1) {
-          if (onSuccess) {
-            onSuccess(data);
-          }
-        } else if (data.result === -1) {
-          DropDownHolder.error('Invalid transaction', data.errorMessage);
-        } else {
-          // @TODO: Prepare error message by parsing the events based on each transaction type.s
-          const errorMessage = data.events.map((e) => e.name).join(', ');
-
-          DropDownHolder.error('Failed transaction', errorMessage);
+        if (onSuccess) {
+          onSuccess(data);
         }
       },
       onError: (error) => {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          i18next.t('transactions.errors.dryRunRequestErrorDescription')
-        );
-
         if (onError) {
           onError(error);
         }
@@ -51,4 +36,26 @@ export default function useDryRunTransactionMutation({ onSuccess, onError, ...op
       ...options,
     }
   );
+
+  const error = useMemo(() => {
+    if (mutation.data?.data.result === -1) {
+      const errorMessage = mutation.data.data.events.map((e) => e.name).join(', ');
+
+      return { message: `Invalid transaction: ${errorMessage}` };
+    }
+
+    if (mutation.data?.data.result === 0) {
+      const errorMessage = mutation.data.data.events.map((e) => e.name).join(', ');
+
+      return { message: `Failed transaction: ${errorMessage}` };
+    }
+
+    return mutation.error;
+  }, [mutation.data?.data.events, mutation.data?.data.result, mutation.error]);
+
+  const isError = useMemo(() => error || mutation.isError, [error, mutation.isError]);
+
+  const isSuccess = useMemo(() => !isError && mutation.isSuccess, [isError, mutation.isSuccess]);
+
+  return { ...mutation, isError, error, isSuccess };
 }

@@ -71,9 +71,7 @@ export function SignTransaction({
       case 'error':
         return (
           <SignTransactionError
-            onClick={() => {
-              onError();
-            }}
+            onClick={() => onError()}
             error={_error}
             actionButton={errorActionButton}
           />

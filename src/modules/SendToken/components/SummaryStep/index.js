@@ -83,8 +83,8 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
           token={summary.token}
           isSuccess={form.broadcastTransactionMutation.isSuccess}
           isLoading={form.broadcastTransactionMutation.isLoading}
-          error={form.broadcastTransactionMutation.error}
-          onReset={form.broadcastTransactionMutation.reset}
+          error={form.broadcastTransactionMutation.error || form.dryRunTransactionMutation.error}
+          onReset={form.handleMutationsReset}
         />
       </BottomModal>
     </>
