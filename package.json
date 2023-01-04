@@ -49,7 +49,7 @@
     "console-browserify": "^1.2.0",
     "constants-browserify": "^1.0.0",
     "deprecated-react-native-prop-types": "^2.3.0",
-    "detox": "^19.6.5",
+    "detox": "^20.1.1",
     "dns.js": "^1.0.1",
     "domain-browser": "^1.2.0",
     "events": "^3.3.0",
