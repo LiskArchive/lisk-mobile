@@ -1,5 +1,6 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
+
 import { themes, colors } from 'constants/styleGuide';
 import { useTheme } from 'contexts/ThemeContext';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import getStyles from './styles';
 import { BLUR_VARIANTS } from './constants';

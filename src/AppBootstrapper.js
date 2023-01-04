@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import apiClient from 'utilities/api/APIClient';
-import { GET_ACCOUNT_TRANSACTIONS_QUERY, GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
+import {
+  GET_ACCOUNT_TRANSACTIONS_QUERY,
+  GET_ACCOUNT_TOKENS_QUERY,
+  GET_AUTH_QUERY,
+} from 'utilities/api/queries';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 
 /**
@@ -27,6 +31,7 @@ export default function AppBootstrapper({ children }) {
     const invalidateQueries = () => {
       queryClient.invalidateQueries([GET_ACCOUNT_TRANSACTIONS_QUERY], { exact: false });
       queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY], { exact: false });
+      queryClient.invalidateQueries([GET_AUTH_QUERY], { exact: false });
     };
 
     if (currentApplication && apiClient?.ws) {
