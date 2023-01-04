@@ -37,6 +37,8 @@ export default function useDryRunTransactionMutation({ onSuccess, onError, ...op
     }
   );
 
+  // @TODO: Calculate properly the error message and integrate it with UI.
+  // See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
   const error = useMemo(() => {
     if (mutation.data?.data.result === -1) {
       const errorMessage = mutation.data.data.events.map((e) => e.name).join(', ');
