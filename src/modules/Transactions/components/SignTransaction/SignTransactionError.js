@@ -16,6 +16,8 @@ export default function SignTransactionError({ onClick, error, actionButton }) {
     styles: getSignTransactionErrorStyles(),
   });
 
+  const errorMessage = error instanceof Error && error.message;
+
   return (
     <View style={[styles.container, styles.theme.container]}>
       <View style={styles.illustrationContainer}>
@@ -26,13 +28,19 @@ export default function SignTransactionError({ onClick, error, actionButton }) {
         {i18next.t('sendToken.result.error.title')}
       </Text>
 
-      <Text style={[styles.description, styles.theme.description]}>
-        {i18next.t('sendToken.result.error.description1')}
-      </Text>
+      {errorMessage ? (
+        <Text style={[styles.description, styles.theme.description]}>{errorMessage}</Text>
+      ) : (
+        <>
+          <Text style={[styles.description, styles.theme.description]}>
+            {i18next.t('sendToken.result.error.description1')}
+          </Text>
 
-      <Text style={[styles.description, styles.theme.description]}>
-        {i18next.t('sendToken.result.error.description2')}
-      </Text>
+          <Text style={[styles.description, styles.theme.description]}>
+            {i18next.t('sendToken.result.error.description2')}
+          </Text>
+        </>
+      )}
 
       {actionButton || (
         <PrimaryButton

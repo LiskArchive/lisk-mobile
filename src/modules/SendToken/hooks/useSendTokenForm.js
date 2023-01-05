@@ -17,6 +17,7 @@ import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { DRY_RUN_TRANSACTION_RESULTS } from '../../Transactions/utils/constants';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -121,11 +122,16 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
-        await dryRunTransactionMutation.mutate({ transaction: encodedTransaction });
-
-        if (dryRunTransactionMutation.isSuccess) {
-          broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
-        }
+        dryRunTransactionMutation.mutate(
+          { transaction: encodedTransaction },
+          {
+            onSettled: ({ data }) => {
+              if (data.result === DRY_RUN_TRANSACTION_RESULTS.succeed) {
+                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+              }
+            },
+          }
+        );
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),
@@ -149,13 +155,19 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       )?.tokenID;
 
       if (defaultTokenID) {
+        transaction.update({
+          params: {
+            tokenID: defaultTokenID,
+          },
+        });
+
         form.reset({
           ...defaultValues,
           tokenID: defaultTokenID,
         });
       }
     }
-  }, [form, defaultValues, applicationSupportedTokensData]);
+  }, [form, defaultValues, applicationSupportedTokensData, transaction]);
 
   useEffect(() => {
     if (isTransactionSuccess) {
