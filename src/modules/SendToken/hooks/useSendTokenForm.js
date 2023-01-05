@@ -121,11 +121,16 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
-        await dryRunTransactionMutation.mutate({ transaction: encodedTransaction });
-
-        if (dryRunTransactionMutation.isSuccess) {
-          broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
-        }
+        dryRunTransactionMutation.mutate(
+          { transaction: encodedTransaction },
+          {
+            onSettled: ({ data }) => {
+              if (data.result === 1) {
+                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+              }
+            },
+          }
+        );
       } catch (error) {
         DropDownHolder.error(
           i18next.t('Error'),

@@ -1,8 +1,8 @@
+// import { useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
-import { useMemo } from 'react';
 
 /**
  * Verifies if a transaction is valid or not based on its params and schema.
@@ -11,7 +11,7 @@ import { useMemo } from 'react';
  * @returns The mutation to trigger the API call.
  */
 export default function useDryRunTransactionMutation({ onSuccess, onError, ...options } = {}) {
-  const mutation = useMutation(
+  return useMutation(
     ({ transaction }) => {
       const config = {
         url: `${API_URL}/transactions/dryrun`,
@@ -36,28 +36,4 @@ export default function useDryRunTransactionMutation({ onSuccess, onError, ...op
       ...options,
     }
   );
-
-  // @TODO: Calculate properly the error message and integrate it with UI.
-  // See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
-  const error = useMemo(() => {
-    if (mutation.data?.data.result === -1) {
-      const errorMessage = mutation.data.data.events.map((e) => e.name).join(', ');
-
-      return { message: `Invalid transaction: ${errorMessage}` };
-    }
-
-    if (mutation.data?.data.result === 0) {
-      const errorMessage = mutation.data.data.events.map((e) => e.name).join(', ');
-
-      return { message: `Failed transaction: ${errorMessage}` };
-    }
-
-    return mutation.error;
-  }, [mutation.data?.data.events, mutation.data?.data.result, mutation.error]);
-
-  const isError = useMemo(() => error || mutation.isError, [error, mutation.isError]);
-
-  const isSuccess = useMemo(() => !isError && mutation.isSuccess, [isError, mutation.isSuccess]);
-
-  return { ...mutation, isError, error, isSuccess };
 }

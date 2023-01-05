@@ -99,9 +99,39 @@ export const getTxConstant = ({ moduleAssetId }) => {
     ...result,
     title: result?.title ?? i18next.t('Transaction'),
     image: result?.image
-      ? result?.image
+      ? result?.imageConfirmTransaction
       : (theme) => (theme === themes.light ? txUnknownLight : txUnknownDark),
   };
 };
 
 export const isTransfer = ({ moduleAssetId }) => moduleAssetId === MODULE_COMMAND_MAP.transfer;
+
+/**
+ * Interprets a transaction dry-run error result. Generates an Error instance with descriptive
+ * message if transaction verification failed or is invalid.
+ * @param {Object} responseData - Dry-run transaction response.
+ * @returns {Error} Error with message based on data.result value.
+ * @TODO - Calculate properly the error message and integrate it with UI.
+ * See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
+ */
+export function getDryRunTransactionError(responseData) {
+  let error = null;
+
+  const errorMessage = responseData.events.map((e) => e.name).join(', ');
+
+  switch (responseData.result) {
+    case -1:
+      error = new Error(`Transaction is invalid. Reason: ${errorMessage}`);
+
+      break;
+
+    case 0:
+      error = new Error(`Transaction failed. Reason: ${errorMessage}`);
+      break;
+
+    default:
+      break;
+  }
+
+  return error;
+}
