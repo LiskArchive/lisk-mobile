@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated } from 'react-native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { P, A } from 'components/shared/toolBox/typography';
 
 import getCreateAccountStyles from './styles';

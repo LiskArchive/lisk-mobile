@@ -8,7 +8,7 @@ import { colors } from 'constants/styleGuide';
 import HeaderSearchBar from 'components/navigation/HeaderSearchBar';
 import Icon from 'components/shared/toolBox/icon';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import getStyles from './styles';
 import { BookmarkList } from './components';
 import { useSearch } from '../../hooks/useSearch';

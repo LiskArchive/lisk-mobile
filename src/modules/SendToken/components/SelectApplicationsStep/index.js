@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import DataRenderer from 'components/shared/DataRenderer';
 import { PrimaryButton } from 'components/shared/toolBox/button';

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
 import { useEmailReport } from 'hooks/useEmailReport';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import TxErrorSvg from 'assets/svgs/TxErrorSvg';
 

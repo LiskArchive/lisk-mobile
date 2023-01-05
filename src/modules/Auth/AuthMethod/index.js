@@ -8,7 +8,7 @@ import RNFS from 'react-native-fs';
 import SplashScreen from 'react-native-splash-screen';
 import DocumentPicker from 'react-native-document-picker';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { settingsRetrieved } from 'modules/Settings/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';

@@ -5,7 +5,7 @@ import i18next from 'i18next';
 
 import { H3, P } from 'components/shared/toolBox/typography';
 import { Button, PrimaryButton } from 'components/shared/toolBox/button';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';

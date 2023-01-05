@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import React from 'react';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { P } from 'components/shared/toolBox/typography';
 
 import getDataRendererStyles from './styles';

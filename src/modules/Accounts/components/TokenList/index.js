@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import { P } from 'components/shared/toolBox/typography';
 import { LabelButton } from 'components/shared/toolBox/button';

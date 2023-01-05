@@ -2,7 +2,7 @@ import React from 'react';
 import { useController } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useAccounts } from '../../hooks/useAccounts';

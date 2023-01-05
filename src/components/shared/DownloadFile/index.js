@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import React from 'react';
 
 import { useDownloadFile } from 'hooks/useDownloadFile';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { LabelButton } from 'components/shared/toolBox/button';
 import { P } from 'components/shared/toolBox/typography';
 import DownloadSvg from 'assets/svgs/DownloadSvg';

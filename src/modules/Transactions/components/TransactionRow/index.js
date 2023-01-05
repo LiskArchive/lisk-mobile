@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { stringShortener } from 'utilities/helpers';
 import { fromRawLsk } from 'utilities/conversions';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';

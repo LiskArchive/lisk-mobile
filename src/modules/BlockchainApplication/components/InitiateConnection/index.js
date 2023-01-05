@@ -5,7 +5,7 @@ import i18next from 'i18next';
 import { H3, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import Checkbox from 'components/shared/Checkbox';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { stringShortener } from 'utilities/helpers';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';

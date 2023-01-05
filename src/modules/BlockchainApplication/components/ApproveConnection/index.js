@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import i18next from 'i18next';
 import { H3, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import getConnectionStyles from './styles';
 import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';

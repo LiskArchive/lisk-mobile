@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper';
 import Switch from 'react-native-switch-pro';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { headerHeight } from 'utilities/device';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import { PrimaryButton } from 'components/shared/toolBox/button';

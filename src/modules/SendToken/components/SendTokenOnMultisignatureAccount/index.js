@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Linking } from 'react-native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { B, P } from 'components/shared/toolBox/typography';
 import SendLSKIllustrationSvg from 'assets/svgs/SendLSKIllustrationSvg';
 

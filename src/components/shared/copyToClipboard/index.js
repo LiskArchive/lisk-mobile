@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 import Icon from '../toolBox/icon';
 

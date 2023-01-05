@@ -8,7 +8,7 @@ import i18next from 'i18next';
 
 import BottomModal from 'components/shared/BottomModal';
 import { P, H3 } from 'components/shared/toolBox/typography';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import AddSvg from 'assets/svgs/AddSvg';
 import getStyles from './styles';
 import ApplicationList from '../ApplicationList';

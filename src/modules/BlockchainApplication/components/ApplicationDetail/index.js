@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import { ScrollView, View, ImageBackground, Image } from 'react-native';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
