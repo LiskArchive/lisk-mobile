@@ -43,7 +43,7 @@ export default function TransactionList({ mode = 'overview', style }) {
     if (mode === 'full') return null;
 
     return (
-      <View style={[styles.header, style?.header]}>
+      <View style={[styles.header, style?.header]} testID="transaction-list">
         <P style={[styles.title, styles.theme.title, style?.title]}>
           {i18next.t('transactions.transactionList.title')}
         </P>

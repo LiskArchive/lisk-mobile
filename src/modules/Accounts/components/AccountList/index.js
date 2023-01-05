@@ -70,6 +70,7 @@ export default function AccountList({
             onDeletePress={() => onDeleteAccountClick(item)}
             onEditPress={() => onEditAccountClick(item)}
             active={item.metadata.address === currentAccount.metadata?.address}
+            testID={`account-list-item`}
           />
         )}
         withDefaultSpinner

@@ -25,14 +25,19 @@ describe('Accounts Screen', () => {
     await element(by.id('account-name')).replaceText(testConstants.accountName);
     await element(by.id('agree-switch')).tap();
     await element(by.id('save-account')).tap();
-    await expect(element(by.id('empty-transaction-list'))).toExist();
+    // TODO: Download passphrase before selecting account
+    await element(by.id('account-list-item')).atIndex(0).tap();
+    await expect(element(by.id('accounts-home'))).toBeVisible();
   });
 
-  it.skip('should show activity list', async () => {
-    await device.reloadReactNative();
-    await element(by.id('signInPassphraseInput')).tap();
-    await element(by.id('signInPassphraseInput')).replaceText(testConstants.account);
-    await element(by.id('signInButton')).tap();
-    await expect(element(by.id('transactions-list-manager'))).toExist();
+  it('should display all account information', async () => {
+    await expect(element(by.id('username'))).toBeVisible();
+    await expect(element(by.id('address'))).toBeVisible();
+    // TODO: Test tokens are displayed
+  });
+
+  it('should show activity list', async () => {
+    await expect(element(by.id('transaction-list'))).toBeVisible();
+    // TODO: Test transactions are rendered
   });
 });
