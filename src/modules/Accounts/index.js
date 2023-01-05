@@ -92,6 +92,7 @@ export default function Home() {
               <TouchableOpacity
                 style={[styles.switchContainer]}
                 onPress={() => setShowManageAccountsModal(true)}
+                testID="switch-account"
               >
                 <SwitchSvg />
               </TouchableOpacity>

@@ -40,7 +40,7 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
   }
 
   return (
-    <View style={[styles.container, style?.container]}>
+    <View style={[styles.container, style?.container]} testID="delete-account">
       <View style={[styles.body, style?.body]}>
         {mode === 'modal' && (
           <H2 style={[styles.title, styles.theme.title, style?.title]}>
@@ -80,6 +80,7 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
         title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
         disabled={!isSuccessDownloadFile}
         style={[styles.submitButton, style?.submitButton]}
+        testID="delete-account-button"
       />
     </View>
   );
