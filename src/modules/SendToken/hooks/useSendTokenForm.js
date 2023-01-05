@@ -149,13 +149,19 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       )?.tokenID;
 
       if (defaultTokenID) {
+        transaction.update({
+          params: {
+            tokenID: defaultTokenID,
+          },
+        });
+
         form.reset({
           ...defaultValues,
           tokenID: defaultTokenID,
         });
       }
     }
-  }, [form, defaultValues, applicationSupportedTokensData]);
+  }, [form, defaultValues, applicationSupportedTokensData, transaction]);
 
   useEffect(() => {
     if (isTransactionSuccess) {
