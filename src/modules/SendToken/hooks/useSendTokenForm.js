@@ -17,6 +17,7 @@ import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { DRY_RUN_TRANSACTION_RESULTS } from '../../Transactions/utils/constants';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -125,7 +126,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           { transaction: encodedTransaction },
           {
             onSettled: ({ data }) => {
-              if (data.result === 1) {
+              if (data.result === DRY_RUN_TRANSACTION_RESULTS.succeed) {
                 broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
               }
             },

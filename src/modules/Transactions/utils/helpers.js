@@ -5,7 +5,12 @@ import { themes } from 'constants/styleGuide';
 import txUnknownLight from 'assets/images/txDetail/tx-unknown-light.png';
 import txUnknownDark from 'assets/images/txDetail/tx-unknown-dark.png';
 
-import { BASE_TRANSACTION_SCHEMA, MODULE_COMMAND_MAP, TRANSACTIONS } from './constants';
+import {
+  BASE_TRANSACTION_SCHEMA,
+  DRY_RUN_TRANSACTION_RESULTS,
+  MODULE_COMMAND_MAP,
+  TRANSACTIONS,
+} from './constants';
 
 export const getCommandParamsSchema = (module, command, schema) => {
   const moduleCommand = module.concat(':', command);
@@ -120,12 +125,12 @@ export function getDryRunTransactionError(responseData) {
   const errorMessage = responseData.events.map((e) => e.name).join(', ');
 
   switch (responseData.result) {
-    case -1:
+    case DRY_RUN_TRANSACTION_RESULTS.invalid:
       error = new Error(`Transaction is invalid. Reason: ${errorMessage}`);
 
       break;
 
-    case 0:
+    case DRY_RUN_TRANSACTION_RESULTS.failed:
       error = new Error(`Transaction failed. Reason: ${errorMessage}`);
       break;
 
