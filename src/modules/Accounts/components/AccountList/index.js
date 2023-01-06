@@ -10,7 +10,6 @@ import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import DropDownHolder from 'utilities/alert';
 import AccountItem from '../AccountItem';
 
 import getAccountsListStyles from './styles';
@@ -34,10 +33,7 @@ export default function AccountList({
 
   function handleSelectAccountClick(account) {
     if (!currentApplication) {
-      DropDownHolder.error(
-        i18next.t('Error'),
-        'Wallet is not available right now. Please try again later.'
-      );
+      navigation.navigate('ApplicationError');
     } else {
       setAccount(account);
 

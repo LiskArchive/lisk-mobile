@@ -99,6 +99,10 @@ const navigationOptions = {
     title: null,
     header: () => null,
   },
+  ApplicationError: {
+    title: null,
+    header: () => null,
+  },
 };
 
 export default navigationOptions;

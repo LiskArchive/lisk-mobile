@@ -37,6 +37,7 @@ import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEve
 import navigationOptions from './options';
 import navigationLinking from './linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
+import ApplicationErrorScreen from '../components/screens/ApplicationErrorScreen';
 
 const StackNavigator = createStackNavigator();
 
@@ -175,6 +176,11 @@ export default function Navigator() {
           <StackNavigator.Screen
             name="DeleteAccount"
             component={DeleteAccountScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="ApplicationError"
+            component={ApplicationErrorScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
