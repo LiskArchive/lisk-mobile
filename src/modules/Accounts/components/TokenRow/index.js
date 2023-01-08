@@ -3,11 +3,12 @@ import React from 'react';
 import { View } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useTokenMetaQuery } from 'modules/BlockchainApplication/api/useTokenMetaQuery';
 import { useTokenAmountInCurrency } from 'modules/SendToken/components/SelectTokenStep/hooks';
 import DataRenderer from 'components/shared/DataRenderer';
 import { P, H3 } from 'components/shared/toolBox/typography';
+import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 
@@ -47,16 +48,20 @@ export default function TokenRow({ token }) {
       </View>
 
       <View style={[styles.balanceContainer]}>
-        <H3 style={[styles.theme.title]}>{balance}</H3>
+        <DiscreteModeComponent data={balance} blurVariant="balance">
+          <H3 style={[styles.theme.title]}>{balance}</H3>
+        </DiscreteModeComponent>
 
         <DataRenderer
           data={tokenMetaData?.data[0]}
           isLoading={isTokenMetaLoading}
           error={errorOnTokenMeta}
           renderData={() => (
-            <P style={[styles.theme.currency]}>
-              {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
-            </P>
+            <DiscreteModeComponent data={balance} blurVariant="balance">
+              <P style={[styles.theme.currency]}>
+                {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
+              </P>
+            </DiscreteModeComponent>
           )}
         />
       </View>

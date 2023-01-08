@@ -1,7 +1,7 @@
 import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { themes, colors } from 'constants/styleGuide';
 
 export default function EmptyIllustrationSvg({ height = 80, width = 216, style }) {

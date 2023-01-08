@@ -4,7 +4,7 @@ import { View, Animated, useWindowDimensions, Easing } from 'react-native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import Icon from 'components/shared/toolBox/icon';
 import { H3, P } from 'components/shared/toolBox/typography';

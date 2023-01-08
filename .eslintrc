@@ -115,6 +115,7 @@
     "import/resolver": {
       "alias": {
         "map": [
+          ["contexts", "./src/contexts"],
           ["constants", "./src/constants"],
           ["components", "./src/components"],
           ["assets", "./src/assets"],

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';

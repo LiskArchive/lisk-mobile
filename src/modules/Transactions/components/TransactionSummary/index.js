@@ -4,7 +4,7 @@ import { View, Text, Image } from 'react-native';
 import i18next from 'i18next';
 import * as Lisk from '@liskhq/lisk-client';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';

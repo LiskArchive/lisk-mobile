@@ -3,7 +3,7 @@ import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import { validatePassphrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';

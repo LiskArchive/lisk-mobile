@@ -5,7 +5,7 @@ import i18next from 'i18next';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import getExternalApplicationSignatureRequestStyles from './styles';
 

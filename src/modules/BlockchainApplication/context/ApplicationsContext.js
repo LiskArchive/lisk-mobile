@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 
-import apiClient from 'utilities/api/APIClient';
 import { useApplicationsStorage } from '../hooks/useApplicationsStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
 import { APPLICATIONS_STORAGE_KEY, PINNED_APPLICATIONS_STORAGE_KEY } from '../constants';
@@ -66,8 +65,6 @@ export function ApplicationsProvider({ children }) {
 
     if (!currentApplication && defaultApplicationsData) {
       setCurrentApplication(defaultApplicationsData[0]);
-
-      apiClient.create(defaultApplicationsData[0]?.serviceURLs?.[0]);
     }
   }, [
     defaultApplicationsData,

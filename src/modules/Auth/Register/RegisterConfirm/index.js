@@ -3,7 +3,7 @@ import { View, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { H4, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';

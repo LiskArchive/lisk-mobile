@@ -2,7 +2,7 @@ import React from 'react';
 import { translate } from 'react-i18next';
 import { View } from 'react-native';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import ApplicationList from '../ApplicationList';
 import getAddApplicationStyles from './styles';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';

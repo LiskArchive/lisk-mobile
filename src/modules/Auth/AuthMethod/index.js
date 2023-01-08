@@ -6,7 +6,7 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { settingsRetrieved } from 'modules/Settings/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';

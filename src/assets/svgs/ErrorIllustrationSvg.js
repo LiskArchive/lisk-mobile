@@ -1,7 +1,7 @@
 import React from 'react';
 import { Svg, Path, Mask, G } from 'react-native-svg';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { themes, colors } from 'constants/styleGuide';
 
 export default function ErrorIllustrationSvg({ height = 85, width = 174, style }) {

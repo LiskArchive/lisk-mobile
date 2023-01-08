@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';

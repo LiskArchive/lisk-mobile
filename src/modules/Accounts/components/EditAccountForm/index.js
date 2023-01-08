@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { useForm } from 'react-hook-form';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { H2 } from 'components/shared/toolBox/typography';
 import Stepper from 'components/shared/Stepper';
 

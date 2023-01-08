@@ -4,12 +4,13 @@ import { View } from 'react-native';
 import i18next from 'i18next';
 import { useController } from 'react-hook-form';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import BottomModal from 'components/shared/BottomModal';
+import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
@@ -43,6 +44,13 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
   const { styles } = useTheme({
     styles: getSendTokenSummaryStepStyles(),
   });
+
+  const broadcastTransactionError = form.broadcastTransactionMutation.error;
+
+  const dryRunTransactionError =
+    form.dryRunTransactionMutation.error ||
+    (form.dryRunTransactionMutation.data?.data &&
+      getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
   return (
     <>
@@ -82,9 +90,11 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
           amount={summary.amount}
           token={summary.token}
           isSuccess={form.broadcastTransactionMutation.isSuccess}
-          isLoading={form.broadcastTransactionMutation.isLoading}
-          error={form.broadcastTransactionMutation.error}
-          onReset={form.broadcastTransactionMutation.reset}
+          isLoading={
+            form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
+          }
+          error={broadcastTransactionError || dryRunTransactionError}
+          onReset={form.handleMutationsReset}
         />
       </BottomModal>
     </>

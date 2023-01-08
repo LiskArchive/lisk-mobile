@@ -4,7 +4,7 @@ import { View, Text, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { BookmarkList } from 'modules/Bookmark/components';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import Picker from 'components/shared/Picker';

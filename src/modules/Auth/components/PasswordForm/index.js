@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
 import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';

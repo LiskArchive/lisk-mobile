@@ -3,7 +3,7 @@ import { SafeAreaView, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import DataRenderer from 'components/shared/DataRenderer';
 import { useTransactionQuery } from '../../api/useTransactionQuery';

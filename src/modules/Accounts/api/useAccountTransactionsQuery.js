@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import apiClient from 'utilities/api/APIClient';
 import { LIMIT, API_URL } from 'utilities/api/constants';
-import { GET_ACCOUNT_TRANSACTIONS_QUERY, GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
+import { GET_ACCOUNT_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 
 export function useAccountTransactionsQueryParams({ config: customConfig = {} } = {}) {
   const [currentAccount] = useCurrentAccount();
@@ -18,7 +15,7 @@ export function useAccountTransactionsQueryParams({ config: customConfig = {} } 
     ...customConfig,
     params: {
       limit: LIMIT,
-      senderAddress: currentAccount.metadata.address,
+      address: currentAccount.metadata.address,
       ...(customConfig?.params || {}),
     },
   };
@@ -45,20 +42,7 @@ export function useAccountTransactionsQuery({
   options = {},
   client = apiClient,
 } = {}) {
-  const queryClient = useQueryClient();
-
   const { config, keys } = useAccountTransactionsQueryParams({ config: customConfig });
-
-  useEffect(() => {
-    function invalidateQuery() {
-      queryClient.invalidateQueries([GET_ACCOUNT_TRANSACTIONS_QUERY], { exact: false });
-      queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY], { exact: false });
-    }
-
-    client?.ws?.on('new.transactions', invalidateQuery);
-
-    client?.ws?.on('delete.transactions', invalidateQuery);
-  }, [client, queryClient]);
 
   return useCustomInfiniteQuery({ config, options, keys, client });
 }

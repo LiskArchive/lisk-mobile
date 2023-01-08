@@ -5,7 +5,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import { P } from 'components/shared/toolBox/typography';
 import Avatar from 'components/shared/avatar';
@@ -52,8 +52,8 @@ export default function Home() {
       })
     );
   };
-  const requestTokens = () => navigation.navigate('Request');
-  const sendTokens = () => navigation.navigate('Send');
+  const handleRequestTokensClick = () => navigation.navigate('Request');
+  const handleSendTokensClick = () => navigation.navigate('Send');
 
   useEffect(() => {
     if (!accounts?.length) {
@@ -107,19 +107,22 @@ export default function Home() {
             </View>
 
             <View style={[styles.row, styles.buttonContainer]}>
-              <TouchableOpacity style={[styles.button]} onPress={requestTokens}>
+              <TouchableOpacity style={[styles.button]} onPress={handleRequestTokensClick}>
                 <P style={[styles.buttonText]}>Request</P>
               </TouchableOpacity>
 
-              <TouchableOpacity style={[styles.button, styles.sendButton]} onPress={sendTokens}>
+              <TouchableOpacity
+                style={[styles.button, styles.sendButton]}
+                onPress={handleSendTokensClick}
+              >
                 <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
               </TouchableOpacity>
             </View>
           </View>
 
-          <TokenList style={{ container: { marginTop: 16 } }} />
+          <TokenList mode="overview" style={{ container: { marginTop: 16 } }} />
 
-          <TransactionList style={{ container: { marginTop: 16 } }} />
+          <TransactionList mode="overview" style={{ container: { marginTop: 16 } }} />
         </View>
       </NavigationSafeAreaView>
 

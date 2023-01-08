@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import { P } from 'components/shared/toolBox/typography';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -22,6 +22,7 @@ import TokenRow from '../TokenRow';
 
 import TokenListTabs from './TokenListTabs';
 import getTokenListStyles from './styles';
+import { NO_OF_TOKENS_ON_OVERVIEW } from './constants';
 
 export default function TokenList({ mode = 'overview', style }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -37,7 +38,7 @@ export default function TokenList({ mode = 'overview', style }) {
     isFetchingNextPage: isFetchingTokensNextPage,
   } = useAccountTokensQuery({
     config: {
-      params: { limit: mode === 'overview' ? 2 : LIMIT },
+      params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
     },
   });
 
@@ -62,12 +63,14 @@ export default function TokenList({ mode = 'overview', style }) {
     styles: getTokenListStyles(),
   });
 
+  const areMoreOnOverview = tokensData?.meta.count < tokensData?.meta.total;
+
   const showViewAllButton =
-    mode === 'overview' && !errorOnTokens && !isLoadingTokens && tokensData?.data.length > 0;
+    mode === 'overview' && !errorOnTokens && !isLoadingTokens && areMoreOnOverview;
 
   return (
     <View style={[styles.theme.container, style?.container]}>
-      <View style={[styles.header, style?.header]}>
+      <View style={[styles.header, !showViewAllButton && styles.headerExtraMargin, style?.header]}>
         <TokenListTabs
           lockedTokens={lockedTokens}
           activeTab={activeTab}

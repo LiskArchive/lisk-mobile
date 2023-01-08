@@ -4,7 +4,7 @@ import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
 import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
-import ThemeContext from '../../../contexts/theme';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import Confirm from './confirm';
 import Pending from './pending';
 import Form from './form';

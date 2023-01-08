@@ -5,7 +5,7 @@ import i18next from 'i18next';
 
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { colors, themes } from 'constants/styleGuide';
 import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
 import StakedSvg from 'assets/svgs/StakedSvg';

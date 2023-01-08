@@ -17,6 +17,7 @@ import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { DRY_RUN_TRANSACTION_RESULTS } from '../../Transactions/utils/constants';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -124,14 +125,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         dryRunTransactionMutation.mutate(
           { transaction: encodedTransaction },
           {
-            onSuccess: (data) => {
-              if (data.success) {
+            onSettled: ({ data }) => {
+              if (data.result === DRY_RUN_TRANSACTION_RESULTS.succeed) {
                 broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
-              } else {
-                DropDownHolder.error(
-                  i18next.t('transactions.errors.dryRunInvalidTransactionTitle'),
-                  i18next.t('transactions.errors.dryRunInvalidTransactionDescription')
-                );
               }
             },
           }
@@ -147,6 +143,11 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const handleReset = () => form.reset(defaultValues);
 
+  const handleMutationsReset = () => {
+    dryRunTransactionMutation.reset();
+    broadcastTransactionMutation.reset();
+  };
+
   useEffect(() => {
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
       const defaultTokenID = applicationSupportedTokensData.find(
@@ -154,13 +155,19 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       )?.tokenID;
 
       if (defaultTokenID) {
+        transaction.update({
+          params: {
+            tokenID: defaultTokenID,
+          },
+        });
+
         form.reset({
           ...defaultValues,
           tokenID: defaultTokenID,
         });
       }
     }
-  }, [form, defaultValues, applicationSupportedTokensData]);
+  }, [form, defaultValues, applicationSupportedTokensData, transaction]);
 
   useEffect(() => {
     if (isTransactionSuccess) {
@@ -184,5 +191,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     handleSubmit,
     handleReset,
     broadcastTransactionMutation,
+    dryRunTransactionMutation,
+    handleMutationsReset,
   };
 }

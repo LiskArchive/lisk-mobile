@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { LabelButton } from 'components/shared/toolBox/button';
 import { fromRawLsk } from 'utilities/conversions';
 import CopyToClipboard from 'components/shared/copyToClipboard';

@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import getDeleteBlockchainApplicationStyles from './styles';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';

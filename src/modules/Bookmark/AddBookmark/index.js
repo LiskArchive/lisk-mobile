@@ -6,7 +6,7 @@ import { BackHandler, SafeAreaView, View } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 
 import { colors } from 'constants/styleGuide';
 import { decodeLaunchUrl } from 'utilities/qrCode';

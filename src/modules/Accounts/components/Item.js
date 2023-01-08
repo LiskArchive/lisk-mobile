@@ -2,15 +2,13 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-// import LottieView from 'lottie-react-native';
 import { translate } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { getTxConstant, isTransfer } from 'modules/Transactions/utils/helpers';
 import { fromRawLsk } from 'utilities/conversions';
 import { stringShortener } from 'utilities/helpers';
-// import loadingAnimation from 'assets/animations/loading-dots.json';
-import { Blur } from 'components/shared/blur';
+import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import FormattedNumber from 'components/shared/formattedNumber';
 import FormattedDate from 'components/shared/formattedDate';
 import { B, Small } from 'components/shared/toolBox/typography';
@@ -118,7 +116,7 @@ const Item = ({
             </View>
           )}
           {tx.recipientAddress !== tx.senderAddress && discrete ? (
-            <Blur value={amount} direction={direction} />
+            <DiscreteModeComponent data={amount} blurVariant={direction} />
           ) : null}
           {typeof tx.timestamp !== 'number' && (
             <View style={styles.pendingIcon}>

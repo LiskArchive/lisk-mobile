@@ -6,7 +6,7 @@ import i18next from 'i18next';
 import Stepper from 'components/shared/Stepper';
 
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';

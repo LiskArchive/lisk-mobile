@@ -134,3 +134,9 @@ export const PRIORITY_NAMES_MAP = {
   medium: t('sendToken.tokenSelect.mediumPriorityLabel'),
   high: t('sendToken.tokenSelect.highPriorityLabel'),
 };
+
+export const DRY_RUN_TRANSACTION_RESULTS = {
+  invalid: -1,
+  failed: 0,
+  succeed: 1,
+};

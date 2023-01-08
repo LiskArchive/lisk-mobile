@@ -27,6 +27,21 @@ export default function getTokenRowStyles() {
       balanceContainer: {
         alignItems: 'flex-end',
       },
+      blurBig: {
+        width: 100,
+        height: 30,
+        marginLeft: -15,
+      },
+      blurMedium: {
+        width: 77,
+        height: 30,
+        marginLeft: -10,
+      },
+      blurSmall: {
+        width: 60,
+        height: 30,
+        marginLeft: -5,
+      },
     },
     [themes.light]: {
       container: {

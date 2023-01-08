@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
-import { useTheme } from 'hooks/useTheme';
+import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import TxSuccessSvg from 'assets/svgs/TxSuccesSvg';
 import TxSuccessDarkSvg from 'assets/svgs/TxSuccessDarkSvg';
