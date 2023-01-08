@@ -47,7 +47,15 @@ describe('Accounts Screen', () => {
     await element(by.id('delete-account')).atIndex(1).tap();
     await element(by.id('download-file-button')).atIndex(1).tap();
     await element(by.id('delete-account-button')).atIndex(0).tap();
-    await element(by.id('switch-account')).tap();
-    await expect(element(by.id('account-list-item')).atIndex(1)).not.toBeVisible();
+    // Navigate to auth method after deleting account since no account is left
+    await expect(element(by.id('secret-phrase')).atIndex(1)).toBeVisible();
+  });
+
+  it('should add account using by file upload', async () => {
+    await element(by.id('restore-from-file')).atIndex(1).tap();
+    await element(by.id('decrypt-password-input')).tap();
+    await element(by.id('decrypt-password-input')).replaceText('Password1!');
+    await element(by.id('decrypt-button-continue')).tap();
+    await expect(element(by.id('account-list-item')).atIndex(0)).toBeVisible();
   });
 });

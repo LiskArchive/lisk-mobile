@@ -4,9 +4,7 @@ import { LogBox, View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
-import RNFS from 'react-native-fs';
 import SplashScreen from 'react-native-splash-screen';
-import DocumentPicker from 'react-native-document-picker';
 
 import { useTheme } from 'hooks/useTheme';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -20,6 +18,7 @@ import CreateAccount from '../components/CreateAccount';
 import AuthTypeItem from '../components/AuthType';
 
 import getStyles from './styles';
+import { selectEncryptedFile } from '../utils/documentPicker';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -56,10 +55,7 @@ export default function AuthMethod({ route }) {
 
   const selectEncryptedJSON = async () => {
     try {
-      const file = await DocumentPicker.pickSingle({
-        type: DocumentPicker.types.allFiles,
-      });
-      const encryptedData = await RNFS.readFile(file.uri);
+      const encryptedData = await selectEncryptedFile();
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
