@@ -7,7 +7,14 @@ import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCu
 import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
 import { API_VERSION } from 'utilities/api/constants';
 
-export function useEmailReport({ errorMessage, error } = {}) {
+/**
+ * Allows to send an email report based on provided error.
+ * Opens email app of device and prefill error metadata.
+ * @param {Error} error - Error instance that generates the email report.
+ * @param {String} errorMessage - Error message to add to the email metadata (optional).
+ * @returns {Object} - The send email callback and its execution state (loading, error and data).
+ */
+export function useEmailReport({ error, errorMessage } = {}) {
   const [isFetching, setIsFetching] = useState(false);
   const [errorOnLinking, setErrorOnLinking] = useState();
 
