@@ -23,16 +23,8 @@ export default function BootstrapApp({ children }) {
   const [currentApplication] = useCurrentApplication();
 
   const isLoading = currentApplication.isLoading;
-
   const isError = currentApplication.isError;
-
   const error = currentApplication.error;
-
-  // useEffect(() => {
-  //   if (isError && navigationRef.current) {
-  //     navigationRef.current.navigate('ErrorFallback');
-  //   }
-  // }, [navigationRef, isError]);
 
   // Bootstrap API client with current application.
   useEffect(() => {
