@@ -83,7 +83,7 @@ function ApplicationRow({
               />
             )}
 
-            {showActive && currentApplication.chainID === application.chainID && (
+            {showActive && currentApplication.data?.chainID === application.chainID && (
               <View style={{ marginRight: 12 }}>
                 <CircleCheckedSvg variant="fill" />
               </View>

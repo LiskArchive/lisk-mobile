@@ -25,7 +25,7 @@ export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options 
       network: NETWORK,
       limit: LIMIT,
       tokenID,
-      chainID: currentApplication.chainID,
+      chainID: currentApplication.data?.chainID,
       ...customConfig.params,
     },
   };

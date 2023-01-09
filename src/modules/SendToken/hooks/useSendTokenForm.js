@@ -24,8 +24,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const [currentApplication] = useCurrentApplication();
 
-  const { data: applicationSupportedTokensData } =
-    useApplicationSupportedTokensQuery(currentApplication);
+  const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
+    currentApplication.data
+  );
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -33,9 +34,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const defaultValues = useMemo(
     () => ({
-      senderApplicationChainID: currentApplication.chainID,
+      senderApplicationChainID: currentApplication.data?.chainID,
       recipientApplicationChainID:
-        initialValues?.recipientApplicationChainID || currentApplication.chainID,
+        initialValues?.recipientApplicationChainID || currentApplication.data?.chainID,
       recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: 'input',
       tokenID: initialValues?.tokenID,
@@ -44,7 +45,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       priority: 'low',
       userPassword: '',
     }),
-    [currentApplication.chainID, initialValues]
+    [currentApplication.data?.chainID, initialValues]
   );
 
   const validationSchema = yup

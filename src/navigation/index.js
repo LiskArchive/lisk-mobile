@@ -15,6 +15,7 @@ import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import Intro from 'components/screens/intro';
+import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
 
 import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
@@ -37,11 +38,10 @@ import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEve
 import navigationOptions from './options';
 import navigationLinking from './linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
-import ApplicationErrorScreen from '../components/screens/ApplicationErrorScreen';
 
 const StackNavigator = createStackNavigator();
 
-export default function Navigator() {
+export default function Navigator({ children }) {
   const { theme } = useSelector((state) => state.settings);
 
   const themeColors = {
@@ -49,6 +49,7 @@ export default function Navigator() {
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
 
+  // TODO: Add init this to BootstrapApp component.
   useWalletConnectEventsManager();
 
   return (
@@ -179,11 +180,13 @@ export default function Navigator() {
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
-            name="ApplicationError"
-            component={ApplicationErrorScreen}
+            name="ErrorFallback"
+            component={ErrorFallbackScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
+
+        {children}
       </NavigationContainer>
     </SafeAreaProvider>
   );

@@ -35,6 +35,7 @@ export function ApplicationsProvider({ children }) {
   const {
     data: defaultApplicationsData,
     isLoading: isLoadingDefaultApplications,
+    isSuccess: isSuccessDefaultApplications,
     isError: isErrorOnDefaultApplications,
     error: errorOnDefaultApplications,
   } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
@@ -42,6 +43,7 @@ export function ApplicationsProvider({ children }) {
   const {
     data: applicationsData,
     isLoading: isLoadingApplications,
+    isSuccess: isSuccessApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
   } = useApplicationsExplorer();
@@ -79,6 +81,10 @@ export function ApplicationsProvider({ children }) {
     () => isLoadingDefaultApplications || isLoadingApplications,
     [isLoadingDefaultApplications, isLoadingApplications]
   );
+  const isSuccess = useMemo(
+    () => isSuccessDefaultApplications || isSuccessApplications,
+    [isSuccessDefaultApplications, isSuccessApplications]
+  );
   const error = useMemo(
     () => errorOnDefaultApplications || errorOnApplications,
     [errorOnDefaultApplications, errorOnApplications]
@@ -94,18 +100,27 @@ export function ApplicationsProvider({ children }) {
         applications: {
           data: applications,
           isLoading,
+          isSuccess,
           isError,
           error,
         },
         pins: {
           data: pins,
           isLoading,
+          isSuccess,
+          isError,
+          error,
+        },
+        currentApplication: {
+          data: currentApplication,
+          isLoading,
+          isSuccess,
           isError,
           error,
         },
         dispatchApplications,
         dispatchPins,
-        currentApplication,
+        // currentApplication,
         setCurrentApplication,
       }}
     >

@@ -25,6 +25,7 @@ class Splash extends React.Component {
       toValue: 0,
       duration: bgOpacityDuration,
       delay: bgOpacityDelay,
+      useNativeDriver: true,
     }).start();
 
     const topDuration = animate ? 600 : 0;
@@ -34,6 +35,7 @@ class Splash extends React.Component {
       duration: topDuration,
       delay: topDelay,
       easing: easing.easeOutQuart,
+      useNativeDriver: true,
     }).start();
 
     const iconOpacityDuration = animate ? 300 : 0;
@@ -42,6 +44,7 @@ class Splash extends React.Component {
       toValue: 1,
       duration: iconOpacityDuration,
       delay: iconOpacityDelay,
+      useNativeDriver: true,
     }).start();
   }
 

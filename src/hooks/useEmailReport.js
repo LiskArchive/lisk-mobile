@@ -32,8 +32,8 @@ export function useEmailReport({ errorMessage, error } = {}) {
       `;
     }
 
-    if (currentApplication?.serviceURLs) {
-      const stringifiedAppApis = currentApplication.serviceURLs.reduce(
+    if (currentApplication.data?.serviceURLs) {
+      const stringifiedAppApis = currentApplication.data.serviceURLs.reduce(
         (acc, serviceURL) => `${acc} - ${serviceURL.http}`,
         ''
       );
@@ -69,7 +69,7 @@ export function useEmailReport({ errorMessage, error } = {}) {
     }
 
     return value;
-  }, [networkStatusData?.data, currentApplication?.serviceURLs, errorMessage, error]);
+  }, [networkStatusData?.data, currentApplication.data?.serviceURLs, errorMessage, error]);
 
   async function handleSend() {
     if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));

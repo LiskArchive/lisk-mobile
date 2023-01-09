@@ -99,7 +99,7 @@ const navigationOptions = {
     title: null,
     header: () => null,
   },
-  ApplicationError: {
+  ErrorFallback: {
     title: null,
     header: () => null,
   },

@@ -52,7 +52,7 @@ export default function RequestToken() {
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
   const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
-    currentApplication.chainID
+    currentApplication.data?.chainID
   );
   const [tokenID, setTokenID] = useState(
     mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
@@ -154,7 +154,7 @@ export default function RequestToken() {
           <TokenSelectField
             value={tokenID}
             onChange={setTokenID}
-            recipientApplication={currentApplication}
+            recipientApplication={currentApplication.data}
             style={{ toggle: { container: { marginBottom: 16 } } }}
           />
 
@@ -162,7 +162,7 @@ export default function RequestToken() {
             value={amount.value}
             onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
             tokenID={tokenID}
-            recipientApplication={currentApplication}
+            recipientApplication={currentApplication.data}
             style={{ container: { marginBottom: 16 } }}
           />
 

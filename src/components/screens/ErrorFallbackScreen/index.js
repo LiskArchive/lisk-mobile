@@ -4,43 +4,48 @@ import { View, SafeAreaView } from 'react-native';
 
 import { useEmailReport } from 'hooks/useEmailReport';
 import { useTheme } from 'contexts/ThemeContext';
+import Splash from 'modules/Auth/components/splash';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import { P } from 'components/shared/toolBox/typography';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
-import Splash from 'modules/Auth/components/splash';
 
-import getStyles from './styles';
+import { getErrorFallbackScreenStyles, errorFallbackSplashStyles } from './styles';
 
-export default function ApplicationErrorScreen({ error }) {
-  const emailReport = useEmailReport({ error, errorMessage: 'Error initializing account' });
+/**
+ * Renders an Error UI as fallback screen when a provided error occurs.
+ * @param {Error} props.error - Error instance to handle with this component.
+ * @param {Function} props.onRetry - Callback to trigger when user retries the error
+ * triggering action.
+ */
+export default function ErrorFallbackScreen({ error, onRetry }) {
+  const errorMessage = error?.message || 'Error running app';
 
-  const { styles } = useTheme({ styles: getStyles() });
+  const emailReport = useEmailReport({ error, errorMessage });
 
-  const handleRestartAppClick = () => {
-    console.log('restarting...');
-  };
+  const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <Splash animate={false} showSimplifiedView={true} style={{ container: { marginTop: 40 } }} />
+      <Splash animate={false} showSimplifiedView={true} style={errorFallbackSplashStyles} />
 
       <View style={[styles.body]}>
         <View style={[styles.illustration]}>
           <ErrorIllustrationSvg />
         </View>
 
+        <P style={[styles.description, styles.theme.description]}>{errorMessage}</P>
+
         <P style={[styles.description, styles.theme.description]}>
-          We can't sign in to your account at the moment. You can restart the app or if you still
-          can't sign in please report the error via mail.
+          You can restart the app or if you still can't sign in please report the error via mail.
         </P>
 
         <PrimaryButton
           noTheme
           style={[styles.submitButton]}
-          onClick={handleRestartAppClick}
+          onClick={onRetry}
           // disabled={disabled}
         >
-          Restart app
+          Retry
         </PrimaryButton>
 
         <P style={[styles.label]}>Is the problem persisting?</P>
