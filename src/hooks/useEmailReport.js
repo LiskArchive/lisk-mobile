@@ -71,18 +71,30 @@ export function useEmailReport({ errorMessage, error } = {}) {
     return value;
   }, [networkStatusData?.data, currentApplication.data?.serviceURLs, errorMessage, error]);
 
-  async function handleSend() {
-    if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));
-
+  const handleSend = async () => {
     setIsFetching(true);
 
-    return Linking.openURL(url)
-      .then(() => setIsFetching(false))
+    if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));
+
+    return Linking.canOpenURL(url)
+      .then((isURLSupported) => {
+        if (!isURLSupported) {
+          setErrorOnLinking(new Error(`Can't handle url: ${url}`));
+          setIsFetching(false);
+        } else {
+          Linking.openURL(url)
+            .then(() => setIsFetching(false))
+            .catch((_error) => {
+              setErrorOnLinking(_error);
+              setIsFetching(false);
+            });
+        }
+      })
       .catch((_error) => {
         setErrorOnLinking(_error);
         setIsFetching(false);
       });
-  }
+  };
 
   return {
     url,

@@ -15,7 +15,6 @@ import ErrorFallbackScreen from './components/screens/ErrorFallbackScreen';
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
  * @param {React.ReactNode} children - Components tree to provide the loaded data.
- * @param {React.MutableRefObject} ref - Navigation ref.
  */
 export default function BootstrapApp({ children }) {
   const queryClient = useQueryClient();

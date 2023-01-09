@@ -26,7 +26,7 @@ export default function ErrorFallbackScreen({ error, onRetry }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <Splash animate={false} showSimplifiedView={true} style={errorFallbackSplashStyles} />
+      <Splash animate={false} showSimplifiedView style={errorFallbackSplashStyles} />
 
       <View style={[styles.body]}>
         <View style={[styles.illustration]}>
@@ -48,7 +48,7 @@ export default function ErrorFallbackScreen({ error, onRetry }) {
           Retry
         </PrimaryButton>
 
-        {emailReport.error && (
+        {!emailReport.error && (
           <>
             <P style={[styles.label]}>Is the problem persisting?</P>
 
