@@ -39,12 +39,7 @@ export default function ErrorFallbackScreen({ error, onRetry }) {
           You can restart the app or if you still can't sign in please report the error via mail.
         </P>
 
-        <PrimaryButton
-          noTheme
-          style={[styles.submitButton]}
-          onClick={onRetry}
-          // disabled={disabled}
-        >
+        <PrimaryButton noTheme style={[styles.submitButton]} onClick={onRetry}>
           Retry
         </PrimaryButton>
 

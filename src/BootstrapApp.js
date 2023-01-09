@@ -64,7 +64,7 @@ export default function BootstrapApp({ children }) {
   }
 
   if (isError) {
-    return <ErrorFallbackScreen error={error} onRetry={refetch} />;
+    return <ErrorFallbackScreen onRetry={refetch} error={error} />;
   }
 
   return children;

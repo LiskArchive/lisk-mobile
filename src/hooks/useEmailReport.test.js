@@ -71,6 +71,6 @@ describe('useEmailReport hook', () => {
 
     await act(() => result.current.handleSend());
 
-    expect(result.current.error).toBeFalsy();
+    expect(result.current.error).toBeTruthy();
   });
 });

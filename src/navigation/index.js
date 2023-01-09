@@ -15,7 +15,6 @@ import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import Intro from 'components/screens/intro';
-import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
 
 import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
@@ -177,11 +176,6 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="DeleteAccount"
             component={DeleteAccountScreen}
-            options={navigationOptions.NoHeader}
-          />
-          <StackNavigator.Screen
-            name="ErrorFallback"
-            component={ErrorFallbackScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
