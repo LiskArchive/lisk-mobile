@@ -68,7 +68,7 @@ export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }
       <ScrollView contentContainerStyle={styles.container}>
         <View style={[styles.labelContainer, styles.theme.labelContainer]}>
           <P style={[styles.label, styles.theme.label]}>
-            {i18next.t('commons.secret_recovery_phrase')}
+            {i18next.t('commons.secretRecoveryPhrase')}
           </P>
 
           <IconButton
