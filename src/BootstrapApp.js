@@ -14,7 +14,7 @@ import ErrorFallbackScreen from './components/screens/ErrorFallbackScreen';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
- * @param {ReactNode} children - Components tree to provide the loaded data.
+ * @param {React.ReactNode} children - Components tree to provide the loaded data.
  * @param {React.MutableRefObject} ref - Navigation ref.
  */
 export default function BootstrapApp({ children }) {
@@ -25,6 +25,7 @@ export default function BootstrapApp({ children }) {
   const isLoading = currentApplication.isLoading;
   const isError = currentApplication.isError;
   const error = currentApplication.error;
+  const refetch = currentApplication.refetch;
 
   // Bootstrap API client with current application.
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function BootstrapApp({ children }) {
   }
 
   if (isError) {
-    return <ErrorFallbackScreen error={error} onRetry={() => console.log('retrying...')} />;
+    return <ErrorFallbackScreen error={error} onRetry={refetch} />;
   }
 
   return children;

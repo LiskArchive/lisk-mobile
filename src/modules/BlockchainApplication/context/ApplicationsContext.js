@@ -1,5 +1,13 @@
 /* eslint-disable max-statements */
-import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react';
 
 import { useApplicationsStorage } from '../hooks/useApplicationsStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
@@ -38,6 +46,7 @@ export function ApplicationsProvider({ children }) {
     isSuccess: isSuccessDefaultApplications,
     isError: isErrorOnDefaultApplications,
     error: errorOnDefaultApplications,
+    refetch: refetchDefaultApplications,
   } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
 
   const {
@@ -46,6 +55,7 @@ export function ApplicationsProvider({ children }) {
     isSuccess: isSuccessApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
+    refetch: refetchApplications,
   } = useApplicationsExplorer();
 
   useEffect(() => {
@@ -93,6 +103,10 @@ export function ApplicationsProvider({ children }) {
     () => isErrorOnDefaultApplications || isErrorOnApplications,
     [isErrorOnDefaultApplications, isErrorOnApplications]
   );
+  const refetch = useCallback(() => {
+    refetchDefaultApplications();
+    refetchApplications();
+  }, [refetchDefaultApplications, refetchApplications]);
 
   return (
     <ApplicationsContext.Provider
@@ -103,6 +117,7 @@ export function ApplicationsProvider({ children }) {
           isSuccess,
           isError,
           error,
+          refetch,
         },
         pins: {
           data: pins,
@@ -110,6 +125,7 @@ export function ApplicationsProvider({ children }) {
           isSuccess,
           isError,
           error,
+          refetch,
         },
         currentApplication: {
           data: currentApplication,
@@ -117,6 +133,7 @@ export function ApplicationsProvider({ children }) {
           isSuccess,
           isError,
           error,
+          refetch,
         },
         dispatchApplications,
         dispatchPins,

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useApplicationsQuery } from '../api/useApplicationsQuery';
 import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
@@ -18,6 +18,7 @@ export function useApplicationsExplorer({
     isLoading: isLoadingApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
+    refetch: refetchApplicationsQuery,
   } = useApplicationsQuery({
     config: applicationsConfig,
     options: applicationsOptions,
@@ -28,6 +29,7 @@ export function useApplicationsExplorer({
     isLoading: isLoadingApplicationsMeta,
     isError: isErrorOnApplicationsMeta,
     error: errorOnApplicationsMeta,
+    refetch: refetchApplicationsMetaQuery,
   } = useApplicationsMetaQuery({
     options: {
       enabled: !!applicationsData?.data,
@@ -56,10 +58,17 @@ export function useApplicationsExplorer({
     return applicationsMetaData.data;
   }, [applicationsData?.data, applicationsMetaData?.data]);
 
+  const refetch = useCallback(() => {
+    refetchApplicationsQuery();
+
+    refetchApplicationsMetaQuery();
+  }, [refetchApplicationsQuery, refetchApplicationsMetaQuery]);
+
   return {
     data,
     isLoading,
     isError,
     error,
+    refetch,
   };
 }
