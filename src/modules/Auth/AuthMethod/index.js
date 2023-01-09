@@ -76,7 +76,7 @@ export default function AuthMethod({ route }) {
   const showBackButton = navigation.canGoBack() && accounts.length > 0;
 
   return (
-    <SafeAreaView style={[styles.container, styles.theme.container]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
       {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
 
       <View style={[styles.body]}>

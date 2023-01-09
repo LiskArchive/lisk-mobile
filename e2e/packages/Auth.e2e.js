@@ -58,4 +58,22 @@ describe('Accounts Screen', () => {
     await element(by.id('decrypt-button-continue')).tap();
     await expect(element(by.id('account-list-item')).atIndex(0)).toBeVisible();
   });
+
+  it('should register new account', async () => {
+    const recoveryPhraseArray = testConstants.secretRecoveryPhrase.split(' ');
+    await element(by.id('add-account')).tap();
+    await element(by.id('createAccountButton')).atIndex(1).tap();
+    await element(by.id('register-intro')).swipe('left');
+    await element(by.id('register-intro')).swipe('left');
+    await element(by.id('continueButton')).atIndex(0).tap();
+    await element(by.id('understandResponsibilitySwitch')).tap();
+    await element(by.id('safeKeepingButton')).tap();
+    await element(by.id(`passphrasePlaceholderFor-${recoveryPhraseArray[0]}`)).tap();
+    await element(by.id(`passphraseOptionFor-${recoveryPhraseArray[0]}`)).tap();
+    await element(by.id(`passphrasePlaceholderFor-${recoveryPhraseArray[1]}`)).tap();
+    await element(by.id(`passphraseOptionFor-${recoveryPhraseArray[1]}`)).tap();
+    await element(by.id('registerConfirmButton')).atIndex(0).tap();
+    await element(by.id('register-continue-button')).atIndex(0).tap();
+    await expect(element(by.id('auth-method-screen')).atIndex(0)).toBeVisible();
+  });
 });

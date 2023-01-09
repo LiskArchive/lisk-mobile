@@ -38,7 +38,7 @@ export default function RegisterSuccess({ hideNav }) {
 
       <View style={styles.footer}>
         <PrimaryButton
-          testID="registerSuccess"
+          testID="register-continue-button"
           style={styles.button}
           onClick={() =>
             navigation.reset({

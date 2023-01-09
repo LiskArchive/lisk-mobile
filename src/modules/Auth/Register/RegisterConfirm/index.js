@@ -7,38 +7,9 @@ import { useTheme } from 'contexts/ThemeContext';
 import { H4, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { assembleWordOptions } from 'modules/Auth/utils';
+import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 
 import getStyles from './styles';
-
-/**
- * Returns a random index which doesn't exist in list
- *
- * @param {Array} list - The list of existing random Indexes
- * @returns {Number} random index between 0 and length of words
- */
-const randomIndex = (list, words) => {
-  let index;
-  do {
-    index = Math.floor(Math.random() * words.length);
-  } while (list.includes(index));
-  return index;
-};
-
-/**
- * Returns a number of random indexes within 0 and the length of words
- * @param {Number} qty - the number of random indexes required
- * @returns {Array} the list of random indexes
- */
-const chooseRandomWords = (qty, words) => {
-  const missing = [];
-
-  for (let i = 0; i < qty; i++) {
-    missing.push(randomIndex(missing, words));
-  }
-
-  return missing;
-};
 
 // eslint-disable-next-line max-statements
 export default function RegisterConfirm({ nextStep, passphrase, prevStep, customHeader }) {

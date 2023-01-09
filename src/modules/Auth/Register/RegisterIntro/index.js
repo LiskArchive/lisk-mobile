@@ -47,7 +47,7 @@ export default function RegisterIntro({ nextStep, setShowProgressBar }) {
   }, [navigation, setShowProgressBar]);
 
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper} testID="register-intro">
       <Slider
         slides={slides}
         skip={nextStep}

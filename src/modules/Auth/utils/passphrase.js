@@ -159,3 +159,32 @@ export const assembleWordOptions = (passphraseWords, missingWords) => {
 
   return mixWithMissingWords(wordOptions);
 };
+
+/**
+ * Returns a random index which doesn't exist in list
+ *
+ * @param {Array} list - The list of existing random Indexes
+ * @returns {Number} random index between 0 and length of words
+ */
+export const randomIndex = (list, words) => {
+  let index;
+  do {
+    index = Math.floor(Math.random() * words.length);
+  } while (list.includes(index));
+  return index;
+};
+
+/**
+ * Returns a number of random indexes within 0 and the length of words
+ * @param {Number} qty - the number of random indexes required
+ * @returns {Array} the list of random indexes
+ */
+export const chooseRandomWords = (qty, words) => {
+  const missing = [];
+
+  for (let i = 0; i < qty; i++) {
+    missing.push(randomIndex(missing, words));
+  }
+
+  return missing;
+};
