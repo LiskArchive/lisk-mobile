@@ -48,14 +48,15 @@ export default function ErrorFallbackScreen({ error, onRetry }) {
           Retry
         </PrimaryButton>
 
-        <P style={[styles.label]}>Is the problem persisting?</P>
+        {emailReport.error && (
+          <>
+            <P style={[styles.label]}>Is the problem persisting?</P>
 
-        <LabelButton
-          onClick={emailReport.handleSend}
-          disabled={emailReport.isLoading || emailReport.error}
-        >
-          Report the error via email
-        </LabelButton>
+            <LabelButton onClick={emailReport.handleSend} disabled={emailReport.isLoading}>
+              Report the error via email
+            </LabelButton>
+          </>
+        )}
       </View>
     </SafeAreaView>
   );
