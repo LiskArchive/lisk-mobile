@@ -1,13 +1,5 @@
 /* eslint-disable max-statements */
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from 'react';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 
 import { useApplicationsStorage } from '../hooks/useApplicationsStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
@@ -87,26 +79,18 @@ export function ApplicationsProvider({ children }) {
     getPinnedApplicationsStorageData,
   ]);
 
-  const isLoading = useMemo(
-    () => isLoadingDefaultApplications || isLoadingApplications,
-    [isLoadingDefaultApplications, isLoadingApplications]
-  );
-  const isSuccess = useMemo(
-    () => isSuccessDefaultApplications || isSuccessApplications,
-    [isSuccessDefaultApplications, isSuccessApplications]
-  );
-  const error = useMemo(
-    () => errorOnDefaultApplications || errorOnApplications,
-    [errorOnDefaultApplications, errorOnApplications]
-  );
-  const isError = useMemo(
-    () => isErrorOnDefaultApplications || isErrorOnApplications,
-    [isErrorOnDefaultApplications, isErrorOnApplications]
-  );
-  const refetch = useCallback(() => {
+  const isLoading = isLoadingDefaultApplications || isLoadingApplications;
+
+  const isSuccess = isSuccessDefaultApplications && isSuccessApplications;
+
+  const error = errorOnDefaultApplications || errorOnApplications;
+
+  const isError = () => isErrorOnDefaultApplications || isErrorOnApplications;
+
+  const refetch = () => {
     refetchDefaultApplications();
     refetchApplications();
-  }, [refetchDefaultApplications, refetchApplications]);
+  };
 
   return (
     <ApplicationsContext.Provider
