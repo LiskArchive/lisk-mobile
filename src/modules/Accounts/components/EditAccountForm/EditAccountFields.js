@@ -36,10 +36,15 @@ export default function EditAccountFields({ account, form, nextStep, style }) {
           innerStyles={{
             containerStyle: styles.inputContainer,
           }}
+          testID="account-name"
         />
       </View>
 
-      <PrimaryButton onClick={handleSubmit} style={[styles.submitButton, style?.submitButton]}>
+      <PrimaryButton
+        onClick={handleSubmit}
+        style={[styles.submitButton, style?.submitButton]}
+        testID="edit-name-done-button"
+      >
         Done
       </PrimaryButton>
     </>

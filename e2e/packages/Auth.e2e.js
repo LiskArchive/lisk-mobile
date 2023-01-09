@@ -41,13 +41,23 @@ describe('Accounts Screen', () => {
     // TODO: Test transactions are rendered
   });
 
-  it('should remove account successfully', async () => {
+  it('should edit account name', async () => {
     await element(by.id('switch-account')).tap();
+    await element(by.id('account-list-item')).atIndex(1).swipe('left');
+    await element(by.id('edit-account')).atIndex(1).tap();
+    await element(by.id('account-name')).atIndex(0).replaceText('tester');
+    await element(by.id('edit-name-done-button')).atIndex(0).tap();
+    await element(by.id('download-file-button')).atIndex(1).tap();
+    await element(by.id('edit-account-button')).atIndex(0).tap();
+    await element(by.id('switch-account')).tap();
+    await expect(element(by.text('tester')).atIndex(1)).toBeVisible();
+  });
+
+  it('should remove account successfully', async () => {
     await element(by.id('account-list-item')).atIndex(1).swipe('left');
     await element(by.id('delete-account')).atIndex(1).tap();
     await element(by.id('download-file-button')).atIndex(1).tap();
     await element(by.id('delete-account-button')).atIndex(0).tap();
-    // Navigate to auth method after deleting account since no account is left
     await expect(element(by.id('secret-phrase')).atIndex(1)).toBeVisible();
   });
 

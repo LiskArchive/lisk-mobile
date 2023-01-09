@@ -33,7 +33,11 @@ export default function EditAccountSuccess({ account, onCompleted, style }) {
         <DownloadFile data={account} fileName={accountFilename} />
       </View>
 
-      <PrimaryButton onClick={handleSubmit} style={[styles.submitButton, style?.submitButton]}>
+      <PrimaryButton
+        onClick={handleSubmit}
+        style={[styles.submitButton, style?.submitButton]}
+        testID="edit-account-button"
+      >
         Continue to wallet
       </PrimaryButton>
     </>
