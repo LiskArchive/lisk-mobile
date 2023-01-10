@@ -85,7 +85,7 @@ export function ApplicationsProvider({ children }) {
 
   const error = errorOnDefaultApplications || errorOnApplications;
 
-  const isError = () => isErrorOnDefaultApplications || isErrorOnApplications;
+  const isError = isErrorOnDefaultApplications || isErrorOnApplications;
 
   const refetch = () => {
     refetchDefaultApplications();
