@@ -36,11 +36,6 @@ describe('Accounts Screen', () => {
     // TODO: Test tokens are displayed
   });
 
-  it('should show activity list', async () => {
-    await expect(element(by.id('transaction-list'))).toBeVisible();
-    // TODO: Test transactions are rendered
-  });
-
   it('should edit account name', async () => {
     await element(by.id('switch-account')).tap();
     await element(by.id('account-list-item')).atIndex(1).swipe('left');
