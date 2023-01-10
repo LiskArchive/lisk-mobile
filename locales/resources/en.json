@@ -112,7 +112,6 @@
   "The Avatar represents the address, making it easy to recognize.": "The Avatar represents the address, making it easy to recognize.",
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "The address is unique and can’t be changed. It’s yours. Find it in your home page.",
   "The amount value is invalid.": "The amount value is invalid.",
-  "The label must be shorter than 20 characters.": "The label must be shorter than 20 characters.",
   "The official Lisk mobile wallet.": "The official Lisk mobile wallet.",
   "The only way to access your account.": "The only way to access your account.",
   "This is not your second passphrase.": "This is not your second passphrase.",
@@ -272,6 +271,11 @@
   },
   "bookmarks": {
     "emptyText": "You do not have any bookmarks yet.",
+    "addBookmark": {
+      "invalidLabel": "The label must be between 3 to 20 characters",
+      "invalidAddress": "Invalid address",
+      "required": "This field is required"
+    },
     "disabled": {
       "title": "Disabled Bookmark",
       "description": "This bookmark is associated with a legacy account and can no longer be used.",

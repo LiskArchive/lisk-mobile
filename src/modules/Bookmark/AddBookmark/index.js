@@ -7,6 +7,7 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'contexts/ThemeContext';
+import regex from 'constants/regex';
 
 import { colors } from 'constants/styleGuide';
 import { decodeLaunchUrl } from 'utilities/qrCode';
@@ -41,8 +42,8 @@ export default function AddBookmark({ route }) {
   const scanner = useRef();
 
   const errors = {
-    label: i18next.t('The label must be shorter than 20 characters.'),
-    address: i18next.t('Invalid address.'),
+    label: i18next.t('bookmarks.addBookmark.invalidLabel'),
+    address: i18next.t('bookmarks.addBookmark.invalidAddress'),
   };
 
   const setError = (validity, fieldName) => {
@@ -50,7 +51,7 @@ export default function AddBookmark({ route }) {
       case 1:
         return errors[fieldName];
       case -1:
-        return i18next.t('This field is required.');
+        return i18next.t('bookmarks.addBookmark.required');
       default:
         return '';
     }
@@ -60,7 +61,7 @@ export default function AddBookmark({ route }) {
     if (str === '') {
       return -1;
     }
-    return str.length > 20 ? 1 : 0;
+    return regex.delegateName.test(str) ? 0 : 1;
   };
 
   const handleLabel = (value) => {
@@ -158,10 +159,11 @@ export default function AddBookmark({ route }) {
             <Input
               label={i18next.t('Address')}
               autoCorrect={false}
+              autoCapitalize="none"
               innerStyles={{
                 errorMessage: styles.errorMessage,
               }}
-              onChange={(value) => setAddress({ value })}
+              onChange={(value) => setAddress({ value: value.toLocaleLowerCase() })}
               value={address.value}
               error={setError(address.validity, 'address')}
               adornments={{
