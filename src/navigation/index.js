@@ -32,7 +32,6 @@ import TransactionsHistory from 'modules/Transactions/components/TransactionsHis
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
 import AppNavigator from './components/AppNavigator';
-import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
 import navigationOptions from './options';
 import navigationLinking from './linking';
@@ -47,9 +46,6 @@ export default function Navigator({ children }) {
     dark: theme === 'light',
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
-
-  // TODO: Add init this to BootstrapApp component.
-  useWalletConnectEventsManager();
 
   return (
     <SafeAreaProvider>
