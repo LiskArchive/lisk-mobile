@@ -7,7 +7,7 @@ import styles from './styles';
 const Swipeable = ({ children, leftActions, rightActions, style, enabled = true }) => {
   const swipeableRef = useRef();
 
-  const renderAction = (text, color, icon, onPress, x, progress) => {
+  const renderAction = (text, color, icon, onPress, x, progress, testID) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
       outputRange: [x, 0],
@@ -35,6 +35,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
               justifyContent: 'space-around',
               flexDirection: 'column',
             }}
+            testID={testID}
           >
             {icon?.()}
             <Text style={styles.actionText}>{text}</Text>
@@ -59,7 +60,8 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
           action.icon,
           action.onPress,
           -(80 * leftActions.length + i),
-          progress
+          progress,
+          action.testID
         )
       )}
     </View>
@@ -79,7 +81,8 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
           action.icon,
           action.onPress,
           80 * (rightActions.length - i),
-          progress
+          progress,
+          action.testID
         )
       )}
     </View>

@@ -34,6 +34,7 @@ export default function AccountItem({
           color: colors.dark.blueGray,
           icon: () => <RefreshSvg />,
           // TODO: Implement backup action.
+          testID: 'backup-account',
           onPress: () => {},
         },
       ]}
@@ -42,12 +43,14 @@ export default function AccountItem({
           title: 'Edit',
           color: colors.dark.blueGray,
           icon: () => <Icon name="edit-bookmark" size={20} color={colors[theme].white} />,
+          testID: 'edit-account',
           onPress: onEditPress,
         },
         {
           title: 'Delete',
           color: colors.dark.furyRed,
           icon: () => <Icon name="delete-bookmark" size={20} color={colors[theme].white} />,
+          testID: 'delete-account',
           onPress: onDeletePress,
         },
       ]}

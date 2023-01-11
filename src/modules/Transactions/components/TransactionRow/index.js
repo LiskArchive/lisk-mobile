@@ -45,7 +45,7 @@ export default function TransactionRow({ transaction }) {
 
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
         <DiscreteModeComponent
-          blurVariant={transactionAssets.amount.sign === '-' ? 'outgoing' : 'incoming'}
+          blurVariant={transactionAssets.amount?.sign === '-' ? 'outgoing' : 'incoming'}
           data={transaction.notRawLisk ? transaction.amount : fromRawLsk(transaction.params.amount)}
         >
           <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />

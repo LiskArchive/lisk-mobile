@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +15,7 @@ import SwitchSvg from 'assets/svgs/SwitchSvg';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from './hooks/useCurrentAccount';
@@ -39,6 +40,7 @@ export default function Home() {
   const { address, name: username } = currAccount.metadata;
   const discrete = useSelector((state) => state.settings.discrete);
   const dispatch = useDispatch();
+  const { accounts } = useAccounts();
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -53,10 +55,19 @@ export default function Home() {
   const handleRequestTokensClick = () => navigation.navigate('Request');
   const handleSendTokensClick = () => navigation.navigate('Send');
 
+  useEffect(() => {
+    if (!accounts?.length) {
+      navigation.navigate('AuthMethod');
+    }
+  }, [accounts, navigation]);
+
   return (
     <>
       <NavigationSafeAreaView>
-        <View style={[styles.row, styles.alignItemsCenter, styles.topContainer]}>
+        <View
+          style={[styles.row, styles.alignItemsCenter, styles.topContainer]}
+          testID="accounts-home-container"
+        >
           <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito}>
             <IncognitoSvg size={1.2} disabled={discrete} />
           </TouchableOpacity>
@@ -72,13 +83,16 @@ export default function Home() {
               <Avatar address={address} size={50} />
 
               <View style={[styles.accountDetails]}>
-                <P style={[styles.username, styles.theme.username]}>{username}</P>
+                <P style={[styles.username, styles.theme.username]} testID="username-label">
+                  {username}
+                </P>
                 <View>
                   <CopyToClipboard
                     value={address}
                     labelStyle={[styles.address, styles.theme.address]}
                     label={stringShortener(address, 7, 6)}
                     iconColor={colors.light.platinumGray}
+                    testID="address-copy-to-clipboard"
                   />
                 </View>
               </View>
@@ -86,6 +100,7 @@ export default function Home() {
               <TouchableOpacity
                 style={[styles.switchContainer]}
                 onPress={() => setShowManageAccountsModal(true)}
+                testID="switch-account"
               >
                 <SwitchSvg />
               </TouchableOpacity>

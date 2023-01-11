@@ -17,4 +17,10 @@ describe('Intro Screen', () => {
     await element(by.id('intro-screen')).swipe('left');
     await expect(element(by.text('Easy access'))).toBeVisible();
   });
+
+  it('should navigate to add account screen after intro screen', async () => {
+    await element(by.id('sliderButton')).tap();
+    await element(by.id('continueButton')).tap();
+    await expect(element(by.id('add-account-title')).atIndex(1)).toBeVisible();
+  });
 });

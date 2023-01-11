@@ -31,9 +31,11 @@ export default function PasswordForm({ address, onPress, testID, theme, onSubmit
           placeholderTextColor={
             theme === themes.dark ? colors.dark.mountainMist : colors.light.blueGray
           }
+          secureTextEntry
           onChange={setPassword}
           value={password}
           returnKeyType="done"
+          testID="decrypt-password-input"
         />
       </View>
 
@@ -43,6 +45,7 @@ export default function PasswordForm({ address, onPress, testID, theme, onSubmit
           title={i18next.t('banners.btcRemoval.buttons.gotIt')}
           disabled={!password}
           onPress={() => onSubmit(password)}
+          testID="decrypt-button-continue"
         />
       </View>
     </View>

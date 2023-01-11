@@ -90,7 +90,7 @@ export default function PasswordSetupForm({ route }) {
             />
 
             <View style={styles.actionContainer}>
-              <View style={styles.switch}>
+              <View style={styles.switch} testID="agree-switch">
                 <Switch
                   value={isAgreedField.value}
                   onValueChange={(value) => isAgreedField.onChange(value)}
@@ -105,7 +105,11 @@ export default function PasswordSetupForm({ route }) {
           </ScrollView>
 
           <View style={[styles.footer]}>
-            <PrimaryButton onPress={handleSubmit} disabled={!isAgreedField.value || isLoading}>
+            <PrimaryButton
+              onPress={handleSubmit}
+              disabled={!isAgreedField.value || isLoading}
+              testID="save-account"
+            >
               {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
             </PrimaryButton>
           </View>

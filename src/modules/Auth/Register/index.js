@@ -42,7 +42,7 @@ export default function Register({ route }) {
   }, [onBackButtonPressedAndroid]);
 
   return (
-    <View style={[styles.container, noNavStyle]}>
+    <View style={[styles.container, noNavStyle]} testID="register-screen">
       <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
         <RegisterIntro title="create" passphrase={passphrase} route={route} />
 

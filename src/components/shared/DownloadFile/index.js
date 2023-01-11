@@ -42,6 +42,7 @@ export default function DownloadFile({
           right: <DownloadSvg style={[styles.downloadFileIcon]} />,
         }}
         disabled={baseIsLoading || isLoading}
+        testID="download-file-button"
       >
         Download
       </LabelButton>

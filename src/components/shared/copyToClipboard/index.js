@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
@@ -18,6 +17,7 @@ export default function CopyToClipBoard({
   iconStyle,
   labelStyle,
   iconColor,
+  testID,
 }) {
   const [copied, handleCopy] = useCopyToClipboard(value);
 
@@ -30,7 +30,7 @@ export default function CopyToClipBoard({
   const color = iconColor || colors.light.blueGray;
 
   return (
-    <TouchableOpacity style={[styles.container, style]} onPress={handleCopy}>
+    <TouchableOpacity style={[styles.container, style]} onPress={handleCopy} testID={testID}>
       <Element style={[labelStyle]}>{text}</Element>
 
       <TouchableOpacity onPress={handleCopy}>

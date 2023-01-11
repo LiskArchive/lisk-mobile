@@ -61,7 +61,7 @@ export default function ResultScreen({
       </View>
 
       {onContinue && (
-        <View style={[styles.footer]}>
+        <View style={[styles.footer]} testID="result-screen-continue">
           <PrimaryButton
             noTheme
             title={buttonText}

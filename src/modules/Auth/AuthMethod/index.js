@@ -4,9 +4,7 @@ import { LogBox, View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
-import RNFS from 'react-native-fs';
 import SplashScreen from 'react-native-splash-screen';
-import DocumentPicker from 'react-native-document-picker';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -20,6 +18,7 @@ import CreateAccount from '../components/CreateAccount';
 import AuthTypeItem from '../components/AuthType';
 
 import getStyles from './styles';
+import { selectEncryptedFile } from '../utils/documentPicker';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -56,10 +55,7 @@ export default function AuthMethod({ route }) {
 
   const selectEncryptedJSON = async () => {
     try {
-      const file = await DocumentPicker.pickSingle({
-        type: DocumentPicker.types.allFiles,
-      });
-      const encryptedData = await RNFS.readFile(file.uri);
+      const encryptedData = await selectEncryptedFile();
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
@@ -80,7 +76,7 @@ export default function AuthMethod({ route }) {
   const showBackButton = navigation.canGoBack() && accounts.length > 0;
 
   return (
-    <SafeAreaView style={[styles.container, styles.theme.container]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
       {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
 
       <View style={[styles.body]}>
@@ -90,7 +86,7 @@ export default function AuthMethod({ route }) {
           style={{ container: { marginTop: 40 } }}
         />
 
-        <H2 style={[styles.title, styles.theme.title]}>
+        <H2 style={[styles.title, styles.theme.title]} testID="add-account-title">
           {i18next.t('auth.setup.addAccountTitle')}
         </H2>
 
