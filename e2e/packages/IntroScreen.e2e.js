@@ -1,6 +1,6 @@
 import { device, element, by } from 'detox';
 
-describe.skip('Intro Screen', () => {
+describe('Intro Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
@@ -21,6 +21,6 @@ describe.skip('Intro Screen', () => {
   it('should navigate to add account screen after intro screen', async () => {
     await element(by.id('sliderButton')).tap();
     await element(by.id('continueButton')).tap();
-    await expect(element(by.id('addAccountTitle')).atIndex(1)).toBeVisible();
+    await expect(element(by.id('add-account-title')).atIndex(1)).toBeVisible();
   });
 });

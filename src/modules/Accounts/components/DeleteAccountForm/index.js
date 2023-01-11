@@ -40,7 +40,7 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
   }
 
   return (
-    <View style={[styles.container, style?.container]} testID="delete-account">
+    <View style={[styles.container, style?.container]} testID="delete-account-container">
       <View style={[styles.body, style?.body]}>
         {mode === 'modal' && (
           <H2 style={[styles.title, styles.theme.title, style?.title]}>

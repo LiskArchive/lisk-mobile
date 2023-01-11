@@ -66,7 +66,7 @@ export default function Home() {
       <NavigationSafeAreaView>
         <View
           style={[styles.row, styles.alignItemsCenter, styles.topContainer]}
-          testID="accounts-home"
+          testID="accounts-home-container"
         >
           <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito}>
             <IncognitoSvg size={1.2} disabled={discrete} />
@@ -83,7 +83,7 @@ export default function Home() {
               <Avatar address={address} size={50} />
 
               <View style={[styles.accountDetails]}>
-                <P style={[styles.username, styles.theme.username]} testID="username">
+                <P style={[styles.username, styles.theme.username]} testID="username-label">
                   {username}
                 </P>
                 <View>
@@ -92,7 +92,7 @@ export default function Home() {
                     labelStyle={[styles.address, styles.theme.address]}
                     label={stringShortener(address, 7, 6)}
                     iconColor={colors.light.platinumGray}
-                    testID="address"
+                    testID="address-copy-to-clipboard"
                   />
                 </View>
               </View>

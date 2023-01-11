@@ -1,6 +1,7 @@
 import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
 
+// TODO: Fix settings end to end test
 describe.skip('Settings Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
