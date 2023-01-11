@@ -56,6 +56,8 @@ export default function BootstrapApp({ children }) {
   }, [queryClient, currentApplication.data]);
 
   if (isLoading) {
+    // TODO: Replace by <LoadingFallbackScreen /> component when
+    // working on https://github.com/LiskHQ/lisk-mobile/issues/1587.
     return (
       <SafeAreaView>
         <Text>Loading app...</Text>
