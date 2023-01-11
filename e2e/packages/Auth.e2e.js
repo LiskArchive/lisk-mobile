@@ -2,7 +2,7 @@
 import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
 
-describe('Accounts Screen', () => {
+describe('Auth module', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');
@@ -27,12 +27,12 @@ describe('Accounts Screen', () => {
     await element(by.id('save-account')).tap();
     // TODO: Download passphrase before selecting account
     await element(by.id('account-list-item')).atIndex(0).tap();
-    await expect(element(by.id('accounts-home'))).toBeVisible();
+    await expect(element(by.id('accounts-home-container'))).toBeVisible();
   });
 
   it('should display all account information', async () => {
-    await expect(element(by.id('username'))).toBeVisible();
-    await expect(element(by.id('address'))).toBeVisible();
+    await expect(element(by.id('username-label'))).toBeVisible();
+    await expect(element(by.id('address-copy-to-clipboard'))).toBeVisible();
     // TODO: Test tokens are displayed
   });
 
@@ -50,13 +50,13 @@ describe('Accounts Screen', () => {
 
   it('should remove account successfully', async () => {
     await element(by.id('account-list-item')).atIndex(1).swipe('left');
-    await element(by.id('delete-account')).atIndex(1).tap();
+    await element(by.id('delete-account-container')).atIndex(1).tap();
     await element(by.id('download-file-button')).atIndex(1).tap();
     await element(by.id('delete-account-button')).atIndex(0).tap();
     await expect(element(by.id('secret-phrase')).atIndex(1)).toBeVisible();
   });
 
-  it('should add account using by file upload', async () => {
+  it('should add account by file upload', async () => {
     await element(by.id('restore-from-file')).atIndex(1).tap();
     await element(by.id('decrypt-password-input')).tap();
     await element(by.id('decrypt-password-input')).replaceText('Password1!');
@@ -68,8 +68,8 @@ describe('Accounts Screen', () => {
     const recoveryPhraseArray = testConstants.secretRecoveryPhrase.split(' ');
     await element(by.id('add-account')).tap();
     await element(by.id('createAccountButton')).atIndex(1).tap();
-    await element(by.id('register-intro')).swipe('left');
-    await element(by.id('register-intro')).swipe('left');
+    await element(by.id('register-intro-container')).swipe('left');
+    await element(by.id('register-intro-container')).swipe('left');
     await element(by.id('continueButton')).atIndex(0).tap();
     await element(by.id('understandResponsibilitySwitch')).tap();
     await element(by.id('safeKeepingButton')).tap();

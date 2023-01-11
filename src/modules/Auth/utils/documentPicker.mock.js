@@ -1,5 +1,5 @@
-import { encryptedAccountMock } from '../AuthMethod/__fixtures__/account';
+import { mockEncryptedAccount } from '../AuthMethod/__fixtures__/mockEncryptedAccount';
 
 export const selectEncryptedFile = async () => {
-  return JSON.stringify(encryptedAccountMock);
+  return JSON.stringify(mockEncryptedAccount);
 };

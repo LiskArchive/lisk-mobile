@@ -14,7 +14,7 @@ const ApplicationSwitcher = ({ onPress }) => {
   const { styles } = useTheme({ styles: getStyles });
 
   return (
-    <View style={styles.switcherContainer} testID="switch-application">
+    <View style={styles.switcherContainer} testID="switch-application-container">
       <TouchableOpacity onPress={onPress}>
         <View style={[styles.container, styles.theme.container]}>
           <Animated.View style={[styles.switch]}>
