@@ -10,7 +10,7 @@
   },
   "fallbackScreens" : {
     "error" : {
-      "description": "Something went wrong. Please try  later and if you are still experiencing problems then report the error via email",
+      "description": "Something went wrong. Please try again later and if you are still experiencing problems then report the error via email.",
       "retryButton": "Retry",
       "emailReportLabel": "Is the problem persisting?",
       "emailReportButton": "Report the error via email"
