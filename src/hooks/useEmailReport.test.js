@@ -1,4 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
+import { Linking } from 'react-native';
 
 import { mockApplicationsMeta } from 'modules/BlockchainApplication/__fixtures__';
 
@@ -9,6 +10,7 @@ import { applicationsWrapper } from '../tests/applicationsWrapper';
 jest.useRealTimers();
 
 jest.mock('react-native/Libraries/Linking/Linking', () => ({
+  canOpenURL: jest.fn(() => Promise.resolve(true)),
   openURL: jest.fn(() => Promise.resolve()),
 }));
 
@@ -34,6 +36,7 @@ describe('useEmailReport hook', () => {
     await waitFor(() => !result.current.isLoading);
 
     expect(result.current.isLoading).toBeFalsy();
+    expect(result.current.isFetching).toBeFalsy();
 
     expect(result.current.url).toMatch(new RegExp(expectedNetworkVersionPattern));
     expect(result.current.url).toMatch(new RegExp(expectedNetworkIdentifierPattern));
@@ -66,11 +69,24 @@ describe('useEmailReport hook', () => {
     expect(result.current.url).toMatch(new RegExp(expectedErrorPattern));
   });
 
-  it('should fall in error when no url is defined when triggering handleSend', async () => {
+  it('calls canOpenURL and openURL when triggering handleSend successfully', async () => {
+    const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
+
+    await waitFor(() => !result.current.isLoading);
+
+    await act(() => result.current.handleSend());
+
+    expect(Linking.canOpenURL).toBeCalledTimes(1);
+    expect(Linking.openURL).toBeCalledTimes(1);
+    expect(result.current.isFetching).toBeFalsy();
+  });
+
+  it('should fall in error if no url is defined when triggering handleSend', async () => {
     const { result } = renderHook(() => useEmailReport(), { wrapper });
 
     await act(() => result.current.handleSend());
 
     expect(result.current.error).toBeTruthy();
+    expect(result.current.isFetching).toBeFalsy();
   });
 });

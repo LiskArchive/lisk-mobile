@@ -78,10 +78,20 @@ export function useEmailReport({ error, errorMessage } = {}) {
     return value;
   }, [networkStatusData?.data, currentApplication.data?.serviceURLs, errorMessage, error]);
 
-  const handleSend = async () => {
+  const handleResetState = () => {
+    setIsFetching(false);
+    setErrorOnLinking(undefined);
+  };
+
+  const handleSend = () => {
+    handleResetState();
+
     setIsFetching(true);
 
-    if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));
+    if (!url) {
+      setErrorOnLinking(new Error('Not URL defined before sending.'));
+      return setIsFetching(false);
+    }
 
     return Linking.canOpenURL(url)
       .then((isURLSupported) => {
