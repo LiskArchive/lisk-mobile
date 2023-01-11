@@ -50,7 +50,7 @@ describe('Auth module', () => {
 
   it('should remove account successfully', async () => {
     await element(by.id('account-list-item')).atIndex(1).swipe('left');
-    await element(by.id('delete-account-container')).atIndex(1).tap();
+    await element(by.id('delete-account')).atIndex(1).tap();
     await element(by.id('download-file-button')).atIndex(1).tap();
     await element(by.id('delete-account-button')).atIndex(0).tap();
     await expect(element(by.id('secret-phrase')).atIndex(1)).toBeVisible();
