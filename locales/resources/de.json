@@ -113,7 +113,6 @@
   "The Avatar represents the address, making it easy to recognize.": "Der Avatar stellt die Adresse dar. Hiermit kannst du diese einfacher erkennen.",
   "The address is unique and can’t be changed. It’s yours. Find it in your home page.": "Die Adresse ist einzigartig und kann nicht verändert werden. Du kannst deine Adresse auf dem Homescreen der App finden.",
   "The amount value is invalid.": "Der Betrag ist ungültig.",
-  "The label must be shorter than 20 characters.": "Die Bezeichnung muss kürzer als 20 Zeichen sein.",
   "The official Lisk mobile wallet.": "Das offizielle Lisk Mobile Wallet.",
   "The only way to access your account.": "Der einzige Weg auf Ihr Konto zuzugreifen.",
   "This is not your second passphrase.": "Das ist nicht deine zweite Passphrase.",
@@ -273,6 +272,11 @@
   },
   "bookmarks": {
     "emptyText": "Sie haben noch keine Lesezeichen.",
+    "addBookmark": {
+      "invalidLabel": "",
+      "invalidAddress": "",
+      "required": ""
+    },
     "disabled": {
       "title": "",
       "description": "",

@@ -44,6 +44,7 @@ export default function Bookmarks() {
 
         <TouchableOpacity
           style={[styles.titleContainer]}
+          testID="add-bookmark"
           onPress={() =>
             navigation.navigate({
               name: 'AddBookmark',

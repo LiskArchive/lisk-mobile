@@ -47,6 +47,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
           {
             title: 'Edit',
             color: colors.dark.blueGray,
+            testID: 'edit-bookmark',
             icon: () => (
               <Icon
                 name="edit-bookmark"
@@ -70,6 +71,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
         {
           title: 'Delete',
           color: colors.light.burntSieanna,
+          testID: 'delete-bookmark',
           icon: () => (
             <Icon
               name="delete-bookmark"
