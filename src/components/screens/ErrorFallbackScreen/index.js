@@ -16,11 +16,15 @@ import { getErrorFallbackScreenStyles, errorFallbackSplashStyles } from './style
  * @param {Error} props.error - Error instance to handle with this component.
  * @param {Function} props.onRetry - Callback to trigger when user retries the error
  * triggering action.
+ * @param {String} props.description - Optional text to display as description. If it's
+ * not provided, a default description will be rendered.
  */
-export default function ErrorFallbackScreen({ error, onRetry }) {
-  const errorMessage = error?.message || 'Error running app';
+export default function ErrorFallbackScreen(props) {
+  const description =
+    props.description ||
+    'Something went wrong. Please try  later and if you are still experiencing problems then report the error via email';
 
-  const emailReport = useEmailReport({ error, errorMessage });
+  const emailReport = useEmailReport({ error: props.error, errorMessage: description });
 
   const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
@@ -33,13 +37,9 @@ export default function ErrorFallbackScreen({ error, onRetry }) {
           <ErrorIllustrationSvg />
         </View>
 
-        <P style={[styles.description, styles.theme.description]}>{errorMessage}</P>
+        <P style={[styles.description, styles.theme.description]}>{description}</P>
 
-        <P style={[styles.description, styles.theme.description]}>
-          You can restart the app or if you still can't sign in please report the error via mail.
-        </P>
-
-        <PrimaryButton noTheme style={[styles.submitButton]} onClick={onRetry}>
+        <PrimaryButton noTheme style={[styles.submitButton]} onClick={props.onRetry}>
           Retry
         </PrimaryButton>
 
