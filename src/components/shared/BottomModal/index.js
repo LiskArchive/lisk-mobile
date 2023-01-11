@@ -15,11 +15,13 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   const resetPositionAnimation = Animated.timing(panY, {
     toValue: 0,
     duration: 300,
+    useNativeDriver: true,
   });
 
   const closeAnimation = Animated.timing(panY, {
     toValue: Dimensions.get('screen').height,
     duration: 300,
+    useNativeDriver: true,
   });
 
   const handleClose = () => closeAnimation.start(() => toggleShow(false));

@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 
 import { useApplicationsStorage } from '../hooks/useApplicationsStorage';
 import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
@@ -35,15 +35,19 @@ export function ApplicationsProvider({ children }) {
   const {
     data: defaultApplicationsData,
     isLoading: isLoadingDefaultApplications,
+    isSuccess: isSuccessDefaultApplications,
     isError: isErrorOnDefaultApplications,
     error: errorOnDefaultApplications,
+    refetch: refetchDefaultApplications,
   } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
 
   const {
     data: applicationsData,
     isLoading: isLoadingApplications,
+    isSuccess: isSuccessApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
+    refetch: refetchApplications,
   } = useApplicationsExplorer();
 
   useEffect(() => {
@@ -75,18 +79,18 @@ export function ApplicationsProvider({ children }) {
     getPinnedApplicationsStorageData,
   ]);
 
-  const isLoading = useMemo(
-    () => isLoadingDefaultApplications || isLoadingApplications,
-    [isLoadingDefaultApplications, isLoadingApplications]
-  );
-  const error = useMemo(
-    () => errorOnDefaultApplications || errorOnApplications,
-    [errorOnDefaultApplications, errorOnApplications]
-  );
-  const isError = useMemo(
-    () => isErrorOnDefaultApplications || isErrorOnApplications,
-    [isErrorOnDefaultApplications, isErrorOnApplications]
-  );
+  const isLoading = isLoadingDefaultApplications || isLoadingApplications;
+
+  const isSuccess = isSuccessDefaultApplications && isSuccessApplications;
+
+  const error = errorOnDefaultApplications || errorOnApplications;
+
+  const isError = isErrorOnDefaultApplications || isErrorOnApplications;
+
+  const refetch = () => {
+    refetchDefaultApplications();
+    refetchApplications();
+  };
 
   return (
     <ApplicationsContext.Provider
@@ -94,18 +98,30 @@ export function ApplicationsProvider({ children }) {
         applications: {
           data: applications,
           isLoading,
+          isSuccess,
           isError,
           error,
+          refetch,
         },
         pins: {
           data: pins,
           isLoading,
+          isSuccess,
           isError,
           error,
+          refetch,
+        },
+        currentApplication: {
+          data: currentApplication,
+          isLoading,
+          isSuccess,
+          isError,
+          error,
+          refetch,
         },
         dispatchApplications,
         dispatchPins,
-        currentApplication,
+        // currentApplication,
         setCurrentApplication,
       }}
     >

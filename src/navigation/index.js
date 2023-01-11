@@ -40,7 +40,7 @@ import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
 
 const StackNavigator = createStackNavigator();
 
-export default function Navigator() {
+export default function Navigator({ children }) {
   const { theme } = useSelector((state) => state.settings);
 
   const themeColors = {
@@ -48,6 +48,7 @@ export default function Navigator() {
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
 
+  // TODO: Add init this to BootstrapApp component.
   useWalletConnectEventsManager();
 
   return (
@@ -178,6 +179,8 @@ export default function Navigator() {
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
+
+        {children}
       </NavigationContainer>
     </SafeAreaProvider>
   );

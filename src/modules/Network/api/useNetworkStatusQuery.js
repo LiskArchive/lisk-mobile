@@ -1,7 +1,8 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { API_URL } from 'utilities/api/constants';
 import { GET_NETWORK_STATUS_QUERY } from 'utilities/api/queries';
-import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
+import liskAPIClient from 'utilities/api/LiskAPIClient';
+import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 /**
  * Creates a custom hook for network status query
@@ -13,7 +14,7 @@ import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
  *
  * @returns the query object
  */
-export function useNetworkStatusQuery({ config: customConfig = {}, options } = {}) {
+export function useNetworkStatusQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/network/status`,
     method: 'get',
@@ -27,5 +28,6 @@ export function useNetworkStatusQuery({ config: customConfig = {}, options } = {
     keys,
     config,
     options,
+    client: liskAPIClient,
   });
 }

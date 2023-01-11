@@ -7,7 +7,14 @@ import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCu
 import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
 import { API_VERSION } from 'utilities/api/constants';
 
-export function useEmailReport({ errorMessage, error } = {}) {
+/**
+ * Allows to send an email report based on provided error.
+ * Opens email app of device and prefill error metadata.
+ * @param {Error} error - Error instance that generates the email report.
+ * @param {String} errorMessage - Error message to add to the email metadata (optional).
+ * @returns {Object} - The send email callback and its execution state (loading, error and data).
+ */
+export function useEmailReport({ error, errorMessage } = {}) {
   const [isFetching, setIsFetching] = useState(false);
   const [errorOnLinking, setErrorOnLinking] = useState();
 
@@ -32,8 +39,8 @@ export function useEmailReport({ errorMessage, error } = {}) {
       `;
     }
 
-    if (currentApplication?.serviceURLs) {
-      const stringifiedAppApis = currentApplication.serviceURLs.reduce(
+    if (currentApplication.data?.serviceURLs) {
+      const stringifiedAppApis = currentApplication.data.serviceURLs.reduce(
         (acc, serviceURL) => `${acc} - ${serviceURL.http}`,
         ''
       );
@@ -69,20 +76,42 @@ export function useEmailReport({ errorMessage, error } = {}) {
     }
 
     return value;
-  }, [networkStatusData?.data, currentApplication?.serviceURLs, errorMessage, error]);
+  }, [networkStatusData?.data, currentApplication.data?.serviceURLs, errorMessage, error]);
 
-  async function handleSend() {
-    if (!url) return setErrorOnLinking(new Error('Not URL defined before sending.'));
+  const handleResetState = () => {
+    setIsFetching(false);
+    setErrorOnLinking(undefined);
+  };
+
+  const handleSend = () => {
+    handleResetState();
 
     setIsFetching(true);
 
-    return Linking.openURL(url)
-      .then(() => setIsFetching(false))
+    if (!url) {
+      setErrorOnLinking(new Error('Not URL defined before sending.'));
+      return setIsFetching(false);
+    }
+
+    return Linking.canOpenURL(url)
+      .then((isURLSupported) => {
+        if (!isURLSupported) {
+          setErrorOnLinking(new Error(`Can't handle url: ${url}`));
+          setIsFetching(false);
+        } else {
+          Linking.openURL(url)
+            .then(() => setIsFetching(false))
+            .catch((_error) => {
+              setErrorOnLinking(_error);
+              setIsFetching(false);
+            });
+        }
+      })
       .catch((_error) => {
         setErrorOnLinking(_error);
         setIsFetching(false);
       });
-  }
+  };
 
   return {
     url,

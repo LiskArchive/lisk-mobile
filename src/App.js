@@ -6,12 +6,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { ApplicationsProvider } from 'modules/BlockchainApplication/context/ApplicationsContext';
 import { ThemeProvider } from 'contexts/ThemeContext';
-import Router from 'navigation';
+import Navigator from 'navigation';
 import Alert from 'components/shared/alert';
 import StatusBar from 'components/shared/StatusBar';
 import reactQueryClient from 'utilities/api/reactQueryClient';
 import store, { persistedStore } from 'store/index';
-import AppBootstrapper from './AppBootstrapper';
+import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
 
@@ -24,11 +24,12 @@ export default function App() {
             <PersistGate loading={null} persistor={persistedStore}>
               <ApplicationsProvider>
                 <ThemeProvider>
-                  <AppBootstrapper>
-                    <StatusBar />
-                    <Router />
-                    <Alert />
-                  </AppBootstrapper>
+                  <BootstrapApp>
+                    <Navigator>
+                      <StatusBar />
+                      <Alert />
+                    </Navigator>
+                  </BootstrapApp>
                 </ThemeProvider>
               </ApplicationsProvider>
             </PersistGate>

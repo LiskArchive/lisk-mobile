@@ -99,6 +99,10 @@ const navigationOptions = {
     title: null,
     header: () => null,
   },
+  ErrorFallback: {
+    title: null,
+    header: () => null,
+  },
 };
 
 export default navigationOptions;

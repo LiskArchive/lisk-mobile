@@ -12,7 +12,7 @@ module.exports = {
     '/node_modules/',
     'src/components/',
     'src/App.js',
-    'src/AppBootstrapper.js',
+    'src/BootstrapApp.js',
     'src/constants/',
     'src/contexts/',
     'src/store',

@@ -33,7 +33,7 @@ export default function AccountList({
   const { styles } = useTheme({ styles: getAccountsListStyles() });
 
   function handleSelectAccountClick(account) {
-    if (!currentApplication) {
+    if (!currentApplication.data) {
       DropDownHolder.error(
         i18next.t('Error'),
         'Wallet is not available right now. Please try again later.'

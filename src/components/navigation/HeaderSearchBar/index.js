@@ -49,6 +49,7 @@ export default function HeaderSearchBar({
         toValue: 1,
         easing: Easing.elastic(),
         duration: 500,
+        useNativeDriver: true,
       }).start();
     } else {
       width.setValue(0);

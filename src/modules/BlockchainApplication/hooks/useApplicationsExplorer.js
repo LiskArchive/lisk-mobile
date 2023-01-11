@@ -16,8 +16,10 @@ export function useApplicationsExplorer({
   const {
     data: applicationsData,
     isLoading: isLoadingApplications,
+    isSuccess: isSuccessApplications,
     isError: isErrorOnApplications,
     error: errorOnApplications,
+    refetch: refetchApplicationsQuery,
   } = useApplicationsQuery({
     config: applicationsConfig,
     options: applicationsOptions,
@@ -26,8 +28,10 @@ export function useApplicationsExplorer({
   const {
     data: applicationsMetaData,
     isLoading: isLoadingApplicationsMeta,
+    isSuccess: isSuccessApplicationsMeta,
     isError: isErrorOnApplicationsMeta,
     error: errorOnApplicationsMeta,
+    refetch: refetchApplicationsMetaQuery,
   } = useApplicationsMetaQuery({
     options: {
       enabled: !!applicationsData?.data,
@@ -45,6 +49,7 @@ export function useApplicationsExplorer({
   });
 
   const isLoading = isLoadingApplications || isLoadingApplicationsMeta;
+  const isSuccess = isSuccessApplications && isSuccessApplicationsMeta;
   const isError = isErrorOnApplications || isErrorOnApplicationsMeta;
   const error = errorOnApplications || errorOnApplicationsMeta;
 
@@ -56,10 +61,18 @@ export function useApplicationsExplorer({
     return applicationsMetaData.data;
   }, [applicationsData?.data, applicationsMetaData?.data]);
 
+  const refetch = () => {
+    refetchApplicationsQuery();
+
+    refetchApplicationsMetaQuery();
+  };
+
   return {
     data,
     isLoading,
+    isSuccess,
     isError,
     error,
+    refetch,
   };
 }

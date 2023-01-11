@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+/* eslint-disable max-statements */
+import React, { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { SafeAreaView, Text } from 'react-native';
 
 import apiClient from 'utilities/api/APIClient';
 import {
@@ -8,22 +10,28 @@ import {
   GET_AUTH_QUERY,
 } from 'utilities/api/queries';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
+import ErrorFallbackScreen from './components/screens/ErrorFallbackScreen';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
- * @param {ReactNode} children - Components tree to provide the loaded data.
+ * @param {React.ReactNode} children - Components tree to provide the loaded data.
  */
-export default function AppBootstrapper({ children }) {
+export default function BootstrapApp({ children }) {
   const queryClient = useQueryClient();
 
   const [currentApplication] = useCurrentApplication();
 
+  const isLoading = currentApplication.isLoading;
+  const isError = currentApplication.isError;
+  const error = currentApplication.error;
+  const refetch = currentApplication.refetch;
+
   // Bootstrap API client with current application.
   useEffect(() => {
-    if (currentApplication?.serviceURLs) {
-      apiClient.create(currentApplication.serviceURLs[0]);
+    if (currentApplication.data?.serviceURLs) {
+      apiClient.create(currentApplication.data.serviceURLs[0]);
     }
-  }, [currentApplication]);
+  }, [currentApplication.data]);
 
   // Bootstrap WS connections for re-fetching account transactions and tokens data when
   // new and delete transactions events occur.
@@ -34,7 +42,7 @@ export default function AppBootstrapper({ children }) {
       queryClient.invalidateQueries([GET_AUTH_QUERY], { exact: false });
     };
 
-    if (currentApplication && apiClient?.ws) {
+    if (currentApplication.data && apiClient?.ws) {
       apiClient.ws.on('new.transactions', invalidateQueries);
       apiClient.ws.on('delete.transactions', invalidateQueries);
     }
@@ -45,7 +53,21 @@ export default function AppBootstrapper({ children }) {
         apiClient.ws.off('delete.transactions');
       }
     };
-  }, [queryClient, currentApplication]);
+  }, [queryClient, currentApplication.data]);
+
+  if (isLoading) {
+    // TODO: Replace with <LoadingFallbackScreen /> component when
+    // working on https://github.com/LiskHQ/lisk-mobile/issues/1587.
+    return (
+      <SafeAreaView>
+        <Text>Loading app...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  if (isError) {
+    return <ErrorFallbackScreen onRetry={refetch} error={error} />;
+  }
 
   return children;
 }

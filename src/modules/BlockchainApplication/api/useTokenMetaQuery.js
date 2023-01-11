@@ -2,7 +2,7 @@ import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
 import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
-import applicationsAPIClient from 'utilities/api/ApplicationsAPIClient';
+import liskAPIClient from 'utilities/api/LiskAPIClient';
 import { useCurrentApplication } from '../hooks/useCurrentApplication';
 
 /**
@@ -25,12 +25,12 @@ export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options 
       network: NETWORK,
       limit: LIMIT,
       tokenID,
-      chainID: currentApplication.chainID,
+      chainID: currentApplication.data?.chainID,
       ...customConfig.params,
     },
   };
 
   const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
 
-  return useCustomQuery({ config, options, keys, client: applicationsAPIClient });
+  return useCustomQuery({ config, options, keys, client: liskAPIClient });
 }
