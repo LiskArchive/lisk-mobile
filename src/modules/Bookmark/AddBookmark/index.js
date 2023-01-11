@@ -67,7 +67,7 @@ export default function AddBookmark({ route }) {
   const handleLabel = (value) => {
     setLabel({
       value,
-      validity: validateLabel(value),
+      validity: validateLabel(value.toLocaleLowerCase()),
     });
   };
 
@@ -163,7 +163,8 @@ export default function AddBookmark({ route }) {
               innerStyles={{
                 errorMessage: styles.errorMessage,
               }}
-              onChange={(value) => setAddress({ value: value.toLocaleLowerCase() })}
+              testID="bookmark-address-input"
+              onChange={(value) => setAddress({ value })}
               value={address.value}
               error={setError(address.validity, 'address')}
               adornments={{
@@ -194,8 +195,10 @@ export default function AddBookmark({ route }) {
         )}
 
         <Input
+          testID="bookmark-label-input"
           label={i18next.t('Label')}
           autoCorrect={false}
+          autoCapitalize="none"
           innerStyles={{ inputLabel: styles.input }}
           multiline={false}
           onChange={handleLabel}
@@ -205,7 +208,7 @@ export default function AddBookmark({ route }) {
       </View>
 
       <View style={[styles.footer]}>
-        <PrimaryButton onClick={handleSubmit} noTheme>
+        <PrimaryButton onClick={handleSubmit} noTheme testID="add-bookmark-button">
           {editMode ? i18next.t('Save changes') : i18next.t('Add to bookmarks')}
         </PrimaryButton>
       </View>

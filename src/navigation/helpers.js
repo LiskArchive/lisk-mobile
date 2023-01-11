@@ -1,5 +1,6 @@
 import React from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { View } from 'react-native';
 
 import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './options';
@@ -12,7 +13,11 @@ export function getNavigationHeaderOptions({ route }) {
 export function getTabBarIcon({ route }) {
   return {
     tabBarIcon: (props) => {
-      return <TabBarIcon focused={props.focused} name={route.name} />;
+      return (
+        <View testID={`${route.name}-tab`}>
+          <TabBarIcon focused={props.focused} name={route.name} />
+        </View>
+      );
     },
   };
 }
