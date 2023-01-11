@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { View, SafeAreaView } from 'react-native';
+import i18next from 'i18next';
 
 import { useEmailReport } from 'hooks/useEmailReport';
 import { useTheme } from 'contexts/ThemeContext';
@@ -20,9 +21,7 @@ import { getErrorFallbackScreenStyles, errorFallbackSplashStyles } from './style
  * not provided, a default description will be rendered.
  */
 export default function ErrorFallbackScreen(props) {
-  const description =
-    props.description ||
-    'Something went wrong. Please try  later and if you are still experiencing problems then report the error via email';
+  const description = props.description || i18next.t('fallbackScreens.error.description');
 
   const emailReport = useEmailReport({ error: props.error, errorMessage: description });
 
@@ -40,15 +39,15 @@ export default function ErrorFallbackScreen(props) {
         <P style={[styles.description, styles.theme.description]}>{description}</P>
 
         <PrimaryButton noTheme style={[styles.submitButton]} onClick={props.onRetry}>
-          Retry
+          {i18next.t('fallbackScreens.error.retryButton')}
         </PrimaryButton>
 
         {!emailReport.error && (
           <>
-            <P style={[styles.label]}>Is the problem persisting?</P>
+            <P style={[styles.label]}>{i18next.t('fallbackScreens.error.emailReportLabel')}</P>
 
             <LabelButton onClick={emailReport.handleSend} disabled={emailReport.isLoading}>
-              Report the error via email
+              {i18next.t('fallbackScreens.error.emailReportButton')}
             </LabelButton>
           </>
         )}

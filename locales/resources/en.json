@@ -8,6 +8,14 @@
     },
     "copyToClipboard": "Copy to clipboard"
   },
+  "fallbackScreens" : {
+    "error" : {
+      "description": "Something went wrong. Please try  later and if you are still experiencing problems then report the error via email",
+      "retryButton": "Retry",
+      "emailReportLabel": "Is the problem persisting?",
+      "emailReportButton": "Report the error via email"
+    }
+  },
   "Activity": "Activity",
   "Add to bookmarks": "Add to bookmarks",
   "Address": "Address",

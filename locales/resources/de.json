@@ -8,6 +8,14 @@
     },
     "copyToClipboard": "In die Zwischenablage kopieren"
   },
+  "fallbackScreens" : {
+    "error" : {
+      "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es später erneut und melden Sie den Fehler per E-Mail, wenn Sie weiterhin Probleme haben",
+      "retryButton": "Wiederholen",
+      "emailReportLabel": "Bleibt das Problem bestehen?",
+      "emailReportButton": "Melden Sie den Fehler per E-Mail"
+    }
+  },
   "Activity": "Aktivitäten",
   "Add to bookmarks": "Zu Lesezeichen hinzufügen",  
   "Address": "Adresse",
