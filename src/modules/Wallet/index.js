@@ -11,7 +11,6 @@ import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { DeleteBookmarkModal } from 'modules/Bookmark/components';
 import { H3 } from 'components/shared/toolBox/typography';
-import LoadingBar from 'components/shared/loading';
 import { accountUnFollowed } from 'modules/Accounts/store/actions';
 import BookmarkSvg from 'assets/svgs/BookmarkSvg';
 import BookmarkOutlineSvg from 'assets/svgs/BookmarkOutlineSvg';
@@ -36,7 +35,7 @@ const Wallet = ({ styles, navigation, t, route, theme }) => {
   const dispatch = useDispatch();
 
   // TODO: Use useAccountTransactionsQuery instead.
-  const { transactions, loading, loadMore, refresh, account } = useTransactionList({
+  const { transactions, loadMore, refresh, account } = useTransactionList({
     address: route.params?.address,
     activeToken: 'LSK',
   });
@@ -85,7 +84,6 @@ const Wallet = ({ styles, navigation, t, route, theme }) => {
         renderTitle={() => (
           <View style={[styles.titleContainer, styles.theme.titleContainer]}>
             <H3 style={styles.theme.title}>{t('Activity')}</H3>
-            <LoadingBar loading={loading} />
           </View>
         )}
         render={(refreshing) =>
