@@ -1,4 +1,4 @@
-// @todo Add tests by #4418
+// TODO: Add tests by #ttps://github.com/LiskHQ/lisk-desktop/issues/4418
 // import { approveLiskRequest, rejectLiskRequest } from './requestHandlers';
 
 describe('requestHandlers', () => {
