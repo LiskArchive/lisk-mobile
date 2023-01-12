@@ -63,10 +63,10 @@ export default function TransactionList({ mode = 'overview', style }) {
             adornments={{
               right: (
                 <CaretSvg
-                  height={12}
-                  width={12}
+                  height={14}
+                  width={14}
                   direction="right"
-                  style={{ marginLeft: 8 }}
+                  style={{ marginLeft: 4 }}
                   color={colors.light.ultramarineBlue}
                 />
               ),
