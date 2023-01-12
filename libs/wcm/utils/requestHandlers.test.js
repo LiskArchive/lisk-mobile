@@ -1,4 +1,4 @@
-// TODO: Add tests by #ttps://github.com/LiskHQ/lisk-desktop/issues/4418
+// TODO: Add missing UT (details on https://github.com/LiskHQ/lisk-mobile/issues/1597)
 // import { approveLiskRequest, rejectLiskRequest } from './requestHandlers';
 
 describe('requestHandlers', () => {
