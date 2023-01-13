@@ -19,7 +19,7 @@ import getTransactionDetailsStyles from './styles';
 export function TransactionDetailsBody({ transaction }) {
   const [showParams, setShowParams] = useState(false);
 
-  const transactionAssets = useTransactionAssets(transaction);
+  const transactionAssets = useTransactionAssets({ transaction });
 
   const scrollViewRef = useRef();
 

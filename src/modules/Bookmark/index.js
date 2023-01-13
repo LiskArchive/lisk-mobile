@@ -26,7 +26,7 @@ export default function Bookmarks() {
 
   const handleSearchTermChange = (term) => search.setTerm(term);
 
-  const handlePress = (data) => navigation.navigate('Wallet', { address: data.address });
+  const handlePress = (data) => navigation.navigate('AccountDetails', { address: data.address });
 
   return (
     <NavigationSafeAreaView>

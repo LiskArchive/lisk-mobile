@@ -1,16 +1,6 @@
 import * as Lisk from '@liskhq/lisk-client';
-import i18next from 'i18next';
 
-import { themes } from 'constants/styleGuide';
-import txUnknownLight from 'assets/images/txDetail/tx-unknown-light.png';
-import txUnknownDark from 'assets/images/txDetail/tx-unknown-dark.png';
-
-import {
-  BASE_TRANSACTION_SCHEMA,
-  DRY_RUN_TRANSACTION_RESULTS,
-  MODULE_COMMAND_MAP,
-  TRANSACTIONS,
-} from './constants';
+import { BASE_TRANSACTION_SCHEMA, DRY_RUN_TRANSACTION_RESULTS } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema) => {
   const moduleCommand = module.concat(':', command);
@@ -97,19 +87,6 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
     id: transaction.id && transaction.id.toString('hex'),
   };
 };
-
-export const getTxConstant = ({ moduleAssetId }) => {
-  const result = TRANSACTIONS[moduleAssetId] ?? {};
-  return {
-    ...result,
-    title: result?.title ?? i18next.t('Transaction'),
-    image: result?.image
-      ? result?.imageConfirmTransaction
-      : (theme) => (theme === themes.light ? txUnknownLight : txUnknownDark),
-  };
-};
-
-export const isTransfer = ({ moduleAssetId }) => moduleAssetId === MODULE_COMMAND_MAP.transfer;
 
 /**
  * Interprets a transaction dry-run error result. Generates an Error instance with descriptive

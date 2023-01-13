@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
-import Wallet from 'modules/Wallet';
+import AccountDetails from 'modules/Accounts/components/AccountDetails';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
@@ -130,9 +130,9 @@ export default function Navigator({ children }) {
             options={navigationOptions.TransactionDetails}
           />
           <StackNavigator.Screen
-            name="Wallet"
-            component={Wallet}
-            options={navigationOptions.Wallet}
+            name="AccountDetails"
+            component={AccountDetails}
+            options={navigationOptions.AccountDetails}
           />
           <StackNavigator.Screen
             name="EnableBioAuth"

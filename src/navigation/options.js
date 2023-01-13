@@ -13,7 +13,7 @@ const navigationOptions = {
       headerShown: false,
     };
   },
-  Wallet: {
+  AccountDetails: {
     header: () => null,
   },
   Applications: {
