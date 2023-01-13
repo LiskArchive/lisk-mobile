@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 /* istanbul ignore file */
-// @todo Add test coverage by #4418
 import { formatJsonRpcError, formatJsonRpcResult } from '@json-rpc-tools/utils';
 import { getSdkError } from '@walletconnect/utils';
 import { transactions, cryptography } from '@liskhq/lisk-client';
