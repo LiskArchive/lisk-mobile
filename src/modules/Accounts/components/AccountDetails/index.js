@@ -11,6 +11,7 @@ import getAccountDetailsStyles from './styles';
 /**
  * Renders an account details screen given an address by route params.
  * @TODO - Implement this component.
+ * (details on https://github.com/LiskHQ/lisk-mobile/issues/1601).
  */
 export default function AccountDetails() {
   const navigation = useNavigation();
