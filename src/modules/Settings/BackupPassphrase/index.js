@@ -3,8 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import Stepper from 'components/shared/Stepper';
 import PassphraseBackup from 'components/screens/passphraseBackup';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import { useAccountInfo } from 'modules/Accounts/hooks/useAccountInfo';
 import RegisterConfirm from 'modules/Auth/Register/RegisterConfirm';
 import PasswordSetupSuccess from 'modules/Auth/PasswordSetupSuccess';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,11 +10,11 @@ import withTheme from 'components/shared/withTheme';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import getStyles from './styles';
 
-const BackupPassphrase = ({ styles }) => {
+const BackupPassphrase = ({ styles, route }) => {
   useScreenshotPrevent();
-  const [account] = useCurrentAccount();
-  const { summary } = useAccountInfo();
   const navigation = useNavigation();
+
+  const { account } = route.params;
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
@@ -25,7 +23,7 @@ const BackupPassphrase = ({ styles }) => {
           account={account}
           route={{
             params: {
-              address: summary.address,
+              address: account.metadata.address,
               title: 'settings.backup_phrase.title',
             },
           }}

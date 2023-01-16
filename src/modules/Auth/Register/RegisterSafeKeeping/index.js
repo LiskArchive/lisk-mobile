@@ -35,6 +35,10 @@ export default function RegisterSafeKeeping({
 
   const handleConfirm = (status) => setConfirmed(status);
 
+  const onContinue = () => {
+    nextStep({ passphrase });
+  };
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.body}>
@@ -82,7 +86,7 @@ export default function RegisterSafeKeeping({
             testID="safeKeepingButton"
             style={styles.button}
             noTheme={true}
-            onClick={nextStep}
+            onClick={onContinue}
           >
             {i18next.t('auth.register.safeKeeping.continueButtonText')}
           </PrimaryButton>

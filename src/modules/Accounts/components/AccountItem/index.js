@@ -6,6 +6,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'components/shared/toolBox/icon';
 import { stringShortener } from 'utilities/helpers';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
@@ -23,6 +24,7 @@ export default function AccountItem({
   active,
 }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
+  const navigation = useNavigation();
 
   const { name: username, address } = account.metadata;
 
@@ -35,7 +37,7 @@ export default function AccountItem({
           icon: () => <RefreshSvg />,
           // TODO: Implement backup action.
           testID: 'backup-account',
-          onPress: () => {},
+          onPress: () => navigation.navigate('PassphraseBackup', { account }),
         },
       ]}
       rightActions={[
