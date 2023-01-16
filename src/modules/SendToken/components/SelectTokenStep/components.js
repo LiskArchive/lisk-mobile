@@ -94,7 +94,8 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
                     <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
                   </Picker.Item>
                 )}
-                // TODO: Integrate pagination props using react-query.
+                // TODO: Integrate pagination props using react-query when
+                // https://github.com/LiskHQ/lisk-mobile/issues/1610 is done.
               />
             </Picker.Menu>
           </>
