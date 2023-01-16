@@ -10,7 +10,8 @@
  */
 const t = (str) => str;
 
-// TODO: Use from service endpoint/elements
+// TODO: Use from service endpoint/elements.
+// (details on https://github.com/LiskHQ/lisk-mobile/issues/1612).
 export const BASE_TRANSACTION_SCHEMA = {
   $id: '/lisk/baseTransaction',
   type: 'object',
