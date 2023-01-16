@@ -12,6 +12,7 @@ import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import app from 'constants/app';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
@@ -22,6 +23,7 @@ import getStyles from './styles';
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
+  const [account] = useCurrentAccount();
 
   const setErrorMessage = (error) => {
     setError(error.message);
@@ -34,6 +36,12 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
 
   const hideDialog = () => {
     setShow(false);
+  };
+
+  const backupPassphrase = () => {
+    navigation.navigate('PassphraseBackup', {
+      account,
+    });
   };
 
   const switchTheme = () => {
@@ -87,14 +95,13 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
 
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
-              navigation={navigation}
-              target="PassphraseBackup"
               showDialog={showDialog}
               hideDialog={hideDialog}
               setError={setErrorMessage}
               icon="backup"
               title={t('settings.menu.backupPassphrase')}
               iconSize={22}
+              onPress={backupPassphrase}
             />
           </View>
 
