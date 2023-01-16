@@ -40,6 +40,8 @@ export default function ApplicationList({ applications, Component, onItemPress, 
                 onPress={() => onItemPress(item)}
                 {...props}
               />
+              // TODO: Integrate pagination props.
+              // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
             )}
           />
         </View>

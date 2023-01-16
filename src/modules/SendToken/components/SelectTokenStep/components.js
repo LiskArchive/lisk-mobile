@@ -59,7 +59,6 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         {selectedToken && (
           <Picker.Label style={style?.label}>
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
-            {/* TODO: Read token symbol from account info when backend send the data */}
             <Text style={[styles.balanceText]}>
               {tokenBalance} {selectedToken.symbol}
             </Text>
@@ -94,8 +93,8 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
                     <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
                   </Picker.Item>
                 )}
-                // TODO: Integrate pagination props using react-query when
-                // https://github.com/LiskHQ/lisk-mobile/issues/1610 is done.
+                // TODO: Integrate pagination props.
+                // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
               />
             </Picker.Menu>
           </>
