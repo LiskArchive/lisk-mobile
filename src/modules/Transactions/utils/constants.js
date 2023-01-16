@@ -71,7 +71,6 @@ export const BASE_TRANSACTION_SCHEMA = {
 
 const TRANSACTION_MODULES = {
   token: 2,
-  dpos: 5,
   multiSignature: 4,
   legacyAccount: 1000,
 };
@@ -88,10 +87,6 @@ const TRANSACTION_COMMANDS = {
 
 export const MODULE_COMMAND_MAP = {
   transfer: `${TRANSACTION_MODULES.token}:${TRANSACTION_COMMANDS.transfer}`,
-  unlockToken: `${TRANSACTION_MODULES.dpos}:${TRANSACTION_COMMANDS.unlockToken}`,
-  voteDelegate: `${TRANSACTION_MODULES.dpos}:${TRANSACTION_COMMANDS.voteDelegate}`,
-  registerDelegate: `${TRANSACTION_MODULES.dpos}:${TRANSACTION_COMMANDS.registerDelegate}`,
-  reportDelegateMisbehavior: `${TRANSACTION_MODULES.dpos}:${TRANSACTION_COMMANDS.reportDelegateMisbehavior}`,
   registerMultisignatureGroup: `${TRANSACTION_MODULES.multiSignature}:${TRANSACTION_COMMANDS.registerMultisignatureGroup}`,
   reclaimLSK: `${TRANSACTION_MODULES.legacyAccount}:${TRANSACTION_COMMANDS.reclaimLSK}`,
 };

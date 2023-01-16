@@ -26,7 +26,7 @@ describe('sessionHandlers', () => {
     },
     id: 'sample_id',
   };
-  const selectedAccounts = [wallets.genesis.summary.address, wallets.delegate.summary.address];
+  const selectedAccounts = [wallets.genesis.summary.address];
 
   describe('onApprove', () => {
     it('Should signClient.approve with correct arguments', async () => {
