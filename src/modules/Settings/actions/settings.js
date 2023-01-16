@@ -19,19 +19,23 @@ export const settingsUpdated = (data) => ({
 /**
  * Reads the settings from the storage
  * and notifies the store about it accordingly
- *
- * @todo Rejection must is not handled
- *
  * @returns {Function} Thunk action function
  */
 export const settingsRetrieved = () => (dispatch) =>
-  getSettings().then((data) => {
-    if (!data.theme) {
-      data.theme = 'light';
-    }
+  getSettings()
+    .then((data) => {
+      if (!data.theme) {
+        data.theme = 'light';
+      }
 
-    dispatch({
-      type: actionTypes.settingsRetrieved,
-      data,
-    });
-  });
+      dispatch({
+        type: actionTypes.settingsRetrieved,
+        data,
+      });
+    })
+    .catch((blankSettings) =>
+      dispatch({
+        type: actionTypes.settingsRetrieved,
+        data: blankSettings,
+      })
+    );

@@ -23,6 +23,8 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
 
+  console.log({ settings });
+
   const setErrorMessage = (error) => {
     setError(error.message);
   };
