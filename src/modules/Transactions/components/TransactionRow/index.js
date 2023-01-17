@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
@@ -20,7 +20,7 @@ export default function TransactionRow({ transaction }) {
     styles: getTransactionRowStyles(),
   });
 
-  const transactionAssets = useTransactionAssets(transaction);
+  const transactionAssets = useTransactionAssets({ transaction, style: { icon: styles.icon } });
 
   return (
     <TouchableOpacity
@@ -28,7 +28,7 @@ export default function TransactionRow({ transaction }) {
       style={[styles.container, styles.theme.container]}
     >
       <View style={[styles.row]}>
-        <Image source={transactionAssets.image} style={[styles.image]} />
+        {transactionAssets.icon}
 
         <View style={[styles.titleContainer, styles.theme.titleContainer]}>
           <Text style={[styles.addressText, styles.theme.addressText]}>

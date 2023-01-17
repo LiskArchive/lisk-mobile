@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
-import Wallet from 'modules/Wallet';
+import AccountDetails from 'modules/Accounts/components/AccountDetails';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
@@ -32,7 +32,6 @@ import TransactionsHistory from 'modules/Transactions/components/TransactionsHis
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
 import AppNavigator from './components/AppNavigator';
-import useWalletConnectEventsManager from '../../libs/wcm/hooks/useConnectionEventsManager';
 
 import navigationOptions from './options';
 import navigationLinking from './linking';
@@ -47,9 +46,6 @@ export default function Navigator({ children }) {
     dark: theme === 'light',
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
-
-  // TODO: Add init this to BootstrapApp component.
-  useWalletConnectEventsManager();
 
   return (
     <SafeAreaProvider>
@@ -134,9 +130,9 @@ export default function Navigator({ children }) {
             options={navigationOptions.TransactionDetails}
           />
           <StackNavigator.Screen
-            name="Wallet"
-            component={Wallet}
-            options={navigationOptions.Wallet}
+            name="AccountDetails"
+            component={AccountDetails}
+            options={navigationOptions.AccountDetails}
           />
           <StackNavigator.Screen
             name="EnableBioAuth"

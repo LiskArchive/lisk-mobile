@@ -33,7 +33,8 @@ export default function AccountItem({
           title: 'Backup',
           color: colors.dark.blueGray,
           icon: () => <RefreshSvg />,
-          // TODO: Implement backup action.
+          // TODO: Implement backup action
+          // (details on https://github.com/LiskHQ/lisk-mobile/issues/1596)
           testID: 'backup-account',
           onPress: () => {},
         },

@@ -88,6 +88,7 @@ const ItemTitle = ({
     <TouchableHighlight testID="testID" {...props}>
       {/* TODO: Update to use own defined icons (remove react-native-vector-icons)
       to solve current inconsistencies.
+      (details on https://github.com/LiskHQ/lisk-mobile/issues/1609)
       */}
       <Fragment>
         {React.isValidElement(icon) ? (

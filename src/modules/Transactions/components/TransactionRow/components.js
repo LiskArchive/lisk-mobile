@@ -10,7 +10,7 @@ import SandClockSvg from 'assets/svgs/SandClockSvg';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 
 export function TransactionAmount({ transaction, style }) {
-  const transactionAssets = useTransactionAssets(transaction);
+  const transactionAssets = useTransactionAssets({ transaction });
 
   const language = useSelector((state) => state.settings.language);
 
