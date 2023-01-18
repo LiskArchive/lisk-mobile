@@ -1,5 +1,7 @@
-import io from 'socket.io-client';
 import axios from 'axios';
+import io from 'socket.io-client';
+
+import { METHOD } from './constants';
 
 export class APIClient {
   http = null;
@@ -42,6 +44,10 @@ export class APIClient {
     request.interceptors.response.use((res) => res.data);
 
     this.http = request;
+  }
+
+  call({ transformResult = async (data) => data, ...args }) {
+    return this[METHOD](args).then(transformResult);
   }
 }
 
