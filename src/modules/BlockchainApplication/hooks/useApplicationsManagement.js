@@ -1,8 +1,11 @@
-import { useCallback } from 'react';
+/* eslint-disable max-statements */
+import { useCallback, useEffect } from 'react';
 
 import { useApplications } from '../context/ApplicationsContext';
-import { APPLICATIONS_STORAGE_KEY } from '../constants';
+import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
 import { useApplicationsStorage } from './useApplicationsStorage';
+import { transformApplicationsMetaQueryResult } from '../utils';
+import { APPLICATIONS_STORAGE_KEY } from '../constants';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
@@ -10,9 +13,20 @@ import { useApplicationsStorage } from './useApplicationsStorage';
  * and deleteApplication callback.
  */
 export function useApplicationsManagement() {
-  const { applications, dispatchApplications } = useApplications();
+  const { applications } = useApplications();
+
+  // Fetch default apps metadata from server.
+  const {
+    data: defaultApplicationsMetaData,
+    status: defaultApplicationsMetaDataStatus,
+    refetch: refetchApplicationsMetaData,
+    error: errorOnDefaultApplicationsMetaData,
+  } = useApplicationsMetaQuery({
+    config: { transformResult: transformApplicationsMetaQueryResult, params: { isDefault: true } },
+  });
 
   const {
+    getApplications: getApplicationsStorageData,
     addApplication: addApplicationToStorage,
     deleteApplication: deleteApplicationFromStorage,
   } = useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
@@ -20,22 +34,53 @@ export function useApplicationsManagement() {
   const addApplication = useCallback(
     (application) =>
       addApplicationToStorage(application.chainID).then(() =>
-        dispatchApplications({ type: 'add', application })
+        applications.dispatchData({ type: 'add', application })
       ),
-    [addApplicationToStorage, dispatchApplications]
+    [addApplicationToStorage, applications]
   );
 
   const deleteApplication = useCallback(
     (chainID) =>
       deleteApplicationFromStorage(chainID).then(() =>
-        dispatchApplications({ type: 'delete', chainID })
+        applications.dispatchData({ type: 'delete', chainID })
       ),
-    [deleteApplicationFromStorage, dispatchApplications]
+    [deleteApplicationFromStorage, applications]
   );
+
+  const retry = useCallback(() => refetchApplicationsMetaData(), [refetchApplicationsMetaData]);
+
+  console.log(JSON.stringify(defaultApplicationsMetaData));
+
+  useEffect(() => {
+    if (!applications.data && defaultApplicationsMetaData) {
+      getApplicationsStorageData().then((cachedChainIDs) => {
+        console.log({ cachedChainIDs });
+        // const initApplications = getInitContextApplications({
+        //   applications: applicationsData,
+        //   defaultApplications: defaultApplicationsData,
+        //   cachedChainIDs,
+        // });
+
+        const initApplications = defaultApplicationsMetaData.data;
+
+        applications.dispatchData({ type: 'init', applications: initApplications });
+      });
+    }
+  }, [applications, defaultApplicationsMetaData, getApplicationsStorageData]);
+
+  // Set current application status and error based on default applications on-chain
+  // and off-chain data query statuses.
+  useEffect(() => {
+    applications.setStatus(defaultApplicationsMetaDataStatus);
+  }, [defaultApplicationsMetaDataStatus, applications]);
+  useEffect(() => {
+    applications.setError(errorOnDefaultApplicationsMetaData);
+  }, [errorOnDefaultApplicationsMetaData, applications]);
 
   return {
     applications,
     addApplication,
     deleteApplication,
+    retry,
   };
 }

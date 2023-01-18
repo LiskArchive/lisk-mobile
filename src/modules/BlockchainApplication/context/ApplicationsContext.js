@@ -1,15 +1,7 @@
 /* eslint-disable max-statements */
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useContext, useReducer, useState } from 'react';
 
-import { useApplicationsStorage } from '../hooks/useApplicationsStorage';
-import { useApplicationsExplorer } from '../hooks/useApplicationsExplorer';
-import { APPLICATIONS_STORAGE_KEY, PINNED_APPLICATIONS_STORAGE_KEY } from '../constants';
-
-import {
-  applicationsContextReducer,
-  applicationPinsContextReducer,
-  getInitContextApplications,
-} from './utils';
+import { applicationsContextReducer, applicationPinsContextReducer } from './utils';
 
 export const ApplicationsContext = createContext();
 
@@ -23,102 +15,42 @@ export const ApplicationsContext = createContext();
  */
 export function ApplicationsProvider({ children }) {
   const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
+  const [applicationStatus, setApplicationStatus] = useState(false);
+  const [_errorOnApplications, setErrorOnApplications] = useState();
 
   const [pins, dispatchPins] = useReducer(applicationPinsContextReducer);
 
   const [currentApplication, setCurrentApplication] = useState();
   const [currentApplicationStatus, setCurrentApplicationStatus] = useState(false);
-  const [errorOnApplication, setErrorOnCurrentApplication] = useState();
-
-  const { getApplications: getApplicationsStorageData } =
-    useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
-  const { getApplications: getPinnedApplicationsStorageData } = useApplicationsStorage(
-    PINNED_APPLICATIONS_STORAGE_KEY
-  );
-
-  const {
-    data: defaultApplicationsData,
-    isLoading: isLoadingDefaultApplications,
-    isSuccess: isSuccessDefaultApplications,
-    isError: isErrorOnDefaultApplications,
-    error: errorOnDefaultApplications,
-    refetch: refetchDefaultApplications,
-  } = useApplicationsExplorer({ applicationsMetaConfig: { params: { isDefault: true } } });
-
-  const {
-    data: applicationsData,
-    isLoading: isLoadingApplications,
-    isSuccess: isSuccessApplications,
-    isError: isErrorOnApplications,
-    error: errorOnApplications,
-    refetch: refetchApplications,
-  } = useApplicationsExplorer();
-
-  useEffect(() => {
-    if (!applications && defaultApplicationsData && applicationsData) {
-      getApplicationsStorageData().then((cachedChainIDs) => {
-        const initApplications = getInitContextApplications({
-          applications: applicationsData,
-          defaultApplications: defaultApplicationsData,
-          cachedChainIDs,
-        });
-
-        dispatchApplications({ type: 'init', applications: initApplications });
-      });
-
-      getPinnedApplicationsStorageData().then((cachedPins) => {
-        dispatchPins({ type: 'init', pins: cachedPins || [] });
-      });
-    }
-  }, [
-    defaultApplicationsData,
-    applicationsData,
-    applications,
-    getApplicationsStorageData,
-    getPinnedApplicationsStorageData,
-  ]);
-
-  const isLoading = isLoadingDefaultApplications || isLoadingApplications;
-
-  const isSuccess = isSuccessDefaultApplications && isSuccessApplications;
-
-  const error = errorOnDefaultApplications || errorOnApplications;
-
-  const isError = isErrorOnDefaultApplications || isErrorOnApplications;
-
-  const refetch = () => {
-    refetchDefaultApplications();
-    refetchApplications();
-  };
+  const [errorOnCurrentApplication, setErrorOnCurrentApplication] = useState();
 
   return (
     <ApplicationsContext.Provider
       value={{
         applications: {
           data: applications,
-          isLoading,
-          isSuccess,
-          isError,
-          error,
-          refetch,
+          dispatchData: dispatchApplications,
+          status: applicationStatus,
+          setStatus: setApplicationStatus,
+          error: _errorOnApplications,
+          setError: setErrorOnApplications,
         },
         pins: {
           data: pins,
-          isLoading,
-          isSuccess,
-          isError,
-          error,
-          refetch,
+          isLoading: false,
+          isSuccess: true,
+          isError: false,
+          error: undefined,
+          refetch: () => {},
         },
         currentApplication: {
           data: currentApplication,
           setData: setCurrentApplication,
           status: currentApplicationStatus,
           setStatus: setCurrentApplicationStatus,
-          error: errorOnApplication,
+          error: errorOnCurrentApplication,
           setError: setErrorOnCurrentApplication,
         },
-        dispatchApplications,
         dispatchPins,
       }}
     >
