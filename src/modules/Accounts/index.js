@@ -26,11 +26,7 @@ import TokenList from './components/TokenList';
 
 /**
  * This component would be mounted first and would be used to config and redirect
- * the application to referer page or Sign In
- *
- * @todo Implement release notification
- * @todo Implement custom message: this can be used in case we need to notify the user
- * about any unforeseen issue/change
+ * the application to referer page or Sign In.
  */
 export default function Home() {
   const navigation = useNavigation();

@@ -1,6 +1,11 @@
 import config from '../../../../lsk.config';
 
 // eslint-disable-next-line import/prefer-default-export
+
+/**
+ * @TODO This implementation will be changed to use react-query and Lisk Service v3
+ * (details on https://github.com/LiskHQ/lisk-mobile/issues/1595).
+ */
 export const getPriceTicker = async () => {
   const response = await fetch(
     `${config.isTestnet ? config.testnetURL : config.serviceURL}/v2/market/prices`,

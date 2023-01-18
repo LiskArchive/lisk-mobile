@@ -116,7 +116,6 @@ export class Transaction {
    * @returns void
    */
   async sign(privateKey, options = { includeSenderSignature: false }) {
-    // TODO: Update networkIdentifier to chainID once service endpoint is updated
     const chainID = Buffer.from(this._networkStatus.chainID, 'hex');
 
     const { optionalKeys, mandatoryKeys } = this.transaction.params;

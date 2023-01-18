@@ -109,7 +109,8 @@ export function SendTokenRecipientApplicationField({
             </Picker.Item>
           )}
           withDefaultSpinner
-          // TODO: Integrate pagination props using react-query.
+          // TODO: Integrate pagination props.
+          // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
         />
       </Picker.Menu>
     </Picker>

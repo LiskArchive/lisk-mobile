@@ -35,8 +35,7 @@ export default function getTransactionRowStyles() {
         fontSize: 12,
         lineHeight: 14,
       },
-      image: {
-        borderRadius: 50,
+      icon: {
         width: 40,
         height: 40,
         marginRight: 12,
