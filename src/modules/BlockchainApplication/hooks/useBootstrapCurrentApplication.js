@@ -37,14 +37,13 @@ export function useBootstrapCurrentApplication() {
     error: errorOnDefaultApplicationsData,
   } = useApplicationsQuery({
     options: {
-      enabled: !!defaultApplicationsMetaData?.data && !!apiClient,
+      enabled: !!defaultApplicationsMetaData?.data,
     },
     config: {
       params: {
         chainID: defaultApplicationsMetaData?.data[0].chainID,
       },
     },
-    client: apiClient,
   });
 
   const retry = useCallback(() => {
