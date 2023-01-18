@@ -208,7 +208,7 @@
       "restoreFromFile": "Restore from file",
       "downloaded": "Downloaded!",
       "buttons": {
-        "passwordSetupContinueButton": "Continue to Dashboard",
+        "passwordSetupContinueButton": "Continue",
         "saveAccountButton": "Save account"
       }
     },

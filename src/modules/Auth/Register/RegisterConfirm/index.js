@@ -12,8 +12,10 @@ import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
-export default function RegisterConfirm({ nextStep, passphrase, prevStep, customHeader }) {
+export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, customHeader }) {
   const navigation = useNavigation();
+
+  const { passphrase } = data;
 
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);

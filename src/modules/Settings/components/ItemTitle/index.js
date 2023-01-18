@@ -35,6 +35,7 @@ const ItemTitle = ({
   authenticate,
   description,
   testID,
+  onPress,
 }) => {
   const authenticateFn = (cb) => {
     bioMetricAuthentication({
@@ -64,7 +65,9 @@ const ItemTitle = ({
     style: styles.icon,
   };
 
-  if (target) {
+  if (onPress) {
+    props.onPress = onPress;
+  } else if (target) {
     props.onPress = () => {
       if (authenticate) {
         authenticateFn(() => {

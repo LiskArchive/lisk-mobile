@@ -48,7 +48,7 @@ export default function Register({ route }) {
 
         <RegisterSafeKeeping title="safekeeping" passphrase={passphrase} route={route} />
 
-        <RegisterConfirm title="verify" passphrase={passphrase} route={route} />
+        <RegisterConfirm title="verify" route={route} />
 
         <RegisterSuccess title="success" hideNav={hideNav} />
       </Stepper>
