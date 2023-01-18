@@ -11,7 +11,11 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
  * @returns - The query state of the API call. Includes the data
  * (applications), loading state, error state, and more.
  */
-export function useApplicationsQuery({ config: customConfig = {}, options = {} } = {}) {
+export function useApplicationsQuery({
+  config: customConfig = {},
+  options = {},
+  client = liskAPIClient,
+} = {}) {
   const config = {
     baseURL: process.env.SERVICE_API_BASE_URL,
     url: `${API_URL}/blockchain/apps`,
@@ -23,5 +27,5 @@ export function useApplicationsQuery({ config: customConfig = {}, options = {} }
 
   const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
 
-  return useCustomInfiniteQuery({ config, options, keys, client: liskAPIClient });
+  return useCustomInfiniteQuery({ config, options, keys, client });
 }

@@ -23,8 +23,12 @@ export const ApplicationsContext = createContext();
  */
 export function ApplicationsProvider({ children }) {
   const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
+
   const [pins, dispatchPins] = useReducer(applicationPinsContextReducer);
+
   const [currentApplication, setCurrentApplication] = useState();
+  const [currentApplicationStatus, setCurrentApplicationStatus] = useState(false);
+  const [errorOnApplication, setErrorOnCurrentApplication] = useState();
 
   const { getApplications: getApplicationsStorageData } =
     useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
@@ -39,7 +43,7 @@ export function ApplicationsProvider({ children }) {
     isError: isErrorOnDefaultApplications,
     error: errorOnDefaultApplications,
     refetch: refetchDefaultApplications,
-  } = useApplicationsExplorer({ applicationsConfig: { params: { isDefault: true } } });
+  } = useApplicationsExplorer({ applicationsMetaConfig: { params: { isDefault: true } } });
 
   const {
     data: applicationsData,
@@ -66,15 +70,10 @@ export function ApplicationsProvider({ children }) {
         dispatchPins({ type: 'init', pins: cachedPins || [] });
       });
     }
-
-    if (!currentApplication && defaultApplicationsData) {
-      setCurrentApplication(defaultApplicationsData[0]);
-    }
   }, [
     defaultApplicationsData,
     applicationsData,
     applications,
-    currentApplication,
     getApplicationsStorageData,
     getPinnedApplicationsStorageData,
   ]);
@@ -113,16 +112,14 @@ export function ApplicationsProvider({ children }) {
         },
         currentApplication: {
           data: currentApplication,
-          isLoading,
-          isSuccess,
-          isError,
-          error,
-          refetch,
+          setData: setCurrentApplication,
+          status: currentApplicationStatus,
+          setStatus: setCurrentApplicationStatus,
+          error: errorOnApplication,
+          setError: setErrorOnCurrentApplication,
         },
         dispatchApplications,
         dispatchPins,
-        // currentApplication,
-        setCurrentApplication,
       }}
     >
       {children}

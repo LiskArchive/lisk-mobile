@@ -12,6 +12,7 @@ import {
 } from 'utilities/api/queries';
 import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
 import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
+import { useBootstrapCurrentApplication } from './modules/BlockchainApplication/hooks/useBootstrapCurrentApplication';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
@@ -22,17 +23,14 @@ export default function BootstrapApp({ children }) {
 
   const [currentApplication] = useCurrentApplication();
 
-  const isLoading = currentApplication.isLoading;
-  const isError = currentApplication.isError;
+  const isLoading = currentApplication.status === 'loading';
+  const isError = currentApplication.status === 'error';
   const error = currentApplication.error;
-  const refetch = currentApplication.refetch;
 
   // Bootstrap API client with current application.
-  useEffect(() => {
-    if (currentApplication.data?.serviceURLs) {
-      apiClient.create(currentApplication.data.serviceURLs[0]);
-    }
-  }, [currentApplication.data]);
+  const retryBootstrapCurrentApplication = useBootstrapCurrentApplication();
+
+  const handleRetry = () => retryBootstrapCurrentApplication();
 
   // Bootstrap WS connections for re-fetching account transactions and tokens data when
   // new and delete transactions events occur.
@@ -70,7 +68,7 @@ export default function BootstrapApp({ children }) {
   }
 
   if (isError) {
-    return <ErrorFallbackScreen onRetry={refetch} error={error} />;
+    return <ErrorFallbackScreen onRetry={handleRetry} error={error} />;
   }
 
   return children;

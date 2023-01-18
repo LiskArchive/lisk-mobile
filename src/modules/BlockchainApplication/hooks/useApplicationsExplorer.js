@@ -14,18 +14,6 @@ export function useApplicationsExplorer({
   applicationsMetaOptions = {},
 } = {}) {
   const {
-    data: applicationsData,
-    isLoading: isLoadingApplications,
-    isSuccess: isSuccessApplications,
-    isError: isErrorOnApplications,
-    error: errorOnApplications,
-    refetch: refetchApplicationsQuery,
-  } = useApplicationsQuery({
-    config: applicationsConfig,
-    options: applicationsOptions,
-  });
-
-  const {
     data: applicationsMetaData,
     isLoading: isLoadingApplicationsMeta,
     isSuccess: isSuccessApplicationsMeta,
@@ -33,25 +21,37 @@ export function useApplicationsExplorer({
     error: errorOnApplicationsMeta,
     refetch: refetchApplicationsMetaQuery,
   } = useApplicationsMetaQuery({
+    config: applicationsMetaConfig,
+    options: applicationsMetaOptions,
+  });
+
+  const {
+    data: applicationsData,
+    isLoading: isLoadingApplications,
+    isSuccess: isSuccessApplications,
+    isError: isErrorOnApplications,
+    error: errorOnApplications,
+    refetch: refetchApplicationsQuery,
+  } = useApplicationsQuery({
     options: {
-      enabled: !!applicationsData?.data,
-      ...applicationsMetaOptions,
+      enabled: !!applicationsMetaData?.data,
+      ...applicationsOptions,
     },
     config: {
       params: {
         // TODO: Pass as CSV of chainIDs when backend supports feature.
         // e.g.: applicationsData?.data.map((app) => app.chainID)
-        chainID: applicationsData?.data[0]?.chainID,
-        ...applicationsMetaConfig?.params,
+        chainID: applicationsMetaData?.data[0]?.chainID,
+        ...applicationsConfig?.params,
       },
-      ...applicationsMetaConfig,
+      ...applicationsConfig,
     },
   });
 
-  const isLoading = isLoadingApplications || isLoadingApplicationsMeta;
-  const isSuccess = isSuccessApplications && isSuccessApplicationsMeta;
-  const isError = isErrorOnApplications || isErrorOnApplicationsMeta;
-  const error = errorOnApplications || errorOnApplicationsMeta;
+  const isLoading = isLoadingApplicationsMeta || isLoadingApplications;
+  const isSuccess = isSuccessApplicationsMeta && isSuccessApplications;
+  const isError = isErrorOnApplicationsMeta || isErrorOnApplications;
+  const error = errorOnApplicationsMeta || errorOnApplications;
 
   const data = useMemo(() => {
     if (!applicationsMetaData?.data || !applicationsData?.data) {
