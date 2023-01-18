@@ -35,7 +35,6 @@ export default function AccountItem({
           title: 'Backup',
           color: colors.dark.blueGray,
           icon: () => <RefreshSvg />,
-          // TODO: Implement backup action.
           testID: 'backup-account',
           onPress: () => navigation.navigate('PassphraseBackup', { account }),
         },

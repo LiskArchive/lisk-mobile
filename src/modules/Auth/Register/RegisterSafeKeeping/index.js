@@ -35,9 +35,7 @@ export default function RegisterSafeKeeping({
 
   const handleConfirm = (status) => setConfirmed(status);
 
-  const onContinue = () => {
-    nextStep({ passphrase });
-  };
+  const onContinue = () => nextStep({ passphrase });
 
   return (
     <SafeAreaView style={styles.wrapper}>

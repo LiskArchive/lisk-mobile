@@ -38,11 +38,10 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     setShow(false);
   };
 
-  const backupPassphrase = () => {
+  const backupPassphrase = () =>
     navigation.navigate('PassphraseBackup', {
       account,
     });
-  };
 
   const switchTheme = () => {
     settingsUpdated({
