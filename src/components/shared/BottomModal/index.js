@@ -15,13 +15,13 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   const resetPositionAnimation = Animated.timing(panY, {
     toValue: 0,
     duration: 300,
-    useNativeDriver: true,
+    useNativeDriver: false,
   });
 
   const closeAnimation = Animated.timing(panY, {
     toValue: Dimensions.get('screen').height,
     duration: 300,
-    useNativeDriver: true,
+    useNativeDriver: false,
   });
 
   const handleClose = () => closeAnimation.start(() => toggleShow(false));
@@ -56,7 +56,9 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
 
           {/* TODO: Replace {children} container with another VirtualizedList-backed container.
           VirtualizedLists should never be nested inside plain ScrollViews with the 
-          same orientation because it can break windowing and other functionality.  */}
+          same orientation because it can break windowing and other functionality.
+          (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
+          */}
           <ScrollView style={[style?.children]}>{children}</ScrollView>
         </Animated.View>
       </View>

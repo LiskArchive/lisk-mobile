@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MultiSignature from 'components/screens/multiSignature';
-import { LockedBalanceDetails } from 'modules/Accounts/components';
+import { LockedBalanceDetails } from 'modules/Accounts/components/LockedBalanceDetails';
 
 import { getNavigationHeaderOptions } from '../../helpers';
 import Tabs from '../Tabs';

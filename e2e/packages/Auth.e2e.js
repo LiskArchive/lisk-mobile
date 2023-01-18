@@ -25,7 +25,8 @@ describe('Auth module', () => {
     await element(by.id('account-name')).replaceText(testConstants.accountName);
     await element(by.id('agree-switch')).tap();
     await element(by.id('save-account')).tap();
-    // TODO: Download passphrase before selecting account
+    // TODO: Download passphrase before selecting account.
+    // (details on https://github.com/LiskHQ/lisk-mobile/issues/1605).
     await element(by.id('account-list-item')).atIndex(0).tap();
     await expect(element(by.id('accounts-home-container'))).toBeVisible();
   });
@@ -34,6 +35,7 @@ describe('Auth module', () => {
     await expect(element(by.id('username-label'))).toBeVisible();
     await expect(element(by.id('address-copy-to-clipboard'))).toBeVisible();
     // TODO: Test tokens are displayed
+    // (details on https://github.com/LiskHQ/lisk-mobile/issues/1605).
   });
 
   it('should edit account name', async () => {

@@ -53,6 +53,7 @@ export function useApplicationSupportedTokensQuery(application) {
       tokens = tokensOnChainData.map((tokenOnChainData) => {
         // TODO: Query for each token the GET /meta/tokens endpoint when service solves tokenID inconsistency
         // between GET /tokens/summary and GET /meta/tokens responses.
+        // (details on https://github.com/LiskHQ/lisk-mobile/issues/1610).
         const tokenMetaData =
           mockTokensMeta.find((tokenMeta) => tokenMeta.tokenID === tokenOnChainData.tokenID) || {};
 

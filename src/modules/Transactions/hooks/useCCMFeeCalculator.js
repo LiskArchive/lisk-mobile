@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
+
 // TODO: Implement real calculation business logic.
+// (details on https://github.com/LiskHQ/lisk-mobile/issues/1607).
 export default function useCCMFeeCalculator({
   senderApplicationChainID,
   recipientApplicationChainID,

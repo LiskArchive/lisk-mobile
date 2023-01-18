@@ -2,6 +2,7 @@
 import { useTransactionsQuery } from 'modules/Transactions/api/useTransactionsQuery';
 
 // TODO: Implement real calculation business logic.
+// (details on https://github.com/LiskHQ/lisk-mobile/issues/1607).
 export default function useInitializationFeeCalculator({ recipientAccountAddress }) {
   // TODO: Fetch this data from service once endpoint is available.
   const initializationFeeData = BigInt(0);

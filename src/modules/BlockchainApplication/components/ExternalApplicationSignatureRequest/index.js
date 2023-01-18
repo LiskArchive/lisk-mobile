@@ -2,7 +2,7 @@
 import React, { useContext, useMemo, useState } from 'react';
 import i18next from 'i18next';
 
-import { extractAddressFromPublicKey } from 'modules/Wallet/utils/account';
+import { extractAddressFromPublicKey } from 'modules/Auth/utils/accountKeys';
 import DataRenderer from 'components/shared/DataRenderer';
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';

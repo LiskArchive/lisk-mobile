@@ -41,6 +41,7 @@ class Confirm extends Component {
       // };
       // const tx = await transactionsAPI.create(data);
       // const { id } = await transactionsAPI.broadcast(tx);
+      // Recap when https://github.com/LiskHQ/lisk-mobile/issues/1463 is solved.
 
       composeMessage({
         id: '',

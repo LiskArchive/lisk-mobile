@@ -26,7 +26,7 @@ const SelectNode = ({ application, onPress }) => {
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.urlContainer} onPress={() => onPress(item)} key={item}>
             <P style={styles.url}>{item.http}</P>
-            <CaretSvg direction={'left'} color={colors.light.ultramarineBlue} />
+            <CaretSvg direction="left" color={colors.light.ultramarineBlue} />
           </TouchableOpacity>
         )}
       />

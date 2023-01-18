@@ -1,6 +1,10 @@
 import { service as serviceAPI } from 'utilities/api';
 import actionTypes from 'constants/actions';
 
+/**
+ * @TODO This implementation will be changed to use react-query and Lisk Service v3
+ * (details on https://github.com/LiskHQ/lisk-mobile/issues/1595).
+ */
 export const pricesRetrieved = () => (dispatch, getState) => {
   const {
     settings: { token },
@@ -17,7 +21,7 @@ export const pricesRetrieved = () => (dispatch, getState) => {
         },
       })
     )
-    .catch((err) => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
+    .catch((err) => console.log(err));
 };
 
 export const dynamicFeesRetrieved = () => (dispatch, getState) => {
@@ -33,5 +37,5 @@ export const dynamicFeesRetrieved = () => (dispatch, getState) => {
         dynamicFees,
       })
     )
-    .catch((err) => console.log(err)); // @TODO: DISCUSS & HANDLE THIS!
+    .catch((err) => console.log(err));
 };

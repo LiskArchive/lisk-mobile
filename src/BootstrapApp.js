@@ -3,14 +3,15 @@ import React, { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { SafeAreaView, Text } from 'react-native';
 
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import apiClient from 'utilities/api/APIClient';
 import {
   GET_ACCOUNT_TRANSACTIONS_QUERY,
   GET_ACCOUNT_TOKENS_QUERY,
   GET_AUTH_QUERY,
 } from 'utilities/api/queries';
-import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import ErrorFallbackScreen from './components/screens/ErrorFallbackScreen';
+import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
+import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
@@ -54,6 +55,9 @@ export default function BootstrapApp({ children }) {
       }
     };
   }, [queryClient, currentApplication.data]);
+
+  // Bootstrap WC.
+  useWalletConnectEventsManager();
 
   if (isLoading) {
     // TODO: Replace with <LoadingFallbackScreen /> component when
