@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import Config from 'react-native-config';
 import { SafeAreaView, Text } from 'react-native';
 
 import apiClient from 'utilities/api/APIClient';
@@ -32,6 +33,11 @@ export default function BootstrapApp({ children }) {
       apiClient.create(currentApplication.data.serviceURLs[0]);
     }
   }, [currentApplication.data]);
+
+  useEffect(() => {
+    console.log(Config);
+    console.log(process.env);
+  }, []);
 
   // Bootstrap WS connections for re-fetching account transactions and tokens data when
   // new and delete transactions events occur.

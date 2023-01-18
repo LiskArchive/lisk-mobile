@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
@@ -13,7 +14,7 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
  */
 export function useApplicationsQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
-    baseURL: process.env.SERVICE_API_BASE_URL,
+    baseURL: Config.SERVICE_API_BASE_URL,
     url: `${API_URL}/blockchain/apps`,
     method: 'get',
     event: 'get.blockchain.apps',

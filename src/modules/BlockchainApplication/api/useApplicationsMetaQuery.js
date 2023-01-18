@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
@@ -19,7 +20,7 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     ...customConfig,
     params: {
       limit: LIMIT,
-      network: process.env.NETWORK,
+      network: Config.NETWORK,
       ...(customConfig?.params || {}),
     },
   };

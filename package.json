@@ -5,7 +5,9 @@
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "scripts": {
-    "android": "npx react-native run-android",
+    "android:qa": "react-native run-android --variant=qadebug",
+    "android:dev": "react-native run-android --variant=developmentdebug",
+    "android:prod": "react-native run-android --variant=productionrelease",
     "ios": "npx react-native run-ios",
     "start": "npx react-native start",
     "release:android": "cd android && ./gradlew bundleRelease",
@@ -75,6 +77,7 @@
     "react-native-background-timer": "2.4.1",
     "react-native-blur-overlay": "1.0.7",
     "react-native-camera": "3.43.0",
+    "react-native-config": "^1.4.12",
     "react-native-crypto": "^2.2.0",
     "react-native-device-info": "8.0.2",
     "react-native-document-picker": "^8.1.1",

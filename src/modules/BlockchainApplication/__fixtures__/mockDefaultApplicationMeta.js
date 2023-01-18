@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 export const mockDefaultApplicationMeta = {
   chainName: 'Lisk',
   chainID: '04000000',
@@ -8,8 +10,8 @@ export const mockDefaultApplicationMeta = {
   projectPage: 'https://lisk.com',
   serviceURLs: [
     {
-      http: process.env.SERVICE_API_BASE_URL,
-      ws: process.env.SERVICE_WS_BASE_URL,
+      http: Config.SERVICE_API_BASE_URL,
+      ws: Config.SERVICE_WS_BASE_URL,
     },
   ],
   logo: {

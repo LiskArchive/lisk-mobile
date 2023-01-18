@@ -1,4 +1,6 @@
-const isTestnet = process.env.NETWORK === 'testnet';
+import Config from 'react-native-config';
+
+const isTestnet = Config.NETWORK === 'testnet';
 
 export default {
   isTestnet,

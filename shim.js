@@ -3,7 +3,6 @@
 require('crypto');
 import BackgroundTimer from 'react-native-background-timer';
 // import { Buffer } from 'buffer';
-const env = require('./env.json');
 
 global.setTimeout = BackgroundTimer.setTimeout.bind(BackgroundTimer);
 global.setInterval = BackgroundTimer.setInterval.bind(BackgroundTimer);
@@ -27,22 +26,11 @@ if (!global.WebAssembly) {
   global.WebAssembly = require('react-native-wasm');
 }
 
-for (var p in env) {
-  process.env[p] = env[p];
-}
-
 process.browser = false;
 // global.Buffer = Buffer;
 // global.Buffer.prototype.reverse = function () {
 //   return require('buffer-reverse')(this, arguments);
 // };
-
-// global.location = global.location || { port: 80 }
-const isDev = typeof __DEV__ === 'boolean' && __DEV__;
-process.env['NODE_ENV'] = isDev ? 'development' : 'production';
-if (typeof localStorage !== 'undefined') {
-  localStorage.debug = isDev ? '*' : '';
-}
 
 if (global.navigator && global.navigator.product === 'ReactNative') {
   global.navigator.mimeTypes = '';

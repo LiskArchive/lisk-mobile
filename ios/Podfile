@@ -4,7 +4,15 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'Lisk' do
+abstract_target 'LiskCommonPods' do
+  target 'LiskDev' do
+  end
+ 
+  target 'LiskQa' do
+  end
+ 
+  target 'Lisk' do
+  end
   config = use_native_modules!
 
   # Flags change depending on the env values.

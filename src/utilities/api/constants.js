@@ -1,10 +1,12 @@
-export const NETWORK = process.env.NETWORK;
+import Config from 'react-native-config';
 
-export const API_BASE_URL = process.env.SERVICE_API_BASE_URL;
+export const NETWORK = Config.NETWORK;
 
-export const WS_BASE_URL = process.env.SERVICE_WS_BASE_URL;
+export const API_BASE_URL = Config.SERVICE_API_BASE_URL;
 
-export const API_VERSION = process.env.SERVICE_API_VERSION;
+export const WS_BASE_URL = Config.SERVICE_WS_BASE_URL;
+
+export const API_VERSION = Config.SERVICE_API_VERSION;
 
 export const API_URL = `/api/${API_VERSION}`;
 

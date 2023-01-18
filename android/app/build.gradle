@@ -1,5 +1,12 @@
 apply plugin: "com.android.application"
 
+project.ext.envConfigFiles = [
+   production: ".env.production",
+   development: ".env.development",
+   qadebug: ".env.qa",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle" // <- add this line
+
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -148,6 +155,28 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    flavorDimensions "default"
+    productFlavors {
+        production {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "io.lisk.mobile"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "io.lisk"
+        }
+        qa {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "io.lisk.qa"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "io.lisk"
+        }
+        development {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "io.lisk.development"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "io.lisk"
+        }
+    }
+
     defaultConfig {
         applicationId "io.lisk.mobile"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -242,6 +271,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.

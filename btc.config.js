@@ -1,7 +1,8 @@
 import { networks } from 'bitcoinjs-lib';
+import Config from 'react-native-config';
 import URLs from './src/constants/URLs';
 
-const isTestnet = process.env.NETWORK === 'testnet';
+const isTestnet = Config.NETWORK === 'testnet';
 
 export default {
   isTestnet,

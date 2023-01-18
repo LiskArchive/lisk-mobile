@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+import Config from 'react-native-config';
 
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
@@ -13,7 +14,7 @@ import DropDownHolder from 'utilities/alert';
 
 import getStyles from './styles';
 
-const devDefaultPass = process.env.passphrase || '';
+const devDefaultPass = Config.passphrase || '';
 
 export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
   const [showPassword, setShowPassword] = useState(false);

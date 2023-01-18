@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import Config from 'react-native-config';
 import { MSWServer } from './MSWServer';
 
-if (process.env.MOCK_SERVICE_API_ENABLED) {
+if (Config.MOCK_SERVICE_API_ENABLED) {
   require('react-native-url-polyfill/auto');
 
   const nativeMsw = require('msw/native');

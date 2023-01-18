@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
+import Config from 'react-native-config';
 
 import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
@@ -215,7 +216,7 @@ class LiskMessageExtension extends Component {
     return (
       <ThemeContext.Provider value="light">
         <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: '#F5F7FA' }}>
-          {process.env.NODE_ENV === 'development' && <DevSettings />}
+          {Config.NODE_ENV === 'development' && <DevSettings />}
           {content}
         </ScrollView>
       </ThemeContext.Provider>

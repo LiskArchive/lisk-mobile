@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { mswHandlers } from './handlers';
 
 export class MSWServer {
@@ -27,9 +28,9 @@ export class MSWServer {
       return [...Object.values(mswHandlers)];
     }
 
-    if (!process.env.MOCKED_SERVICE_ENDPOINTS) return [];
+    if (!Config.MOCKED_SERVICE_ENDPOINTS) return [];
 
-    const endpointsToMock = process.env.MOCKED_SERVICE_ENDPOINTS.split(';').map(
+    const endpointsToMock = Config.MOCKED_SERVICE_ENDPOINTS.split(';').map(
       (endpointName) => `${endpointName}MockHandler`
     );
 
