@@ -63,7 +63,7 @@ export async function transformApplicationsMetaQueryResult(res) {
 /**
  * Calculates current application data by merging applications of-chain
  * and on-chain data.
- * @param {Object} applicationsMetadata - Applications off-chain.
+ * @param {Object} applicationsMetadata - Applications off-chain data.
  * @param {Object} applicationsData - Applications on-chain data.
  * @returns - Current application data.
  */
