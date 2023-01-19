@@ -22,7 +22,7 @@ export const mockApplicationsMeta = [
       },
     ],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-02/colecti-logo.jpeg',
+      png: 'https://media.lisk.com/COL_Beeldmerk_Colecti_FINAL_0ea399020c.png?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
     appPage: 'https://coleti.com',
@@ -55,7 +55,7 @@ export const mockApplicationsMeta = [
       },
     ],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-02/doedu-logo.jpg',
+      png: 'https://media.lisk.com/init/doedu_a8bd2981e9.jpg?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
     appPage: 'https://docuedu.com',
@@ -88,7 +88,7 @@ export const mockApplicationsMeta = [
       },
     ],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-02/enevti-logo.png',
+      png: 'https://media.lisk.com/init/enevti_logo_0dbeff61b1.png?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
     appPage: 'https://enevti.com',
@@ -121,7 +121,7 @@ export const mockApplicationsMeta = [
       },
     ],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-07/Kalipo.jpg',
+      png: 'https://media.lisk.com/init/Kalipo_6ffad25590.jpg?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
     appPage: 'https://kalipo.com',
