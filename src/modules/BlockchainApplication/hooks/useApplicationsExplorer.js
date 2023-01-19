@@ -6,12 +6,9 @@ import { transformApplicationsMetaQueryResult } from '../utils';
  * @returns {Object} Available blockchain applications on and off-chain data.
  */
 export function useApplicationsExplorer() {
-  const {
-    data: { data },
-    ...applicationsQuery
-  } = useApplicationsMetaQuery({
+  const { data, ...applicationsQuery } = useApplicationsMetaQuery({
     config: { transformResult: transformApplicationsMetaQueryResult },
   });
 
-  return { data, ...applicationsQuery };
+  return { data: data?.data, ...applicationsQuery };
 }
