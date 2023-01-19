@@ -9,13 +9,13 @@ import { APPLICATIONS_STORAGE_KEY } from '../constants';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
- * @returns {Object} applications (data, loading and error states), addApplication callback
- * and deleteApplication callback.
+ * @returns {Object} - Applications (data, loading and error states), addApplication
+ * callback and deleteApplication callback.
  */
 export function useApplicationsManagement() {
   const { applications } = useApplications();
 
-  // Fetch default apps metadata from server.
+  // Fetch default apps of-chain and on-chain data from server and merges results.
   const {
     data: defaultApplicationsMetaData,
     status: defaultApplicationsMetaDataStatus,
@@ -49,8 +49,7 @@ export function useApplicationsManagement() {
 
   const retry = useCallback(() => refetchApplicationsMetaData(), [refetchApplicationsMetaData]);
 
-  console.log(JSON.stringify(defaultApplicationsMetaData));
-
+  // Init applications context data by merging API calls results with user local stored applications.
   useEffect(() => {
     if (!applications.data && defaultApplicationsMetaData) {
       getApplicationsStorageData().then((cachedChainIDs) => {
@@ -68,8 +67,8 @@ export function useApplicationsManagement() {
     }
   }, [applications, defaultApplicationsMetaData, getApplicationsStorageData]);
 
-  // Set current application status and error based on default applications on-chain
-  // and off-chain data query statuses.
+  // Set applications status and error based on default applications on-chain
+  // and off-chain data query status.
   useEffect(() => {
     applications.setStatus(defaultApplicationsMetaDataStatus);
   }, [defaultApplicationsMetaDataStatus, applications]);
