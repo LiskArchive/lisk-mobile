@@ -43,7 +43,7 @@ export const mockApplicationsMeta = [
     chainName: 'DoEdu',
     chainID: '00000003',
     title: 'DoEdu - Betanet',
-    isDefault: true,
+    isDefault: false,
     description: 'An educational platform built with Lisk SDK',
     networkType: 'mainnet',
     genesisURL: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',

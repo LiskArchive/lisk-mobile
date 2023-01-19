@@ -27,9 +27,34 @@ export const getApplicationsMetaMockHandler = rest.get(
   async (req, res, ctx) => {
     const limit = Number(req.url.searchParams.get('limit' || LIMIT));
     const offset = Number(req.url.searchParams.get('offset') || 0);
+    const isDefault = req.url.searchParams.get('isDefault')
+      ? Boolean(req.url.searchParams.get('isDefault'))
+      : null;
+
+    const data = mockApplicationsMeta.slice(offset, offset + limit).reduce((acc, appMeta) => {
+      switch (isDefault) {
+        case null:
+          return [...acc, appMeta];
+
+        case false:
+          if (appMeta.isDefault === false) {
+            return [...acc, appMeta];
+          }
+          return acc;
+
+        case true:
+          if (appMeta.isDefault === true) {
+            return [...acc, appMeta];
+          }
+          return acc;
+
+        default:
+          return [...acc, appMeta];
+      }
+    }, []);
 
     const response = {
-      data: mockApplicationsMeta.slice(offset, offset + limit),
+      data,
       meta: {
         count: limit,
         offset,
