@@ -4,9 +4,9 @@ import { useApplications } from '../context/ApplicationsContext';
 import { usePinsLocalStorage } from './usePinsLocalStorage';
 
 /**
- * Hook that handle all the logic related to pinning blockchain
- * applications. This enables components/hooks to use pin logic
- * from one single place. Allows user to add/remove a pin by chain ID.
+ * Handles all the logic related to pinning blockchain applications
+ * Enables components/hooks to use pin logic from one single place.
+ * Allows user to add/remove a pin by chain ID.
  *
  * @returns {Object} - The pinned applications chain IDs, a toggle pin handler
  * and a handler for checking pinned application by chain ID.
