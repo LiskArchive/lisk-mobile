@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useApplications } from '../context/ApplicationsContext';
-// import { useApplicationsStorage } from './useApplicationsStorage';
-// import { PINNED_APPLICATIONS_STORAGE_KEY } from '../constants';
+import { usePinsLocalStorage } from './usePinsLocalStorage';
 
 /**
  * Hook that handle all the logic related to pinning blockchain
@@ -13,32 +12,47 @@ import { useApplications } from '../context/ApplicationsContext';
  * and a handler for checking pinned application by chain ID.
  */
 export function usePinApplications() {
-  const { pins, dispatchPins } = useApplications();
+  const { pins } = useApplications();
 
-  // const { addApplication: addPinToStorage, deleteApplication: deletePinFromStorage } =
-  //   useApplicationsStorage(PINNED_APPLICATIONS_STORAGE_KEY);
+  const {
+    getPins: getPinsFromStorage,
+    addPin: addPinToStorage,
+    deletePin: deletePinFromStorage,
+    status: pinsStorageStatus,
+    error: errorOnPinsStorage,
+  } = usePinsLocalStorage();
 
   const checkPin = useCallback((chainID) => pins.data?.includes(chainID), [pins.data]);
 
   const togglePin = useCallback(
     async (chainID) => {
       if (!checkPin(chainID)) {
-        // await addPinToStorage(chainID);
+        await addPinToStorage(chainID);
 
-        dispatchPins({ type: 'add', chainID });
+        pins.dispatchData({ type: 'add', chainID });
       } else {
-        // await deletePinFromStorage(chainID);
+        await deletePinFromStorage(chainID);
 
-        dispatchPins({ type: 'delete', chainID });
+        pins.dispatchData({ type: 'delete', chainID });
       }
     },
-    [
-      // addPinToStorage,
-      checkPin,
-      // deletePinFromStorage,
-      dispatchPins,
-    ]
+    [addPinToStorage, checkPin, deletePinFromStorage, pins]
   );
+
+  useEffect(() => {
+    if (!pins.data) {
+      getPinsFromStorage().then((cachedPins) => {
+        pins.dispatchData({ type: 'init', pins: cachedPins || [] });
+      });
+    }
+  }, [pins, getPinsFromStorage]);
+
+  useEffect(() => {
+    pins.setStatus(pinsStorageStatus);
+  }, [pinsStorageStatus, pins]);
+  useEffect(() => {
+    pins.setError(errorOnPinsStorage);
+  }, [errorOnPinsStorage, pins]);
 
   return { pins, togglePin, checkPin };
 }

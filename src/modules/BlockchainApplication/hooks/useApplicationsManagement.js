@@ -2,7 +2,7 @@
 import { useCallback, useEffect } from 'react';
 
 import { useApplications } from '../context/ApplicationsContext';
-import { useApplicationsStorage } from './useApplicationsStorage';
+import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
 import { APPLICATIONS_STORAGE_KEY } from '../constants';
 import { useApplicationsFullDataQuery } from '../api/useApplicationsFullDataQuery';
 import { joinArraysWithoutDuplicates } from '../../../utilities/helpers';
@@ -29,7 +29,7 @@ export function useApplicationsManagement() {
     data: applicationsStorageData,
     addApplication: addApplicationToStorage,
     deleteApplication: deleteApplicationFromStorage,
-  } = useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
+  } = useApplicationsLocalStorage(APPLICATIONS_STORAGE_KEY);
 
   const addApplication = useCallback(
     (application) =>

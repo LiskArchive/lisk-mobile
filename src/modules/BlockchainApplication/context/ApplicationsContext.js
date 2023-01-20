@@ -15,13 +15,15 @@ export const ApplicationsContext = createContext();
  */
 export function ApplicationsProvider({ children }) {
   const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
-  const [applicationStatus, setApplicationStatus] = useState(false);
-  const [_errorOnApplications, setErrorOnApplications] = useState();
+  const [applicationStatus, setApplicationStatus] = useState();
+  const [errorOnApplications, setErrorOnApplications] = useState();
 
   const [pins, dispatchPins] = useReducer(applicationPinsContextReducer);
+  const [pinsStatus, setPinsStatus] = useState(false);
+  const [errorOnPins, setErrorOnPins] = useState();
 
   const [currentApplication, setCurrentApplication] = useState();
-  const [currentApplicationStatus, setCurrentApplicationStatus] = useState(false);
+  const [currentApplicationStatus, setCurrentApplicationStatus] = useState();
   const [errorOnCurrentApplication, setErrorOnCurrentApplication] = useState();
 
   return (
@@ -32,16 +34,16 @@ export function ApplicationsProvider({ children }) {
           dispatchData: dispatchApplications,
           status: applicationStatus,
           setStatus: setApplicationStatus,
-          error: _errorOnApplications,
+          error: errorOnApplications,
           setError: setErrorOnApplications,
         },
         pins: {
           data: pins,
-          isLoading: false,
-          isSuccess: true,
-          isError: false,
-          error: undefined,
-          refetch: () => {},
+          dispatchData: dispatchPins,
+          status: pinsStatus,
+          setStatus: setPinsStatus,
+          error: errorOnPins,
+          setError: setErrorOnPins,
         },
         currentApplication: {
           data: currentApplication,
@@ -51,7 +53,6 @@ export function ApplicationsProvider({ children }) {
           error: errorOnCurrentApplication,
           setError: setErrorOnCurrentApplication,
         },
-        dispatchPins,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import * as useApplications from '../context/ApplicationsContext';
-import * as useApplicationsStorage from './useApplicationsStorage';
+import * as useApplicationsLocalStorage from './useApplicationsLocalStorage';
 import { mockApplicationsFullData } from '../__fixtures__/mockApplicationsFullData';
 import { useApplicationsManagement } from './useApplicationsManagement';
 
@@ -21,7 +21,7 @@ jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
   dispatchApplications: dispatchApplicationsMock,
 }));
 
-jest.spyOn(useApplicationsStorage, 'useApplicationsStorage').mockImplementation(() => ({
+jest.spyOn(useApplicationsLocalStorage, 'useApplicationsLocalStorage').mockImplementation(() => ({
   addApplication: addApplicationToStorage,
   deleteApplication: deleteApplicationFromStorage,
 }));

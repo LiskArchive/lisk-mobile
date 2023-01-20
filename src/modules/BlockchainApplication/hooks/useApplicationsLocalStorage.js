@@ -8,7 +8,7 @@ import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_META_QUERY, APPLICATION } from 'utilities/api/queries';
 import { transformApplicationsMetaQueryResult } from '../utils';
 
-export function useApplicationsStorage(storageKey) {
+export function useApplicationsLocalStorage(storageKey) {
   const [localStorageData, setLocalStorageData] = useState();
   const [isLoadingLocalStorageData, setIsLoadingLocalStorageData] = useState(true);
   const [isSuccessLocalStorageData, setIsSuccessLocalStorageData] = useState();
