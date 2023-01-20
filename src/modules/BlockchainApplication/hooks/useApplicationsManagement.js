@@ -2,10 +2,10 @@
 import { useCallback, useEffect } from 'react';
 
 import { useApplications } from '../context/ApplicationsContext';
-import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
 import { useApplicationsStorage } from './useApplicationsStorage';
-import { transformApplicationsMetaQueryResult } from '../utils';
 import { APPLICATIONS_STORAGE_KEY } from '../constants';
+import { useApplicationsFullDataQuery } from '../api/useApplicationsFullDataQuery';
+import { joinArraysWithoutDuplicates } from '../../../utilities/helpers';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
@@ -21,12 +21,12 @@ export function useApplicationsManagement() {
     status: defaultApplicationsMetaDataStatus,
     refetch: refetchApplicationsMetaData,
     error: errorOnDefaultApplicationsMetaData,
-  } = useApplicationsMetaQuery({
-    config: { transformResult: transformApplicationsMetaQueryResult, params: { isDefault: true } },
+  } = useApplicationsFullDataQuery({
+    config: { params: { isDefault: true } },
   });
 
   const {
-    getApplications: getApplicationsStorageData,
+    data: applicationsStorageData,
     addApplication: addApplicationToStorage,
     deleteApplication: deleteApplicationFromStorage,
   } = useApplicationsStorage(APPLICATIONS_STORAGE_KEY);
@@ -49,23 +49,20 @@ export function useApplicationsManagement() {
 
   const retry = useCallback(() => refetchApplicationsMetaData(), [refetchApplicationsMetaData]);
 
-  // Init applications context data by merging API calls results with user local stored applications.
+  // Init applications management data by merging API calls results with user local
+  // stored applications.
   useEffect(() => {
-    if (!applications.data && defaultApplicationsMetaData) {
-      getApplicationsStorageData().then((cachedChainIDs) => {
-        console.log({ cachedChainIDs });
-        // const initApplications = getInitContextApplications({
-        //   applications: applicationsData,
-        //   defaultApplications: defaultApplicationsData,
-        //   cachedChainIDs,
-        // });
-
-        const initApplications = defaultApplicationsMetaData.data;
-
-        applications.dispatchData({ type: 'init', applications: initApplications });
+    if (!applications.data && defaultApplicationsMetaData.data && applicationsStorageData?.data) {
+      applications.dispatchData({
+        type: 'init',
+        applications: joinArraysWithoutDuplicates(
+          defaultApplicationsMetaData.data,
+          applicationsStorageData.data,
+          'chainID'
+        ),
       });
     }
-  }, [applications, defaultApplicationsMetaData, getApplicationsStorageData]);
+  }, [applications, defaultApplicationsMetaData, applicationsStorageData]);
 
   // Set applications status and error based on default applications on-chain
   // and off-chain data query status.

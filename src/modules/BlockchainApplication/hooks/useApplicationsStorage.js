@@ -1,39 +1,56 @@
+/* eslint-disable complexity */
 /* eslint-disable max-statements */
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
+import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
+import { GET_APPLICATIONS_META_QUERY, APPLICATION } from 'utilities/api/queries';
+import { transformApplicationsMetaQueryResult } from '../utils';
+
 export function useApplicationsStorage(storageKey) {
-  const [status, setStatus] = useState('idle');
-  const [error, setError] = useState();
+  const [localStorageData, setLocalStorageData] = useState();
+  const [isLoadingLocalStorageData, setIsLoadingLocalStorageData] = useState(true);
+  const [isSuccessLocalStorageData, setIsSuccessLocalStorageData] = useState();
+  const [errorOnLocalStorageData, setErrorOnLocalStorageData] = useState();
 
-  const getApplications = useCallback(async () => {
-    let applications;
+  const config = {
+    url: `${API_URL}/blockchain/apps/meta`,
+    method: 'get',
+    event: 'get.blockchain.apps.meta',
+    transformResult: transformApplicationsMetaQueryResult,
+    params: {
+      network: process.env.NETWORK,
+      limit: LIMIT,
+      chainID: localStorageData && localStorageData.join(','),
+    },
+  };
 
-    setStatus('initializing');
+  const {
+    data: applicationsData,
+    isInitialLoading: isLoadingApplicationsData,
+    isSuccess: isSuccessApplicationsData,
+    error: errorOnApplicationsData,
+  } = useCustomQuery({
+    keys: [GET_APPLICATIONS_META_QUERY, config, APPLICATION, METHOD],
+    options: {
+      enabled: !!(isSuccessLocalStorageData && localStorageData?.length > 0),
+    },
+    config,
+  });
 
-    try {
-      const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
-
-      setStatus('idle');
-
-      applications =
-        cachedApplicationsJSON != null ? JSON.parse(cachedApplicationsJSON) : undefined;
-
-      return applications;
-    } catch (_error) {
-      setError(_error);
-
-      setStatus('idle');
-
-      return applications;
-    }
-  }, [storageKey]);
+  const resetState = () => {
+    setLocalStorageData(undefined);
+    setIsSuccessLocalStorageData(undefined);
+    setErrorOnLocalStorageData(undefined);
+  };
 
   const addApplication = useCallback(
     async (chainID) => {
-      setStatus('adding');
-
       let updatedApplications;
+
+      resetState();
+      setIsLoadingLocalStorageData(true);
 
       try {
         const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
@@ -44,25 +61,29 @@ export function useApplicationsStorage(storageKey) {
 
         updatedApplications = await AsyncStorage.setItem(storageKey, payload);
 
-        setStatus('idle');
+        setIsSuccessLocalStorageData(true);
+        setIsLoadingLocalStorageData(false);
 
-        return updatedApplications;
+        setLocalStorageData(updatedApplications);
+
+        return applicationsData;
       } catch (_error) {
-        setError(_error);
+        setErrorOnLocalStorageData(_error);
+        setIsLoadingLocalStorageData(false);
+        setIsSuccessLocalStorageData(false);
 
-        setStatus('idle');
-
-        return updatedApplications;
+        return applicationsData;
       }
     },
-    [storageKey]
+    [storageKey, applicationsData]
   );
 
   const deleteApplication = useCallback(
     async (chainID) => {
-      setStatus('deleting');
-
       let updatedApplications;
+
+      resetState();
+      setIsLoadingLocalStorageData(true);
 
       try {
         const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
@@ -75,24 +96,65 @@ export function useApplicationsStorage(storageKey) {
 
         updatedApplications = await AsyncStorage.setItem(storageKey, payload);
 
-        setStatus('idle');
+        setIsSuccessLocalStorageData(true);
+        setIsLoadingLocalStorageData(false);
 
-        return updatedApplications;
+        setLocalStorageData(updatedApplications);
+
+        return applicationsData;
       } catch (_error) {
-        setError(_error);
+        setErrorOnLocalStorageData(_error);
+        setIsLoadingLocalStorageData(false);
+        setIsSuccessLocalStorageData(false);
 
-        setStatus('idle');
-
-        return updatedApplications;
+        return applicationsData;
       }
     },
-    [storageKey]
+    [storageKey, applicationsData]
   );
 
+  useEffect(() => {
+    const fetchDataFromLocalStorage = async () => {
+      let applications;
+
+      resetState();
+
+      try {
+        const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
+
+        applications =
+          cachedApplicationsJSON != null ? JSON.parse(cachedApplicationsJSON) : undefined;
+
+        setIsLoadingLocalStorageData(false);
+
+        setIsSuccessLocalStorageData(true);
+
+        setLocalStorageData(applications);
+
+        return applications;
+      } catch (_error) {
+        setErrorOnLocalStorageData(_error);
+        setIsLoadingLocalStorageData(false);
+        setIsSuccessLocalStorageData(false);
+
+        return applications;
+      }
+    };
+
+    if (!localStorageData) {
+      fetchDataFromLocalStorage();
+    }
+  }, [localStorageData, applicationsData, storageKey]);
+
+  const isLoading = isLoadingLocalStorageData || isLoadingApplicationsData;
+  const isSuccess = isSuccessLocalStorageData && isSuccessApplicationsData;
+  const error = errorOnLocalStorageData || errorOnApplicationsData;
+
   return {
-    status,
+    data: applicationsData,
+    isLoading,
+    isSuccess,
     error,
-    getApplications,
     addApplication,
     deleteApplication,
   };

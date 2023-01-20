@@ -9,11 +9,21 @@ export const getApplicationsMockHandler = rest.get(
   async (req, res, ctx) => {
     const limit = Number(req.url.searchParams.get('limit' || LIMIT));
     const offset = Number(req.url.searchParams.get('offset') || 0);
+    const chainIDs =
+      req.url.searchParams.get('chainID') && req.url.searchParams.get('chainID').split(',');
+
+    let data = mockApplications
+      .slice(offset, offset + limit)
+      .filter((app) => chainIDs.includes(app.chainID));
+
+    if (chainIDs) {
+      data = data.filter((app) => chainIDs.includes(app.chainID));
+    }
 
     const response = {
-      data: mockApplications.slice(offset, offset + limit),
+      data,
       meta: {
-        count: limit,
+        count: data.length,
         offset,
       },
     };
@@ -30,8 +40,10 @@ export const getApplicationsMetaMockHandler = rest.get(
     const isDefault = req.url.searchParams.get('isDefault')
       ? Boolean(req.url.searchParams.get('isDefault'))
       : null;
+    const chainIDs =
+      req.url.searchParams.get('chainID') && req.url.searchParams.get('chainID').split(',');
 
-    const data = mockApplicationsMeta.slice(offset, offset + limit).reduce((acc, appMeta) => {
+    let data = mockApplicationsMeta.slice(offset, offset + limit).reduce((acc, appMeta) => {
       switch (isDefault) {
         case null:
           return [...acc, appMeta];
@@ -53,10 +65,14 @@ export const getApplicationsMetaMockHandler = rest.get(
       }
     }, []);
 
+    if (chainIDs) {
+      data = data.filter((app) => chainIDs.includes(app.chainID));
+    }
+
     const response = {
       data,
       meta: {
-        count: limit,
+        count: data.length,
         offset,
       },
     };
