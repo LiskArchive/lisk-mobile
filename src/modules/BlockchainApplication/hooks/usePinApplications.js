@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
 import { useApplications } from '../context/ApplicationsContext';
-import { usePinsLocalStorage } from './usePinsLocalStorage';
+import { usePinApplicationsLocalStorage } from './usePinApplicationsLocalStorage';
 
 /**
  * Handles all the logic related to pinning blockchain applications
@@ -20,7 +20,7 @@ export function usePinApplications() {
     deletePin: deletePinFromStorage,
     status: pinsStorageStatus,
     error: errorOnPinsStorage,
-  } = usePinsLocalStorage();
+  } = usePinApplicationsLocalStorage();
 
   const checkPin = useCallback((chainID) => pins.data?.includes(chainID), [pins.data]);
 

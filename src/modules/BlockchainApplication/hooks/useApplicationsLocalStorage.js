@@ -7,14 +7,21 @@ import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_META_QUERY, APPLICATION } from 'utilities/api/queries';
 import { transformApplicationsMetaQueryResult } from '../utils';
+import { APPLICATIONS_STORAGE_KEY } from '../constants';
 
-export function useApplicationsLocalStorage(storageKey) {
+/**
+ * Reads, adds and deletes applications from device local storage.
+ * @returns {Object} The stored applications array, callbacks to read, add and delete
+ * pins from local storage as well as the status and error (if any) of the async
+ * operation.
+ */
+export function useApplicationsLocalStorage() {
   const [localStorageData, setLocalStorageData] = useState();
   const [isLoadingLocalStorageData, setIsLoadingLocalStorageData] = useState(true);
   const [isSuccessLocalStorageData, setIsSuccessLocalStorageData] = useState();
   const [errorOnLocalStorageData, setErrorOnLocalStorageData] = useState();
 
-  const config = {
+  const queryConfig = {
     url: `${API_URL}/blockchain/apps/meta`,
     method: 'get',
     event: 'get.blockchain.apps.meta',
@@ -32,11 +39,11 @@ export function useApplicationsLocalStorage(storageKey) {
     isSuccess: isSuccessApplicationsData,
     error: errorOnApplicationsData,
   } = useCustomQuery({
-    keys: [GET_APPLICATIONS_META_QUERY, config, APPLICATION, METHOD],
+    keys: [GET_APPLICATIONS_META_QUERY, queryConfig, APPLICATION, METHOD],
     options: {
       enabled: !!(isSuccessLocalStorageData && localStorageData?.length > 0),
     },
-    config,
+    config: queryConfig,
   });
 
   const resetState = () => {
@@ -53,13 +60,13 @@ export function useApplicationsLocalStorage(storageKey) {
       setIsLoadingLocalStorageData(true);
 
       try {
-        const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
+        const cachedApplicationsJSON = await AsyncStorage.getItem(APPLICATIONS_STORAGE_KEY);
 
         const cachedApplications = cachedApplicationsJSON ? JSON.parse(cachedApplicationsJSON) : [];
 
         const payload = JSON.stringify([...cachedApplications, chainID]);
 
-        updatedApplications = await AsyncStorage.setItem(storageKey, payload);
+        updatedApplications = await AsyncStorage.setItem(APPLICATIONS_STORAGE_KEY, payload);
 
         setIsSuccessLocalStorageData(true);
         setIsLoadingLocalStorageData(false);
@@ -75,7 +82,7 @@ export function useApplicationsLocalStorage(storageKey) {
         return applicationsData;
       }
     },
-    [storageKey, applicationsData]
+    [applicationsData]
   );
 
   const deleteApplication = useCallback(
@@ -86,7 +93,7 @@ export function useApplicationsLocalStorage(storageKey) {
       setIsLoadingLocalStorageData(true);
 
       try {
-        const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
+        const cachedApplicationsJSON = await AsyncStorage.getItem(APPLICATIONS_STORAGE_KEY);
 
         const cachedApplications = cachedApplicationsJSON ? JSON.parse(cachedApplicationsJSON) : [];
 
@@ -94,7 +101,7 @@ export function useApplicationsLocalStorage(storageKey) {
           cachedApplications.filter((cachedChainID) => cachedChainID !== chainID)
         );
 
-        updatedApplications = await AsyncStorage.setItem(storageKey, payload);
+        updatedApplications = await AsyncStorage.setItem(APPLICATIONS_STORAGE_KEY, payload);
 
         setIsSuccessLocalStorageData(true);
         setIsLoadingLocalStorageData(false);
@@ -110,7 +117,7 @@ export function useApplicationsLocalStorage(storageKey) {
         return applicationsData;
       }
     },
-    [storageKey, applicationsData]
+    [applicationsData]
   );
 
   useEffect(() => {
@@ -120,7 +127,7 @@ export function useApplicationsLocalStorage(storageKey) {
       resetState();
 
       try {
-        const cachedApplicationsJSON = await AsyncStorage.getItem(storageKey);
+        const cachedApplicationsJSON = await AsyncStorage.getItem(APPLICATIONS_STORAGE_KEY);
 
         applications =
           cachedApplicationsJSON != null ? JSON.parse(cachedApplicationsJSON) : undefined;
@@ -144,7 +151,7 @@ export function useApplicationsLocalStorage(storageKey) {
     if (!localStorageData) {
       fetchDataFromLocalStorage();
     }
-  }, [localStorageData, applicationsData, storageKey]);
+  }, [localStorageData, applicationsData]);
 
   const isLoading = isLoadingLocalStorageData || isLoadingApplicationsData;
   const isSuccess = isSuccessLocalStorageData && isSuccessApplicationsData;

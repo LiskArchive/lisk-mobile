@@ -5,12 +5,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PINNED_APPLICATIONS_STORAGE_KEY } from '../constants';
 
 /**
- * Allows to read, add and delete pinned applications chainIDs from
- * device local storage.
+ * Reads, adds and deletes pinned applications chainIDs from device's
+ * local storage.
  * @returns {Object} Callbacks to read, add and delete pins from local storage
  * as well as the status and error (if any) of the async operation.
  */
-export function usePinsLocalStorage() {
+export function usePinApplicationsLocalStorage() {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState();
 
