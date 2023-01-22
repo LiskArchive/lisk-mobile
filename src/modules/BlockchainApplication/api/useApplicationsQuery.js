@@ -14,11 +14,15 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
 export function useApplicationsQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     baseURL: process.env.SERVICE_API_BASE_URL,
-    url: `${API_URL}/blockchain/apps`,
+    url: `${API_URL}/blockchain/apps/meta`,
     method: 'get',
     event: 'get.blockchain.apps',
     ...customConfig,
-    params: { limit: LIMIT, ...customConfig.params },
+    params: {
+      limit: LIMIT,
+      network: process.env.NETWORK,
+      ...customConfig.params,
+    },
   };
 
   const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
