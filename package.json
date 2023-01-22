@@ -16,8 +16,8 @@
     "i18n": "node ./scripts/scanner.config.js",
     "link": "./node_modules/.bin/rn-nodeify --hack --install",
     "postinstall": "patch-package",
-    "e2e:ios": "detox build -c ios.debug && detox test -c ios.debug",
-    "e2e:android": "detox build -c android.debug && detox test -c android.debug",
+    "e2e:ios": "cp env.test.json env.json && detox build -c ios.debug && detox test -c ios.debug",
+    "e2e:android": "cp env.test.json env.json && detox build -c android.debug && detox test -c android.debug",
     "prepare": "husky install"
   },
   "dependencies": {

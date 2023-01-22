@@ -36,7 +36,6 @@ class Splash extends React.Component {
       duration: 600,
       delay: 50,
       easing: easing.easeOutQuart,
-      useNativeDriver: true,
     }).start();
     Animated.timing(iconOpacity, {
       toValue: 1,
