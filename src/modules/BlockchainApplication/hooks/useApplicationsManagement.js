@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 import { useCallback, useEffect } from 'react';
 
 import { useApplications } from '../context/ApplicationsContext';
@@ -32,10 +31,15 @@ export function useApplicationsManagement() {
   } = useApplicationsLocalStorage(APPLICATIONS_STORAGE_KEY);
 
   const addApplication = useCallback(
-    (application) =>
-      addApplicationToStorage(application.chainID).then(() =>
-        applications.dispatchData({ type: 'add', application })
-      ),
+    async (application) => {
+      try {
+        await addApplicationToStorage(application.chainID);
+
+        applications.dispatchData({ type: 'add', application });
+      } catch (error) {
+        console.log({ error });
+      }
+    },
     [addApplicationToStorage, applications]
   );
 
@@ -65,7 +69,7 @@ export function useApplicationsManagement() {
   }, [applications, defaultApplicationsMetaData, applicationsStorageData]);
 
   // Set applications status and error based on default applications on-chain
-  // and off-chain data query status.
+  // and off-chain data query results.
   useEffect(() => {
     applications.setStatus(defaultApplicationsMetaDataStatus);
   }, [defaultApplicationsMetaDataStatus, applications]);

@@ -10,7 +10,7 @@ import { transformApplicationsMetaQueryResult } from '../utils';
 import { APPLICATIONS_STORAGE_KEY } from '../constants';
 
 /**
- * Reads, adds and deletes applications from device local storage.
+ * Reads, adds and deletes applications from device's local storage.
  * @returns {Object} The stored applications array, callbacks to read, add and delete
  * pins from local storage as well as the status and error (if any) of the async
  * operation.
