@@ -5,7 +5,6 @@ import DropDownHolder from 'utilities/alert';
 import { joinArraysWithoutDuplicates } from 'utilities/helpers';
 import { useApplications } from '../context/ApplicationsContext';
 import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
-import { APPLICATIONS_STORAGE_KEY } from '../constants';
 import { useApplicationsFullDataQuery } from '../api/useApplicationsFullDataQuery';
 
 /**
@@ -30,7 +29,7 @@ export function useApplicationsManagement() {
     data: applicationsStorageData,
     addApplication: addApplicationToStorage,
     deleteApplication: deleteApplicationFromStorage,
-  } = useApplicationsLocalStorage(APPLICATIONS_STORAGE_KEY);
+  } = useApplicationsLocalStorage();
 
   const addApplication = useCallback(
     async (application) => {
