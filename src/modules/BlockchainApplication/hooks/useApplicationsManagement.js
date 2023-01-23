@@ -1,10 +1,12 @@
 import { useCallback, useEffect } from 'react';
+import i18next from 'i18next';
 
+import DropDownHolder from 'utilities/alert';
+import { joinArraysWithoutDuplicates } from 'utilities/helpers';
 import { useApplications } from '../context/ApplicationsContext';
 import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
 import { APPLICATIONS_STORAGE_KEY } from '../constants';
 import { useApplicationsFullDataQuery } from '../api/useApplicationsFullDataQuery';
-import { joinArraysWithoutDuplicates } from '../../../utilities/helpers';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
@@ -16,10 +18,10 @@ export function useApplicationsManagement() {
 
   // Fetch default apps of-chain and on-chain data from server and merges results.
   const {
-    data: defaultApplicationsMetaData,
-    status: defaultApplicationsMetaDataStatus,
-    refetch: refetchApplicationsMetaData,
-    error: errorOnDefaultApplicationsMetaData,
+    data: defaultApplicationsFullData,
+    status: defaultApplicationsFullDataStatus,
+    refetch: refetchDefaultApplicationsFullData,
+    error: errorOnDefaultApplicationsFullData,
   } = useApplicationsFullDataQuery({
     config: { params: { isDefault: true } },
   });
@@ -37,45 +39,59 @@ export function useApplicationsManagement() {
 
         applications.dispatchData({ type: 'add', application });
       } catch (error) {
-        console.log({ error });
+        DropDownHolder.error(
+          i18next.t('Error'),
+          'Error adding application. Please try again later.'
+        );
       }
     },
     [addApplicationToStorage, applications]
   );
 
   const deleteApplication = useCallback(
-    (chainID) =>
-      deleteApplicationFromStorage(chainID).then(() =>
-        applications.dispatchData({ type: 'delete', chainID })
-      ),
+    async (chainID) => {
+      try {
+        await deleteApplicationFromStorage(chainID);
+
+        applications.dispatchData({ type: 'delete', chainID });
+      } catch (error) {
+        DropDownHolder.error(
+          i18next.t('Error'),
+          'Error deleting application. Please try again later.'
+        );
+      }
+    },
     [deleteApplicationFromStorage, applications]
   );
 
-  const retry = useCallback(() => refetchApplicationsMetaData(), [refetchApplicationsMetaData]);
+  const retry = useCallback(
+    () => refetchDefaultApplicationsFullData(),
+    [refetchDefaultApplicationsFullData]
+  );
 
   // Init applications management data by merging API calls results with user local
   // stored applications.
   useEffect(() => {
-    if (!applications.data && defaultApplicationsMetaData.data && applicationsStorageData?.data) {
+    if (!applications.data && defaultApplicationsFullData.data && applicationsStorageData?.data) {
       applications.dispatchData({
         type: 'init',
         applications: joinArraysWithoutDuplicates(
-          defaultApplicationsMetaData.data,
+          defaultApplicationsFullData.data,
           applicationsStorageData.data,
           'chainID'
         ),
       });
     }
-  }, [applications, defaultApplicationsMetaData, applicationsStorageData]);
+  }, [applications, defaultApplicationsFullData, applicationsStorageData]);
 
   // Set applications status and error based on default applications on-chain
   // and off-chain data query results.
   useEffect(() => {
-    applications.setStatus(defaultApplicationsMetaDataStatus);
-  }, [defaultApplicationsMetaDataStatus, applications]);
+    applications.setStatus(defaultApplicationsFullDataStatus);
+  }, [defaultApplicationsFullDataStatus, applications]);
   useEffect(() => {
-    applications.setError(errorOnDefaultApplicationsMetaData);
-  }, [errorOnDefaultApplicationsMetaData, applications]);
+    applications.setError(errorOnDefaultApplicationsFullData);
+  }, [errorOnDefaultApplicationsFullData, applications]);
 
   return {
     applications,
