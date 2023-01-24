@@ -1,7 +1,10 @@
 /* eslint-disable max-statements */
 import React, { createContext, useContext, useReducer, useState } from 'react';
 
-import { applicationsContextReducer, applicationPinsContextReducer } from './utils';
+import {
+  applicationsContextReducer,
+  applicationPinsContextReducer,
+} from './ApplicationsContext.utils';
 
 export const ApplicationsContext = createContext();
 

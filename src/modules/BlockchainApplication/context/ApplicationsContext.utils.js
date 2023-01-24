@@ -7,7 +7,7 @@
  */
 export function applicationsContextReducer(
   state = [],
-  { type, applications, application, chainID }
+  { type, applications, application, chainID } = {}
 ) {
   switch (type) {
     case 'init':
@@ -37,7 +37,7 @@ export function applicationsContextReducer(
  * Can be "init" pins, "add" a pin or "delete" a pin.
  * @returns {Array} state - The context state of saved pins (chainIDs).
  */
-export function applicationPinsContextReducer(state, { type, pins, chainID }) {
+export function applicationPinsContextReducer(state = [], { type, pins, chainID } = {}) {
   switch (type) {
     case 'init':
       return pins;
