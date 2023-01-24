@@ -17,7 +17,7 @@ export default function LoadingFallbackScreen() {
 
       <View style={[styles.animationContainer]}>
         <Lottie
-          source={require('../../../assets/animations/animated-logo.json')}
+          source={require('assets/animations/animated-logo.json')}
           autoPlay
           loop
           style={[styles.animation]}

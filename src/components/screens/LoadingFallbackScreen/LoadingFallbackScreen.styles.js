@@ -5,7 +5,7 @@ export function getLoadingFallbackScreenStyles() {
     common: {
       container: {
         flex: 1,
-        backgroundColor: colors.light.inkBlue,
+        backgroundColor: colors.light.ultramarineBlue,
         paddingLeft: boxes.boxPadding,
         paddingRight: boxes.boxPadding,
         alignItems: 'center',
