@@ -1,3 +1,5 @@
+import { API_BASE_URL, WS_BASE_URL } from 'utilities/api/constants';
+
 export const mockDefaultApplicationMeta = {
   chainName: 'Lisk',
   chainID: '04000000',
@@ -9,8 +11,8 @@ export const mockDefaultApplicationMeta = {
   projectPage: 'https://lisk.com',
   serviceURLs: [
     {
-      http: process.env.SERVICE_API_BASE_URL || 'http://localhost:9901',
-      ws: process.env.SERVICE_WS_BASE_URL || 'wss://localhost:9901/blockchain',
+      http: API_BASE_URL,
+      ws: WS_BASE_URL,
     },
   ],
   logo: {

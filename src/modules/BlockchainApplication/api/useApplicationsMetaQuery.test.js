@@ -18,7 +18,7 @@ describe('useApplicationsMetaQuery hook', () => {
     const expectedResponse = {
       data: mockApplicationsMeta,
       meta: {
-        count: 20,
+        count: mockApplicationsMeta.length,
         offset: 0,
       },
     };

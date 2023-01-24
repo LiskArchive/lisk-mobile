@@ -12,9 +12,7 @@ export const getApplicationsMockHandler = rest.get(
     const chainIDs =
       req.url.searchParams.get('chainID') && req.url.searchParams.get('chainID').split(',');
 
-    let data = mockApplications
-      .slice(offset, offset + limit)
-      .filter((app) => chainIDs.includes(app.chainID));
+    let data = mockApplications.slice(offset, offset + limit);
 
     if (chainIDs) {
       data = data.filter((app) => chainIDs.includes(app.chainID));
