@@ -60,6 +60,8 @@
     "hoist-non-react-statics": "^3.3.2",
     "https-browserify": "^0.0.1",
     "i18next": "^14.0.1",
+    "lottie-ios": "3.4.0",
+    "lottie-react-native": "^5.1.4",
     "moment": "^2.29.1",
     "patch-package": "^6.4.7",
     "path-browserify": "^0.0.0",

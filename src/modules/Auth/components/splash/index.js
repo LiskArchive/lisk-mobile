@@ -50,11 +50,12 @@ class Splash extends React.Component {
 
   render() {
     const { bgOpacity, iconOpacity } = this.state;
-    const { styles, style } = this.props;
+    const { showSimplifiedView, t, styles, style } = this.props;
 
     return (
       <View style={[styles.splashContainer, style?.container]}>
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }, style?.bg]} />
+
         <Animated.View style={[styles.splashFigure, { opacity: iconOpacity }, style?.figure]}>
           <Icon
             name="lisk-full"
@@ -63,7 +64,9 @@ class Splash extends React.Component {
             style={[style?.icon]}
           />
 
-          <Title style={[style?.title]}>{this.props.t('The official Lisk mobile wallet.')}</Title>
+          {!showSimplifiedView && (
+            <Title style={[style?.title]}>{t('The official Lisk mobile wallet.')}</Title>
+          )}
         </Animated.View>
       </View>
     );
