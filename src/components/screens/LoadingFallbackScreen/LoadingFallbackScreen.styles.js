@@ -1,24 +1,23 @@
 import { colors, boxes } from 'constants/styleGuide';
-import { Dimensions } from 'react-native';
 
 export function getLoadingFallbackScreenStyles() {
-  const deviceWidth = Dimensions.get('window').width;
-  const left = deviceWidth / 2 - 88;
-
   return {
     common: {
       container: {
         flex: 1,
-        backgroundColor: colors.light.ultramarineBlue,
+        backgroundColor: colors.light.inkBlue,
         paddingLeft: boxes.boxPadding,
         paddingRight: boxes.boxPadding,
         alignItems: 'center',
         justifyContent: 'center',
       },
-      illustration: {
+      animationContainer: {
         position: 'absolute',
-        left,
-        bottom: 88,
+        bottom: 40,
+      },
+      animation: {
+        width: 80,
+        height: 80,
       },
     },
   };
