@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { applicationsWrapper } from '../../../tests/applicationsWrapper';
 
-import { mockApplications } from '../__fixtures__';
+import { mockApplicationsMeta } from '../__fixtures__';
 
 import { useApplicationsQuery } from './useApplicationsQuery';
 
@@ -16,7 +16,7 @@ describe('useApplicationsQuery hook', () => {
     expect(result.current.isSuccess).toBeTruthy();
 
     const expectedResponse = {
-      data: mockApplications,
+      data: mockApplicationsMeta,
       meta: {
         count: 20,
         offset: 0,
