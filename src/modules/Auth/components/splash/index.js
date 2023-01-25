@@ -1,11 +1,12 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
-import Icon from 'components/shared/toolBox/icon';
+import { translate } from 'react-i18next';
+
 import easing from 'utilities/easing';
 import { deviceHeight } from 'utilities/device';
-import { colors } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
-import { translate } from 'react-i18next';
+import LiskMobileLogoSvg from 'assets/svgs/LiskMobileLogoSvg';
+
 import Title from '../title';
 import getStyles from './styles';
 
@@ -57,12 +58,7 @@ class Splash extends React.Component {
         <Animated.View style={[styles.splashBg, { opacity: bgOpacity }, style?.bg]} />
 
         <Animated.View style={[styles.splashFigure, { opacity: iconOpacity }, style?.figure]}>
-          <Icon
-            name="lisk-full"
-            size={55}
-            color={colors.light.ultramarineBlue}
-            style={[style?.icon]}
-          />
+          <LiskMobileLogoSvg style={[style?.icon]} />
 
           {!showSimplifiedView && (
             <Title style={[style?.title]}>{t('The official Lisk mobile wallet.')}</Title>

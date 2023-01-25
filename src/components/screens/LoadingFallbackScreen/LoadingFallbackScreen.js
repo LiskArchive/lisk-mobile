@@ -1,9 +1,9 @@
 import React from 'react';
 import { SafeAreaView, View } from 'react-native';
-import Lottie from 'lottie-react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
-import Splash from 'modules/Auth/components/splash';
+import LiskMobileLogoSvg from 'assets/svgs/LiskMobileLogoSvg';
+import LiskLogoAnimation from 'assets/animations/LiskLogoAnimation';
 import { colors } from 'constants/styleGuide';
 
 import { getLoadingFallbackScreenStyles } from './LoadingFallbackScreen.styles';
@@ -13,15 +13,10 @@ export default function LoadingFallbackScreen() {
 
   return (
     <SafeAreaView style={[styles.container]}>
-      <Splash animate={false} showSimplifiedView style={{ icon: { color: colors.light.white } }} />
+      <LiskMobileLogoSvg color={colors.light.white} />
 
       <View style={[styles.animationContainer]}>
-        <Lottie
-          source={require('assets/animations/animated-logo.json')}
-          autoPlay
-          loop
-          style={[styles.animation]}
-        />
+        <LiskLogoAnimation variant="white" style={[styles.animation]} />
       </View>
     </SafeAreaView>
   );
