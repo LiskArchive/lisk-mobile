@@ -8,6 +8,9 @@ import { colors } from 'constants/styleGuide';
 
 import { getLoadingFallbackScreenStyles } from './LoadingFallbackScreen.styles';
 
+/**
+ * Fallback screen component for application loading state.
+ */
 export default function LoadingFallbackScreen() {
   const { styles } = useTheme({ styles: getLoadingFallbackScreenStyles() });
 
