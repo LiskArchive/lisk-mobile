@@ -12,7 +12,7 @@ export default () => ({
     },
     title: {
       textAlign: 'center',
-      marginTop: 24,
+      marginTop: 40,
       marginBottom: 8,
     },
     footer: {

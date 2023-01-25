@@ -4,8 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from 'contexts/ThemeContext';
 import AccountList from 'modules/Accounts/components/AccountList';
-
-import Splash from '../components/splash';
+import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 
 import getAccountsManagerScreenStyles from './styles';
 
@@ -18,7 +17,7 @@ export default function AccountsManagerScreen() {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <Splash animate={false} />
+      <HeaderLogo style={{ container: { marginBottom: 40 } }} />
 
       <AccountList
         mode="screen"

@@ -9,7 +9,7 @@ import {
   GET_ACCOUNT_TOKENS_QUERY,
   GET_AUTH_QUERY,
 } from 'utilities/api/queries';
-// import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
+import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
 import LoadingFallbackScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
 import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
 
@@ -26,8 +26,6 @@ export default function BootstrapApp({ children }) {
   const isError = currentApplication.isError;
   const error = currentApplication.error;
   const refetch = currentApplication.refetch;
-
-  console.log({ children, isLoading, isError, error, refetch });
 
   // Bootstrap API client with current application.
   useEffect(() => {
@@ -61,15 +59,13 @@ export default function BootstrapApp({ children }) {
   // Bootstrap WC.
   useWalletConnectEventsManager();
 
-  return <LoadingFallbackScreen />;
+  if (isLoading) {
+    return <LoadingFallbackScreen />;
+  }
 
-  // if (isLoading) {
-  //   return <LoadingFallbackScreen />;
-  // }
+  if (isError) {
+    return <ErrorFallbackScreen onRetry={refetch} error={error} />;
+  }
 
-  // if (isError) {
-  //   return <ErrorFallbackScreen onRetry={refetch} error={error} />;
-  // }
-
-  // return children;
+  return children;
 }
