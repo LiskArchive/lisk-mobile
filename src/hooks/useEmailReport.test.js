@@ -2,8 +2,11 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { Linking } from 'react-native';
 
 import { mockApplicationsMeta } from 'modules/BlockchainApplication/__fixtures__';
+import * as useNetworkStatusQuery from 'modules/Network/api/useNetworkStatusQuery';
+import * as useCurrentApplication from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 
 import { useEmailReport } from './useEmailReport';
+
 import { mockNetworkStatus } from '../modules/Network/__fixtures__';
 import { applicationsWrapper } from '../tests/applicationsWrapper';
 
@@ -82,11 +85,23 @@ describe('useEmailReport hook', () => {
   });
 
   it('should fall in error if no url is defined when triggering handleSend', async () => {
-    const { result } = renderHook(() => useEmailReport(), { wrapper });
+    jest.spyOn(useCurrentApplication, 'useCurrentApplication').mockImplementation(() => [
+      {
+        data: undefined,
+      },
+    ]);
+
+    jest.spyOn(useNetworkStatusQuery, 'useNetworkStatusQuery').mockImplementation(() => ({
+      data: undefined,
+    }));
+
+    const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
+
+    await waitFor(() => !result.current.isLoading);
 
     await act(() => result.current.handleSend());
 
-    expect(result.current.error).toBeTruthy();
     expect(result.current.isFetching).toBeFalsy();
+    expect(result.current.error).toBeTruthy();
   });
 });
