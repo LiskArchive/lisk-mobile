@@ -8,7 +8,7 @@ export function getSkeletonStyles({ width, height, variant }) {
         height: variant === 'circle' ? width : height,
         overflow: 'hidden',
       },
-      linearGradient: {
+      animation: {
         position: 'absolute',
         top: 0,
         bottom: 0,

@@ -57,7 +57,8 @@ export default function Skeleton({ variant = 'rectangle', width = 100, height = 
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={[
-          styles.linearGradient,
+          styles.animation,
+          style?.animation,
           {
             transform: [{ translateX }],
           },
