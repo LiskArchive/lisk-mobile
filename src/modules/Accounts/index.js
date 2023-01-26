@@ -22,7 +22,7 @@ import { useCurrentAccount } from './hooks/useCurrentAccount';
 import getStyles from './styles';
 import TransactionList from '../Transactions/components/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';
-import TokenList from './components/TokenList';
+import TokenList from './components/TokenList/TokenList';
 
 /**
  * This component would be mounted first and would be used to config and redirect

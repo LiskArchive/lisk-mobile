@@ -5,7 +5,7 @@ import i18next from 'i18next';
 import { useTheme } from 'contexts/ThemeContext';
 import { P } from 'components/shared/toolBox/typography';
 
-import getTokenListStyles from './styles';
+import getTokenListStyles from '../TokenList.styles';
 
 export default function TokenListTabs({
   lockedTokens,

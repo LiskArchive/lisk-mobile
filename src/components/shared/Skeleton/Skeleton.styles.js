@@ -19,7 +19,7 @@ export function getSkeletonStyles({ width, height, variant }) {
         borderRadius: 8,
       },
       circleContainer: {
-        borderRadius: '50%',
+        borderRadius: 50,
       },
     },
     [themes.light]: {
