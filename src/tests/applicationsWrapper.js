@@ -14,13 +14,28 @@ export function applicationsWrapper({ children }) {
         value={{
           applications: {
             data: mockApplicationsFullData,
-            isLoading: false,
-            isError: false,
-            error: undefined,
+            dispatchData: jest.fn(),
+            status: 'success',
+            setStatus: jest.fn(),
+            error: null,
+            setError: jest.fn(),
           },
-          dispatchApplications: jest.fn(),
-          currentApplication: mockCurrentApplication,
-          setCurrentApplication: jest.fn(),
+          pins: {
+            data: mockApplicationsFullData.map((app) => app.chainID),
+            dispatchData: jest.fn(),
+            status: 'success',
+            setStatus: jest.fn(),
+            error: null,
+            setError: jest.fn(),
+          },
+          currentApplication: {
+            data: mockCurrentApplication,
+            setData: jest.fn(),
+            status: 'success',
+            setStatus: jest.fn(),
+            error: null,
+            setError: jest.fn(),
+          },
         }}
       >
         {children}

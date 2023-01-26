@@ -1,7 +1,7 @@
 import { useApplications } from '../context/ApplicationsContext';
 
 export function useCurrentApplication() {
-  const { currentApplication, setCurrentApplication } = useApplications();
+  const { currentApplication } = useApplications();
 
-  return [currentApplication, setCurrentApplication];
+  return [currentApplication, currentApplication.setData];
 }

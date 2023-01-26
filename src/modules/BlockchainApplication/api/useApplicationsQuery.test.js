@@ -5,11 +5,15 @@ import { mockApplications } from '../__fixtures__';
 
 import { useApplicationsQuery } from './useApplicationsQuery';
 
-describe('useApplicationsQuery hook', () => {
-  it('should fetch data correctly', async () => {
-    const wrapper = ({ children }) => applicationsWrapper({ children });
+jest.useRealTimers();
 
+describe('useApplicationsQuery hook', () => {
+  const wrapper = ({ children }) => applicationsWrapper({ children });
+
+  it('should fetch data correctly', async () => {
     const { result, waitFor } = renderHook(() => useApplicationsQuery(), { wrapper });
+
+    expect(result.current.isLoading).toBeTruthy();
 
     await waitFor(() => result.current.isFetched);
 
@@ -18,7 +22,7 @@ describe('useApplicationsQuery hook', () => {
     const expectedResponse = {
       data: mockApplications,
       meta: {
-        count: 20,
+        count: mockApplications.length,
         offset: 0,
       },
     };

@@ -3,6 +3,16 @@ import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
 import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
 
+export function getApplicationsQueryConfigCreator() {
+  return (customConfig = {}) => ({
+    url: `${API_URL}/blockchain/apps`,
+    method: 'get',
+    event: 'get.blockchain.apps',
+    ...customConfig,
+    params: { limit: LIMIT, ...customConfig.params },
+  });
+}
+
 /**
  * Fetch list of blockchain applications on-chain data.
  * Executes the API call once the hook is mounted.
@@ -11,17 +21,14 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
  * @returns - The query state of the API call. Includes the data
  * (applications), loading state, error state, and more.
  */
-export function useApplicationsQuery({ config: customConfig = {}, options = {} } = {}) {
-  const config = {
-    baseURL: process.env.SERVICE_API_BASE_URL,
-    url: `${API_URL}/blockchain/apps`,
-    method: 'get',
-    event: 'get.blockchain.apps',
-    ...customConfig,
-    params: { limit: LIMIT, ...customConfig.params },
-  };
+export function useApplicationsQuery({
+  config: customConfig = {},
+  options = {},
+  client = liskAPIClient,
+} = {}) {
+  const config = getApplicationsQueryConfigCreator()(customConfig);
 
   const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
 
-  return useCustomInfiniteQuery({ config, options, keys, client: liskAPIClient });
+  return useCustomInfiniteQuery({ config, options, keys, client });
 }

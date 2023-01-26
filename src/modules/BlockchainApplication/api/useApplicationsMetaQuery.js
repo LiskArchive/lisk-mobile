@@ -1,5 +1,5 @@
 import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
-import { GET_APPLICATIONS_QUERY, APPLICATION } from 'utilities/api/queries';
+import { GET_APPLICATIONS_META_QUERY, APPLICATION } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
 
@@ -24,7 +24,7 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     },
   };
 
-  const keys = [GET_APPLICATIONS_QUERY, config, APPLICATION, METHOD];
+  const keys = [GET_APPLICATIONS_META_QUERY, config, APPLICATION, METHOD];
 
   return useCustomInfiniteQuery({ config, options, keys, client: liskAPIClient });
 }
