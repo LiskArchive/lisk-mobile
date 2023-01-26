@@ -6,6 +6,12 @@ import Skeleton from 'components/shared/Skeleton/Skeleton';
 
 import getTokenRowSkeletonStyles from './TokenRowSkeleton.styles';
 
+/**
+ * Skeleton placeholder for the TokenRow component.
+ * @param {React.CSSProperties} style - Custom styles to add to the main component
+ * container (optional).
+ * @returns
+ */
 export default function TokenRowSkeleton({ style }) {
   const { styles } = useTheme({ styles: getTokenRowSkeletonStyles() });
 
