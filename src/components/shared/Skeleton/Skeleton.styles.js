@@ -24,12 +24,12 @@ export function getSkeletonStyles({ width, height, variant }) {
     },
     [themes.light]: {
       container: {
-        backgroundColor: colors.light.ghost,
+        backgroundColor: colors.light.platinumGray,
       },
     },
     [themes.dark]: {
       container: {
-        backgroundColor: colors.dark.ghost,
+        backgroundColor: colors.dark.textInputBg,
       },
     },
   };

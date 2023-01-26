@@ -1,9 +1,10 @@
+/* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { useTheme } from 'contexts/ThemeContext';
-import colors from 'constants/styleGuide/colors';
+import { themes, colors } from 'constants/styleGuide';
 
 import { getSkeletonStyles } from './Skeleton.styles';
 
@@ -17,7 +18,7 @@ const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
  * @param {object} style - Style object to add custom styles to the component
  */
 export default function Skeleton({ variant = 'rectangle', width = 100, height = 10, style }) {
-  const { styles } = useTheme({ styles: getSkeletonStyles({ width, height, variant }) });
+  const { theme, styles } = useTheme({ styles: getSkeletonStyles({ width, height, variant }) });
 
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -45,15 +46,15 @@ export default function Skeleton({ variant = 'rectangle', width = 100, height = 
     outputRange: [-width, width],
   });
 
+  const primaryBgColor =
+    theme === themes.light ? colors.light.platinumGray : colors.dark.textInputBg;
+  // TODO: Add dark mode color to palette.
+  const secondaryBgColor = theme === themes.light ? colors.light.mystic : '#222225';
+
   return (
     <View style={[styles.container, styles.theme.container, containerStyle, style?.container]}>
       <AnimatedLinearGradient
-        colors={[
-          colors.light.ghost,
-          colors.light.platinum,
-          colors.light.platinum,
-          colors.light.ghost,
-        ]}
+        colors={[primaryBgColor, secondaryBgColor, secondaryBgColor, primaryBgColor]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={[
