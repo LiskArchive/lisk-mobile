@@ -5,9 +5,9 @@ import i18next from 'i18next';
 
 import { useEmailReport } from 'hooks/useEmailReport';
 import { useTheme } from 'contexts/ThemeContext';
-import Splash from 'modules/Auth/components/splash';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import { P } from 'components/shared/toolBox/typography';
+import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 
 import { getErrorFallbackScreenStyles, errorFallbackSplashStyles } from './styles';
@@ -29,7 +29,7 @@ export default function ErrorFallbackScreen(props) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <Splash animate={false} showSimplifiedView style={errorFallbackSplashStyles} />
+      <HeaderLogo style={errorFallbackSplashStyles} />
 
       <View style={[styles.body]}>
         <View style={[styles.illustration]}>

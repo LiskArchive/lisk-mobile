@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 import React, { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { SafeAreaView, Text } from 'react-native';
 
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import apiClient from 'utilities/api/APIClient';
@@ -11,6 +10,7 @@ import {
   GET_AUTH_QUERY,
 } from 'utilities/api/queries';
 import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
+import LoadingFallbackScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
 import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
 import { useBootstrapCurrentApplication } from './modules/BlockchainApplication/hooks/useBootstrapCurrentApplication';
 
@@ -58,13 +58,7 @@ export default function BootstrapApp({ children }) {
   useWalletConnectEventsManager();
 
   if (isLoading) {
-    // TODO: Replace with <LoadingFallbackScreen /> component when
-    // working on https://github.com/LiskHQ/lisk-mobile/issues/1587.
-    return (
-      <SafeAreaView>
-        <Text>Loading app...</Text>
-      </SafeAreaView>
-    );
+    return <LoadingFallbackScreen />;
   }
 
   if (isError) {

@@ -1,15 +1,13 @@
 /* eslint-disable no-shadow */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { translate } from 'react-i18next';
 import activityHistoryImg from 'assets/images/intro/activityHistory3x.png';
 import tokensTransferImg from 'assets/images/intro/tokensTransfer3x.png';
 import secureAuthenticationImg from 'assets/images/intro/secureAuthentication3x.png';
 import easyAccessImg from 'assets/images/intro/easyAccess3x.png';
-import Splash from './splash';
 import Slider from '../../shared/Slider';
 import styles from './styles';
 
@@ -18,11 +16,6 @@ const Intro = ({ navigation, t }) => {
     AsyncStorage.setItem('@lisk-mobile-intro', 'true');
     navigation.push('AuthMethod', { signOut: true });
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => SplashScreen.hide(), 500);
-    return () => clearTimeout(timeout);
-  }, []);
 
   const slides = [
     {
@@ -57,7 +50,6 @@ const Intro = ({ navigation, t }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper} testID="intro-screen">
-        <Splash />
         <Slider skip={skip} slides={slides} style={{ image: styles.illustration }} testID="intro" />
       </View>
     </SafeAreaView>
