@@ -17,7 +17,7 @@ import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
-import TokenRow from '../TokenRow';
+import TokenRow from '../TokenRow/TokenRow';
 
 import TokenListTabs from './components/TokenListTabs';
 import getTokenListStyles from './TokenList.styles';

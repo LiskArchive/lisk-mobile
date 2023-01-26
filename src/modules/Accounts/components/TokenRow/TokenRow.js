@@ -12,7 +12,7 @@ import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import { fromRawLsk } from 'utilities/conversions';
 import TokenSvg from 'assets/svgs/TokenSvg';
 
-import getTokenRowStyles from './styles';
+import getTokenRowStyles from './TokenRow.styles';
 
 export default function TokenRow({ token }) {
   const balance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
