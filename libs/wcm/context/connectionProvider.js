@@ -1,6 +1,8 @@
+/* eslint-disable max-statements */
 import React, { useState, useEffect } from 'react';
 import ConnectionContext from './connectionContext';
 import { createSignClient } from '../utils/connectionCreator';
+import { useApplicationsMetaQuery } from '../../../src/modules/BlockchainApplication/api/useApplicationsMetaQuery';
 
 const ConnectionProvider = ({ children }) => {
   const [session, setSession] = useState({
@@ -20,6 +22,12 @@ const ConnectionProvider = ({ children }) => {
     setEvents(newEvents);
   };
 
+  const { data: liskApplication } = useApplicationsMetaQuery({
+    config: { params: { chainName: 'Lisk' } },
+  });
+
+  const icon = liskApplication?.data[0]?.logo.svg;
+
   const value = {
     events,
     pairings,
@@ -31,8 +39,10 @@ const ConnectionProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    createSignClient();
-  }, []);
+    if (icon) {
+      createSignClient(icon);
+    }
+  }, [icon]);
 
   return <ConnectionContext.Provider value={value}>{children}</ConnectionContext.Provider>;
 };
