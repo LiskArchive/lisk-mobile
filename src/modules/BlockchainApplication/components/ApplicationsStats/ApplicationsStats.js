@@ -13,6 +13,7 @@ import StakedSvg from 'assets/svgs/StakedSvg';
 import getStyles from './ApplicationsStat.styles';
 import { useApplicationStatsQuery } from '../../api/useApplicationStatsQuery';
 import ApplicationsStatsLegendItem from './components/ApplicationsStatsLegendItem';
+import ApplicationsStatsSkeleton from './components/ApplicationsStatsSkeleton';
 
 const { width } = Dimensions.get('window');
 
@@ -88,6 +89,7 @@ export default function ApplicationsStats(props) {
             </>
           );
         }}
+        renderLoading={() => <ApplicationsStatsSkeleton />}
       />
     </View>
   );

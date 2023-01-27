@@ -16,7 +16,7 @@ export function getSkeletonStyles({ width, height, variant }) {
         left: 0,
       },
       rectangleContainer: {
-        borderRadius: 8,
+        borderRadius: 4,
       },
       circleContainer: {
         borderRadius: 50,

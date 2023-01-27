@@ -131,7 +131,7 @@ export default function ApplicationDetails({ route }) {
               <Skeleton
                 width={96}
                 height={24}
-                style={{ container: [styles.title, styles.theme.title, { borderRadius: 4 }] }}
+                style={{ container: [styles.title, styles.theme.title] }}
               />
             )}
           />
@@ -147,11 +147,7 @@ export default function ApplicationDetails({ route }) {
               width={288}
               height={16}
               style={{
-                container: [
-                  styles.address,
-                  styles.theme.address,
-                  { alignSelf: 'center', borderRadius: 4 },
-                ],
+                container: [styles.address, styles.theme.address, { alignSelf: 'center' }],
               }}
             />
           )}
@@ -175,7 +171,7 @@ export default function ApplicationDetails({ route }) {
                 width={180}
                 height={16}
                 style={{
-                  container: [styles.url, { alignSelf: 'center', borderRadius: 4 }],
+                  container: [styles.url, { alignSelf: 'center' }],
                 }}
               />
             )}
@@ -196,7 +192,7 @@ export default function ApplicationDetails({ route }) {
                 width={144}
                 height={16}
                 style={{
-                  container: [styles.amount, { alignSelf: 'center', borderRadius: 4 }],
+                  container: [styles.amount, { alignSelf: 'center' }],
                 }}
               />
             )}
@@ -262,7 +258,7 @@ export default function ApplicationDetails({ route }) {
                     width={80}
                     height={16}
                     style={{
-                      container: [styles.value, { borderRadius: 4 }],
+                      container: [styles.value],
                     }}
                   />
                 )}
@@ -285,7 +281,7 @@ export default function ApplicationDetails({ route }) {
                     width={48}
                     height={16}
                     style={{
-                      container: [styles.value, { borderRadius: 4 }],
+                      container: [styles.value],
                     }}
                   />
                 )}
