@@ -20,7 +20,7 @@ import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView
 import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from './hooks/useCurrentAccount';
 import getStyles from './styles';
-import TransactionList from '../Transactions/components/TransactionList';
+import TransactionList from '../Transactions/components/TransactionList/TransactionList';
 import AccountsManagerModal from './components/AccountsManagerModal';
 import TokenList from './components/TokenList/TokenList';
 
