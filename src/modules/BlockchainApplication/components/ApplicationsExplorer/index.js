@@ -20,7 +20,7 @@ import CopySvg from 'assets/svgs/CopySvg';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import ApplicationList from '../ApplicationList/ApplicationList';
 import ApplicationRow from '../ApplicationRow/ApplicationRow';
-import ApplicationsStats from '../ApplicationsStats';
+import ApplicationsStats from '../ApplicationsStats/ApplicationsStats';
 import ExternalApplicationList from '../ExternalApplicationList';
 
 import getApplicationsExplorerStyles from './styles';
