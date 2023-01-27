@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import { ScrollView, View, ImageBackground, Image } from 'react-native';
@@ -16,11 +17,12 @@ import { colors } from 'constants/styleGuide';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
-import getStyles from './styles';
+import getStyles from './ApplicationDetails.styles';
 
 /**
  *
@@ -30,7 +32,7 @@ import getStyles from './styles';
  * 'explore' -> uses app background with patterns
  *
  */
-export default function ApplicationDetail({ route }) {
+export default function ApplicationDetails({ route }) {
   const navigation = useNavigation();
 
   const { chainID, variant } = route.params;
@@ -102,6 +104,13 @@ export default function ApplicationDetail({ route }) {
             source={{ uri: data.png }}
           />
         )}
+        renderLoading={() => (
+          <Skeleton
+            variant="circle"
+            width={70}
+            style={{ container: { marginTop: -32, marginBottom: -32, alignSelf: 'center' } }}
+          />
+        )}
       />
 
       <SafeAreaView style={[styles.flex, styles.body]}>
@@ -110,12 +119,22 @@ export default function ApplicationDetail({ route }) {
             isLoading={applications.isLoading}
             error={applications.isError}
             data={application?.chainName}
-            renderData={(data) => <H3 style={[styles.title, styles.theme.title]}>{data}</H3>}
+            renderData={(data) => (
+              <>
+                <H3 style={[styles.title, styles.theme.title]}>{data}</H3>
+                <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
+                  <PinSvg variant={isPinned ? 'fill' : 'outline'} width={24} height={24} />
+                </TouchableOpacity>
+              </>
+            )}
+            renderLoading={() => (
+              <Skeleton
+                width={96}
+                height={24}
+                style={{ container: [styles.title, styles.theme.title, { borderRadius: 4 }] }}
+              />
+            )}
           />
-
-          <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-            <PinSvg variant={isPinned ? 'fill' : 'outline'} width={24} height={24} />
-          </TouchableOpacity>
         </View>
 
         <DataRenderer
@@ -123,6 +142,19 @@ export default function ApplicationDetail({ route }) {
           error={applications.isError}
           data={application?.address}
           renderData={(data) => <P style={[styles.address, styles.theme.address]}>{data}</P>}
+          renderLoading={() => (
+            <Skeleton
+              width={288}
+              height={16}
+              style={{
+                container: [
+                  styles.address,
+                  styles.theme.address,
+                  { alignSelf: 'center', borderRadius: 4 },
+                ],
+              }}
+            />
+          )}
           style={{ empty: [styles.address, styles.theme.address] }}
         />
 
@@ -138,6 +170,15 @@ export default function ApplicationDetail({ route }) {
                 <P style={styles.url}>{data[0].url}</P>
               </>
             )}
+            renderLoading={() => (
+              <Skeleton
+                width={180}
+                height={16}
+                style={{
+                  container: [styles.url, { alignSelf: 'center', borderRadius: 4 }],
+                }}
+              />
+            )}
             style={{ empty: styles.url }}
           />
         </View>
@@ -150,6 +191,15 @@ export default function ApplicationDetail({ route }) {
             error={applications.isError}
             data={application?.deposited}
             renderData={(data) => <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>}
+            renderLoading={() => (
+              <Skeleton
+                width={144}
+                height={16}
+                style={{
+                  container: [styles.amount, { alignSelf: 'center', borderRadius: 4 }],
+                }}
+              />
+            )}
             style={{ empty: styles.amount }}
           />
         </View>
@@ -173,6 +223,15 @@ export default function ApplicationDetail({ route }) {
                   <View style={[styles.stateContainer, styles[`${application?.state}Container`]]}>
                     <P style={[styles.value, styles[data], styles.theme[data]]}>{data}</P>
                   </View>
+                )}
+                renderLoading={() => (
+                  <Skeleton
+                    width={78}
+                    height={28}
+                    style={{
+                      container: [styles.value, { borderRadius: 16 }],
+                    }}
+                  />
                 )}
                 style={{
                   empty: [
@@ -198,6 +257,15 @@ export default function ApplicationDetail({ route }) {
                     {moment(data).format('D MMM YYYY')}
                   </P>
                 )}
+                renderLoading={() => (
+                  <Skeleton
+                    width={80}
+                    height={16}
+                    style={{
+                      container: [styles.value, { borderRadius: 4 }],
+                    }}
+                  />
+                )}
                 style={{ empty: [styles.value, styles.theme.value] }}
               />
             </View>
@@ -212,6 +280,15 @@ export default function ApplicationDetail({ route }) {
                 error={applications.isError}
                 data={application?.lastCertificateHeight}
                 renderData={(data) => <P style={[styles.value, styles.theme.value]}>{data}</P>}
+                renderLoading={() => (
+                  <Skeleton
+                    width={48}
+                    height={16}
+                    style={{
+                      container: [styles.value, { borderRadius: 4 }],
+                    }}
+                  />
+                )}
                 style={{ empty: [styles.value, styles.theme.value] }}
               />
             </View>

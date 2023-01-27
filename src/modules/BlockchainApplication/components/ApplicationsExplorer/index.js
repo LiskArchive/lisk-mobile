@@ -109,7 +109,7 @@ export default function ApplicationsExplorer() {
               applications={applications}
               Component={ApplicationRow}
               onItemPress={(item) =>
-                navigation.navigate('ApplicationDetail', {
+                navigation.navigate('ApplicationDetails', {
                   chainID: item.chainID,
                   variant: 'explore',
                 })
