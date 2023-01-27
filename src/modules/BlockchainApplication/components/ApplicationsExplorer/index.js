@@ -18,8 +18,8 @@ import Fab from 'components/shared/Fab';
 import QRCodeSvg from 'assets/svgs/QRCodeSvg';
 import CopySvg from 'assets/svgs/CopySvg';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
-import ApplicationList from '../ApplicationList';
-import ApplicationRow from '../ApplicationRow';
+import ApplicationList from '../ApplicationList/ApplicationList';
+import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import ApplicationsStats from '../ApplicationsStats';
 import ExternalApplicationList from '../ExternalApplicationList';
 

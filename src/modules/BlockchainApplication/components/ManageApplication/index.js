@@ -11,8 +11,8 @@ import { P, H3 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import AddSvg from 'assets/svgs/AddSvg';
 import getStyles from './styles';
-import ApplicationList from '../ApplicationList';
-import BlockchainApplicationRow from '../ApplicationRow';
+import ApplicationList from '../ApplicationList/ApplicationList';
+import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import SelectNode from '../SelectNode';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
@@ -69,7 +69,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
 
       <ApplicationList
         applications={applications}
-        Component={BlockchainApplicationRow}
+        Component={ApplicationRow}
         onItemPress={selectApplication}
         showActive
         deleteApplication={deleteApplication}

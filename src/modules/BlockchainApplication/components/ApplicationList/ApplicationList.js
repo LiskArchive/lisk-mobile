@@ -11,7 +11,7 @@ import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ResultScreen from 'components/screens/ResultScreen';
 
 import { View } from 'react-native';
-import getApplicationListStyles from './styles';
+import getApplicationListStyles from './ApplicationList.styles';
 
 export default function ApplicationList({ applications, Component, onItemPress, style, ...props }) {
   const navigation = useNavigation();

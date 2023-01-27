@@ -14,8 +14,8 @@ import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 
-import { useApplicationRowActions } from './hooks';
-import getApplicationRowStyles from './styles';
+import { useApplicationRowActions } from './ApplicationRow.hooks';
+import getApplicationRowStyles from './ApplicationRow.styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 import { usePinApplications } from '../../hooks/usePinApplications';
 
