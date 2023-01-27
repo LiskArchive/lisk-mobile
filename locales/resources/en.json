@@ -271,7 +271,6 @@
       "statsButtonText": "Stats",
       "applicationList": {
         "title": "All applications",
-        "loadingText": "Loading applications...",
         "errorText": "Error loading your applications.",
         "emptyText": "You have no applications yet.",
         "pinText": "Pin",

@@ -1,24 +1,17 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import i18next from 'i18next';
 
-import { useTheme } from 'contexts/ThemeContext';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import DataRenderer from 'components/shared/DataRenderer';
-import { P } from 'components/shared/toolBox/typography';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ResultScreen from 'components/screens/ResultScreen';
 
 import { View } from 'react-native';
-import getApplicationListStyles from './ApplicationList.styles';
+import ApplicationListSkeleton from './components/ApplicationListSkeleton';
 
 export default function ApplicationList({ applications, Component, onItemPress, style, ...props }) {
   const navigation = useNavigation();
-
-  const { styles } = useTheme({
-    styles: getApplicationListStyles(),
-  });
 
   return (
     <DataRenderer
@@ -46,11 +39,7 @@ export default function ApplicationList({ applications, Component, onItemPress, 
           />
         </View>
       )}
-      renderLoading={() => (
-        <P style={[styles.text, styles.theme.text, style?.text]}>
-          {i18next.t('application.explore.applicationList.loadingText')}
-        </P>
-      )}
+      renderLoading={() => <ApplicationListSkeleton style={[style?.container]} />}
       renderEmpty={() => (
         <ResultScreen
           illustration={<EmptyIllustrationSvg />}
