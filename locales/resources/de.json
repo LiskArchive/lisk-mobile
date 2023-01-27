@@ -481,7 +481,6 @@
       "header2ParamsLabel": "Kopfzeile 2"
     },
     "transactionList": {
-      "loadingText": "Transaktionen werden geladen...",
       "errorText": "Fehler beim Laden von Transaktionen!",
       "emptyText": "Du hast keine kürzlichen Aktivitäten.",
       "title": "Transaktionen",
