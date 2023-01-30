@@ -1,4 +1,4 @@
-import { colors } from 'constants/styleGuide';
+import { colors, themes } from 'constants/styleGuide';
 
 export default function getTokenRowSkeletonStyles() {
   return {
@@ -7,13 +7,22 @@ export default function getTokenRowSkeletonStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderWidth: 1,
-        borderColor: colors.light.platinumGray,
         borderRadius: 8,
         padding: 16,
       },
       row: {
         flexDirection: 'row',
         alignItems: 'center',
+      },
+    },
+    [themes.light]: {
+      container: {
+        borderColor: colors.light.platinumGray,
+      },
+    },
+    [themes.dark]: {
+      container: {
+        borderColor: colors.dark.textInputBg,
       },
     },
   };
