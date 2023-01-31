@@ -47,9 +47,9 @@ export default function Skeleton({ variant = 'rectangle', width = 100, height = 
   });
 
   const primaryBgColor =
-    theme === themes.light ? colors.light.platinumGray : colors.dark.textInputBg;
+    theme === themes.light ? colors.light.platinumGray : colors.dark.satinDeepBlack;
   // TODO: Add dark mode color to palette.
-  const secondaryBgColor = theme === themes.light ? colors.light.mystic : '#222225';
+  const secondaryBgColor = theme === themes.light ? colors.light.mystic : colors.dark.volcanicSand;
 
   return (
     <View style={[styles.container, styles.theme.container, containerStyle, style?.container]}>

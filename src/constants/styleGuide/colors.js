@@ -21,6 +21,7 @@ const common = {
   volcanicSand: '#4D4D50',
   yellowCopacabana: '#F7E36D',
   sparkleGray: '#70778B',
+  satinDeepBlack: '#1C1C1E',
 };
 
 const light = {
@@ -34,11 +35,11 @@ const light = {
 const dark = {
   ...common,
   outgoingArrow: common.platinum,
-  headerBg: '#1C1C1E',
+  headerBg: common.satinDeepBlack,
   homeHeaderBg: '#1C316A',
   mainBg: common.black,
   footerBg: '#1C1C1C',
-  textInputBg: '#1C1C1E',
+  textInputBg: common.satinDeepBlack,
   tabBarText: common.white,
 };
 
