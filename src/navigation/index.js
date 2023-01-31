@@ -24,7 +24,7 @@ import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
-import ApplicationDetail from 'modules/BlockchainApplication/components/ApplicationDetail';
+import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
 import SendToken from 'modules/SendToken';
 import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
@@ -98,8 +98,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="ApplicationDetail"
-            component={ApplicationDetail}
+            name="ApplicationDetails"
+            component={ApplicationDetails}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen

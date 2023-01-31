@@ -18,9 +18,9 @@ import Fab from 'components/shared/Fab';
 import QRCodeSvg from 'assets/svgs/QRCodeSvg';
 import CopySvg from 'assets/svgs/CopySvg';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
-import ApplicationList from '../ApplicationList';
-import ApplicationRow from '../ApplicationRow';
-import ApplicationsStats from '../ApplicationsStats';
+import ApplicationList from '../ApplicationList/ApplicationList';
+import ApplicationRow from '../ApplicationRow/ApplicationRow';
+import ApplicationsStats from '../ApplicationsStats/ApplicationsStats';
 import ExternalApplicationList from '../ExternalApplicationList';
 
 import getApplicationsExplorerStyles from './styles';
@@ -109,7 +109,7 @@ export default function ApplicationsExplorer() {
               applications={applications}
               Component={ApplicationRow}
               onItemPress={(item) =>
-                navigation.navigate('ApplicationDetail', {
+                navigation.navigate('ApplicationDetails', {
                   chainID: item.chainID,
                   variant: 'explore',
                 })

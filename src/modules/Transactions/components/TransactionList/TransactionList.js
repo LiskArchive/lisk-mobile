@@ -15,10 +15,11 @@ import ResultScreen from 'components/screens/ResultScreen';
 import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
-import TransactionRow from '../TransactionRow';
+import TransactionRow from '../TransactionRow/TransactionRow';
 
-import getTransactionListStyles from './styles';
-import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from './constants';
+import getTransactionListStyles from './TransactionList.styles';
+import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from './TransactionList.constants';
+import TransactionListSkeleton from './components/TransactionListSkeleton';
 
 export default function TransactionList({ mode = 'overview', style }) {
   const navigation = useNavigation();
@@ -97,11 +98,7 @@ export default function TransactionList({ mode = 'overview', style }) {
             isFetchingNextPage={isFetchingTransactionsNextPage}
           />
         )}
-        renderLoading={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>
-            {i18next.t('transactions.transactionList.loadingText')}
-          </P>
-        )}
+        renderLoading={() => <TransactionListSkeleton />}
         renderEmpty={() => (
           <ResultScreen
             illustration={<EmptyIllustrationSvg />}
