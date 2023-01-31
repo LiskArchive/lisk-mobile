@@ -37,7 +37,7 @@ export default function SliderSlide({ item }) {
         <P style={[styles.description, styles.theme.description]}>{item.description}</P>
       </View>
 
-      {item.body(Animated, bodyStyle)}
+      <Animated.View style={bodyStyle}>{item.body}</Animated.View>
     </View>
   );
 }
