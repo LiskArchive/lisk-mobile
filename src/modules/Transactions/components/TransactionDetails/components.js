@@ -8,7 +8,7 @@ import { fromRawLsk } from 'utilities/conversions';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
-import JsonViewer from 'components/shared/ObjectViewer';
+import ObjectViewer from 'components/shared/ObjectViewer/ObjectViewer';
 import { stringShortener, setColorOpacity } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
@@ -199,11 +199,7 @@ function TransactionDetailsParams({ params, show, setShow }) {
             : i18next.t('transactions.transactionDetails.hideParamsButtonText')}
         </LabelButton>
       </View>
-      {show && (
-        <View style={[styles.params, styles.theme.params]}>
-          <JsonViewer data={params} />
-        </View>
-      )}
+      {show && <ObjectViewer data={params} style={[styles.params, styles.theme.params]} />}
     </View>
   );
 }

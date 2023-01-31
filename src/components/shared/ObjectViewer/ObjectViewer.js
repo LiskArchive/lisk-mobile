@@ -1,16 +1,16 @@
 import React from 'react';
 import ObjectNode from './ObjectNode';
-import objectType from './utils';
+import objectType from './utils/ObjectViewer.utils';
 
-const JsonViewer = ({ data }) => {
+const ObjectViewer = ({ data, style }) => {
   const nodeType = objectType(data);
 
   switch (nodeType) {
     case 'Iterable':
-      return <ObjectNode data={data} />;
+      return <ObjectNode data={data} style={style} />;
     default:
       return null;
   }
 };
 
-export default JsonViewer;
+export default ObjectViewer;

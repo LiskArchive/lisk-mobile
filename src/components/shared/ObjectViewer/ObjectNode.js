@@ -1,13 +1,20 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useTheme } from 'contexts/ThemeContext';
-import getStyles from './styles';
+import getStyles from './ObjectViewer.styles';
 
-const ObjectNode = ({ data }) => {
+/**
+ *
+ * @param {Object} data
+ * @returns ReactNode
+ *
+ */
+
+const ObjectNode = ({ data, style }) => {
   const { styles } = useTheme({ styles: getStyles() });
   const entries = Object.keys(data);
   return (
-    <View>
+    <View style={style}>
       <Text style={[styles.text, styles.theme.text]}>{`{`}</Text>
       {entries.map((key) => (
         <View key={key} style={styles.container}>
