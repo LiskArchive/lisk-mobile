@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -23,6 +23,10 @@ export default function AccountsManagerModal({ show, setShow }) {
     setActiveSection({ id: 'AccountList', data: undefined });
     setShow(false);
   }
+
+  useEffect(() => {
+    setActiveSection({ id: 'AccountList', data: undefined });
+  }, [show]);
 
   switch (activeSection.id) {
     case 'AccountList':
