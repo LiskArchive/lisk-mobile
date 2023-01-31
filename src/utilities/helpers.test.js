@@ -8,6 +8,7 @@ import {
   isEmpty,
   setColorOpacity,
   isNumeric,
+  joinArraysWithoutDuplicates,
 } from './helpers';
 
 describe('helpers', () => {
@@ -198,6 +199,44 @@ describe('helpers', () => {
 
     it('should return true for integers', () => {
       expect(isNumeric('123456789')).toBe(true);
+    });
+  });
+
+  describe('joinArraysWithoutDuplicates()', () => {
+    it('should return an array of unique objects from both input arrays', () => {
+      const arr1 = [
+        { id: 1, name: 'object1' },
+        { id: 2, name: 'object2' },
+      ];
+      const arr2 = [
+        { id: 2, name: 'object2' },
+        { id: 3, name: 'object3' },
+      ];
+      const result = joinArraysWithoutDuplicates(arr1, arr2, 'id');
+      expect(result).toEqual([
+        { id: 1, name: 'object1' },
+        { id: 2, name: 'object2' },
+        { id: 3, name: 'object3' },
+      ]);
+    });
+    it('should throw an error if either arr1 or arr2 is not an array', () => {
+      const arr1 = [
+        { id: 1, name: 'object1' },
+        { id: 2, name: 'object2' },
+      ];
+      const arr2 = 'not an array';
+      expect(() => joinArraysWithoutDuplicates(arr1, arr2, 'id')).toThrowError(TypeError);
+    });
+    it('should throw an error if filterProp is not a string', () => {
+      const arr1 = [
+        { id: 1, name: 'object1' },
+        { id: 2, name: 'object2' },
+      ];
+      const arr2 = [
+        { id: 2, name: 'object2' },
+        { id: 3, name: 'object3' },
+      ];
+      expect(() => joinArraysWithoutDuplicates(arr1, arr2, 2)).toThrowError(TypeError);
     });
   });
 });

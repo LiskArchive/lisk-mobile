@@ -4,16 +4,15 @@ import { LogBox, View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
-import SplashScreen from 'react-native-splash-screen';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { settingsRetrieved } from 'modules/Settings/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H2 } from 'components/shared/toolBox/typography';
+import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import Splash from '../components/splash';
 import CreateAccount from '../components/CreateAccount';
 import AuthTypeItem from '../components/AuthType';
 
@@ -35,16 +34,10 @@ export default function AuthMethod({ route }) {
     styles: getStyles(),
   });
 
-  const signOut = route.params?.signOut;
-
-  const init = () => {
-    SplashScreen.hide();
-  };
-
   useEffect(() => {
     if (settings.showedIntro) {
       dispatch(settingsRetrieved());
-      init();
+
       if (accounts.length && !route.params?.authRequired) {
         navigation.navigate('AccountsManagerScreen');
       }
@@ -80,11 +73,7 @@ export default function AuthMethod({ route }) {
       {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
 
       <View style={[styles.body]}>
-        <Splash
-          animate={!signOut}
-          showSimplifiedView={false}
-          style={{ container: { marginTop: 40 } }}
-        />
+        <HeaderLogo style={{ container: { marginTop: 40 } }} />
 
         <H2 style={[styles.title, styles.theme.title]} testID="add-account-title">
           {i18next.t('auth.setup.addAccountTitle')}

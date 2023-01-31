@@ -8,6 +8,6 @@ export const API_VERSION = process.env.SERVICE_API_VERSION;
 
 export const API_URL = `/api/${API_VERSION}`;
 
-export const METHOD = 'http';
+export const METHOD = 'rest';
 
 export const LIMIT = 20;

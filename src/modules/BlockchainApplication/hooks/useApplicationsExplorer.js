@@ -1,78 +1,11 @@
-import { useMemo } from 'react';
-
-import { useApplicationsQuery } from '../api/useApplicationsQuery';
-import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
+import { useApplicationsFullDataQuery } from '../api/useApplicationsFullDataQuery';
 
 /**
  * Hook that handle all the logic related to blockchain applications explorer.
  * @returns {Object} Available blockchain applications on and off-chain data.
  */
-export function useApplicationsExplorer({
-  applicationsConfig = {},
-  applicationsMetaConfig = {},
-  applicationsOptions = {},
-  applicationsMetaOptions = {},
-} = {}) {
-  const {
-    data: applicationsData,
-    isLoading: isLoadingApplications,
-    isSuccess: isSuccessApplications,
-    isError: isErrorOnApplications,
-    error: errorOnApplications,
-    refetch: refetchApplicationsQuery,
-  } = useApplicationsQuery({
-    config: applicationsConfig,
-    options: applicationsOptions,
-  });
+export function useApplicationsExplorer() {
+  const { data, ...applicationsFullDataQuery } = useApplicationsFullDataQuery();
 
-  const {
-    data: applicationsMetaData,
-    isLoading: isLoadingApplicationsMeta,
-    isSuccess: isSuccessApplicationsMeta,
-    isError: isErrorOnApplicationsMeta,
-    error: errorOnApplicationsMeta,
-    refetch: refetchApplicationsMetaQuery,
-  } = useApplicationsMetaQuery({
-    options: {
-      enabled: !!applicationsData?.data,
-      ...applicationsMetaOptions,
-    },
-    config: {
-      params: {
-        // TODO: Pass as CSV of chainIDs when backend supports feature.
-        // e.g.: applicationsData?.data.map((app) => app.chainID)
-        chainID: applicationsData?.data[0]?.chainID,
-        ...applicationsMetaConfig?.params,
-      },
-      ...applicationsMetaConfig,
-    },
-  });
-
-  const isLoading = isLoadingApplications || isLoadingApplicationsMeta;
-  const isSuccess = isSuccessApplications && isSuccessApplicationsMeta;
-  const isError = isErrorOnApplications || isErrorOnApplicationsMeta;
-  const error = errorOnApplications || errorOnApplicationsMeta;
-
-  const data = useMemo(() => {
-    if (!applicationsMetaData?.data || !applicationsData?.data) {
-      return undefined;
-    }
-
-    return applicationsMetaData.data;
-  }, [applicationsData?.data, applicationsMetaData?.data]);
-
-  const refetch = () => {
-    refetchApplicationsQuery();
-
-    refetchApplicationsMetaQuery();
-  };
-
-  return {
-    data,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-    refetch,
-  };
+  return { data: data?.data, ...applicationsFullDataQuery };
 }

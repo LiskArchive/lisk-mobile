@@ -12,14 +12,14 @@ describe('connectionCreator', () => {
       RELAY_URL: 'wss://relay.walletconnect.com',
     };
     expect(signClient).toBeUndefined();
-    const res = await createSignClient();
+    const res = await createSignClient('https://lisk.com/documentation/_/img/lisk-symbol.svg');
     expect(SignClient.init).toHaveBeenCalledWith({
       projectId: process.env.PROJECT_ID,
       relayUrl: process.env.RELAY_URL,
       metadata: {
         name: 'Lisk',
         description: 'Lisk',
-        url: 'https://github.com/LiskHQ/lisk-desktop',
+        url: 'https://github.com/LiskHQ/lisk-mobile',
         icons: ['https://lisk.com/documentation/_/img/lisk-symbol.svg'],
       },
     });

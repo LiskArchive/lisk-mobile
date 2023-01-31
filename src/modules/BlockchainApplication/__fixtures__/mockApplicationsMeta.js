@@ -8,6 +8,7 @@ export const mockApplicationsMeta = [
     title: 'Coleti - Betanet',
     description: 'A Lisk-based NFT marketplace',
     networkType: 'mainnet',
+    isDefault: true,
     genesisURL: 'https://downloads.coleti.com/lisk/mainnet/genesis_block.json.tar.gz',
     projectPage: 'https://coleti.com',
     serviceURLs: [
@@ -21,9 +22,11 @@ export const mockApplicationsMeta = [
       },
     ],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-02/colecti-logo.jpeg',
+      png: 'https://media.lisk.com/COL_Beeldmerk_Colecti_FINAL_0ea399020c.png?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
+    appPage: 'https://coleti.com',
+    backgroundColor: '#FFFFFF1A',
     explorers: [{ tnxPage: 'https://coleti.observer', url: 'https://explorer.coleti.io' }],
     appNodes: [
       {
@@ -35,12 +38,12 @@ export const mockApplicationsMeta = [
         maintainer: 'Coleti GmbH',
       },
     ],
-    backgroundColor: '#FFFFFF1A',
   },
   {
     chainName: 'DoEdu',
     chainID: '00000003',
     title: 'DoEdu - Betanet',
+    isDefault: false,
     description: 'An educational platform built with Lisk SDK',
     networkType: 'mainnet',
     genesisURL: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
@@ -52,9 +55,11 @@ export const mockApplicationsMeta = [
       },
     ],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-02/doedu-logo.jpg',
+      png: 'https://media.lisk.com/init/doedu_a8bd2981e9.jpg?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
+    appPage: 'https://docuedu.com',
+    backgroundColor: '#FFFFFF1A',
     explorers: [{ tnxPage: 'https://doedu.observer', url: 'https://explorer.doedu.io' }],
     appNodes: [
       {
@@ -66,12 +71,12 @@ export const mockApplicationsMeta = [
         maintainer: 'DoEdu GmbH',
       },
     ],
-    backgroundColor: '#FFFFFF1A',
   },
   {
     chainName: 'Enevti',
     chainID: '00000004',
     title: 'Enevti - Betanet',
+    isDefault: true,
     description: 'A decentralized social media NFT platform',
     networkType: 'mainnet',
     genesisURL: 'https://downloads.enevti.com/lisk/mainnet/genesis_block.json.tar.gz',
@@ -82,11 +87,13 @@ export const mockApplicationsMeta = [
         ws: 'wss://service.enevti.com',
       },
     ],
-    explorers: [{ tnxPage: 'https://enevti.observer', url: 'https://explorer.enevti.io' }],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-02/enevti-logo.png',
+      png: 'https://media.lisk.com/init/enevti_logo_0dbeff61b1.png?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
+    appPage: 'https://enevti.com',
+    backgroundColor: '#FFFFFF1A',
+    explorers: [{ tnxPage: 'https://enevti.observer', url: 'https://explorer.enevti.io' }],
     appNodes: [
       {
         url: 'https://betanet.enevti.com',
@@ -97,12 +104,12 @@ export const mockApplicationsMeta = [
         maintainer: 'Enevti GmbH',
       },
     ],
-    backgroundColor: '#FFFFFF1A',
   },
   {
     chainName: 'Kalipo',
     chainID: '00000005',
     title: 'Kalipo - Betanet',
+    isDefault: false,
     description: 'A platform to support Decentralized Autonomous Organizations (DAOs)',
     networkType: 'mainnet',
     genesisURL: 'https://downloads.lisk.com/lisk/mainnet/genesis_block.json.tar.gz',
@@ -113,11 +120,13 @@ export const mockApplicationsMeta = [
         ws: 'wss://service.kalipo.com',
       },
     ],
-    explorers: [{ tnxPage: 'https://kalipo.observer', url: 'https://explorer.kalipo.io' }],
     logo: {
-      png: 'https://lisk.com/sites/default/files/2022-07/Kalipo.jpg',
+      png: 'https://media.lisk.com/init/Kalipo_6ffad25590.jpg?auto=compress,format&fit=max&w=320&q=80',
       svg: '',
     },
+    appPage: 'https://kalipo.com',
+    backgroundColor: '#FFFFFF1A',
+    explorers: [{ tnxPage: 'https://kalipo.observer', url: 'https://explorer.kalipo.io' }],
     appNodes: [
       {
         url: 'https://betanet.kalipo.com',
@@ -128,7 +137,6 @@ export const mockApplicationsMeta = [
         maintainer: 'Kalipo GmbH',
       },
     ],
-    backgroundColor: '#FFFFFF1A',
   },
 ];
 

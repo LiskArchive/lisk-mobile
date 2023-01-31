@@ -1,65 +1,84 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import * as useApplications from '../context/ApplicationsContext';
-import * as useApplicationsStorage from './useApplicationsStorage';
-import { mockApplicationsFullData } from '../__fixtures__/mockApplicationsFullData';
 import { useApplicationsManagement } from './useApplicationsManagement';
+import * as useApplications from '../context/ApplicationsContext';
+import * as useApplicationsLocalStorage from './useApplicationsLocalStorage';
+import * as useApplicationsFullDataQuery from '../api/useApplicationsFullDataQuery';
 
-const dispatchApplicationsMock = jest.fn();
-const addApplicationToStorage = jest.fn(() => Promise.resolve());
-const deleteApplicationFromStorage = jest.fn(() => Promise.resolve());
-
-const applicationsMock = {
-  data: mockApplicationsFullData,
-  isLoading: false,
-  isError: false,
-  error: undefined,
-};
+const dispatchApplicationsDataMock = jest.fn();
+const addApplicationToStorageMock = jest.fn(() => Promise.resolve());
+const deleteApplicationToStorageMock = jest.fn(() => Promise.resolve());
+const applicationsSetStatusMock = jest.fn();
+const applicationsSetErrorMock = jest.fn();
 
 jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
-  applications: applicationsMock,
-  dispatchApplications: dispatchApplicationsMock,
+  applications: {
+    data: undefined,
+    dispatchData: dispatchApplicationsDataMock,
+    setStatus: applicationsSetStatusMock,
+    setError: applicationsSetErrorMock,
+  },
 }));
 
-jest.spyOn(useApplicationsStorage, 'useApplicationsStorage').mockImplementation(() => ({
-  addApplication: addApplicationToStorage,
-  deleteApplication: deleteApplicationFromStorage,
+jest.spyOn(useApplicationsFullDataQuery, 'useApplicationsFullDataQuery').mockImplementation(() => ({
+  data: { data: [{ chainID: '123' }] },
+  status: 'success',
+  refetch: jest.fn(),
+  error: null,
+}));
+
+jest.spyOn(useApplicationsLocalStorage, 'useApplicationsLocalStorage').mockImplementation(() => ({
+  data: { data: [{ chainID: '456' }] },
+  addApplication: addApplicationToStorageMock,
+  deleteApplication: deleteApplicationToStorageMock,
 }));
 
 describe('useApplicationsManagement hook', () => {
-  beforeEach(() => {
-    dispatchApplicationsMock.mockClear();
-    addApplicationToStorage.mockClear();
-    deleteApplicationFromStorage.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(useApplicationsManagement).toBeDefined();
-  });
-
-  it('returns applications properly', () => {
+  it('should add an application to storage and update the data in context', async () => {
     const { result } = renderHook(() => useApplicationsManagement());
 
-    expect(result.current.applications).toEqual(applicationsMock);
+    const application = { chainID: '123' };
+
+    await result.current.addApplication(application);
+
+    expect(dispatchApplicationsDataMock).toHaveBeenCalledWith({
+      type: 'add',
+      application,
+    });
+    expect(addApplicationToStorageMock).toHaveBeenCalledWith(application.chainID);
   });
 
-  it('calls dispatchApplications on add action', async () => {
+  it('should delete an application from storage and update the data in context', async () => {
     const { result } = renderHook(() => useApplicationsManagement());
 
-    await result.current.addApplication(mockApplicationsFullData[0]);
+    const chainID = '123';
 
-    expect(addApplicationToStorage).toBeCalledTimes(1);
-    expect(dispatchApplicationsMock).toBeCalledTimes(1);
-    expect(deleteApplicationFromStorage).toBeCalledTimes(0);
+    await result.current.deleteApplication(chainID);
+
+    expect(dispatchApplicationsDataMock).toHaveBeenCalledWith({
+      type: 'delete',
+      chainID,
+    });
+    expect(deleteApplicationToStorageMock).toHaveBeenCalledWith(chainID);
   });
 
-  it('calls dispatchApplications on delete action', async () => {
-    const { result } = renderHook(() => useApplicationsManagement());
+  it('should initialize the applications context data', async () => {
+    renderHook(() => useApplicationsManagement());
 
-    await result.current.deleteApplication(mockApplicationsFullData[0].chainID);
+    expect(dispatchApplicationsDataMock).toHaveBeenCalledWith({
+      type: 'init',
+      applications: [{ chainID: '123' }, { chainID: '456' }],
+    });
+  });
 
-    expect(deleteApplicationFromStorage).toBeCalledTimes(1);
-    expect(dispatchApplicationsMock).toBeCalledTimes(1);
-    expect(addApplicationToStorage).toBeCalledTimes(0);
+  it('should set the status and error based on the data from the API', () => {
+    renderHook(() => useApplicationsManagement());
+
+    expect(applicationsSetStatusMock).toHaveBeenCalledWith('success');
+    expect(applicationsSetErrorMock).toHaveBeenCalledWith(null);
   });
 });

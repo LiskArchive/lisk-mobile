@@ -154,3 +154,40 @@ export const validateAmount = (amount) => new RegExp(regex.amount).test(amount);
  * @returns {boolean}
  */
 export const isNumeric = (value) => /^([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(value);
+
+/**
+ * Joins two arrays of objects without repeating the ones with the same property value.
+ * @param {Array} arr1 - The first array of objects to join.
+ * @param {Array} arr2 - The second array of objects to join.
+ * @param {string} filterProp - The property name to use as a filter.
+ * @return {Array} Returns a new array that contains all the unique objects from both input arrays.
+ * @throws {TypeError} Will throw an error if either arr1 or arr2 is not an array, or filterProp is not a string.
+ */
+export function joinArraysWithoutDuplicates(arr1, arr2, filterProp) {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2))
+    throw new TypeError('Both arr1 and arr2 must be arrays');
+  if (typeof filterProp !== 'string') throw new TypeError('filterProp must be a string');
+  // Create an empty array to store the unique objects
+  const uniqueObjects = [];
+
+  // Iterate over the first array of objects
+  for (let i = 0; i < arr1.length; i++) {
+    // Check if an object with the same filterProp value already exists in the uniqueObjects array
+    if (!uniqueObjects.some((obj) => obj[filterProp] === arr1[i][filterProp])) {
+      // If it doesn't, add it to the uniqueObjects array
+      uniqueObjects.push(arr1[i]);
+    }
+  }
+
+  // Iterate over the second array of objects
+  for (let i = 0; i < arr2.length; i++) {
+    // Check if an object with the same filterProp value already exists in the uniqueObjects array
+    if (!uniqueObjects.some((obj) => obj[filterProp] === arr2[i][filterProp])) {
+      // If it doesn't, add it to the uniqueObjects array
+      uniqueObjects.push(arr2[i]);
+    }
+  }
+
+  // Return the uniqueObjects array
+  return uniqueObjects;
+}

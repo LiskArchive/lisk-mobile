@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import defaultClient from 'utilities/api/APIClient';
-import { METHOD } from 'utilities/api/constants';
 
 /**
  * Creates a custom hook for infinite queries
@@ -21,7 +20,7 @@ export const useCustomInfiniteQuery = ({ keys, config, options = {}, client = de
   return useInfiniteQuery(
     keys,
     async ({ pageParam }) =>
-      client[METHOD]({
+      client.call({
         ...config,
         params: {
           ...(config.params || {}),

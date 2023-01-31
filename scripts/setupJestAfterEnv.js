@@ -3,6 +3,7 @@ import { setupServer } from 'msw/node';
 
 import { MSWServer } from '../services/msw/MSWServer';
 import apiClient from '../src/utilities/api/APIClient';
+import liskAPIClient from '../src/utilities/api/LiskAPIClient';
 
 const mswTestServer = new MSWServer('test', setupServer);
 
@@ -11,6 +12,7 @@ beforeAll(() => {
   mswTestServer.init({ onUnhandledRequest: 'error' });
 
   apiClient.create({ ws: 'wss://localhost', http: 'http://localhost' });
+  liskAPIClient.create({ ws: 'wss://localhost', http: 'http://localhost' });
 });
 
 // Reset any request handlers that we may add during the tests,

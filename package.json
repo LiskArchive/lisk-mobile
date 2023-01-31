@@ -23,7 +23,7 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
     "@json-rpc-tools/utils": "^1.7.6",
-    "@liskhq/lisk-client": "6.0.0-alpha.9",
+    "@liskhq/lisk-client": "6.0.0-alpha.12",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-camera-roll/camera-roll": "^5.1.0",
     "@react-native-community/art": "^1.2.0",
@@ -60,6 +60,8 @@
     "hoist-non-react-statics": "^3.3.2",
     "https-browserify": "^0.0.1",
     "i18next": "^14.0.1",
+    "lottie-ios": "3.4.0",
+    "lottie-react-native": "^5.1.4",
     "moment": "^2.29.1",
     "patch-package": "^6.4.7",
     "path-browserify": "^0.0.0",

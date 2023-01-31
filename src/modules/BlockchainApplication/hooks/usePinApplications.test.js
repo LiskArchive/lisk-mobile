@@ -1,36 +1,41 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import * as useApplications from '../context/ApplicationsContext';
-import * as useApplicationsStorage from './useApplicationsStorage';
+import * as usePinApplicationsLocalStorage from './usePinApplicationsLocalStorage';
 import { mockApplicationsFullData } from '../__fixtures__/mockApplicationsFullData';
 import { usePinApplications } from './usePinApplications';
 
-const dispatchPinsMock = jest.fn();
+const dispatchPinsDataMock = jest.fn();
+const getPinsMock = jest.fn(() => Promise.resolve(['123']));
 const addPinToStorage = jest.fn(() => Promise.resolve());
 const deletePinFromStorage = jest.fn(() => Promise.resolve());
+const pinsSetStatusMock = jest.fn();
+const pinsSetErrorMock = jest.fn();
 
-const pinsMock = {
-  data: mockApplicationsFullData.map((app) => app.chainID),
-  isLoading: false,
-  isError: false,
-  error: undefined,
-};
+const pinsMock = mockApplicationsFullData.map((app) => app.chainID);
 
 jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
-  pins: pinsMock,
-  dispatchPins: dispatchPinsMock,
+  pins: {
+    data: pinsMock,
+    dispatchData: dispatchPinsDataMock,
+    setStatus: pinsSetStatusMock,
+    setError: pinsSetErrorMock,
+  },
 }));
 
-jest.spyOn(useApplicationsStorage, 'useApplicationsStorage').mockImplementation(() => ({
-  addApplication: addPinToStorage,
-  deleteApplication: deletePinFromStorage,
-}));
+jest
+  .spyOn(usePinApplicationsLocalStorage, 'usePinApplicationsLocalStorage')
+  .mockImplementation(() => ({
+    getPins: getPinsMock,
+    addPin: addPinToStorage,
+    deletePin: deletePinFromStorage,
+    status: 'success',
+    error: null,
+  }));
 
 describe('usePinApplications hook', () => {
-  beforeEach(() => {
-    dispatchPinsMock.mockClear();
-    addPinToStorage.mockClear();
-    deletePinFromStorage.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should be defined', () => {
@@ -40,39 +45,63 @@ describe('usePinApplications hook', () => {
   it('returns pins properly', () => {
     const { result } = renderHook(() => usePinApplications());
 
-    expect(result.current.pins).toEqual(pinsMock);
+    expect(result.current.pins.data).toEqual(pinsMock);
   });
 
-  it('calls dispatchPins on toggle pin', async () => {
+  it('should check if a pin exists by chain ID', () => {
     const { result } = renderHook(() => usePinApplications());
 
-    await result.current.togglePin(mockApplicationsFullData[0].chainID);
-
-    expect(dispatchPinsMock).toBeCalledTimes(1);
+    expect(result.current.checkPin(pinsMock[0])).toBe(true);
+    expect(result.current.checkPin('nonExistingPinChainID')).toBe(false);
   });
 
-  it('calls addPinToStorage on toggle not-existing pin', async () => {
+  it('should add a pin to storage and update the data in context', async () => {
     const { result } = renderHook(() => usePinApplications());
+    const chainID = 'nonExistingPinChainID';
 
-    await result.current.togglePin('nonExistingPinChainID');
+    await result.current.togglePin(chainID);
 
-    expect(addPinToStorage).toBeCalledTimes(1);
-    expect(deletePinFromStorage).toBeCalledTimes(0);
+    expect(addPinToStorage).toHaveBeenCalledWith(chainID);
+    expect(result.current.pins.dispatchData).toHaveBeenCalledWith({ type: 'add', chainID });
   });
 
-  it('calls deletePinFromStorage on toggle already-existing pin', async () => {
+  it('should delete a pin from storage and update the data in context', async () => {
     const { result } = renderHook(() => usePinApplications());
+    const chainID = pinsMock[0];
 
-    await result.current.togglePin(mockApplicationsFullData[0].chainID);
+    await result.current.togglePin(chainID);
 
-    expect(deletePinFromStorage).toBeCalledTimes(1);
-    expect(addPinToStorage).toBeCalledTimes(0);
+    expect(deletePinFromStorage).toHaveBeenCalledWith(chainID);
+    expect(result.current.pins.dispatchData).toHaveBeenCalledWith({ type: 'delete', chainID });
   });
 
-  it('checkPin returns true for already-existing pin', async () => {
+  it('should set the status and error based on the data from local storage', () => {
     const { result } = renderHook(() => usePinApplications());
 
-    expect(result.current.checkPin(mockApplicationsFullData[0].chainID)).toBeTruthy();
-    expect(result.current.checkPin('nonExistingPinChainID')).toBeFalsy();
+    expect(result.current.pins.setStatus).toHaveBeenCalledWith('success');
+    expect(result.current.pins.setError).toHaveBeenCalledWith(null);
+  });
+
+  it('should initialize the pins data from local storage', async () => {
+    jest.clearAllMocks();
+
+    const spy = jest.spyOn(useApplications, 'useApplications');
+
+    spy.mockImplementation(() => ({
+      pins: {
+        data: undefined,
+        dispatchData: dispatchPinsDataMock,
+        setStatus: pinsSetStatusMock,
+        setError: pinsSetErrorMock,
+      },
+    }));
+
+    renderHook(() => usePinApplications());
+
+    await expect(getPinsMock).toHaveBeenCalled();
+
+    expect(dispatchPinsDataMock).toHaveBeenCalledWith({ type: 'init', pins: ['123'] });
+
+    spy.mockRestore();
   });
 });

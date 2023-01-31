@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 import React, { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { SafeAreaView, Text } from 'react-native';
 
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import apiClient from 'utilities/api/APIClient';
@@ -11,7 +10,9 @@ import {
   GET_AUTH_QUERY,
 } from 'utilities/api/queries';
 import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
+import LoadingFallbackScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
 import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
+import { useBootstrapCurrentApplication } from './modules/BlockchainApplication/hooks/useBootstrapCurrentApplication';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
@@ -22,17 +23,14 @@ export default function BootstrapApp({ children }) {
 
   const [currentApplication] = useCurrentApplication();
 
-  const isLoading = currentApplication.isLoading;
-  const isError = currentApplication.isError;
+  const isLoading = currentApplication.status === 'loading';
+  const isError = currentApplication.status === 'error';
   const error = currentApplication.error;
-  const refetch = currentApplication.refetch;
 
   // Bootstrap API client with current application.
-  useEffect(() => {
-    if (currentApplication.data?.serviceURLs) {
-      apiClient.create(currentApplication.data.serviceURLs[0]);
-    }
-  }, [currentApplication.data]);
+  const retryBootstrapCurrentApplication = useBootstrapCurrentApplication();
+
+  const handleRetry = () => retryBootstrapCurrentApplication();
 
   // Bootstrap WS connections for re-fetching account transactions and tokens data when
   // new and delete transactions events occur.
@@ -60,17 +58,11 @@ export default function BootstrapApp({ children }) {
   useWalletConnectEventsManager();
 
   if (isLoading) {
-    // TODO: Replace with <LoadingFallbackScreen /> component when
-    // working on https://github.com/LiskHQ/lisk-mobile/issues/1587.
-    return (
-      <SafeAreaView>
-        <Text>Loading app...</Text>
-      </SafeAreaView>
-    );
+    return <LoadingFallbackScreen />;
   }
 
   if (isError) {
-    return <ErrorFallbackScreen onRetry={refetch} error={error} />;
+    return <ErrorFallbackScreen onRetry={handleRetry} error={error} />;
   }
 
   return children;

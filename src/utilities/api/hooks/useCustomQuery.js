@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
 import defaultClient from 'utilities/api/APIClient';
-import { METHOD } from 'utilities/api/constants';
 
 /**
  * Creates a custom hook for queries.
@@ -15,5 +14,5 @@ import { METHOD } from 'utilities/api/constants';
  * @returns The query object
  */
 export function useCustomQuery({ keys, config, options = {}, client = defaultClient }) {
-  return useQuery(keys, async () => client[METHOD](config), options);
+  return useQuery(keys, async () => client.call(config), options);
 }
