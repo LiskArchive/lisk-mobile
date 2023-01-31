@@ -12,6 +12,7 @@ import i18next from 'i18next';
 import styles from './IntroScreen.styles';
 import Slider from '../../shared/__Slider/Slider';
 import AddressIllustrationSvg from '../../../assets/svgs/AddressIllustrationSvg';
+import ActivityHistoryIllustrationSvg from '../../../assets/svgs/ActivityHistoryIllustrationSvg';
 
 export default function IntroScreen() {
   // const navigation = useNavigation();
@@ -28,7 +29,7 @@ export default function IntroScreen() {
       description: i18next.t(
         'Get a full overview of your current balance, transaction history and much more.'
       ),
-      body: <AddressIllustrationSvg />,
+      body: <ActivityHistoryIllustrationSvg />,
     },
     {
       id: 2,
