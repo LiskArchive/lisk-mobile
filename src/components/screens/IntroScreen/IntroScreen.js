@@ -1,8 +1,6 @@
-/* eslint-disable no-shadow */
 import React from 'react';
-import { View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 
@@ -10,57 +8,62 @@ import activityHistoryImg from 'assets/images/intro/activityHistory3x.png';
 import tokensTransferImg from 'assets/images/intro/tokensTransfer3x.png';
 import secureAuthenticationImg from 'assets/images/intro/secureAuthentication3x.png';
 import easyAccessImg from 'assets/images/intro/easyAccess3x.png';
-import Slider from '../../shared/Slider';
 
 import styles from './IntroScreen.styles';
+import Slider from '../../shared/__Slider/Slider';
 
 export default function IntroScreen() {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
-  const skip = () => {
-    AsyncStorage.setItem('@lisk-mobile-intro', 'true');
-    navigation.push('AuthMethod', { signOut: true });
-  };
+  // const skip = () => {
+  //   AsyncStorage.setItem('@lisk-mobile-intro', 'true');
+  //   navigation.push('AuthMethod', { signOut: true });
+  // };
 
-  const slides = [
+  const data = [
     {
-      step: 1,
+      id: 1,
       title: i18next.t('Activity history'),
       description: i18next.t(
         'Get a full overview of your current balance, transaction history and much more.'
       ),
-      imageSrc: activityHistoryImg,
+      body: (Animated, style) => (
+        <Animated.Image source={activityHistoryImg} resizeMode="contain" style={style} />
+      ),
     },
     {
-      step: 2,
+      id: 2,
       title: i18next.t('Token transfer'),
       description: i18next.t(
         'Transfer your tokens easily to other accounts, by simply scanning QR Codes.'
       ),
-      imageSrc: tokensTransferImg,
+      body: (Animated, style) => (
+        <Animated.Image source={tokensTransferImg} resizeMode="contain" style={style} />
+      ),
     },
     {
-      step: 3,
+      id: 3,
       title: i18next.t('Secure authentication'),
       description: i18next.t('Access all functions via advanced biometric authentication.'),
-      imageSrc: secureAuthenticationImg,
+      body: (Animated, style) => (
+        <Animated.Image source={secureAuthenticationImg} resizeMode="contain" style={style} />
+      ),
     },
     {
-      step: 4,
+      id: 4,
       title: i18next.t('Easy access'),
       description: i18next.t(
         'Create an account using passphrase to access your LSK cryptocurrency.'
       ),
-      imageSrc: easyAccessImg,
-      acceptTermsSwitch: true,
+      body: (Animated, style) => (
+        <Animated.Image source={easyAccessImg} resizeMode="contain" style={style} />
+      ),
     },
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper} testID="intro-screen">
-        <Slider skip={skip} slides={slides} style={{ image: styles.illustration }} testID="intro" />
-      </View>
+    <SafeAreaView style={styles.container} testID="intro-screen">
+      <Slider data={data} />
     </SafeAreaView>
   );
 }
