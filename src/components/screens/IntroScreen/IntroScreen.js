@@ -4,7 +4,6 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 
-// import activityHistoryImg from 'assets/images/intro/activityHistory3x.png';
 // import tokensTransferImg from 'assets/images/intro/tokensTransfer3x.png';
 // import secureAuthenticationImg from 'assets/images/intro/secureAuthentication3x.png';
 // import easyAccessImg from 'assets/images/intro/easyAccess3x.png';
