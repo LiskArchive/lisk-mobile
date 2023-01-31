@@ -14,6 +14,7 @@ const MODULES = {
   token: 'token',
   auth: 'auth',
   legacy: 'legacy',
+  pos: 'pos',
 };
 
 const COMMANDS = {
@@ -27,6 +28,7 @@ const COMMANDS = {
   voteDelegate: 'voteDelegate',
   reclaimLSK: 'reclaimLSK',
   registerkeys: 'registerkeys',
+  stake: 'stake',
 };
 
 export const MODULE_COMMAND_NAMES = {
@@ -35,6 +37,7 @@ export const MODULE_COMMAND_NAMES = {
   registerMultisignatureGroup: `${MODULES.auth}:${COMMANDS.registerMultisignatureGroup}`,
   reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
   registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,
+  stake: `${MODULES.pos}:${COMMANDS.stake}`,
 };
 
 export const TRANSACTION_STATUS_NAMES = {

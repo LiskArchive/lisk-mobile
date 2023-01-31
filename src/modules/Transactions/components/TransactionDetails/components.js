@@ -8,10 +8,11 @@ import { fromRawLsk } from 'utilities/conversions';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
+import ObjectViewer from 'components/shared/ObjectViewer/ObjectViewer';
 import { stringShortener, setColorOpacity } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
-import { TRANSACTION_PARAMS_NAMES, TRANSACTION_STATUS_NAMES } from '../../constants';
+import { TRANSACTION_STATUS_NAMES } from '../../constants';
 import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionDetailsStyles from './styles';
@@ -182,8 +183,6 @@ function TransactionDetailsStatus({ status }) {
 function TransactionDetailsParams({ params, show, setShow }) {
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
-  const paramsEntries = Object.entries(params);
-
   return (
     <View style={[styles.section]}>
       <View style={[styles.row]}>
@@ -200,17 +199,7 @@ function TransactionDetailsParams({ params, show, setShow }) {
             : i18next.t('transactions.transactionDetails.hideParamsButtonText')}
         </LabelButton>
       </View>
-
-      {show &&
-        paramsEntries.map(([paramKey, paramValue]) => (
-          <React.Fragment key={paramKey}>
-            <Text style={[styles.label, styles.theme.label, { marginTop: 16 }]}>
-              {i18next.t(TRANSACTION_PARAMS_NAMES[paramKey])}:
-            </Text>
-
-            <Text style={[styles.text, styles.theme.text]}>{paramValue}</Text>
-          </React.Fragment>
-        ))}
+      {show && <ObjectViewer data={params} style={[styles.params, styles.theme.params]} />}
     </View>
   );
 }

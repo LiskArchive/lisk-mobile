@@ -101,11 +101,11 @@ export function useTransactionAssets({ transaction, style }) {
       };
       break;
 
-    case MODULE_COMMAND_NAMES.voteDelegate:
+    case MODULE_COMMAND_NAMES.stake:
       assets = {
         ...assets,
         type: 'voteDelegate',
-        title: 'Vote',
+        title: 'Staking',
       };
       break;
 

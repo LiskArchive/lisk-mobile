@@ -117,7 +117,7 @@ export default function TransactionSvg({
       );
       break;
 
-    case MODULE_COMMAND_NAMES.unlockToken:
+    case MODULE_COMMAND_NAMES.stake:
       children = (
         <>
           <Path

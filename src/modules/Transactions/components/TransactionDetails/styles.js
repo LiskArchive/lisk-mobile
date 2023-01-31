@@ -53,6 +53,10 @@ export default function getTransactionDetailsStyles() {
         lineHeight: 0,
         alignSelf: 'flex-start',
       },
+      params: {
+        padding: 10,
+        borderRadius: 5,
+      },
     },
     [themes.light]: {
       container: {
@@ -67,6 +71,9 @@ export default function getTransactionDetailsStyles() {
       date: {
         color: colors.light.slateGray,
       },
+      params: {
+        backgroundColor: colors.light.athensWhite,
+      },
     },
     [themes.dark]: {
       container: {
@@ -80,6 +87,9 @@ export default function getTransactionDetailsStyles() {
       },
       date: {
         color: colors.dark.silverGrey,
+      },
+      params: {
+        backgroundColor: colors.dark.headerBg,
       },
     },
   };
