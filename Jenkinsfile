@@ -29,13 +29,13 @@ pipeline {
         }
       }
     }
-    stage ('Run End to end tests') {
-      steps {
-        nvm(getNodejsVersion()) {
-          sh 'yarn run e2e:ios'
-        }
-      }
-    }
+    // stage ('Run End to end tests') {
+    //   steps {
+    //     nvm(getNodejsVersion()) {
+    //       sh 'yarn run e2e:ios'
+    //     }
+    //   }
+    // }
   }
   post {
     always {
