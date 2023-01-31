@@ -23,7 +23,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
         fillRule="evenodd"
         clipRule="evenodd"
         d="M113.471 128.001H139.556V117.975H113.471V128.001Z"
-        fill="#DFE6F2"
+        fill={colors.light.platinumGray}
       />
       <Path
         fillRule="evenodd"
@@ -49,13 +49,13 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
         fillRule="evenodd"
         clipRule="evenodd"
         d="M97.3264 117.976H21.333V79.9786C21.333 58.993 38.3445 41.9814 59.3293 41.9814C80.3149 41.9814 97.3264 58.993 97.3264 79.9786V117.976Z"
-        fill="#4070F4"
+        fill={colors.light.ultramarineBlue}
       />
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M97.3264 117.976H21.333V79.9786C21.333 58.993 38.3445 41.9814 59.3293 41.9814C80.3149 41.9814 97.3264 58.993 97.3264 79.9786V117.976Z"
-        stroke="#4070F4"
+        stroke={colors.light.ultramarineBlue}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -69,7 +69,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
       />
       <Path
         d="M160.969 64.0039V3.0498"
-        stroke="#2BD67B"
+        stroke={colors.light.ufoGreen}
         strokeWidth="5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -95,7 +95,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M160.969 13.1555H175.763V0.875977H160.969V13.1555Z"
-          fill="#2BD67B"
+          fill={colors.light.ufoGreen}
         />
         <Path
           fillRule="evenodd"
@@ -121,19 +121,19 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M206.31 336.658C206.31 336.658 206.734 318.237 196.514 305.596C186.296 292.956 193.67 322.424 206.31 336.658Z"
-          fill="#2BD67B"
+          fill={colors.light.ufoGreen}
         />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
           d="M199.938 335.9C199.938 335.9 209.288 309.154 224.093 310.323C238.897 311.492 206.95 334.551 199.938 335.9Z"
-          fill="#2BD67B"
+          fill={colors.light.ufoGreen}
         />
         <Path
           fillRule="evenodd"
           clipRule="evenodd"
           d="M204.66 335.127C204.66 335.127 201.182 296.723 213.731 296.384C226.279 296.045 209.999 326.095 204.66 335.127Z"
-          fill="#2BD67B"
+          fill={colors.light.ufoGreen}
         />
         <Path
           fillRule="evenodd"

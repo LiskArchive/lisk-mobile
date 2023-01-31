@@ -15,10 +15,12 @@ export default function getSliderSlideStyles() {
       },
       header: {
         alignItems: 'center',
+        marginBottom: 24,
       },
       body: {
         flex: 1,
         width: '100%',
+        alignItems: 'center',
       },
       title: {
         textAlign: 'center',
