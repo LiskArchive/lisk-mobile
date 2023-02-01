@@ -8,11 +8,11 @@ import getSliderPaginationStyles from './SliderPagination.styles';
 
 const { width } = Dimensions.get('window');
 
-export default function SliderPagination({ data, scrollX }) {
+export default function SliderPagination({ data, scrollX, style }) {
   const { styles } = useTheme({ styles: getSliderPaginationStyles() });
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style?.container]}>
       {data.map((_, idx) => {
         const inputRange = [(idx - 1) * width, idx * width, (idx + 1) * width];
 
@@ -35,7 +35,7 @@ export default function SliderPagination({ data, scrollX }) {
         return (
           <Animated.View
             key={idx.toString()}
-            style={[styles.dot, { width: dotWidth, backgroundColor }]}
+            style={[styles.dot, style?.dot, { width: dotWidth, backgroundColor }]}
           />
         );
       })}

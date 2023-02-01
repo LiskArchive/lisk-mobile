@@ -6,7 +6,7 @@ import { H2, P } from 'components/shared/toolBox/typography';
 
 import getSliderSlideStyles from './SliderSlide.styles';
 
-export default function SliderSlide({ item }) {
+export default function SliderSlide({ item, style }) {
   const { styles } = useTheme({ styles: getSliderSlideStyles() });
 
   const translateYBody = new Animated.Value(10);
@@ -20,6 +20,7 @@ export default function SliderSlide({ item }) {
         },
       ],
     },
+    style?.body,
   ];
 
   Animated.timing(translateYBody, {
@@ -30,11 +31,13 @@ export default function SliderSlide({ item }) {
   }).start();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <H2 style={[styles.title, styles.theme.title]}>{item.title}</H2>
+    <View style={[styles.container, style?.container]}>
+      <View style={[styles.header, style?.header]}>
+        <H2 style={[styles.title, styles.theme.title, style?.title]}>{item.title}</H2>
 
-        <P style={[styles.description, styles.theme.description]}>{item.description}</P>
+        <P style={[styles.description, styles.theme.description, style?.description]}>
+          {item.description}
+        </P>
       </View>
 
       <Animated.View style={bodyStyle}>{item.body}</Animated.View>

@@ -3,7 +3,7 @@ export default function getSliderPaginationStyles() {
     common: {
       container: {
         position: 'absolute',
-        top: 130,
+        bottom: 0,
         flexDirection: 'row',
         width: '100%',
         alignItems: 'center',

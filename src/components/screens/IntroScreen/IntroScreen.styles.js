@@ -1,11 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from 'constants/styleGuide';
+import { colors, boxes } from 'constants/styleGuide';
 
 const styles = {
   container: {
     flex: 1,
     backgroundColor: colors.light.white,
+    justifyContent: 'space-between',
+  },
+  footer: {
+    padding: boxes.boxPadding,
   },
 };
 
