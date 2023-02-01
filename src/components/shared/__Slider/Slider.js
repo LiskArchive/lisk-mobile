@@ -5,6 +5,33 @@ import { Animated, FlatList, View } from 'react-native';
 import SliderSlide from './components/SliderSlide';
 import SliderPagination from './components/SliderPagination';
 
+/**
+ * A slideshow component for cycling through elements (slides) sequentially.
+ * @typedef {Object} DataItem
+ * @property {string} key - Unique key of the item
+ * @property {React.ReactNode} item - Data item to be rendered in the slide
+ *
+ * @typedef {Object} Style
+ * @property {Object} container - Style for the container view
+ * @property {Object} slide - Style for the slide component
+ * @property {Object} pagination - Style for the pagination component
+ *
+ * @typedef {Object} RenderControllerProps
+ * @property {number} index - Index of the currently selected item
+ * @property {Function} setIndex - Function to set the index of the selected item
+ * @property {Function} handleGoPrevIndex - Function to handle go to previous index
+ * @property {Function} handleGoNextIndex - Function to handle go to next index
+ * @property {Function} handleGoToLastIndex - Function to handle go to last index
+ * @property {number} dataCount - Total count of data items
+ *
+ * @typedef {Function} RenderController
+ * @param {RenderControllerProps} props - Props to be passed to the render controller component
+ *
+ * @interface SliderProps
+ * @property {Array<DataItem>} data - Array of data items to be displayed in the slider
+ * @property {RenderController} [renderController] - Render controller component
+ * @property {Style} [style] - Style for the slider components
+ */
 export default function Slider({ data, renderController, style }) {
   const [index, setIndex] = useState(0);
 
