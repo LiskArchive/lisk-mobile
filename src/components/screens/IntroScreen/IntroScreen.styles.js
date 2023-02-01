@@ -13,6 +13,7 @@ const styles = {
   },
   footer: {
     padding: boxes.boxPadding,
+    height: 88,
   },
   switchContainer: {
     flexDirection: 'row',
