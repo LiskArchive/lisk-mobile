@@ -4,7 +4,6 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { removeUndefinedObjectKeys } from 'utilities/helpers';
 
-import { BASE_TRANSACTION_SCHEMA } from './constants';
 import {
   getCommandParamsSchema,
   decodeTransaction,
@@ -20,6 +19,8 @@ export class Transaction {
   _networkStatus = null;
 
   _auth = null;
+
+  _schema = null;
 
   _feeEstimatePerByte = null;
 
@@ -50,7 +51,9 @@ export class Transaction {
     command = null,
     encodedTransaction = null,
     params = {},
+    schema,
   }) {
+    this._schema = schema;
     this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
@@ -248,7 +251,7 @@ export class Transaction {
 
     const { params, ...rest } = this.transaction;
 
-    Lisk.validator.validator.validate(BASE_TRANSACTION_SCHEMA, {
+    Lisk.validator.validator.validate(this._schema, {
       ...rest,
       params: Buffer.alloc(0),
     });
