@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
-import { View, Linking } from 'react-native';
-import Switch from 'react-native-switch-pro';
+import React from 'react';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 
-// import tokensTransferImg from 'assets/images/intro/tokensTransfer3x.png';
-// import secureAuthenticationImg from 'assets/images/intro/secureAuthentication3x.png';
-// import easyAccessImg from 'assets/images/intro/easyAccess3x.png';
-
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import Slider from 'components/shared/__Slider/Slider';
-import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { P, A } from 'components/shared/toolBox/typography';
-import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import CoinIllustrationSvg from 'assets/svgs/CoinIllustrationSvg';
 import ActivityHistoryIllustrationSvg from 'assets/svgs/ActivityHistoryIllustrationSvg';
-import URLs from 'constants/URLs';
-import { colors } from 'constants/styleGuide';
+import SecureAuthIllustrationSvg from 'assets/svgs/SecureAuthIllustrationSvg';
+import EasyAccessIllustrationSvg from 'assets/svgs/EasyAccessIllustrationSvg';
 
 import styles from './IntroScreen.styles';
 
+/**
+ * Intro screen shown to the user when it opens the app for the first time.
+ * Introduces Lisk main features.
+ */
 export default function IntroScreen() {
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
-
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -51,7 +46,7 @@ export default function IntroScreen() {
       id: 3,
       title: i18next.t('Secure authentication'),
       description: i18next.t('Access all functions via advanced biometric authentication.'),
-      body: <AddressIllustrationSvg />,
+      body: <SecureAuthIllustrationSvg />,
     },
     {
       id: 4,
@@ -59,62 +54,23 @@ export default function IntroScreen() {
       description: i18next.t(
         'Create an account using passphrase to access your LSK cryptocurrency.'
       ),
-      body: <AddressIllustrationSvg />,
+      body: <EasyAccessIllustrationSvg />,
     },
   ];
 
-  const handleTermsAndConditionsClick = () => Linking.openURL(URLs.liskTermsAndConditions);
+  const renderFooter = ({ index, dataCount }) => {
+    let children;
 
-  const renderFooter = ({ index, handleGoNextIndex, handleGoToLastIndex, dataCount }) => {
     const isLastSlide = index === dataCount - 1;
 
-    const handleSkipClick = () => {
+    const handleContinueClick = () => {
       dispatch(settingsUpdatedAction({ showedIntro: true }));
-
       AsyncStorage.setItem('@lisk-mobile-intro', 'true');
       navigation.push('AuthMethod', { signOut: true });
     };
 
-    let children = (
-      <>
-        <PrimaryButton onClick={handleGoNextIndex} style={{ marginBottom: 16 }}>
-          Next
-        </PrimaryButton>
-
-        <Button onClick={handleGoToLastIndex}>Skip</Button>
-      </>
-    );
-
     if (isLastSlide) {
-      children = (
-        <>
-          <View style={styles.switchContainer}>
-            <Switch
-              height={26}
-              width={43}
-              onSyncPress={(status) => setAcceptedTerms(status)}
-              backgroundActive={colors.light.ultramarineBlue}
-              backgroundInactive={colors.light.platinum}
-              testID="sliderButton"
-            />
-            <P style={styles.confirmationText}>
-              {i18next.t('I have read and agreed with the')}
-
-              <A onPress={handleTermsAndConditionsClick} style={styles.link}>
-                &nbsp;{i18next.t('terms and conditions.')}
-              </A>
-            </P>
-          </View>
-
-          <PrimaryButton
-            onClick={handleSkipClick}
-            disabled={!acceptedTerms}
-            style={{ marginBottom: 16 }}
-          >
-            Continue to add account
-          </PrimaryButton>
-        </>
-      );
+      children = <PrimaryButton onClick={handleContinueClick}>Continue</PrimaryButton>;
     }
 
     return <View style={styles.footer}>{children}</View>;
