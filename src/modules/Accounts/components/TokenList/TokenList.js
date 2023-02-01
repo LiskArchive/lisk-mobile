@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 
-import { P } from 'components/shared/toolBox/typography';
 import { LabelButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
@@ -18,11 +17,12 @@ import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
 import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
-import TokenRow from '../TokenRow';
+import TokenRow from '../TokenRow/TokenRow';
 
-import TokenListTabs from './TokenListTabs';
-import getTokenListStyles from './styles';
-import { NO_OF_TOKENS_ON_OVERVIEW } from './constants';
+import TokenListTabs from './components/TokenListTabs';
+import getTokenListStyles from './TokenList.styles';
+import { NO_OF_TOKENS_ON_OVERVIEW } from './TokenList.constants';
+import TokenListSkeleton from './components/TokenListSkeleton';
 
 export default function TokenList({ mode = 'overview', style }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -114,11 +114,7 @@ export default function TokenList({ mode = 'overview', style }) {
             isFetchingNextPage={isFetchingTokensNextPage}
           />
         )}
-        renderLoading={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>
-            {i18next.t('accounts.loadingTokensText')}
-          </P>
-        )}
+        renderLoading={() => <TokenListSkeleton />}
         renderEmpty={() => (
           <ResultScreen
             illustration={<EmptyIllustrationSvg />}

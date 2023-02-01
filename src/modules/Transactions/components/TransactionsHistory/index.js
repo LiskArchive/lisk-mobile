@@ -5,7 +5,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import TransactionList from '../TransactionList';
+import TransactionList from '../TransactionList/TransactionList';
 
 import getTransactionsHistoryStyles from './styles';
 

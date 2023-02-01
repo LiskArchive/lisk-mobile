@@ -26,7 +26,7 @@ export const mockApplicationsMeta = [
       svg: '',
     },
     appPage: 'https://coleti.com',
-    backgroundColor: '#FFFFFF1A',
+    backgroundColor: '#d4ff00',
     explorers: [{ tnxPage: 'https://coleti.observer', url: 'https://explorer.coleti.io' }],
     appNodes: [
       {
@@ -59,7 +59,7 @@ export const mockApplicationsMeta = [
       svg: '',
     },
     appPage: 'https://docuedu.com',
-    backgroundColor: '#FFFFFF1A',
+    backgroundColor: '#000000',
     explorers: [{ tnxPage: 'https://doedu.observer', url: 'https://explorer.doedu.io' }],
     appNodes: [
       {
@@ -92,7 +92,7 @@ export const mockApplicationsMeta = [
       svg: '',
     },
     appPage: 'https://enevti.com',
-    backgroundColor: '#FFFFFF1A',
+    backgroundColor: '#6423c7',
     explorers: [{ tnxPage: 'https://enevti.observer', url: 'https://explorer.enevti.io' }],
     appNodes: [
       {
@@ -125,7 +125,7 @@ export const mockApplicationsMeta = [
       svg: '',
     },
     appPage: 'https://kalipo.com',
-    backgroundColor: '#FFFFFF1A',
+    backgroundColor: '#3f71f4',
     explorers: [{ tnxPage: 'https://kalipo.observer', url: 'https://explorer.kalipo.io' }],
     appNodes: [
       {

@@ -5,7 +5,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import TokenList from '../TokenList';
+import TokenList from '../TokenList/TokenList';
 
 import tokensTabStyles from './styles';
 

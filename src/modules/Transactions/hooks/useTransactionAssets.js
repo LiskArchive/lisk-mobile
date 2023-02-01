@@ -5,7 +5,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import TransactionSvg from 'assets/svgs/TransactionSvg';
 import { MODULE_COMMAND_NAMES } from '../constants';
-import getTransactionRowStyles from '../components/TransactionRow/styles';
+import getTransactionRowStyles from '../components/TransactionRow/TransactionRow.styles';
 
 /**
  * Allows to get all the necessary UI assets of a transaction (based on it's type) to
