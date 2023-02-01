@@ -15,7 +15,7 @@ export default function getSliderSlideStyles() {
       },
       header: {
         alignItems: 'center',
-        marginBottom: 40,
+        marginBottom: 24,
       },
       body: {
         flex: 1,
