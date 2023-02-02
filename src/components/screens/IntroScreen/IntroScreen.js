@@ -73,7 +73,11 @@ export default function IntroScreen() {
 
     return (
       <View style={styles.lastSlideFooter}>
-        <Button onClick={() => handleContinueClick('AuthMethod')} style={{ marginBottom: 16 }}>
+        <Button
+          onClick={() => handleContinueClick('AuthMethod')}
+          style={{ marginBottom: 16 }}
+          testID="continueToAddAccountButton"
+        >
           {i18next.t('intro.continueToAddAccountButton')}
         </Button>
 
