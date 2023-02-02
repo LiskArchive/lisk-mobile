@@ -16,6 +16,14 @@
       "emailReportButton": "Report the error via email"
     }
   },
+  "intro" : {
+    "sendAndRequestTokensTitle": "Send and request tokens",
+    "sendAndRequestTokensDescription": "Creating an account is your first step in benefiting from blockchain technology. With your account, you can securely send and request tokens within and across blockchain applications.",
+    "uniqueAvatarTitle": "A unique avatar",
+    "uniqueAvatarDescription": "The Avatar represents the address, making it easy to recognize.",
+    "manageApplicationsTitle": "Manage blockchain application assets",
+    "manageApplicationsDescription": "You can manage several blockchain application assets (claim tokens, NFTs, etc..) using your accounts."
+  },
   "Activity": "Activity",
   "Add to bookmarks": "Add to bookmarks",
   "Address": "Address",
@@ -23,8 +31,7 @@
   "Amount": "Amount",
   "Status": "Status",  
   "Cancel": "Cancel",
-  "Edit bookmark": "Edit bookmark",
-  "Get a full overview of your current balance, transaction history and much more.": "Get a full overview of your current balance, transaction history and much more.",
+  "Edit bookmark": "Edit bookmark",  
   "Here’s what you need to know:": "Here’s what you need to know:",
   "I have read and agreed with the": "I have read and agreed with the",
   "Initialize your account": "Initialize your account",
@@ -82,12 +89,6 @@
   "You will be able to add it again anytime.": "You will be able to add it again anytime.",
   "We’ve got good news!": "We’ve got good news!",
   "Info": "Info",
-  "Activity history": "Activity history",
-  "Token transfer": "Token transfer",
-  "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Transfer your tokens easily to other accounts, by simply scanning QR Codes.",
-  "Secure authentication": "Secure authentication",
-  "Access all functions via advanced biometric authentication.": "Access all functions via advanced biometric authentication.",
-  "Easy access": "Easy access",
   "Locked balance details": "Locked balance details",
   "Find details of your locked balance and the unlock waiting period.": "Find details of your locked balance and the unlock waiting period.",
   "will be available to unlock": "will be available to unlock in ~ {{timeToUnlock}}",
