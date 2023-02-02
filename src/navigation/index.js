@@ -15,6 +15,7 @@ import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
+import RegisterIntro from 'modules/Auth/Register/RegisterIntro';
 
 import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
@@ -85,6 +86,11 @@ export default function Navigator({ children }) {
             name="Intro"
             component={IntroScreen}
             options={navigationOptions.Intro}
+          />
+          <StackNavigator.Screen
+            name="RegisterIntro"
+            component={RegisterIntro}
+            options={navigationOptions.RegisterIntro}
           />
           <StackNavigator.Screen
             name="Main"

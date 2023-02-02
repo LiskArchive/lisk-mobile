@@ -1,14 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { deviceType } from 'utilities/device';
+
+import { boxes } from 'constants/styleGuide';
 
 const styles = {
-  wrapper: {
-    flexGrow: 1,
+  container: {
+    flex: 1,
   },
-  sliderImage: {
-    width: 284,
-    height: 375,
-    marginTop: deviceType() === 'iOSx' ? 40 : 20,
+  footer: {
+    flexDirection: 'row',
+    width: '100%',
+    padding: boxes.boxPadding,
+    height: 88,
   },
 };
 
