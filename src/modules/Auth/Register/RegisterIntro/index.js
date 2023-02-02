@@ -10,9 +10,6 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import Slider from 'components/shared/__Slider/Slider';
-// import addressImg from 'assets/images/registrationIntro/address3x.png';
-// import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
-// import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
 import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';
 import AvatarIllustrationSvg from 'assets/svgs/AvatarIllustrationSvg';
 import LockerIllustrationSvg from 'assets/svgs/LockerIllustrationSvg';
