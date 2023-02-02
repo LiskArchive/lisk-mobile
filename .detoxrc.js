@@ -15,7 +15,7 @@ module.exports = {
       type: 'ios.app',
       binaryPath: 'ios/build/Build/Products/Debug-iphonesimulator/Lisk.app',
       build:
-        'xcodebuild -workspace ios/Lisk.xcworkspace -scheme Lisk -sdk iphonesimulator -derivedDataPath ios/build',
+        '/usr/bin/xcodebuild -workspace ios/Lisk.xcworkspace -scheme Lisk -sdk iphonesimulator -derivedDataPath ios/build',
     },
     'android.debug': {
       name: 'Lisk',

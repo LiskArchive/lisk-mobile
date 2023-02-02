@@ -8,10 +8,13 @@
 
 const defaultSourceExts = require('metro-config/src/defaults/defaults').sourceExts;
 
+const env = require('./env.json');
+
+console.log('env.APP_MODE', env.APP_MODE);
+
 module.exports = {
   resolver: {
-    sourceExts:
-      process.env.MY_APP_MODE === 'mocked' ? ['mock.js', ...defaultSourceExts] : defaultSourceExts,
+    sourceExts: env.APP_MODE === 'mocked' ? ['mock.js', ...defaultSourceExts] : defaultSourceExts,
   },
   transformer: {
     getTransformOptions: async () => ({

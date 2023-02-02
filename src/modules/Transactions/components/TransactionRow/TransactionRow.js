@@ -9,9 +9,10 @@ import { fromRawLsk } from 'utilities/conversions';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import TransactionTimestamp from '../TransactionTimestamp';
 
-import getTransactionRowStyles from './styles';
-import { TransactionAmount, TransactionStatus } from './components';
+import getTransactionRowStyles from './TransactionRow.styles';
 import DiscreteModeComponent from '../../../../components/shared/DiscreteModeComponent';
+import { TransactionAmount } from './components/TransactionAmount';
+import { TransactionStatus } from './components/TransactionStatus';
 
 export default function TransactionRow({ transaction }) {
   const navigation = useNavigation();
