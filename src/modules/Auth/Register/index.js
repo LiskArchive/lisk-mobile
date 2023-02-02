@@ -1,8 +1,6 @@
 /* eslint-disable max-statements */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { BackHandler, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
 
 import Stepper from 'components/shared/Stepper';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
@@ -15,10 +13,6 @@ import RegisterSafeKeeping from './RegisterSafeKeeping';
 import styles from './styles';
 
 export default function Register({ route }) {
-  const navigation = useNavigation();
-
-  const settings = useSelector((state) => state.settings);
-
   const [showNav, setShowNav] = useState(true);
 
   const passphrase = useMemo(
@@ -45,12 +39,6 @@ export default function Register({ route }) {
     BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
     return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
   }, [onBackButtonPressedAndroid]);
-
-  useEffect(() => {
-    if (!settings.showedRegisterIntro) {
-      navigation.navigate('RegisterIntro');
-    }
-  }, [navigation, settings.showedRegisterIntro]);
 
   useScreenshotPrevent();
 

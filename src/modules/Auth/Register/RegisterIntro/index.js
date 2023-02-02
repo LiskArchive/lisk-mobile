@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
-import Slider from 'components/shared/__Slider/Slider';
+import Slider from 'components/shared/Slider/Slider';
 import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';
 import AvatarIllustrationSvg from 'assets/svgs/AvatarIllustrationSvg';
 import LockerIllustrationSvg from 'assets/svgs/LockerIllustrationSvg';

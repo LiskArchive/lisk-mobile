@@ -13,7 +13,6 @@ export const INITIAL_STATE = {
   language: languageKeys[0],
   enableCustomDerivationPath: false,
   showedIntro: false,
-  showedRegisterIntro: false,
   token: {
     active: tokenKeys[0],
     list: tokenKeys.reduce((acc, key) => {

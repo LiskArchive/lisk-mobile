@@ -90,7 +90,6 @@
   "Secure authentication": "Sichere Authentifizierung",
   "Access all functions via advanced biometric authentication.": "Greife auf alle Funktionen via biometrischer Authentifizierung zu.",
   "Easy access": "Einfacher Zugriff",
-  "Create an account using passphrase to access your LSK cryptocurrency.": "Erstellen Sie ein Konto mit Passphrase für den Zugriff auf Ihre LSK-Kryptowährung.",
   "Locked balance details": "",
   "Find details of your locked balance and the unlock waiting period.": "",
   "will be available to unlock": "... ~ {{timeToUnlock}}",
@@ -170,15 +169,7 @@
   },
   "auth": {
     "register" : {
-      "title": "Konto erstellen",
-      "intro" : {
-        "addressTitle": "Ihre Lisk-Adresse",
-        "addressDescription": "Die Adresse ist einmalig und kann nicht geändert werden. Es ist deins. Finden Sie es auf Ihrer Homepage.",
-        "avatarTitle": "Ein einzigartiger Avatar",
-        "avatarDescription": "Der Avatar stellt die Adresse dar, wodurch sie leicht zu erkennen ist.",
-        "passphraseTitle": "Eine sichere Passphrase",
-        "passphraseDescription": "Ihre Passphrase wird für den Zugriff auf Ihr Konto verwendet. Niemand kann es zurücksetzen, nicht einmal Lisk."
-      },
+      "title": "Konto erstellen",      
       "safeKeeping": {
         "title": "Speichern Sie Ihre Passphrase",
         "description": "Bewahren Sie Ihre Passphrase sorgfältig auf",
