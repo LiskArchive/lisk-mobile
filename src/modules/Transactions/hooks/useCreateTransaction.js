@@ -46,6 +46,8 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isError: isErrorOnCommandParametersSchemas,
   } = useCommandParametersSchemasQuery();
 
+  const transactionSchema = commandParametersSchemasData?.data?.transaction?.schema;
+
   const {
     data: transactionFeeEstimateData,
     isLoading: isTransactionFeeEstimateLoading,
@@ -73,7 +75,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
 
   useEffect(
     () => {
-      if (isSuccess) {
+      if (isSuccess && transactionSchema) {
         transaction.init({
           pubkey,
           networkStatus: networkStatusData?.data,
@@ -83,11 +85,12 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           module,
           command,
           encodedTransaction,
+          schema: transactionSchema,
         });
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isSuccess, transaction, encodedTransaction, module, pubkey, command]
+    [isSuccess, transaction, encodedTransaction, module, pubkey, command, transactionSchema]
   );
 
   return { data: transaction, isLoading, isSuccess, isError };
