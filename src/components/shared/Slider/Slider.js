@@ -73,8 +73,6 @@ export default function Slider({ data, renderController, style }) {
     if (index > 0) {
       const updatedIndex = index - 1;
 
-      setIndex(updatedIndex);
-
       flatListRef?.current?.scrollToIndex({
         animated: true,
         index: updatedIndex,
@@ -86,8 +84,6 @@ export default function Slider({ data, renderController, style }) {
     if (index < data.length - 1) {
       const updatedIndex = index + 1;
 
-      setIndex(updatedIndex);
-
       flatListRef?.current?.scrollToIndex({
         animated: true,
         index: updatedIndex,
@@ -97,13 +93,8 @@ export default function Slider({ data, renderController, style }) {
 
   const handleGoToLastIndex = useCallback(() => {
     if (index < data.length - 1) {
-      const updatedIndex = data.length - 1;
-
-      setIndex(updatedIndex);
-
-      flatListRef?.current?.scrollToIndex({
+      flatListRef?.current?.scrollToEnd({
         animated: true,
-        index: updatedIndex,
       });
     }
   }, [index, data]);
