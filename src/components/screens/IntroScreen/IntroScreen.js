@@ -61,11 +61,11 @@ export default function IntroScreen() {
       return (
         <View style={styles.footer}>
           <LabelButton onClick={handleGoToLastIndex} style={{ flex: 0.3, height: 48 }}>
-            Skip
+            {i18next.t('intro.skipButton')}
           </LabelButton>
 
           <PrimaryButton onClick={handleGoNextIndex} style={{ flex: 0.7, height: 48 }}>
-            Next
+            {i18next.t('intro.nextButton')}
           </PrimaryButton>
         </View>
       );
@@ -74,11 +74,11 @@ export default function IntroScreen() {
     return (
       <View style={styles.lastSlideFooter}>
         <Button onClick={() => handleContinueClick('AuthMethod')} style={{ marginBottom: 16 }}>
-          Continue to add account
+          {i18next.t('intro.continueToAddAccountButton')}
         </Button>
 
         <PrimaryButton onClick={() => handleContinueClick('Register')}>
-          Continue to account creation
+          {i18next.t('intro.continueToCreateAccountButton')}
         </PrimaryButton>
       </View>
     );

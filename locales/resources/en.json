@@ -22,7 +22,11 @@
     "uniqueAvatarTitle": "A unique avatar",
     "uniqueAvatarDescription": "The Avatar represents the address, making it easy to recognize.",
     "manageApplicationsTitle": "Manage blockchain application assets",
-    "manageApplicationsDescription": "You can manage several blockchain application assets (claim tokens, NFTs, etc..) using your accounts."
+    "manageApplicationsDescription": "You can manage several blockchain application assets (claim tokens, NFTs, etc..) using your accounts.",
+    "skipButton": "Skip",
+    "nextButton": "Continue",
+    "continueToAddAccountButton": "Continue to add account",
+    "continueToCreateAccountButton": "Continue to account creation"
   },
   "Activity": "Activity",
   "Add to bookmarks": "Add to bookmarks",

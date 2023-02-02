@@ -22,7 +22,11 @@
     "uniqueAvatarTitle": "Ein einzigartiger Avatar",
     "uniqueAvatarDescription": "Der Avatar repräsentiert die Adresse und macht es einfach zu erkennen.",
     "manageApplicationsTitle": "Verwalten Sie Anwendungsvermögen von Blockchain-Anwendungen",
-    "manageApplicationsDescription": "Sie können mehrere Anwendungsvermögen von Blockchain-Anwendungen (Anspruchstoken, NFTs usw.) mit Ihren Konten verwalten."
+    "manageApplicationsDescription": "Sie können mehrere Anwendungsvermögen von Blockchain-Anwendungen (Anspruchstoken, NFTs usw.) mit Ihren Konten verwalten.",
+    "skipButton": "Überspringen",
+    "nextButton": "Weiter",
+    "continueToAddAccountButton": "Weiter zur Konto hinzufügen",
+    "continueToCreateAccountButton": "Weiter zur Kontoerstellung"
   },
   "Activity": "Aktivitäten",
   "Add to bookmarks": "Zu Lesezeichen hinzufügen",  
