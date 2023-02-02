@@ -45,7 +45,7 @@ export default function Slider({ data, renderController, style }) {
 
   const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
     if (viewableItems[0]) {
-      setIndex(viewableItems[0]?.index);
+      setIndex(viewableItems[0].index);
     }
   }).current;
 
