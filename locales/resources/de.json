@@ -16,6 +16,14 @@
       "emailReportButton": "Melden Sie den Fehler per E-Mail"
     }
   },
+  "intro": {
+    "sendAndRequestTokensTitle": "Senden und Token anfordern",
+    "sendAndRequestTokensDescription": "Ein Konto zu erstellen ist der erste Schritt, um von der Blockchain-Technologie zu profitieren. Mit Ihrem Konto können Sie sicher Tokens innerhalb und über Blockchain-Anwendungen senden und anfordern.",
+    "uniqueAvatarTitle": "Ein einzigartiger Avatar",
+    "uniqueAvatarDescription": "Der Avatar repräsentiert die Adresse und macht es einfach zu erkennen.",
+    "manageApplicationsTitle": "Verwalten Sie Anwendungsvermögen von Blockchain-Anwendungen",
+    "manageApplicationsDescription": "Sie können mehrere Anwendungsvermögen von Blockchain-Anwendungen (Anspruchstoken, NFTs usw.) mit Ihren Konten verwalten."
+  },
   "Activity": "Aktivitäten",
   "Add to bookmarks": "Zu Lesezeichen hinzufügen",  
   "Address": "Adresse",
@@ -23,8 +31,7 @@
   "Amount": "Betrag",
   "Status": "",  
   "Cancel": "Abbrechen",
-  "Edit bookmark": "Lesezeichen bearbeiten",
-  "Get a full overview of your current balance, transaction history and much more.": "Erhalte einen Überblick über deinen Kontostand, deine Transaktionsgeschichte und vieles mehr.",
+  "Edit bookmark": "Lesezeichen bearbeiten",  
   "Here’s what you need to know:": "Hier ist was du wissen musst:",
   "I have read and agreed with the": "Ich akzeptiere die",
   "Initialize now": "Jetzt initialisieren",
@@ -84,12 +91,6 @@
   "You will be able to add it again anytime.": "Du kannst es jederzeit wieder hinzufügen.",
   "We’ve got good news!": "Gute Neuigkeiten für dich!",
   "Info": "Info",
-  "Activity history": "Aktivitäts Historie",
-  "Token transfer": "Token Transfer",
-  "Transfer your tokens easily to other accounts, by simply scanning QR Codes.": "Um deine Tokens zu anderen Accounts zu senden, scanne einfach den QR Code.",
-  "Secure authentication": "Sichere Authentifizierung",
-  "Access all functions via advanced biometric authentication.": "Greife auf alle Funktionen via biometrischer Authentifizierung zu.",
-  "Easy access": "Einfacher Zugriff",
   "Locked balance details": "",
   "Find details of your locked balance and the unlock waiting period.": "",
   "will be available to unlock": "... ~ {{timeToUnlock}}",

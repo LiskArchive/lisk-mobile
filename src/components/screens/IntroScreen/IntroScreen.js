@@ -27,24 +27,20 @@ export default function IntroScreen() {
   const slides = [
     {
       id: 1,
-      title: i18next.t('Activity history'),
-      description: i18next.t(
-        'Get a full overview of your current balance, transaction history and much more.'
-      ),
+      title: i18next.t('intro.sendAndRequestTokensTitle'),
+      description: i18next.t('intro.sendAndRequestTokensDescription'),
       body: <AddressIllustrationSvg />,
     },
     {
       id: 2,
-      title: i18next.t('Token transfer'),
-      description: i18next.t(
-        'Transfer your tokens easily to other accounts, by simply scanning QR Codes.'
-      ),
+      title: i18next.t('intro.uniqueAvatarTitle'),
+      description: i18next.t('intro.uniqueAvatarDescription'),
       body: <AvatarIllustrationSvg />,
     },
     {
       id: 3,
-      title: i18next.t('Secure authentication'),
-      description: i18next.t('Access all functions via advanced biometric authentication.'),
+      title: i18next.t('intro.manageApplicationsTitle'),
+      description: i18next.t('intro.manageApplicationsDescription'),
       body: <LockerIllustrationSvg />,
     },
   ];
