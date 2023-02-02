@@ -95,9 +95,6 @@ const navigationOptions = {
   Intro: {
     header: () => null,
   },
-  RegisterIntro: {
-    header: () => null,
-  },
   EditAccount: {
     title: null,
     header: () => null,

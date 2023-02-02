@@ -7,12 +7,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
-import Slider from 'components/shared/__Slider/Slider';
+import Slider from 'components/shared/Slider/Slider';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import CoinIllustrationSvg from 'assets/svgs/CoinIllustrationSvg';
-import ActivityHistoryIllustrationSvg from 'assets/svgs/ActivityHistoryIllustrationSvg';
-import SecureAuthIllustrationSvg from 'assets/svgs/SecureAuthIllustrationSvg';
-import EasyAccessIllustrationSvg from 'assets/svgs/EasyAccessIllustrationSvg';
+import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';
+import AvatarIllustrationSvg from 'assets/svgs/AvatarIllustrationSvg';
+import LockerIllustrationSvg from 'assets/svgs/LockerIllustrationSvg';
 
 import styles from './IntroScreen.styles';
 
@@ -32,7 +31,7 @@ export default function IntroScreen() {
       description: i18next.t(
         'Get a full overview of your current balance, transaction history and much more.'
       ),
-      body: <ActivityHistoryIllustrationSvg />,
+      body: <AddressIllustrationSvg />,
     },
     {
       id: 2,
@@ -40,21 +39,13 @@ export default function IntroScreen() {
       description: i18next.t(
         'Transfer your tokens easily to other accounts, by simply scanning QR Codes.'
       ),
-      body: <CoinIllustrationSvg />,
+      body: <AvatarIllustrationSvg />,
     },
     {
       id: 3,
       title: i18next.t('Secure authentication'),
       description: i18next.t('Access all functions via advanced biometric authentication.'),
-      body: <SecureAuthIllustrationSvg />,
-    },
-    {
-      id: 4,
-      title: i18next.t('Easy access'),
-      description: i18next.t(
-        'Create an account using passphrase to access your LSK cryptocurrency.'
-      ),
-      body: <EasyAccessIllustrationSvg />,
+      body: <LockerIllustrationSvg />,
     },
   ];
 
