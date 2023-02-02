@@ -14,6 +14,8 @@ import Slider from 'components/shared/__Slider/Slider';
 // import securePassphraseImg from 'assets/images/registrationIntro/securePassphrase3x.png';
 // import uniqueAvatarImg from 'assets/images/registrationIntro/uniqueAvatar3x.png';
 import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';
+import AvatarIllustrationSvg from 'assets/svgs/AvatarIllustrationSvg';
+import LockerIllustrationSvg from 'assets/svgs/LockerIllustrationSvg';
 
 import styles from './styles';
 
@@ -33,13 +35,13 @@ export default function RegisterIntro() {
       id: 2,
       title: i18next.t('auth.register.intro.avatarTitle'),
       description: i18next.t('auth.register.intro.avatarDescription'),
-      body: <AddressIllustrationSvg />,
+      body: <AvatarIllustrationSvg />,
     },
     {
       id: 3,
       title: i18next.t('auth.register.intro.passphraseTitle'),
       description: i18next.t('auth.register.intro.passphraseDescription'),
-      body: <AddressIllustrationSvg />,
+      body: <LockerIllustrationSvg />,
     },
   ];
 
