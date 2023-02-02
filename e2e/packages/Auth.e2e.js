@@ -8,8 +8,7 @@ describe('Auth module', () => {
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
-    await element(by.id('sliderButton')).tap();
-    await element(by.id('continueButton')).tap();
+    await element(by.id('continueToAddAccountButton')).tap();
   });
 
   it('should add an account by recovery phrase', async () => {
@@ -70,9 +69,6 @@ describe('Auth module', () => {
     const recoveryPhraseArray = testConstants.secretRecoveryPhrase.split(' ');
     await element(by.id('add-account')).tap();
     await element(by.id('createAccountButton')).atIndex(1).tap();
-    await element(by.id('register-intro-container')).swipe('left');
-    await element(by.id('register-intro-container')).swipe('left');
-    await element(by.id('continueButton')).atIndex(0).tap();
     await element(by.id('understandResponsibilitySwitch')).tap();
     await element(by.id('safeKeepingButton')).tap();
     await element(by.id(`passphrasePlaceholderFor-${recoveryPhraseArray[0]}`)).tap();
