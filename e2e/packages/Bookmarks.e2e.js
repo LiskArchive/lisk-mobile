@@ -8,8 +8,7 @@ describe('Bookmark Screen', () => {
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
-    await element(by.id('sliderButton')).tap();
-    await element(by.id('continueButton')).tap();
+    await element(by.id('continueToAddAccountButton')).tap();
     await element(by.id('restore-from-file')).atIndex(1).tap();
     await element(by.id('decrypt-password-input')).tap();
     await element(by.id('decrypt-password-input')).replaceText('Password1!');
