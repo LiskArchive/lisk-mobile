@@ -17,7 +17,6 @@ describe('Intro Screen', () => {
   });
 
   it('should navigate to add account screen after intro screen', async () => {
-    // await element(by.id('sliderButton')).tap();
     await element(by.id('continueToAddAccountButton')).tap();
     await expect(element(by.id('add-account-title')).atIndex(1)).toBeVisible();
   });
