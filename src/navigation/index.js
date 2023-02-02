@@ -14,7 +14,7 @@ import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
-import Intro from 'components/screens/intro';
+import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 
 import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
@@ -81,7 +81,11 @@ export default function Navigator({ children }) {
             component={PasswordSetupForm}
             options={navigationOptions.SignIn}
           />
-          <StackNavigator.Screen name="Intro" component={Intro} options={navigationOptions.Intro} />
+          <StackNavigator.Screen
+            name="Intro"
+            component={IntroScreen}
+            options={navigationOptions.Intro}
+          />
           <StackNavigator.Screen
             name="Main"
             component={AppNavigator}

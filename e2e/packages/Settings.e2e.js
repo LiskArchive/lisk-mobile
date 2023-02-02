@@ -9,8 +9,7 @@ describe.skip('Settings Screen', () => {
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
-    await element(by.id('sliderButton')).tap();
-    await element(by.id('continueButton')).tap();
+    await element(by.id('continueToAddAccountButton')).tap();
   });
 
   it('should load settings screen', async () => {
