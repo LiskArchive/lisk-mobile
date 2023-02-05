@@ -1433,29 +1433,29 @@
     "@json-rpc-tools/types" "^1.7.6"
     "@pedrouid/environment" "^1.0.1"
 
-"@liskhq/lisk-api-client@^6.0.0-alpha.12":
-  version "6.0.0-alpha.12"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-api-client/-/lisk-api-client-6.0.0-alpha.12.tgz#0c147e318880e3c267c5793d808c5537d7b34967"
-  integrity sha512-GcW8BpEFul7sU9iEB/j2OjgaOcqTFbGdaLbh4LDYd/2kpTz0BEsy1DpM2rIMo93m/CuXBcpJcqqAa0mXQPDHSA==
+"@liskhq/lisk-api-client@^6.0.0-alpha.13":
+  version "6.0.0-alpha.13"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-api-client/-/lisk-api-client-6.0.0-alpha.13.tgz#1a8a12e55b4c3cc33150589d6402071c851ff5d8"
+  integrity sha512-YItB4tvXIILPAGz5PJD/J1qYkgT84A4L8hxD61WX9dLCIAft4sP3NF4bgyciEXfB+dxneNHun9Tn1X9th8XNsA==
   dependencies:
     "@liskhq/lisk-codec" "^0.3.0-alpha.7"
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
-    "@liskhq/lisk-transactions" "^6.0.0-alpha.9"
+    "@liskhq/lisk-transactions" "^6.0.0-alpha.10"
     "@liskhq/lisk-validator" "^0.7.0-alpha.6"
     isomorphic-ws "4.0.1"
     ws "8.11.0"
     zeromq "6.0.0-beta.6"
 
-"@liskhq/lisk-client@6.0.0-alpha.12":
-  version "6.0.0-alpha.12"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-client/-/lisk-client-6.0.0-alpha.12.tgz#03720cd860f8e4556a1976ab28e4312fff914d3f"
-  integrity sha512-Tqy6+XgAz9fJ+JFN/xhwgkV1SZSDWwe5tZy4KV8uf10hm3PdBh/n6UYaLNHd+tOBtj3V4nkqWWYGydDIrM2x6w==
+"@liskhq/lisk-client@6.0.0-alpha.13":
+  version "6.0.0-alpha.13"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-client/-/lisk-client-6.0.0-alpha.13.tgz#74a0c4c2cec5ba2c3fbd49ac57c1c2117ed4126d"
+  integrity sha512-Nk2yvKwpup0AuD85stsRdlbZbcLjOLgIjwUHFaH5jqrpS61KooKcu/dbdS6oc14wzy0B/zYqUZ5qG+g3fQd5KQ==
   dependencies:
-    "@liskhq/lisk-api-client" "^6.0.0-alpha.12"
+    "@liskhq/lisk-api-client" "^6.0.0-alpha.13"
     "@liskhq/lisk-codec" "^0.3.0-alpha.7"
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
     "@liskhq/lisk-passphrase" "^4.0.0-alpha.2"
-    "@liskhq/lisk-transactions" "^6.0.0-alpha.9"
+    "@liskhq/lisk-transactions" "^6.0.0-alpha.10"
     "@liskhq/lisk-tree" "^0.3.0-alpha.8"
     "@liskhq/lisk-utils" "^0.3.0-alpha.3"
     "@liskhq/lisk-validator" "^0.7.0-alpha.6"
@@ -1489,10 +1489,10 @@
   dependencies:
     bip39 "3.0.3"
 
-"@liskhq/lisk-transactions@^6.0.0-alpha.9":
-  version "6.0.0-alpha.9"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-transactions/-/lisk-transactions-6.0.0-alpha.9.tgz#0df52eca8e8a4782ff31181fd67c9cf4a02bc04a"
-  integrity sha512-xWMbanUeHfYqHWitejoJbMGNMlAOnNpxhKz6f7b4orc1IC4Ivb01R5VnY7MaYAmF1EXXPLxF24ZZn4bM4GmbIQ==
+"@liskhq/lisk-transactions@^6.0.0-alpha.10":
+  version "6.0.0-alpha.10"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-transactions/-/lisk-transactions-6.0.0-alpha.10.tgz#6c9334d2b4a1aae621724b0ef97d134d8d782540"
+  integrity sha512-udheIcWP7bWXLRiSYMkbbSW8bAxpSWK9qwtFLpwVA+U7u2n/RU6fzJU3JqUno9PC+WLkQQbsjiskKTbdtC0FVw==
   dependencies:
     "@liskhq/lisk-codec" "^0.3.0-alpha.7"
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
@@ -11010,13 +11010,6 @@ react-native-svg@^12.5.0:
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"
-
-react-native-swiper@1.6.0:
-  version "1.6.0"
-  resolved "https://npm.lisk.com/react-native-swiper/-/react-native-swiper-1.6.0.tgz#59fdbdf95addee49630312f27077622c27776819"
-  integrity sha512-OnkTTZi+9uZUgy0uz1I9oYDhCU3z36lZn+LFsk9FXPRelxb/KeABzvPs3r3SrHWy1aA67KGtSFj0xNK2QD0NJQ==
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-switch-pro@1.0.5:
   version "1.0.5"
