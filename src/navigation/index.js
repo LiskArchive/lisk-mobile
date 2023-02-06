@@ -25,7 +25,7 @@ import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
-import SendToken from 'modules/SendToken';
+import SendToken from 'modules/SendToken/SendToken';
 import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';

@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -18,9 +18,14 @@ import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
-import { getSendTokenStyles } from './styles';
+import { getSendTokenStyles } from './SendToken.styles';
 
-export default function SendToken({ route }) {
+/**
+ * Renders form to transfer tokens transaction.
+ */
+export default function SendToken() {
+  const route = useRoute();
+
   const navigation = useNavigation();
 
   const account = useSelector((state) => state.account);
