@@ -1,6 +1,15 @@
 /* eslint-disable max-statements */
 import { useInvokeQuery } from 'utilities/api/hooks/useInvokeQuery';
 
+/**
+ * Calculates the initialization fee (or extra command fee) of a transaction
+ * for a given account and token.
+ * @param {Object} params.options - Query custom options.
+ * @param {String} params.address - Account address to verify existence (fee will be 0 if des not exist).
+ * @param {String} params.tokenID - Token ID to verify the account address existence.
+ * @param {Boolean} params.isCrossChainTransaction - Flag that indicates if transaction is cross-chain or not (default: false).
+ * @returns {Object} Query state: data, isLoading, isError, error and isSuccess.
+ */
 export function useInitializationFee({
   options = {},
   address,
