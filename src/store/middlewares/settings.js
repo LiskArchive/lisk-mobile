@@ -3,7 +3,6 @@ import { storeSettings } from 'utilities/storage';
 import { deviceLocale } from 'utilities/device';
 import i18n from '../../../locales';
 // import { languageKeys } from 'constants/languages';
-import { pricesRetrieved } from '../../actions/service';
 
 const settingsMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -30,9 +29,6 @@ const settingsMiddleware = (store) => (next) => (action) => {
       break;
     case actionTypes.settingsUpdated:
       next(action);
-      if (action.data.token) {
-        store.dispatch(pricesRetrieved());
-      }
       storeSettings(store.getState().settings);
 
       if (action.data.language) {

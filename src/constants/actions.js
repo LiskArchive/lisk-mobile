@@ -6,7 +6,6 @@ const actionTypes = {
   loadingStarted: 'LOADING_STARTED',
   loadingFinished: 'LOADING_FINISHED',
   // Service
-  pricesRetrieved: 'PRICES_RETRIEVED',
   dynamicFeesRetrieved: 'DYNAMIC_FEES_RETRIEVED',
   // Network
   networkInfoUpdated: 'NETWORK_INFO_UPDATED',
