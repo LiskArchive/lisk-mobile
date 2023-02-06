@@ -8,7 +8,7 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { useTransactionFeeEstimateQuery } from 'modules/Transactions/api/useTransactionFeeEstimateQuery';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
@@ -311,8 +311,9 @@ export function SendTokenTransactionFeesLabels({
     transaction.data.transaction.fee.toString()
   );
 
-  const initializationFee = useInitializationFeeCalculator({
-    recipientAccountAddress,
+  const initializationFee = useInitializationFee({
+    address: recipientAccountAddress,
+    tokenID,
   });
 
   const cmmFee = useCCMFeeCalculator({

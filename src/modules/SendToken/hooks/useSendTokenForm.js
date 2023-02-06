@@ -11,7 +11,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
-import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
+import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
@@ -74,8 +74,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     enableReinitialize: true,
   });
 
-  const initializationFee = useInitializationFeeCalculator({
-    recipientAccountAddress: form.watch('recipientAccountAddress'),
+  const initializationFee = useInitializationFee({
+    address: form.watch('recipientAccountAddress'),
+    tokenID: form.watch('tokenID'),
   });
 
   const cmmFee = useCCMFeeCalculator({
