@@ -23,13 +23,11 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
   }
 
   function localizeAmount(amount) {
-    return (
-      Number(amount).toLocaleString(
-        `${accountSettings.language}-${accountSettings.language?.toUpperCase()}`,
-        {
-          maximumFractionDigits: 20,
-        }
-      ) ?? 0
+    return Number(amount).toLocaleString(
+      `${accountSettings.language}-${accountSettings.language?.toUpperCase()}`,
+      {
+        maximumFractionDigits: 20,
+      }
     );
   }
 
