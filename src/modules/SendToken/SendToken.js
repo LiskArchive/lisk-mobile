@@ -10,7 +10,6 @@ import Stepper from 'components/shared/Stepper';
 import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
-import { P } from 'components/shared/toolBox/typography';
 import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
 import useSendTokenForm from './hooks/useSendTokenForm';
@@ -19,6 +18,7 @@ import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
 import { getSendTokenStyles } from './SendToken.styles';
+import SendTokenSkeleton from './components/SendTokenSkeleton/SendTokenSkeleton';
 
 /**
  * Renders form to transfer tokens transaction.
@@ -92,9 +92,7 @@ export default function SendToken() {
             )}
           </>
         )}
-        renderLoading={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>Loading...</P>
-        )}
+        renderLoading={() => <SendTokenSkeleton />}
         renderError={() => (
           <ResultScreen
             illustration={<ErrorIllustrationSvg />}
