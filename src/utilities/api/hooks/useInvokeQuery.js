@@ -15,7 +15,7 @@ export function useInvokeQuery({ config: customConfig = {}, options }) {
     ...customConfig,
   };
   return useCustomQuery({
-    keys: [INVOKE_QUERY],
+    keys: [INVOKE_QUERY, config, options],
     config,
     options,
   });
