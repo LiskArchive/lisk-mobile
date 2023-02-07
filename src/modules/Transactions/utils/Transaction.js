@@ -22,7 +22,9 @@ export class Transaction {
 
   _schema = null;
 
-  _feeEstimatePerByte = null;
+  _priorityFee = null;
+
+  _extraCommandFee = null;
 
   transaction = {
     module: null,
@@ -45,7 +47,8 @@ export class Transaction {
     pubkey,
     networkStatus,
     auth,
-    feeEstimatePerByte,
+    priorityFee,
+    extraCommandFee,
     commandParametersSchemas,
     module = null,
     command = null,
@@ -57,7 +60,8 @@ export class Transaction {
     this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
-    this._feeEstimatePerByte = feeEstimatePerByte;
+    this._priorityFee = priorityFee;
+    this._extraCommandFee = BigInt(extraCommandFee || 0);
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
       ? pubkey
       : Buffer.from(pubkey, 'hex');
@@ -165,14 +169,15 @@ export class Transaction {
   computeFee(extraFee = BigInt(0)) {
     this._validateTransaction();
 
-    const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
-
     const allocateEmptySignaturesWithEmptyBuffer = (signatureCount) =>
       new Array(signatureCount).fill(Buffer.alloc(64));
 
     const numberOfSignatures = this._auth.numberOfSignatures || 1;
 
-    const numberOfEmptySignatures = 0;
+    const options = {
+      numberOfSignatures,
+      additionalFee: this._extraCommandFee + extraFee,
+    };
 
     const minFee = Lisk.transactions.computeMinFee(
       {
@@ -185,19 +190,26 @@ export class Transaction {
         },
       },
       this._paramsSchema,
-      {
-        numberOfSignatures,
-        numberOfEmptySignatures,
-      }
+      options
     );
 
-    const priorityFee = this.transaction.priority
-      ? this._feeEstimatePerByte[this.transaction.priority]
-      : 0;
+    const priorityFee = this._getPriorityFee();
 
-    const fee = minFee + BigInt(priorityFee * transactionSize) + extraFee;
+    const fee = minFee + priorityFee;
 
     this.transaction = { ...this.transaction, fee };
+  }
+
+  /**
+   * Breakdowns the transaction fee into priorityFee, byteFee and extraCommandFee.
+   * @returns {Object} priorityFee, byteFee and extraCommandFee.
+   */
+  getFeeBreakdown() {
+    const priorityFee = this._getPriorityFee();
+    const extraCommandFee = this._extraCommandFee;
+    const byteFee = this.transaction.fee - priorityFee - extraCommandFee;
+
+    return { priorityFee, byteFee, extraCommandFee };
   }
 
   /**
@@ -259,5 +271,19 @@ export class Transaction {
     if (Buffer.isBuffer(params)) {
       throw new Error('Transaction parameter is not decoded.');
     }
+  }
+
+  /**
+   * Calculates the priority fee based on the base priority fee from the network and the transaction size.
+   * @returns {BigInt} Calculated priority fee.
+   */
+  _getPriorityFee() {
+    const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
+
+    const basePriorityFee = this.transaction.priority
+      ? this._priorityFee[this.transaction.priority]
+      : 0;
+
+    return BigInt(basePriorityFee * transactionSize);
   }
 }

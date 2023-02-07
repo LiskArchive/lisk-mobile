@@ -9,8 +9,8 @@ import * as Lisk from '@liskhq/lisk-client';
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
+import { usePriorityFee } from 'modules/Transactions/hooks/usePriorityFee';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
-import { useTransactionFeeEstimateQuery } from 'modules/Transactions/api/useTransactionFeeEstimateQuery';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
@@ -229,18 +229,18 @@ export function SendTokenMessageField({ value, onChange, style }) {
 
 export function SendTokenPriorityField({ value, onChange, style }) {
   const {
-    data: transactionFeeEstimateData,
+    data: priorityFeesData,
     isLoading: isTransactionFeeEstimateLoading,
     error: errorOnTransactionFeeEstimate,
-  } = useTransactionFeeEstimateQuery();
+  } = usePriorityFee();
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
   const priorities =
-    transactionFeeEstimateData?.data.feeEstimatePerByte &&
-    Object.entries(transactionFeeEstimateData.data.feeEstimatePerByte).map(([code, fee]) => ({
+    priorityFeesData &&
+    Object.entries(priorityFeesData).map(([code, fee]) => ({
       code,
       fee,
     }));
@@ -324,6 +324,10 @@ export function SendTokenTransactionFeesLabels({
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
+
+  const feesBreakdown = transaction.data.getFeeBreakdown();
+
+  console.log({ feesBreakdown });
 
   return (
     <View>

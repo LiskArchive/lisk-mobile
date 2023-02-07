@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-statements */
 import { useEffect, useRef } from 'react';
 
@@ -8,6 +9,8 @@ import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommand
 import { useTransactionFeeEstimateQuery } from '../api/useTransactionFeeEstimateQuery';
 
 import { Transaction } from '../utils/Transaction';
+import { usePriorityFee } from './usePriorityFee';
+import { useInitializationFee } from './useInitializationFee';
 
 /**
  * Creates a transaction object with all required build-in
@@ -49,29 +52,39 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const transactionSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
   const {
-    data: transactionFeeEstimateData,
-    isLoading: isTransactionFeeEstimateLoading,
-    isSuccess: isTransactionFeeEstimateSuccess,
-    isError: isErrorOnTransactionFeeEstimate,
-  } = useTransactionFeeEstimateQuery();
+    data: priorityFeeData,
+    isLoading: isPriorityFeeLoading,
+    isSuccess: isPriorityFeeSuccess,
+    isError: isErrorPriorityFee,
+  } = usePriorityFee();
+
+  const {
+    data: initializationFeeData,
+    isLoading: isInitializationFeeLoading,
+    isSuccess: isInitializationFeeSuccess,
+    isError: isErrorInitializationFee,
+  } = useInitializationFee();
 
   const isLoading =
     isNetworkStatusLoading ||
     isAuthLoading ||
     isCommandParametersSchemasLoading ||
-    isTransactionFeeEstimateLoading;
+    isPriorityFeeLoading ||
+    isInitializationFeeLoading;
 
   const isSuccess =
     isNetworkStatusSuccess &&
     isAuthSuccess &&
     isCommandParametersSchemasSuccess &&
-    isTransactionFeeEstimateSuccess;
+    isPriorityFeeSuccess &&
+    isInitializationFeeSuccess;
 
   const isError =
     isErrorOnNetworkStatus ||
     isErrorOnAuth ||
     isErrorOnCommandParametersSchemas ||
-    isErrorOnTransactionFeeEstimate;
+    isErrorPriorityFee ||
+    isErrorInitializationFee;
 
   useEffect(
     () => {
@@ -80,7 +93,8 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           pubkey,
           networkStatus: networkStatusData?.data,
           auth: authData?.data,
-          feeEstimatePerByte: transactionFeeEstimateData?.data.feeEstimatePerByte,
+          priorityFee: priorityFeeData,
+          extraCommandFee: initializationFeeData,
           commandParametersSchemas: commandParametersSchemasData?.data.commands,
           module,
           command,
