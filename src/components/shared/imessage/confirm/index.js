@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { includeFee } from 'utilities/conversions';
+import { includeFee } from 'utilities/conversions.utils';
 import { colors } from 'constants/styleGuide';
 import { extractAddress } from 'utilities/api/lisk/account';
 import FormattedNumber from '../../formattedNumber';

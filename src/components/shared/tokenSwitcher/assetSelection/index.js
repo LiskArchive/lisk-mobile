@@ -8,7 +8,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actio
 import { colors } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import FormatedNumber from 'components/shared/formattedNumber';
-import { fromRawLsk } from 'utilities/conversions';
+import { fromRawLsk } from 'utilities/conversions.utils';
 import ModalHolder from 'utilities/modal';
 import getStyles from './styles';
 

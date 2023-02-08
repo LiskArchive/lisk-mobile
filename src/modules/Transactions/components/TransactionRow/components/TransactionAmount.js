@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { fromRawLsk } from 'utilities/conversions';
+import { fromRawLsk } from 'utilities/conversions.utils';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { useTransactionAssets } from '../../../hooks/useTransactionAssets';
 
