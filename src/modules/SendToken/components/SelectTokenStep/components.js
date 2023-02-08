@@ -310,16 +310,19 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
   const feesBreakdown = transaction.data.getFeeBreakdown();
 
   const feesLabels = Object.entries(feesBreakdown).reduce(
-    (acc, [feeKey, feeValue]) => ({
-      ...acc,
-      [feeKey]: fromBaseToDisplayDenom({
-        amount: feeValue,
-        displayDenom: selectedToken.displayDenom,
-        denomUnits: selectedToken.denomUnits,
-        symbol: selectedToken.symbol,
-        withSymbol: true,
-      }),
-    }),
+    (acc, [feeKey, feeValue]) =>
+      feeValue > 0
+        ? {
+            ...acc,
+            [feeKey]: fromBaseToDisplayDenom({
+              amount: feeValue,
+              displayDenom: selectedToken.displayDenom,
+              denomUnits: selectedToken.denomUnits,
+              symbol: selectedToken.symbol,
+              withSymbol: true,
+            }),
+          }
+        : acc,
     {}
   );
 
@@ -368,21 +371,25 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
             <Text style={[styles.theme.text]}>{feesLabels.byteFee}</Text>
           </View>
 
-          <View style={[styles.feeBreakdownRow]}>
-            <Text style={[styles.secondaryText, styles.iconLabel]}>
-              {i18next.t('sendToken.tokenSelect.priorityFeeLabel')}
-            </Text>
+          {feesLabels.priorityFee && (
+            <View style={[styles.feeBreakdownRow]}>
+              <Text style={[styles.secondaryText, styles.iconLabel]}>
+                {i18next.t('sendToken.tokenSelect.priorityFeeLabel')}
+              </Text>
 
-            <Text style={[styles.theme.text]}>{feesLabels.priorityFee}</Text>
-          </View>
+              <Text style={[styles.theme.text]}>{feesLabels.priorityFee}</Text>
+            </View>
+          )}
 
-          <View style={[styles.feeBreakdownRow]}>
-            <Text style={[styles.secondaryText, styles.iconLabel]}>
-              {i18next.t('sendToken.tokenSelect.extraCommandFeeLabel')}
-            </Text>
+          {feesLabels.extraCommandFee && (
+            <View style={[styles.feeBreakdownRow]}>
+              <Text style={[styles.secondaryText, styles.iconLabel]}>
+                {i18next.t('sendToken.tokenSelect.extraCommandFeeLabel')}
+              </Text>
 
-            <Text style={[styles.theme.text]}>{feesLabels.extraCommandFee}</Text>
-          </View>
+              <Text style={[styles.theme.text]}>{feesLabels.extraCommandFee}</Text>
+            </View>
+          )}
         </FadeInView>
       )}
     </View>
