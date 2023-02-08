@@ -12,6 +12,10 @@ export default () => ({
     footer: {
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
+      marginBottom: boxes.boxPadding,
+    },
+    rightAdornment: {
+      paddingRight: 80,
     },
     input: {
       marginTop: 8,
