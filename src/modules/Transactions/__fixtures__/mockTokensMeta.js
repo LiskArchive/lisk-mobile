@@ -9,7 +9,7 @@ export const mockTokensMeta = [
       svg: 'https://lisk-qa.ams3.digitaloceanspaces.com/Logo-20.svg',
     },
     symbol: 'LSK',
-    displayDenom: 'lisk',
+    displayDenom: 'lsk',
     baseDenom: 'beddows',
     denomUnits: [
       {
