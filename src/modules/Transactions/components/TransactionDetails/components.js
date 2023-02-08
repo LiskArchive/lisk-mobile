@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { LabelButton } from 'components/shared/toolBox/button';
-import { fromRawLsk } from 'utilities/conversions';
+import { fromRawLsk } from 'utilities/conversions.utils';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';

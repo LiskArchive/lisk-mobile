@@ -16,7 +16,7 @@ module.exports = {
     'src/constants/',
     'src/contexts/',
     'src/store',
-    'src/utilities/conversions.js',
+    'src/utilities/conversions.utils.js',
     'src/utilities/device.js',
     'src/utilities/easing.js',
     'src/utilities/api/',

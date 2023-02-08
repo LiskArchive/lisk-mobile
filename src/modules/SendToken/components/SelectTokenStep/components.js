@@ -8,9 +8,7 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import { usePriorityFee } from 'modules/Transactions/hooks/usePriorityFee';
-import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
@@ -20,8 +18,10 @@ import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
 import DataRenderer from 'components/shared/DataRenderer';
+import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
+import CaretSvg from 'assets/svgs/CaretSvg';
 import colors from 'constants/styleGuide/colors';
 
 import { useTokenAmountInCurrency } from './hooks';
@@ -59,7 +59,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         {selectedToken && (
           <Picker.Label style={style?.label}>
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
-            <Text style={[styles.balanceText]}>
+            <Text style={[styles.primaryText]}>
               {tokenBalance} {selectedToken.symbol}
             </Text>
           </Picker.Label>
@@ -75,7 +75,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
             <Picker.Toggle style={style?.toggle}>
               {selectedToken && (
                 <View style={[styles.row]}>
-                  <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
+                  <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
 
                   <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
                 </View>
@@ -88,7 +88,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
                 keyExtractor={(item) => item.tokenID}
                 renderItem={(item) => (
                   <Picker.Item key={item.tokenID} value={item.tokenID}>
-                    <Text style={[styles.text, styles.theme.text]}>{item.symbol}</Text>
+                    <Text style={[styles.theme.text]}>{item.symbol}</Text>
 
                     <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
                   </Picker.Item>
@@ -296,30 +296,12 @@ export function SendTokenPriorityField({ value, onChange, style }) {
   );
 }
 
-export function SendTokenTransactionFeesLabels({
-  tokenID,
-  recipientAccountAddress,
-  senderApplication,
-  recipientApplication,
-  transaction,
-}) {
+export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, transaction }) {
+  const [showFeesBreakdown, setShowFeesBreakdown] = useState(false);
+
   const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
-
-  const transactionFee = Lisk.transactions.convertBeddowsToLSK(
-    transaction.data.transaction.fee.toString()
-  );
-
-  const initializationFee = useInitializationFee({
-    address: recipientAccountAddress,
-    tokenID,
-  });
-
-  const cmmFee = useCCMFeeCalculator({
-    senderApplicationChainID: senderApplication.chainID,
-    recipientApplicationChainID: recipientApplication.chainID,
-  });
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
@@ -327,13 +309,25 @@ export function SendTokenTransactionFeesLabels({
 
   const feesBreakdown = transaction.data.getFeeBreakdown();
 
-  console.log({ feesBreakdown });
+  const feesLabels = Object.entries(feesBreakdown).reduce(
+    (acc, [feeKey, feeValue]) => ({
+      ...acc,
+      [feeKey]: fromBaseToDisplayDenom({
+        amount: feeValue,
+        displayDenom: selectedToken.displayDenom,
+        denomUnits: selectedToken.denomUnits,
+        symbol: selectedToken.symbol,
+        withSymbol: true,
+      }),
+    }),
+    {}
+  );
 
   return (
     <View>
       <View style={[styles.feeContainer]}>
         <View style={[styles.row]}>
-          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
+          <Text style={[styles.theme.text, styles.iconLabel, showFeesBreakdown && styles.boldText]}>
             {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
           </Text>
 
@@ -343,64 +337,54 @@ export function SendTokenTransactionFeesLabels({
           />
         </View>
 
-        <Text style={[styles.text, styles.theme.text]}>
-          {transactionFee} {selectedToken?.symbol}
-        </Text>
-      </View>
-
-      <View style={[styles.feeContainer]}>
         <View style={[styles.row]}>
-          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
-            {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
+          <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>
+            {feesLabels.totalFee}
           </Text>
 
-          <InfoToggler
-            title={i18next.t('sendToken.info.initializationFee.title')}
-            description={i18next.t('sendToken.info.initializationFee.description1')}
-          />
+          <TouchableOpacity onPress={() => setShowFeesBreakdown((prevState) => !prevState)}>
+            <CaretSvg
+              color={colors.light.ultramarineBlue}
+              height={16}
+              direction={showFeesBreakdown ? 'down' : 'right'}
+            />
+          </TouchableOpacity>
         </View>
-
-        <DataRenderer
-          data={initializationFee.data}
-          isLoading={initializationFee.isLoading}
-          error={initializationFee.error}
-          renderData={(data) => (
-            <Text style={[styles.text, styles.theme.text]}>
-              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
-            </Text>
-          )}
-          renderEmpty={() => (
-            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
-          )}
-        />
       </View>
 
-      <View style={[styles.feeContainer]}>
-        <View style={[styles.row]}>
-          <Text style={[styles.text, styles.theme.text, styles.iconLabel]}>
-            {i18next.t('sendToken.tokenSelect.cmmFeeLabel')}
-          </Text>
-
-          <InfoToggler
-            title={i18next.t('sendToken.info.cmmFee.title')}
-            description={i18next.t('sendToken.info.cmmFee.description1')}
-          />
-        </View>
-
-        <DataRenderer
-          data={cmmFee.data}
-          isLoading={cmmFee.isLoading}
-          error={cmmFee.error}
-          renderData={(data) => (
-            <Text style={[styles.text, styles.theme.text]}>
-              {Lisk.transactions.convertBeddowsToLSK(data.toString())} {selectedToken?.symbol}
+      {showFeesBreakdown && (
+        <View style={[styles.feeBreakdownContainer]}>
+          <View style={[styles.feeBreakdownRow]}>
+            <Text style={[styles.primaryText]}>
+              {i18next.t('sendToken.tokenSelect.transactionFeeBreakdownText')}
             </Text>
-          )}
-          renderEmpty={() => (
-            <Text style={[styles.text, styles.theme.text]}>0 {selectedToken?.symbol}</Text>
-          )}
-        />
-      </View>
+          </View>
+
+          <View style={[styles.feeBreakdownRow]}>
+            <Text style={[styles.secondaryText, styles.iconLabel]}>
+              {i18next.t('sendToken.tokenSelect.bytesFeeLabel')}
+            </Text>
+
+            <Text style={[styles.theme.text]}>{feesLabels.byteFee}</Text>
+          </View>
+
+          <View style={[styles.feeBreakdownRow]}>
+            <Text style={[styles.secondaryText, styles.iconLabel]}>
+              {i18next.t('sendToken.tokenSelect.priorityFeeLabel')}
+            </Text>
+
+            <Text style={[styles.theme.text]}>{feesLabels.priorityFee}</Text>
+          </View>
+
+          <View style={[styles.feeBreakdownRow]}>
+            <Text style={[styles.secondaryText, styles.iconLabel]}>
+              {i18next.t('sendToken.tokenSelect.extraCommandFeeLabel')}
+            </Text>
+
+            <Text style={[styles.theme.text]}>{feesLabels.extraCommandFee}</Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 }

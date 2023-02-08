@@ -205,11 +205,12 @@ export class Transaction {
    * @returns {Object} priorityFee, byteFee and extraCommandFee.
    */
   getFeeBreakdown() {
+    const totalFee = this.transaction.fee;
     const priorityFee = this._getPriorityFee();
     const extraCommandFee = this._extraCommandFee;
-    const byteFee = this.transaction.fee - priorityFee - extraCommandFee;
+    const byteFee = totalFee - priorityFee - extraCommandFee;
 
-    return { priorityFee, byteFee, extraCommandFee };
+    return { totalFee, priorityFee, byteFee, extraCommandFee };
   }
 
   /**
