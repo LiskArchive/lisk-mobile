@@ -21,7 +21,7 @@ import { getSendTokenStyles } from './SendToken.styles';
 import SendTokenSkeleton from './components/SendTokenSkeleton/SendTokenSkeleton';
 
 /**
- * Renders form to transfer tokens transaction.
+ * UI form to perform a token:transfer transaction (within and across apps).
  */
 export default function SendToken() {
   const route = useRoute();
