@@ -73,7 +73,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     enableReinitialize: true,
   });
 
-  const cmmFee = useMessageFee({
+  const messageFee = useMessageFee({
     senderApplicationChainID: form.watch('senderApplicationChainID'),
     recipientApplicationChainID: form.watch('recipientApplicationChainID'),
   });
@@ -108,7 +108,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       try {
         let extraFee = BigInt(0);
 
-        if (cmmFee.data > 0) extraFee += cmmFee.data;
+        if (messageFee.data > 0) extraFee += messageFee.data;
 
         if (extraFee) transaction.computeFee(extraFee);
 
