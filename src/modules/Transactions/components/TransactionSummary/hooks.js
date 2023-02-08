@@ -1,12 +1,10 @@
-/* eslint-disable max-statements */
 import { useSelector } from 'react-redux';
-import * as Lisk from '@liskhq/lisk-client';
 
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
+import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 
 export function useTransactionSummary({
   senderApplicationChainID,
@@ -38,11 +36,12 @@ export function useTransactionSummary({
 
   const token = supportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
-  const transactionFee = Lisk.transactions.convertBeddowsToLSK(fee.toString());
-
-  const initializationFee = useInitializationFee({
-    address: recipientAccountAddress,
-    tokenID,
+  const transactionFee = fromBaseToDisplayDenom({
+    amount: fee,
+    displayDenom: token?.displayDenom,
+    denomUnits: token?.denomUnits,
+    symbol: token?.symbol,
+    withSymbol: true,
   });
 
   const cmmFee = useCCMFeeCalculator({
@@ -59,7 +58,6 @@ export function useTransactionSummary({
     token,
     priority,
     transactionFee,
-    initializationFee,
     cmmFee,
   };
 }

@@ -6,7 +6,6 @@ import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
-import { useTransactionFeeEstimateQuery } from '../api/useTransactionFeeEstimateQuery';
 
 import { Transaction } from '../utils/Transaction';
 import { usePriorityFee } from './usePriorityFee';
