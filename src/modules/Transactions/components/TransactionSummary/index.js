@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import i18next from 'i18next';
-import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
@@ -140,30 +139,18 @@ export default function TransactionSummary(transaction) {
       <View style={[styles.fieldRow]}>
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.transactionFeeLabel')}</Text>
 
-        <Text style={[styles.valueText, styles.theme.valueText]}>
-          {transaction.transactionFee} {transaction.token?.symbol}
-        </Text>
+        <Text style={[styles.valueText, styles.theme.valueText]}>{transaction.transactionFee}</Text>
       </View>
 
-      <View style={[styles.fieldRow]}>
-        <Text style={[styles.label]}>
-          {i18next.t('sendToken.tokenSelect.initializationFeeLabel')}
-        </Text>
+      {transaction.messageFee.data && (
+        <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
+          <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.cmmFeeLabel')}</Text>
 
-        <Text style={[styles.valueText, styles.theme.valueText]}>
-          {Lisk.transactions.convertBeddowsToLSK(transaction.initializationFee?.data.toString())}{' '}
-          {transaction.token?.symbol}
-        </Text>
-      </View>
-
-      <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
-        <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.cmmFeeLabel')}</Text>
-
-        <Text style={[styles.valueText, styles.theme.valueText]}>
-          {Lisk.transactions.convertBeddowsToLSK(transaction.cmmFee?.data.toString())}{' '}
-          {transaction.token?.symbol}
-        </Text>
-      </View>
+          <Text style={[styles.valueText, styles.theme.valueText]}>
+            {transaction.messageFee.data}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

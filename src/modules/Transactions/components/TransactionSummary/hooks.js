@@ -44,7 +44,7 @@ export function useTransactionSummary({
     withSymbol: true,
   });
 
-  const cmmFee = useMessageFee({
+  const messageFee = useMessageFee({
     senderApplicationChainID,
     recipientApplicationChainID,
   });
@@ -58,6 +58,6 @@ export function useTransactionSummary({
     token,
     priority,
     transactionFee,
-    cmmFee,
+    messageFee,
   };
 }

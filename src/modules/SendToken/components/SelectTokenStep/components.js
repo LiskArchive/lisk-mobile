@@ -340,19 +340,20 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
           />
         </View>
 
-        <View style={[styles.row]}>
+        <TouchableOpacity
+          onPress={() => setShowFeesBreakdown((prevState) => !prevState)}
+          style={[styles.row]}
+        >
           <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>
             {feesLabels.totalFee}
           </Text>
 
-          <TouchableOpacity onPress={() => setShowFeesBreakdown((prevState) => !prevState)}>
-            <CaretSvg
-              color={colors.light.ultramarineBlue}
-              height={16}
-              direction={showFeesBreakdown ? 'down' : 'right'}
-            />
-          </TouchableOpacity>
-        </View>
+          <CaretSvg
+            color={colors.light.ultramarineBlue}
+            height={16}
+            direction={showFeesBreakdown ? 'down' : 'right'}
+          />
+        </TouchableOpacity>
       </View>
 
       {showFeesBreakdown && (
