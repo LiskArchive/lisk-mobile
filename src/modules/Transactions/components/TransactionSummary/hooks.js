@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
+import useMessageFee from 'modules/Transactions/hooks/useMessageFee';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 
@@ -44,7 +44,7 @@ export function useTransactionSummary({
     withSymbol: true,
   });
 
-  const cmmFee = useCCMFeeCalculator({
+  const cmmFee = useMessageFee({
     senderApplicationChainID,
     recipientApplicationChainID,
   });
