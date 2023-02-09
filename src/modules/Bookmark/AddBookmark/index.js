@@ -162,6 +162,7 @@ export default function AddBookmark({ route }) {
               autoCapitalize="none"
               innerStyles={{
                 errorMessage: styles.errorMessage,
+                rightAdornment: styles.rightAdornment,
               }}
               testID="bookmark-address-input"
               onChange={(value) => setAddress({ value })}

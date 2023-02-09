@@ -16,7 +16,7 @@ export default () => ({
       justifyContent: 'center',
       paddingTop: 2,
       position: 'absolute',
-      bottom: 0,
+      bottom: Platform.select({ android: 30, ios: 0 }),
       right: 16,
       margin: 10,
     },
