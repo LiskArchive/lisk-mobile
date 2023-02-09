@@ -1,6 +1,6 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 import { deviceType } from 'utilities/device';
 
 const { height } = Dimensions.get('window');
@@ -18,10 +18,6 @@ export function getSendTokenStyles() {
       },
       progressBar: {
         marginBottom: 16,
-      },
-      loadingText: {
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
       },
     },
     [themes.light]: {

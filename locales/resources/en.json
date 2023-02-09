@@ -353,12 +353,11 @@
       "mediumPriorityLabel": "Medium",
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
-      "loadingTransactionFeeText": "Loading transaction fee...",
-      "errorLoadingTransactionFeeText": "Error calculating fees!",
-      "initializationFeeLabel": "Initialization fee",
-      "loadingInitializationFeeText": "Loading initialization fee...",
-      "cmmFeeLabel": "CCM fee",
-      "loadingCmmFeeText": "Loading CCM fee..."
+      "transactionFeeBreakdownText": "Fee breakdown",
+      "bytesFeeLabel": "Bytes",      
+      "priorityFeeLabel": "Priority",
+      "extraCommandFeeLabel": "Initialization",
+      "messageFeeLabel": "Message fee"
     },
     "summary": {
       "prevStepButtonText": "Back",
@@ -399,27 +398,14 @@
       "insufficientBalance": "Your balance is not sufficient."
     },
     "info": {
-      "bytesCounter": {
-        "title": "Bytes Counter",
-        "description1": "Lisk counts your message in bytes, so keep in mind that the length of your message may vary in different languages.",
-        "description2": "Different characters may consume a varying amount of bytes."
-      },
       "priority": {
         "title": "Transaction priority",
         "description1": "When the network is busy, transactions with a higher priority are confirmed sooner."
       },
       "transactionFee": {
-        "title": "Transaction Fee",
-        "description1": "Fee based on bytes, can be set by user depending on priority."
-      },
-      "initializationFee": {
-        "title": "Initialization Fee",
-        "description1": "Some commands have an extra command fee (delegate registration in DPoS, chain registration in Interoperability), this fee should be exactly equal to the constant set by the command."
-      },
-      "cmmFee": {
-        "title": "CMM Fee",
-        "description1": "Cross chain messages are the objects containing the cross-chain commands, they have a fee property also called message fee to distinguish from transaction fees."
-      }
+        "title": "Transaction fee",
+        "description1": "Is the sum of byte based fee, Initialization and selected network priority"
+      }     
     }
   },
   "accounts": {

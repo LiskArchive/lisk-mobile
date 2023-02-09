@@ -7,7 +7,7 @@ import { colors, themes } from 'constants/styleGuide';
 import { P } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { fromRawLsk } from 'utilities/conversions';
+import { fromRawLsk } from 'utilities/conversions.utils';
 import LockSvg from 'assets/svgs/LockSvg';
 import ProgressSvg from 'assets/svgs/ProgressSvg';
 import UnlockSvg from 'assets/svgs/UnlockSvg';

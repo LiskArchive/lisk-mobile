@@ -1,12 +1,10 @@
-/* eslint-disable max-statements */
 import { useSelector } from 'react-redux';
-import * as Lisk from '@liskhq/lisk-client';
 
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import useInitializationFeeCalculator from 'modules/Transactions/hooks/useInitializationFeeCalculator';
-import useCCMFeeCalculator from 'modules/Transactions/hooks/useCCMFeeCalculator';
+import useMessageFee from 'modules/Transactions/hooks/useMessageFee';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
+import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 
 export function useTransactionSummary({
   senderApplicationChainID,
@@ -38,13 +36,15 @@ export function useTransactionSummary({
 
   const token = supportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
-  const transactionFee = Lisk.transactions.convertBeddowsToLSK(fee.toString());
-
-  const initializationFee = useInitializationFeeCalculator({
-    recipientAccountAddress,
+  const transactionFee = fromBaseToDisplayDenom({
+    amount: fee,
+    displayDenom: token?.displayDenom,
+    denomUnits: token?.denomUnits,
+    symbol: token?.symbol,
+    withSymbol: true,
   });
 
-  const cmmFee = useCCMFeeCalculator({
+  const messageFee = useMessageFee({
     senderApplicationChainID,
     recipientApplicationChainID,
   });
@@ -58,7 +58,6 @@ export function useTransactionSummary({
     token,
     priority,
     transactionFee,
-    initializationFee,
-    cmmFee,
+    messageFee,
   };
 }

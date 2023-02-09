@@ -9,7 +9,7 @@ import { useTokenAmountInCurrency } from 'modules/SendToken/components/SelectTok
 import DataRenderer from 'components/shared/DataRenderer';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
-import { fromRawLsk } from 'utilities/conversions';
+import { fromRawLsk } from 'utilities/conversions.utils';
 import TokenSvg from 'assets/svgs/TokenSvg';
 
 import getTokenRowStyles from './TokenRow.styles';

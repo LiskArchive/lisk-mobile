@@ -41,16 +41,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
     control: form.control,
   });
 
-  const { field: recipientAccountAddressField } = useController({
-    name: 'recipientAccountAddress',
-    control: form.control,
-  });
-
-  const { field: senderApplicationChainIDField } = useController({
-    name: 'senderApplicationChainID',
-    control: form.control,
-  });
-
   const { field: recipientApplicationChainIDField } = useController({
     name: 'recipientApplicationChainID',
     control: form.control,
@@ -62,10 +52,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
 
   const recipientApplication = applications?.data.find(
     (application) => application.chainID === recipientApplicationChainIDField.value
-  );
-
-  const senderApplication = applications?.data.find(
-    (application) => application.chainID === senderApplicationChainIDField.value
   );
 
   const { isMaxAllowedAmountExceeded } = useSendTokenAmountChecker({
@@ -114,8 +100,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
 
         <SendTokenTransactionFeesLabels
           tokenID={tokenIDField.value}
-          recipientAccountAddress={recipientAccountAddressField.value}
-          senderApplication={senderApplication}
           recipientApplication={recipientApplication}
           transaction={transaction}
         />

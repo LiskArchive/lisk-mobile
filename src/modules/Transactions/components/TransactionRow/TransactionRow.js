@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { stringShortener } from 'utilities/helpers';
-import { fromRawLsk } from 'utilities/conversions';
+import { fromRawLsk } from 'utilities/conversions.utils';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import TransactionTimestamp from '../TransactionTimestamp';
 

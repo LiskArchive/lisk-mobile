@@ -21,6 +21,17 @@ export default function getSendTokenSelectTokenStepStyles() {
         justifyContent: 'space-between',
         marginBottom: 16,
       },
+      feeBreakdownContainer: {
+        padding: 8,
+        borderRadius: 4,
+        backgroundColor: colors.light.athensWhite,
+      },
+      feeBreakdownRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 8,
+      },
       labelContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -29,8 +40,11 @@ export default function getSendTokenSelectTokenStepStyles() {
       tokenSvg: {
         marginLeft: 8,
       },
-      balanceText: {
+      primaryText: {
         color: colors.light.ultramarineBlue,
+      },
+      secondaryText: {
+        color: colors.light.sparkleGray,
       },
       tokenAmountInCurrencyText: {
         color: colors.light.slateGray,
@@ -67,8 +81,8 @@ export default function getSendTokenSelectTokenStepStyles() {
         color: colors.light.zodiacBlue,
         fontWeight: '600',
       },
-      text: {
-        color: colors.light.blueGray,
+      boldText: {
+        fontWeight: '600',
       },
       prevStepButton: {
         marginRight: 16,

@@ -6,6 +6,7 @@ import {
   mockCustomInfiniteQueryData,
   mockCustomInfiniteQuery,
   mockCustomQuery,
+  mockInvokeQuery,
 } from '../__fixtures__';
 
 export const customInfiniteQueryMockHandler = rest.get(
@@ -33,6 +34,15 @@ export const customQueryMockHandler = rest.get(
     const response = mockCustomQuery;
 
     return res(ctx.delay(500), ctx.json(response));
+  }
+);
+
+export const invokeQueryMockHandler = rest.post(
+  `*/api/${API_VERSION}/invoke`,
+  async (req, res, ctx) => {
+    const response = mockInvokeQuery;
+
+    return res(ctx.delay(500), ctx.status(200), ctx.json(response));
   }
 );
 

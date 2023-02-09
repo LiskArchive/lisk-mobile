@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -10,7 +10,6 @@ import Stepper from 'components/shared/Stepper';
 import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
-import { P } from 'components/shared/toolBox/typography';
 import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
 
 import useSendTokenForm from './hooks/useSendTokenForm';
@@ -18,9 +17,15 @@ import SendTokenApplicationsStep from './components/SelectApplicationsStep';
 import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
-import { getSendTokenStyles } from './styles';
+import { getSendTokenStyles } from './SendToken.styles';
+import SendTokenSkeleton from './components/SendTokenSkeleton/SendTokenSkeleton';
 
-export default function SendToken({ route }) {
+/**
+ * UI form to perform a token:transfer transaction (within and across apps).
+ */
+export default function SendToken() {
+  const route = useRoute();
+
   const navigation = useNavigation();
 
   const account = useSelector((state) => state.account);
@@ -87,9 +92,7 @@ export default function SendToken({ route }) {
             )}
           </>
         )}
-        renderLoading={() => (
-          <P style={[styles.loadingText, styles.theme.loadingText]}>Loading...</P>
-        )}
+        renderLoading={() => <SendTokenSkeleton />}
         renderError={() => (
           <ResultScreen
             illustration={<ErrorIllustrationSvg />}
