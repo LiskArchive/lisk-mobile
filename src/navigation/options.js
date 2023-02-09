@@ -5,7 +5,7 @@ import { navigationGenericTitleStyle, navigationNoShadowStyle } from './styles';
 
 const navigationOptions = {
   Main: {},
-  Home: {
+  AccountHome: {
     header: () => null,
   },
   NoHeader: () => {

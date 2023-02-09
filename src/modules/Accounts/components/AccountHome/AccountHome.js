@@ -17,18 +17,19 @@ import CopyToClipboard from 'components/shared/copyToClipboard';
 import { settingsUpdated } from 'modules/Settings/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import ApplicationSwitcher from '../BlockchainApplication/components/ApplicationSwitcher';
-import { useCurrentAccount } from './hooks/useCurrentAccount';
-import getStyles from './styles';
-import TransactionList from '../Transactions/components/TransactionList/TransactionList';
-import AccountsManagerModal from './components/AccountsManagerModal';
-import TokenList from './components/TokenList/TokenList';
+import ApplicationSwitcher from '../../../BlockchainApplication/components/ApplicationSwitcher';
+import { useCurrentAccount } from '../../hooks/useCurrentAccount';
+import TransactionList from '../../../Transactions/components/TransactionList/TransactionList';
+import AccountsManagerModal from '../AccountsManagerModal';
+import TokenList from '../TokenList/TokenList';
+
+import getStyles from './AccountHome.styles';
 
 /**
  * This component would be mounted first and would be used to config and redirect
  * the application to referer page or Sign In.
  */
-export default function Home() {
+export default function AccountHome() {
   const navigation = useNavigation();
   const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
   const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);

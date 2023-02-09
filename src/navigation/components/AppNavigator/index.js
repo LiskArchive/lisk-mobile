@@ -23,8 +23,8 @@ const Stack = createStackNavigator();
 
 export default function AppNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Home" mode="modal">
-      <Stack.Screen name="Home" component={Tabs} options={getNavigationHeaderOptions} />
+    <Stack.Navigator initialRouteName="AccountHome" mode="modal">
+      <Stack.Screen name="AccountHome" component={Tabs} options={getNavigationHeaderOptions} />
       <Stack.Screen
         name="LockedBalance"
         component={LockedBalanceDetails}

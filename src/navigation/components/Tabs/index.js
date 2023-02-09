@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Settings from 'modules/Settings';
-import Home from 'modules/Accounts';
+import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';
 import Bookmarks from 'modules/Bookmark';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
 import ExternalApplicationSignatureRequest from 'modules/BlockchainApplication/components/ExternalApplicationSignatureRequest';
@@ -30,7 +30,7 @@ export default function Tabs() {
   return (
     <>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="AccountHome"
         lazy
         screenOptions={{ unmountOnBlur: false }}
         tabBarOptions={{
@@ -39,8 +39,8 @@ export default function Tabs() {
         }}
       >
         <Tab.Screen
-          name="Home"
-          component={Home}
+          name="AccountHome"
+          component={AccountHome}
           options={getTabBarIcon}
           listeners={({ route, navigation }) => ({
             tabPress: (e) => {
@@ -51,7 +51,7 @@ export default function Tabs() {
                   route.params.scrollToTop();
                 }
               }
-              navigation.navigate('Home');
+              navigation.navigate('AccountHome');
             },
           })}
         />
