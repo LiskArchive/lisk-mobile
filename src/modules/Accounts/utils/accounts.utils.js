@@ -10,39 +10,35 @@ export const getPendingTime = (unvoteHeight, unlockHeight) => {
   return moment().to(momentSeconds, true);
 };
 
-export async function transformTokensResult(res) {
-  const transformTokens = async (tokens) => {
-    try {
-      const tokensIDs = tokens?.map(({ tokenID }) => tokenID).join(',');
+/**
+ * Merges tokens data and metadata query results.
+ * @param {Array} tokens - Tokens on-chain data obtained from the GET /tokens endpoint.
+ * @returns {Array} List of tokens containing its off-chain and on-chain data merged.
+ */
+export async function addTokensMetaData(tokens) {
+  try {
+    const tokensIDs = tokens?.map(({ tokenID }) => tokenID).join(',');
 
-      if (!tokensIDs) {
-        return tokens;
-      }
-
-      const metaConfig = getTokensMetaQueryConfig({
-        params: {
-          tokenID: tokensIDs,
-        },
-      });
-
-      const tokenMetaRes = await apiClient.call(metaConfig);
-
-      return tokens.map((tokenData) => {
-        const selectedTokenMetaData = tokenMetaRes?.data?.find(
-          (tokenMetaData) => tokenMetaData.tokenID === tokenData.tokenID
-        );
-
-        return { ...(selectedTokenMetaData ?? {}), ...tokenData };
-      });
-    } catch (error) {
+    if (!tokensIDs) {
       return tokens;
     }
-  };
 
-  const tokensData = await transformTokens(res.data);
+    const metaDataQueryConfig = getTokensMetaQueryConfig({
+      params: {
+        tokenID: tokensIDs,
+      },
+    });
 
-  return {
-    ...res,
-    data: tokensData,
-  };
+    const tokenMetaRes = await apiClient.call(metaDataQueryConfig);
+
+    return tokens.map((tokenData) => {
+      const selectedTokenMetaData = tokenMetaRes?.data?.find(
+        (tokenMetaData) => tokenMetaData.tokenID === tokenData.tokenID
+      );
+
+      return { ...(selectedTokenMetaData ?? {}), ...tokenData };
+    });
+  } catch (error) {
+    return tokens;
+  }
 }
