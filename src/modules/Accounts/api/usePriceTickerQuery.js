@@ -2,6 +2,7 @@ import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+import apiClient from 'utilities/api/APIClient';
 
 /**
  * Fetch market prices for available token.
@@ -22,5 +23,5 @@ export function usePriceTickerQuery({ config: customConfig = {} } = {}) {
 
   const keys = useQueryKeys([GET_ACCOUNT_TOKENS_QUERY]);
 
-  return useCustomQuery({ config, keys });
+  return useCustomQuery({ config, keys, client: apiClient });
 }

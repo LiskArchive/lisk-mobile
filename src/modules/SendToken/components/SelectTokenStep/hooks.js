@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import { useSelector } from 'react-redux';
 
-import { usePriceTickerQuery } from 'modules/Accounts/hooks/usePriceTickerQuery';
+import { usePriceTickerQuery } from 'modules/Accounts/api/usePriceTickerQuery';
 
 export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
   const { data } = usePriceTickerQuery();
