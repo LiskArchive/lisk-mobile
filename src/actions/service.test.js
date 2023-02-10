@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import actionTypes from 'constants/actions';
 import { service as serviceAPI } from 'utilities/api';
 import { INITIAL_STATE as settings } from 'modules/Settings/reducer';
-import { pricesRetrieved, dynamicFeesRetrieved } from './service';
+import { dynamicFeesRetrieved } from './service';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -18,31 +18,6 @@ describe('actions: service', () => {
 
   beforeEach(() => {
     store = mockStore({ settings });
-  });
-
-  describe('pricesRetrieved', () => {
-    it('should dispatch pricesRetrieved action with given data', async () => {
-      const tickers = { EUR: 1, USD: 1 };
-      serviceAPI.getPriceTicker.mockResolvedValueOnce(tickers);
-
-      await store.dispatch(pricesRetrieved());
-
-      expect(store.getActions()).toEqual([
-        {
-          type: actionTypes.pricesRetrieved,
-          data: {
-            priceTicker: tickers,
-            activeToken: settings.token.active,
-          },
-        },
-      ]);
-    });
-
-    it('should handle rejections', async () => {
-      serviceAPI.getPriceTicker.mockRejectedValueOnce('Error');
-      await store.dispatch(pricesRetrieved());
-      expect(store.getActions()).toEqual([]);
-    });
   });
 
   describe('dynamicFeesRetrieved', () => {

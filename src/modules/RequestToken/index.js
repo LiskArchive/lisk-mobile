@@ -1,9 +1,8 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import { useDispatch } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
@@ -28,7 +27,6 @@ import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import Avatar from 'components/shared/avatar';
 import BottomModal from 'components/shared/BottomModal';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { pricesRetrieved } from 'actions/service';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
 import { deviceWidth } from 'utilities/device';
@@ -40,8 +38,6 @@ import getStyles from './styles';
 
 export default function RequestToken() {
   const navigation = useNavigation();
-
-  const dispatch = useDispatch();
 
   const [currentAccount] = useCurrentAccount();
 
@@ -86,10 +82,6 @@ export default function RequestToken() {
   const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
 
   const qrCodeSize = deviceWidth() * 0.52;
-
-  useEffect(() => {
-    dispatch(pricesRetrieved());
-  }, [dispatch]);
 
   const renderQRCode = (size) => (
     <QRCode

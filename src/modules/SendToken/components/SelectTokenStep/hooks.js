@@ -1,27 +1,25 @@
 /* eslint-disable max-statements */
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { pricesRetrieved } from '../../../../actions/service';
+import { usePriceTickerQuery } from 'modules/Accounts/api/usePriceTickerQuery';
 
 export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
-  const dispatch = useDispatch();
+  const { data } = usePriceTickerQuery();
 
-  const priceTicker = useSelector((state) => state.service.priceTicker);
+  const prices = data?.data ?? [];
+
   const accountSettings = useSelector((state) => state.settings);
-
-  useEffect(() => {
-    dispatch(pricesRetrieved());
-  }, [dispatch]);
 
   if (tokenSymbol !== 'LSK') return null;
 
+  const priceRate = prices.find(
+    (price) => price.to === accountSettings.currency && price.from === tokenSymbol
+  );
+
   let rawAmountInCurrency = 0;
 
-  if (tokenAmount) {
-    rawAmountInCurrency = (
-      parseFloat(tokenAmount) * priceTicker[accountSettings.token.active][accountSettings.currency]
-    ).toFixed(2);
+  if (tokenAmount && priceRate) {
+    rawAmountInCurrency = (parseFloat(tokenAmount) * Number(priceRate.rate)).toFixed(2);
   }
 
   function localizeAmount(amount) {
