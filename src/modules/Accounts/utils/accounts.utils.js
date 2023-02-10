@@ -17,11 +17,7 @@ export const getPendingTime = (unvoteHeight, unlockHeight) => {
  */
 export async function addTokensMetaData(tokens) {
   try {
-    const tokensIDs = tokens?.map(({ tokenID }) => tokenID).join(',');
-
-    if (!tokensIDs) {
-      return tokens;
-    }
+    const tokensIDs = tokens.map(({ tokenID }) => tokenID).join(',');
 
     const metaDataQueryConfig = getTokensMetaQueryConfig({
       params: {
@@ -31,13 +27,19 @@ export async function addTokensMetaData(tokens) {
 
     const tokenMetaRes = await apiClient.call(metaDataQueryConfig);
 
-    return tokens.map((tokenData) => {
+    const tokensFullData = tokens.reduce((acc, tokenData) => {
       const selectedTokenMetaData = tokenMetaRes?.data?.find(
         (tokenMetaData) => tokenMetaData.tokenID === tokenData.tokenID
       );
 
-      return { ...(selectedTokenMetaData ?? {}), ...tokenData };
-    });
+      if (selectedTokenMetaData) {
+        return [...acc, { ...selectedTokenMetaData, ...tokenData }];
+      }
+
+      return acc;
+    }, []);
+
+    return tokensFullData;
   } catch (error) {
     return tokens;
   }
