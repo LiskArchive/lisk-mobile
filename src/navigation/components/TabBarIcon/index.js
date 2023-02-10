@@ -15,7 +15,7 @@ export default function TabBarIcon({ name, focused, size = 24 }) {
   };
 
   switch (name) {
-    case 'Home':
+    case 'AccountHome':
       return <HomeSvg {...props} />;
 
     case 'Applications':

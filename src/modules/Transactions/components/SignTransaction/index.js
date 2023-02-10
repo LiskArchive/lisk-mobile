@@ -62,7 +62,7 @@ export function SignTransaction({
           <SignTransactionSuccess
             onClick={() => {
               onSuccess();
-              navigation.navigate('Home');
+              navigation.navigate('AccountHome');
             }}
             actionButton={successActionButton}
           />

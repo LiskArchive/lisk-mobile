@@ -21,11 +21,11 @@ describe.skip('Settings Screen', () => {
     await expect(element(by.text('Security'))).toBeVisible();
   });
   it('should toggle discrete mode', async () => {
-    await element(by.text('Home')).tap();
+    await element(by.text('AccountHome')).tap();
     await expect(element(by.id('token-balance'))).toBeVisible();
     await element(by.text('Settings')).tap();
     await element(by.id('enable-incognito-target')).atIndex(0).tap();
-    await element(by.text('Home')).tap();
+    await element(by.text('AccountHome')).tap();
     await expect(element(by.id('amount-blur'))).toBeVisible();
   });
 

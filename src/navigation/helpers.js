@@ -6,7 +6,7 @@ import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './options';
 
 export function getNavigationHeaderOptions({ route }) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'AccountHome';
   return navigationOptions[routeName];
 }
 

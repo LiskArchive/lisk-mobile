@@ -1,9 +1,8 @@
 import { useMemo, useRef } from 'react';
 
 import { APIClient } from 'utilities/api/APIClient';
-import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
-import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
+import { useAccountTokensFullDataQuery } from '../../Accounts/api/useAccountTokensFullDataQuery';
 
 /**
  * Fetch list of supported tokens for a given account and blockchain application.
@@ -22,11 +21,11 @@ export function useApplicationSupportedTokensQuery(application) {
   }
 
   const {
-    data: { data: accountTokensData } = {},
-    isLoading: isAccountTokensLoading,
-    isError: isAccountTokensError,
-    error: errorOnAccountTokens,
-  } = useAccountTokensQuery();
+    data: { data: accountTokensFullData } = {},
+    isLoading: isAccountTokensFullDataLoading,
+    isError: isAccountTokensFullDataError,
+    error: errorOnAccountTokensFullData,
+  } = useAccountTokensFullDataQuery();
 
   const {
     data: { data: { supportedTokens: supportedTokensData } = {} } = {},
@@ -40,37 +39,37 @@ export function useApplicationSupportedTokensQuery(application) {
   const data = useMemo(() => {
     let tokens;
 
-    if (accountTokensData && supportedTokensData) {
-      const tokensOnChainData = supportedTokensData.isSupportAllToken
-        ? accountTokensData
-        : accountTokensData.filter(
-            (token) =>
-              supportedTokensData.exactTokenIDs.find(
-                (supportedToken) => supportedToken.chainID === token.chainID
-              ).length
-          );
+    if (accountTokensFullData && supportedTokensData) {
+      const isSupportAllToken = supportedTokensData.isSupportAllToken;
 
-      tokens = tokensOnChainData.map((tokenOnChainData) => {
-        // TODO: Query for each token the GET /meta/tokens endpoint when service solves tokenID inconsistency
-        // between GET /tokens/summary and GET /meta/tokens responses.
-        // (details on https://github.com/LiskHQ/lisk-mobile/issues/1610).
-        const tokenMetaData =
-          mockTokensMeta.find((tokenMeta) => tokenMeta.tokenID === tokenOnChainData.tokenID) || {};
+      if (isSupportAllToken) {
+        tokens = accountTokensFullData;
+      } else {
+        const exactTokensSupported = accountTokensFullData.filter((token) =>
+          supportedTokensData.exactTokenIDs.includes(token.tokenID)
+        );
 
-        return { ...tokenOnChainData, ...tokenMetaData };
-      });
+        const patternTokensSupported = supportedTokensData.patternTokenIDs
+          .map((pattern) => {
+            const chainID = pattern.slice(0, 8);
+            return accountTokensFullData.filter((token) => chainID === token.tokenID.slice(0, 8));
+          })
+          .flatMap((res) => res);
+
+        const supportedAppTokens = [...(patternTokensSupported || []), ...exactTokensSupported];
+
+        tokens = Array.from(new Set(supportedAppTokens));
+      }
     }
 
     return tokens;
-  }, [accountTokensData, supportedTokensData]);
+  }, [accountTokensFullData, supportedTokensData]);
 
   return {
     data,
-    isSupportedTokensLoading,
-    isAccountTokensLoading,
-    isError: isSupportedTokensError || isAccountTokensError,
-    isLoading: isAccountTokensLoading || isSupportedTokensLoading,
+    isError: isSupportedTokensError || isAccountTokensFullDataError,
+    isLoading: isAccountTokensFullDataLoading || isSupportedTokensLoading,
     errorOnSupportedTokens,
-    errorOnAccountTokens,
+    errorOnAccountTokensFullData,
   };
 }

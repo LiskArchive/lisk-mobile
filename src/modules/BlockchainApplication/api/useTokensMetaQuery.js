@@ -4,6 +4,16 @@ import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
 
+export function getTokensMetaQueryConfig(customConfig = {}) {
+  return {
+    url: `${API_URL}/blockchain/apps/meta/tokens`,
+    method: 'get',
+    event: 'get.blockchain.apps.meta.tokens',
+    ...customConfig,
+    params: { network: NETWORK, limit: LIMIT, ...customConfig.params },
+  };
+}
+
 /**
  * Fetch list of blockchain applications tokens off-chain metadata.
  * Executes the API call once the hook is mounted.
@@ -12,16 +22,14 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
  * @returns - The query state of the API call. Includes the data
  * (tokens), loading state, error state, and more.
  */
-export function useTokensMetaQuery({ config: customConfig = {}, options = {} } = {}) {
-  const config = {
-    url: `${API_URL}/blockchain/apps/meta/tokens`,
-    method: 'get',
-    event: 'get.tokens.meta',
-    ...customConfig,
-    params: { network: NETWORK, limit: LIMIT, ...customConfig.params },
-  };
+export function useTokensMetaQuery({
+  config: customConfig = {},
+  options = {},
+  client = liskAPIClient,
+} = {}) {
+  const config = getTokensMetaQueryConfig(customConfig);
 
   const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
 
-  return useCustomInfiniteQuery({ config, options, keys, client: liskAPIClient });
+  return useCustomInfiniteQuery({ config, options, keys, client });
 }
