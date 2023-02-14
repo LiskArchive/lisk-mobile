@@ -9,23 +9,19 @@ import TokenList from '../TokenList/TokenList';
 
 import tokensTabStyles from './styles';
 
-export default function TokensScreen() {
+export default function TokensHistory() {
   const navigation = useNavigation();
   const route = useRoute();
 
   const { styles } = useTheme({ styles: tokensTabStyles });
 
-  const accountAddress = route.params?.accountAddress;
+  const address = route.params?.address;
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       <HeaderBackButton title={i18next.t('accounts.allTokens')} onPress={navigation.goBack} />
 
-      <TokenList
-        mode="full"
-        accountAddress={accountAddress}
-        style={{ container: styles.tokenListContainer }}
-      />
+      <TokenList mode="full" address={address} style={{ container: styles.tokenListContainer }} />
     </SafeAreaView>
   );
 }

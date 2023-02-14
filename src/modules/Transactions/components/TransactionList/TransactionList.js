@@ -21,7 +21,7 @@ import getTransactionListStyles from './TransactionList.styles';
 import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from './TransactionList.constants';
 import TransactionListSkeleton from './components/TransactionListSkeleton';
 
-export default function TransactionList({ mode = 'overview', style }) {
+export default function TransactionList({ mode = 'overview', address, style }) {
   const navigation = useNavigation();
 
   const {
@@ -31,7 +31,7 @@ export default function TransactionList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
-  } = useAccountTransactionsQuery({
+  } = useAccountTransactionsQuery(address, {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT },
     },
@@ -59,7 +59,9 @@ export default function TransactionList({ mode = 'overview', style }) {
 
         {showViewAllButton && (
           <LabelButton
-            onClick={() => navigation.navigate('TransactionsHistory')}
+            onClick={() =>
+              navigation.navigate({ name: 'TransactionsHistory', params: { address } })
+            }
             textStyle={styles.labelButtonText}
             adornments={{
               right: (

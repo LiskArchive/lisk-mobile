@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -11,8 +11,11 @@ import getTransactionsHistoryStyles from './styles';
 
 export default function TransactionsHistory() {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const { styles } = useTheme({ styles: getTransactionsHistoryStyles() });
+
+  const address = route.params?.address;
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -22,7 +25,7 @@ export default function TransactionsHistory() {
         containerStyle={styles.header}
       />
 
-      <TransactionList mode="full" style={{ container: styles.listContainer }} />
+      <TransactionList mode="full" address={address} style={{ container: styles.listContainer }} />
     </SafeAreaView>
   );
 }

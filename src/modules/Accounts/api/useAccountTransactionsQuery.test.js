@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import * as useCurrentAccount from 'modules/Accounts/hooks/useCurrentAccount';
 import { mockGetTransactionsQuery } from 'modules/Transactions/__fixtures__';
 import { mockSavedAccounts } from '../__fixtures__';
 import { useAccountTransactionsQuery } from './useAccountTransactionsQuery';
@@ -8,22 +7,15 @@ import { applicationsWrapper } from '../../../tests/applicationsWrapper';
 
 jest.useRealTimers();
 
-jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(() => [
-  {
-    metadata: {
-      address: mockSavedAccounts[0].metadata.address,
-    },
-  },
-]);
-
 describe('useAccountTransactionsQuery hook', () => {
+  const address = mockSavedAccounts[0].metadata.address;
   const limit = 2;
   const config = { params: { limit } };
 
   const wrapper = ({ children }) => applicationsWrapper({ children });
 
   it('fetch data correctly', async () => {
-    const { result, waitFor } = renderHook(() => useAccountTransactionsQuery({ config }), {
+    const { result, waitFor } = renderHook(() => useAccountTransactionsQuery(address, { config }), {
       wrapper,
     });
 

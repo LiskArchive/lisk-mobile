@@ -21,12 +21,12 @@ export default function AccountDetailsScreen() {
 
   const { styles } = useTheme({ styles: getAccountDetailsScreenStyles() });
 
-  const accountAddress = route.params?.address;
+  const address = route.params?.address;
 
   const bookmarkedAccounts = useSelector(selectBookmarkListSelector);
 
   const bookmarkAccount = bookmarkedAccounts.find(
-    (bookmarkedAccount) => bookmarkedAccount.address === accountAddress
+    (bookmarkedAccount) => bookmarkedAccount.address === address
   );
 
   if (!bookmarkAccount) {

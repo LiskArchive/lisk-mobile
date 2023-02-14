@@ -89,11 +89,15 @@ export default function AccountDetails({ account }) {
 
         <TokenList
           mode="overview"
-          accountAddress={account.address}
+          address={account.address}
           style={{ container: styles.tokenListContainer }}
         />
 
-        <TransactionList mode="overview" style={{ container: styles.transactionListContainer }} />
+        <TransactionList
+          mode="overview"
+          address={account.address}
+          style={{ container: styles.transactionListContainer }}
+        />
       </View>
 
       <AccountsManagerModal show={showManageAccountsModal} setShow={setShowManageAccountsModal} />

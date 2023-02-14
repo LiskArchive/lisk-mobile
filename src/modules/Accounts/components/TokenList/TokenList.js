@@ -24,7 +24,7 @@ import getTokenListStyles from './TokenList.styles';
 import { NO_OF_TOKENS_ON_OVERVIEW } from './TokenList.constants';
 import TokenListSkeleton from './components/TokenListSkeleton';
 
-export default function TokenList({ mode = 'overview', accountAddress, style }) {
+export default function TokenList({ mode = 'overview', address, style }) {
   const [activeTab, setActiveTab] = useState(0);
 
   const navigation = useNavigation();
@@ -36,7 +36,7 @@ export default function TokenList({ mode = 'overview', accountAddress, style }) 
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-  } = useAccountTokensQuery(accountAddress, {
+  } = useAccountTokensQuery(address, {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
     },
@@ -80,7 +80,7 @@ export default function TokenList({ mode = 'overview', accountAddress, style }) 
 
         {showViewAllButton && (
           <LabelButton
-            onClick={() => navigation.navigate({ name: 'Tokens', params: accountAddress })}
+            onClick={() => navigation.navigate({ name: 'Tokens', params: { address } })}
             style={[styles.labelButton]}
             textStyle={styles.labelButtonText}
             adornments={{

@@ -1,33 +1,8 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import apiClient from 'utilities/api/APIClient';
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TRANSACTIONS_QUERY } from 'utilities/api/queries';
-
-export function useAccountTransactionsQueryParams({ config: customConfig = {} } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
-  const config = {
-    url: `${API_URL}/transactions`,
-    method: 'get',
-    event: 'get.transactions',
-    ...customConfig,
-    params: {
-      limit: LIMIT,
-      address: currentAccount.metadata.address,
-      ...(customConfig?.params || {}),
-    },
-  };
-
-  const keys = useQueryKeys([
-    GET_ACCOUNT_TRANSACTIONS_QUERY,
-    currentAccount.metadata.address,
-    config,
-  ]);
-
-  return { config, keys };
-}
 
 /**
  * Fetch user account transactions in paginated mode.
@@ -37,12 +12,23 @@ export function useAccountTransactionsQueryParams({ config: customConfig = {} } 
  * @returns - The query state of the API call. Includes the data
  * (with the array of transactions), loading state, error state, and more.
  */
-export function useAccountTransactionsQuery({
-  config: customConfig = {},
-  options = {},
-  client = apiClient,
-} = {}) {
-  const { config, keys } = useAccountTransactionsQueryParams({ config: customConfig });
+export function useAccountTransactionsQuery(
+  address,
+  { config: customConfig = {}, options = {}, client = apiClient } = {}
+) {
+  const config = {
+    url: `${API_URL}/transactions`,
+    method: 'get',
+    event: 'get.transactions',
+    ...customConfig,
+    params: {
+      limit: LIMIT,
+      address,
+      ...(customConfig?.params || {}),
+    },
+  };
+
+  const keys = useQueryKeys([GET_ACCOUNT_TRANSACTIONS_QUERY, address, config]);
 
   return useCustomInfiniteQuery({ config, options, keys, client });
 }

@@ -117,13 +117,13 @@ export default function AccountHome() {
             </View>
           </View>
 
-          <TokenList
+          <TokenList mode="overview" address={address} style={{ container: { marginTop: 16 } }} />
+
+          <TransactionList
             mode="overview"
-            accountAddress={address}
+            address={address}
             style={{ container: { marginTop: 16 } }}
           />
-
-          <TransactionList mode="overview" style={{ container: { marginTop: 16 } }} />
         </View>
       </NavigationSafeAreaView>
 
