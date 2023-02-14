@@ -1,12 +1,14 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { P } from 'components/shared/toolBox/typography';
+import { selectBookmarkList as selectBookmarkListSelector } from 'modules/Bookmark/store/selectors';
 
 import getAccountDetailsScreenStyles from './AccountDetailsScreen.styles';
+import AccountDetails from '../AccountDetails/AccountDetails';
 
 /**
  * Renders an account details screen given an address by route params.
@@ -19,19 +21,25 @@ export default function AccountDetailsScreen() {
 
   const { styles } = useTheme({ styles: getAccountDetailsScreenStyles() });
 
+  const accountAddress = route.params?.address;
+
+  const bookmarkedAccounts = useSelector(selectBookmarkListSelector);
+
+  const bookmarkAccount = bookmarkedAccounts.find(
+    (bookmarkedAccount) => bookmarkedAccount.address === accountAddress
+  );
+
+  if (!bookmarkAccount) {
+    return null;
+  }
+
+  const account = { ...bookmarkAccount, username: bookmarkAccount.label };
+
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <HeaderBackButton title="Account Details" onPress={navigation.goBack} />
+      <HeaderBackButton title="Account details" onPress={navigation.goBack} />
 
-      <View style={[styles.body]}>
-        <P style={[styles.text, styles.theme.text, { marginBottom: 8 }]}>
-          Screen not available yet.
-        </P>
-
-        <P style={[styles.text, styles.theme.text, { marginBottom: 8 }]}>
-          Address: {route.params?.address}
-        </P>
-      </View>
+      <AccountDetails account={account} />
     </SafeAreaView>
   );
 }
