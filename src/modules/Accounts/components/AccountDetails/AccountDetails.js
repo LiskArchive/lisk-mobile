@@ -19,7 +19,7 @@ import { useCurrentAccount } from '../../hooks/useCurrentAccount';
 
 /**
  * Renders a account detailed information (personal data, tokens and transactions) given an address.
- * @param {Object} address - Account address to which render its information.
+ * @param {Object} account - Account to which render its information.
  */
 export default function AccountDetails({ account }) {
   const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
