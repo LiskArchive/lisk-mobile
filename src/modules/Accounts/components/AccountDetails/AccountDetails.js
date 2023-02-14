@@ -18,7 +18,8 @@ import getAccountDetailsStyles from './AccountDetails.styles';
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
 
 /**
- * Renders a account detailed information given an address by route params.
+ * Renders a account detailed information (personal data, tokens and transactions) given an address.
+ * @param {Object} address - Account address to which render its information.
  */
 export default function AccountDetails({ account }) {
   const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
