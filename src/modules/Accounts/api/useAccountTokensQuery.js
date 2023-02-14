@@ -4,18 +4,16 @@ import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 /**
- * Fetch list of tokens available for a given user account.
+ * Fetch list of tokens available for a given user address.
  * Executes the API call once the hook is mounted.
- * @param {Object} config - Custom configurations for the query.
- * @param {Object} options - Custom options for the query.
- * @param {Object} client - Custom API client for the query.
+ * @param {String} address - Address of the account to query the tokens from.
+ * @param {String} configs - Custom configurations for the query (optional).
+ * @param {Object} configs.config - Custom config for the query.
+ * @param {Object} configs.options - Custom options for the query.
  * @returns - The query state of the API call. Includes the data
  * (tokens), loading state, error state, and more.
  */
-export function useAccountTokensQuery(
-  address,
-  { config: customConfig = {}, options = {}, client } = {}
-) {
+export function useAccountTokensQuery(address, { config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/tokens`,
     method: 'get',
@@ -30,5 +28,5 @@ export function useAccountTokensQuery(
 
   const keys = useQueryKeys([GET_ACCOUNT_TOKENS_QUERY, address, config]);
 
-  return useCustomInfiniteQuery({ config, options, keys, client });
+  return useCustomInfiniteQuery({ config, options, keys });
 }
