@@ -43,7 +43,7 @@ export default function AccountDetails({ account }) {
 
             <View style={[styles.detailsContainer]}>
               <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
-                {account.username}
+                {account.name}
               </P>
 
               <View>

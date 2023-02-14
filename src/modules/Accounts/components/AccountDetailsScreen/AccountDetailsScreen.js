@@ -12,8 +12,6 @@ import AccountDetails from '../AccountDetails/AccountDetails';
 
 /**
  * Renders an account details screen given an address by route params.
- * @TODO - Implement this component.
- * (details on https://github.com/LiskHQ/lisk-mobile/issues/1601).
  */
 export default function AccountDetailsScreen() {
   const navigation = useNavigation();
@@ -33,7 +31,7 @@ export default function AccountDetailsScreen() {
     return null;
   }
 
-  const account = { ...bookmarkAccount, username: bookmarkAccount.label };
+  const account = { ...bookmarkAccount, name: bookmarkAccount.label };
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
