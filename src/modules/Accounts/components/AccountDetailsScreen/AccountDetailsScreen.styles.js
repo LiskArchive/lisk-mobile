@@ -1,6 +1,6 @@
 import { themes, colors, boxes } from 'constants/styleGuide';
 
-export default function getAccountDetailsStyles() {
+export default function getAccountDetailsScreenStyles() {
   return {
     common: {
       container: {

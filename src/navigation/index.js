@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import Register from 'modules/Auth/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
-import AccountDetails from 'modules/Accounts/components/AccountDetails';
+import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
 import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
@@ -135,7 +135,7 @@ export default function Navigator({ children }) {
           />
           <StackNavigator.Screen
             name="AccountDetails"
-            component={AccountDetails}
+            component={AccountDetailsScreen}
             options={navigationOptions.AccountDetails}
           />
           <StackNavigator.Screen

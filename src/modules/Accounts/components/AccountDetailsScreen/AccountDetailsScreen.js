@@ -6,18 +6,18 @@ import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 
-import getAccountDetailsStyles from './styles';
+import getAccountDetailsScreenStyles from './AccountDetailsScreen.styles';
 
 /**
  * Renders an account details screen given an address by route params.
  * @TODO - Implement this component.
  * (details on https://github.com/LiskHQ/lisk-mobile/issues/1601).
  */
-export default function AccountDetails() {
+export default function AccountDetailsScreen() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { styles } = useTheme({ styles: getAccountDetailsStyles() });
+  const { styles } = useTheme({ styles: getAccountDetailsScreenStyles() });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
