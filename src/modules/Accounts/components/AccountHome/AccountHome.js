@@ -117,7 +117,11 @@ export default function AccountHome() {
             </View>
           </View>
 
-          <TokenList mode="overview" style={{ container: { marginTop: 16 } }} />
+          <TokenList
+            mode="overview"
+            accountAddress={address}
+            style={{ container: { marginTop: 16 } }}
+          />
 
           <TransactionList mode="overview" style={{ container: { marginTop: 16 } }} />
         </View>

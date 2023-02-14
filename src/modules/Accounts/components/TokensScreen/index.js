@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 
@@ -11,14 +11,21 @@ import tokensTabStyles from './styles';
 
 export default function TokensScreen() {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const { styles } = useTheme({ styles: tokensTabStyles });
+
+  const accountAddress = route.params?.accountAddress;
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       <HeaderBackButton title={i18next.t('accounts.allTokens')} onPress={navigation.goBack} />
 
-      <TokenList mode="full" style={{ container: styles.tokenListContainer }} />
+      <TokenList
+        mode="full"
+        accountAddress={accountAddress}
+        style={{ container: styles.tokenListContainer }}
+      />
     </SafeAreaView>
   );
 }

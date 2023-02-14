@@ -32,7 +32,7 @@ export default function AccountDetails({ account }) {
   const handleRequestTokensClick = () => navigation.navigate('Request');
   const handleSendTokensClick = () => navigation.navigate('Send');
 
-  const isCurrentAccount = currentAccount.address === account.address;
+  const isCurrentAccount = currentAccount.metadata.address === account.address;
 
   return (
     <>
@@ -87,7 +87,11 @@ export default function AccountDetails({ account }) {
           </View>
         </View>
 
-        <TokenList mode="overview" style={{ container: styles.tokenListContainer }} />
+        <TokenList
+          mode="overview"
+          accountAddress={account.address}
+          style={{ container: styles.tokenListContainer }}
+        />
 
         <TransactionList mode="overview" style={{ container: styles.transactionListContainer }} />
       </View>

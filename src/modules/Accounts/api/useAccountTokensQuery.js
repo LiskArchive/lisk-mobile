@@ -1,4 +1,3 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TOKENS_QUERY } from 'utilities/api/queries';
@@ -13,22 +12,23 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
  * @returns - The query state of the API call. Includes the data
  * (tokens), loading state, error state, and more.
  */
-export function useAccountTokensQuery({ config: customConfig = {}, options = {}, client } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
+export function useAccountTokensQuery(
+  address,
+  { config: customConfig = {}, options = {}, client } = {}
+) {
   const config = {
     url: `${API_URL}/tokens`,
     method: 'get',
     event: 'get.tokens',
     ...customConfig,
     params: {
-      address: currentAccount.metadata.address,
+      address,
       limit: LIMIT,
       ...(customConfig?.params || {}),
     },
   };
 
-  const keys = useQueryKeys([GET_ACCOUNT_TOKENS_QUERY, currentAccount.metadata.address, config]);
+  const keys = useQueryKeys([GET_ACCOUNT_TOKENS_QUERY, address, config]);
 
   return useCustomInfiniteQuery({ config, options, keys, client });
 }
