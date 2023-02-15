@@ -21,7 +21,9 @@ export default function getAccountDetailsStyles() {
       },
       detailsContainer: {
         flex: 1,
+        marginLeft: 8,
         paddingHorizontal: 8,
+        justifyContent: 'center',
       },
       usernameText: {
         fontFamily: fonts.family.contextBold,
@@ -30,6 +32,7 @@ export default function getAccountDetailsStyles() {
       },
       addressText: {
         fontFamily: fonts.family.context,
+        fontSize: fonts.size.base,
       },
       buttonContainer: {
         marginTop: 40,

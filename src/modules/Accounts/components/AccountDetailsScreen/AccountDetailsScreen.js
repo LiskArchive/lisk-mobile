@@ -27,11 +27,7 @@ export default function AccountDetailsScreen() {
     (bookmarkedAccount) => bookmarkedAccount.address === address
   );
 
-  if (!bookmarkAccount) {
-    return null;
-  }
-
-  const account = { ...bookmarkAccount, name: bookmarkAccount.label };
+  const account = { address, name: bookmarkAccount?.label, ...bookmarkAccount };
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>

@@ -51,9 +51,11 @@ export default function AccountDetails({ account }) {
             <Avatar address={account.address} size={48} />
 
             <View style={[styles.detailsContainer]}>
-              <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
-                {account.name}
-              </P>
+              {account.name && (
+                <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
+                  {account.name}
+                </P>
+              )}
 
               <View>
                 <CopyToClipboard
