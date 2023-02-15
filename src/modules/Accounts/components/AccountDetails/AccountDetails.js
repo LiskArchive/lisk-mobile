@@ -30,10 +30,18 @@ export default function AccountDetails({ account }) {
 
   const { styles } = useTheme({ styles: getAccountDetailsStyles() });
 
-  const handleRequestTokensClick = () => navigation.navigate('Request');
-  const handleSendTokensClick = () => navigation.navigate('Send');
-
   const isCurrentAccount = currentAccount.metadata.address === account.address;
+
+  const handleRequestTokensClick = () => navigation.navigate('Request');
+
+  const handleSendTokensClick = () =>
+    navigation.navigate({
+      name: 'Send',
+      params: !isCurrentAccount && {
+        recipientAccountAddress: account.address,
+        recipientAccountAddressFormat: 'picker',
+      },
+    });
 
   return (
     <>
