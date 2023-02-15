@@ -196,6 +196,7 @@ const Fab = ({
   };
 
   const Touchable = getTouchableComponent();
+
   const propStyles = {
     bottom: mainBottomAnimation.current,
   };
@@ -217,7 +218,7 @@ const Fab = ({
       )}
       {renderActions()}
       <Animated.View
-        style={[styles.buttonContainer, propStyles]}
+        style={[styles.buttonContainer, sizeStyle, animatedViewStyle, propStyles]}
         accessible
         accessibilityLabel="Floating Action Button"
       >
