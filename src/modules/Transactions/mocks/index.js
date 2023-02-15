@@ -3,10 +3,20 @@ import { rest } from 'msw';
 
 import { LIMIT, API_VERSION } from 'utilities/api/constants';
 import {
+  mockGetAccountTokensQuery,
   mockGetTransactionsQuery,
   mockGetTransactionQuery,
   mockTransactions,
 } from '../__fixtures__';
+
+export const getAccountTokensMockHandler = rest.get(
+  `*/api/${API_VERSION}/tokens`,
+  async (_, res, ctx) => {
+    const response = mockGetAccountTokensQuery;
+
+    return res(ctx.delay(20), ctx.json(response));
+  }
+);
 
 export const getTransactionsMockHandler = rest.get(
   `*/api/${API_VERSION}/transactions`,

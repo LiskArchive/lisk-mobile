@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 import { LIMIT } from 'utilities/api/constants';
@@ -21,8 +22,10 @@ import getTransactionListStyles from './TransactionList.styles';
 import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from './TransactionList.constants';
 import TransactionListSkeleton from './components/TransactionListSkeleton';
 
-export default function TransactionList({ mode = 'overview', style }) {
+export default function TransactionList({ mode = 'overview', address, style }) {
   const navigation = useNavigation();
+
+  const [currentAccount] = useCurrentAccount();
 
   const {
     data: transactionsData,
@@ -31,7 +34,7 @@ export default function TransactionList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
-  } = useAccountTransactionsQuery({
+  } = useAccountTransactionsQuery(address, {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT },
     },
@@ -44,6 +47,8 @@ export default function TransactionList({ mode = 'overview', style }) {
   const areMoreOnOverview = transactionsData?.meta.count < transactionsData?.meta.total;
 
   const showViewAllButton = !errorOnTransactions && !isLoadingTransactions && areMoreOnOverview;
+
+  const isCurrentAccount = currentAccount.metadata.address === address;
 
   function renderHeader() {
     if (mode === 'full') return null;
@@ -59,7 +64,9 @@ export default function TransactionList({ mode = 'overview', style }) {
 
         {showViewAllButton && (
           <LabelButton
-            onClick={() => navigation.navigate('TransactionsHistory')}
+            onClick={() =>
+              navigation.navigate({ name: 'TransactionsHistory', params: { address } })
+            }
             textStyle={styles.labelButtonText}
             adornments={{
               right: (
@@ -102,7 +109,11 @@ export default function TransactionList({ mode = 'overview', style }) {
         renderEmpty={() => (
           <ResultScreen
             illustration={<EmptyIllustrationSvg />}
-            description={i18next.t('transactions.transactionList.emptyText')}
+            description={
+              isCurrentAccount
+                ? i18next.t('transactions.transactionList.emptyText')
+                : "This account hasn't performed any transaction yet."
+            }
             styles={{
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,

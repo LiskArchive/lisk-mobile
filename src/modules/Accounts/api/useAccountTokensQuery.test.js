@@ -1,13 +1,13 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { mockGetTransactionsQuery } from 'modules/Transactions/__fixtures__';
+import { mockGetAccountTokensQuery } from 'modules/Transactions/__fixtures__/mockGetAccountTokensQuery';
 import { mockSavedAccounts } from '../__fixtures__';
-import { useAccountTransactionsQuery } from './useAccountTransactionsQuery';
+import { useAccountTokensQuery } from './useAccountTokensQuery';
 import { applicationsWrapper } from '../../../tests/applicationsWrapper';
 
 jest.useRealTimers();
 
-describe('useAccountTransactionsQuery hook', () => {
+describe('useAccountTokensQuery hook', () => {
   const address = mockSavedAccounts[0].metadata.address;
   const limit = 2;
   const config = { params: { limit } };
@@ -15,7 +15,7 @@ describe('useAccountTransactionsQuery hook', () => {
   const wrapper = ({ children }) => applicationsWrapper({ children });
 
   it('fetch data correctly', async () => {
-    const { result, waitFor } = renderHook(() => useAccountTransactionsQuery(address, { config }), {
+    const { result, waitFor } = renderHook(() => useAccountTokensQuery(address, { config }), {
       wrapper,
     });
 
@@ -25,14 +25,7 @@ describe('useAccountTransactionsQuery hook', () => {
 
     expect(result.current.isSuccess).toBeTruthy();
 
-    const expectedResponse = {
-      data: mockGetTransactionsQuery.data.slice(0, limit),
-      meta: {
-        ...mockGetTransactionsQuery.meta,
-        count: limit,
-        offset: 0,
-      },
-    };
+    const expectedResponse = mockGetAccountTokensQuery;
 
     expect(result.current.data).toEqual(expectedResponse);
   });

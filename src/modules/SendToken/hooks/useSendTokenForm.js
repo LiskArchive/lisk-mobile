@@ -37,7 +37,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       recipientApplicationChainID:
         initialValues?.recipientApplicationChainID || currentApplication.data?.chainID,
       recipientAccountAddress: initialValues?.recipientAccountAddress,
-      recipientAccountAddressFormat: 'input',
+      recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
       tokenID: initialValues?.tokenID,
       amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
       message: initialValues?.message || '',

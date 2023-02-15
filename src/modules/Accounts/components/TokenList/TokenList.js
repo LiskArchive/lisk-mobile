@@ -23,9 +23,12 @@ import TokenListTabs from './components/TokenListTabs';
 import getTokenListStyles from './TokenList.styles';
 import { NO_OF_TOKENS_ON_OVERVIEW } from './TokenList.constants';
 import TokenListSkeleton from './components/TokenListSkeleton';
+import { useCurrentAccount } from '../../hooks/useCurrentAccount';
 
-export default function TokenList({ mode = 'overview', style }) {
+export default function TokenList({ mode = 'overview', address, style }) {
   const [activeTab, setActiveTab] = useState(0);
+
+  const [currentAccount] = useCurrentAccount();
 
   const navigation = useNavigation();
 
@@ -36,7 +39,7 @@ export default function TokenList({ mode = 'overview', style }) {
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-  } = useAccountTokensQuery({
+  } = useAccountTokensQuery(address, {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
     },
@@ -68,6 +71,8 @@ export default function TokenList({ mode = 'overview', style }) {
   const showViewAllButton =
     mode === 'overview' && !errorOnTokens && !isLoadingTokens && areMoreOnOverview;
 
+  const isCurrentAccount = currentAccount.metadata.address === address;
+
   return (
     <View style={[styles.theme.container, style?.container]}>
       <View style={[styles.header, !showViewAllButton && styles.headerExtraMargin, style?.header]}>
@@ -80,7 +85,7 @@ export default function TokenList({ mode = 'overview', style }) {
 
         {showViewAllButton && (
           <LabelButton
-            onClick={() => navigation.navigate('Tokens')}
+            onClick={() => navigation.navigate({ name: 'Tokens', params: { address } })}
             style={[styles.labelButton]}
             textStyle={styles.labelButtonText}
             adornments={{
@@ -118,7 +123,11 @@ export default function TokenList({ mode = 'overview', style }) {
         renderEmpty={() => (
           <ResultScreen
             illustration={<EmptyIllustrationSvg />}
-            description={i18next.t('accounts.emptyTokenMessage')}
+            description={
+              isCurrentAccount
+                ? i18next.t('accounts.emptyTokenMessage')
+                : 'There are no tokens to display for this account at this time.'
+            }
             styles={{
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,

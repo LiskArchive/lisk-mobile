@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, TouchableOpacity, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -20,11 +21,19 @@ import getTransactionDetailsStyles from './styles';
 export function TransactionDetailsBody({ transaction }) {
   const [showParams, setShowParams] = useState(false);
 
+  const navigation = useNavigation();
+
   const transactionAssets = useTransactionAssets({ transaction });
 
   const scrollViewRef = useRef();
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
+
+  const handleAccountClick = () =>
+    navigation.navigate({
+      name: 'AccountDetails',
+      params: { address: transaction.sender.address },
+    });
 
   return (
     <ScrollView
@@ -43,23 +52,25 @@ export function TransactionDetailsBody({ transaction }) {
       </View>
 
       <View style={[styles.section, styles.row]}>
-        <View style={[styles.column]}>
-          <Text style={[styles.label, styles.theme.label]}>
-            {i18next.t('transactions.transactionDetails.senderLabel')}
-          </Text>
+        <TouchableOpacity style={[styles.row]} onPress={handleAccountClick}>
+          <View style={[styles.column]}>
+            <Text style={[styles.label, styles.theme.label]}>
+              {i18next.t('transactions.transactionDetails.senderLabel')}
+            </Text>
 
-          <CopyToClipboard
-            style={[styles.text, styles.theme.text]}
-            labelStyle={[styles.text, styles.theme.text]}
-            showIcon
-            iconSize={18}
-            value={transaction.sender.address}
-            type={P}
-            label={stringShortener(transaction.sender.address, 5, 5)}
-          />
-        </View>
+            <CopyToClipboard
+              style={[styles.text, styles.theme.text]}
+              labelStyle={[styles.text, styles.theme.text]}
+              showIcon
+              iconSize={18}
+              value={transaction.sender.address}
+              type={P}
+              label={stringShortener(transaction.sender.address, 5, 5)}
+            />
+          </View>
 
-        <Avatar address={transaction.sender.address} size={40} />
+          <Avatar address={transaction.sender.address} size={40} />
+        </TouchableOpacity>
       </View>
 
       <View style={[styles.section]}>

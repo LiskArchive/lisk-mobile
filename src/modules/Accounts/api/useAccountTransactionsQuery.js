@@ -1,13 +1,22 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
-import apiClient from 'utilities/api/APIClient';
 import { LIMIT, API_URL } from 'utilities/api/constants';
 import { GET_ACCOUNT_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 
-export function useAccountTransactionsQueryParams({ config: customConfig = {} } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
+/**
+ * Fetch user account transactions in paginated mode.
+ * Executes the API call once the hook is mounted.
+ * @param {String} address - Address of the account to query the transactions from.
+ * @param {String} configs - Custom configurations for the query (optional).
+ * @param {Object} configs.config - Custom config for the query.
+ * @param {Object} configs.options - Custom options for the query.
+ * @returns - The query state of the API call. Includes the data
+ * (with the array of transactions), loading state, error state, and more.
+ */
+export function useAccountTransactionsQuery(
+  address,
+  { config: customConfig = {}, options = {} } = {}
+) {
   const config = {
     url: `${API_URL}/transactions`,
     method: 'get',
@@ -15,34 +24,12 @@ export function useAccountTransactionsQueryParams({ config: customConfig = {} } 
     ...customConfig,
     params: {
       limit: LIMIT,
-      address: currentAccount.metadata.address,
+      address,
       ...(customConfig?.params || {}),
     },
   };
 
-  const keys = useQueryKeys([
-    GET_ACCOUNT_TRANSACTIONS_QUERY,
-    currentAccount.metadata.address,
-    config,
-  ]);
+  const keys = useQueryKeys([GET_ACCOUNT_TRANSACTIONS_QUERY, address, config]);
 
-  return { config, keys };
-}
-
-/**
- * Fetch user account transactions in paginated mode.
- * Executes the API call once the hook is mounted.
- * @param {Object} config - Custom configurations for the query.
- * @param {Object} options - Custom options for the query.
- * @returns - The query state of the API call. Includes the data
- * (with the array of transactions), loading state, error state, and more.
- */
-export function useAccountTransactionsQuery({
-  config: customConfig = {},
-  options = {},
-  client = apiClient,
-} = {}) {
-  const { config, keys } = useAccountTransactionsQueryParams({ config: customConfig });
-
-  return useCustomInfiniteQuery({ config, options, keys, client });
+  return useCustomInfiniteQuery({ config, options, keys });
 }
