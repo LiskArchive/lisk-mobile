@@ -25,7 +25,11 @@ export default function RegisterSafeKeeping({
   useEffect(() => {
     navigation.setOptions({
       headerLeft: (props) => (
-        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('auth.register.title')} />
+        <HeaderBackButton
+          {...props}
+          onPress={() => navigation.goBack()}
+          title={i18next.t('auth.register.title')}
+        />
       ),
       title: null,
     });
