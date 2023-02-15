@@ -23,9 +23,12 @@ import TokenListTabs from './components/TokenListTabs';
 import getTokenListStyles from './TokenList.styles';
 import { NO_OF_TOKENS_ON_OVERVIEW } from './TokenList.constants';
 import TokenListSkeleton from './components/TokenListSkeleton';
+import { useCurrentAccount } from '../../hooks/useCurrentAccount';
 
 export default function TokenList({ mode = 'overview', address, style }) {
   const [activeTab, setActiveTab] = useState(0);
+
+  const [currentAccount] = useCurrentAccount();
 
   const navigation = useNavigation();
 
@@ -67,6 +70,8 @@ export default function TokenList({ mode = 'overview', address, style }) {
 
   const showViewAllButton =
     mode === 'overview' && !errorOnTokens && !isLoadingTokens && areMoreOnOverview;
+
+  const isCurrentAccount = currentAccount.metadata.address === address;
 
   return (
     <View style={[styles.theme.container, style?.container]}>
@@ -118,7 +123,11 @@ export default function TokenList({ mode = 'overview', address, style }) {
         renderEmpty={() => (
           <ResultScreen
             illustration={<EmptyIllustrationSvg />}
-            description={i18next.t('accounts.emptyTokenMessage')}
+            description={
+              isCurrentAccount
+                ? i18next.t('accounts.emptyTokenMessage')
+                : 'There are no tokens to display for this account at this time.'
+            }
             styles={{
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,
