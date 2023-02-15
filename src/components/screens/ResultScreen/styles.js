@@ -13,7 +13,7 @@ export default () => ({
       justifyContent: 'center',
     },
     illustration: {
-      paddingVertical: 16,
+      paddingVertical: 12,
     },
     title: {
       fontFamily: fonts.family.heading,
@@ -23,9 +23,8 @@ export default () => ({
     },
     description: {
       fontFamily: fonts.family.context,
-      fontSize: fonts.size.base,
+      fontSize: fonts.size.input,
       textAlign: 'center',
-      marginBottom: 16,
     },
     footer: {
       padding: boxes.boxPadding,
@@ -43,7 +42,7 @@ export default () => ({
       color: colors.light.zodiacBlue,
     },
     description: {
-      color: colors.light.zodiacBlue,
+      color: colors.light.sparkleGray,
     },
   },
 
