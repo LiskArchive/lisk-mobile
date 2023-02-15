@@ -233,7 +233,8 @@ const Fab = ({
                 inputRange: [0, 1],
                 outputRange: [colors.light.white, colors.light.ultramarineBlue],
               })}
-              size={20}
+              height={24}
+              width={24}
             />
           </Animated.View>
         </Touchable>
