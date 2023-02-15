@@ -36,7 +36,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     elevation: 5,
     position: 'absolute',
-    right: 30,
+    right: 32,
     bottom: 0,
   },
   button: {
