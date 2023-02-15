@@ -12,12 +12,7 @@ import { colors } from 'constants/styleGuide';
 
 import styles from './styles';
 
-export default function RegisterSafeKeeping({
-  passphrase,
-  prevStep,
-  nextStep,
-  setShowProgressBar,
-}) {
+export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgressBar }) {
   const navigation = useNavigation();
 
   const [confirmed, setConfirmed] = useState(false);
@@ -35,7 +30,7 @@ export default function RegisterSafeKeeping({
     });
 
     setShowProgressBar(true);
-  }, [navigation, prevStep, setShowProgressBar]);
+  }, [navigation, setShowProgressBar]);
 
   const handleConfirm = (status) => setConfirmed(status);
 
