@@ -22,7 +22,7 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
       headerLeft: (props) => (
         <HeaderBackButton
           {...props}
-          onPress={() => navigation.goBack()}
+          onPress={navigation.goBack}
           title={i18next.t('auth.register.title')}
         />
       ),
