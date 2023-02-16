@@ -174,19 +174,19 @@
     "register" : {
       "title": "Create account",     
       "safeKeeping": {
-        "title": "Saving your passphrase",
-        "description": "Store your passphrase carefully",
-        "understandResponsibilityDescription": "I understand that it’s my responsibility to keep my passphrase safe.",
-        "continueButtonText": "I wrote it down"
+        "title": "Save your secret recovery phrase",
+        "description": "Please write down these 12 words carefully, and store them in a safe place.",
+        "understandResponsibilityDescription": "I understand that it's my responsibility to keep my secret recovery phrase safe.",
+        "continueButtonText": "I have written them down"
       },
       "confirm": {
-        "title": "Passphrase verification",
-        "description": "Tap and fill in the blanks:"
+        "title": "Confirm your secret recovery phrase",
+        "description": "Tap and fill in the blanks."
       },
       "success": {
-        "title": "Perfect! You’re all set",
-        "description": "Great! now you can use your passphrase to sign in to your account.",
-        "continueButtonText": "Continue to Add account"
+        "title": "Great! Your account is now created",
+        "description": "You can now add your account to Lisk Wallet by clicking on 'Continue to add account', to be able to send and request tokens and much more.",
+        "continueButtonText": "Continue to add account"
       }
     },
     "setup": {
