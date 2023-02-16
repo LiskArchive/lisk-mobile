@@ -16,7 +16,7 @@ const SelectNode = ({ application, onPress }) => {
     <View style={styles.container}>
       <View style={styles.titleHolder}>
         <View style={styles.row}>
-          <Image source={{ uri: logo.png }} style={styles.logo} />
+          <Image source={{ uri: logo?.png }} style={styles.logo} />
           <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
         </View>
       </View>
