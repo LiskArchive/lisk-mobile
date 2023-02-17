@@ -176,18 +176,18 @@
     "register" : {
       "title": "Konto erstellen",      
       "safeKeeping": {
-        "title": "Speichern Sie Ihre Passphrase",
-        "description": "Bewahren Sie Ihre Passphrase sorgfältig auf",
-        "understandResponsibilityDescription": "Ich verstehe, dass es in meiner Verantwortung liegt, meine Passphrase sicher aufzubewahren.",
-        "continueButtonText": "Ich habe es aufgeschrieben"
+        "title": "Speichern Sie Ihre geheime Wiederherstellungsphrase",
+        "description": "Bitte schreiben Sie diese 12 Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
+        "understandResponsibilityDescription": "Ich verstehe, dass es in meiner Verantwortung liegt, meine geheime Wiederherstellungsphrase sicher aufzubewahren.",
+        "continueButtonText": "Ich habe sie aufgeschrieben"
       },
       "confirm": {
-        "title": "Überprüfung der Passphrase",
-        "description": "Tippen Sie auf und füllen Sie die Lücken aus:"
+        "title": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
+        "description": "Tippen Sie auf und füllen Sie die Lücken aus."
       },
       "success": {
-        "title": "Perfekt!",
-        "description": "Groß! Jetzt können Sie sich mit Ihrer Passphrase bei Ihrem Konto anmelden.",
+        "title": "Großartig! Ihr Konto ist jetzt erstellt",
+        "description": "Sie können Ihr Konto jetzt zu Lisk Wallet hinzufügen, indem Sie auf „Konto hinzufügen fortsetzen“ klicken, um Tokens senden und anfordern zu können und vieles mehr.",
         "continueButtonText": "Weiter zu Konto hinzufügen"
       }
     },

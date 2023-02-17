@@ -12,12 +12,7 @@ import { colors } from 'constants/styleGuide';
 
 import styles from './styles';
 
-export default function RegisterSafeKeeping({
-  passphrase,
-  prevStep,
-  nextStep,
-  setShowProgressBar,
-}) {
+export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgressBar }) {
   const navigation = useNavigation();
 
   const [confirmed, setConfirmed] = useState(false);
@@ -25,13 +20,17 @@ export default function RegisterSafeKeeping({
   useEffect(() => {
     navigation.setOptions({
       headerLeft: (props) => (
-        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('auth.register.title')} />
+        <HeaderBackButton
+          {...props}
+          onPress={navigation.goBack}
+          title={i18next.t('auth.register.title')}
+        />
       ),
       title: null,
     });
 
     setShowProgressBar(true);
-  }, [navigation, prevStep, setShowProgressBar]);
+  }, [navigation, setShowProgressBar]);
 
   const handleConfirm = (status) => setConfirmed(status);
 
