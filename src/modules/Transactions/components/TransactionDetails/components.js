@@ -42,6 +42,7 @@ export function TransactionDetailsBody({ transaction }) {
         showParams && scrollViewRef.current.scrollToEnd({ animated: true })
       }
       style={[styles.container, styles.theme.container]}
+      showsVerticalScrollIndicator={false}
     >
       <View style={[styles.section]}>
         <Text style={[styles.text, styles.theme.text, { marginBottom: 8 }]}>

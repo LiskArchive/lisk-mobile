@@ -185,8 +185,8 @@ export function SendTokenMessageField({ value, onChange, style }) {
     return (
       <LabelButton
         onClick={() => setShowInput(true)}
-        style={{ width: 178 }}
-        textStyle={{ fontSize: 14, lineHeight: 0, marginBottom: 16 }}
+        style={styles.addMessageLabelContainer}
+        textStyle={styles.addMessageLabel}
       >
         {i18next.t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
