@@ -99,7 +99,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
           <InfiniteScrollList
             data={data}
             keyExtractor={(item) => item.id}
-            renderItem={(item) => <TransactionRow transaction={item} />}
+            renderItem={(item) => <TransactionRow transaction={item} address={address} />}
             fetchNextPage={fetchNextTransactionsPage}
             hasNextPage={mode === 'full' && hasTransactionsNextPage}
             isFetchingNextPage={isFetchingTransactionsNextPage}

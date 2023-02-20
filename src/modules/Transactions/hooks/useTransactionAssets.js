@@ -2,7 +2,6 @@
 import React from 'react';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import TransactionSvg from 'assets/svgs/TransactionSvg';
 import { MODULE_COMMAND_NAMES } from '../constants';
 import getTransactionRowStyles from '../components/TransactionRow/TransactionRow.styles';
@@ -13,9 +12,7 @@ import getTransactionRowStyles from '../components/TransactionRow/TransactionRow
  * @param {Object} transaction - The transaction object to get the assets from.
  * @returns {Object} - The assets of the transaction.
  */
-export function useTransactionAssets({ transaction, style }) {
-  const [currentAccount] = useCurrentAccount();
-
+export function useTransactionAssets({ transaction, style, address }) {
   const { styles } = useTheme({
     styles: getTransactionRowStyles(),
   });
@@ -25,7 +22,7 @@ export function useTransactionAssets({ transaction, style }) {
   };
 
   if (transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenTransfer) {
-    if (currentAccount.metadata.address !== transaction.sender.address) {
+    if (address !== transaction.sender.address) {
       assets = {
         ...assets,
         amount: {

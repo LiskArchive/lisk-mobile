@@ -14,7 +14,7 @@ import DiscreteModeComponent from '../../../../components/shared/DiscreteModeCom
 import { TransactionAmount } from './components/TransactionAmount';
 import { TransactionStatus } from './components/TransactionStatus';
 
-export default function TransactionRow({ transaction }) {
+export default function TransactionRow({ transaction, address }) {
   const navigation = useNavigation();
 
   const { styles } = useTheme({
@@ -49,7 +49,11 @@ export default function TransactionRow({ transaction }) {
           blurVariant={transactionAssets.amount?.sign === '-' ? 'outgoing' : 'incoming'}
           data={transaction.notRawLisk ? transaction.amount : fromRawLsk(transaction.params.amount)}
         >
-          <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />
+          <TransactionAmount
+            transaction={transaction}
+            address={address}
+            style={{ marginBottom: 4 }}
+          />
         </DiscreteModeComponent>
 
         <TransactionStatus transaction={transaction} />
