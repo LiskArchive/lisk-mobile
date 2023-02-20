@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { ModalContext } from 'contexts/ModalContext';
 import Settings from 'modules/Settings';
 import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';
 import Bookmarks from 'modules/Bookmark';
@@ -15,6 +16,7 @@ const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   const { session } = useWalletConnectSession();
+  const { isOpen: modalOpen } = useContext(ModalContext);
 
   const [
     showExternalApplicationSignatureRequestModal,
@@ -35,7 +37,7 @@ export default function Tabs() {
         screenOptions={{ unmountOnBlur: false }}
         tabBarOptions={{
           showLabel: false,
-          style: getNavigationTabBarStyles(),
+          style: getNavigationTabBarStyles(modalOpen),
         }}
       >
         <Tab.Screen

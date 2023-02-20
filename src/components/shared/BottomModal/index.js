@@ -1,13 +1,18 @@
+/* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
-import { TouchableOpacity, View, Modal, ScrollView, Animated, Dimensions } from 'react-native';
+import { TouchableOpacity, View, ScrollView, Animated, Dimensions } from 'react-native';
+import { useModal } from 'contexts/useModal';
 
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
+import { useNavigation } from '@react-navigation/native';
 
 import getStyles from './styles';
 
 const BottomModal = ({ showClose = true, show, toggleShow, children, style }) => {
+  const navigation = useNavigation();
+  const { toggle: toggleModalContext } = useModal();
   const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
 
   const { styles } = useTheme({ styles: getStyles() });
@@ -24,7 +29,9 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
     useNativeDriver: false,
   });
 
-  const handleClose = () => closeAnimation.start(() => toggleShow(false));
+  const handleClose = () => {
+    closeAnimation.start(() => toggleShow(false));
+  };
 
   const top = panY.interpolate({
     inputRange: [-1, 0, 1],
@@ -33,12 +40,25 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
 
   useEffect(() => {
     if (show) {
+      toggleModalContext(show);
       resetPositionAnimation.start();
     }
-  }, [show, resetPositionAnimation]);
+  }, [show, resetPositionAnimation, toggleModalContext]);
+
+  useEffect(() => {
+    const tabBarVisible = !show;
+    navigation.setOptions({
+      tabBarVisible,
+    });
+    toggleModalContext(show);
+  }, [show, navigation, toggleModalContext]);
+
+  if (!show) {
+    return null;
+  }
 
   return (
-    <Modal transparent visible={show} onRequestClose={handleClose} animationType="fade">
+    <View style={styles.content} onPress={handleClose}>
       <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
         <Animated.View
           style={[styles.container, styles.theme.container, style?.container, { top }]}
@@ -62,7 +82,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
           <ScrollView style={[style?.children]}>{children}</ScrollView>
         </Animated.View>
       </View>
-    </Modal>
+    </View>
   );
 };
 

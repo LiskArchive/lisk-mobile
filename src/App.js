@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { ApplicationsProvider } from 'modules/BlockchainApplication/context/ApplicationsContext';
 import { ThemeProvider } from 'contexts/ThemeContext';
+import { ModalProvider } from 'contexts/ModalContext';
 import Navigator from 'navigation';
 import Alert from 'components/shared/alert';
 import StatusBar from 'components/shared/StatusBar';
@@ -24,12 +25,14 @@ export default function App() {
             <PersistGate loading={null} persistor={persistedStore}>
               <ApplicationsProvider>
                 <ThemeProvider>
-                  <BootstrapApp>
-                    <Navigator>
-                      <StatusBar />
-                      <Alert />
-                    </Navigator>
-                  </BootstrapApp>
+                  <ModalProvider>
+                    <BootstrapApp>
+                      <Navigator>
+                        <StatusBar />
+                        <Alert />
+                      </Navigator>
+                    </BootstrapApp>
+                  </ModalProvider>
                 </ThemeProvider>
               </ApplicationsProvider>
             </PersistGate>

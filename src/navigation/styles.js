@@ -3,7 +3,7 @@ import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
 import { colors, fonts } from 'constants/styleGuide';
 
-export function getNavigationTabBarStyles() {
+export function getNavigationTabBarStyles(modalOpen) {
   const deviceWidth = Dimensions.get('window').width;
   const width = deviceWidth - 44;
   const left = deviceWidth / 2 - width / 2;
@@ -14,7 +14,7 @@ export function getNavigationTabBarStyles() {
     width,
     left,
     backgroundColor: colors.light.ultramarineBlue,
-    bottom: 24,
+    bottom: modalOpen ? 0 : 24,
     borderRadius: 64,
     height: 64,
     paddingTop,
