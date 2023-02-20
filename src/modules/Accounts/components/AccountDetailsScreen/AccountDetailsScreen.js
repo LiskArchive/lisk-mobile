@@ -30,9 +30,8 @@ export default function AccountDetailsScreen() {
   const account = { address, name: bookmarkAccount?.label, ...bookmarkAccount };
 
   return (
-    <SafeAreaView style={[styles.container, styles.theme.container]}>
+    <SafeAreaView style={[styles.flex, styles.theme.container]}>
       <HeaderBackButton title="Account details" onPress={navigation.goBack} />
-
       <AccountDetails account={account} />
     </SafeAreaView>
   );
