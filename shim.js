@@ -2,7 +2,7 @@
 // crypto is loaded first, so it can populate global.crypto
 require('crypto');
 import BackgroundTimer from 'react-native-background-timer';
-// import { Buffer } from 'buffer';
+import { Buffer } from '@craftzdog/react-native-buffer';
 const env = require('./env.json');
 
 global.setTimeout = BackgroundTimer.setTimeout.bind(BackgroundTimer);
@@ -32,10 +32,7 @@ for (var p in env) {
 }
 
 process.browser = false;
-// global.Buffer = Buffer;
-// global.Buffer.prototype.reverse = function () {
-//   return require('buffer-reverse')(this, arguments);
-// };
+global.Buffer = Buffer;
 
 // global.location = global.location || { port: 80 }
 const isDev = typeof __DEV__ === 'boolean' && __DEV__;

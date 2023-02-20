@@ -21,6 +21,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@craftzdog/react-native-buffer": "^6.0.5",
     "@hookform/resolvers": "^2.9.7",
     "@json-rpc-tools/utils": "^1.7.6",
     "@liskhq/lisk-client": "6.0.0-alpha.13",
@@ -51,7 +52,7 @@
     "bitcoinjs-lib": "^5.2.0",
     "bitcore-mnemonic": "^8.25.30",
     "browserify-zlib": "^0.1.4",
-    "buffer": "^4.9.1",
+    "buffer": "^4.9.2",
     "console-browserify": "^1.2.0",
     "constants-browserify": "^1.0.0",
     "deprecated-react-native-prop-types": "^2.3.0",
