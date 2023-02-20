@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity, View, ScrollView, Animated, Dimensions } from 'react-native';
-import { ModalContext } from 'contexts/ModalContext';
+import { useModal } from 'contexts/useModal';
 
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';
@@ -12,7 +12,7 @@ import getStyles from './styles';
 
 const BottomModal = ({ showClose = true, show, toggleShow, children, style }) => {
   const navigation = useNavigation();
-  const { toggle: toggleModalContext } = useContext(ModalContext);
+  const { toggle: toggleModalContext } = useModal();
   const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
 
   const { styles } = useTheme({ styles: getStyles() });
@@ -30,10 +30,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   });
 
   const handleClose = () => {
-    closeAnimation.start(() => {
-      toggleShow(false);
-      toggleModalContext(false);
-    });
+    closeAnimation.start(() => toggleShow(false));
   };
 
   const top = panY.interpolate({
@@ -53,36 +50,39 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
     navigation.setOptions({
       tabBarVisible,
     });
-  }, [show, navigation]);
+    toggleModalContext(show);
+  }, [show, navigation, toggleModalContext]);
+
+  if (!show) {
+    return null;
+  }
 
   return (
-    show && (
-      <View style={styles.content} onPress={handleClose}>
-        <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
-          <Animated.View
-            style={[styles.container, styles.theme.container, style?.container, { top }]}
-          >
-            <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
+    <View style={styles.content} onPress={handleClose}>
+      <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
+        <Animated.View
+          style={[styles.container, styles.theme.container, style?.container, { top }]}
+        >
+          <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 
-            {showClose && (
-              <TouchableOpacity
-                style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
-                onPress={handleClose}
-              >
-                <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
-              </TouchableOpacity>
-            )}
+          {showClose && (
+            <TouchableOpacity
+              style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
+              onPress={handleClose}
+            >
+              <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
+            </TouchableOpacity>
+          )}
 
-            {/* TODO: Replace {children} container with another VirtualizedList-backed container.
+          {/* TODO: Replace {children} container with another VirtualizedList-backed container.
           VirtualizedLists should never be nested inside plain ScrollViews with the 
           same orientation because it can break windowing and other functionality.
           (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
           */}
-            <ScrollView style={[style?.children]}>{children}</ScrollView>
-          </Animated.View>
-        </View>
+          <ScrollView style={[style?.children]}>{children}</ScrollView>
+        </Animated.View>
       </View>
-    )
+    </View>
   );
 };
 

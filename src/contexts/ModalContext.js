@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export const ModalContext = React.createContext(false);
 
-export function ModalStateProvider({ children }) {
+export function ModalProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
