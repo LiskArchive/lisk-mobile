@@ -30,7 +30,7 @@ export function TransactionDetailsBody({ transaction, address }) {
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
-  const addressIsSender = !!transactionAssets.amount.sign;
+  const addressIsSender = !!transactionAssets.amount?.sign;
   const displayedAddress = addressIsSender
     ? transaction.meta.recipient.address
     : transaction.sender.address;
