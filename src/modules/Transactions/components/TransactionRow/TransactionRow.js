@@ -23,6 +23,8 @@ export default function TransactionRow({ transaction, address }) {
 
   const transactionAssets = useTransactionAssets({ transaction, style: { icon: styles.icon } });
 
+  const shownAddress = transaction.params.recipientAddress || transaction.sender.address;
+
   return (
     <TouchableOpacity
       onPress={() =>
@@ -39,7 +41,7 @@ export default function TransactionRow({ transaction, address }) {
 
         <View style={[styles.titleContainer, styles.theme.titleContainer]}>
           <Text style={[styles.addressText, styles.theme.addressText]}>
-            {stringShortener(transaction.params.recipientAddress, 5, 5)}
+            {stringShortener(shownAddress, 5, 5)}
           </Text>
 
           <TransactionTimestamp
