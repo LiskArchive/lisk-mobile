@@ -15,6 +15,7 @@ const MODULES = {
   auth: 'auth',
   legacy: 'legacy',
   pos: 'pos',
+  interoperability: 'interoperability',
 };
 
 const COMMANDS = {
@@ -27,8 +28,9 @@ const COMMANDS = {
   updateGeneratorKey: 'updateGeneratorKey',
   voteDelegate: 'voteDelegate',
   reclaimLSK: 'reclaimLSK',
-  registerkeys: 'registerkeys',
+  registerkeys: 'registerKeys',
   stake: 'stake',
+  registerSidechain: 'registerSidechain',
 };
 
 export const MODULE_COMMAND_NAMES = {
@@ -38,6 +40,7 @@ export const MODULE_COMMAND_NAMES = {
   reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
   registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,
   stake: `${MODULES.pos}:${COMMANDS.stake}`,
+  registerSidechain: `${MODULES.interoperability}:${COMMANDS.registerSidechain}`,
 };
 
 export const TRANSACTION_STATUS_NAMES = {

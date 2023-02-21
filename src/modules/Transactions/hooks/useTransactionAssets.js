@@ -121,6 +121,13 @@ export function useTransactionAssets({ transaction, style, address }) {
         title: 'Register keys',
       };
       break;
+    case MODULE_COMMAND_NAMES.registerSidechain:
+      assets = {
+        ...assets,
+        type: 'registerSidechain',
+        title: 'Register Sidechain',
+      };
+      break;
 
     default:
       break;

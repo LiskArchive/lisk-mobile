@@ -1,5 +1,4 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import { GET_TRANSACTION_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
@@ -13,8 +12,6 @@ import { API_URL } from 'utilities/api/constants';
  * @returns - The query hook to perform the API call.
  */
 export function useTransactionQuery(id, { config: customConfig = {}, options = {} } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
   const config = {
     url: `${API_URL}/transactions`,
     method: 'get',
@@ -22,7 +19,6 @@ export function useTransactionQuery(id, { config: customConfig = {}, options = {
     ...customConfig,
     params: {
       transactionID: id,
-      senderAddress: currentAccount.metadata.address,
       ...(customConfig?.params || {}),
     },
   };

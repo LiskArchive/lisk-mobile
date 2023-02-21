@@ -41,6 +41,7 @@ export default function TransactionSvg({
       break;
 
     case MODULE_COMMAND_NAMES.registerMultisignatureGroup:
+    case MODULE_COMMAND_NAMES.registerSidechain:
     case MODULE_COMMAND_NAMES.updateGeneratorKey:
     case MODULE_COMMAND_NAMES.registerkeys:
       children = (

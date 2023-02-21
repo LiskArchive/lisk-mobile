@@ -437,6 +437,7 @@
       "errorText": "Error loading transaction!",
       "title": "Transaction details",
       "senderLabel": "Sender",
+      "recipientLabel": "Recipient",
       "transactionFeeLabel": "Transaction Fee",
       "nonceLabel": "Nonce",
       "confirmationsLabel": "Confirmations",

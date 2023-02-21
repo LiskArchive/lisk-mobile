@@ -15,6 +15,7 @@ export default function TransactionDetails(props) {
   const navigation = useNavigation();
 
   const transactionId = props.route.params.transactionId || props.transactionId;
+  const address = props.route.params.address || props.address;
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
@@ -35,7 +36,7 @@ export default function TransactionDetails(props) {
           data={transactionData?.data[0]}
           isLoading={isLoadingTransaction}
           error={errorOnTransaction}
-          renderData={(data) => <TransactionDetailsBody transaction={data} />}
+          renderData={(data) => <TransactionDetailsBody transaction={data} address={address} />}
           renderLoading={() => (
             <Text>{i18next.t('transactions.transactionDetails.loadingText')}</Text>
           )}

@@ -25,7 +25,13 @@ export default function TransactionRow({ transaction, address }) {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('TransactionDetails', { transactionId: transaction.id })}
+      onPress={() =>
+        navigation.navigate({
+          name: 'TransactionDetails',
+          params: { transactionId: transaction.id, address },
+          key: transaction.id,
+        })
+      }
       style={[styles.container, styles.theme.container]}
     >
       <View style={[styles.row]}>

@@ -438,6 +438,7 @@
       "errorText": "Fehler beim Laden der Transaktion!",
       "title": "Transaktionsdetails",
       "senderLabel": "Absender",
+      "recipientLabel": "",
       "transactionFeeLabel": "Transaktionsgebühr",
       "nonceLabel": "Nonce",
       "confirmationsLabel": "Bestätigungen",
