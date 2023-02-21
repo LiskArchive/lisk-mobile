@@ -2449,11 +2449,6 @@
   resolved "https://npm.lisk.com/@tsconfig%2fnode16/-/node16-1.0.3.tgz"
   integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
 
-"@tsconfig/react-native@2.0.2":
-  version "2.0.2"
-  resolved "https://npm.lisk.com/@tsconfig%2freact-native/-/react-native-2.0.2.tgz"
-  integrity sha512-OY+qydDk8Xw+VONvAFB6WTZAi3OP/KSQWNIeuJgkGFHGV3epw8qlctJQ35+fKGG4919nGbNS9ZI0JuZl1y8w2g==
-
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.14":
   version "7.1.20"
   resolved "https://npm.lisk.com/@types%2fbabel__core/-/babel__core-7.1.20.tgz"
@@ -2550,14 +2545,6 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@29.2.1":
-  version "29.2.1"
-  resolved "https://npm.lisk.com/@types%2fjest/-/jest-29.2.1.tgz"
-  integrity sha512-nKixEdnGDqFOZkMTF74avFNr3yRqB1ZJ6sRZv5/28D5x2oLN14KApv7F9mfDT/vUic0L3tRCsh3XWpWjtJisUQ==
-  dependencies:
-    expect "^29.0.0"
-    pretty-format "^29.0.0"
-
 "@types/js-levenshtein@^1.1.1":
   version "1.1.1"
   resolved "https://npm.lisk.com/@types%2fjs-levenshtein/-/js-levenshtein-1.1.1.tgz"
@@ -2623,26 +2610,10 @@
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
-"@types/react-test-renderer@18.0.0":
-  version "18.0.0"
-  resolved "https://npm.lisk.com/@types%2freact-test-renderer/-/react-test-renderer-18.0.0.tgz"
-  integrity sha512-C7/5FBJ3g3sqUahguGi03O79b8afNeSD6T8/GU50oQrJCU0bVCCGQHaGKUbg2Ce8VQEEqTw8/HiS6lXHHdgkdQ==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react@*":
   version "18.0.25"
   resolved "https://npm.lisk.com/@types%2freact/-/react-18.0.25.tgz"
   integrity sha512-xD6c0KDT4m7n9uD4ZHi02lzskaiqcBxf4zi+tXZY98a04wvc0hi/TcCPC2FOESZi51Nd7tlUeOJY8RofL799/g==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@18.0.24":
-  version "18.0.24"
-  resolved "https://npm.lisk.com/@types%2freact/-/react-18.0.24.tgz"
-  integrity sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -6537,7 +6508,7 @@ expect@^27.5.1:
     jest-matcher-utils "^27.5.1"
     jest-message-util "^27.5.1"
 
-expect@^29.0.0, expect@^29.4.3:
+expect@^29.4.3:
   version "29.4.3"
   resolved "https://npm.lisk.com/expect/-/expect-29.4.3.tgz"
   integrity sha512-uC05+Q7eXECFpgDrHdXA4k2rpMyStAYPItEDLyQDo5Ta7fVkJnNA/4zh/OIVkVVNZ1oOK1PipQoyNjuZ6sz6Dg==
