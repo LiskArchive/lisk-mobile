@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": ["airbnb-base", "plugin:react/recommended", "prettier"],
   "env": {
     "browser": true,
@@ -18,8 +18,6 @@
     "jest/consistent-test-it": "error",
     "jest/expect-expect": "error",
     "jest/no-test-prefixes": "error",
-    "jest/prefer-to-be-null": "error",
-    "jest/prefer-to-be-undefined": "error",
     "jest/prefer-to-have-length": "error",
     "arrow-body-style": "off",
     "no-mixed-operators": "off",

@@ -101,7 +101,7 @@ class LiskMessageExtension extends Component {
     );
   };
 
-  bindKeyBoardFocused = () => {
+  static bindKeyBoardFocused = () => {
     MessagesManager.updatePresentationStyle('expanded');
   };
 
@@ -146,7 +146,7 @@ class LiskMessageExtension extends Component {
       .catch(console.log);
   };
 
-  parseUrl = (url) => {
+  static parseUrl = (url) => {
     const parsedData = url.substring(1).replace(/&/g, '","').replace(/=/g, '":"');
     return JSON.parse(`{"${parsedData}"}`, (key, value) =>
       key === '' ? value : decodeURIComponent(value)

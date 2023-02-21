@@ -89,7 +89,7 @@ export function usePasswordSetupForm(passphrase) {
       setError(_error);
       setIsError(true);
 
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptPassphraseError'));
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.encryptPassphraseError'));
     }
   });
 
