@@ -189,7 +189,7 @@
     "react-native-codegen": "0.0.9",
     "react-test-renderer": "18.2.0",
     "redux-mock-store": "^1.5.4",
-    "rn-nodeify": "github:tradle/rn-nodeify",
+    "rn-nodeify": "^10.3.0",
     "schedule": "^0.5.0"
   },
   "jest": {
