@@ -134,7 +134,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
                   onSyncPress={switchTheme}
                 />
               }
-              title={t('settings.menu.dark_mode')}
+              title={t('settings.menu.darkMode')}
             />
           </View>
 

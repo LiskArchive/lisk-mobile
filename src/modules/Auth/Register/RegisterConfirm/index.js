@@ -147,7 +147,7 @@ export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, 
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       {customHeader && (
         <HeaderBackButton
-          title={'settings.backup_phrase.confirm_phrase'}
+          title={'settings.backupPhrase.confirmPhrase'}
           onPress={navigation.goBack}
         />
       )}

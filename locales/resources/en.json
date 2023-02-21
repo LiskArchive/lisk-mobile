@@ -55,7 +55,6 @@
   "Scan": "Scan",
   "Search": "Search",
   "Search for a bookmark": "Search for a bookmark",
-  "Store your passphrase:": "Store your passphrase:",
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
   "The official Lisk mobile wallet.": "The official Lisk mobile wallet.",
   "terms and conditions.": "terms and conditions.",
@@ -99,9 +98,9 @@
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "settings": {
     "menu": {
-      "backupPassphrase": "Backup your passphrase",
+      "backupPassphrase": "Backup your secret recovery phrase",
       "about": "About Lisk",
-      "dark_mode": "Dark mode",
+      "darkMode": "Dark mode",
       "disabled": "Disabled",
       "enabled": "Enabled",
       "discreetMode": "Discreet mode",
@@ -112,10 +111,11 @@
     "descriptions": {
       "discreetMode": "Hide balance and transaction amounts."
     },
-    "backup_phrase": {
+    "backupPhrase": {
       "title": "Backup secret recovery phrase",
-      "confirm_phrase": "Confirm your secret recovery phrase",
-      "continue": "Continue"
+      "confirmPhrase": "Confirm your secret recovery phrase",
+      "continue": "Continue",
+      "storePhrase": "Store your secret recovery phrase:"
     }
   },
   "multisignature": {

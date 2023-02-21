@@ -57,7 +57,6 @@
   "Scan": "scannen",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
-  "Store your passphrase:": "Speichere deine Passphrase:",
   "Tap on the QR Code to share it.": "Tippe auf den QR-Code um ihn zu teilen",
   "The official Lisk mobile wallet.": "Das offizielle Lisk Mobile Wallet.",
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
@@ -103,7 +102,7 @@
     "menu": {
       "backupPassphrase": "Sichern Sie Ihre Passphrase",
       "about": "Über Lisk",
-      "dark_mode": "Dunkler Modus",
+      "darkMode": "Dunkler Modus",
       "disabled": "Deaktiviert",
       "enabled": "Ermöglicht",
       "discreetMode": "Diskreter Modus",
@@ -114,10 +113,11 @@
     "descriptions": {
       "discreetMode": "Guthaben und Transaktionsbeträge ausblenden."
     },
-    "backup_phrase": {
+    "backupPhrase": {
       "title": "Sichern Sie die geheime Wiederherstellungsphrase",
-      "confirm_phrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
-      "continue": "Weiter"
+      "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
+      "continue": "Weiter",
+      "storePhrase": ""
     }
   },
   "multisignature": {
