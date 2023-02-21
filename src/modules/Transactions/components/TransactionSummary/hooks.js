@@ -37,12 +37,12 @@ export function useTransactionSummary({
   const token = supportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
   const transactionFee =
-    supportedTokensData &&
+    token &&
     fromBaseToDisplayDenom({
       amount: fee,
-      displayDenom: token?.displayDenom,
-      denomUnits: token?.denomUnits,
-      symbol: token?.symbol,
+      displayDenom: token.displayDenom,
+      denomUnits: token.denomUnits,
+      symbol: token.symbol,
       withSymbol: true,
     });
 

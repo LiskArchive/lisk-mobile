@@ -5,8 +5,6 @@ const actionTypes = {
   // Loading
   loadingStarted: 'LOADING_STARTED',
   loadingFinished: 'LOADING_FINISHED',
-  // Service
-  dynamicFeesRetrieved: 'DYNAMIC_FEES_RETRIEVED',
   // Network
   networkInfoUpdated: 'NETWORK_INFO_UPDATED',
 };
