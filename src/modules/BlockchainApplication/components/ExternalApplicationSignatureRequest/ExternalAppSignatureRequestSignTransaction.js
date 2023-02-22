@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Linking } from 'react-native';
 import i18next from 'i18next';
 
@@ -21,10 +21,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
 }) {
   const [passwordForm, passwordController] = usePasswordForm();
 
-  const signedTransactionString = useMemo(
-    () => JSON.stringify(transaction.toJSON()),
-    [transaction]
-  );
+  const signedTransactionString = JSON.stringify(transaction.toJSON());
 
   const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
     useCopyToClipboard(signedTransactionString);
