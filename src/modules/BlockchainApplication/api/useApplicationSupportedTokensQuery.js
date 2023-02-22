@@ -14,11 +14,7 @@ import { useAccountTokensFullDataQuery } from '../../Accounts/api/useAccountToke
 export function useApplicationSupportedTokensQuery(application) {
   const toApplicationApiClient = useRef(new APIClient());
 
-  if (application?.serviceURLs?.length) {
-    toApplicationApiClient.current.create(application.serviceURLs[0]);
-  } else {
-    throw new Error('Supported tokens can only be queried with applications with serviceURLs.');
-  }
+  toApplicationApiClient.current.create(application?.serviceURLs[0]);
 
   const {
     data: { data: accountTokensFullData } = {},
@@ -69,6 +65,7 @@ export function useApplicationSupportedTokensQuery(application) {
     data,
     isError: isSupportedTokensError || isAccountTokensFullDataError,
     isLoading: isAccountTokensFullDataLoading || isSupportedTokensLoading,
+    error: errorOnSupportedTokens || errorOnAccountTokensFullData,
     errorOnSupportedTokens,
     errorOnAccountTokensFullData,
   };
