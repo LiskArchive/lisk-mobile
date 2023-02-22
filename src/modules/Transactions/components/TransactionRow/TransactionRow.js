@@ -14,7 +14,7 @@ import DiscreteModeComponent from '../../../../components/shared/DiscreteModeCom
 import { TransactionAmount } from './components/TransactionAmount';
 import { TransactionStatus } from './components/TransactionStatus';
 
-export default function TransactionRow({ transaction }) {
+export default function TransactionRow({ transaction, address }) {
   const navigation = useNavigation();
 
   const { styles } = useTheme({
@@ -23,9 +23,17 @@ export default function TransactionRow({ transaction }) {
 
   const transactionAssets = useTransactionAssets({ transaction, style: { icon: styles.icon } });
 
+  const shownAddress = transaction.params.recipientAddress || transaction.sender.address;
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('TransactionDetails', { transactionId: transaction.id })}
+      onPress={() =>
+        navigation.navigate({
+          name: 'TransactionDetails',
+          params: { transactionId: transaction.id, address },
+          key: transaction.id,
+        })
+      }
       style={[styles.container, styles.theme.container]}
     >
       <View style={[styles.row]}>
@@ -33,7 +41,7 @@ export default function TransactionRow({ transaction }) {
 
         <View style={[styles.titleContainer, styles.theme.titleContainer]}>
           <Text style={[styles.addressText, styles.theme.addressText]}>
-            {stringShortener(transaction.params.recipientAddress, 5, 5)}
+            {stringShortener(shownAddress, 5, 5)}
           </Text>
 
           <TransactionTimestamp
@@ -49,7 +57,11 @@ export default function TransactionRow({ transaction }) {
           blurVariant={transactionAssets.amount?.sign === '-' ? 'outgoing' : 'incoming'}
           data={transaction.notRawLisk ? transaction.amount : fromRawLsk(transaction.params.amount)}
         >
-          <TransactionAmount transaction={transaction} style={{ marginBottom: 4 }} />
+          <TransactionAmount
+            transaction={transaction}
+            address={address}
+            style={{ marginBottom: 4 }}
+          />
         </DiscreteModeComponent>
 
         <TransactionStatus transaction={transaction} />

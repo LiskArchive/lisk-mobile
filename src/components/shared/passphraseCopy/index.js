@@ -8,7 +8,7 @@ import getStyles from './styles';
 
 const PassphraseCopy = ({ styles, passphrase, t }) => (
   <View style={[styles.wrapper, styles.theme.wrapper]}>
-    <P style={styles.theme.passphraseTitle}>{t('Store your passphrase:')}</P>
+    <P style={styles.theme.passphraseTitle}>{t('settings.backupPhrase.storePhrase')}</P>
 
     <P style={[styles.passphrase, styles.theme.passphrase]}>{passphrase}</P>
 

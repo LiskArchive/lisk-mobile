@@ -10,6 +10,8 @@ export default function getSendTokenSelectTokenStepStyles() {
         flex: 1,
         padding: boxes.boxPadding,
       },
+      addMessageLabel: { fontSize: 14, marginBottom: 16 },
+      addMessageLabelContainer: { width: 178 },
       row: {
         flexDirection: 'row',
         alignItems: 'center',

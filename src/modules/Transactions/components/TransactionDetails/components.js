@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useRef, useState } from 'react';
 import { ScrollView, View, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -18,21 +19,27 @@ import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionDetailsStyles from './styles';
 
-export function TransactionDetailsBody({ transaction }) {
+export function TransactionDetailsBody({ transaction, address }) {
   const [showParams, setShowParams] = useState(false);
 
   const navigation = useNavigation();
 
-  const transactionAssets = useTransactionAssets({ transaction });
+  const transactionAssets = useTransactionAssets({ transaction, address });
 
   const scrollViewRef = useRef();
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
+  const addressIsSender = !!transactionAssets.amount?.sign;
+  const displayedAddress = addressIsSender
+    ? transaction.meta.recipient.address
+    : transaction.sender.address;
+
   const handleAccountClick = () =>
     navigation.navigate({
       name: 'AccountDetails',
-      params: { address: transaction.sender.address },
+      key: displayedAddress,
+      params: { address: displayedAddress },
     });
 
   return (
@@ -42,6 +49,7 @@ export function TransactionDetailsBody({ transaction }) {
         showParams && scrollViewRef.current.scrollToEnd({ animated: true })
       }
       style={[styles.container, styles.theme.container]}
+      showsVerticalScrollIndicator={false}
     >
       <View style={[styles.section]}>
         <Text style={[styles.text, styles.theme.text, { marginBottom: 8 }]}>
@@ -55,7 +63,9 @@ export function TransactionDetailsBody({ transaction }) {
         <TouchableOpacity style={[styles.row]} onPress={handleAccountClick}>
           <View style={[styles.column]}>
             <Text style={[styles.label, styles.theme.label]}>
-              {i18next.t('transactions.transactionDetails.senderLabel')}
+              {addressIsSender
+                ? i18next.t('transactions.transactionDetails.recipientLabel')
+                : i18next.t('transactions.transactionDetails.senderLabel')}
             </Text>
 
             <CopyToClipboard
@@ -63,13 +73,13 @@ export function TransactionDetailsBody({ transaction }) {
               labelStyle={[styles.text, styles.theme.text]}
               showIcon
               iconSize={18}
-              value={transaction.sender.address}
+              value={displayedAddress}
               type={P}
-              label={stringShortener(transaction.sender.address, 5, 5)}
+              label={stringShortener(displayedAddress, 5, 5)}
             />
           </View>
 
-          <Avatar address={transaction.sender.address} size={40} />
+          <Avatar address={displayedAddress} size={40} />
         </TouchableOpacity>
       </View>
 
@@ -102,7 +112,7 @@ export function TransactionDetailsBody({ transaction }) {
           {i18next.t('transactions.transactionDetails.statusLabel')}
         </Text>
 
-        <TransactionDetailsStatus />
+        <TransactionDetailsStatus status={transaction.executionStatus} />
       </View>
 
       <View style={[styles.section]}>

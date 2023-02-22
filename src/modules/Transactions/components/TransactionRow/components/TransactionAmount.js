@@ -6,8 +6,8 @@ import { fromRawLsk } from 'utilities/conversions.utils';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { useTransactionAssets } from '../../../hooks/useTransactionAssets';
 
-export function TransactionAmount({ transaction, style }) {
-  const transactionAssets = useTransactionAssets({ transaction });
+export function TransactionAmount({ transaction, style, address }) {
+  const transactionAssets = useTransactionAssets({ transaction, address });
 
   const language = useSelector((state) => state.settings.language);
 

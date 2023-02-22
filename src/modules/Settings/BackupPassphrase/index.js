@@ -24,7 +24,7 @@ const BackupPassphrase = ({ styles, route }) => {
           route={{
             params: {
               address: account.metadata.address,
-              title: 'settings.backup_phrase.title',
+              title: 'settings.backupPhrase.title',
             },
           }}
         />

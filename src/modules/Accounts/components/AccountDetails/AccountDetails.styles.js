@@ -3,9 +3,11 @@ import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 export default function getAccountDetailsStyles() {
   return {
     common: {
+      flex: {
+        flex: 1,
+      },
       container: {
         padding: boxes.boxPadding,
-        flex: 1,
       },
       accountCard: {
         backgroundColor: colors.light.ultramarineBlue,

@@ -1,21 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import * as useCurrentAccount from 'modules/Accounts/hooks/useCurrentAccount';
-
-import { mockSavedAccounts } from 'modules/Accounts/__fixtures__';
 import { mockGetTransactionQuery, mockTransactions } from '../__fixtures__';
 import { useTransactionQuery } from './useTransactionQuery';
 import { applicationsWrapper } from '../../../tests/applicationsWrapper';
 
 jest.useRealTimers();
-
-jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(() => [
-  {
-    metadata: {
-      address: mockSavedAccounts[0].metadata.address,
-    },
-  },
-]);
 
 describe('useTransactionQuery hook', () => {
   const wrapper = ({ children }) => applicationsWrapper({ children });

@@ -29,7 +29,7 @@ const PassphraseBackup = ({ styles, t, theme, sharedData: data, nextStep }) => {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title={'settings.backup_phrase.title'} onPress={navigation.goBack} />
+      <HeaderBackButton title={'settings.backupPhrase.title'} onPress={navigation.goBack} />
       <ScrollView style={styles.container}>
         <PassphraseCopy passphrase={data.recoveryPhrase} />
         <View style={styles.row}>
@@ -52,7 +52,7 @@ const PassphraseBackup = ({ styles, t, theme, sharedData: data, nextStep }) => {
         )}
       </ScrollView>
       <View style={styles.container}>
-        <PrimaryButton noTheme title={t('settings.backup_phrase.continue')} onPress={nextScreen} />
+        <PrimaryButton noTheme title={t('settings.backupPhrase.continue')} onPress={nextScreen} />
       </View>
     </SafeAreaView>
   );
