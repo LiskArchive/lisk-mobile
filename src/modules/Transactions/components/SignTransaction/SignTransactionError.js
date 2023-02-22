@@ -5,11 +5,12 @@ import i18next from 'i18next';
 import { useEmailReport } from 'hooks/useEmailReport';
 import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
+import { H3, P } from 'components/shared/toolBox/typography';
 import TxErrorSvg from 'assets/svgs/TxErrorSvg';
 
 import { getSignTransactionErrorStyles } from './styles';
 
-export default function SignTransactionError({ onClick, error, actionButton }) {
+export default function SignTransactionError({ onClick, error, title, description, actionButton }) {
   const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
   const { styles } = useTheme({
@@ -18,29 +19,39 @@ export default function SignTransactionError({ onClick, error, actionButton }) {
 
   const errorMessage = error instanceof Error && error.message;
 
+  const renderDescription = () => {
+    if (description) {
+      return <P style={[styles.description, styles.theme.description]}>{description}</P>;
+    }
+
+    if (errorMessage) {
+      return <P style={[styles.description, styles.theme.description]}>{errorMessage}</P>;
+    }
+
+    return (
+      <>
+        <P style={[styles.description, styles.theme.description]}>
+          {i18next.t('sendToken.result.error.description1')}
+        </P>
+
+        <P style={[styles.description, styles.theme.description]}>
+          {i18next.t('sendToken.result.error.description2')}
+        </P>
+      </>
+    );
+  };
+
   return (
     <View style={[styles.container, styles.theme.container]}>
       <View style={styles.illustrationContainer}>
         <TxErrorSvg />
       </View>
 
-      <Text style={[styles.title, styles.theme.title]}>
-        {i18next.t('sendToken.result.error.title')}
-      </Text>
+      <H3 style={[styles.title, styles.theme.title]}>
+        {title || i18next.t('sendToken.result.error.title')}
+      </H3>
 
-      {errorMessage ? (
-        <Text style={[styles.description, styles.theme.description]}>{errorMessage}</Text>
-      ) : (
-        <>
-          <Text style={[styles.description, styles.theme.description]}>
-            {i18next.t('sendToken.result.error.description1')}
-          </Text>
-
-          <Text style={[styles.description, styles.theme.description]}>
-            {i18next.t('sendToken.result.error.description2')}
-          </Text>
-        </>
-      )}
+      {renderDescription()}
 
       {actionButton || (
         <PrimaryButton
