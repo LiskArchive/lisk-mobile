@@ -34,9 +34,6 @@ const useWalletConnectEventsManager = () => {
       Object.keys(EVENTS).forEach((eventName) => {
         signClient.on(EVENTS[eventName], eventHandler.bind(null, EVENTS[eventName]));
       });
-    } else {
-      // eslint-disable-next-line no-console
-      console.log('There was an error initializing the Wallet Connect client');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSessionRequest, onSessionDelete, eventHandler, signClient?.on]);

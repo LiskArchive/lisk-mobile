@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Linking } from 'react-native';
 import i18next from 'i18next';
 
@@ -21,10 +21,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
 }) {
   const [passwordForm, passwordController] = usePasswordForm();
 
-  const signedTransactionString = useMemo(
-    () => JSON.stringify(transaction.toJSON()),
-    [transaction]
-  );
+  const signedTransactionString = JSON.stringify(transaction.toJSON());
 
   const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
     useCopyToClipboard(signedTransactionString);
@@ -41,6 +38,12 @@ export default function ExternalAppSignatureRequestSignTransaction({
     (_token) => _token.tokenID === transaction.transaction.params.tokenID
   );
 
+  const handleSuccessSubmit = () => {
+    handleCopySignedTransactionToClipboard();
+    Linking.openURL(session.peer.metadata.url);
+  };
+  const handleErrorSubmit = () => Linking.openURL(session.peer.metadata.url);
+
   return (
     <SignTransaction
       onSubmit={() => onSubmit(passwordController.field.value)}
@@ -53,7 +56,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
       isLoading={isLoading}
       error={error}
       successActionButton={
-        <PrimaryButton onClick={handleCopySignedTransactionToClipboard}>
+        <PrimaryButton onClick={handleSuccessSubmit}>
           {!isSignedTransactionCopiedToClipboard
             ? i18next.t(
                 'application.externalApplicationSignatureRequest.sign.copyToClipboardButtonText'
@@ -63,11 +66,15 @@ export default function ExternalAppSignatureRequestSignTransaction({
               )}
         </PrimaryButton>
       }
+      successTitle="Transaction signing successful"
+      successDescription="Your transaction has been signed, click the button below to copy your signed transaction, once copied you will be redirected to application."
       errorActionButton={
-        <PrimaryButton onClick={() => Linking.openURL(session.peer.metadata.url)}>
+        <PrimaryButton onClick={handleErrorSubmit}>
           {i18next.t('application.externalApplicationSignatureRequest.sign.errorButtonText')}
         </PrimaryButton>
       }
+      errorTitle="Transaction signing failed"
+      errorDescription="Error encountered while signing your transaction."
     />
   );
 }
