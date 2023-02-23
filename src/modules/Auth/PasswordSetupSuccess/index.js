@@ -1,20 +1,31 @@
 import React from 'react';
 import i18next from 'i18next';
+import { useRoute } from '@react-navigation/native';
 
 import { useDownloadFile } from 'hooks/useDownloadFile';
+import { useTheme } from 'contexts/ThemeContext';
 import DownloadFile from 'components/shared/DownloadFile';
 import ResultScreen from 'components/screens/ResultScreen';
 import CompletedIllustrationSvg from 'assets/svgs/CompletedIllustrationSvg';
 import { getAccountDownloadableFilename } from '../utils/downloadAccount';
 
-export default function PasswordSetupSuccess({ encryptedJson, onContinue }) {
-  const accountFilename = getAccountDownloadableFilename(encryptedJson.metadata.address);
+import getPasswordSetupSuccessStyles from './styles';
+
+export default function PasswordSetupSuccess() {
+  const route = useRoute();
+
+  const encryptedAccount = route.params?.encryptedAccount;
+  const onContinue = route.params?.onContinue;
+
+  const accountFilename = getAccountDownloadableFilename(encryptedAccount.metadata.address);
 
   const [downloadFile, { isLoading: isLoadingDownloadFile, isSuccess: isSuccessDownloadFile }] =
     useDownloadFile({
-      data: encryptedJson,
+      data: encryptedAccount,
       fileName: accountFilename,
     });
+
+  const { styles } = useTheme({ styles: getPasswordSetupSuccessStyles() });
 
   return (
     <ResultScreen
@@ -29,6 +40,7 @@ export default function PasswordSetupSuccess({ encryptedJson, onContinue }) {
         fileName={accountFilename}
         downloadFile={downloadFile}
         isLoading={isLoadingDownloadFile}
+        style={{ container: styles.downloadFileContainer }}
       />
     </ResultScreen>
   );

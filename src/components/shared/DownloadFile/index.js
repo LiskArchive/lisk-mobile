@@ -17,6 +17,7 @@ export default function DownloadFile({
   onError,
   downloadFile: baseDownloadFile,
   isLoading: baseIsLoading,
+  style,
 }) {
   const [downloadFile, { isLoading }] = useDownloadFile({
     data,
@@ -28,16 +29,16 @@ export default function DownloadFile({
   const { styles } = useTheme({ styles: getDeleteAccountFormStyles() });
 
   return (
-    <View style={[styles.container]}>
-      <View style={[styles.row, styles.filenameContainer]}>
+    <View style={[styles.container, style?.container]}>
+      <View style={[styles.row, styles.filenameContainer, style?.filenameContainer]}>
         <FileSvg />
 
-        <P style={[styles.text, styles.theme.text]}>{fileName}</P>
+        <P style={[styles.text, styles.theme.text, style?.fileName]}>{fileName}</P>
       </View>
 
       <LabelButton
         onPress={baseDownloadFile || downloadFile}
-        style={[styles.row]}
+        style={[styles.row, style?.submitButton]}
         adornments={{
           right: <DownloadSvg style={[styles.downloadFileIcon]} />,
         }}
