@@ -19,7 +19,11 @@ export function SignTransaction({
   amount,
   token,
   successActionButton,
+  successTitle,
+  successDescription,
   errorActionButton,
+  errorTitle,
+  errorDescription,
 }) {
   const navigation = useNavigation();
 
@@ -60,11 +64,13 @@ export function SignTransaction({
       case 'success':
         return (
           <SignTransactionSuccess
-            onClick={() => {
+            onSubmit={() => {
               onSuccess();
               navigation.navigate('AccountHome');
             }}
             actionButton={successActionButton}
+            title={successTitle}
+            description={successDescription}
           />
         );
 
@@ -74,6 +80,8 @@ export function SignTransaction({
             onClick={() => onError()}
             error={_error}
             actionButton={errorActionButton}
+            title={errorTitle}
+            description={errorDescription}
           />
         );
 

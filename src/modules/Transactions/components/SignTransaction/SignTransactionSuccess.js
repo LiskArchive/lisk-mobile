@@ -1,16 +1,17 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import { H3, P } from 'components/shared/toolBox/typography';
 import TxSuccessSvg from 'assets/svgs/TxSuccesSvg';
 import TxSuccessDarkSvg from 'assets/svgs/TxSuccessDarkSvg';
 import { themes } from 'constants/styleGuide';
 
 import { getSignTransactionSuccessStyles } from './styles';
 
-export default function SendTokenSuccess({ onClick, actionButton }) {
+export default function SignTransactionSuccess({ onSubmit, title, description, actionButton }) {
   const { styles, theme } = useTheme({
     styles: getSignTransactionSuccessStyles(),
   });
@@ -24,20 +25,20 @@ export default function SendTokenSuccess({ onClick, actionButton }) {
           <TxSuccessSvg style={styles.illustration} />
         )}
 
-        <Text style={[styles.title, styles.theme.title]}>
-          {i18next.t('sendToken.result.success.title')}
-        </Text>
+        <H3 style={[styles.title, styles.theme.title]}>
+          {title || i18next.t('sendToken.result.success.title')}
+        </H3>
 
-        <Text style={[styles.description, styles.theme.description]}>
-          {i18next.t('sendToken.result.success.description')}
-        </Text>
+        <P style={[styles.description, styles.theme.description]}>
+          {description || i18next.t('sendToken.result.success.description')}
+        </P>
       </View>
 
       {actionButton || (
         <PrimaryButton
-          style={{ marginBottom: 24 }}
-          onClick={onClick}
+          onClick={onSubmit}
           title={i18next.t('sendToken.result.success.closeButtonText')}
+          style={{ marginBottom: 24 }}
         />
       )}
     </View>
