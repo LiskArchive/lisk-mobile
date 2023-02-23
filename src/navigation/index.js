@@ -20,6 +20,7 @@ import PassphraseBackup from 'modules/Settings/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
 import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
+import PasswordSetupSuccess from 'modules/Auth/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
@@ -79,6 +80,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="PasswordSetupForm"
             component={PasswordSetupForm}
+            options={navigationOptions.SignIn}
+          />
+          <StackNavigator.Screen
+            name="PasswordSetupSuccess"
+            component={PasswordSetupSuccess}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
