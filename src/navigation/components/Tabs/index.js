@@ -15,7 +15,7 @@ import useWalletConnectSession from '../../../../libs/wcm/hooks/useSession';
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
-  const { session } = useWalletConnectSession();
+  const { session, reject } = useWalletConnectSession();
   const { isOpen: modalOpen } = useContext(ModalContext);
 
   const [
@@ -68,9 +68,11 @@ export default function Tabs() {
 
       <BottomModal
         show={showExternalApplicationSignatureRequestModal}
-        toggleShow={() =>
-          setShowExternalApplicationSignatureRequestModal((prevState) => !prevState)
-        }
+        toggleShow={() => {
+          setShowExternalApplicationSignatureRequestModal((prevState) => !prevState);
+
+          reject();
+        }}
       >
         <ExternalApplicationSignatureRequest
           session={session.request}
