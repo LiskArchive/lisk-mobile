@@ -17,6 +17,10 @@ export default function PasswordSetupSuccess() {
   const encryptedAccount = route.params?.encryptedAccount;
   const onContinue = route.params?.onContinue;
 
+  if (!encryptedAccount) {
+    throw new Error('An encrypted account is needed to download its backup file.');
+  }
+
   const accountFilename = getAccountDownloadableFilename(encryptedAccount.metadata.address);
 
   const [downloadFile, { isLoading: isLoadingDownloadFile, isSuccess: isSuccessDownloadFile }] =
