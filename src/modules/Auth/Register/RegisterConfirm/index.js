@@ -12,7 +12,7 @@ import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 import getStyles from './styles';
 
 // eslint-disable-next-line max-statements
-export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, customHeader }) {
+export default function RegisterConfirm({ account, sharedData: data, prevStep, customHeader }) {
   const navigation = useNavigation();
 
   const { passphrase } = data;
@@ -191,7 +191,12 @@ export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, 
           disabled={buttonStatus}
           noTheme={true}
           style={styles.button}
-          onClick={() => nextStep({ passphrase })}
+          onClick={() =>
+            navigation.navigate({
+              name: 'PasswordSetupSuccess',
+              params: { encryptedAccount: account, onContinue: navigation.goBack },
+            })
+          }
         >
           {i18next.t('commons.buttons.confirm')}
         </PrimaryButton>
