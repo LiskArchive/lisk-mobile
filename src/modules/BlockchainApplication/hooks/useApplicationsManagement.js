@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { useCallback, useEffect } from 'react';
 import i18next from 'i18next';
 
@@ -71,12 +72,12 @@ export function useApplicationsManagement() {
   // Init applications management data by merging API calls results with user local
   // stored applications.
   useEffect(() => {
-    if (!applications.data && defaultApplicationsFullData.data && applicationsStorageData?.data) {
+    if (!applications.data && defaultApplicationsFullData.data) {
       applications.dispatchData({
         type: 'init',
         applications: joinArraysWithoutDuplicates(
           defaultApplicationsFullData.data,
-          applicationsStorageData.data,
+          applicationsStorageData?.data || [],
           'chainID'
         ),
       });
