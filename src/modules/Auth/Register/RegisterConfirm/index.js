@@ -194,7 +194,7 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
           onClick={() =>
             navigation.navigate({
               name: 'PasswordSetupSuccess',
-              params: { encryptedAccount: account, onContinue: () => navigation.goBack() },
+              params: { encryptedAccount: account, onContinue: navigation.goBack },
             })
           }
         >
