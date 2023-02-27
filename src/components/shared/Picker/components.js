@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable complexity */
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import CaretSvg from 'assets/svgs/CaretSvg';
@@ -9,7 +9,7 @@ import { themes, colors } from 'constants/styleGuide';
 
 import { usePicker } from './hooks';
 import { getPickerStyles } from './styles';
-import BottomModal from '../BottomModal';
+import { useModal } from '../../../contexts/useModal';
 
 export function PickerLabel({ children, style: baseStyle }) {
   const { styles } = useTheme({
@@ -19,8 +19,8 @@ export function PickerLabel({ children, style: baseStyle }) {
   return <Text style={[styles.label, styles.theme.label, baseStyle]}>{children}</Text>;
 }
 
-export function PickerToggle({ children, placeholder, disabled, style: baseStyle }) {
-  const { value, setShowMenu, error } = usePicker();
+export function PickerToggle({ children, placeholder, disabled, style: baseStyle, openMenu }) {
+  const { value, error } = usePicker();
 
   const { styles, theme } = useTheme({
     styles: getPickerStyles(error),
@@ -51,7 +51,7 @@ export function PickerToggle({ children, placeholder, disabled, style: baseStyle
   return (
     <>
       <TouchableOpacity
-        onPress={() => setShowMenu(true)}
+        onPress={() => openMenu()}
         disabled={disabled}
         style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
       >
@@ -70,22 +70,23 @@ export function PickerToggle({ children, placeholder, disabled, style: baseStyle
   );
 }
 
-export function PickerMenu({ children, style: baseStyle }) {
-  const { showMenu, setShowMenu } = usePicker();
+export function usePickerMenu(children) {
+  const { showMenu } = usePicker();
+  const { showModal } = useModal();
+  const openModal = () => showModal(children);
 
-  const { styles } = useTheme({
-    styles: getPickerStyles(),
-  });
+  useEffect(() => {
+    if (showMenu) {
+      openModal();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showMenu]);
 
-  return (
-    <BottomModal show={showMenu} toggleShow={() => setShowMenu(false)}>
-      <View style={[styles.menuContainer, baseStyle?.container]}>{children}</View>
-    </BottomModal>
-  );
+  return { showOptions: openModal };
 }
 
-export function PickerItem({ value, children, style: baseStyle }) {
-  const { setShowMenu, onChange } = usePicker();
+export function PickerItem({ value, children, onChange, style: baseStyle }) {
+  const { toggle } = useModal();
 
   const { styles } = useTheme({
     styles: getPickerStyles(),
@@ -95,7 +96,7 @@ export function PickerItem({ value, children, style: baseStyle }) {
     <TouchableOpacity
       onPress={() => {
         onChange(value);
-        setShowMenu(false);
+        toggle(false);
       }}
       style={[styles.itemContainer, styles.theme.itemContainer, baseStyle]}
     >

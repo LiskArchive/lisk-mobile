@@ -74,8 +74,27 @@ export function SendTokenRecipientApplicationField({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
+  const MenuItems = () => (
+    <InfiniteScrollList
+      data={applications}
+      keyExtractor={(item) => item.chainID}
+      renderItem={(item) => (
+        <Picker.Item key={item.chainID} value={item.chainID} onChange={onChange}>
+          <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
+
+          <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
+        </Picker.Item>
+      )}
+      withDefaultSpinner
+      // TODO: Integrate pagination props.
+      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
+    />
+  );
+
+  const { showOptions } = Picker.usePickerMenu(<MenuItems />);
+
   return (
-    <Picker value={value} onChange={onChange} error={errorMessage}>
+    <Picker value={value} error={errorMessage}>
       <Picker.Label style={style?.label}>
         {i18next.t('sendToken.applicationsSelect.recipientApplicationFieldLabel')}
       </Picker.Label>
@@ -84,6 +103,7 @@ export function SendTokenRecipientApplicationField({
         disabled={applications.loading}
         placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
+        openMenu={showOptions}
       >
         {recipientApplication && (
           <View style={[styles.row]}>
@@ -96,23 +116,6 @@ export function SendTokenRecipientApplicationField({
           </View>
         )}
       </Picker.Toggle>
-
-      <Picker.Menu>
-        <InfiniteScrollList
-          data={applications}
-          keyExtractor={(item) => item.chainID}
-          renderItem={(item) => (
-            <Picker.Item key={item.chainID} value={item.chainID}>
-              <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
-
-              <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
-            </Picker.Item>
-          )}
-          withDefaultSpinner
-          // TODO: Integrate pagination props.
-          // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
-        />
-      </Picker.Menu>
     </Picker>
   );
 }
@@ -145,13 +148,35 @@ export function SendTokenRecipientAccountField({
     onChange(_value);
   }
 
+  const MenuOptions = () => (
+    <BookmarkList
+      renderEmpty
+      Component={({ data }) => (
+        <Picker.Item key={data.address} onChange={handleInputChange} value={data.address}>
+          <Avatar address={data.address} size={40} />
+
+          <View>
+            {!!data.label && (
+              <P style={[styles.accountName, styles.theme.accountName]}>{data.label}</P>
+            )}
+
+            <P style={[styles.accountAddress, styles.theme.accountAddress]}>
+              {stringShortener(data.address, 6, 6)}
+            </P>
+          </View>
+        </Picker.Item>
+      )}
+    />
+  );
+
+  const { showOptions } = Picker.usePickerMenu(<MenuOptions />);
+
   return (
     <>
       <Input
         label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
         value={addressFormat === 'input' ? value : ''}
         placeholder="Input wallet address or choose a username"
-        onChange={handleInputChange}
         error={addressFormat === 'input' && errorMessage}
         adornments={{
           left: (!value || addressFormat === 'picker') && <CircleSvg />,
@@ -167,6 +192,7 @@ export function SendTokenRecipientAccountField({
           error={addressFormat === 'picker' && errorMessage}
         >
           <Picker.Toggle
+            openMenu={showOptions}
             placeholder={
               <View style={[styles.row]}>
                 <BookmarksSvg
@@ -198,27 +224,6 @@ export function SendTokenRecipientAccountField({
               </View>
             )}
           </Picker.Toggle>
-
-          <Picker.Menu>
-            <BookmarkList
-              renderEmpty
-              Component={({ data }) => (
-                <Picker.Item key={data.address} value={data.address}>
-                  <Avatar address={data.address} size={40} />
-
-                  <View>
-                    {!!data.label && (
-                      <P style={[styles.accountName, styles.theme.accountName]}>{data.label}</P>
-                    )}
-
-                    <P style={[styles.accountAddress, styles.theme.accountAddress]}>
-                      {stringShortener(data.address, 6, 6)}
-                    </P>
-                  </View>
-                </Picker.Item>
-              )}
-            />
-          </Picker.Menu>
         </Picker>
       ) : null}
     </>

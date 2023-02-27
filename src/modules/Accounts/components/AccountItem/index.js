@@ -6,7 +6,6 @@ import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'components/shared/toolBox/icon';
 import { stringShortener } from 'utilities/helpers';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
@@ -22,9 +21,9 @@ export default function AccountItem({
   onDeletePress,
   testID,
   active,
+  navigation,
 }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
-  const navigation = useNavigation();
 
   const { name: username, address } = account.metadata;
 

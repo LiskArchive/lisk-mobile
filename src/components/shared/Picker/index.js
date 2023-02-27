@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { PickerContext } from './hooks';
-import { PickerItem, PickerLabel, PickerMenu, PickerToggle } from './components';
+import { PickerItem, PickerLabel, usePickerMenu, PickerToggle } from './components';
+import { useModal } from '../../../contexts/useModal';
 
-export default function Picker({ children, value, onChange, error }) {
-  const [showMenu, setShowMenu] = useState(false);
+export default function Picker({ children, value, error }) {
+  const { toggle, isOpen } = useModal();
 
   return (
     <PickerContext.Provider
       value={{
-        showMenu,
-        setShowMenu,
+        showMenu: isOpen,
+        setShowMenu: toggle,
         value,
-        onChange,
         error,
       }}
     >
@@ -21,7 +21,7 @@ export default function Picker({ children, value, onChange, error }) {
   );
 }
 
-Picker.Menu = PickerMenu;
+Picker.usePickerMenu = usePickerMenu;
 Picker.Item = PickerItem;
 Picker.Label = PickerLabel;
 Picker.Toggle = PickerToggle;

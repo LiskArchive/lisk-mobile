@@ -27,6 +27,7 @@ export default function AccountsManagerScreen() {
         onDeleteAccountClick={(account) =>
           navigation.navigate({ name: 'DeleteAccount', params: account })
         }
+        navigation={navigation}
       />
     </SafeAreaView>
   );

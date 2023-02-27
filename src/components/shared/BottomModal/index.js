@@ -6,13 +6,11 @@ import { useModal } from 'contexts/useModal';
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
-import { useNavigation } from '@react-navigation/native';
 
 import getStyles from './styles';
 
-const BottomModal = ({ showClose = true, show, toggleShow, children, style }) => {
-  const navigation = useNavigation();
-  const { toggle: toggleModalContext } = useModal();
+const BottomModal = ({ style }) => {
+  const { toggle: toggleModalContext, closeModal, isOpen, component, showClose } = useModal();
   const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
 
   const { styles } = useTheme({ styles: getStyles() });
@@ -30,7 +28,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   });
 
   const handleClose = () => {
-    closeAnimation.start(() => toggleShow(false));
+    closeAnimation.start(() => closeModal());
   };
 
   const top = panY.interpolate({
@@ -39,26 +37,22 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   });
 
   useEffect(() => {
-    if (show) {
-      toggleModalContext(show);
+    if (isOpen) {
+      toggleModalContext(isOpen);
       resetPositionAnimation.start();
     }
-  }, [show, resetPositionAnimation, toggleModalContext]);
+  }, [isOpen, resetPositionAnimation, toggleModalContext]);
 
   useEffect(() => {
-    const tabBarVisible = !show;
-    navigation.setOptions({
-      tabBarVisible,
-    });
-    toggleModalContext(show);
-  }, [show, navigation, toggleModalContext]);
+    // toggleModalContext(isOpen);
+  }, [isOpen, toggleModalContext]);
 
-  if (!show) {
+  if (!isOpen) {
     return null;
   }
 
   return (
-    <View style={styles.content} onPress={handleClose}>
+    <Animated.View style={styles.content} onPress={handleClose}>
       <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
         <Animated.View
           style={[styles.container, styles.theme.container, style?.container, { top }]}
@@ -79,10 +73,10 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
           same orientation because it can break windowing and other functionality.
           (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
           */}
-          <ScrollView style={[style?.children]}>{children}</ScrollView>
+          <ScrollView style={[style?.children]}>{component}</ScrollView>
         </Animated.View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

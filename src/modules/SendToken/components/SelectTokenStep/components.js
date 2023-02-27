@@ -49,8 +49,26 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
       ).toLocaleString()
     : 0;
 
+  const MenuOptions = (data = supportedTokensData) => (
+    <InfiniteScrollList
+      data={data}
+      keyExtractor={(item) => item.tokenID}
+      renderItem={(item) => (
+        <Picker.Item key={item.tokenID} value={item.tokenID} onChange={onChange}>
+          <Text style={[styles.theme.text]}>{item.symbol}</Text>
+
+          <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+        </Picker.Item>
+      )}
+      // TODO: Integrate pagination props.
+      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
+    />
+  );
+
+  const { showOptions } = Picker.usePickerMenu(<MenuOptions />);
+
   return (
-    <Picker value={value} onChange={onChange} error={errorMessage}>
+    <Picker value={value} error={errorMessage}>
       <View style={{ ...styles.row, justifyContent: 'space-between' }}>
         <Picker.Label style={style?.label}>
           {i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}
@@ -70,9 +88,9 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         data={supportedTokensData}
         isLoading={isLoadingSupportedTokens}
         error={isSupportedTokensError}
-        renderData={(data) => (
+        renderData={() => (
           <>
-            <Picker.Toggle style={style?.toggle}>
+            <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
               {selectedToken && (
                 <View style={[styles.row]}>
                   <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
@@ -81,22 +99,6 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
                 </View>
               )}
             </Picker.Toggle>
-
-            <Picker.Menu>
-              <InfiniteScrollList
-                data={data}
-                keyExtractor={(item) => item.tokenID}
-                renderItem={(item) => (
-                  <Picker.Item key={item.tokenID} value={item.tokenID}>
-                    <Text style={[styles.theme.text]}>{item.symbol}</Text>
-
-                    <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
-                  </Picker.Item>
-                )}
-                // TODO: Integrate pagination props.
-                // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
-              />
-            </Picker.Menu>
           </>
         )}
       />
