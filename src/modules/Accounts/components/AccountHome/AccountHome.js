@@ -1,20 +1,25 @@
 /* eslint-disable max-statements */
-import React, { useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity, ScrollView, RefreshControl, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from 'contexts/ThemeContext';
-import IncognitoSvg from 'assets/svgs/IncognitoSvg';
-import { settingsUpdated } from 'modules/Settings/store/actions';
+import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
+import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
+import { settingsUpdated } from 'modules/Settings/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import ApplicationSwitcher from 'modules/BlockchainApplication/components/ApplicationSwitcher';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import ApplicationSwitcher from '../../../BlockchainApplication/components/ApplicationSwitcher';
+import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
+import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
+import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from '../../../Transactions/components/TransactionList/TransactionList.constants';
+import { NO_OF_TOKENS_ON_OVERVIEW } from '../TokenList/TokenList.constants';
+import AccountDetails from '../AccountDetails/AccountDetails';
 
 import getStyles from './AccountHome.styles';
-import AccountDetails from '../AccountDetails/AccountDetails';
 
 /**
  * This component would be mounted first and would be used to config and redirect
@@ -24,6 +29,22 @@ function AccountHome() {
   const navigation = useNavigation();
 
   const [currentAccount] = useCurrentAccount();
+
+  const { refetch: refetchTokens, isRefetching: isRefetchingTokens } = useAccountTokensQuery(
+    currentAccount.metadata.address,
+    {
+      config: {
+        params: { limit: NO_OF_TOKENS_ON_OVERVIEW },
+      },
+    }
+  );
+
+  const { refetch: refetchTransactions, isRefetching: isRefetchingTransactions } =
+    useAccountTransactionsQuery(currentAccount.metadata.address, {
+      config: {
+        params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
+      },
+    });
 
   const discrete = useSelector((state) => state.settings.discrete);
 
@@ -48,23 +69,34 @@ function AccountHome() {
     }
   }, [accounts, navigation]);
 
+  const handleRefresh = () => {
+    refetchTokens();
+    refetchTransactions();
+  };
+
+  const isRefreshing = isRefetchingTokens || isRefetchingTransactions;
+
   return (
     <>
       <NavigationSafeAreaView>
-        <View
-          style={[styles.row, styles.alignItemsCenter, styles.topContainer]}
-          testID="accounts-home-container"
+        <ScrollView
+          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
         >
-          <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito}>
-            <IncognitoSvg size={1.2} disabled={discrete} />
-          </TouchableOpacity>
+          <View
+            style={[styles.row, styles.alignItemsCenter, styles.topContainer]}
+            testID="accounts-home-container"
+          >
+            <TouchableOpacity style={[styles.discreteContainer]} onPress={toggleIncognito}>
+              <IncognitoSvg size={1.2} disabled={discrete} />
+            </TouchableOpacity>
 
-          <View style={styles.flex}>
-            <ApplicationSwitcher />
+            <View style={styles.flex}>
+              <ApplicationSwitcher />
+            </View>
           </View>
-        </View>
 
-        <AccountDetails account={currentAccount.metadata} />
+          <AccountDetails account={currentAccount.metadata} />
+        </ScrollView>
       </NavigationSafeAreaView>
     </>
   );
