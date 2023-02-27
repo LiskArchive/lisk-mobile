@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { useCallback, useEffect } from 'react';
 import i18next from 'i18next';
 
@@ -18,18 +19,26 @@ export function useApplicationsManagement() {
   // Fetch default apps of-chain and on-chain data from server and merges results.
   const {
     data: defaultApplicationsFullData,
-    status: defaultApplicationsFullDataStatus,
-    refetch: refetchDefaultApplicationsFullData,
+    isLoading: isLoadingDefaultApplicationsFullData,
+    isSuccess: isSuccessDefaultApplicationsFullData,
     error: errorOnDefaultApplicationsFullData,
+    refetch: refetchDefaultApplicationsFullData,
   } = useApplicationsFullDataQuery({
     config: { params: { isDefault: true } },
   });
 
   const {
     data: applicationsStorageData,
+    isLoading: isLoadingApplicationsStorageData,
+    isSuccess: isSuccessApplicationsStorageData,
+    error: errorOnApplicationsStorageData,
     addApplication: addApplicationToStorage,
     deleteApplication: deleteApplicationFromStorage,
   } = useApplicationsLocalStorage();
+
+  const isSuccess = isSuccessDefaultApplicationsFullData && isSuccessApplicationsStorageData;
+  const isLoading = isLoadingDefaultApplicationsFullData || isLoadingApplicationsStorageData;
+  const error = errorOnDefaultApplicationsFullData || errorOnApplicationsStorageData;
 
   const addApplication = useCallback(
     async (application) => {
@@ -37,7 +46,7 @@ export function useApplicationsManagement() {
         await addApplicationToStorage(application.chainID);
 
         applications.dispatchData({ type: 'add', application });
-      } catch (error) {
+      } catch (_error) {
         DropDownHolder.error(
           i18next.t('Error'),
           'Error adding application. Please try again later.'
@@ -53,7 +62,7 @@ export function useApplicationsManagement() {
         await deleteApplicationFromStorage(chainID);
 
         applications.dispatchData({ type: 'delete', chainID });
-      } catch (error) {
+      } catch (_error) {
         DropDownHolder.error(
           i18next.t('Error'),
           'Error deleting application. Please try again later.'
@@ -71,26 +80,29 @@ export function useApplicationsManagement() {
   // Init applications management data by merging API calls results with user local
   // stored applications.
   useEffect(() => {
-    if (!applications.data && defaultApplicationsFullData.data) {
+    if (!applications.data && isSuccess) {
       applications.dispatchData({
         type: 'init',
         applications: joinArraysWithoutDuplicates(
-          defaultApplicationsFullData.data,
+          defaultApplicationsFullData?.data || [],
           applicationsStorageData?.data || [],
           'chainID'
         ),
       });
     }
-  }, [applications, defaultApplicationsFullData, applicationsStorageData]);
+  }, [applications, defaultApplicationsFullData, applicationsStorageData, isSuccess]);
 
   // Set applications status and error based on default applications on-chain
   // and off-chain data query results.
   useEffect(() => {
-    applications.setStatus(defaultApplicationsFullDataStatus);
-  }, [defaultApplicationsFullDataStatus, applications]);
+    applications.setIsLoading(isLoading);
+  }, [isLoading, applications]);
   useEffect(() => {
-    applications.setError(errorOnDefaultApplicationsFullData);
-  }, [errorOnDefaultApplicationsFullData, applications]);
+    applications.setIsSuccess(isSuccess);
+  }, [isSuccess, applications]);
+  useEffect(() => {
+    applications.setError(error);
+  }, [error, applications]);
 
   return {
     applications,

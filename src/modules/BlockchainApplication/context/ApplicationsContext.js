@@ -18,7 +18,8 @@ export const ApplicationsContext = createContext();
  */
 export function ApplicationsProvider({ children }) {
   const [applications, dispatchApplications] = useReducer(applicationsContextReducer);
-  const [applicationStatus, setApplicationStatus] = useState();
+  const [isLoadingApplications, setIsLoadingApplications] = useState();
+  const [isSuccessApplications, setIsSuccessApplications] = useState();
   const [errorOnApplications, setErrorOnApplications] = useState();
 
   const [pins, dispatchPins] = useReducer(applicationPinsContextReducer);
@@ -35,8 +36,10 @@ export function ApplicationsProvider({ children }) {
         applications: {
           data: applications,
           dispatchData: dispatchApplications,
-          status: applicationStatus,
-          setStatus: setApplicationStatus,
+          isLoading: isLoadingApplications,
+          setIsLoading: setIsLoadingApplications,
+          isSuccess: isSuccessApplications,
+          setIsSuccess: setIsSuccessApplications,
           error: errorOnApplications,
           setError: setErrorOnApplications,
         },
