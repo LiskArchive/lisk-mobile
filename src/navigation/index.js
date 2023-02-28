@@ -16,7 +16,7 @@ import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 
-import PassphraseBackup from 'modules/Settings/BackupPassphrase';
+import BackupPassphrase from 'modules/Settings/components/BackupPassphrase/BackupPassphrase';
 import AuthMethod from 'modules/Auth/AuthMethod';
 import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
@@ -155,8 +155,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.DisableBioAuth}
           />
           <StackNavigator.Screen
-            name="PassphraseBackup"
-            component={PassphraseBackup}
+            name="BackupPassphrase"
+            component={BackupPassphrase}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen

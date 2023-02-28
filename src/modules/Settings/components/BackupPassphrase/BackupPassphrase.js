@@ -4,12 +4,12 @@ import { useRoute } from '@react-navigation/native';
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import Stepper from 'components/shared/Stepper';
-import PassphraseBackup from 'components/screens/passphraseBackup';
 import DecryptPhrase from 'modules/Auth/DecryptPhrase';
 import RegisterConfirm from 'modules/Auth/Register/RegisterConfirm';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import getStyles from './styles';
+import getStyles from './BackupPassphrase.styles';
+import CopyPassphrase from './components/CopyPassphrase';
 
 export default function BackupPassphrase() {
   const route = useRoute();
@@ -35,7 +35,7 @@ export default function BackupPassphrase() {
           }}
         />
 
-        <PassphraseBackup />
+        <CopyPassphrase />
 
         <RegisterConfirm customHeader />
       </Stepper>

@@ -5,9 +5,9 @@ import { translate } from 'react-i18next';
 import { removePassphraseFromKeyChain } from 'modules/Auth/utils';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
-import PassphraseCopy from 'components/shared/passphraseCopy';
+import CopyPassphraseToClipboard from 'components/shared/CopyPassphraseToClipboard/CopyPassphraseToClipboard';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
 import getStyles from './styles';
 
 @connect(
@@ -47,7 +47,7 @@ class DisableBioAuth extends React.Component {
       <View style={styles.wrapper}>
         <View style={[styles.container, styles.theme.container]}>
           <View style={styles.passphraseContainer}>
-            <PassphraseCopy passphrase={passphrase} />
+            <CopyPassphraseToClipboard passphrase={passphrase} />
           </View>
 
           <PrimaryButton onClick={this.confirm} title={t('Disable bioAuth', { title })} />

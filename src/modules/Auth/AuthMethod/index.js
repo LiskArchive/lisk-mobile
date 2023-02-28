@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { settingsRetrieved } from 'modules/Settings/actions';
+import { settingsRetrieved } from 'modules/Settings/store/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';

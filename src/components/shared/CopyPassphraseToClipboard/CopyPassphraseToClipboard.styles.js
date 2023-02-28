@@ -3,7 +3,7 @@ import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
-    wrapper: {
+    container: {
       alignItems: 'center',
       padding: boxes.boxPadding,
       borderWidth: 1,
@@ -25,7 +25,7 @@ export default () => ({
   },
 
   [themes.light]: {
-    wrapper: {
+    container: {
       borderColor: colors.light.mystic,
     },
     passphraseTitle: {
@@ -40,7 +40,7 @@ export default () => ({
   },
 
   [themes.dark]: {
-    wrapper: {
+    container: {
       borderColor: setColorOpacity(colors.light.white, 0.15),
     },
     passphraseTitle: {

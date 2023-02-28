@@ -77,7 +77,7 @@ const navigationOptions = {
     headerStyle: navigationNoShadowStyle,
     headerTitleStyle: navigationGenericTitleStyle,
   },
-  PassphraseBackup: {
+  BackupPassphrase: {
     title: null,
     headerLeft: (props) => <HeaderBackButton title="Passphrase backup" {...props} />,
     headerStyle: navigationNoShadowStyle,
