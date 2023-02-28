@@ -3,7 +3,7 @@ import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
-export default function getRegisterSafeKeepingStyle() {
+export default function getPassphraseQuizStyles() {
   return {
     common: {
       container: {

@@ -7,7 +7,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import DownloadFile from 'components/shared/DownloadFile';
 import ResultScreen from 'components/screens/ResultScreen';
 import CompletedIllustrationSvg from 'assets/svgs/CompletedIllustrationSvg';
-import { getAccountDownloadableFilename } from '../utils/downloadAccount';
+import { getAccountDownloadableFilename } from '../../utils/downloadAccount';
 
 import getPasswordSetupSuccessStyles from './styles';
 

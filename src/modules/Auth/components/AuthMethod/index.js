@@ -13,11 +13,11 @@ import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import PassphraseSvg from 'assets/svgs/PassphraseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import CreateAccount from '../components/CreateAccount';
-import AuthTypeItem from '../components/AuthType';
+import CreateAccount from '../CreateAccount';
+import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
-import { selectEncryptedFile } from '../utils/documentPicker';
+import { selectEncryptedFile } from '../../utils/documentPicker';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -52,7 +52,7 @@ export default function AuthMethod({ route }) {
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
-      navigation.navigate('DecryptPhrase', {
+      navigation.navigate('DecryptPassphrase', {
         title: 'auth.setup.decryptPassphrase',
         encryptedData,
         successRoute: 'AccountsManagerScreen',

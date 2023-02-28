@@ -10,9 +10,9 @@ import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 
-import getRegisterConfirmStyles from './styles';
+import getPassphraseQuizStyles from './PassphraseQuiz.styles';
 
-export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, customHeader }) {
+export default function PassphraseQuiz({ nextStep, sharedData: data, prevStep, customHeader }) {
   const navigation = useNavigation();
 
   const { passphrase } = data;
@@ -33,7 +33,7 @@ export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, 
   const [visibleOptions, setVisibleOptions] = useState(-1);
 
   const { styles } = useTheme({
-    styles: getRegisterConfirmStyles(),
+    styles: getPassphraseQuizStyles(),
   });
 
   const generateTest = useCallback(() => {
@@ -153,9 +153,11 @@ export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, 
       )}
 
       <View style={[styles.body]}>
-        <H4 style={[styles.title, styles.theme.title]}>
-          {i18next.t('auth.register.confirm.title')}
-        </H4>
+        {!customHeader && (
+          <H4 style={[styles.title, styles.theme.title]}>
+            {i18next.t('auth.register.confirm.title')}
+          </H4>
+        )}
 
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.register.confirm.description')}

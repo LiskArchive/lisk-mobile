@@ -8,7 +8,7 @@ import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import Scanner from 'components/shared/scanner';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
-import SecretRecoveryPhraseForm from '../components/SecretRecoveryPhraseForm';
+import SecretRecoveryPhraseForm from '../SecretRecoveryPhraseForm';
 
 import getStyles from './styles';
 

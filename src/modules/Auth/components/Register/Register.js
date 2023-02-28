@@ -6,12 +6,12 @@ import { useRoute } from '@react-navigation/native';
 import Stepper from 'components/shared/Stepper';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import { useTheme } from 'contexts/ThemeContext';
-import { generatePassphrase } from '../utils';
+import { generatePassphrase } from '../../utils';
 
-import RegisterConfirm from './RegisterConfirm';
+import PassphraseQuiz from '../PassphraseQuiz/PassphraseQuiz';
 import RegisterSuccess from './RegisterSuccess';
 import RegisterSafeKeeping from './RegisterSafeKeeping';
-import getRegisterStyles from './styles';
+import getRegisterStyles from './Register.styles';
 
 export default function Register() {
   const [showNav, setShowNav] = useState(true);
@@ -54,7 +54,7 @@ export default function Register() {
       <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
         <RegisterSafeKeeping title="safekeeping" passphrase={passphrase} route={route} />
 
-        <RegisterConfirm title="verify" route={route} />
+        <PassphraseQuiz title="verify" route={route} />
 
         <RegisterSuccess title="success" hideNav={hideNav} />
       </Stepper>

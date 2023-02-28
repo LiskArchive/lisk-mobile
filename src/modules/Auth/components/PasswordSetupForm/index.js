@@ -3,16 +3,16 @@ import { View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import i18next from 'i18next';
+import { Switch } from 'react-native-gesture-handler';
 
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-import { Switch } from 'react-native-gesture-handler';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
-import { usePasswordSetupForm } from '../hooks/usePasswordSetupForm';
+import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
 
