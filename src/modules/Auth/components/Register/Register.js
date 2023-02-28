@@ -52,11 +52,11 @@ export default function Register() {
   return (
     <View style={[styles.container, styles.theme.container, noNavStyle]} testID="register-screen">
       <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
-        <RegisterSafeKeeping title="safekeeping" passphrase={passphrase} route={route} />
+        <RegisterSafeKeeping passphrase={passphrase} />
 
-        <PassphraseQuiz title="verify" route={route} />
+        <PassphraseQuiz />
 
-        <RegisterSuccess title="success" hideNav={hideNav} />
+        <RegisterSuccess hideNav={hideNav} />
       </Stepper>
     </View>
   );

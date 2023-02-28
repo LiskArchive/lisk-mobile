@@ -1,17 +1,20 @@
 import React from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-import Stepper from 'components/shared/Stepper';
+import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
 import PassphraseQuiz from 'modules/Auth/components/PassphraseQuiz/PassphraseQuiz';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Stepper from 'components/shared/Stepper';
 
 import getStyles from './BackupPassphrase.styles';
 import CopyPassphrase from './components/CopyPassphrase';
 
 export default function BackupPassphrase() {
+  const navigation = useNavigation();
+
   const route = useRoute();
 
   const { account } = route.params;
@@ -36,6 +39,15 @@ export default function BackupPassphrase() {
         <CopyPassphrase />
 
         <PassphraseQuiz customHeader />
+
+        <PasswordSetupSuccess
+          route={{
+            params: {
+              encryptedAccount: account,
+              onContinue: () => navigation.navigate('AccountHome'),
+            },
+          }}
+        />
       </Stepper>
     </SafeAreaView>
   );

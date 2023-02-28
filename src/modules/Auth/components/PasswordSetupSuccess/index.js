@@ -1,6 +1,5 @@
 import React from 'react';
 import i18next from 'i18next';
-import { useRoute } from '@react-navigation/native';
 
 import { useDownloadFile } from 'hooks/useDownloadFile';
 import { useTheme } from 'contexts/ThemeContext';
@@ -11,9 +10,7 @@ import { getAccountDownloadableFilename } from '../../utils/downloadAccount';
 
 import getPasswordSetupSuccessStyles from './styles';
 
-export default function PasswordSetupSuccess() {
-  const route = useRoute();
-
+export default function PasswordSetupSuccess({ route }) {
   const encryptedAccount = route.params?.encryptedAccount;
   const onContinue = route.params?.onContinue;
 
