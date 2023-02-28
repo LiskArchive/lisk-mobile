@@ -4,18 +4,23 @@ import i18next from 'i18next';
 import Switch from 'react-native-switch-pro';
 import { useNavigation } from '@react-navigation/native';
 
+import { useTheme } from 'contexts/ThemeContext';
 import { H4, B, P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { colors } from 'constants/styleGuide';
 
-import styles from './styles';
+import getRegisterSafeKeepingStyles from './styles';
 
 export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgressBar }) {
   const navigation = useNavigation();
 
   const [confirmed, setConfirmed] = useState(false);
+
+  const { styles } = useTheme({
+    styles: getRegisterSafeKeepingStyles(),
+  });
 
   useEffect(() => {
     navigation.setOptions({
@@ -37,14 +42,21 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
   const onContinue = () => nextStep({ passphrase });
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.body}>
-        <H4 style={styles.title}>{i18next.t('auth.register.safeKeeping.title')}</H4>
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <View style={[styles.body]}>
+        <H4 style={[styles.title, styles.theme.title]}>
+          {i18next.t('auth.register.safeKeeping.title')}
+        </H4>
 
-        <P style={styles.passphraseTitle}>{i18next.t('auth.register.safeKeeping.description')}</P>
+        <P style={[styles.description, styles.theme.description]}>
+          {i18next.t('auth.register.safeKeeping.description')}
+        </P>
 
         <View style={styles.passphraseContainer}>
-          <Text style={styles.passphrase} testID="passphraseText">
+          <Text
+            style={[styles.passphraseText, styles.theme.passphraseText]}
+            testID="passphraseText"
+          >
             {passphrase.replace(/\s+/g, '  ')}
           </Text>
 
@@ -61,8 +73,8 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
         </View>
       </View>
 
-      <View style={styles.footer}>
-        <View style={styles.switchContainer}>
+      <View style={[styles.footer]}>
+        <View style={[styles.switchContainer]}>
           <Switch
             testID="understandResponsibilitySwitch"
             height={26}
@@ -72,7 +84,7 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
             backgroundInactive={colors.light.platinum}
           />
 
-          <P style={styles.confirmText}>
+          <P style={[styles.confirmText]}>
             {i18next.t('auth.register.safeKeeping.understandResponsibilityDescription')}
           </P>
         </View>

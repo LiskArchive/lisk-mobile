@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
@@ -9,10 +10,9 @@ import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 
-import getStyles from './styles';
+import getRegisterConfirmStyles from './styles';
 
-// eslint-disable-next-line max-statements
-export default function RegisterConfirm({ account, sharedData: data, prevStep, customHeader }) {
+export default function RegisterConfirm({ nextStep, sharedData: data, prevStep, customHeader }) {
   const navigation = useNavigation();
 
   const { passphrase } = data;
@@ -33,7 +33,7 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
   const [visibleOptions, setVisibleOptions] = useState(-1);
 
   const { styles } = useTheme({
-    styles: getStyles(),
+    styles: getRegisterConfirmStyles(),
   });
 
   const generateTest = useCallback(() => {
@@ -108,7 +108,7 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
         key={index}
         title={answers[optionIndex].value}
         onClick={() => toggleOptions(optionIndex)}
-        textStyle={[styles.label, answers[optionIndex].textStyle]}
+        textStyle={[styles.label, styles.theme.label, answers[optionIndex].textStyle]}
         style={[styles.placeholder, style, answers[optionIndex].style]}
       />
     );
@@ -123,7 +123,7 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
             optionIndex >= 0 ? (
               generatePlaceholder(index, optionIndex, val)
             ) : (
-              <P key={index} style={[styles.word, styles.theme.word]}>
+              <P key={index} style={[styles.passphraseText, styles.theme.passphraseText]}>
                 {val}
               </P>
             );
@@ -144,7 +144,7 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
   }, [navigation, generateTest, prevStep]);
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
       {customHeader && (
         <HeaderBackButton
           title={'settings.backupPhrase.confirmPhrase'}
@@ -152,10 +152,14 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
         />
       )}
 
-      <View style={styles.body}>
-        <H4 style={styles.title}>{i18next.t('auth.register.confirm.title')}</H4>
+      <View style={[styles.body]}>
+        <H4 style={[styles.title, styles.theme.title]}>
+          {i18next.t('auth.register.confirm.title')}
+        </H4>
 
-        <P style={[styles.passphraseTitle]}>{i18next.t('auth.register.confirm.description')}</P>
+        <P style={[styles.description, styles.theme.description]}>
+          {i18next.t('auth.register.confirm.description')}
+        </P>
 
         <View style={styles.box}>
           <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
@@ -169,14 +173,15 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
             {options[visibleOptions] ? (
               options[visibleOptions].map((value, idx) => (
                 <Button
-                  noPredefinedStyle
-                  testID={`passphraseOptionFor-${value}`}
-                  style={styles.option}
-                  textStyle={[styles.label, styles.labelOption]}
                   key={idx}
-                  title={value}
                   onClick={() => fillOption(value)}
-                />
+                  testID={`passphraseOptionFor-${value}`}
+                  noPredefinedStyle
+                  style={[styles.option]}
+                  textStyle={[styles.label, styles.theme.label]}
+                >
+                  {value}
+                </Button>
               ))
             ) : (
               <View style={styles.optionPlaceholder} />
@@ -191,12 +196,7 @@ export default function RegisterConfirm({ account, sharedData: data, prevStep, c
           disabled={buttonStatus}
           noTheme={true}
           style={styles.button}
-          onClick={() =>
-            navigation.navigate({
-              name: 'PasswordSetupSuccess',
-              params: { encryptedAccount: account, onContinue: navigation.goBack },
-            })
-          }
+          onClick={() => nextStep({ passphrase })}
         >
           {i18next.t('commons.buttons.confirm')}
         </PrimaryButton>

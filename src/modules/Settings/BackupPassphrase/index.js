@@ -37,7 +37,7 @@ export default function BackupPassphrase() {
 
         <PassphraseBackup />
 
-        <RegisterConfirm account={account} customHeader />
+        <RegisterConfirm customHeader />
       </Stepper>
     </SafeAreaView>
   );

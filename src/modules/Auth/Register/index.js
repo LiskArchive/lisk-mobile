@@ -1,24 +1,31 @@
 /* eslint-disable max-statements */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { BackHandler, View } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
 import Stepper from 'components/shared/Stepper';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-
+import { useTheme } from 'contexts/ThemeContext';
 import { generatePassphrase } from '../utils';
 
 import RegisterConfirm from './RegisterConfirm';
 import RegisterSuccess from './RegisterSuccess';
 import RegisterSafeKeeping from './RegisterSafeKeeping';
-import styles from './styles';
+import getRegisterStyles from './styles';
 
-export default function Register({ route }) {
+export default function Register() {
   const [showNav, setShowNav] = useState(true);
+
+  const route = useRoute();
 
   const passphrase = useMemo(
     () => route.params?.passphrase ?? generatePassphrase(),
     [route.params?.passphrase]
   );
+
+  const { styles } = useTheme({
+    styles: getRegisterStyles(),
+  });
 
   const noNavStyle = showNav ? {} : { paddingBottom: 0 };
 
@@ -43,7 +50,7 @@ export default function Register({ route }) {
   useScreenshotPrevent();
 
   return (
-    <View style={[styles.container, noNavStyle]} testID="register-screen">
+    <View style={[styles.container, styles.theme.container, noNavStyle]} testID="register-screen">
       <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
         <RegisterSafeKeeping title="safekeeping" passphrase={passphrase} route={route} />
 
