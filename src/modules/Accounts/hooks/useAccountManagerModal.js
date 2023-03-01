@@ -10,13 +10,13 @@ import DeleteAccountForm from '../components/DeleteAccountForm';
 export default function useAccountManagerModal() {
   const [data, setData] = useState(undefined);
   const [activeScreen, setActiveScreen] = useState(undefined);
-  const { showModal, closeModal, isOpen } = useModal();
+  const modal = useModal();
 
   const navigation = useNavigation();
 
   function handleCompleted() {
     navigation.navigate('Main');
-    closeModal();
+    modal.close();
     setActiveScreen(undefined);
   }
 
@@ -33,7 +33,7 @@ export default function useAccountManagerModal() {
         children = (
           <AccountList
             mode="modal"
-            onAccountClick={() => closeModal()}
+            onAccountClick={() => modal.close()}
             onEditAccountClick={(account) => changeSelection('EditAccount', account)}
             onDeleteAccountClick={(account) => changeSelection('DeleteAccount', account)}
             navigation={navigation}
@@ -57,20 +57,20 @@ export default function useAccountManagerModal() {
 
   useEffect(() => {
     if (activeScreen) {
-      showModal(getScreen(activeScreen));
+      modal.open(getScreen(activeScreen));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeScreen]);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!modal.isOpen) {
       setActiveScreen(undefined);
     }
-  }, [isOpen]);
+  }, [modal.isOpen]);
 
   return {
-    openModal: () => {
-      showModal(getScreen(activeScreen || 'AccountList'));
+    open: () => {
+      modal.open(getScreen(activeScreen || 'AccountList'));
     },
   };
 }

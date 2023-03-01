@@ -9,7 +9,7 @@ import InfoSvg from 'assets/svgs/InfoSvg';
 import getInfoTogglerStyles from './styles';
 
 export default function InfoToggler({ title, description, style }) {
-  const { showModal } = useModal();
+  const modal = useModal();
 
   const { styles } = useTheme({
     styles: getInfoTogglerStyles(),
@@ -40,7 +40,7 @@ export default function InfoToggler({ title, description, style }) {
   );
 
   const openModal = () => {
-    showModal(renderInfoItem());
+    modal.open(renderInfoItem());
   };
 
   return (

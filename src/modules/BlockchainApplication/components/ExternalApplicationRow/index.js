@@ -18,15 +18,15 @@ import getExternalApplicationRowStyles from './styles';
 
 export default function ExternalApplicationRow({ application }) {
   const [activeAction, setActiveAction] = useState();
-  const { showModal, closeModal, isOpen } = useModal();
+  const modal = useModal();
 
   const { styles } = useTheme({ styles: getExternalApplicationRowStyles() });
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!modal.isOpen) {
       setActiveAction(undefined);
     }
-  }, [isOpen]);
+  }, [modal.isOpen]);
 
   const rightActions = [
     {
@@ -102,9 +102,9 @@ export default function ExternalApplicationRow({ application }) {
 
   useEffect(() => {
     if (activeAction) {
-      showModal(renderActiveAction());
+      modal.open(renderActiveAction());
     } else {
-      closeModal();
+      modal.close();
     }
   }, [activeAction]);
 

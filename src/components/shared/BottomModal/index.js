@@ -10,7 +10,7 @@ import { colors } from 'constants/styleGuide';
 import getStyles from './styles';
 
 const BottomModal = ({ style }) => {
-  const { toggle: toggleModalContext, closeModal, isOpen, component, showClose } = useModal();
+  const { toggle: toggleModalContext, close, isOpen, component, showClose } = useModal();
   const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
   const bottom = useRef(new Animated.Value(0));
 
@@ -29,7 +29,7 @@ const BottomModal = ({ style }) => {
   });
 
   const handleClose = () => {
-    closeAnimation.start(() => closeModal());
+    closeAnimation.start(() => close());
   };
 
   const top = panY.interpolate({

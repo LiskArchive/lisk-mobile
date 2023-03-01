@@ -45,7 +45,7 @@ const actions = [
  * view blockchain applications.
  */
 export default function ApplicationsExplorer() {
-  const { showModal, closeModal } = useModal();
+  const modal = useModal();
 
   const navigation = useNavigation();
   const { events } = useContext(WalletConnectContext);
@@ -58,10 +58,10 @@ export default function ApplicationsExplorer() {
     styles: getApplicationsExplorerStyles(),
   });
 
-  const onCancelConnection = () => closeModal();
+  const onCancelConnection = () => modal.close();
 
   const showApplicationStats = () =>
-    showModal(
+    modal.open(
       <ApplicationsStats
         styles={{
           container: {
@@ -88,7 +88,7 @@ export default function ApplicationsExplorer() {
     </Stepper>
   );
 
-  const showNewConnectionModal = () => showModal(renderConnectionSteps());
+  const showNewConnectionModal = () => modal.open(renderConnectionSteps());
 
   const onFabItemPress = (item) => {
     if (item.key === 'paste') {

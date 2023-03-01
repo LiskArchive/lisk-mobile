@@ -17,15 +17,15 @@ const Tab = createBottomTabNavigator();
 export default function Tabs() {
   const { session, reject } = useWalletConnectSession();
   const { isOpen: modalOpen } = useContext(ModalContext);
-  const { showModal, closeModal } = useModal();
+  const modal = useModal();
 
   const rejectRequest = () => {
     reject();
-    closeModal();
+    modal.close();
   };
 
   const showSignatureRequestModal = () =>
-    showModal(
+    modal.open(
       <ExternalApplicationSignatureRequest session={session.request} onCancel={rejectRequest} />,
       false
     );

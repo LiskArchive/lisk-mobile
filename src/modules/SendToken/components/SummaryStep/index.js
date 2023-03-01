@@ -15,7 +15,7 @@ import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 import getSendTokenSummaryStepStyles from './styles';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
-  const { showModal } = useModal();
+  const modal = useModal();
 
   const { field } = useController({
     name: 'userPassword',
@@ -53,7 +53,7 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
   const showSignTransactionModal = () =>
-    showModal(
+    modal.open(
       <SignTransaction
         onSubmit={form.handleSubmit}
         onSuccess={() => {

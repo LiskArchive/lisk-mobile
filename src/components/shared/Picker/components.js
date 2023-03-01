@@ -72,8 +72,8 @@ export function PickerToggle({ children, placeholder, disabled, style: baseStyle
 
 export function usePickerMenu(children) {
   const { showMenu } = usePicker();
-  const { showModal } = useModal();
-  const openModal = () => showModal(children);
+  const modal = useModal();
+  const openModal = () => modal.open(children);
 
   useEffect(() => {
     if (showMenu) {
@@ -86,7 +86,7 @@ export function usePickerMenu(children) {
 }
 
 export function PickerItem({ value, children, onChange, style: baseStyle }) {
-  const { toggle } = useModal();
+  const modal = useModal();
 
   const { styles } = useTheme({
     styles: getPickerStyles(),
@@ -96,7 +96,7 @@ export function PickerItem({ value, children, onChange, style: baseStyle }) {
     <TouchableOpacity
       onPress={() => {
         onChange(value);
-        toggle(false);
+        modal.toggle(false);
       }}
       style={[styles.itemContainer, styles.theme.itemContainer, baseStyle]}
     >

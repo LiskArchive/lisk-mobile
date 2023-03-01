@@ -38,7 +38,7 @@ import getStyles from './styles';
 
 export default function RequestToken() {
   const navigation = useNavigation();
-  const { showModal } = useModal();
+  const modal = useModal();
 
   const [currentAccount] = useCurrentAccount();
 
@@ -104,7 +104,7 @@ export default function RequestToken() {
     </View>
   );
 
-  const openQrCode = () => showModal(renderFullCode());
+  const openQrCode = () => modal.open(renderFullCode());
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>

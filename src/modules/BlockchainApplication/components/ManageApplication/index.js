@@ -18,7 +18,7 @@ import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 
 const ManageApplication = ({ nextStep, style, navigation }) => {
   const [selectedApplication, setSelectedApplication] = useState({});
-  const { showModal, closeModal } = useModal();
+  const modal = useModal();
 
   const { applications } = useApplicationsManagement();
 
@@ -27,17 +27,17 @@ const ManageApplication = ({ nextStep, style, navigation }) => {
   const { styles } = useTheme({ styles: getStyles });
 
   const addApplication = () => {
-    closeModal();
+    modal.close();
     navigation.navigate('AddApplication');
   };
 
   const switchApplication = (acc) => {
     setCurrentApplication(acc);
-    closeModal();
+    modal.close();
   };
 
   const onUrlSelect = (item) => {
-    closeModal(false);
+    modal.close(false);
     switchApplication({ ...selectedApplication, serviceURL: item });
   };
 
@@ -47,11 +47,11 @@ const ManageApplication = ({ nextStep, style, navigation }) => {
         styles={styles}
         onPress={onUrlSelect}
         application={selectedApplication}
-        closeModal={() => closeModal(false)}
+        closeModal={() => modal.close(false)}
       />
     );
 
-  const selectNode = () => showModal(renderSelectNodeOptions());
+  const selectNode = () => modal.open(renderSelectNodeOptions());
 
   const selectApplication = (acc) => {
     if (acc.serviceURLs.length > 1) {

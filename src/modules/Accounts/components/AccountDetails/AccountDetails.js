@@ -22,7 +22,7 @@ import { useCurrentAccount } from '../../hooks/useCurrentAccount';
  * @param {Object} account - Account to which render its information.
  */
 export default function AccountDetails({ account }) {
-  const { openModal } = useAccountManagerModal();
+  const accountManager = useAccountManagerModal();
 
   const navigation = useNavigation();
 
@@ -71,7 +71,7 @@ export default function AccountDetails({ account }) {
             {isCurrentAccount && (
               <TouchableOpacity
                 style={[styles.switchContainer]}
-                onPress={openModal}
+                onPress={accountManager.open}
                 testID="switch-account"
               >
                 <SwitchSvg />

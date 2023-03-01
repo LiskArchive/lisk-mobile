@@ -37,7 +37,7 @@ function ApplicationRow({
   deleteApplication,
   navigation,
 }) {
-  const { showModal, closeModal } = useModal();
+  const modal = useModal();
 
   const [currentApplication] = useCurrentApplication();
 
@@ -49,16 +49,16 @@ function ApplicationRow({
 
   const toggleDeleteDefaultApplicationModal = (bool) => {
     if (bool) {
-      return showModal(
+      return modal.open(
         <ResultScreen
           variant="error"
           description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
           buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
-          onContinue={() => closeModal(false)}
+          onContinue={() => modal.close(false)}
         />
       );
     }
-    return closeModal();
+    return modal.close();
   };
 
   const { leftActions, rightActions } = useApplicationRowActions({

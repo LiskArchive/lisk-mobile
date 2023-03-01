@@ -13,11 +13,11 @@ import getStyles from './styles';
 
 const ApplicationSwitcher = () => {
   const [currentApplication] = useCurrentApplication();
-  const { showModal } = useModal();
+  const modal = useModal();
   const navigation = useNavigation();
 
   const showManageApplicationModal = () =>
-    showModal(<ApplicationManagerModal navigation={navigation} />);
+    modal.open(<ApplicationManagerModal navigation={navigation} />);
 
   const { styles } = useTheme({ styles: getStyles });
 

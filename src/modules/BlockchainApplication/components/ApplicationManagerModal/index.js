@@ -7,8 +7,8 @@ import DeleteApplication from '../DeleteApplication';
 import DeleteApplicationSuccess from '../DeleteApplicationSuccess';
 
 export default function ApplicationManagerModal({ navigation }) {
-  const { toggle } = useModal();
-  const closeModal = () => toggle(false);
+  const modal = useModal();
+  const closeModal = () => modal.toggle(false);
 
   return (
     <Stepper currentIndex={0} finalCallback={closeModal}>
