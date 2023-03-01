@@ -10,7 +10,7 @@ import FingerprintOverlay from 'components/shared/fingerprintOverlay';
 import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
@@ -39,7 +39,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
   };
 
   const backupPassphrase = () =>
-    navigation.navigate('PassphraseBackup', {
+    navigation.navigate('BackupPassphrase', {
       account,
     });
 

@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native';
-import actionTypes from 'modules/Settings/actionTypes';
+import actionTypes from 'modules/Settings/store/actionTypes';
 import * as storageUtility from 'utilities/storage';
 import settingsMiddleware from './settings';
 

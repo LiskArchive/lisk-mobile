@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'contexts/ThemeContext';
 import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
-import { settingsUpdated } from 'modules/Settings/actions';
+import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import ApplicationSwitcher from '../../../BlockchainApplication/components/ApplicationSwitcher';
