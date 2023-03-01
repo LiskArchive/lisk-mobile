@@ -74,7 +74,7 @@ export function SendTokenRecipientApplicationField({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const MenuItems = () => (
+  const renderMenuItems = () => (
     <InfiniteScrollList
       data={applications}
       keyExtractor={(item) => item.chainID}
@@ -91,7 +91,7 @@ export function SendTokenRecipientApplicationField({
     />
   );
 
-  const { showOptions } = Picker.usePickerMenu(<MenuItems />);
+  const { showOptions } = Picker.usePickerMenu(renderMenuItems());
 
   return (
     <Picker value={value} error={errorMessage}>
@@ -148,7 +148,7 @@ export function SendTokenRecipientAccountField({
     onChange(_value);
   }
 
-  const MenuOptions = () => (
+  const renderOptions = () => (
     <BookmarkList
       renderEmpty
       Component={({ data }) => (
@@ -169,7 +169,7 @@ export function SendTokenRecipientAccountField({
     />
   );
 
-  const { showOptions } = Picker.usePickerMenu(<MenuOptions />);
+  const { showOptions } = Picker.usePickerMenu(renderOptions());
 
   return (
     <>
