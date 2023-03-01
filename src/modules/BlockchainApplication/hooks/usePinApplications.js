@@ -22,7 +22,7 @@ export function usePinApplications() {
     error: errorOnPinsStorage,
   } = usePinApplicationsLocalStorage();
 
-  const checkPin = useCallback((chainID) => pins.data?.includes(chainID), [pins.data]);
+  const checkPin = useCallback((chainID) => pins?.data?.includes(chainID), [pins.data]);
 
   const togglePin = useCallback(
     async (chainID) => {

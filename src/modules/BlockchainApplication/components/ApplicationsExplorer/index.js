@@ -29,6 +29,7 @@ import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
+import { useModal } from '../../../../contexts/useModal';
 
 const actions = [
   {
@@ -45,10 +46,11 @@ const actions = [
  * view blockchain applications.
  */
 export default function ApplicationsExplorer() {
+  const { showModal } = useModal();
+
   const navigation = useNavigation();
   const { events } = useContext(WalletConnectContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
-  const [showStatsModal, setShowStatsModal] = useState(false);
   const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
 
@@ -66,6 +68,18 @@ export default function ApplicationsExplorer() {
 
   const onCancelConnection = () => setShowBridgeAppModal(false);
 
+  const showApplicationStats = () =>
+    showModal(
+      <ApplicationsStats
+        styles={{
+          container: {
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+          },
+        }}
+      />
+    );
+
   const connectionEvent = useMemo(() => {
     if (events.length && events[events.length - 1].name === EVENTS.SESSION_PROPOSAL) {
       return events[events.length - 1];
@@ -82,7 +96,7 @@ export default function ApplicationsExplorer() {
           noIcon
           rightIconComponent={() => (
             <IconButton
-              onClick={() => setShowStatsModal(true)}
+              onClick={showApplicationStats}
               icon={<StatsSvg height={20} />}
               title={i18next.t('application.explore.statsButtonText')}
               titleStyle={{
@@ -131,17 +145,6 @@ export default function ApplicationsExplorer() {
           <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
           <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
         </Stepper>
-      </BottomModal>
-
-      <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
-        <ApplicationsStats
-          styles={{
-            container: {
-              borderTopLeftRadius: 24,
-              borderTopRightRadius: 24,
-            },
-          }}
-        />
       </BottomModal>
 
       {activeTab === 'externalApplications' && (

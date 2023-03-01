@@ -3,10 +3,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
-import BottomModal from 'components/shared/BottomModal';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import AddSvg from 'assets/svgs/AddSvg';
@@ -16,12 +14,11 @@ import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import SelectNode from '../SelectNode';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
+import { useModal } from '../../../../contexts/useModal';
 
-const ManageApplication = ({ closeModal, nextStep, style }) => {
+const ManageApplication = ({ nextStep, style, navigation }) => {
   const [selectedApplication, setSelectedApplication] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const navigation = useNavigation();
+  const { showModal, closeModal } = useModal();
 
   const { applications } = useApplicationsManagement();
 
@@ -34,24 +31,32 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
     navigation.navigate('AddApplication');
   };
 
-  const toggleModal = (bool) => {
-    setIsModalOpen(bool);
-  };
-
   const switchApplication = (acc) => {
     setCurrentApplication(acc);
     closeModal();
   };
 
   const onUrlSelect = (item) => {
-    toggleModal(false);
+    closeModal(false);
     switchApplication({ ...selectedApplication, serviceURL: item });
   };
+
+  const SelectNodeOption = () =>
+    selectedApplication && (
+      <SelectNode
+        styles={styles}
+        onPress={onUrlSelect}
+        application={selectedApplication}
+        closeModal={() => closeModal(false)}
+      />
+    );
+
+  const selectNode = () => showModal(<SelectNodeOption />);
 
   const selectApplication = (acc) => {
     if (acc.serviceURLs.length > 1) {
       setSelectedApplication(acc);
-      toggleModal(true);
+      selectNode();
     } else {
       switchApplication({ ...acc, serviceURL: acc.serviceURLs[0] });
     }
@@ -73,6 +78,7 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
         onItemPress={selectApplication}
         showActive
         deleteApplication={deleteApplication}
+        navigation={navigation}
       />
 
       <View style={styles.footer}>
@@ -86,16 +92,6 @@ const ManageApplication = ({ closeModal, nextStep, style }) => {
           <P style={styles.buttonText}>{i18next.t('application.manage.add.buttonText')}</P>
         </TouchableOpacity>
       </View>
-      <BottomModal show={isModalOpen} toggleShow={() => toggleModal(false)}>
-        {selectedApplication && (
-          <SelectNode
-            styles={styles}
-            onPress={onUrlSelect}
-            application={selectedApplication}
-            closeModal={() => toggleModal(false)}
-          />
-        )}
-      </BottomModal>
     </View>
   );
 };

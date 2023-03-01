@@ -1,12 +1,11 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from 'contexts/ThemeContext';
-import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import { settingsUpdated } from 'modules/Settings/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -21,9 +20,7 @@ import AccountDetails from '../AccountDetails/AccountDetails';
  * This component would be mounted first and would be used to config and redirect
  * the application to referer page or Sign In.
  */
-export default function AccountHome() {
-  const [showManageApplicationsModal, setShowManageApplicationsModal] = useState(false);
-
+function AccountHome() {
   const navigation = useNavigation();
 
   const [currentAccount] = useCurrentAccount();
@@ -63,17 +60,14 @@ export default function AccountHome() {
           </TouchableOpacity>
 
           <View style={styles.flex}>
-            <ApplicationSwitcher onPress={() => setShowManageApplicationsModal(true)} />
+            <ApplicationSwitcher />
           </View>
         </View>
 
         <AccountDetails account={currentAccount.metadata} />
       </NavigationSafeAreaView>
-
-      <ApplicationManagerModal
-        show={showManageApplicationsModal}
-        setShow={setShowManageApplicationsModal}
-      />
     </>
   );
 }
+
+export default React.memo(AccountHome);
