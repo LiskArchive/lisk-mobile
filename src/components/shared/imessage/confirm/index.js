@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+
+import { extractAddress } from 'modules/Auth/utils/accountKeys';
 import { includeFee } from 'utilities/conversions.utils';
 import { colors } from 'constants/styleGuide';
-import { extractAddress } from 'utilities/api/lisk/account';
 import FormattedNumber from '../../formattedNumber';
 import { PrimaryButton, Button } from '../../toolBox/button';
 import Avatar from '../../avatar';
