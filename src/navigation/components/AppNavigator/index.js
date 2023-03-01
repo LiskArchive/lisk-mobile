@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MultiSignature from 'components/screens/multiSignature';
-import { LockedBalanceDetails } from 'modules/Accounts/components/LockedBalanceDetails';
 
 import { getNavigationHeaderOptions } from '../../helpers';
 import Tabs from '../Tabs';
@@ -25,17 +24,6 @@ export default function AppNavigator() {
   return (
     <Stack.Navigator initialRouteName="AccountHome" mode="modal">
       <Stack.Screen name="AccountHome" component={Tabs} options={getNavigationHeaderOptions} />
-      <Stack.Screen
-        name="LockedBalance"
-        component={LockedBalanceDetails}
-        options={{
-          headerShown: false,
-          transitionSpec: {
-            open: config,
-            close: config,
-          },
-        }}
-      />
       <Stack.Screen
         name="Multisignature"
         component={MultiSignature}
