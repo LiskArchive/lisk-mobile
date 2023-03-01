@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
-import { TouchableOpacity, View, ScrollView, Animated, Dimensions } from 'react-native';
+import { TouchableOpacity, View, ScrollView, Animated, Dimensions, Keyboard } from 'react-native';
 import { useModal } from 'contexts/useModal';
 
 import Icon from 'components/shared/toolBox/icon';
@@ -12,6 +12,7 @@ import getStyles from './styles';
 const BottomModal = ({ style }) => {
   const { toggle: toggleModalContext, closeModal, isOpen, component, showClose } = useModal();
   const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
+  const bottom = useRef(new Animated.Value(0));
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -43,9 +44,21 @@ const BottomModal = ({ style }) => {
     }
   }, [isOpen, resetPositionAnimation, toggleModalContext]);
 
+  const keyboardDidShow = (e) => {
+    const keyboardHeight = e.endCoordinates.height;
+    bottom.current.setValue(keyboardHeight);
+  };
+
+  const keyboardDidHide = () => bottom.current.setValue(0);
+
   useEffect(() => {
-    // toggleModalContext(isOpen);
-  }, [isOpen, toggleModalContext]);
+    const showSubscription = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   if (!isOpen) {
     return null;
@@ -53,7 +66,14 @@ const BottomModal = ({ style }) => {
 
   return (
     <Animated.View style={styles.content} onPress={handleClose}>
-      <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
+      <Animated.View
+        style={[
+          styles.overlay,
+          styles.theme.overlay,
+          style?.overlay,
+          { paddingBottom: bottom.current },
+        ]}
+      >
         <Animated.View
           style={[styles.container, styles.theme.container, style?.container, { top }]}
         >
@@ -75,7 +95,7 @@ const BottomModal = ({ style }) => {
           */}
           <ScrollView style={[style?.children]}>{component}</ScrollView>
         </Animated.View>
-      </View>
+      </Animated.View>
     </Animated.View>
   );
 };
