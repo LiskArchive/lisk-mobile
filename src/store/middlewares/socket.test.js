@@ -1,4 +1,4 @@
-import { INITIAL_STATE as settings } from 'modules/Settings/reducer';
+import { INITIAL_STATE as settings } from 'modules/Settings/store/reducer';
 import { account as accountAPI } from 'utilities/api';
 import { tokenKeys } from 'constants/tokens';
 import socketMiddleware from './socket';

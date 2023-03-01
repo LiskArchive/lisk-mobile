@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/actions';
+import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
 import Slider from 'components/shared/Slider/Slider';
 import { PrimaryButton, Button, LabelButton } from 'components/shared/toolBox/button';
 import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';

@@ -8,29 +8,35 @@ import * as useApplicationsFullDataQuery from '../api/useApplicationsFullDataQue
 const dispatchApplicationsDataMock = jest.fn();
 const addApplicationToStorageMock = jest.fn(() => Promise.resolve());
 const deleteApplicationToStorageMock = jest.fn(() => Promise.resolve());
-const applicationsSetStatusMock = jest.fn();
+const applicationsSetIsLoadingMock = jest.fn();
+const applicationsSetIsSuccessMock = jest.fn();
 const applicationsSetErrorMock = jest.fn();
 
 jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
   applications: {
     data: undefined,
     dispatchData: dispatchApplicationsDataMock,
-    setStatus: applicationsSetStatusMock,
+    setIsLoading: applicationsSetIsLoadingMock,
+    setIsSuccess: applicationsSetIsSuccessMock,
     setError: applicationsSetErrorMock,
   },
 }));
 
 jest.spyOn(useApplicationsFullDataQuery, 'useApplicationsFullDataQuery').mockImplementation(() => ({
   data: { data: [{ chainID: '123' }] },
-  status: 'success',
+  isLoading: false,
+  isSuccess: true,
   refetch: jest.fn(),
   error: null,
 }));
 
 jest.spyOn(useApplicationsLocalStorage, 'useApplicationsLocalStorage').mockImplementation(() => ({
   data: { data: [{ chainID: '456' }] },
+  isLoading: false,
+  isSuccess: true,
   addApplication: addApplicationToStorageMock,
   deleteApplication: deleteApplicationToStorageMock,
+  error: null,
 }));
 
 describe('useApplicationsManagement hook', () => {
@@ -78,7 +84,8 @@ describe('useApplicationsManagement hook', () => {
   it('should set the status and error based on the data from the API', () => {
     renderHook(() => useApplicationsManagement());
 
-    expect(applicationsSetStatusMock).toHaveBeenCalledWith('success');
+    expect(applicationsSetIsLoadingMock).toHaveBeenCalledWith(false);
+    expect(applicationsSetIsSuccessMock).toHaveBeenCalledWith(true);
     expect(applicationsSetErrorMock).toHaveBeenCalledWith(null);
   });
 });
