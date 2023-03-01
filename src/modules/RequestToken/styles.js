@@ -54,6 +54,7 @@ export default () => ({
       justifyContent: 'center',
     },
     shareContainer: {
+      alignItems: 'center',
       padding: boxes.boxPadding,
       flex: 1,
     },

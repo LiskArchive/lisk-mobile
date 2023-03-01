@@ -11,7 +11,6 @@ import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Tabs from 'components/shared/Tabs';
-import BottomModal from 'components/shared/BottomModal';
 import StatsSvg from 'assets/svgs/StatsSvg';
 import { colors, themes } from 'constants/styleGuide';
 import Fab from 'components/shared/Fab';
@@ -46,12 +45,11 @@ const actions = [
  * view blockchain applications.
  */
 export default function ApplicationsExplorer() {
-  const { showModal } = useModal();
+  const { showModal, closeModal } = useModal();
 
   const navigation = useNavigation();
   const { events } = useContext(WalletConnectContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
-  const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
 
   const applications = useApplicationsExplorer();
@@ -60,13 +58,7 @@ export default function ApplicationsExplorer() {
     styles: getApplicationsExplorerStyles(),
   });
 
-  const onFabItemPress = (item) => {
-    if (item.key === 'paste') {
-      setShowBridgeAppModal(true);
-    }
-  };
-
-  const onCancelConnection = () => setShowBridgeAppModal(false);
+  const onCancelConnection = () => closeModal();
 
   const showApplicationStats = () =>
     showModal(
@@ -87,6 +79,22 @@ export default function ApplicationsExplorer() {
 
     return undefined;
   }, [events]);
+
+  const NewConnectionSteps = () => (
+    <Stepper>
+      <BridgeApplication />
+      <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
+      <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
+    </Stepper>
+  );
+
+  const showNewConnectionModal = () => showModal(<NewConnectionSteps />);
+
+  const onFabItemPress = (item) => {
+    if (item.key === 'paste') {
+      showNewConnectionModal();
+    }
+  };
 
   return (
     <>
@@ -138,14 +146,6 @@ export default function ApplicationsExplorer() {
           </Tabs.Panel>
         </View>
       </NavigationSafeAreaView>
-
-      <BottomModal show={showBridgeAppModal} toggleShow={() => setShowBridgeAppModal(false)}>
-        <Stepper>
-          <BridgeApplication />
-          <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
-          <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
-        </Stepper>
-      </BottomModal>
 
       {activeTab === 'externalApplications' && (
         <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />

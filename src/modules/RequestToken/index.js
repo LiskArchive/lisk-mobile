@@ -25,7 +25,6 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import Avatar from 'components/shared/avatar';
-import BottomModal from 'components/shared/BottomModal';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
@@ -35,9 +34,11 @@ import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
 import getStyles from './styles';
+import { useModal } from '../../contexts/useModal';
 
 export default function RequestToken() {
   const navigation = useNavigation();
+  const { showModal } = useModal();
 
   const [currentAccount] = useCurrentAccount();
 
@@ -53,7 +54,6 @@ export default function RequestToken() {
   const [tokenID, setTokenID] = useState(
     mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
-  const [showQRModal, setShowQRModal] = useState(false);
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -92,15 +92,27 @@ export default function RequestToken() {
     />
   );
 
+  const Code = () => (
+    <View style={styles.shareContainer}>
+      <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
+        {renderQRCode(qrCodeSize)}
+      </Share>
+
+      <P style={[styles.shareText, styles.theme.shareText]}>
+        {i18next.t('Tap on the QR Code to share it.')}
+      </P>
+    </View>
+  );
+
+  const openQrCode = () => showModal(<Code />);
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
         title="requestTokens.title"
         onPress={navigation.goBack}
         rightIconComponent={() => (
-          <TouchableOpacity onPress={() => setShowQRModal(true)}>
-            {renderQRCode(20)}
-          </TouchableOpacity>
+          <TouchableOpacity onPress={openQrCode}>{renderQRCode(20)}</TouchableOpacity>
         )}
       />
 
@@ -176,22 +188,6 @@ export default function RequestToken() {
           </PrimaryButton>
         </View>
       </KeyboardAwareScrollView>
-
-      <BottomModal
-        show={showQRModal}
-        toggleShow={setShowQRModal}
-        style={{ container: { alignItems: 'center' } }}
-      >
-        <View style={styles.shareContainer}>
-          <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
-            {renderQRCode(qrCodeSize)}
-          </Share>
-
-          <P style={[styles.shareText, styles.theme.shareText]}>
-            {i18next.t('Tap on the QR Code to share it.')}
-          </P>
-        </View>
-      </BottomModal>
     </SafeAreaView>
   );
 }
