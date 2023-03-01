@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import { P, B } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
 import ResultScreen from 'components/screens/ResultScreen';

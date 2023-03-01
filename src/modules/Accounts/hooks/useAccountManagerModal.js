@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import { useNavigation } from '@react-navigation/native';
 
 import AccountList from '../components/AccountList';

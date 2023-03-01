@@ -9,7 +9,7 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';

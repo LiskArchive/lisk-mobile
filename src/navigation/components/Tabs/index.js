@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import { ModalContext } from 'contexts/ModalContext';
 import Settings from 'modules/Settings';
 import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';

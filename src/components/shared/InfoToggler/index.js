@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import InfoSvg from 'assets/svgs/InfoSvg';
 
 import getInfoTogglerStyles from './styles';

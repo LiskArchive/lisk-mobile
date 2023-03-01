@@ -1,6 +1,6 @@
 import React from 'react';
 import Stepper from 'components/shared/Stepper';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 
 import ManageApplication from '../ManageApplication';
 import DeleteApplication from '../DeleteApplication';

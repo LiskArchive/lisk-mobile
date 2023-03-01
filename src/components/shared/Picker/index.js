@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import { PickerContext } from './hooks';
 import { PickerItem, PickerLabel, usePickerMenu, PickerToggle } from './components';
 

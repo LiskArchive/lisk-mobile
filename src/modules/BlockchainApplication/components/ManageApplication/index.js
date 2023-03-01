@@ -7,7 +7,7 @@ import i18next from 'i18next';
 
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import AddSvg from 'assets/svgs/AddSvg';
 import getStyles from './styles';
 import ApplicationList from '../ApplicationList/ApplicationList';

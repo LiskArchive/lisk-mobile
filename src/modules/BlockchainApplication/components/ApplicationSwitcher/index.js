@@ -5,7 +5,7 @@ import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCu
 import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { P } from 'components/shared/toolBox/typography';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import ChangeSvg from 'assets/svgs/ChangeSvg';
 import { useNavigation } from '@react-navigation/native';
 

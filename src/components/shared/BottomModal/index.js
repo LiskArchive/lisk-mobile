@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity, View, ScrollView, Animated, Dimensions, Keyboard } from 'react-native';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';

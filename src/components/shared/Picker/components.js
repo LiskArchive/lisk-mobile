@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { useModal } from 'contexts/useModal';
+import { useModal } from 'hooks/useModal';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import { themes, colors } from 'constants/styleGuide';
 
