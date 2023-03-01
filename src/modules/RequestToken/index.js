@@ -92,7 +92,7 @@ export default function RequestToken() {
     />
   );
 
-  const Code = () => (
+  const renderFullCode = () => (
     <View style={styles.shareContainer}>
       <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
         {renderQRCode(qrCodeSize)}
@@ -104,7 +104,7 @@ export default function RequestToken() {
     </View>
   );
 
-  const openQrCode = () => showModal(<Code />);
+  const openQrCode = () => showModal(renderFullCode());
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>

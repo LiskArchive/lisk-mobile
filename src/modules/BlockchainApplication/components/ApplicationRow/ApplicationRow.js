@@ -47,18 +47,16 @@ function ApplicationRow({
 
   const applicationPinned = checkPin(application.chainID);
 
-  const DeleteApplicationResult = () => (
-    <ResultScreen
-      variant="error"
-      description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
-      buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
-      onContinue={() => closeModal(false)}
-    />
-  );
-
   const toggleDeleteDefaultApplicationModal = (bool) => {
     if (bool) {
-      return showModal(<DeleteApplicationResult />);
+      return showModal(
+        <ResultScreen
+          variant="error"
+          description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
+          buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
+          onContinue={() => closeModal(false)}
+        />
+      );
     }
     return closeModal();
   };

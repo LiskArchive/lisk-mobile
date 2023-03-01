@@ -15,7 +15,7 @@ export default function InfoToggler({ title, description, style }) {
     styles: getInfoTogglerStyles(),
   });
 
-  const InfoItems = () => (
+  const renderInfoItem = () => (
     <View style={[styles.modalContainer]}>
       {title && <Text style={[styles.title, styles.theme.title, style?.title]}>{title}</Text>}
 
@@ -40,7 +40,7 @@ export default function InfoToggler({ title, description, style }) {
   );
 
   const openModal = () => {
-    showModal(<InfoItems />);
+    showModal(renderInfoItem());
   };
 
   return (

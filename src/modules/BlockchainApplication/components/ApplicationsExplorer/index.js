@@ -80,7 +80,7 @@ export default function ApplicationsExplorer() {
     return undefined;
   }, [events]);
 
-  const NewConnectionSteps = () => (
+  const renderConnectionSteps = () => (
     <Stepper>
       <BridgeApplication />
       <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
@@ -88,7 +88,7 @@ export default function ApplicationsExplorer() {
     </Stepper>
   );
 
-  const showNewConnectionModal = () => showModal(<NewConnectionSteps />);
+  const showNewConnectionModal = () => showModal(renderConnectionSteps());
 
   const onFabItemPress = (item) => {
     if (item.key === 'paste') {

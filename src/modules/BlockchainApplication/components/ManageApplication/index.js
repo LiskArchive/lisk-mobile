@@ -41,7 +41,7 @@ const ManageApplication = ({ nextStep, style, navigation }) => {
     switchApplication({ ...selectedApplication, serviceURL: item });
   };
 
-  const SelectNodeOption = () =>
+  const renderSelectNodeOptions = () =>
     selectedApplication && (
       <SelectNode
         styles={styles}
@@ -51,7 +51,7 @@ const ManageApplication = ({ nextStep, style, navigation }) => {
       />
     );
 
-  const selectNode = () => showModal(<SelectNodeOption />);
+  const selectNode = () => showModal(renderSelectNodeOptions());
 
   const selectApplication = (acc) => {
     if (acc.serviceURLs.length > 1) {
