@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { useModal } from 'contexts/useModal';
 import { ModalContext } from 'contexts/ModalContext';
 import Settings from 'modules/Settings';
 import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';
@@ -10,7 +11,6 @@ import ExternalApplicationSignatureRequest from 'modules/BlockchainApplication/c
 import { getTabBarIcon } from '../../helpers';
 import { getNavigationTabBarStyles } from '../../styles';
 import useWalletConnectSession from '../../../../libs/wcm/hooks/useSession';
-import { useModal } from '../../../contexts/useModal';
 
 const Tab = createBottomTabNavigator();
 

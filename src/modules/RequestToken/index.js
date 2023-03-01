@@ -9,6 +9,7 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
@@ -34,7 +35,6 @@ import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
 import getStyles from './styles';
-import { useModal } from '../../contexts/useModal';
 
 export default function RequestToken() {
   const navigation = useNavigation();

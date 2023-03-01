@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { useModal } from 'contexts/useModal';
 import { PickerContext } from './hooks';
 import { PickerItem, PickerLabel, usePickerMenu, PickerToggle } from './components';
-import { useModal } from '../../../contexts/useModal';
 
 export default function Picker({ children, value, error }) {
   const { toggle, isOpen } = useModal();

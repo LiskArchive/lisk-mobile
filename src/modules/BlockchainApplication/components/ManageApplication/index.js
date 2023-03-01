@@ -7,6 +7,7 @@ import i18next from 'i18next';
 
 import { P, H3 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import AddSvg from 'assets/svgs/AddSvg';
 import getStyles from './styles';
 import ApplicationList from '../ApplicationList/ApplicationList';
@@ -14,7 +15,6 @@ import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import SelectNode from '../SelectNode';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
-import { useModal } from '../../../../contexts/useModal';
 
 const ManageApplication = ({ nextStep, style, navigation }) => {
   const [selectedApplication, setSelectedApplication] = useState({});

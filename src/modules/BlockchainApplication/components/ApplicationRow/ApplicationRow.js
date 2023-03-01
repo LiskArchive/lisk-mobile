@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
@@ -17,7 +18,6 @@ import { useApplicationRowActions } from './ApplicationRow.hooks';
 import getApplicationRowStyles from './ApplicationRow.styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 import { usePinApplications } from '../../hooks/usePinApplications';
-import { useModal } from '../../../../contexts/useModal';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.

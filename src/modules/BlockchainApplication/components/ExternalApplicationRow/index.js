@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import { P, B } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
 import ResultScreen from 'components/screens/ResultScreen';
@@ -14,7 +15,6 @@ import ExternalApplicationDetails from '../ExternalApplicationDetails';
 import DisconnectExternalApplication from '../DisconnectExternalApplication';
 
 import getExternalApplicationRowStyles from './styles';
-import { useModal } from '../../../../contexts/useModal';
 
 export default function ExternalApplicationRow({ application }) {
   const [activeAction, setActiveAction] = useState();

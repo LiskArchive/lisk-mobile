@@ -3,10 +3,10 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import InfoSvg from 'assets/svgs/InfoSvg';
 
 import getInfoTogglerStyles from './styles';
-import { useModal } from '../../../contexts/useModal';
 
 export default function InfoToggler({ title, description, style }) {
   const { showModal } = useModal();

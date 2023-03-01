@@ -4,12 +4,12 @@ import React, { useEffect } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import { themes, colors } from 'constants/styleGuide';
 
 import { usePicker } from './hooks';
 import { getPickerStyles } from './styles';
-import { useModal } from '../../../contexts/useModal';
 
 export function PickerLabel({ children, style: baseStyle }) {
   const { styles } = useTheme({

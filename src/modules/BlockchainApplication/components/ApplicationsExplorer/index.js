@@ -6,6 +6,7 @@ import i18next from 'i18next';
 import Stepper from 'components/shared/Stepper';
 
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useModal } from 'contexts/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { IconButton } from 'components/shared/toolBox/button';
@@ -28,7 +29,6 @@ import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
-import { useModal } from '../../../../contexts/useModal';
 
 const actions = [
   {

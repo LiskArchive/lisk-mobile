@@ -5,6 +5,7 @@ import i18next from 'i18next';
 import { useController } from 'react-hook-form';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'contexts/useModal';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
@@ -12,7 +13,6 @@ import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
-import { useModal } from '../../../../contexts/useModal';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const { showModal } = useModal();
