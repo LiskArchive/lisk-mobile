@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
+import { useController } from 'react-hook-form';
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -11,32 +12,19 @@ import { stringShortener } from 'utilities/helpers';
 
 import getConfirmTransactionStyles from './styles';
 
-export default function ConfirmTransaction({
-  amount,
-  token,
-  password,
-  onPasswordChange,
-  onSuccess,
-  onError,
-  isLoading,
-  isSuccess,
-  error,
-  isValidationError,
-  onSubmit,
-}) {
+export default function ConfirmTransaction({ amount, token, isLoading, isValidationError, form }) {
   const [currentAccount] = useCurrentAccount();
+
+  const { field } = useController({
+    name: 'userPassword',
+    control: form.control,
+  });
 
   const { styles } = useTheme({
     styles: getConfirmTransactionStyles(),
   });
 
-  useEffect(() => {
-    if (isSuccess) onSuccess();
-
-    if (error) onError(error);
-  }, [isSuccess, error, onSuccess, onError]);
-
-  const submitDisabled = isLoading || !password || isValidationError;
+  const submitDisabled = isLoading || !field.value || isValidationError;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -76,8 +64,8 @@ export default function ConfirmTransaction({
           }}
           placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
-          onChange={onPasswordChange}
-          value={password}
+          onChange={field.onChange}
+          value={field.value}
         />
       </View>
 
@@ -88,7 +76,7 @@ export default function ConfirmTransaction({
 
         <PrimaryButton
           noTheme
-          onClick={onSubmit}
+          onClick={form.handleSubmit}
           style={{ marginBottom: 24 }}
           disabled={submitDisabled}
         >
