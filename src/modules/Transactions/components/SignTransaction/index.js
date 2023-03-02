@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 
 import ConfirmTransaction from '../ConfirmTransaction';
 import SignTransactionSuccess from './SignTransactionSuccess';
@@ -24,9 +23,8 @@ export function SignTransaction({
   errorActionButton,
   errorTitle,
   errorDescription,
+  navigation,
 }) {
-  const navigation = useNavigation();
-
   const [activeStep, setActiveStep] = useState('confirm');
 
   const [_error, _setError] = useState();
