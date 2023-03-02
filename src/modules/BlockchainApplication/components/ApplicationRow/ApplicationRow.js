@@ -1,14 +1,14 @@
-import React, { useState, memo } from 'react';
+/* eslint-disable max-statements */
+import React, { memo } from 'react';
 import { View, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
 import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
-import BottomModal from 'components/shared/BottomModal';
 import ResultScreen from 'components/screens/ResultScreen';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
@@ -35,26 +35,39 @@ function ApplicationRow({
   showActive,
   showCaret,
   deleteApplication,
+  navigation,
 }) {
-  const navigation = useNavigation();
-
-  const [showDeleteDefaultApplicationModal, setShowDeleteDefaultApplicationModal] = useState(false);
+  const modal = useModal();
 
   const [currentApplication] = useCurrentApplication();
 
   const { checkPin } = usePinApplications();
 
+  const { theme, styles } = useTheme({ styles: getApplicationRowStyles() });
+
+  const applicationPinned = checkPin(application.chainID);
+
+  const toggleDeleteDefaultApplicationModal = (bool) => {
+    if (bool) {
+      return modal.open(
+        <ResultScreen
+          variant="error"
+          description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
+          buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
+          onContinue={() => modal.close(false)}
+        />
+      );
+    }
+    return modal.close();
+  };
+
   const { leftActions, rightActions } = useApplicationRowActions({
     application,
     variant,
     navigation,
-    setShowDeleteDefaultApplicationModal,
+    toggleDeleteDefaultApplicationModal,
     deleteApplication,
   });
-
-  const { theme, styles } = useTheme({ styles: getApplicationRowStyles() });
-
-  const applicationPinned = checkPin(application.chainID);
 
   return (
     <>
@@ -98,18 +111,6 @@ function ApplicationRow({
           </View>
         </TouchableOpacity>
       </Swipeable>
-
-      <BottomModal
-        show={showDeleteDefaultApplicationModal}
-        toggleShow={() => setShowDeleteDefaultApplicationModal(false)}
-      >
-        <ResultScreen
-          variant="error"
-          description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
-          buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
-          onContinue={() => setShowDeleteDefaultApplicationModal(false)}
-        />
-      </BottomModal>
     </>
   );
 }

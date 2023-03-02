@@ -6,12 +6,12 @@ import i18next from 'i18next';
 import Stepper from 'components/shared/Stepper';
 
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Tabs from 'components/shared/Tabs';
-import BottomModal from 'components/shared/BottomModal';
 import StatsSvg from 'assets/svgs/StatsSvg';
 import { colors, themes } from 'constants/styleGuide';
 import Fab from 'components/shared/Fab';
@@ -45,11 +45,11 @@ const actions = [
  * view blockchain applications.
  */
 export default function ApplicationsExplorer() {
+  const modal = useModal();
+
   const navigation = useNavigation();
   const { events } = useContext(WalletConnectContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
-  const [showStatsModal, setShowStatsModal] = useState(false);
-  const [showBridgeAppModal, setShowBridgeAppModal] = useState(false);
   const tabBarHeight = useBottomTabBarHeight();
 
   const applications = useApplicationsExplorer();
@@ -58,13 +58,19 @@ export default function ApplicationsExplorer() {
     styles: getApplicationsExplorerStyles(),
   });
 
-  const onFabItemPress = (item) => {
-    if (item.key === 'paste') {
-      setShowBridgeAppModal(true);
-    }
-  };
+  const onCancelConnection = () => modal.close();
 
-  const onCancelConnection = () => setShowBridgeAppModal(false);
+  const showApplicationStats = () =>
+    modal.open(
+      <ApplicationsStats
+        styles={{
+          container: {
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+          },
+        }}
+      />
+    );
 
   const connectionEvent = useMemo(() => {
     if (events.length && events[events.length - 1].name === EVENTS.SESSION_PROPOSAL) {
@@ -74,6 +80,22 @@ export default function ApplicationsExplorer() {
     return undefined;
   }, [events]);
 
+  const renderConnectionSteps = () => (
+    <Stepper>
+      <BridgeApplication />
+      <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
+      <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
+    </Stepper>
+  );
+
+  const showNewConnectionModal = () => modal.open(renderConnectionSteps());
+
+  const onFabItemPress = (item) => {
+    if (item.key === 'paste') {
+      showNewConnectionModal();
+    }
+  };
+
   return (
     <>
       <NavigationSafeAreaView>
@@ -82,7 +104,7 @@ export default function ApplicationsExplorer() {
           noIcon
           rightIconComponent={() => (
             <IconButton
-              onClick={() => setShowStatsModal(true)}
+              onClick={showApplicationStats}
               icon={<StatsSvg height={20} />}
               title={i18next.t('application.explore.statsButtonText')}
               titleStyle={{
@@ -124,25 +146,6 @@ export default function ApplicationsExplorer() {
           </Tabs.Panel>
         </View>
       </NavigationSafeAreaView>
-
-      <BottomModal show={showBridgeAppModal} toggleShow={() => setShowBridgeAppModal(false)}>
-        <Stepper>
-          <BridgeApplication />
-          <InitiateConnection event={connectionEvent} onFinish={onCancelConnection} />
-          <ApproveConnection event={connectionEvent} onFinish={onCancelConnection} />
-        </Stepper>
-      </BottomModal>
-
-      <BottomModal show={showStatsModal} toggleShow={() => setShowStatsModal(false)}>
-        <ApplicationsStats
-          styles={{
-            container: {
-              borderTopLeftRadius: 24,
-              borderTopRightRadius: 24,
-            },
-          }}
-        />
-      </BottomModal>
 
       {activeTab === 'externalApplications' && (
         <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />

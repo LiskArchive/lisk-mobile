@@ -1,21 +1,21 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 import { useController } from 'react-hook-form';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import BottomModal from 'components/shared/BottomModal';
 import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
-  const [showSendTokenSummaryModal, setShowSendTokenSummaryModal] = useState(false);
+  const modal = useModal();
 
   const { field } = useController({
     name: 'userPassword',
@@ -52,6 +52,29 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
+  const showSignTransactionModal = () =>
+    modal.open(
+      <SignTransaction
+        onSubmit={form.handleSubmit}
+        onSuccess={() => {
+          form.handleReset();
+          reset();
+        }}
+        onError={reset}
+        password={field.value}
+        onPasswordChange={field.onChange}
+        isValidationError={Object.keys(form.formState.errors).length > 0}
+        amount={summary.amount}
+        token={summary.token}
+        isSuccess={form.broadcastTransactionMutation.isSuccess}
+        isLoading={
+          form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
+        }
+        error={broadcastTransactionError || dryRunTransactionError}
+        onReset={form.handleMutationsReset}
+      />
+    );
+
   return (
     <>
       <View style={[styles.container, styles.theme.container]}>
@@ -67,36 +90,11 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
 
         <PrimaryButton
           noTheme
-          onClick={() => setShowSendTokenSummaryModal(true)}
+          onClick={showSignTransactionModal}
           title={i18next.t('sendToken.summary.submitTransactionButtonText')}
           style={{ flex: 1 }}
         />
       </View>
-
-      <BottomModal
-        show={showSendTokenSummaryModal}
-        toggleShow={() => setShowSendTokenSummaryModal(false)}
-      >
-        <SignTransaction
-          onSubmit={form.handleSubmit}
-          onSuccess={() => {
-            form.handleReset();
-            reset();
-          }}
-          onError={reset}
-          password={field.value}
-          onPasswordChange={field.onChange}
-          isValidationError={Object.keys(form.formState.errors).length > 0}
-          amount={summary.amount}
-          token={summary.token}
-          isSuccess={form.broadcastTransactionMutation.isSuccess}
-          isLoading={
-            form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
-          }
-          error={broadcastTransactionError || dryRunTransactionError}
-          onReset={form.handleMutationsReset}
-        />
-      </BottomModal>
     </>
   );
 }

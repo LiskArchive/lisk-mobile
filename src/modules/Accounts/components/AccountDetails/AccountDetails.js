@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,7 +12,7 @@ import SwitchSvg from 'assets/svgs/SwitchSvg';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import TransactionList from 'modules/Transactions/components/TransactionList/TransactionList';
 import TokenList from '../TokenList/TokenList';
-import AccountsManagerModal from '../AccountsManagerModal';
+import useAccountManagerModal from '../../hooks/useAccountManagerModal';
 
 import getAccountDetailsStyles from './AccountDetails.styles';
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
@@ -22,7 +22,7 @@ import { useCurrentAccount } from '../../hooks/useCurrentAccount';
  * @param {Object} account - Account to which render its information.
  */
 export default function AccountDetails({ account }) {
-  const [showManageAccountsModal, setShowManageAccountsModal] = useState(false);
+  const accountManager = useAccountManagerModal();
 
   const navigation = useNavigation();
 
@@ -71,7 +71,7 @@ export default function AccountDetails({ account }) {
             {isCurrentAccount && (
               <TouchableOpacity
                 style={[styles.switchContainer]}
-                onPress={() => setShowManageAccountsModal(true)}
+                onPress={accountManager.open}
                 testID="switch-account"
               >
                 <SwitchSvg />
@@ -110,8 +110,6 @@ export default function AccountDetails({ account }) {
           style={{ container: styles.transactionListContainer }}
         />
       </View>
-
-      <AccountsManagerModal show={showManageAccountsModal} setShow={setShowManageAccountsModal} />
     </>
   );
 }

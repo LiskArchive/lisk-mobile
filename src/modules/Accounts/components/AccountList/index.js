@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -21,9 +20,8 @@ export default function AccountList({
   onDeleteAccountClick,
   onEditAccountClick,
   style,
+  navigation,
 }) {
-  const navigation = useNavigation();
-
   const { accounts } = useAccounts();
 
   const [currentAccount, setAccount] = useCurrentAccount();
@@ -71,6 +69,7 @@ export default function AccountList({
             onEditPress={() => onEditAccountClick(item)}
             active={item.metadata.address === currentAccount.metadata?.address}
             testID={`account-list-item`}
+            navigation={navigation}
           />
         )}
         withDefaultSpinner

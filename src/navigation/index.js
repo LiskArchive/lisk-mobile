@@ -15,6 +15,7 @@ import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
+import BottomModal from 'components/shared/BottomModal';
 
 import BackupPassphrase from 'modules/Settings/components/BackupPassphrase/BackupPassphrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
@@ -185,8 +186,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
-
         {children}
+        <BottomModal />
       </NavigationContainer>
     </SafeAreaProvider>
   );
