@@ -44,7 +44,7 @@ const DecryptPassphrase = ({ account, route, nextStep, t }) => {
   return (
     <SafeAreaView style={[styles.container, styles.theme.wrapper]}>
       <HeaderBackButton title={title} onPress={navigation.goBack} />
-      <PasswordForm address={encryptedAccount.metadata.address} onSubmit={onSubmit} />
+      <PasswordForm account={encryptedAccount} onSubmit={onSubmit} />
     </SafeAreaView>
   );
 };
