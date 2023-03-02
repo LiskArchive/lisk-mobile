@@ -10,12 +10,14 @@ import TransactionSummary from 'modules/Transactions/components/TransactionSumma
 import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import { useNavigation } from '@react-navigation/native';
 import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
 export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
   const modal = useModal();
+  const navigation = useNavigation();
 
   const { field } = useController({
     name: 'userPassword',
@@ -72,6 +74,7 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
         }
         error={broadcastTransactionError || dryRunTransactionError}
         onReset={form.handleMutationsReset}
+        navigation={navigation}
       />
     );
 
