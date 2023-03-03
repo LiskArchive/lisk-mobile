@@ -8,7 +8,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { useSignTransaction } from '../../../Transactions/hooks/useSignTransaction';
+import { useSignTransactionModal } from 'modules/Transactions/hooks/useSignTransactionModal';
 import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
@@ -44,7 +44,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
-  const signTransaction = useSignTransaction({
+  const signTransaction = useSignTransactionModal({
     form,
     isValidationError: Object.keys(form.formState.errors).length > 0,
     amount: summary.amount,

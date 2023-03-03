@@ -6,7 +6,7 @@ import ConfirmTransaction from '../components/ConfirmTransaction';
 import SignTransactionSuccess from '../components/SignTransaction/SignTransactionSuccess';
 import SignTransactionError from '../components/SignTransaction/SignTransactionError';
 
-export function useSignTransaction({
+export function useSignTransactionModal({
   isValidationError,
   dryRunError,
   amount,

@@ -6,7 +6,7 @@ import i18next from 'i18next';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
-import { useSignTransaction } from 'modules/Transactions/hooks/useSignTransaction';
+import { useSignTransactionModal } from 'modules/Transactions/hooks/useSignTransactionModal';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 
@@ -41,7 +41,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
   };
   const handleErrorSubmit = () => Linking.openURL(session.peer.metadata.url);
 
-  const signTransaction = useSignTransaction({
+  const signTransaction = useSignTransactionModal({
     onSubmit: onSubmit(passwordController.field.value),
     password: passwordController.field.value,
     onPasswordChange: passwordController.field.onChange,

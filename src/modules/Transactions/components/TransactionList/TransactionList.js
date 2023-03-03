@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -34,11 +34,18 @@ export default function TransactionList({ mode = 'overview', address, style }) {
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
+    refetch,
   } = useAccountTransactionsQuery(address, {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT },
     },
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => refetch(), 4000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const { styles } = useTheme({
     styles: getTransactionListStyles(),
