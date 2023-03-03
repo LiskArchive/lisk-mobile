@@ -33,7 +33,7 @@ export default function useAccountManagerModal() {
         children = (
           <AccountList
             mode="modal"
-            onAccountClick={() => modal.close()}
+            onAccountClick={modal.close}
             onEditAccountClick={(account) => changeSelection('EditAccount', account)}
             onDeleteAccountClick={(account) => changeSelection('DeleteAccount', account)}
             navigation={navigation}

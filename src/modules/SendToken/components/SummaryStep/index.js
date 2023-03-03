@@ -2,27 +2,19 @@
 import React from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
-import { useController } from 'react-hook-form';
 
+import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'contexts/ThemeContext';
-import { useModal } from 'hooks/useModal';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
-import { SignTransaction } from 'modules/Transactions/components/SignTransaction';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { useNavigation } from '@react-navigation/native';
+import { useSignTransactionModal } from 'modules/Transactions/hooks/useSignTransactionModal';
 import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
-export default function SendTokenSummaryStep({ form, prevStep, reset, transaction }) {
-  const modal = useModal();
+export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
   const navigation = useNavigation();
-
-  const { field } = useController({
-    name: 'userPassword',
-    control: form.control,
-  });
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
@@ -47,36 +39,19 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
     styles: getSendTokenSummaryStepStyles(),
   });
 
-  const broadcastTransactionError = form.broadcastTransactionMutation.error;
-
   const dryRunTransactionError =
     form.dryRunTransactionMutation.error ||
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
-  const showSignTransactionModal = () =>
-    modal.open(
-      <SignTransaction
-        onSubmit={form.handleSubmit}
-        onSuccess={() => {
-          form.handleReset();
-          reset();
-        }}
-        onError={reset}
-        password={field.value}
-        onPasswordChange={field.onChange}
-        isValidationError={Object.keys(form.formState.errors).length > 0}
-        amount={summary.amount}
-        token={summary.token}
-        isSuccess={form.broadcastTransactionMutation.isSuccess}
-        isLoading={
-          form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
-        }
-        error={broadcastTransactionError || dryRunTransactionError}
-        onReset={form.handleMutationsReset}
-        navigation={navigation}
-      />
-    );
+  const signTransaction = useSignTransactionModal({
+    form,
+    isValidationError: Object.keys(form.formState.errors).length > 0,
+    amount: summary.amount,
+    token: summary.token,
+    dryRunError: dryRunTransactionError,
+    navigation,
+  });
 
   return (
     <>
@@ -93,7 +68,7 @@ export default function SendTokenSummaryStep({ form, prevStep, reset, transactio
 
         <PrimaryButton
           noTheme
-          onClick={showSignTransactionModal}
+          onClick={signTransaction.open}
           title={i18next.t('sendToken.summary.submitTransactionButtonText')}
           style={{ flex: 1 }}
         />
