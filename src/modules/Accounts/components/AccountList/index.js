@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 
+import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -23,6 +24,7 @@ export default function AccountList({
   navigation,
 }) {
   const { accounts } = useAccounts();
+  const modal = useModal();
 
   const [currentAccount, setAccount] = useCurrentAccount();
 
@@ -44,6 +46,13 @@ export default function AccountList({
       if (onAccountClick) onAccountClick(account);
     }
   }
+
+  const addAccount = () => {
+    if (mode === 'modal') {
+      modal.close();
+    }
+    navigation.navigate('AuthMethod');
+  };
 
   return (
     <View style={[styles.container, style?.container]}>
@@ -78,7 +87,7 @@ export default function AccountList({
       />
 
       <View style={[styles.footer, style?.footer]}>
-        <PrimaryButton onClick={() => navigation.navigate('AuthMethod')} testID="add-account">
+        <PrimaryButton onClick={addAccount} testID="add-account">
           {i18next.t('accounts.accountsManager.addAccountButtonText')}
         </PrimaryButton>
       </View>

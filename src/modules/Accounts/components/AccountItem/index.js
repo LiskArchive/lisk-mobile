@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
