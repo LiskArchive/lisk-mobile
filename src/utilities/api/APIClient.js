@@ -34,7 +34,7 @@ export class APIClient {
   }
 
   create({ http, ws } = {}) {
-    this.ws = io(ws, { transports: ['websocket'] });
+    this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
 
     const request = axios.create({
       ...this.axiosConfig,
