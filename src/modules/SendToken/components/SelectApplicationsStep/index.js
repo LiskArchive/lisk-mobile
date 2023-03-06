@@ -61,7 +61,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     !isValidAddress;
 
   return (
-    <ScrollView style={[styles.wrapper, styles.theme.wrapper]}>
+    <ScrollView contentContainerStyle={styles.wrapper} style={[styles.theme.wrapper]}>
       <DataRenderer
         data={applications.data}
         isLoading={applications.isLoading}

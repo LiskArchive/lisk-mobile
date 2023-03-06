@@ -1,8 +1,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, TouchableOpacity } from 'react-native';
 import i18next from 'i18next';
 
 import { P, H3 } from 'components/shared/toolBox/typography';
