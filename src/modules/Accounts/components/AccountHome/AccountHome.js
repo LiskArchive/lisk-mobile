@@ -1,14 +1,13 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TouchableOpacity, ScrollView, RefreshControl, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from 'contexts/ThemeContext';
-import ApplicationManagerModal from 'modules/BlockchainApplication/components/ApplicationManagerModal';
 import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
-import { settingsUpdated } from 'modules/Settings/actions';
+import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import ApplicationSwitcher from 'modules/BlockchainApplication/components/ApplicationSwitcher';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
