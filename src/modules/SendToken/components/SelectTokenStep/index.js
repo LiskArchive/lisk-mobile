@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -61,11 +61,10 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
     transactionFee: transaction.data.transaction.fee,
   });
 
-  const disableNextStepButton =
-    !form.watch('tokenID') || !form.watch('amount') || isMaxAllowedAmountExceeded;
+  const disableNextStepButton = !form.watch('tokenID') || isMaxAllowedAmountExceeded;
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <ScrollView contentContainerStyle={styles.wrapper} style={[styles.theme.wrapper]}>
       <View style={[styles.container]}>
         <TokenSelectField
           value={tokenIDField.value}
@@ -120,6 +119,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
           style={{ flex: 1 }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
