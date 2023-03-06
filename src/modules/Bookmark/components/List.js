@@ -16,7 +16,7 @@ const List = ({ list, onPress, draggable, Component }) => {
           showAvatar
           onPress={onPress}
           data={item}
-          isInvalidAddress={validateAddress('LSK', item.address) === 1}
+          isInvalidAddress={validateAddress(item.address) === 1}
         />
       )}
     />

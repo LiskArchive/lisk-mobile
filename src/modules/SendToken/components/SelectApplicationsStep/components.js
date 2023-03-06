@@ -12,7 +12,6 @@ import Avatar from 'components/shared/avatar';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import Input from 'components/shared/toolBox/input';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
-import CircleSvg from 'assets/svgs/CircleSvg';
 import BookmarksSvg from 'assets/svgs/BookmarksSvg';
 import { stringShortener } from 'utilities/helpers';
 import colors from 'constants/styleGuide/colors';
@@ -127,11 +126,9 @@ export function SendTokenRecipientAccountField({
   addressFormat,
   onAddressFormatChange,
   style,
+  isValidAddress,
 }) {
   const bookmarks = useSelector(selectBookmarkList);
-
-  const recipientAccount = bookmarks.find((bookmark) => bookmark.address === value);
-
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
@@ -179,9 +176,10 @@ export function SendTokenRecipientAccountField({
         placeholder="Input wallet address or choose a username"
         error={addressFormat === 'input' && errorMessage}
         adornments={{
-          left: (!value || addressFormat === 'picker') && <CircleSvg />,
-          right: !!value && addressFormat === 'input' && <CircleCheckedSvg variant="fill" />,
+          left: <Avatar address={value} size={24} />,
+          right: isValidAddress && <CircleCheckedSvg variant="fill" />,
         }}
+        onChange={handleInputChange}
         innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
       />
 
@@ -207,23 +205,7 @@ export function SendTokenRecipientAccountField({
               </View>
             }
             style={style?.picker}
-          >
-            {addressFormat === 'picker' && recipientAccount && (
-              <View style={[styles.row]}>
-                <Avatar address={recipientAccount.address} size={24} />
-
-                <Text style={[styles.accountName, styles.theme.accountName]}>
-                  {recipientAccount.label}
-                </Text>
-
-                <Text style={[styles.accountAddress, styles.theme.accountAddress]}>
-                  {stringShortener(recipientAccount.address, 5, 5)}
-                </Text>
-
-                <CircleCheckedSvg variant="fill" style={{ marginLeft: 8 }} />
-              </View>
-            )}
-          </Picker.Toggle>
+          ></Picker.Toggle>
         </Picker>
       ) : null}
     </>

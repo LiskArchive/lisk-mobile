@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
-import React from 'react';
-import { View } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { View, ScrollView } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -10,6 +10,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import ResultScreen from 'components/screens/ResultScreen';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
+import { validateAddress } from 'utilities/validators';
 
 import getSendTokenSelectApplicationsStepStyles from './styles';
 import {
@@ -20,6 +21,7 @@ import {
 
 export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   const applications = useApplicationsExplorer();
+  const [address, setAddress] = useState('');
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
@@ -36,6 +38,14 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     control: form.control,
   });
 
+  const isValidAddress = useMemo(() => validateAddress(address) === 0, [address]);
+
+  useEffect(() => {
+    if (isValidAddress) {
+      form.handleChange('params.recipientAddress', address, recipientAccountAddressField.onChange);
+    }
+  }, [isValidAddress]);
+
   const { field: addressFormatField } = useController({
     name: 'recipientAccountAddressFormat',
     control: form.control,
@@ -48,10 +58,10 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   const disableNextStepButton =
     !form.watch('senderApplicationChainID') ||
     !form.watch('recipientApplicationChainID') ||
-    !form.watch('recipientAccountAddress');
+    !isValidAddress;
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <ScrollView style={[styles.wrapper, styles.theme.wrapper]}>
       <DataRenderer
         data={applications.data}
         isLoading={applications.isLoading}
@@ -76,17 +86,12 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
               />
 
               <SendTokenRecipientAccountField
-                value={recipientAccountAddressField.value}
-                onChange={(value) =>
-                  form.handleChange(
-                    'params.recipientAddress',
-                    value,
-                    recipientAccountAddressField.onChange
-                  )
-                }
+                value={address}
+                onChange={setAddress}
                 errorMessage={form.formState.errors.recipientAccountAddress?.message}
                 addressFormat={addressFormatField.value}
                 onAddressFormatChange={addressFormatField.onChange}
+                isValidAddress={isValidAddress}
               />
             </View>
 
@@ -107,6 +112,6 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
           />
         )}
       />
-    </View>
+    </ScrollView>
   );
 }
