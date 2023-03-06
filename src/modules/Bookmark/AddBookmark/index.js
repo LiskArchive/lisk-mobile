@@ -90,7 +90,7 @@ export default function AddBookmark({ route }) {
         i18next.t('multisignature.error.description')
       );
     }
-    const addressValidity = validateAddress('LSK', address.value);
+    const addressValidity = validateAddress(address.value);
     const labelValidity = validateLabel(label.value);
     if (incomingData && labelValidity === 0) {
       const action = editMode ? editBookmark : addBookmark;
