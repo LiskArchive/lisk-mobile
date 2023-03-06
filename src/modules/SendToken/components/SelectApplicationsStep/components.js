@@ -205,7 +205,7 @@ export function SendTokenRecipientAccountField({
               </View>
             }
             style={style?.picker}
-          ></Picker.Toggle>
+          />
         </Picker>
       ) : null}
     </>
