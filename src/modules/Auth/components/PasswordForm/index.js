@@ -5,24 +5,27 @@ import i18next from 'i18next';
 import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
 import Input from 'components/shared/toolBox/input';
-import { P } from 'components/shared/toolBox/typography';
+import { H3, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { colors, themes } from 'constants/styleGuide';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 
 import getStyles from './styles';
 
-export default function PasswordForm({ address, onPress, testID, theme, onSubmit }) {
+export default function PasswordForm({ account, onPress, testID, theme, onSubmit }) {
   useScreenshotPrevent();
   const [password, setPassword] = useState('');
 
   const { styles } = useTheme({ styles: getStyles() });
 
   return (
-    <View style={styles.container} onPress={onPress} testID={testID}>
-      <View style={styles.content}>
-        <Avatar address={address} size={45} style={styles.avatar} />
-        <P style={[styles.address, styles.theme.address]}>{address}</P>
+    <View style={[styles.container, styles.theme.container]} onPress={onPress} testID={testID}>
+      <View style={styles.body}>
+        <Avatar address={account.metadata.address} size={45} style={styles.avatar} />
+
+        <H3 style={[styles.nameText, styles.theme.nameText]}>{account.metadata.name}</H3>
+
+        <P style={[styles.addressText, styles.theme.addressText]}>{account.metadata.address}</P>
 
         <Input
           placeholder={i18next.t('auth.form.passwordLabel')}
@@ -42,11 +45,12 @@ export default function PasswordForm({ address, onPress, testID, theme, onSubmit
       <View style={[styles.footer]}>
         <PrimaryButton
           noTheme
-          title={i18next.t('banners.btcRemoval.buttons.gotIt')}
           disabled={!password}
           onPress={() => onSubmit(password)}
           testID="decrypt-button-continue"
-        />
+        >
+          {i18next.t('commons.buttons.continue')}
+        </PrimaryButton>
       </View>
     </View>
   );
