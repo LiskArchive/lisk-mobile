@@ -5,19 +5,25 @@ export default () => ({
     container: {
       flex: 1,
     },
-    content: {
+    body: {
       flex: 1,
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
       alignItems: 'center',
+      justifyContent: 'center',
     },
     avatar: {
+      marginBottom: 16,
+    },
+    nameText: {
+      fontWeight: '500',
+      fontSize: 16,
       marginBottom: 8,
     },
-    address: {
+    addressText: {
       fontSize: 14,
-      marginBottom: 8,
+      marginBottom: 24,
     },
     footer: {
       padding: boxes.boxPadding,
@@ -25,20 +31,26 @@ export default () => ({
   },
 
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
-    address: {
-      color: colors.light.silverGrey,
+    nameText: {
+      color: colors.light.zodiacBlue,
+    },
+    addressText: {
+      color: colors.light.blueGray,
     },
   },
 
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
-    address: {
-      color: colors.light.whiteSmoke,
+    nameText: {
+      color: colors.dark.white,
+    },
+    addressText: {
+      color: colors.dark.whiteSmoke,
     },
   },
 });
