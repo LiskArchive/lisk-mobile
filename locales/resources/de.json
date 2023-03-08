@@ -1,6 +1,7 @@
 {
   "commons": {
     "secretRecoveryPhrase": "Geheime Wiederherstellungsphrase",
+    "customDerivationPath": "",
     "buttons": {
       "continue": "Weiter",
       "cancel": "Absagen",
@@ -99,6 +100,12 @@
   "will be available to unlock": "... ~ {{timeToUnlock}}",
   "available to unlock (only on desktop)": "",
   "settings": {
+    "headers": {
+      "security": "",
+      "general": "",
+      "info": "",
+      "advanced": ""
+    },
     "menu": {
       "backupPassphrase": "Sichern Sie Ihre Passphrase",
       "about": "Über Lisk",
@@ -108,7 +115,8 @@
       "discreetMode": "Diskreter Modus",
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
-      "currency": "Währung"
+      "currency": "Währung",
+      "enableDerivationPath": ""
     },
     "descriptions": {
       "discreetMode": "Guthaben und Transaktionsbeträge ausblenden."

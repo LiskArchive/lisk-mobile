@@ -20,7 +20,7 @@ const common = {
   furyRed: '#FF4557',
   volcanicSand: '#4D4D50',
   yellowCopacabana: '#F7E36D',
-  sparkleGray: '#70778B',
+  smoothGray: '#70778B',
   satinDeepBlack: '#1C1C1E',
 };
 

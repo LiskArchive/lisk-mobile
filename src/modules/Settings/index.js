@@ -18,6 +18,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
+import Checkbox from '../../components/shared/Checkbox';
 
 // eslint-disable-next-line max-statements
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
@@ -49,6 +50,11 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     });
   };
 
+  const toggleUseDerivationPath = () =>
+    settingsUpdated({
+      useDerivationPath: !settings.useDerivationPath,
+    });
+
   const toggleIncognito = () => {
     settingsUpdated({
       discrete: !settings.discrete,
@@ -74,7 +80,9 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
 
       <ScrollView style={styles.innerContainer}>
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+            {t('settings.headers.security')}
+          </H4>
           {settings.sensorType ? (
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
@@ -122,7 +130,9 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('General')}</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+            {t('settings.headers.general')}
+          </H4>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               testID="dark-mode"
@@ -150,7 +160,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Info')}</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('settings.headers.info')}</H4>
 
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
@@ -177,6 +187,20 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               target="PrivacyPolicy"
               title={t('settings.menu.privacyPolicy')}
             />
+          </View>
+        </View>
+
+        <View style={styles.group}>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+            {t('settings.headers.advanced')}
+          </H4>
+
+          <View style={[styles.item, styles.theme.item]}>
+            <Checkbox selected={settings.useDerivationPath} onPress={toggleUseDerivationPath}>
+              <P style={[styles.subtitle, styles.theme.subtitle]}>
+                {t('settings.menu.enableDerivationPath')}
+              </P>
+            </Checkbox>
           </View>
         </View>
       </ScrollView>

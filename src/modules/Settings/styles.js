@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
@@ -26,9 +26,15 @@ export default () => ({
     signOut: {
       marginBottom: 40,
     },
+    subtitle: {
+      fontSize: fonts.size.base,
+    },
   },
 
   [themes.light]: {
+    subtitle: {
+      color: colors.light.zodiacBlue,
+    },
     subHeader: {
       color: colors.light.maastrichtBlue,
     },

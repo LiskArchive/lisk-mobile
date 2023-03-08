@@ -1,4 +1,4 @@
-import { colors, themes, boxes } from 'constants/styleGuide';
+import { colors, themes, boxes, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -15,6 +15,15 @@ export default () => ({
       marginTop: 40,
       marginBottom: 8,
     },
+    derivationPath: {
+      fontFamily: fonts.family.regular,
+      fontSize: fonts.size.base,
+      paddingLeft: 10,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
     footer: {
       padding: boxes.boxPadding,
     },
@@ -26,6 +35,9 @@ export default () => ({
     title: {
       color: colors.light.zodiacBlue,
     },
+    derivationPath: {
+      color: colors.light.smoothGray,
+    },
   },
   [themes.dark]: {
     container: {
@@ -33,6 +45,9 @@ export default () => ({
     },
     title: {
       color: colors.dark.white,
+    },
+    derivationPath: {
+      color: colors.light.mountainMist,
     },
   },
 });

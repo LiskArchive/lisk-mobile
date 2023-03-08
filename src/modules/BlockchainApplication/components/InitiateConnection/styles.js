@@ -64,7 +64,7 @@ export default {
       paddingLeft: 8,
     },
     address: {
-      color: colors.light.sparkleGray,
+      color: colors.light.smoothGray,
       fontSize: fonts.size.input,
     },
   },

@@ -35,7 +35,7 @@ export default function getSliderSlideStyles() {
         color: colors.light.zodiacBlue,
       },
       description: {
-        color: colors.light.sparkleGray,
+        color: colors.light.smoothGray,
       },
     },
     [themes.dark]: {
@@ -43,7 +43,7 @@ export default function getSliderSlideStyles() {
         color: colors.dark.white,
       },
       description: {
-        color: colors.light.sparkleGray,
+        color: colors.light.smoothGray,
       },
     },
   };

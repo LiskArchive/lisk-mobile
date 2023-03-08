@@ -3,14 +3,14 @@ import { selectSettings } from 'store/selectors';
 import { encryptAccount as encryptAccountUtils } from 'modules/Auth/utils';
 
 export function useEncryptAccount() {
-  const { enableCustomDerivationPath, customDerivationPath } = useSelector(selectSettings);
-  const encryptAccount = ({ recoveryPhrase, password, name }) =>
+  const { useDerivationPath } = useSelector(selectSettings);
+  const encryptAccount = ({ recoveryPhrase, password, name, derivationPath }) =>
     encryptAccountUtils({
       recoveryPhrase,
       password,
       name,
-      enableCustomDerivationPath,
-      derivationPath: customDerivationPath,
+      enableCustomDerivationPath: useDerivationPath,
+      derivationPath,
     });
   return { encryptAccount };
 }

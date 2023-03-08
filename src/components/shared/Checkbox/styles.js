@@ -11,7 +11,7 @@ export default {
       alignItems: 'center',
       justifyContent: 'center',
       borderWidth: 1,
-      borderColor: colors.light.sparkleGray,
+      borderColor: colors.light.smoothGray,
       height: 20,
       width: 20,
       borderRadius: 4,

@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useState } from 'react';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -15,12 +16,18 @@ import getStyles from './styles';
 
 const devDefaultPass = process.env.passphrase || '';
 
-export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
+export default function SecretRecoveryPhraseForm({
+  onSubmit,
+  onScanQrCode,
+  lng,
+  useDerivationPath,
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const [passphrase, setPassphrase] = useState({
     value: devDefaultPass,
     validity: [],
   });
+  const [derivationPath, setDerivationPath] = useState('');
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -31,13 +38,14 @@ export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }
     });
   };
 
-  const onFormSubmission = (secretRecoveryPhrase = '') => {
+  const onFormSubmission = () => {
+    const secretRecoveryPhrase = passphrase.value;
     const normalizedPassphrase = secretRecoveryPhrase.trim();
     const validity = validatePassphrase(normalizedPassphrase);
 
     if (!validity.length) {
       DropDownHolder.closeAlert();
-      onSubmit(normalizedPassphrase);
+      onSubmit(normalizedPassphrase, derivationPath);
     } else {
       const errors = validity.filter(
         (item) => item.code !== 'INVALID_MNEMONIC' || validity.length === 1
@@ -106,9 +114,19 @@ export default function SecretRecoveryPhraseForm({ onSubmit, onScanQrCode, lng }
             ),
           }}
         />
+
+        {useDerivationPath && (
+          <View style={[styles.derivationPathContainer]}>
+            <Input
+              label={i18next.t('commons.customDerivationPath')}
+              onChange={setDerivationPath}
+              value={derivationPath}
+            />
+          </View>
+        )}
       </ScrollView>
 
-      <PrimaryButton testID="continue-button" onPress={() => onFormSubmission(passphrase.value)}>
+      <PrimaryButton testID="continue-button" onPress={onFormSubmission}>
         {i18next.t('commons.buttons.continue')}
       </PrimaryButton>
     </View>

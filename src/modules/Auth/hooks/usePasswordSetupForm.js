@@ -9,7 +9,7 @@ import DropDownHolder from 'utilities/alert';
 import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import { useEncryptAccount } from './useEncryptAccount';
+import { useEncryptAccount } from 'modules/Accounts/hooks/useEncryptAccount';
 
 const validationSchema = yup
   .object()
@@ -32,7 +32,7 @@ const validationSchema = yup
  * @returns - The form fields, error state, submit callback and other handlers.
  * Also, the encrypt process state (isLoading, isError, isSuccess, among others).
  */
-export function usePasswordSetupForm(passphrase) {
+export function usePasswordSetupForm(passphrase, derivationPath) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
   const [isError, setIsError] = useState();
@@ -75,6 +75,7 @@ export function usePasswordSetupForm(passphrase) {
         recoveryPhrase: passphrase,
         password: values.password,
         name: values.accountName,
+        derivationPath,
       });
 
       setEncryptedAccount(data);

@@ -42,7 +42,7 @@ export default () => ({
       color: colors.light.zodiacBlue,
     },
     description: {
-      color: colors.light.sparkleGray,
+      color: colors.light.smoothGray,
     },
   },
 

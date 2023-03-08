@@ -46,7 +46,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         color: colors.light.ultramarineBlue,
       },
       secondaryText: {
-        color: colors.light.sparkleGray,
+        color: colors.light.smoothGray,
       },
       tokenAmountInCurrencyText: {
         color: colors.light.slateGray,
