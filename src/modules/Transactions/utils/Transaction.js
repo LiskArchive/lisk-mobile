@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-undef */
 /* eslint-disable max-statements */
 import * as Lisk from '@liskhq/lisk-client';
@@ -15,6 +16,8 @@ import {
 
 export class Transaction {
   _paramsSchema = null;
+
+  _paramsSchemas = null;
 
   _networkStatus = null;
 
@@ -60,6 +63,7 @@ export class Transaction {
     this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
+    this._paramsSchemas = commandParametersSchemas;
     this._priorityFee = priorityFee;
     this._extraCommandFee = BigInt(extraCommandFee || 0);
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
@@ -85,7 +89,7 @@ export class Transaction {
     this._paramsSchema = getCommandParamsSchema(
       this.transaction.module,
       this.transaction.command,
-      commandParametersSchemas
+      this._paramsSchemas
     );
 
     if (encodedTransaction) {
@@ -100,7 +104,15 @@ export class Transaction {
    * @param {object} params - Transaction parameters
    * @returns void
    */
-  update({ params = {}, nonce = null, ...others }) {
+  update({
+    module = this.transaction.module,
+    command = this.transaction.command,
+    params = {},
+    nonce = null,
+    ...others
+  }) {
+    this._computeParamsSchema(module, command);
+
     const updatedTransaction = {
       ...this.transaction,
       ...others,
@@ -252,6 +264,12 @@ export class Transaction {
    */
   fromJSON() {
     return fromTransactionJSON(this.transaction, this._paramsSchema);
+  }
+
+  _computeParamsSchema(module, command) {
+    this._paramsSchema = getCommandParamsSchema(module, command, this._paramsSchemas);
+
+    return this._paramsSchema;
   }
 
   /**
