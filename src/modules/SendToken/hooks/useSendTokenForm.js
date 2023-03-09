@@ -11,7 +11,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
-import useMessageFee from 'modules/Transactions/hooks/useMessageFee';
+import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
@@ -26,6 +26,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
     currentApplication.data
   );
+
+  const { data: messageFeeData } = useMessageFee();
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -69,16 +71,31 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     enableReinitialize: true,
   });
 
-  const messageFee = useMessageFee({
-    senderApplicationChainID: form.watch('senderApplicationChainID'),
-    recipientApplicationChainID: form.watch('recipientApplicationChainID'),
-  });
+  const senderApplicationChainID = form.watch('senderApplicationChainID');
 
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
       const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
 
       transaction.update({ params: { amount: amountInBeddows } });
+    } else if (field === 'params.recipientApplicationChainID') {
+      if (messageFeeData.data.fee && senderApplicationChainID !== value) {
+        transaction.update({
+          command: 'transferCrossChain',
+          params: {
+            messageFee: messageFeeData.data.fee,
+            receivingChainID: value,
+          },
+        });
+      } else {
+        transaction.update({
+          command: 'transfer',
+          params: {
+            messageFee: undefined,
+            receivingChainID: undefined,
+          },
+        });
+      }
     } else {
       transaction.update(fromPathToObject(field, value));
     }
@@ -102,12 +119,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     if (privateKey) {
       try {
-        let extraFee = BigInt(0);
-
-        if (messageFee.data > 0) extraFee += messageFee.data;
-
-        if (extraFee) transaction.computeFee(extraFee);
-
         const signedTransaction = await transaction.sign(privateKey);
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
@@ -123,7 +134,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           }
         );
       } catch (error) {
-        console.log('error', error);
+        console.log({ errorOnSign: error });
         DropDownHolder.error(
           i18next.t('Error'),
           i18next.t('transactions.errors.signErrorDescription')
@@ -175,6 +186,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isTransactionSuccess]);
+
+  console.log(transaction.transaction.params);
 
   return {
     ...form,

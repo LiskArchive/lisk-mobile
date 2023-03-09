@@ -33,6 +33,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
     message,
     priority,
     fee: transaction.data.transaction.fee,
+    messageFee: transaction.data.transaction.params.messageFee,
   });
 
   const { styles } = useTheme({

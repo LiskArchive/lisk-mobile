@@ -44,6 +44,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     if (isValidAddress) {
       form.handleChange('params.recipientAddress', address, recipientAccountAddressField.onChange);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidAddress]);
 
   const { field: addressFormatField } = useController({
@@ -79,7 +80,13 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
 
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainIDField.value}
-                onChange={recipientApplicationChainIDField.onChange}
+                onChange={(value) =>
+                  form.handleChange(
+                    'params.recipientApplicationChainID',
+                    value,
+                    recipientApplicationChainIDField.onChange
+                  )
+                }
                 errorMessage={form.formState.errors.recipientApplicationChainID?.message}
                 applications={data}
                 style={{ toggle: { container: { marginBottom: 16 } } }}
