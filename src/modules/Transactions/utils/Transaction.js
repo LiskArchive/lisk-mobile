@@ -102,7 +102,7 @@ export class Transaction {
   /**
    * Update transaction object
    * @param {object} params - Transaction parameters
-   * @returns void
+   * @returns {object} The updated transaction.
    */
   update({
     module = this.transaction.module,
@@ -126,6 +126,24 @@ export class Transaction {
     this.transaction = { ...this.transaction, ...updatedTransaction };
 
     this.computeFee();
+
+    return this.transaction;
+  }
+
+  /**
+   * Deletes the specified parameters from the transaction object and returns the updated object.
+   *
+   * @param {string[]} params - An array of parameter keys to remove from the object.
+   * @returns {Object} The updated transaction with the specified parameters removed.
+   */
+  deleteParams(params) {
+    params.forEach((param) => {
+      delete this.transaction.params[param];
+    });
+
+    this.computeFee();
+
+    return this.transaction;
   }
 
   /**

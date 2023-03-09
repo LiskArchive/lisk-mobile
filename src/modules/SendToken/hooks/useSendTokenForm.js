@@ -90,11 +90,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       } else {
         transaction.update({
           command: 'transfer',
-          params: {
-            messageFee: undefined,
-            receivingChainID: undefined,
-          },
         });
+
+        transaction.deleteParams(['messageFee', 'receivingChainID']);
       }
     } else {
       transaction.update(fromPathToObject(field, value));
@@ -187,7 +185,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isTransactionSuccess]);
 
-  console.log(transaction.transaction.params);
+  console.log(transaction.transaction);
 
   return {
     ...form,
