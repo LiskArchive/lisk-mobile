@@ -24,9 +24,8 @@ describe('Auth module', () => {
     await element(by.id('account-name')).replaceText(testConstants.accountName);
     await element(by.id('agree-switch')).tap();
     await element(by.id('save-account')).tap();
-    // TODO: Download passphrase before selecting account.
-    // (details on https://github.com/LiskHQ/lisk-mobile/issues/1605).
-    await element(by.id('account-list-item')).atIndex(0).tap();
+    await element(by.id('download-file-button')).atIndex(0).tap();
+    await element(by.id('result-screen-continue')).atIndex(0).tap();
     await expect(element(by.id('accounts-home-container'))).toBeVisible();
   });
 
@@ -41,7 +40,7 @@ describe('Auth module', () => {
     await element(by.id('switch-account')).tap();
     await element(by.id('account-list-item')).atIndex(1).swipe('left');
     await element(by.id('edit-account')).atIndex(1).tap();
-    await element(by.id('account-name')).atIndex(0).replaceText('tester');
+    await element(by.id('account-name')).atIndex(1).replaceText('tester');
     await element(by.id('edit-name-done-button')).atIndex(0).tap();
     await element(by.id('download-file-button')).atIndex(1).tap();
     await element(by.id('edit-account-button')).atIndex(0).tap();
