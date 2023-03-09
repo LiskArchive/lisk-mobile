@@ -70,7 +70,7 @@ export function fromBaseToDisplayDenom({
  * token (optional, default: false).
  * @returns {string} Converted value in string format.
  */
-export function fromBeddowsToLsk(amount, withSymbol) {
+export function fromBeddowsToLsk(amount, withSymbol = false) {
   return fromBaseToDisplayDenom({
     amount,
     displayDenom: 'lsk',
