@@ -1,9 +1,10 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
+import { getDerivationPathErrorMessage } from 'modules/Accounts/utils/accounts.utils';
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import { validatePassphrase } from 'modules/Auth/utils';
@@ -27,9 +28,14 @@ export default function SecretRecoveryPhraseForm({
     value: devDefaultPass,
     validity: [],
   });
-  const [derivationPath, setDerivationPath] = useState('');
+  const [derivationPath, setDerivationPath] = useState(`m/44'/134'/0'`);
 
   const { styles } = useTheme({ styles: getStyles() });
+
+  const derivationPathError = useMemo(
+    () => getDerivationPathErrorMessage(derivationPath),
+    [derivationPath]
+  );
 
   const handleInputChange = (value) => {
     setPassphrase({
@@ -121,6 +127,7 @@ export default function SecretRecoveryPhraseForm({
               label={i18next.t('commons.customDerivationPath')}
               onChange={setDerivationPath}
               value={derivationPath}
+              error={derivationPathError && i18next.t('commons.customDerivationPath')}
             />
           </View>
         )}
