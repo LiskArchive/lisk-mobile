@@ -40,8 +40,6 @@ export class Transaction {
     signatures: [],
   };
 
-  isLoading = true;
-
   /**
    * Initialize transaction with required network and account information
    * @param {object} params - Transaction initialization parameters
@@ -60,7 +58,6 @@ export class Transaction {
     schema,
   }) {
     this._schema = schema;
-    this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
     this._paramsSchemas = commandParametersSchemas;
@@ -116,6 +113,8 @@ export class Transaction {
     const updatedTransaction = {
       ...this.transaction,
       ...others,
+      module,
+      command,
       params: {
         ...this.transaction.params,
         ...Lisk.codec.codec.fromJSON(this._paramsSchema, removeUndefinedObjectKeys(params)),
@@ -132,7 +131,6 @@ export class Transaction {
 
   /**
    * Deletes the specified parameters from the transaction object and returns the updated object.
-   *
    * @param {string[]} params - An array of parameter keys to remove from the object.
    * @returns {Object} The updated transaction with the specified parameters removed.
    */
