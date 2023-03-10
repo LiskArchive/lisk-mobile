@@ -80,13 +80,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
 
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainIDField.value}
-                onChange={(value) =>
-                  form.handleChange(
-                    'params.recipientApplicationChainID',
-                    value,
-                    recipientApplicationChainIDField.onChange
-                  )
-                }
+                onChange={recipientApplicationChainIDField.onChange}
                 errorMessage={form.formState.errors.recipientApplicationChainID?.message}
                 applications={data}
                 style={{ toggle: { container: { marginBottom: 16 } } }}

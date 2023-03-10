@@ -87,25 +87,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
 
       transaction.update({ params: { amount: amountInBeddows } });
-    } else if (field === 'params.recipientApplicationChainID') {
-      if (
-        isCrossChainTransfer &&
-        messageFeeData.data.fee &&
-        recipientApplicationChainChannelData.data?.messageFeeTokenID &&
-        applicationSupportedTokensData
-      ) {
-        transaction.update({
-          command: 'transferCrossChain',
-          params: {
-            messageFee: messageFeeData.data.fee,
-            messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
-            receivingChainID: value,
-          },
-        });
-      } else {
-        transaction.update({ command: 'transfer' });
-        transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
-      }
     } else {
       transaction.update(fromPathToObject(field, value));
     }
@@ -198,6 +179,32 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isTransactionSuccess]);
+
+  useEffect(() => {
+    if (
+      isCrossChainTransfer &&
+      messageFeeData.data?.fee &&
+      recipientApplicationChainChannelData.data?.messageFeeTokenID
+    ) {
+      transaction.update({
+        command: 'transferCrossChain',
+        params: {
+          messageFee: messageFeeData.data.fee,
+          messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
+          receivingChainID: recipientApplicationChainID,
+        },
+      });
+    } else {
+      transaction.update({ command: 'transfer' });
+      transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
+    }
+  }, [
+    isCrossChainTransfer,
+    recipientApplicationChainChannelData?.data?.messageFeeTokenID,
+    messageFeeData.data?.fee,
+    recipientApplicationChainID,
+    transaction,
+  ]);
 
   return {
     ...form,
