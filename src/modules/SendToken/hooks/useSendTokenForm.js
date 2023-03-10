@@ -9,14 +9,14 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
+import { DRY_RUN_TRANSACTION_RESULTS } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
-import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { DRY_RUN_TRANSACTION_RESULTS } from '../../Transactions/utils/constants';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -79,20 +79,27 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       transaction.update({ params: { amount: amountInBeddows } });
     } else if (field === 'params.recipientApplicationChainID') {
-      if (messageFeeData.data.fee && senderApplicationChainID !== value) {
+      if (
+        messageFeeData.data.fee &&
+        applicationSupportedTokensData &&
+        senderApplicationChainID !== value
+      ) {
+        // TODO: Fetch this value from service when endpoint is available.
+        const messageFeeTokenID = applicationSupportedTokensData.find(
+          (token) => token.symbol === 'LSK'
+        )?.tokenID;
+
         transaction.update({
           command: 'transferCrossChain',
           params: {
             messageFee: messageFeeData.data.fee,
             receivingChainID: value,
+            messageFeeTokenID,
           },
         });
       } else {
-        transaction.update({
-          command: 'transfer',
-        });
-
-        transaction.deleteParams(['messageFee', 'receivingChainID']);
+        transaction.update({ command: 'transfer' });
+        transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
       }
     } else {
       transaction.update(fromPathToObject(field, value));
@@ -132,7 +139,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           }
         );
       } catch (error) {
-        console.log({ errorOnSign: error });
+        console.log({ error });
         DropDownHolder.error(
           i18next.t('Error'),
           i18next.t('transactions.errors.signErrorDescription')
@@ -141,7 +148,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
   });
 
-  const handleReset = () => form.reset(defaultValues);
+  const handleReset = () => {
+    dryRunTransactionMutation.reset();
+    broadcastTransactionMutation.reset();
+  };
 
   const handleMutationsReset = () => {
     dryRunTransactionMutation.reset();
@@ -184,8 +194,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isTransactionSuccess]);
-
-  console.log(transaction.transaction);
 
   return {
     ...form,

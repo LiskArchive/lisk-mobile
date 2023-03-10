@@ -41,7 +41,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
   };
   const handleErrorSubmit = () => Linking.openURL(session.peer.metadata.url);
 
-  const signTransaction = useSignTransactionModal({
+  const signTransactionModal = useSignTransactionModal({
     onSubmit: onSubmit(passwordController.field.value),
     password: passwordController.field.value,
     onPasswordChange: passwordController.field.onChange,
@@ -72,7 +72,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
   });
 
   useEffect(() => {
-    signTransaction.open();
+    signTransactionModal.open();
   }, []);
 
   return null;

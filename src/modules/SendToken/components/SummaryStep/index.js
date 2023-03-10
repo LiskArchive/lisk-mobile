@@ -13,7 +13,7 @@ import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
-export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
+export default function SendTokenSummaryStep({ form, prevStep, transaction, reset: resetSteps }) {
   const navigation = useNavigation();
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
@@ -45,13 +45,17 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
-  const signTransaction = useSignTransactionModal({
+  const signTransactionModal = useSignTransactionModal({
     form,
     isValidationError: Object.keys(form.formState.errors).length > 0,
     amount: summary.amount,
     token: summary.token,
     dryRunError: dryRunTransactionError,
     navigation,
+    onReset: () => {
+      form.handleReset();
+      resetSteps();
+    },
   });
 
   return (
@@ -69,7 +73,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
 
         <PrimaryButton
           noTheme
-          onClick={signTransaction.open}
+          onClick={signTransactionModal.open}
           title={i18next.t('sendToken.summary.submitTransactionButtonText')}
           style={{ flex: 1 }}
         />
