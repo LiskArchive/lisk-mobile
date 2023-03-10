@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { useTheme } from 'contexts/ThemeContext';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import { settingsRetrieved , settingsUpdated } from 'modules/Settings/store/actions';
+import { settingsRetrieved, settingsUpdated } from 'modules/Settings/store/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
@@ -71,9 +71,9 @@ export default function AuthMethod({ route }) {
 
   const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
 
-  const showBackButton = React.memo(
+  const showBackButton = React.useMemo(
     () => navigation.canGoBack() && accounts.length > 0,
-    [accounts.length]
+    [navigation, accounts.length]
   );
 
   return (
