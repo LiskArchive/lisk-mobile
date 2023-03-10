@@ -17,6 +17,7 @@ import { DRY_RUN_TRANSACTION_RESULTS } from 'modules/Transactions/utils/constant
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
+import { useChainChannelQuery } from '../../BlockchainApplication/api/useChainChannelQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -71,7 +72,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     enableReinitialize: true,
   });
 
+  const recipientApplicationChainID = form.watch('recipientApplicationChainID');
   const senderApplicationChainID = form.watch('senderApplicationChainID');
+
+  const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
+
+  const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
+    recipientApplicationChainID,
+    { options: { enabled: isCrossChainTransfer } }
+  );
 
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
@@ -80,21 +89,17 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       transaction.update({ params: { amount: amountInBeddows } });
     } else if (field === 'params.recipientApplicationChainID') {
       if (
+        isCrossChainTransfer &&
         messageFeeData.data.fee &&
-        applicationSupportedTokensData &&
-        senderApplicationChainID !== value
+        recipientApplicationChainChannelData.data?.messageFeeTokenID &&
+        applicationSupportedTokensData
       ) {
-        // TODO: Fetch this value from service when endpoint is available.
-        const messageFeeTokenID = applicationSupportedTokensData.find(
-          (token) => token.symbol === 'LSK'
-        )?.tokenID;
-
         transaction.update({
           command: 'transferCrossChain',
           params: {
             messageFee: messageFeeData.data.fee,
+            messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
             receivingChainID: value,
-            messageFeeTokenID,
           },
         });
       } else {
@@ -139,7 +144,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           }
         );
       } catch (error) {
-        console.log({ error });
         DropDownHolder.error(
           i18next.t('Error'),
           i18next.t('transactions.errors.signErrorDescription')

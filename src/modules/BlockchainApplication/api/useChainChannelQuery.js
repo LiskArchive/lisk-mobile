@@ -19,17 +19,17 @@ import { useInvokeQuery } from 'utilities/api/hooks/useInvokeQuery';
 /**
  * Gets channel info of a given blockchain.
  * @param {string} chainID - ID of the chain to query the channel info from.
- * @param {object} configs - Query custom configs.
- * @param {QueryOptions} configs.options - Query config options.
+ * @param {object | undefined} configs - Query custom configs.
+ * @param {QueryOptions | undefined} configs.options - Query config options.
  * @returns {QueryResult<ChannelDataJSON>} Query state: data (ChannelDataJSON), isLoading, isError, error, isSuccess and more.
  */
 export function useChainChannelQuery(chainID, { options = {} } = {}) {
   const config = {
     data: {
       endpoint: 'interoperability_getChannel',
-    },
-    params: {
-      chainID: Buffer.from(chainID, 'hex'),
+      params: {
+        chainID,
+      },
     },
   };
 
