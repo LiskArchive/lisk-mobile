@@ -186,7 +186,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     if (
-      isTransactionSuccess &&
       isCrossChainTransfer &&
       messageFeeData?.data?.fee &&
       recipientApplicationChainChannelData?.data?.messageFeeTokenID
