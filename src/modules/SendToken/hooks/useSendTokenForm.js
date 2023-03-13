@@ -181,9 +181,14 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   }, [defaultValues, isTransactionSuccess]);
 
   useEffect(() => {
+    if (!isTransactionSuccess) {
+      return;
+    }
+
     if (
+      isTransactionSuccess &&
       isCrossChainTransfer &&
-      messageFeeData.data?.fee &&
+      messageFeeData?.data?.fee &&
       recipientApplicationChainChannelData.data?.messageFeeTokenID
     ) {
       transaction.update({
@@ -194,16 +199,17 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           receivingChainID: recipientApplicationChainID,
         },
       });
-    } else {
+    } else if (transaction.command !== 'transfer') {
       transaction.update({ command: 'transfer' });
       transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
     }
   }, [
     isCrossChainTransfer,
     recipientApplicationChainChannelData?.data?.messageFeeTokenID,
-    messageFeeData.data?.fee,
+    messageFeeData?.data?.fee,
     recipientApplicationChainID,
     transaction,
+    isTransactionSuccess,
   ]);
 
   return {
