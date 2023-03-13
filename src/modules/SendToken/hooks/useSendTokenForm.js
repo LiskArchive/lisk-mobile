@@ -189,7 +189,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       isTransactionSuccess &&
       isCrossChainTransfer &&
       messageFeeData?.data?.fee &&
-      recipientApplicationChainChannelData.data?.messageFeeTokenID
+      recipientApplicationChainChannelData?.data?.messageFeeTokenID
     ) {
       transaction.update({
         command: 'transferCrossChain',
