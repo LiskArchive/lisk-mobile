@@ -33,7 +33,7 @@ import { useApplications } from '../context/ApplicationsContext';
  */
 
 /**
- * Provides the current blockchain application the user is logged-in and a setup function.
+ * Provides the current blockchain application the user is logged-in and a setup function for it.
  * @returns {[Application, SetCurrentApplicationFunction]} - Current application and setup function.
  */
 export function useCurrentApplication() {
