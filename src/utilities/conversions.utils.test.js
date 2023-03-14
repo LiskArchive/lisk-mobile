@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { fromBaseToDisplayDenom } from './conversions.utils';
+import { fromBaseToDisplayDenom, fromBeddowsToLsk } from './conversions.utils';
 
 describe('conversion utils', () => {
   describe('fromBaseToDisplayDenom util', () => {
@@ -39,6 +39,22 @@ describe('conversion utils', () => {
       expect(() =>
         fromBaseToDisplayDenom({ ...baseProps, displayDenom: 'nonExistingDenom' })
       ).toThrow(Error);
+    });
+  });
+
+  describe('fromBeddowsToLsk util', () => {
+    it('parses correctly a given amount from Beddows to LSK', () => {
+      const paramAmount = BigInt(5000000);
+      const expectedAmount = '0.05';
+
+      expect(fromBeddowsToLsk(paramAmount)).toBe(expectedAmount);
+    });
+
+    it('adds the token symbol if specified on props', () => {
+      const paramAmount = BigInt(1000000);
+      const expectedAmount = '0.01 LSK';
+
+      expect(fromBeddowsToLsk(paramAmount, true)).toBe(expectedAmount);
     });
   });
 });

@@ -19,19 +19,21 @@ export function useSignTransactionModal({
   errorDescription,
   form,
   navigation,
+  onReset,
 }) {
+  const [activeStep, setActiveStep] = useState();
+
   const modal = useModal();
 
-  const [activeStep, setActiveStep] = useState('confirm');
-
-  const [_error, _setError] = useState();
-
   const error = dryRunError || form.broadcastTransactionMutation.error;
+
   const isSuccess = form.broadcastTransactionMutation.isSuccess;
 
-  const onReset = () => {
-    setActiveStep('confirm');
-    form.handleReset();
+  const isError = !!error;
+
+  const handleReset = () => {
+    setActiveStep();
+    onReset();
     modal.close();
   };
 
@@ -55,7 +57,7 @@ export function useSignTransactionModal({
         return (
           <SignTransactionSuccess
             onSubmit={() => {
-              onReset();
+              handleReset();
               navigation.navigate('AccountHome');
             }}
             actionButton={successActionButton}
@@ -67,8 +69,8 @@ export function useSignTransactionModal({
       case 'error':
         return (
           <SignTransactionError
-            onClick={onReset}
-            error={_error}
+            onClick={handleReset}
+            error={error}
             actionButton={errorActionButton}
             title={errorTitle}
             description={errorDescription}
@@ -82,16 +84,23 @@ export function useSignTransactionModal({
 
   useEffect(() => {
     if (isSuccess) {
-      modal.open(renderStep('success'));
+      setActiveStep('success');
     }
+  }, [isSuccess]);
 
-    if (error) {
-      _setError(error);
-      modal.open(renderStep('error'));
+  useEffect(() => {
+    if (isError) {
+      setActiveStep('error');
     }
-  }, [isSuccess, error]);
+  }, [isError]);
+
+  useEffect(() => {
+    if (activeStep) {
+      modal.open(renderStep(activeStep));
+    }
+  }, [activeStep]);
 
   return {
-    open: () => modal.open(renderStep(activeStep)),
+    open: () => setActiveStep('confirm'),
   };
 }

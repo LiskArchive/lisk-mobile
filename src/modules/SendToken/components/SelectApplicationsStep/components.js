@@ -129,21 +129,22 @@ export function SendTokenRecipientAccountField({
   isValidAddress,
 }) {
   const bookmarks = useSelector(selectBookmarkList);
+
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  function handleInputChange(_value) {
+  const handleInputChange = (_value) => {
     if (addressFormat !== 'input') onAddressFormatChange('input');
 
     onChange(_value);
-  }
+  };
 
-  function handlePickerChange(_value) {
+  const handlePickerChange = (_value) => {
     if (addressFormat !== 'picker') onAddressFormatChange('picker');
 
     onChange(_value);
-  }
+  };
 
   const renderOptions = () => (
     <BookmarkList

@@ -142,13 +142,11 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.valueText, styles.theme.valueText]}>{transaction.transactionFee}</Text>
       </View>
 
-      {transaction.messageFee.data && (
+      {transaction.messageFee && (
         <View style={[styles.fieldRow, { borderBottomColor: 'transparent' }]}>
-          <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.cmmFeeLabel')}</Text>
+          <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.messageFeeLabel')}</Text>
 
-          <Text style={[styles.valueText, styles.theme.valueText]}>
-            {transaction.messageFee.data}
-          </Text>
+          <Text style={[styles.valueText, styles.theme.valueText]}>{transaction.messageFee}</Text>
         </View>
       )}
     </View>

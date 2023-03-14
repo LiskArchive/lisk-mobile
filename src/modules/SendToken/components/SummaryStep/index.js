@@ -13,7 +13,7 @@ import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
-export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
+export default function SendTokenSummaryStep({ form, prevStep, transaction, reset: resetSteps }) {
   const navigation = useNavigation();
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
@@ -33,6 +33,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
     message,
     priority,
     fee: transaction.data.transaction.fee,
+    messageFee: transaction.data.transaction.params.messageFee,
   });
 
   const { styles } = useTheme({
@@ -44,13 +45,17 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
-  const signTransaction = useSignTransactionModal({
+  const signTransactionModal = useSignTransactionModal({
     form,
     isValidationError: Object.keys(form.formState.errors).length > 0,
     amount: summary.amount,
     token: summary.token,
     dryRunError: dryRunTransactionError,
     navigation,
+    onReset: () => {
+      form.handleReset();
+      resetSteps();
+    },
   });
 
   return (
@@ -60,18 +65,13 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction }) {
       </View>
 
       <View style={[styles.footer]}>
-        <Button
-          style={{ marginRight: 16, flex: 1 }}
-          onClick={prevStep}
-          title={i18next.t('sendToken.summary.prevStepButtonText')}
-        />
+        <Button onPress={prevStep} style={{ marginRight: 16, flex: 1 }}>
+          {i18next.t('sendToken.summary.prevStepButtonText')}
+        </Button>
 
-        <PrimaryButton
-          noTheme
-          onClick={signTransaction.open}
-          title={i18next.t('sendToken.summary.submitTransactionButtonText')}
-          style={{ flex: 1 }}
-        />
+        <PrimaryButton onPress={signTransactionModal.open} noTheme style={{ flex: 1 }}>
+          {i18next.t('sendToken.summary.submitTransactionButtonText')}
+        </PrimaryButton>
       </View>
     </>
   );

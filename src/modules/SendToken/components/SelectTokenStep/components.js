@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-undef */
 /* eslint-disable max-lines, max-statements */
 import React, { useState } from 'react';
@@ -18,7 +19,7 @@ import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
 import DataRenderer from 'components/shared/DataRenderer';
-import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
+import { fromBaseToDisplayDenom, fromBeddowsToLsk } from 'utilities/conversions.utils';
 import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
@@ -309,6 +310,10 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
+  const messageFee =
+    transaction.data.transaction.params.messageFee &&
+    fromBeddowsToLsk(transaction.data.transaction.params.messageFee, true);
+
   const feesBreakdown = transaction.data.getFeeBreakdown();
 
   const feesLabels = Object.entries(feesBreakdown).reduce(
@@ -394,6 +399,25 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
             </View>
           )}
         </FadeInView>
+      )}
+
+      {messageFee && (
+        <View style={[styles.feeContainer]}>
+          <View style={[styles.row]}>
+            <Text
+              style={[styles.theme.text, styles.iconLabel, showFeesBreakdown && styles.boldText]}
+            >
+              {i18next.t('sendToken.tokenSelect.messageFeeLabel')}
+            </Text>
+
+            <InfoToggler
+              title={i18next.t('sendToken.info.messageFee.title')}
+              description={i18next.t('sendToken.info.messageFee.description1')}
+            />
+          </View>
+
+          <Text style={[styles.messageFeeText, styles.theme.text]}>{messageFee}</Text>
+        </View>
       )}
     </View>
   );

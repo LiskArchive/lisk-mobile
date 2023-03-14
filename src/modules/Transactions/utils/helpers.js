@@ -99,7 +99,7 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
 export function getDryRunTransactionError(responseData) {
   let error = null;
 
-  const errorMessage = responseData.events.map((e) => e.name).join(', ');
+  const errorMessage = responseData.errorMessage;
 
   switch (responseData.result) {
     case DRY_RUN_TRANSACTION_RESULTS.invalid:
