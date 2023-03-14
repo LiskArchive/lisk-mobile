@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { ModalContext } from 'contexts/ModalContext';
 
-export const useModal = (renderComponent, componentDeps) => {
+export const useModal = (renderComponent, componentDeps = []) => {
   const modal = useContext(ModalContext);
 
   const open = (componentRendered = renderComponent(modal), showCloseIcon = true) => {
