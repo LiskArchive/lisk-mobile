@@ -1,12 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'components/shared/toolBox/icon';
 import { stringShortener } from 'utilities/helpers';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
@@ -22,9 +20,9 @@ export default function AccountItem({
   onDeletePress,
   testID,
   active,
+  navigation,
 }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
-  const navigation = useNavigation();
 
   const { name: username, address } = account.metadata;
 
@@ -36,7 +34,7 @@ export default function AccountItem({
           color: colors.dark.blueGray,
           icon: () => <RefreshSvg />,
           testID: 'backup-account',
-          onPress: () => navigation.navigate('PassphraseBackup', { account }),
+          onPress: () => navigation.navigate('BackupPassphrase', { account }),
         },
       ]}
       rightActions={[

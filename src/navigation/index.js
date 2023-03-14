@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
-import Register from 'modules/Auth/Register';
+import Register from 'modules/Auth/components/Register/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
@@ -15,13 +15,15 @@ import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
+import BottomModal from 'components/shared/BottomModal';
 
-import PassphraseBackup from 'modules/Settings/BackupPassphrase';
-import AuthMethod from 'modules/Auth/AuthMethod';
-import SecretRecoveryPhrase from 'modules/Auth/SecretRecoveryPhrase';
-import PasswordSetupForm from 'modules/Auth/PasswordSetupForm';
-import AccountsManagerScreen from 'modules/Auth/AccountsManagerScreen';
-import DecryptPhrase from 'modules/Auth/DecryptPhrase';
+import BackupPassphrase from 'modules/Settings/components/BackupPassphrase/BackupPassphrase';
+import AuthMethod from 'modules/Auth/components/AuthMethod';
+import SecretRecoveryPhrase from 'modules/Auth/components/SecretRecoveryPhrase';
+import PasswordSetupForm from 'modules/Auth/components/PasswordSetupForm';
+import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
+import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
+import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccess from 'modules/BlockchainApplication/components/AddApplicationSuccess';
 import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
@@ -62,8 +64,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="DecryptPhrase"
-            component={DecryptPhrase}
+            name="DecryptPassphrase"
+            component={DecryptPassphrase}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
@@ -79,6 +81,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="PasswordSetupForm"
             component={PasswordSetupForm}
+            options={navigationOptions.SignIn}
+          />
+          <StackNavigator.Screen
+            name="PasswordSetupSuccess"
+            component={PasswordSetupSuccess}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
@@ -149,8 +156,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.DisableBioAuth}
           />
           <StackNavigator.Screen
-            name="PassphraseBackup"
-            component={PassphraseBackup}
+            name="BackupPassphrase"
+            component={BackupPassphrase}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
@@ -179,8 +186,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
-
         {children}
+        <BottomModal />
       </NavigationContainer>
     </SafeAreaProvider>
   );

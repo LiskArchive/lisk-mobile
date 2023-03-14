@@ -1,19 +1,18 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
-import { TouchableOpacity, View, ScrollView, Animated, Dimensions } from 'react-native';
-import { useModal } from 'contexts/useModal';
+import { TouchableOpacity, View, ScrollView, Animated, Dimensions, Keyboard } from 'react-native';
+import { useModal } from 'hooks/useModal';
 
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
-import { useNavigation } from '@react-navigation/native';
 
 import getStyles from './styles';
 
-const BottomModal = ({ showClose = true, show, toggleShow, children, style }) => {
-  const navigation = useNavigation();
-  const { toggle: toggleModalContext } = useModal();
+const BottomModal = ({ style }) => {
+  const { toggle: toggleModalContext, close, isOpen, component, showClose } = useModal();
   const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
+  const bottom = useRef(new Animated.Value(0));
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -30,7 +29,7 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   });
 
   const handleClose = () => {
-    closeAnimation.start(() => toggleShow(false));
+    closeAnimation.start(() => close());
   };
 
   const top = panY.interpolate({
@@ -39,27 +38,42 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
   });
 
   useEffect(() => {
-    if (show) {
-      toggleModalContext(show);
+    if (isOpen) {
+      toggleModalContext(isOpen);
       resetPositionAnimation.start();
     }
-  }, [show, resetPositionAnimation, toggleModalContext]);
+  }, [isOpen, resetPositionAnimation, toggleModalContext]);
+
+  const keyboardDidShow = (e) => {
+    const keyboardHeight = e.endCoordinates.height;
+    bottom.current.setValue(keyboardHeight);
+  };
+
+  const keyboardDidHide = () => bottom.current.setValue(0);
 
   useEffect(() => {
-    const tabBarVisible = !show;
-    navigation.setOptions({
-      tabBarVisible,
-    });
-    toggleModalContext(show);
-  }, [show, navigation, toggleModalContext]);
+    const showSubscription = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
-  if (!show) {
+  if (!isOpen) {
     return null;
   }
 
   return (
-    <View style={styles.content} onPress={handleClose}>
-      <View style={[styles.overlay, styles.theme.overlay, style?.overlay]}>
+    <Animated.View style={styles.content} onPress={handleClose}>
+      <Animated.View
+        style={[
+          styles.overlay,
+          styles.theme.overlay,
+          style?.overlay,
+          { paddingBottom: bottom.current },
+        ]}
+      >
         <Animated.View
           style={[styles.container, styles.theme.container, style?.container, { top }]}
         >
@@ -79,10 +93,10 @@ const BottomModal = ({ showClose = true, show, toggleShow, children, style }) =>
           same orientation because it can break windowing and other functionality.
           (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
           */}
-          <ScrollView style={[style?.children]}>{children}</ScrollView>
+          <ScrollView style={[style?.children]}>{component}</ScrollView>
         </Animated.View>
-      </View>
-    </View>
+      </Animated.View>
+    </Animated.View>
   );
 };
 

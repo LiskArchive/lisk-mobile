@@ -32,6 +32,7 @@ module.exports = {
     'src/modules/Auth/utils/passphrase.mock.js',
     'src/modules/Auth/utils/documentPicker.mock.js',
     'src/hooks/useDownloadFile.mock.js',
+    'src/hooks/useModal.js',
   ],
   coverageThreshold: {
     global: {

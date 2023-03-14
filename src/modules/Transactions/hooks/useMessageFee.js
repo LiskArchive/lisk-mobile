@@ -1,20 +1,25 @@
-/* eslint-disable no-undef */
+import { useInvokeQuery } from 'utilities/api/hooks/useInvokeQuery';
 
-// TODO: Implement real calculation business logic when service implementation is ready.
-// (details on https://github.com/LiskHQ/lisk-mobile/issues/1642).
-export default function useMessageFee({ senderApplicationChainID, recipientApplicationChainID }) {
-  // TODO: Fetch this data from service once endpoint is available.
-  const data = BigInt(0);
-  const isLoading = false;
-  const isSuccess = false;
-  const error = undefined;
+/**
+ * @typedef {object} MessageFeeResult
+ * @property {fee} string
+ */
 
-  const isFeeApplicable = senderApplicationChainID !== recipientApplicationChainID;
-
-  return {
-    data: isFeeApplicable ? data : BigInt(0),
-    isLoading,
-    error,
-    isSuccess,
+/**
+ * Gets the minimum fee required to calculate a cross-chain transfer message fee.
+ * @param {object} configs - Query custom configs.
+ * @param {QueryOptions} configs.options - Query config options.
+ * @returns {QueryResult<MessageFeeResult>} Query state: data (MessageFeeResult), isLoading, isError, error, isSuccess and more.
+ */
+export function useMessageFee({ options = {} } = {}) {
+  const config = {
+    data: {
+      endpoint: 'interoperability_getMinimumMessageFee',
+    },
   };
+
+  return useInvokeQuery({
+    config,
+    options,
+  });
 }

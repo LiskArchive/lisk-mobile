@@ -3,6 +3,17 @@ import { passphrase as LiskPassphrase, cryptography } from '@liskhq/lisk-client'
 import regex from 'constants/regex';
 
 /**
+ * Extracts wallet address from passphrase for given token.
+ * @param {String} tokenType
+ * @param {String} passphrase
+ * @returns {String}
+ */
+export const extractAddress = (passphrase) => {
+  const { publicKey } = cryptography.legacy.getKeys(passphrase);
+  return cryptography.address.getLisk32AddressFromPublicKey(publicKey).toString('hex');
+};
+
+/**
  * Extracts Lisk PrivateKey/PublicKey pair from a given valid Mnemonic passphrase
  *
  * @param {String} passphrase - Valid Mnemonic passphrase

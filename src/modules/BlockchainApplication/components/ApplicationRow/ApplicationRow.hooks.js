@@ -10,7 +10,7 @@ import { usePinApplications } from '../../hooks/usePinApplications';
 export function useApplicationRowActions({
   application,
   variant,
-  setShowDeleteDefaultApplicationModal,
+  toggleDeleteDefaultApplicationModal,
   deleteApplication,
 }) {
   const { togglePin } = usePinApplications();
@@ -45,7 +45,7 @@ export function useApplicationRowActions({
           icon: () => <DeleteSvg color={colors.light.white} />,
           onPress: () => {
             if (application.isDefault) {
-              setShowDeleteDefaultApplicationModal(true);
+              toggleDeleteDefaultApplicationModal(true);
             } else {
               deleteApplication(application);
             }

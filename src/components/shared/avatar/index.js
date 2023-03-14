@@ -42,7 +42,7 @@ class Avatar extends React.Component {
         { translateX: translate },
       ];
     }
-    if (validateAddress('LSK', address) !== 0) {
+    if (validateAddress(address) !== 0) {
       return (
         <Wrapper
           style={[

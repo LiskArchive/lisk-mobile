@@ -5,7 +5,7 @@ const liskAPIClient = new APIClient();
 
 liskAPIClient.create({
   http: API_BASE_URL,
-  ws: `${WS_BASE_URL}/blockchain`,
+  ws: WS_BASE_URL,
 });
 
 export default liskAPIClient;

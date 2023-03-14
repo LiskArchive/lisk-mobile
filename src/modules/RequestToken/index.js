@@ -9,6 +9,7 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
@@ -25,7 +26,6 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import Avatar from 'components/shared/avatar';
-import BottomModal from 'components/shared/BottomModal';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
@@ -38,6 +38,7 @@ import getStyles from './styles';
 
 export default function RequestToken() {
   const navigation = useNavigation();
+  const modal = useModal();
 
   const [currentAccount] = useCurrentAccount();
 
@@ -53,7 +54,6 @@ export default function RequestToken() {
   const [tokenID, setTokenID] = useState(
     mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
   );
-  const [showQRModal, setShowQRModal] = useState(false);
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -92,15 +92,27 @@ export default function RequestToken() {
     />
   );
 
+  const renderFullCode = () => (
+    <View style={styles.shareContainer}>
+      <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
+        {renderQRCode(qrCodeSize)}
+      </Share>
+
+      <P style={[styles.shareText, styles.theme.shareText]}>
+        {i18next.t('Tap on the QR Code to share it.')}
+      </P>
+    </View>
+  );
+
+  const openQrCode = () => modal.open(renderFullCode());
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton
         title="requestTokens.title"
         onPress={navigation.goBack}
         rightIconComponent={() => (
-          <TouchableOpacity onPress={() => setShowQRModal(true)}>
-            {renderQRCode(20)}
-          </TouchableOpacity>
+          <TouchableOpacity onPress={openQrCode}>{renderQRCode(20)}</TouchableOpacity>
         )}
       />
 
@@ -176,22 +188,6 @@ export default function RequestToken() {
           </PrimaryButton>
         </View>
       </KeyboardAwareScrollView>
-
-      <BottomModal
-        show={showQRModal}
-        toggleShow={setShowQRModal}
-        style={{ container: { alignItems: 'center' } }}
-      >
-        <View style={styles.shareContainer}>
-          <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
-            {renderQRCode(qrCodeSize)}
-          </Share>
-
-          <P style={[styles.shareText, styles.theme.shareText]}>
-            {i18next.t('Tap on the QR Code to share it.')}
-          </P>
-        </View>
-      </BottomModal>
     </SafeAreaView>
   );
 }

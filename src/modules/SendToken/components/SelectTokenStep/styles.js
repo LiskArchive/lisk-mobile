@@ -86,6 +86,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       boldText: {
         fontWeight: '600',
       },
+      messageFeeText: {
+        marginRight: 20,
+      },
       prevStepButton: {
         marginRight: 16,
         flex: 1,

@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { useModal } from 'hooks/useModal';
 import { ModalContext } from 'contexts/ModalContext';
 import Settings from 'modules/Settings';
 import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';
 import Bookmarks from 'modules/Bookmark';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
 import ExternalApplicationSignatureRequest from 'modules/BlockchainApplication/components/ExternalApplicationSignatureRequest';
-import BottomModal from 'components/shared/BottomModal';
 import { getTabBarIcon } from '../../helpers';
 import { getNavigationTabBarStyles } from '../../styles';
 import useWalletConnectSession from '../../../../libs/wcm/hooks/useSession';
@@ -15,17 +15,24 @@ import useWalletConnectSession from '../../../../libs/wcm/hooks/useSession';
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
-  const { session } = useWalletConnectSession();
+  const { session, reject } = useWalletConnectSession();
   const { isOpen: modalOpen } = useContext(ModalContext);
+  const modal = useModal();
 
-  const [
-    showExternalApplicationSignatureRequestModal,
-    setShowExternalApplicationSignatureRequestModal,
-  ] = useState(false);
+  const rejectRequest = () => {
+    reject();
+    modal.close();
+  };
+
+  const showSignatureRequestModal = () =>
+    modal.open(
+      <ExternalApplicationSignatureRequest session={session.request} onCancel={rejectRequest} />,
+      false
+    );
 
   useEffect(() => {
     if (session.request) {
-      setShowExternalApplicationSignatureRequestModal(true);
+      showSignatureRequestModal();
     }
   }, [session.request]);
 
@@ -65,18 +72,6 @@ export default function Tabs() {
         <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon} />
         <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon} />
       </Tab.Navigator>
-
-      <BottomModal
-        show={showExternalApplicationSignatureRequestModal}
-        toggleShow={() =>
-          setShowExternalApplicationSignatureRequestModal((prevState) => !prevState)
-        }
-      >
-        <ExternalApplicationSignatureRequest
-          session={session.request}
-          onCancel={() => setShowExternalApplicationSignatureRequestModal(false)}
-        />
-      </BottomModal>
     </>
   );
 }

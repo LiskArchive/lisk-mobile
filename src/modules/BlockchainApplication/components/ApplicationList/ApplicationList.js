@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import DataRenderer from 'components/shared/DataRenderer';
@@ -10,9 +9,14 @@ import ResultScreen from 'components/screens/ResultScreen';
 import { View } from 'react-native';
 import ApplicationListSkeleton from './components/ApplicationListSkeleton';
 
-export default function ApplicationList({ applications, Component, onItemPress, style, ...props }) {
-  const navigation = useNavigation();
-
+export default function ApplicationList({
+  applications,
+  Component,
+  onItemPress,
+  style,
+  navigation,
+  ...props
+}) {
   return (
     <DataRenderer
       data={applications.data}

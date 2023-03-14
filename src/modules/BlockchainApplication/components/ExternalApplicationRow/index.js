@@ -1,11 +1,11 @@
 import { View, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
 import { P, B } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
-import BottomModal from 'components/shared/BottomModal';
 import ResultScreen from 'components/screens/ResultScreen';
 import CheckSvg from 'assets/svgs/CheckSvg';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
@@ -18,8 +18,15 @@ import getExternalApplicationRowStyles from './styles';
 
 export default function ExternalApplicationRow({ application }) {
   const [activeAction, setActiveAction] = useState();
+  const modal = useModal();
 
   const { styles } = useTheme({ styles: getExternalApplicationRowStyles() });
+
+  useEffect(() => {
+    if (!modal.isOpen) {
+      setActiveAction(undefined);
+    }
+  }, [modal.isOpen]);
 
   const rightActions = [
     {
@@ -93,6 +100,14 @@ export default function ExternalApplicationRow({ application }) {
     }
   }
 
+  useEffect(() => {
+    if (activeAction) {
+      modal.open(renderActiveAction());
+    } else {
+      modal.close();
+    }
+  }, [activeAction]);
+
   return (
     <>
       <Swipeable key={application.topic} rightActions={rightActions}>
@@ -117,10 +132,6 @@ export default function ExternalApplicationRow({ application }) {
           />
         </View>
       </Swipeable>
-
-      <BottomModal show={!!activeAction} toggleShow={() => setActiveAction(undefined)}>
-        {renderActiveAction()}
-      </BottomModal>
     </>
   );
 }
