@@ -24,7 +24,7 @@ if (typeof process === 'undefined') {
 }
 
 if (!global.WebAssembly) {
-  global.WebAssembly = require('webassemblyjs');
+  require('react-native-wasm');
 }
 
 for (var p in env) {
