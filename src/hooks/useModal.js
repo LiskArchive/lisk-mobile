@@ -1,20 +1,26 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ModalContext } from 'contexts/ModalContext';
 
-export const useModal = () => {
-  const { toggle, setComponent, component, isOpen, showClose, setShowClose } =
-    useContext(ModalContext);
+export const useModal = (renderComponent, componentDeps) => {
+  const modal = useContext(ModalContext);
 
-  const open = (componentRendered, showCloseIcon = true) => {
-    toggle(true);
-    setComponent(componentRendered);
-    setShowClose(showCloseIcon);
+  const open = (componentRendered = renderComponent(modal), showCloseIcon = true) => {
+    modal.toggle(true);
+    modal.setComponent(componentRendered);
+    modal.setShowClose(showCloseIcon);
   };
 
   const close = () => {
-    toggle(false);
-    setComponent(null);
+    modal.toggle(false);
+    modal.setComponent(null);
   };
 
-  return { isOpen, toggle, open, close, component, showClose };
+  useEffect(() => {
+    if (modal.component && renderComponent) {
+      modal.setComponent(renderComponent(modal));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, componentDeps);
+
+  return { ...modal, open, close };
 };
