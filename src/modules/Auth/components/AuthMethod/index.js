@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React, { useEffect } from 'react';
-import { LogBox, View, SafeAreaView, Text } from 'react-native';
+import { LogBox, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
@@ -101,7 +101,11 @@ export default function AuthMethod({ route }) {
           testID="restore-from-file"
         />
 
-        <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.row}
+          testID="derivation-switch"
+          onPress={toggleUseDerivationPath}
+        >
           <SwitchButton
             value={settings.useDerivationPath}
             theme={theme}
@@ -110,7 +114,7 @@ export default function AuthMethod({ route }) {
           <Text style={[styles.derivationPath, styles.theme.derivationPath]}>
             Enable custom derivation path
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} />

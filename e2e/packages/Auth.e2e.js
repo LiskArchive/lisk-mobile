@@ -1,5 +1,6 @@
 /* eslint-disable max-statements */
 import { device, element, by } from 'detox';
+import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
 import testConstants from '../utils/testConstants';
 
 describe('Auth module', () => {
@@ -77,5 +78,30 @@ describe('Auth module', () => {
     await element(by.id('registerConfirmButton')).atIndex(0).tap();
     await element(by.id('register-continue-button')).atIndex(0).tap();
     await expect(element(by.id('auth-method-screen')).atIndex(0)).toBeVisible();
+  });
+
+  describe('Derivation path', () => {
+    it('should add an account with derivation path enabled', async () => {
+      await element(by.id('derivation-switch')).tap();
+      await element(by.id('secret-phrase')).tap();
+      await expect(element(by.id('derivation-path-input'))).toBeVisible();
+      await element(by.id('derivation-path-input')).replaceText('invalid-path');
+      await expect(element(by.id('derivation-path-input-error'))).toBeVisible();
+      await element(by.id('derivation-path-input')).replaceText(defaultDerivationPath);
+      await element(by.id('signInPassphraseInput')).tap();
+      await element(by.id('signInPassphraseInput')).replaceText(testConstants.secretRecoveryPhrase);
+      await element(by.id('continue-button')).tap();
+      await element(by.id('enter-password')).tap();
+      await element(by.id('enter-password')).replaceText(testConstants.password);
+      await element(by.id('confirm-password')).tap();
+      await element(by.id('confirm-password')).replaceText(testConstants.password);
+      await element(by.id('account-name')).tap();
+      await element(by.id('account-name')).replaceText(testConstants.accountName);
+      await element(by.id('agree-switch')).tap();
+      await element(by.id('save-account')).tap();
+      await element(by.id('download-file-button')).atIndex(0).tap();
+      await element(by.id('result-screen-continue')).atIndex(0).tap();
+      await expect(element(by.id('accounts-home-container'))).toBeVisible();
+    });
   });
 });

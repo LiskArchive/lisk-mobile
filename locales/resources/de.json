@@ -197,6 +197,9 @@
         "title": "Großartig! Ihr Konto ist jetzt erstellt",
         "description": "Sie können Ihr Konto jetzt zu Lisk Wallet hinzufügen, indem Sie auf „Konto hinzufügen fortsetzen“ klicken, um Tokens senden und anfordern zu können und vieles mehr.",
         "continueButtonText": "Weiter zu Konto hinzufügen"
+      },
+      "error": {
+        "invalidDerivationPath": ""
       }
     },
     "setup": {
