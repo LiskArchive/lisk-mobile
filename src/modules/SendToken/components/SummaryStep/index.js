@@ -3,14 +3,15 @@ import React from 'react';
 import { View } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
-
 import { useNavigation } from '@react-navigation/native';
+
+import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
-import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
+import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
+import SignTransaction from 'modules/Transactions/components/SignTransaction/SignTransaction';
+import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
-import { useSignTransactionModal } from 'modules/Transactions/hooks/useSignTransactionModal';
-import { getDryRunTransactionError } from '../../../Transactions/utils/helpers';
 
 import getSendTokenSummaryStepStyles from './styles';
 
@@ -25,7 +26,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
   const message = form.watch('message');
   const priority = form.watch('priority');
 
-  const { userPasswordField } = useController({
+  const { field: userPasswordField } = useController({
     name: 'userPassword',
     control: form.control,
   });
@@ -51,25 +52,41 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
-  const signTransactionModal = useSignTransactionModal({
-    // form,
-    isValidationError: Object.keys(form.formState.errors).length > 0,
-    amount: summary.amount,
-    token: summary.token,
-    // dryRunError: dryRunTransactionError,
-    navigation,
-    onReset: () => {
-      form.handleReset();
-      resetSteps();
-    },
-    error: dryRunTransactionError || form.broadcastTransactionMutation.error,
-    isSuccess: form.broadcastTransactionMutation.isSuccess,
-    isLoading:
-      form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading,
-    userPassword: userPasswordField.value,
-    onUserPasswordChange: userPasswordField.onChange,
-    onSubmit: form.handleSubmit,
-  });
+  const handleSignTransactionModalReset = (modal) => {
+    form.handleReset();
+    resetSteps();
+    modal.close();
+  };
+
+  const signTransactionModal = useModal(
+    (modal) => (
+      <SignTransaction
+        onSubmit={form.handleSubmit}
+        userPassword={userPasswordField.value}
+        onUserPasswordChange={userPasswordField.onChange}
+        onReset={() => handleSignTransactionModalReset(modal)}
+        amount={summary.amount}
+        token={summary.token}
+        isSuccess={form.broadcastTransactionMutation.isSuccess}
+        isLoading={
+          form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
+        }
+        isValidationError={Object.keys(form.formState.errors).length > 0}
+        error={dryRunTransactionError || form.broadcastTransactionMutation.error}
+        navigation={navigation}
+      />
+    ),
+    [
+      userPasswordField.value,
+      summary.amount,
+      summary.token,
+      form.broadcastTransactionMutation.isSuccess,
+      form.dryRunTransactionMutation.isLoading,
+      form.broadcastTransactionMutation.isLoading,
+      dryRunTransactionError,
+      form.broadcastTransactionMutation.error,
+    ]
+  );
 
   return (
     <>
@@ -82,7 +99,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
           {i18next.t('sendToken.summary.prevStepButtonText')}
         </Button>
 
-        <PrimaryButton onPress={signTransactionModal.open} noTheme style={{ flex: 1 }}>
+        <PrimaryButton onPress={() => signTransactionModal.open()} noTheme style={{ flex: 1 }}>
           {i18next.t('sendToken.summary.submitTransactionButtonText')}
         </PrimaryButton>
       </View>

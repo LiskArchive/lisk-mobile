@@ -53,13 +53,13 @@ export default function SignTransaction({
     case 'confirm':
       return (
         <ConfirmTransaction
+          onSubmit={onSubmit}
           amount={amount}
           token={token}
-          isLoading={isLoading}
-          isValidationError={isValidationError}
           userPassword={userPassword}
           onUserPasswordChange={onUserPasswordChange}
-          onSubmit={onSubmit}
+          isLoading={isLoading}
+          isValidationError={isValidationError}
         />
       );
 

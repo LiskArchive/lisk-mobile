@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+
 import { ModalContext } from 'contexts/ModalContext';
 
 export const useModal = (renderComponent, componentDeps = []) => {
@@ -14,10 +15,9 @@ export const useModal = (renderComponent, componentDeps = []) => {
     modal.toggle(false);
     modal.setComponent(null);
   };
-
   useEffect(() => {
     if (modal.component && renderComponent) {
-      modal.setComponent(renderComponent(modal));
+      modal.setComponent(renderComponent({ ...modal, open, close }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, componentDeps);
