@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { View, ScrollView } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
@@ -21,7 +21,6 @@ import {
 
 export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
   const applications = useApplicationsExplorer();
-  const [address, setAddress] = useState('');
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',
@@ -38,12 +37,20 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     control: form.control,
   });
 
-  const isValidAddress = useMemo(() => validateAddress(address) === 0, [address]);
+  const isValidAddress = useMemo(
+    () => validateAddress(recipientAccountAddressField.value) === 0,
+    [recipientAccountAddressField.value]
+  );
 
   useEffect(() => {
     if (isValidAddress) {
-      form.handleChange('params.recipientAddress', address, recipientAccountAddressField.onChange);
+      form.handleChange(
+        'params.recipientAddress',
+        recipientAccountAddressField.value,
+        recipientAccountAddressField.onChange
+      );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidAddress]);
 
   const { field: addressFormatField } = useController({
@@ -86,8 +93,8 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
               />
 
               <SendTokenRecipientAccountField
-                value={address}
-                onChange={setAddress}
+                value={recipientAccountAddressField.value}
+                onChange={recipientAccountAddressField.onChange}
                 errorMessage={form.formState.errors.recipientAccountAddress?.message}
                 addressFormat={addressFormatField.value}
                 onAddressFormatChange={addressFormatField.onChange}

@@ -1,19 +1,9 @@
-import { renderHook } from '@testing-library/react-hooks';
+import React from 'react';
+import { renderHook, act } from '@testing-library/react-hooks';
 
-import * as useApplications from '../context/ApplicationsContext';
+import { ApplicationsProvider } from '../context/ApplicationsContext';
 import { mockApplicationsFullData } from '../__fixtures__/mockApplicationsFullData';
 import { useCurrentApplication } from './useCurrentApplication';
-
-const currentApplicationDataMock = mockApplicationsFullData[0];
-const setCurrentApplicationDataMock = jest.fn();
-const currentApplicationMock = {
-  data: currentApplicationDataMock,
-  setData: setCurrentApplicationDataMock,
-};
-
-jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
-  currentApplication: currentApplicationMock,
-}));
 
 describe('useCurrentApplication hook', () => {
   afterEach(() => {
@@ -24,10 +14,23 @@ describe('useCurrentApplication hook', () => {
     expect(useCurrentApplication).toBeDefined();
   });
 
-  it('should return the current application data and setData function', () => {
-    const { result } = renderHook(() => useCurrentApplication());
+  it('should return the current application and handleSetData function', () => {
+    const wrapper = ({ children }) => <ApplicationsProvider>{children}</ApplicationsProvider>;
 
-    expect(result.current[0]).toEqual(currentApplicationMock);
-    expect(result.current[1]).toEqual(setCurrentApplicationDataMock);
+    const { result } = renderHook(() => useCurrentApplication(), { wrapper });
+
+    expect(result.current).toEqual([expect.any(Object), expect.any(Function)]);
+  });
+
+  it('should set the data for the current application', () => {
+    const wrapper = ({ children }) => <ApplicationsProvider>{children}</ApplicationsProvider>;
+
+    const { result } = renderHook(() => useCurrentApplication(), { wrapper });
+
+    act(() => {
+      result.current[1](mockApplicationsFullData[1]);
+    });
+
+    expect(result.current[0].data).toEqual(mockApplicationsFullData[1]);
   });
 });

@@ -9,14 +9,15 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
-import useMessageFee from 'modules/Transactions/hooks/useMessageFee';
+import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
+import { DRY_RUN_TRANSACTION_RESULTS } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
-import { useApplicationSupportedTokensQuery } from '../../BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { DRY_RUN_TRANSACTION_RESULTS } from '../../Transactions/utils/constants';
+import { useChainChannelQuery } from '../../BlockchainApplication/api/useChainChannelQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -26,6 +27,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
     currentApplication.data
   );
+
+  const { data: messageFeeData } = useMessageFee();
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -69,10 +72,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     enableReinitialize: true,
   });
 
-  const messageFee = useMessageFee({
-    senderApplicationChainID: form.watch('senderApplicationChainID'),
-    recipientApplicationChainID: form.watch('recipientApplicationChainID'),
-  });
+  const recipientApplicationChainID = form.watch('recipientApplicationChainID');
+  const senderApplicationChainID = form.watch('senderApplicationChainID');
+
+  const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
+
+  const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
+    recipientApplicationChainID,
+    { options: { enabled: isCrossChainTransfer } }
+  );
 
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
@@ -102,12 +110,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     if (privateKey) {
       try {
-        let extraFee = BigInt(0);
-
-        if (messageFee.data > 0) extraFee += messageFee.data;
-
-        if (extraFee) transaction.computeFee(extraFee);
-
         const signedTransaction = await transaction.sign(privateKey);
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
@@ -123,7 +125,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           }
         );
       } catch (error) {
-        console.log('error', error);
         DropDownHolder.error(
           i18next.t('Error'),
           i18next.t('transactions.errors.signErrorDescription')
@@ -132,7 +133,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
   });
 
-  const handleReset = () => form.reset(defaultValues);
+  const handleReset = () => {
+    dryRunTransactionMutation.reset();
+    broadcastTransactionMutation.reset();
+  };
 
   const handleMutationsReset = () => {
     dryRunTransactionMutation.reset();
@@ -175,6 +179,37 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isTransactionSuccess]);
+
+  useEffect(() => {
+    if (!isTransactionSuccess) {
+      return;
+    }
+
+    if (
+      isCrossChainTransfer &&
+      messageFeeData?.data?.fee &&
+      recipientApplicationChainChannelData?.data?.messageFeeTokenID
+    ) {
+      transaction.update({
+        command: 'transferCrossChain',
+        params: {
+          messageFee: messageFeeData.data.fee,
+          messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
+          receivingChainID: recipientApplicationChainID,
+        },
+      });
+    } else if (transaction.command !== 'transfer') {
+      transaction.update({ command: 'transfer' });
+      transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
+    }
+  }, [
+    isCrossChainTransfer,
+    recipientApplicationChainChannelData?.data?.messageFeeTokenID,
+    messageFeeData?.data?.fee,
+    recipientApplicationChainID,
+    transaction,
+    isTransactionSuccess,
+  ]);
 
   return {
     ...form,

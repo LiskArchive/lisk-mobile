@@ -416,7 +416,11 @@
       "transactionFee": {
         "title": "Transaction fee",
         "description1": "Is the sum of byte based fee, Initialization and selected network priority"
-      }     
+      },
+      "messageFee": {
+        "title": "Message fee",
+        "description1": "Messages are the objects containing the cross-chain commands, in the same way in which transactions contain commands. They have a fee property also called message fee to distinguish from transaction fees."
+      }   
     }
   },
   "accounts": {

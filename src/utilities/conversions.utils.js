@@ -62,3 +62,20 @@ export function fromBaseToDisplayDenom({
 
   return convertedAmount;
 }
+
+/**
+ * Parses from base-denomination to display-denomination an amount of LSK.
+ * @param {BigInt} amount - Amount to convert (in beddows).
+ * @param {Boolean} withSymbol - Flag that indicates if the response should or not include the symbol of the
+ * token (optional, default: false).
+ * @returns {string} Converted value in string format.
+ */
+export function fromBeddowsToLsk(amount, withSymbol = false) {
+  return fromBaseToDisplayDenom({
+    amount,
+    displayDenom: 'lsk',
+    denomUnits: [{ decimals: 8, denom: 'lsk' }],
+    symbol: 'LSK',
+    withSymbol,
+  });
+}

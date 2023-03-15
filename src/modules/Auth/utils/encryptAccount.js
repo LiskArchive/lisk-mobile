@@ -24,14 +24,7 @@ export const encryptAccount = async ({
     }
     const address = extractAddressFromPublicKey(publicKey);
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
-    const encryptedPassphrase = await encrypt.encryptMessageWithPassword(plainText, password, {
-      kdf: 'PBKDF2',
-      kdfparams: {
-        parallelism: 4,
-        iterations: 1,
-        memorySize: 2024,
-      },
-    });
+    const encryptedPassphrase = await encrypt.encryptMessageWithPassword(plainText, password);
     return {
       encryptedPassphrase,
       metadata: {

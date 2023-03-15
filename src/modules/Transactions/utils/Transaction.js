@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-undef */
 /* eslint-disable max-statements */
 import * as Lisk from '@liskhq/lisk-client';
@@ -15,6 +16,8 @@ import {
 
 export class Transaction {
   _paramsSchema = null;
+
+  _paramsSchemas = null;
 
   _networkStatus = null;
 
@@ -37,8 +40,6 @@ export class Transaction {
     signatures: [],
   };
 
-  isLoading = true;
-
   /**
    * Initialize transaction with required network and account information
    * @param {object} params - Transaction initialization parameters
@@ -57,9 +58,9 @@ export class Transaction {
     schema,
   }) {
     this._schema = schema;
-    this.isLoading = false;
     this._networkStatus = networkStatus;
     this._auth = auth;
+    this._paramsSchemas = commandParametersSchemas;
     this._priorityFee = priorityFee;
     this._extraCommandFee = BigInt(extraCommandFee || 0);
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
@@ -85,7 +86,7 @@ export class Transaction {
     this._paramsSchema = getCommandParamsSchema(
       this.transaction.module,
       this.transaction.command,
-      commandParametersSchemas
+      this._paramsSchemas
     );
 
     if (encodedTransaction) {
@@ -98,12 +99,22 @@ export class Transaction {
   /**
    * Update transaction object
    * @param {object} params - Transaction parameters
-   * @returns void
+   * @returns {object} The updated transaction.
    */
-  update({ params = {}, nonce = null, ...others }) {
+  update({
+    module = this.transaction.module,
+    command = this.transaction.command,
+    params = {},
+    nonce = null,
+    ...others
+  }) {
+    this._computeParamsSchema(module, command);
+
     const updatedTransaction = {
       ...this.transaction,
       ...others,
+      module,
+      command,
       params: {
         ...this.transaction.params,
         ...Lisk.codec.codec.fromJSON(this._paramsSchema, removeUndefinedObjectKeys(params)),
@@ -114,6 +125,23 @@ export class Transaction {
     this.transaction = { ...this.transaction, ...updatedTransaction };
 
     this.computeFee();
+
+    return this.transaction;
+  }
+
+  /**
+   * Deletes the specified parameters from the transaction object and returns the updated object.
+   * @param {string[]} params - An array of parameter keys to remove from the object.
+   * @returns {Object} The updated transaction with the specified parameters removed.
+   */
+  deleteParams(params) {
+    params.forEach((param) => {
+      delete this.transaction.params[param];
+    });
+
+    this.computeFee();
+
+    return this.transaction;
   }
 
   /**
@@ -252,6 +280,12 @@ export class Transaction {
    */
   fromJSON() {
     return fromTransactionJSON(this.transaction, this._paramsSchema);
+  }
+
+  _computeParamsSchema(module, command) {
+    this._paramsSchema = getCommandParamsSchema(module, command, this._paramsSchemas);
+
+    return this._paramsSchema;
   }
 
   /**

@@ -417,6 +417,10 @@
       "transactionFee": {
         "title": "Transaktionsgebühr",
         "description1": "Ist die Summe aus bytebasierter Gebühr, Initialisierung und ausgewählter Netzwerkpriorität"
+      },
+      "messageFee": {
+        "title": "Nachrichtengebühr",
+        "description1": "Nachrichten sind die Objekte, die die Cross-Chain-Befehle enthalten, genauso wie Transaktionen Befehle enthalten. Sie haben eine Gebühreneigenschaft, die auch als Nachrichtengebühr bezeichnet wird, um sie von Transaktionsgebühren zu unterscheiden."
       }    
     }
   },
