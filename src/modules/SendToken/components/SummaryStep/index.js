@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React from 'react';
 import { View } from 'react-native';
+import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useNavigation } from '@react-navigation/native';
@@ -24,6 +25,11 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
   const message = form.watch('message');
   const priority = form.watch('priority');
 
+  const { userPasswordField } = useController({
+    name: 'userPassword',
+    control: form.control,
+  });
+
   const summary = useTransactionSummary({
     senderApplicationChainID,
     recipientApplicationChainID,
@@ -46,16 +52,23 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
   const signTransactionModal = useSignTransactionModal({
-    form,
+    // form,
     isValidationError: Object.keys(form.formState.errors).length > 0,
     amount: summary.amount,
     token: summary.token,
-    dryRunError: dryRunTransactionError,
+    // dryRunError: dryRunTransactionError,
     navigation,
     onReset: () => {
       form.handleReset();
       resetSteps();
     },
+    error: dryRunTransactionError || form.broadcastTransactionMutation.error,
+    isSuccess: form.broadcastTransactionMutation.isSuccess,
+    isLoading:
+      form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading,
+    userPassword: userPasswordField.value,
+    onUserPasswordChange: userPasswordField.onChange,
+    onSubmit: form.handleSubmit,
   });
 
   return (

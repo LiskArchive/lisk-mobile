@@ -8,7 +8,6 @@ import SignTransactionError from '../components/SignTransaction/SignTransactionE
 
 export function useSignTransactionModal({
   isValidationError,
-  dryRunError,
   amount,
   token,
   successActionButton,
@@ -17,17 +16,18 @@ export function useSignTransactionModal({
   errorActionButton,
   errorTitle,
   errorDescription,
-  form,
   navigation,
   onReset,
+  error,
+  isSuccess,
+  isLoading,
+  userPassword,
+  onUserPasswordChange,
+  onSubmit,
 }) {
   const [activeStep, setActiveStep] = useState();
 
   const modal = useModal();
-
-  const error = dryRunError || form.broadcastTransactionMutation.error;
-
-  const isSuccess = form.broadcastTransactionMutation.isSuccess;
 
   const isError = !!error;
 
@@ -37,6 +37,11 @@ export function useSignTransactionModal({
     modal.close();
   };
 
+  const handleSuccessSubmit = () => {
+    handleReset();
+    navigation.navigate('AccountHome');
+  };
+
   const renderStep = (step) => {
     switch (step) {
       case 'confirm':
@@ -44,22 +49,18 @@ export function useSignTransactionModal({
           <ConfirmTransaction
             amount={amount}
             token={token}
-            form={form}
-            isLoading={
-              form.dryRunTransactionMutation.isLoading ||
-              form.broadcastTransactionMutation.isLoading
-            }
+            isLoading={isLoading}
             isValidationError={isValidationError}
+            userPassword={userPassword}
+            onUserPasswordChange={onUserPasswordChange}
+            onSubmit={onSubmit}
           />
         );
 
       case 'success':
         return (
           <SignTransactionSuccess
-            onSubmit={() => {
-              handleReset();
-              navigation.navigate('AccountHome');
-            }}
+            onSubmit={handleSuccessSubmit}
             actionButton={successActionButton}
             title={successTitle}
             description={successDescription}
