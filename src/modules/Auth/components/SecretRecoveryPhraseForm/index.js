@@ -4,7 +4,7 @@ import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
-import { getDerivationPathErrorMessage } from 'modules/Accounts/utils/accounts.utils';
+import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import { validatePassphrase } from 'modules/Auth/utils';
@@ -33,7 +33,7 @@ export default function SecretRecoveryPhraseForm({
   const { styles } = useTheme({ styles: getStyles() });
 
   const derivationPathError = useMemo(
-    () => getDerivationPathErrorMessage(derivationPath),
+    () => validateDerivationPath(derivationPath),
     [derivationPath]
   );
 

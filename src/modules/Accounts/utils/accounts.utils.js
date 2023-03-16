@@ -40,9 +40,9 @@ export async function addTokensMetaData(tokens) {
 /**
  * Validate a derivation path
  * @param {string} derivationPath
- * @returns {string} - undefined/error
+ * @returns {boolean} - Returns error message if derivation path is invalid
  */
-export const getDerivationPathErrorMessage = (derivationPath) => {
+export const validateDerivationPath = (derivationPath) => {
   try {
     cryptography.utils.parseKeyDerivationPath(derivationPath);
   } catch (error) {
