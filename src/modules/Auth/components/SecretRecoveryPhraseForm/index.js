@@ -122,15 +122,14 @@ export default function SecretRecoveryPhraseForm({
         />
 
         {useDerivationPath && (
-          <View style={[styles.derivationPathContainer]}>
-            <Input
-              testID="derivation-path-input"
-              label={i18next.t('commons.customDerivationPath')}
-              onChange={setDerivationPath}
-              value={derivationPath}
-              error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
-            />
-          </View>
+          <Input
+            testID="derivation-path-input"
+            label={i18next.t('commons.customDerivationPath')}
+            onChange={setDerivationPath}
+            value={derivationPath}
+            innerStyles={{ containerStyle: styles.derivationPathContainer }}
+            error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
+          />
         )}
       </ScrollView>
 

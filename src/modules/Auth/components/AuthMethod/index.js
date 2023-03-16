@@ -35,7 +35,7 @@ export default function AuthMethod({ route }) {
     dispatch(settingsUpdated({ useDerivationPath: !settings.useDerivationPath }));
   };
 
-  const { styles, theme } = useTheme({
+  const { styles } = useTheme({
     styles: getStyles(),
   });
 
@@ -106,13 +106,9 @@ export default function AuthMethod({ route }) {
           testID="derivation-switch"
           onPress={toggleUseDerivationPath}
         >
-          <SwitchButton
-            value={settings.useDerivationPath}
-            theme={theme}
-            onSyncPress={toggleUseDerivationPath}
-          />
+          <SwitchButton value={settings.useDerivationPath} onSyncPress={toggleUseDerivationPath} />
           <Text style={[styles.derivationPath, styles.theme.derivationPath]}>
-            Enable custom derivation path
+            {i18next.t('settings.menu.enableDerivationPath')}
           </Text>
         </TouchableOpacity>
       </View>

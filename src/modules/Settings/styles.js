@@ -47,6 +47,9 @@ export default () => ({
   },
 
   [themes.dark]: {
+    subtitle: {
+      color: colors.dark.white,
+    },
     subHeader: {
       color: colors.dark.white,
     },

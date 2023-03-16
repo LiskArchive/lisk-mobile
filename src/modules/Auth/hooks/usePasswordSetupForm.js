@@ -29,6 +29,7 @@ const validationSchema = yup
 /**
  * Provides a stateful form to handle users passwords setup process.
  * @param {String} passphrase - Generated passphrase to consider on the submit.
+ * @param {String} derivationPath - optional derivation path to be used to generate address
  * @returns - The form fields, error state, submit callback and other handlers.
  * Also, the encrypt process state (isLoading, isError, isSuccess, among others).
  */

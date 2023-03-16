@@ -10,6 +10,7 @@ import FingerprintOverlay from 'components/shared/fingerprintOverlay';
 import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
+import Checkbox from 'components/shared/Checkbox';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
@@ -18,7 +19,6 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
-import Checkbox from '../../components/shared/Checkbox';
 
 // eslint-disable-next-line max-statements
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
@@ -117,11 +117,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               testID="enable-incognito"
               icon="enable-incognito"
               targetStateLabel={
-                <SwitchButton
-                  value={settings.discrete}
-                  theme={theme}
-                  onSyncPress={toggleIncognito}
-                />
+                <SwitchButton value={settings.discrete} onSyncPress={toggleIncognito} />
               }
               title={t('settings.menu.discreetMode')}
               description={t('settings.descriptions.discreetMode')}
@@ -138,11 +134,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               testID="dark-mode"
               icon="dark-mode"
               targetStateLabel={
-                <SwitchButton
-                  value={settings.theme === themes.dark}
-                  theme={theme}
-                  onSyncPress={switchTheme}
-                />
+                <SwitchButton value={settings.theme === themes.dark} onSyncPress={switchTheme} />
               }
               title={t('settings.menu.darkMode')}
             />
