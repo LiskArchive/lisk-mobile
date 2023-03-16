@@ -6,12 +6,7 @@ import { Button } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
-const DeleteBookmark = ({ styles, t, close, modalCallback }) => {
-  const onConfirm = () => {
-    modalCallback();
-    close();
-  };
-
+const DeleteBookmark = ({ styles, t, close, onDelete }) => {
   return (
     <View style={styles.container}>
       <Small style={[styles.text, styles.theme.text]}>
@@ -25,8 +20,9 @@ const DeleteBookmark = ({ styles, t, close, modalCallback }) => {
       <Button
         style={[styles.actionButton, styles.theme.actionButton]}
         textStyle={[styles.buttonText, styles.theme.buttonText]}
-        onClick={onConfirm}
+        onClick={onDelete}
         title={t('Delete this bookmark')}
+        testID="delete-bookmark-button"
       />
 
       <A onPress={close} style={styles.theme.cancelButton}>

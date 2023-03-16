@@ -3,7 +3,6 @@ import { View, TouchableOpacity } from 'react-native';
 import { translate } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { colors, themes } from 'constants/styleGuide';
-import ModalHolder from 'utilities/modal';
 import { stringShortener } from 'utilities/helpers';
 import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from 'components/shared/avatar';
@@ -13,30 +12,31 @@ import SwipeableRow from 'components/shared/Swipeable';
 import { useNavigation } from '@react-navigation/native';
 import DeleteBookmarkModal from './DeleteBookmark';
 import { deleteBookmark } from '../store/actions';
+import { useModal } from '../../../hooks/useModal';
 
 const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddress, t }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const modal = useModal();
+
+  const onConfirmDelete = () => {
+    dispatch(deleteBookmark(data));
+    modal.close();
+  };
+
   const onDelete = () => {
-    ModalHolder.open({
-      title: 'Delete bookmark',
-      component: DeleteBookmarkModal,
-      callback: () => dispatch(deleteBookmark(data)),
-    });
+    modal.open(<DeleteBookmarkModal close={modal.close} onDelete={onConfirmDelete} />);
   };
 
   const openDisabledModal = () => {
-    ModalHolder.open({
-      title: t('bookmarks.disabled.title'),
-      component: () => (
-        <View>
-          <P style={[styles.text, styles.theme.text]}>{t('bookmarks.disabled.description')}</P>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => ModalHolder.close()}>
-            <B style={styles.buttonText}>{t('bookmarks.disabled.buttons.close')}</B>
-          </TouchableOpacity>
-        </View>
-      ),
-    });
+    modal.open(
+      <View>
+        <P style={[styles.text, styles.theme.text]}>{t('bookmarks.disabled.description')}</P>
+        <TouchableOpacity style={styles.buttonContainer} onPress={modal.close}>
+          <B style={styles.buttonText}>{t('bookmarks.disabled.buttons.close')}</B>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   return (
