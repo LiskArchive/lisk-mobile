@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { colors, themes } from 'constants/styleGuide';
 import { stringShortener } from 'utilities/helpers';
+import { useModal } from 'hooks/useModal';
 import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from 'components/shared/avatar';
 import { B, Small, P } from 'components/shared/toolBox/typography';
@@ -12,7 +13,6 @@ import SwipeableRow from 'components/shared/Swipeable';
 import { useNavigation } from '@react-navigation/native';
 import DeleteBookmarkModal from './DeleteBookmark';
 import { deleteBookmark } from '../store/actions';
-import { useModal } from '../../../hooks/useModal';
 
 const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddress, t }) => {
   const dispatch = useDispatch();
