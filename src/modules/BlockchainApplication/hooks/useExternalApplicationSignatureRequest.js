@@ -25,7 +25,7 @@ export function useExternalApplicationSignatureRequest() {
           onCancel={rejectRequest}
           navigation={navigation}
         />,
-        false
+        true
       );
     }
   }, [session.request]);
