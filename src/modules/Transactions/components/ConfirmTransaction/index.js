@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
-import { useController } from 'react-hook-form';
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -12,19 +11,22 @@ import { stringShortener } from 'utilities/helpers';
 
 import getConfirmTransactionStyles from './styles';
 
-export default function ConfirmTransaction({ amount, token, isLoading, isValidationError, form }) {
+export default function ConfirmTransaction({
+  amount,
+  token,
+  userPassword,
+  onUserPasswordChange,
+  isLoading,
+  isValidationError,
+  onSubmit,
+}) {
   const [currentAccount] = useCurrentAccount();
-
-  const { field } = useController({
-    name: 'userPassword',
-    control: form.control,
-  });
 
   const { styles } = useTheme({
     styles: getConfirmTransactionStyles(),
   });
 
-  const submitDisabled = isLoading || !field.value || isValidationError;
+  const submitDisabled = isLoading || !userPassword || isValidationError;
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -48,6 +50,8 @@ export default function ConfirmTransaction({ amount, token, isLoading, isValidat
         </Text>
 
         <Input
+          value={userPassword}
+          onChange={onUserPasswordChange}
           innerStyles={{
             containerStyle: {
               paddingTop: 0,
@@ -64,8 +68,6 @@ export default function ConfirmTransaction({ amount, token, isLoading, isValidat
           }}
           placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
-          onChange={field.onChange}
-          value={field.value}
         />
       </View>
 
@@ -76,7 +78,7 @@ export default function ConfirmTransaction({ amount, token, isLoading, isValidat
 
         <PrimaryButton
           noTheme
-          onClick={form.handleSubmit}
+          onClick={onSubmit}
           style={{ marginBottom: 24 }}
           disabled={submitDisabled}
         >

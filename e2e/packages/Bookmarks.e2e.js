@@ -48,4 +48,11 @@ describe('Bookmark Screen', () => {
     await element(by.id('add-bookmark-button')).tap();
     await expect(element(by.text('edited'))).toBeVisible();
   });
+
+  it('should delete a bookmark successfully', async () => {
+    await element(by.text('edited')).swipe('left');
+    await element(by.id('delete-bookmark')).tap();
+    await element(by.id('delete-bookmark-button')).tap();
+    await expect(element(by.text('edited'))).not.toBeVisible();
+  });
 });

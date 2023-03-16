@@ -85,7 +85,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
     }
   };
 
-  function renderStep(_transaction) {
+  const renderStep = (_transaction) => {
     switch (activeStep) {
       case 'notification':
         return (
@@ -125,14 +125,14 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
       default:
         return null;
     }
-  }
+  };
 
   return (
     <DataRenderer
       data={transaction.data}
       isLoading={transaction.isLoading}
       error={transaction.isError}
-      renderData={(data) => renderStep(data)}
+      renderData={renderStep}
     />
   );
 }
