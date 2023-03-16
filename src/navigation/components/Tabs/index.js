@@ -1,40 +1,21 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { useModal } from 'hooks/useModal';
 import { ModalContext } from 'contexts/ModalContext';
+import { useExternalApplicationSignatureRequest } from 'modules/BlockchainApplication/hooks/useExternalApplicationSignatureRequest';
 import Settings from 'modules/Settings';
 import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';
 import Bookmarks from 'modules/Bookmark';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
-import ExternalApplicationSignatureRequest from 'modules/BlockchainApplication/components/ExternalApplicationSignatureRequest';
 import { getTabBarIcon } from '../../helpers';
 import { getNavigationTabBarStyles } from '../../styles';
-import useWalletConnectSession from '../../../../libs/wcm/hooks/useSession';
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
-  const { session, reject } = useWalletConnectSession();
   const { isOpen: modalOpen } = useContext(ModalContext);
-  const modal = useModal();
 
-  const rejectRequest = () => {
-    reject();
-    modal.close();
-  };
-
-  const showSignatureRequestModal = () =>
-    modal.open(
-      <ExternalApplicationSignatureRequest session={session.request} onCancel={rejectRequest} />,
-      false
-    );
-
-  useEffect(() => {
-    if (session.request) {
-      showSignatureRequestModal();
-    }
-  }, [session.request]);
+  useExternalApplicationSignatureRequest();
 
   return (
     <>
