@@ -1456,41 +1456,41 @@
     "@json-rpc-tools/types" "^1.7.6"
     "@pedrouid/environment" "^1.0.1"
 
-"@liskhq/lisk-api-client@^6.0.0-alpha.13":
-  version "6.0.0-alpha.13"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-api-client/-/lisk-api-client-6.0.0-alpha.13.tgz#1a8a12e55b4c3cc33150589d6402071c851ff5d8"
-  integrity sha512-YItB4tvXIILPAGz5PJD/J1qYkgT84A4L8hxD61WX9dLCIAft4sP3NF4bgyciEXfB+dxneNHun9Tn1X9th8XNsA==
+"@liskhq/lisk-api-client@^6.0.0-alpha.15":
+  version "6.0.0-alpha.15"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-api-client/-/lisk-api-client-6.0.0-alpha.15.tgz#1d010293dbce9c261d2a79f797353ed72625f11d"
+  integrity sha512-Ktgjq8AnK25o7T2Chk9nwkOaUbifdOGtHIGCK5cmDo47pswUillW1tlfUHUrh6/oM3c5bvUOpmW6dur7snWyAw==
   dependencies:
-    "@liskhq/lisk-codec" "^0.3.0-alpha.7"
+    "@liskhq/lisk-codec" "^0.3.0-alpha.8"
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
-    "@liskhq/lisk-transactions" "^6.0.0-alpha.10"
+    "@liskhq/lisk-transactions" "^6.0.0-alpha.11"
     "@liskhq/lisk-validator" "^0.7.0-alpha.6"
     isomorphic-ws "4.0.1"
     ws "8.11.0"
     zeromq "6.0.0-beta.6"
 
-"@liskhq/lisk-client@6.0.0-alpha.13":
-  version "6.0.0-alpha.13"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-client/-/lisk-client-6.0.0-alpha.13.tgz#74a0c4c2cec5ba2c3fbd49ac57c1c2117ed4126d"
-  integrity sha512-Nk2yvKwpup0AuD85stsRdlbZbcLjOLgIjwUHFaH5jqrpS61KooKcu/dbdS6oc14wzy0B/zYqUZ5qG+g3fQd5KQ==
+"@liskhq/lisk-client@6.0.0-alpha.15":
+  version "6.0.0-alpha.15"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-client/-/lisk-client-6.0.0-alpha.15.tgz#dde439fd68ea413f25d56f2174aa325d482393ce"
+  integrity sha512-ffC5NelS9C2UJCrEQvEfdCqf531EYMzW+nY8wFRtQzN/ZK02mNpuO6L5pLFTWunQBbrSbawk3KW8aRZuTpb1kw==
   dependencies:
-    "@liskhq/lisk-api-client" "^6.0.0-alpha.13"
-    "@liskhq/lisk-codec" "^0.3.0-alpha.7"
+    "@liskhq/lisk-api-client" "^6.0.0-alpha.15"
+    "@liskhq/lisk-codec" "^0.3.0-alpha.8"
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
     "@liskhq/lisk-passphrase" "^4.0.0-alpha.2"
-    "@liskhq/lisk-transactions" "^6.0.0-alpha.10"
-    "@liskhq/lisk-tree" "^0.3.0-alpha.8"
-    "@liskhq/lisk-utils" "^0.3.0-alpha.3"
+    "@liskhq/lisk-transactions" "^6.0.0-alpha.11"
+    "@liskhq/lisk-tree" "^0.3.0-alpha.9"
+    "@liskhq/lisk-utils" "^0.3.0-alpha.4"
     "@liskhq/lisk-validator" "^0.7.0-alpha.6"
     buffer "6.0.3"
 
-"@liskhq/lisk-codec@^0.3.0-alpha.7":
-  version "0.3.0-alpha.7"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-codec/-/lisk-codec-0.3.0-alpha.7.tgz#a1e505e2e0ec6d202e41478e5b022addf5113d61"
-  integrity sha512-YK+YSFaf83o0DgO/6RNjI/3nu5Pqyu6WR1N0rk4FDHw8Ycu1hvpNVJiSZ354Xhs04dJJaEMadxIwHgiHKqO2Hg==
+"@liskhq/lisk-codec@^0.3.0-alpha.8":
+  version "0.3.0-alpha.8"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-codec/-/lisk-codec-0.3.0-alpha.8.tgz#3117e444f40be0835075fe8f3f48743520e460dd"
+  integrity sha512-AM7Juadk4+zKz67DQFmvTFrjTQqqyCNK7BLxQ+WgAv5sdJPgcujSfLaKTSoL7hoLiE6Z4l0NMrDaU0ZMlJI2vQ==
   dependencies:
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
-    "@liskhq/lisk-utils" "^0.3.0-alpha.3"
+    "@liskhq/lisk-utils" "^0.3.0-alpha.4"
     "@liskhq/lisk-validator" "^0.7.0-alpha.6"
 
 "@liskhq/lisk-cryptography@^4.0.0-alpha.6":
@@ -1512,27 +1512,27 @@
   dependencies:
     bip39 "3.0.3"
 
-"@liskhq/lisk-transactions@^6.0.0-alpha.10":
-  version "6.0.0-alpha.10"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-transactions/-/lisk-transactions-6.0.0-alpha.10.tgz#6c9334d2b4a1aae621724b0ef97d134d8d782540"
-  integrity sha512-udheIcWP7bWXLRiSYMkbbSW8bAxpSWK9qwtFLpwVA+U7u2n/RU6fzJU3JqUno9PC+WLkQQbsjiskKTbdtC0FVw==
+"@liskhq/lisk-transactions@^6.0.0-alpha.11":
+  version "6.0.0-alpha.11"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-transactions/-/lisk-transactions-6.0.0-alpha.11.tgz#9d7219e1fcaaa97b4ede0dab00bdda01d72f1d31"
+  integrity sha512-XJws8QMr6kZoXZ3dVLKEn6lKWuEh90CFdz7RWAxbdCLw2BKWoNzK+haXC6djIPTrgHhIVsQukHDf/9HcIVbtmA==
   dependencies:
-    "@liskhq/lisk-codec" "^0.3.0-alpha.7"
+    "@liskhq/lisk-codec" "^0.3.0-alpha.8"
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
     "@liskhq/lisk-validator" "^0.7.0-alpha.6"
 
-"@liskhq/lisk-tree@^0.3.0-alpha.8":
-  version "0.3.0-alpha.8"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-tree/-/lisk-tree-0.3.0-alpha.8.tgz#84c48e072d92e482db6fb75f93df3514431bb9b1"
-  integrity sha512-f/PDu1Cfl8gxAkZCpN2WHnRAfD54LbKnNziBfKIfzHZI2UcRaf0mI39Yh3YkH1uNQNXwSYnOIJfxDmMmhdu5kQ==
+"@liskhq/lisk-tree@^0.3.0-alpha.9":
+  version "0.3.0-alpha.9"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-tree/-/lisk-tree-0.3.0-alpha.9.tgz#3b569d6d2232659de719f509b4d41754314d55d9"
+  integrity sha512-nilsdzCCdXGT1ONEMdh5/DGSII7oS0l5ZZ38zCdOmkL+UG5RKjelVw3N8JSPFpHPliNX3J/2sTY3s/BhTi43xw==
   dependencies:
     "@liskhq/lisk-cryptography" "^4.0.0-alpha.6"
-    "@liskhq/lisk-utils" "^0.3.0-alpha.3"
+    "@liskhq/lisk-utils" "^0.3.0-alpha.4"
 
-"@liskhq/lisk-utils@^0.3.0-alpha.3":
-  version "0.3.0-alpha.3"
-  resolved "https://npm.lisk.com/@liskhq%2flisk-utils/-/lisk-utils-0.3.0-alpha.3.tgz#6b4681a9a136928d831004f8bb3d6e84b1914e4a"
-  integrity sha512-wil+SaEoFeelQg8xfAvcvyZoFcSz/2NYvlYbB00Zm8qopEcMl7EvaT9bEDc/9kM2EzGmyeMdod62JGIkIiBohw==
+"@liskhq/lisk-utils@^0.3.0-alpha.4":
+  version "0.3.0-alpha.4"
+  resolved "https://npm.lisk.com/@liskhq%2flisk-utils/-/lisk-utils-0.3.0-alpha.4.tgz#7579145f3b4e096c2db6af0e507a1caf34ac5465"
+  integrity sha512-6+j1YwsvD7T2rCJAr79H3EftGDx4ZYxAFlvgAN0VOYurfm9+IDrkCFPdCqBDNodujjU2ERR1OYnSB06YzmPLlA==
   dependencies:
     lodash.clonedeep "4.5.0"
 

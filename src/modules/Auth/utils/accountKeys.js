@@ -27,7 +27,7 @@ export const extractKeyPair = async ({
   derivationPath,
 }) => {
   if (enableCustomDerivationPath) {
-    const privateKey = await cryptography.ed.getKeyPairFromPhraseAndPath(
+    const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(
       passphrase,
       derivationPath
     );
