@@ -8,6 +8,7 @@ import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import Scanner from 'components/shared/scanner';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
+import { useSelector } from 'react-redux';
 import SecretRecoveryPhraseForm from '../SecretRecoveryPhraseForm';
 
 import getStyles from './styles';
@@ -15,13 +16,14 @@ import getStyles from './styles';
 export default function SecretRecoveryPhrase() {
   useScreenshotPrevent();
   const navigation = useNavigation();
+  const settings = useSelector((state) => state.settings);
 
   const scannerRef = useRef();
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const handleFormSubmission = (passphrase) =>
-    navigation.navigate('PasswordSetupForm', { passphrase });
+  const handleFormSubmission = (passphrase, derivationPath) =>
+    navigation.navigate('PasswordSetupForm', { passphrase, derivationPath });
 
   const handleQRCodeRead = (value) => handleFormSubmission(value);
 
@@ -50,7 +52,11 @@ export default function SecretRecoveryPhrase() {
           {i18next.t('auth.setup.addAccountDescription')}
         </P>
 
-        <SecretRecoveryPhraseForm onSubmit={handleFormSubmission} onScanQrCode={handleScanQrCode} />
+        <SecretRecoveryPhraseForm
+          useDerivationPath={settings.useDerivationPath}
+          onSubmit={handleFormSubmission}
+          onScanQrCode={handleScanQrCode}
+        />
       </View>
     </SafeAreaView>
   );

@@ -1,9 +1,11 @@
 import React from 'react';
 import Switch from 'react-native-switch-pro';
+import { useTheme } from 'contexts/ThemeContext';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { colors, themes } from 'constants/styleGuide';
 
-const switchButton = ({ value, height, onSyncPress, style, theme }) => {
+const SwitchButton = ({ value, height, onSyncPress, style }) => {
+  const { theme } = useTheme({});
   const onPress = (...params) => {
     ReactNativeHapticFeedback.trigger('selection');
     onSyncPress(...params);
@@ -24,4 +26,4 @@ const switchButton = ({ value, height, onSyncPress, style, theme }) => {
   );
 };
 
-export default switchButton;
+export default SwitchButton;

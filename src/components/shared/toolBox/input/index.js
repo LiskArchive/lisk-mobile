@@ -134,7 +134,7 @@ class Input extends React.Component {
         </View>
 
         {error ? (
-          <View style={styles.errorMessageContainer}>
+          <View style={styles.errorMessageContainer} testID={`${testID}-error`}>
             <Text style={[styles.errorMessage, styles.theme.errorMessage]}>{error}</Text>
           </View>
         ) : null}

@@ -1,3 +1,4 @@
+import { cryptography } from '@liskhq/lisk-client';
 import apiClient from 'utilities/api/APIClient';
 import { getTokensMetaQueryConfig } from 'modules/BlockchainApplication/api/useTokensMetaQuery';
 
@@ -35,3 +36,17 @@ export async function addTokensMetaData(tokens) {
     return tokens;
   }
 }
+
+/**
+ * Validate a derivation path
+ * @param {string} derivationPath
+ * @returns {boolean} - Returns error message if derivation path is invalid
+ */
+export const validateDerivationPath = (derivationPath) => {
+  try {
+    cryptography.utils.parseKeyDerivationPath(derivationPath);
+  } catch (error) {
+    return error.message;
+  }
+  return undefined;
+};

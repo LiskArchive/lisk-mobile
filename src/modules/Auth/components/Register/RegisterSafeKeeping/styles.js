@@ -73,7 +73,7 @@ export default function getRegisterSafeKeepingStyles() {
         color: colors.light.zodiacBlue,
       },
       description: {
-        color: colors.light.sparkleGray,
+        color: colors.light.smoothGray,
       },
       passphraseText: {
         color: colors.light.zodiacBlue,

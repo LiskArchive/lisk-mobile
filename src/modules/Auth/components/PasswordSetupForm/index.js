@@ -21,7 +21,7 @@ export default function PasswordSetupForm() {
 
   const route = useRoute();
 
-  const { passphrase } = route.params;
+  const { passphrase, derivationPath } = route.params;
 
   useScreenshotPrevent();
 
@@ -35,7 +35,7 @@ export default function PasswordSetupForm() {
       formState,
     },
     { encryptedAccount, isLoading, isSuccess },
-  ] = usePasswordSetupForm(passphrase);
+  ] = usePasswordSetupForm(passphrase, derivationPath);
 
   const { styles } = useTheme({ styles: getStyles() });
 

@@ -11,6 +11,9 @@ export default () => ({
       textAlign: 'justify',
       color: colors.dark.whiteSmoke,
     },
+    derivationPathContainer: {
+      marginTop: 20,
+    },
     inputContainer: {
       paddingLeft: 0,
       paddingRight: 0,

@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
   theme: themes.light,
   currency: currencyKeys[0],
   language: languageKeys[0],
-  enableCustomDerivationPath: false,
+  useDerivationPath: false,
   showedIntro: false,
   token: {
     active: tokenKeys[0],

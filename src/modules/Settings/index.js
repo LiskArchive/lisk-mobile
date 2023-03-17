@@ -10,6 +10,7 @@ import FingerprintOverlay from 'components/shared/fingerprintOverlay';
 import { colors, themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
+import Checkbox from 'components/shared/Checkbox';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
@@ -49,6 +50,11 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     });
   };
 
+  const toggleUseDerivationPath = () =>
+    settingsUpdated({
+      useDerivationPath: !settings.useDerivationPath,
+    });
+
   const toggleIncognito = () => {
     settingsUpdated({
       discrete: !settings.discrete,
@@ -74,7 +80,9 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
 
       <ScrollView style={styles.innerContainer}>
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Security')}</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+            {t('settings.headers.security')}
+          </H4>
           {settings.sensorType ? (
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
@@ -109,11 +117,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               testID="enable-incognito"
               icon="enable-incognito"
               targetStateLabel={
-                <SwitchButton
-                  value={settings.discrete}
-                  theme={theme}
-                  onSyncPress={toggleIncognito}
-                />
+                <SwitchButton value={settings.discrete} onSyncPress={toggleIncognito} />
               }
               title={t('settings.menu.discreetMode')}
               description={t('settings.descriptions.discreetMode')}
@@ -122,17 +126,15 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('General')}</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+            {t('settings.headers.general')}
+          </H4>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               testID="dark-mode"
               icon="dark-mode"
               targetStateLabel={
-                <SwitchButton
-                  value={settings.theme === themes.dark}
-                  theme={theme}
-                  onSyncPress={switchTheme}
-                />
+                <SwitchButton value={settings.theme === themes.dark} onSyncPress={switchTheme} />
               }
               title={t('settings.menu.darkMode')}
             />
@@ -150,7 +152,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('Info')}</H4>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>{t('settings.headers.info')}</H4>
 
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
@@ -177,6 +179,20 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               target="PrivacyPolicy"
               title={t('settings.menu.privacyPolicy')}
             />
+          </View>
+        </View>
+
+        <View style={styles.group}>
+          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+            {t('settings.headers.advanced')}
+          </H4>
+
+          <View style={[styles.item, styles.theme.item]}>
+            <Checkbox selected={settings.useDerivationPath} onPress={toggleUseDerivationPath}>
+              <P style={[styles.subtitle, styles.theme.subtitle]}>
+                {t('settings.menu.enableDerivationPath')}
+              </P>
+            </Checkbox>
           </View>
         </View>
       </ScrollView>

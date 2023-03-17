@@ -1,6 +1,7 @@
 {
   "commons": {
     "secretRecoveryPhrase": "Secret recovery phrase",
+    "customDerivationPath": "Custom derivation path",
     "buttons": {
       "continue": "Continue",
       "cancel": "Cancel",
@@ -97,6 +98,12 @@
   "will be available to unlock": "will be available to unlock in ~ {{timeToUnlock}}",
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "settings": {
+    "headers": {
+      "security": "Security",
+      "general": "General",
+      "info": "Info",
+      "advanced": "Advanced"
+    },
     "menu": {
       "backupPassphrase": "Backup your secret recovery phrase",
       "about": "About Lisk",
@@ -106,7 +113,8 @@
       "discreetMode": "Discreet mode",
       "terms": "Terms of use",
       "privacyPolicy": "Privacy Policy",
-      "currency": "Currency"
+      "currency": "Currency",
+      "enableDerivationPath": "Enable custom derivation path"
     },
     "descriptions": {
       "discreetMode": "Hide balance and transaction amounts."
@@ -187,6 +195,9 @@
         "title": "Great! Your account is now created",
         "description": "You can now add your account to Lisk Wallet by clicking on 'Continue to add account', to be able to send and request tokens and much more.",
         "continueButtonText": "Continue to add account"
+      },
+      "error": {
+        "invalidDerivationPath": "Entered derivation path is Invalid"
       }
     },
     "setup": {
