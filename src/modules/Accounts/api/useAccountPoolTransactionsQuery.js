@@ -6,6 +6,7 @@ import { GET_ACCOUNT_POOL_TRANSACTIONS_QUERY } from 'utilities/api/queries';
 /**
  * Fetch the transactions in 'pending' status for a given account.
  * @param {String} address - Address of the account to query the transactions from.
+ * @param {String} moduleCommand - Module-command of the transactions to query from.
  * @param {String} configs - Custom configurations for the query (optional).
  * @param {Object} configs.config - Custom config for the query.
  * @param {Object} configs.options - Custom options for the query.
@@ -14,6 +15,7 @@ import { GET_ACCOUNT_POOL_TRANSACTIONS_QUERY } from 'utilities/api/queries';
  */
 export function useAccountPoolTransactionsQuery(
   address,
+  moduleCommand,
   { config: customConfig = {}, options = {} } = {}
 ) {
   const config = {
@@ -24,6 +26,7 @@ export function useAccountPoolTransactionsQuery(
     params: {
       limit: LIMIT,
       address,
+      moduleCommand,
       executionStatus: 'pending',
       ...(customConfig?.params || {}),
     },

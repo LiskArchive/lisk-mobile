@@ -10,6 +10,7 @@ import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommand
 import { Transaction } from '../utils/Transaction';
 import { usePriorityFee } from './usePriorityFee';
 import { useInitializationFee } from './useInitializationFee';
+import { useAccountNonce } from '../../Accounts/hooks/useAccountNonce';
 
 /**
  * Creates a transaction object with all required build-in
@@ -25,7 +26,9 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const transaction = transactionRef.current;
 
   const [currentAccount] = useCurrentAccount();
-  const { pubkey } = currentAccount.metadata;
+  const { address, pubkey } = currentAccount.metadata;
+
+  useAccountNonce(address, `${module}:${command}`);
 
   const {
     data: networkStatusData,
