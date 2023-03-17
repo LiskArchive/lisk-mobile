@@ -13,7 +13,7 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
-import { DRY_RUN_TRANSACTION_RESULTS } from 'modules/Transactions/utils/constants';
+import { TRANSACTION_EXECUTION_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
@@ -118,7 +118,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           { transaction: encodedTransaction },
           {
             onSettled: ({ data }) => {
-              if (data.result === DRY_RUN_TRANSACTION_RESULTS.succeed) {
+              if (data.result === TRANSACTION_EXECUTION_RESULT.ok) {
                 broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
               }
             },
