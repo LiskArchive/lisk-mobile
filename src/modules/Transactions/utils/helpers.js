@@ -1,6 +1,6 @@
 import * as Lisk from '@liskhq/lisk-client';
 
-import { BASE_TRANSACTION_SCHEMA, DRY_RUN_TRANSACTION_RESULTS } from './constants';
+import { BASE_TRANSACTION_SCHEMA, TRANSACTION_EXECUTION_RESULT } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema) => {
   const moduleCommand = module.concat(':', command);
@@ -89,6 +89,22 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
 };
 
 /**
+ * Returns the maximum nonce value of an array of transactions.
+ *
+ * @param {Array.<Transaction>} transactions - An array of transaction objects with `nonce` properties.
+ * @returns {number} The maximum nonce value in the array, or 0 if the array is empty.
+ */
+export function getMaxTransactionsNonce(transactions) {
+  if (transactions.length === 0) {
+    return 0;
+  }
+
+  const nonces = transactions.map((transaction) => parseFloat(transaction.nonce));
+
+  return Math.max(nonces);
+}
+
+/**
  * Interprets a transaction dry-run error result. Generates an Error instance with descriptive
  * message if transaction verification failed or is invalid.
  * @param {Object} responseData - Dry-run transaction response.
@@ -102,12 +118,12 @@ export function getDryRunTransactionError(responseData) {
   const errorMessage = responseData.errorMessage;
 
   switch (responseData.result) {
-    case DRY_RUN_TRANSACTION_RESULTS.invalid:
+    case TRANSACTION_EXECUTION_RESULT.invalid:
       error = new Error(`Transaction is invalid. Reason: ${errorMessage}`);
 
       break;
 
-    case DRY_RUN_TRANSACTION_RESULTS.failed:
+    case TRANSACTION_EXECUTION_RESULT.fail:
       error = new Error(`Transaction failed. Reason: ${errorMessage}`);
       break;
 
