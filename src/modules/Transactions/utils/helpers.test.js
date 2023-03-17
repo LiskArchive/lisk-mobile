@@ -2,10 +2,10 @@ import { getMaxTransactionsNonce } from './helpers';
 
 describe('Transaction module helpers', () => {
   describe('getMaxTransactionsNonce', () => {
-    it('returns 0 for an empty array', () => {
+    it('returns null for an empty array of transactions', () => {
       const transactions = [];
       const result = getMaxTransactionsNonce(transactions);
-      expect(result).toBe(0);
+      expect(result).toBeNull();
     });
 
     it('returns the maximum nonce for an array of transactions', () => {

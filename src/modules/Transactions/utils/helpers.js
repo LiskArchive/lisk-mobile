@@ -90,18 +90,17 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
 
 /**
  * Returns the maximum nonce value of an array of transactions.
- *
  * @param {Array.<Transaction>} transactions - An array of transaction objects with `nonce` properties.
- * @returns {number} The maximum nonce value in the array, or 0 if the array is empty.
+ * @returns {number | null} The maximum nonce value in the array, or null if the array is empty.
  */
 export function getMaxTransactionsNonce(transactions) {
   if (transactions.length === 0) {
-    return 0;
+    return null;
   }
 
   const nonces = transactions.map((transaction) => parseFloat(transaction.nonce));
 
-  return Math.max(nonces);
+  return Math.max(...nonces);
 }
 
 /**
