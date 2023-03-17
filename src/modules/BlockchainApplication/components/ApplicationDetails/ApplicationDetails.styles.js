@@ -23,7 +23,7 @@ export default {
     },
     logoContainer: {
       marginTop: -32,
-      marginBottom: -32,
+      marginBottom: Platform.select({ ios: -32, android: 10 }),
       height: 70,
       width: 70,
       borderRadius: 35,
