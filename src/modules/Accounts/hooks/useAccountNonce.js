@@ -21,11 +21,12 @@ import { useAccountPoolTransactionsQuery } from '../api/useAccountPoolTransactio
  * - `error`: An error object representing any error that the hook has encountered, or `null` if there is no error.
  */
 export function useAccountNonce(address, moduleCommand) {
-  const accountAuthQueryResult = useAuthQuery();
+  const accountAuthQueryResult = useAuthQuery(address, { options: { cacheTime: 0 } });
 
   const accountPoolTransactionsQueryResult = useAccountPoolTransactionsQuery(
     address,
-    moduleCommand
+    moduleCommand,
+    { options: { cacheTime: 0 } }
   );
 
   const isLoading =
