@@ -42,6 +42,9 @@ export function TransactionDetailsBody({ transaction, address }) {
       params: { address: displayedAddress },
     });
 
+  // eslint-disable-next-line no-undef
+  const amountInLsk = fromRawLsk(BigInt(transaction.fee ?? 0));
+
   return (
     <ScrollView
       ref={scrollViewRef}
@@ -88,7 +91,7 @@ export function TransactionDetailsBody({ transaction, address }) {
           {i18next.t('transactions.transactionDetails.transactionFeeLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>{fromRawLsk(transaction.fee)} LSK</Text>
+        <Text style={[styles.text, styles.theme.text]}>{amountInLsk} LSK</Text>
       </View>
 
       <View style={[styles.section]}>

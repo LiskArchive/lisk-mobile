@@ -1,6 +1,14 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef } from 'react';
-import { TouchableOpacity, View, ScrollView, Animated, Dimensions, Keyboard } from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  ScrollView,
+  Animated,
+  Dimensions,
+  Keyboard,
+  SafeAreaView,
+} from 'react-native';
 import { useModal } from 'hooks/useModal';
 
 import Icon from 'components/shared/toolBox/icon';
@@ -74,26 +82,28 @@ const BottomModal = ({ style }) => {
           { paddingBottom: bottom.current },
         ]}
       >
-        <Animated.View
-          style={[styles.container, styles.theme.container, style?.container, { top }]}
-        >
-          <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
+        <Animated.View style={[{ top }]}>
+          <SafeAreaView style={[styles.safeArea, styles.theme.container]}>
+            <View style={[styles.container, styles.theme.container, style?.container]}>
+              <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 
-          {showClose && (
-            <TouchableOpacity
-              style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
-              onPress={handleClose}
-            >
-              <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
-            </TouchableOpacity>
-          )}
+              {showClose && (
+                <TouchableOpacity
+                  style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
+                  onPress={handleClose}
+                >
+                  <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
+                </TouchableOpacity>
+              )}
 
-          {/* TODO: Replace {children} container with another VirtualizedList-backed container.
+              {/* TODO: Replace {children} container with another VirtualizedList-backed container.
           VirtualizedLists should never be nested inside plain ScrollViews with the 
           same orientation because it can break windowing and other functionality.
           (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
           */}
-          <ScrollView style={[style?.children]}>{component}</ScrollView>
+              <ScrollView style={[style?.children]}>{component}</ScrollView>
+            </View>
+          </SafeAreaView>
         </Animated.View>
       </Animated.View>
     </Animated.View>

@@ -1,5 +1,4 @@
 /* eslint-disable complexity */
-/* eslint-disable no-undef */
 /* eslint-disable max-lines, max-statements */
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';

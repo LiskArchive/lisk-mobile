@@ -22,7 +22,8 @@ export const includeFee = (value, fee, asRawLsk = false) => {
   const rawValue = bigValue.multipliedBy(factor);
   const bigFee = new BigNumber(fee);
   const result = rawValue.plus(bigFee);
-  return asRawLsk ? result : fromRawLsk(result);
+  // eslint-disable-next-line no-undef
+  return asRawLsk ? result : fromRawLsk(BigInt(result ?? 0));
 };
 
 /**
