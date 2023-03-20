@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
+import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
@@ -10,7 +11,6 @@ import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommand
 import { Transaction } from '../utils/Transaction';
 import { usePriorityFee } from './usePriorityFee';
 import { useInitializationFee } from './useInitializationFee';
-import { useAccountNonce } from '../../Accounts/hooks/useAccountNonce';
 
 /**
  * Creates a transaction object with all required build-in
@@ -28,7 +28,9 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const [currentAccount] = useCurrentAccount();
   const { address, pubkey } = currentAccount.metadata;
 
-  useAccountNonce(address, `${module}:${command}`);
+  const accountNonceQuery = useAccountNonce(address, `${module}:${command}`);
+
+  console.log(JSON.stringify(accountNonceQuery));
 
   const {
     data: networkStatusData,
@@ -42,7 +44,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isLoading: isAuthLoading,
     isSuccess: isAuthSuccess,
     isError: isErrorOnAuth,
-  } = useAuthQuery();
+  } = useAuthQuery(address);
 
   const {
     data: commandParametersSchemasData,
