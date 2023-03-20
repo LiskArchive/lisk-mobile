@@ -11,7 +11,7 @@ export function TransactionAmount({ transaction, style, address }) {
 
   const language = useSelector((state) => state.settings.language);
 
-  const { sign } = transactionAssets?.amount ?? {};
+  const { sign } = transactionAssets.amount;
 
   // Add fee to transaction amount shown on list for outgoing transactions
   const rawLiskAmount =
