@@ -112,23 +112,26 @@ export function getMaxTransactionsNonce(transactions) {
  * See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
  */
 export function getDryRunTransactionError(responseData) {
-  let error = null;
+  let message;
 
-  const errorMessage = responseData.errorMessage;
+  const responseErrorMessage = responseData.errorMessage;
 
   switch (responseData.result) {
     case TRANSACTION_EXECUTION_RESULT.invalid:
-      error = new Error(`Transaction is invalid. Reason: ${errorMessage}`);
-
+      message = 'Transaction is invalid.';
       break;
 
     case TRANSACTION_EXECUTION_RESULT.fail:
-      error = new Error(`Transaction failed. Reason: ${errorMessage}`);
+      message = 'Transaction failed.';
       break;
 
     default:
       break;
   }
 
-  return error;
+  if (responseErrorMessage && responseData.result) {
+    message = `${message} Reason: ${responseErrorMessage}`;
+  }
+
+  return new Error(message);
 }
