@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* istanbul ignore file */
 import { formatJsonRpcError, formatJsonRpcResult } from '@json-rpc-tools/utils';
 import { getSdkError } from '@walletconnect/utils';
