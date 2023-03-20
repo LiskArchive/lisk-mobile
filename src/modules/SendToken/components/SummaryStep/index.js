@@ -52,6 +52,8 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     (form.dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
 
+  const broadcastTransactionError = form.broadcastTransactionMutation.error;
+
   const handleSignTransactionModalReset = (modal) => {
     form.handleReset();
     resetSteps();
@@ -72,7 +74,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
           form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
         }
         isValidationError={Object.keys(form.formState.errors).length > 0}
-        error={dryRunTransactionError || form.broadcastTransactionMutation.error}
+        error={dryRunTransactionError || broadcastTransactionError}
         navigation={navigation}
       />
     ),
@@ -83,8 +85,8 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
       form.broadcastTransactionMutation.isSuccess,
       form.dryRunTransactionMutation.isLoading,
       form.broadcastTransactionMutation.isLoading,
-      dryRunTransactionError,
-      form.broadcastTransactionMutation.error,
+      dryRunTransactionError?.message,
+      broadcastTransactionError?.message,
     ]
   );
 
