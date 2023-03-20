@@ -1,31 +1,11 @@
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_AUTH_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
-export function useAuthQueryParams({ config: customConfig = {} } = {}) {
-  const [currentAccount] = useCurrentAccount();
-
-  const config = {
-    url: `${API_URL}/auth`,
-    method: 'get',
-    event: 'get.auth',
-    ...customConfig,
-    params: {
-      ...(customConfig?.params || {}),
-      address: currentAccount.metadata.address,
-    },
-  };
-
-  const keys = useQueryKeys([GET_AUTH_QUERY, config]);
-
-  return { config, keys };
-}
-
 /**
  * Creates a custom hook for auth details query.
- *
+ * @param {string} address - Account address to query the auth data from.
  * @param {object} configuration - the custom query configuration object
  * @param {Object} configuration.config - the query config
  * @param {Object} configuration.config.params - the query config params
@@ -34,8 +14,19 @@ export function useAuthQueryParams({ config: customConfig = {} } = {}) {
  *
  * @returns the query object
  */
-export function useAuthQuery({ config: customConfig = {}, options } = {}) {
-  const { config, keys } = useAuthQueryParams({ config: customConfig });
+export function useAuthQuery(address, { config: customConfig = {}, options } = {}) {
+  const config = {
+    url: `${API_URL}/auth`,
+    method: 'get',
+    event: 'get.auth',
+    ...customConfig,
+    params: {
+      ...(customConfig?.params || {}),
+      address,
+    },
+  };
+
+  const keys = useQueryKeys([GET_AUTH_QUERY, config]);
 
   return useCustomQuery({
     keys,
