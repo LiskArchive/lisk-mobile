@@ -144,6 +144,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   };
 
   useEffect(() => {
+    if (!isTransactionSuccess) {
+      return;
+    }
+
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
       const defaultTokenID = applicationSupportedTokensData.find(
         (token) => token.symbol === 'LSK'
@@ -162,7 +166,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         });
       }
     }
-  }, [form, defaultValues, applicationSupportedTokensData, transaction]);
+  }, [form, defaultValues, isTransactionSuccess, applicationSupportedTokensData, transaction]);
 
   useEffect(() => {
     if (isTransactionSuccess) {
