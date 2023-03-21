@@ -2,12 +2,12 @@ import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
 
 import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
-import { useAccountPoolTransactionsQuery } from '../api/useAccountPoolTransactionsQuery';
+import { useTransactionPoolQuery } from 'modules/Transactions/api/useTransactionPoolQuery';
 import { mockSavedAccounts } from '../__fixtures__';
 import { useAccountNonce } from './useAccountNonce';
 
 jest.mock('modules/Auth/api/useAuthQuery');
-jest.mock('../api/useAccountPoolTransactionsQuery');
+jest.mock('modules/Transactions/api/useTransactionPoolQuery');
 
 describe('useAccountNonce', () => {
   const address = mockSavedAccounts[0].metadata.address;
@@ -23,7 +23,7 @@ describe('useAccountNonce', () => {
     refetch: jest.fn(),
   };
 
-  const mockPoolTransactionsQueryResult = {
+  const mockTransactionPoolQueryResult = {
     data: { data: [{ nonce: poolMaxNonce.toString() }] },
     isLoading: false,
     isSuccess: true,
@@ -34,7 +34,7 @@ describe('useAccountNonce', () => {
 
   beforeEach(() => {
     useAuthQuery.mockReturnValue(mockAuthQueryResult);
-    useAccountPoolTransactionsQuery.mockReturnValue(mockPoolTransactionsQueryResult);
+    useTransactionPoolQuery.mockReturnValue(mockTransactionPoolQueryResult);
   });
 
   afterEach(() => {
@@ -48,8 +48,8 @@ describe('useAccountNonce', () => {
   });
 
   it('should fallback to on-chain nonce if pool data is empty', () => {
-    useAccountPoolTransactionsQuery.mockReturnValueOnce({
-      ...mockPoolTransactionsQueryResult,
+    useTransactionPoolQuery.mockReturnValueOnce({
+      ...mockTransactionPoolQueryResult,
       data: { data: [] },
     });
 
@@ -64,8 +64,8 @@ describe('useAccountNonce', () => {
       data: null,
     });
 
-    useAccountPoolTransactionsQuery.mockReturnValueOnce({
-      ...mockPoolTransactionsQueryResult,
+    useTransactionPoolQuery.mockReturnValueOnce({
+      ...mockTransactionPoolQueryResult,
       data: { data: [] },
     });
 
@@ -106,8 +106,8 @@ describe('useAccountNonce', () => {
       data: { data: { nonce: '3' } },
     });
 
-    mockPoolTransactionsQueryResult.refetch.mockResolvedValueOnce({
-      ...mockPoolTransactionsQueryResult,
+    mockTransactionPoolQueryResult.refetch.mockResolvedValueOnce({
+      ...mockTransactionPoolQueryResult,
       data: { data: [{ nonce: newData }] },
     });
 

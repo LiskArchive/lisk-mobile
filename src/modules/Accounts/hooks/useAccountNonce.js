@@ -1,12 +1,12 @@
 /* eslint-disable max-statements */
 import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
 import { getMaxTransactionsNonce } from 'modules/Transactions/utils/helpers';
-import { useAccountPoolTransactionsQuery } from '../api/useAccountPoolTransactionsQuery';
+import { useTransactionPoolQuery } from 'modules/Transactions/api/useTransactionPoolQuery';
 
 /**
  * Retrieves the nonce for a given account address from the on-chain data and transaction pool data.
  * @param {string} address - The account address to retrieve the nonce from.
- * @param {object} configurations - useAuthQuery and useAccountPoolTransactionsQuery queries optional configs.
+ * @param {object} configurations - useAuthQuery and useTransactionPoolQuery queries optional configs.
  * @param {object} configurations.config - The queries config.
  * @param {QueryOptions} configuration.options - The queries options.
  * @returns {QueryResult<string>} The query result with the data field as the account nonce.
@@ -17,8 +17,8 @@ export function useAccountNonce(address, { config = {}, options = {} } = {}) {
     options: { cacheTime: 0, ...options },
   });
 
-  const accountPoolTransactionsQueryResult = useAccountPoolTransactionsQuery(address, {
-    config,
+  const accountPoolTransactionsQueryResult = useTransactionPoolQuery({
+    config: { address, ...config },
     options: { cacheTime: 0, ...options },
   });
 
