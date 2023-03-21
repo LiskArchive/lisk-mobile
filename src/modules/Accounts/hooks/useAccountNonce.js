@@ -5,25 +5,20 @@ import { useAccountPoolTransactionsQuery } from '../api/useAccountPoolTransactio
 
 /**
  * Retrieves the nonce for a given account address from the on-chain data and transaction pool data.
- *
- * @param {string} address - The account address to retrieve the nonce for.
- * @returns {{
- *   data: number | null,
- *   isLoading: boolean,
- *   isSuccess: boolean,
- *   isError: boolean,
- *   error: Error | null,
- * }} An object with properties representing the current state of the hook:
- * - `data`: The account nonce, or `null` if it could not be retrieved.
- * - `isLoading`: A boolean indicating whether the hook is currently loading data.
- * - `isSuccess`: A boolean indicating whether the hook has successfully retrieved data.
- * - `isError`: A boolean indicating whether the hook has encountered an error.
- * - `error`: An error object representing any error that the hook has encountered, or `null` if there is no error.
+ * @param {string} address - The account address to retrieve the nonce from.
+ * @param {object} configurations - useAuthQuery and useAccountPoolTransactionsQuery queries optional configs.
+ * @param {object} configurations.config - The queries config.
+ * @param {QueryOptions} configuration.options - The queries options.
+ * @returns {QueryResult<string>} The query result with the data field as the account nonce.
  */
-export function useAccountNonce(address, options = {}) {
-  const accountAuthQueryResult = useAuthQuery(address, { options: { cacheTime: 0, ...options } });
+export function useAccountNonce(address, { config = {}, options = {} } = {}) {
+  const accountAuthQueryResult = useAuthQuery(address, {
+    config,
+    options: { cacheTime: 0, ...options },
+  });
 
   const accountPoolTransactionsQueryResult = useAccountPoolTransactionsQuery(address, {
+    config,
     options: { cacheTime: 0, ...options },
   });
 
