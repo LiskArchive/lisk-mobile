@@ -31,7 +31,7 @@ describe('useAccountNonce', () => {
       data: { data: [] },
     });
 
-    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef', 'my-module-command'));
+    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef'));
 
     expect(result.current).toEqual({
       data: 1,
@@ -46,7 +46,7 @@ describe('useAccountNonce', () => {
     useAuthQuery.mockReturnValueOnce(mockAuthQueryResult);
     useAccountPoolTransactionsQuery.mockReturnValueOnce(mockPoolTransactionsQueryResult);
 
-    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef', 'my-module-command'));
+    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef'));
 
     expect(result.current).toEqual({
       data: 3,
@@ -67,7 +67,7 @@ describe('useAccountNonce', () => {
       data: { data: [] },
     });
 
-    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef', 'my-module-command'));
+    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef'));
 
     expect(result.current).toEqual({
       data: null,
@@ -96,7 +96,7 @@ describe('useAccountNonce', () => {
       error: mockError,
     });
 
-    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef', 'my-module-command'));
+    const { result } = renderHook(() => useAccountNonce('0x1234567890abcdef'));
 
     expect(result.current).toEqual({
       data: null,

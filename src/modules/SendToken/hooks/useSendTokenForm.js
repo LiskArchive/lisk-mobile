@@ -10,14 +10,15 @@ import * as Lisk from '@liskhq/lisk-client';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
 import { TRANSACTION_EXECUTION_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
-import { useChainChannelQuery } from '../../BlockchainApplication/api/useChainChannelQuery';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -29,6 +30,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   );
 
   const { data: messageFeeData } = useMessageFee();
+
+  const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount.metadata.address, {
+    enabled: false,
+  });
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -95,6 +100,12 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   };
 
   const handleSubmit = baseHandleSubmit(async (values) => {
+    const accountNonceData = await refetchAccountNonce();
+
+    if (accountNonceData) {
+      transaction.update({ nonce: accountNonceData });
+    }
+
     let privateKey;
 
     try {

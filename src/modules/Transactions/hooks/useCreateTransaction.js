@@ -2,8 +2,7 @@
 /* eslint-disable max-statements */
 import { useEffect, useRef } from 'react';
 
-import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
-import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
+import { useAuth } from 'modules/Auth/hooks/useAuth';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
@@ -28,10 +27,6 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const [currentAccount] = useCurrentAccount();
   const { address, pubkey } = currentAccount.metadata;
 
-  const accountNonceQuery = useAccountNonce(address, `${module}:${command}`);
-
-  console.log(JSON.stringify(accountNonceQuery));
-
   const {
     data: networkStatusData,
     isLoading: isNetworkStatusLoading,
@@ -44,7 +39,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isLoading: isAuthLoading,
     isSuccess: isAuthSuccess,
     isError: isErrorOnAuth,
-  } = useAuthQuery(address);
+  } = useAuth(address);
 
   const {
     data: commandParametersSchemasData,
@@ -96,7 +91,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
         transaction.init({
           pubkey,
           networkStatus: networkStatusData?.data,
-          auth: authData?.data,
+          auth: authData,
           priorityFee: priorityFeeData,
           extraCommandFee: initializationFeeData,
           commandParametersSchemas: commandParametersSchemasData?.data.commands,
