@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { themes } from 'constants/styleGuide';
 import {
   createThemedStyles,
@@ -9,6 +10,7 @@ import {
   setColorOpacity,
   isNumeric,
   joinArraysWithoutDuplicates,
+  findMaxBigInt,
 } from './helpers';
 
 describe('helpers', () => {
@@ -237,6 +239,23 @@ describe('helpers', () => {
         { id: 3, name: 'object3' },
       ];
       expect(() => joinArraysWithoutDuplicates(arr1, arr2, 2)).toThrowError(TypeError);
+    });
+  });
+
+  describe('findMaxBigInt', () => {
+    it('should return the max value from an array of BigInt numbers', () => {
+      const arr = [BigInt(123), BigInt(456), BigInt(789)];
+      expect(findMaxBigInt(arr)).toBe(789n);
+    });
+
+    it('should throw an error if the array is empty', () => {
+      const arr = [];
+      expect(() => findMaxBigInt(arr)).toThrow('Values array is empty');
+    });
+
+    it('should return the only value in an array with a single element', () => {
+      const arr = [BigInt(123)];
+      expect(findMaxBigInt(arr)).toBe(123n);
     });
   });
 });

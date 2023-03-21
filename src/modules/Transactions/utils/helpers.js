@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
 import * as Lisk from '@liskhq/lisk-client';
 
+import { findMaxBigInt } from 'utilities/helpers';
 import { BASE_TRANSACTION_SCHEMA, TRANSACTION_EXECUTION_RESULT } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema) => {
@@ -91,16 +93,18 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
 /**
  * Returns the maximum nonce value of an array of transactions.
  * @param {Array.<Transaction>} transactions - An array of transaction objects with `nonce` properties.
- * @returns {number | null} The maximum nonce value in the array, or null if the array is empty.
+ * @returns {string | null} The maximum nonce value in the array, or null if the array is empty.
  */
 export function getMaxTransactionsNonce(transactions) {
   if (transactions.length === 0) {
     return null;
   }
 
-  const nonces = transactions.map((transaction) => parseFloat(transaction.nonce));
+  const nonces = transactions.map((transaction) => BigInt(transaction.nonce));
 
-  return Math.max(...nonces);
+  const maxNonce = findMaxBigInt(nonces);
+
+  return maxNonce.toString();
 }
 
 /**

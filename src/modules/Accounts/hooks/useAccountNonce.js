@@ -17,43 +17,34 @@ export function useAccountNonce(address, { config = {}, options = {} } = {}) {
     options: { cacheTime: 0, ...options },
   });
 
-  const accountPoolTransactionsQueryResult = useTransactionPoolQuery({
-    config: { address, ...config },
+  const transactionPoolQueryResult = useTransactionPoolQuery({
+    config: { ...config, params: { address, ...config.params } },
     options: { cacheTime: 0, ...options },
   });
 
-  const isLoading =
-    accountAuthQueryResult.isLoading || accountPoolTransactionsQueryResult.isLoading;
-
-  const isSuccess =
-    accountAuthQueryResult.isSuccess && accountPoolTransactionsQueryResult.isSuccess;
-
-  const isError = accountAuthQueryResult.isError || accountPoolTransactionsQueryResult.isError;
-
-  const error = accountAuthQueryResult.error || accountPoolTransactionsQueryResult.error;
-
   const computeNonce = (_accountAuthQueryResult, _accountPoolTransactionsQueryResult) => {
-    const onChainNonce =
-      _accountAuthQueryResult.data && parseFloat(_accountAuthQueryResult.data.data.nonce);
+    const onChainNonce = _accountAuthQueryResult.data && _accountAuthQueryResult.data.data.nonce;
 
     const poolMaxNonce =
       _accountPoolTransactionsQueryResult.data &&
       getMaxTransactionsNonce(_accountPoolTransactionsQueryResult.data.data);
 
-    const accountNonce = poolMaxNonce || onChainNonce;
-
-    return accountNonce && accountNonce.toString();
+    return poolMaxNonce || onChainNonce;
   };
 
   const refetch = async () => {
     const _accountAuthQueryResult = await accountAuthQueryResult.refetch();
 
-    const _accountPoolTransactionsQueryResult = await accountPoolTransactionsQueryResult.refetch();
+    const _accountPoolTransactionsQueryResult = await transactionPoolQueryResult.refetch();
 
     return computeNonce(_accountAuthQueryResult, _accountPoolTransactionsQueryResult);
   };
 
-  const data = computeNonce(accountAuthQueryResult, accountPoolTransactionsQueryResult);
+  const data = computeNonce(accountAuthQueryResult, transactionPoolQueryResult);
+  const isLoading = accountAuthQueryResult.isLoading || transactionPoolQueryResult.isLoading;
+  const isSuccess = accountAuthQueryResult.isSuccess && transactionPoolQueryResult.isSuccess;
+  const isError = accountAuthQueryResult.isError || transactionPoolQueryResult.isError;
+  const error = accountAuthQueryResult.error || transactionPoolQueryResult.error;
 
   return {
     data,
