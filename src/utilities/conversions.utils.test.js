@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { fromBaseToDisplayDenom, fromBeddowsToLsk } from './conversions.utils';
 
 describe('conversion utils', () => {

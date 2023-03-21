@@ -1,4 +1,5 @@
 import { themes, colors } from 'constants/styleGuide';
+import { Dimensions } from 'react-native';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
@@ -8,6 +9,11 @@ export default () => ({
       padding: 16,
       borderTopRightRadius: 24,
       borderTopLeftRadius: 24,
+    },
+    safeArea: {
+      flexGrow: 1,
+      marginTop: 30,
+      maxHeight: Dimensions.get('screen').height * 0.75,
     },
     content: {
       position: 'absolute',

@@ -3,7 +3,8 @@
   "extends": ["airbnb-base", "plugin:react/recommended", "prettier"],
   "env": {
     "browser": true,
-    "jest": true
+    "jest": true,
+    "es2020": true
   },
   "plugins": ["react", "react-hooks", "import", "babel", "jest", "prettier"],
   "globals": {

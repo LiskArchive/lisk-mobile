@@ -15,7 +15,10 @@ import TokenSvg from 'assets/svgs/TokenSvg';
 import getTokenRowStyles from './TokenRow.styles';
 
 export default function TokenRow({ token }) {
-  const balance = Number(fromRawLsk(token.availableBalance)).toLocaleString();
+  // eslint-disable-next-line no-undef
+  const balance = Number(
+    fromRawLsk(BigInt(token.availableBalance ?? 0).toString())
+  ).toLocaleString();
 
   const {
     data: tokenMetaData,

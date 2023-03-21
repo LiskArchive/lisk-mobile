@@ -21,9 +21,15 @@ export default function TransactionRow({ transaction, address }) {
     styles: getTransactionRowStyles(),
   });
 
-  const transactionAssets = useTransactionAssets({ transaction, style: { icon: styles.icon } });
+  const transactionAssets = useTransactionAssets({
+    transaction,
+    address,
+    style: { icon: styles.icon },
+  });
 
   const shownAddress = transaction.params.recipientAddress || transaction.sender.address;
+
+  const blurVariant = transactionAssets.amount.sign === '-' ? 'outgoing' : 'incoming';
 
   return (
     <TouchableOpacity
@@ -54,8 +60,13 @@ export default function TransactionRow({ transaction, address }) {
 
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
         <DiscreteModeComponent
-          blurVariant={transactionAssets.amount?.sign === '-' ? 'outgoing' : 'incoming'}
-          data={transaction.notRawLisk ? transaction.amount : fromRawLsk(transaction.params.amount)}
+          blurVariant={blurVariant}
+          data={
+            transaction.notRawLisk
+              ? transaction.amount
+              : // eslint-disable-next-line no-undef
+                fromRawLsk(BigInt(transaction.params.amount ?? 0))
+          }
         >
           <TransactionAmount
             transaction={transaction}

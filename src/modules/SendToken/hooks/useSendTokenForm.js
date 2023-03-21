@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable max-statements */
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';

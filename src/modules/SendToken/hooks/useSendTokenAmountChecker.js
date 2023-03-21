@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable max-statements */
 import * as Lisk from '@liskhq/lisk-client';
 
