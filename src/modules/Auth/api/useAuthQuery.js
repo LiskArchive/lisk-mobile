@@ -14,7 +14,7 @@ export function useAuthQueryParams({ config: customConfig = {} } = {}) {
     ...customConfig,
     params: {
       ...(customConfig?.params || {}),
-      address: currentAccount.metadata.address,
+      address: currentAccount?.metadata?.address,
     },
   };
 
@@ -35,11 +35,15 @@ export function useAuthQueryParams({ config: customConfig = {} } = {}) {
  * @returns the query object
  */
 export function useAuthQuery({ config: customConfig = {}, options } = {}) {
+  const [currentAccount] = useCurrentAccount();
   const { config, keys } = useAuthQueryParams({ config: customConfig });
 
   return useCustomQuery({
     keys,
     config,
-    options,
+    options: {
+      ...options,
+      enabled: !!currentAccount?.metadata,
+    },
   });
 }

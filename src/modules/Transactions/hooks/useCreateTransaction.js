@@ -25,7 +25,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const transaction = transactionRef.current;
 
   const [currentAccount] = useCurrentAccount();
-  const { pubkey } = currentAccount.metadata;
+  const { pubkey } = currentAccount?.metadata ?? {};
 
   const {
     data: networkStatusData,
