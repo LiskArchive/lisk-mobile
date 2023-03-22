@@ -1,17 +1,19 @@
-import { getMaxTransactionsNonce } from './helpers';
+import { computeNonce } from './helpers';
 
 describe('Transaction module helpers', () => {
-  describe('getMaxTransactionsNonce', () => {
-    it('returns null for an empty array of transactions', () => {
-      const transactions = [];
-      const result = getMaxTransactionsNonce(transactions);
-      expect(result).toBeNull();
+  describe('computeNonce', () => {
+    it('returns the authNonce if transactionPool is empty', () => {
+      const authNonce = '123456';
+      const transactionPool = [];
+      const result = computeNonce(authNonce, transactionPool);
+      expect(result).toEqual(authNonce);
     });
 
-    it('returns the maximum nonce for an array of transactions', () => {
-      const transactions = [{ nonce: '2' }, { nonce: '10' }, { nonce: '5' }, { nonce: '9' }];
-      const result = getMaxTransactionsNonce(transactions);
-      expect(result).toBe('10');
+    it('returns the maximum nonce from the transactionPool', () => {
+      const authNonce = '123456';
+      const transactionPool = [{ nonce: '123450' }, { nonce: '123454' }, { nonce: '123455' }];
+      const result = computeNonce(authNonce, transactionPool);
+      expect(result).toEqual('123455');
     });
   });
 });

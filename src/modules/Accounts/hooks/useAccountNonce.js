@@ -1,7 +1,6 @@
-/* eslint-disable max-statements */
 import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
-import { getMaxTransactionsNonce } from 'modules/Transactions/utils/helpers';
 import { useTransactionPoolQuery } from 'modules/Transactions/api/useTransactionPoolQuery';
+import { computeNonce } from 'modules/Transactions/utils/helpers';
 
 /**
  * Retrieves the nonce for a given account address from the on-chain data and transaction pool data.
@@ -12,39 +11,36 @@ import { useTransactionPoolQuery } from 'modules/Transactions/api/useTransaction
  * @returns {QueryResult<string>} The query result with the data field as the account nonce.
  */
 export function useAccountNonce(address, { config = {}, options = {} } = {}) {
-  const accountAuthQueryResult = useAuthQuery(address, {
+  const authQuery = useAuthQuery(address, {
     config,
     options: { cacheTime: 0, ...options },
   });
 
-  const transactionPoolQueryResult = useTransactionPoolQuery({
+  const transactionPoolQuery = useTransactionPoolQuery({
     config: { ...config, params: { address, ...config.params } },
     options: { cacheTime: 0, ...options },
   });
 
-  const computeNonce = (_accountAuthQueryResult, _accountPoolTransactionsQueryResult) => {
-    const onChainNonce = _accountAuthQueryResult.data && _accountAuthQueryResult.data.data.nonce;
+  const prepareData = (accountAuthData, transactionPoolData) => {
+    if (!accountAuthData || !transactionPoolData) {
+      return null;
+    }
 
-    const poolMaxNonce =
-      _accountPoolTransactionsQueryResult.data &&
-      getMaxTransactionsNonce(_accountPoolTransactionsQueryResult.data.data);
-
-    return poolMaxNonce || onChainNonce;
+    return computeNonce(accountAuthData.nonce, transactionPoolData);
   };
 
   const refetch = async () => {
-    const _accountAuthQueryResult = await accountAuthQueryResult.refetch();
+    const { data: authRefetchData } = await authQuery.refetch();
+    const { data: transactionPoolRefetchData } = await transactionPoolQuery.refetch();
 
-    const _accountPoolTransactionsQueryResult = await transactionPoolQueryResult.refetch();
-
-    return computeNonce(_accountAuthQueryResult, _accountPoolTransactionsQueryResult);
+    return prepareData(authRefetchData?.data, transactionPoolRefetchData?.data);
   };
 
-  const data = computeNonce(accountAuthQueryResult, transactionPoolQueryResult);
-  const isLoading = accountAuthQueryResult.isLoading || transactionPoolQueryResult.isLoading;
-  const isSuccess = accountAuthQueryResult.isSuccess && transactionPoolQueryResult.isSuccess;
-  const isError = accountAuthQueryResult.isError || transactionPoolQueryResult.isError;
-  const error = accountAuthQueryResult.error || transactionPoolQueryResult.error;
+  const data = prepareData(authQuery.data?.data, transactionPoolQuery.data?.data);
+  const isLoading = authQuery.isLoading || transactionPoolQuery.isLoading;
+  const isSuccess = authQuery.isSuccess && transactionPoolQuery.isSuccess;
+  const isError = authQuery.isError || transactionPoolQuery.isError;
+  const error = authQuery.error || transactionPoolQuery.error;
 
   return {
     data,

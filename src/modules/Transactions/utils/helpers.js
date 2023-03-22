@@ -91,20 +91,22 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
 };
 
 /**
- * Returns the maximum nonce value of an array of transactions.
- * @param {Array.<Transaction>} transactions - An array of transaction objects with `nonce` properties.
- * @returns {string | null} The maximum nonce value in the array, or null if the array is empty.
+ * Computes the valid nonce to use for a transaction given an account on-chain nonce (auth nonce)
+ * and the account transactions in mem pool.
+ * @param {string} authNonce - Account on-chain nonce.
+ * @param {Array<Transaction>} transactionPool - Account transactions in mem pool.
+ * @returns {string} The calculated max nonce.
  */
-export function getMaxTransactionsNonce(transactions) {
-  if (transactions.length === 0) {
-    return null;
+export function computeNonce(authNonce, transactionPool) {
+  if (transactionPool.length === 0) {
+    return authNonce;
   }
 
-  const nonces = transactions.map((transaction) => BigInt(transaction.nonce));
+  const transactionNonces = transactionPool.map((transaction) => BigInt(transaction.nonce));
 
-  const maxNonce = findMaxBigInt(nonces);
+  const poolMaxNonce = findMaxBigInt(transactionNonces).toString();
 
-  return maxNonce.toString();
+  return poolMaxNonce;
 }
 
 /**
