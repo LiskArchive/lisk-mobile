@@ -2,7 +2,7 @@
 /* eslint-disable max-statements */
 import { useEffect, useRef } from 'react';
 
-import { useAuthQuery } from 'modules/Auth/api/useAuthQuery';
+import { useAuth } from 'modules/Auth/hooks/useAuth';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
@@ -25,7 +25,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
   const transaction = transactionRef.current;
 
   const [currentAccount] = useCurrentAccount();
-  const { pubkey } = currentAccount.metadata;
+  const { address, pubkey } = currentAccount.metadata;
 
   const {
     data: networkStatusData,
@@ -39,7 +39,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isLoading: isAuthLoading,
     isSuccess: isAuthSuccess,
     isError: isErrorOnAuth,
-  } = useAuthQuery();
+  } = useAuth(address);
 
   const {
     data: commandParametersSchemasData,
@@ -91,7 +91,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
         transaction.init({
           pubkey,
           networkStatus: networkStatusData?.data,
-          auth: authData?.data,
+          auth: authData,
           priorityFee: priorityFeeData,
           extraCommandFee: initializationFeeData,
           commandParametersSchemas: commandParametersSchemasData?.data.commands,

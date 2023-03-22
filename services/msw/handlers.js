@@ -1,3 +1,4 @@
+import * as authHandlers from 'modules/Auth/mocks';
 import * as sendTokenHandlers from 'modules/SendToken/mocks';
 import * as transactionHandlers from 'modules/Transactions/mocks';
 import * as applicationsHandlers from 'modules/BlockchainApplication/mocks';
@@ -12,4 +13,5 @@ export const mswHandlers = {
   ...applicationsHandlers,
   ...networkHandlers,
   ...accountHandlers,
+  ...authHandlers,
 };

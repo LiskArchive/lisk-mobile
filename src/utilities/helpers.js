@@ -156,6 +156,19 @@ export const validateAmount = (amount) => new RegExp(regex.amount).test(amount);
 export const isNumeric = (value) => /^([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(value);
 
 /**
+ * Finds the maximum value in an array of BigInt numbers.
+ * @param {Array<bigint>} values - An array of BigInt numbers.
+ * @returns {bigint} - The maximum value in the array.
+ * @throws {Error} - If the input array is empty.
+ */
+export function findMaxBigInt(values) {
+  if (values.length === 0) {
+    throw new Error('Values array is empty');
+  }
+  return values.reduce((acc, cur) => (acc > cur ? acc : cur));
+}
+
+/**
  * Joins two arrays of objects without repeating the ones with the same property value.
  * @param {Array} arr1 - The first array of objects to join.
  * @param {Array} arr2 - The second array of objects to join.
