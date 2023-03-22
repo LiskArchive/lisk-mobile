@@ -113,7 +113,7 @@ export default function SendToken() {
   useEffect(() => {
     if (!accounts.length) {
       navigation.navigate('AuthMethod');
-    } else if (!currentAccount?.metadata && accounts?.length === 1) {
+    } else if (!currentAccount?.metadata && accounts.length === 1) {
       handleSelectAccountClick(accounts[0]);
     } else if (!currentAccount?.metadata) {
       openSelectAccountModal();
