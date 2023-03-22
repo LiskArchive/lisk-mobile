@@ -29,7 +29,7 @@ export default function TransactionRow({ transaction, address }) {
 
   const shownAddress = transaction.params.recipientAddress || transaction.sender.address;
 
-  const blurVariant = transactionAssets.amount.sign === '-' ? 'outgoing' : 'incoming';
+  const blurVariant = transactionAssets.amount?.sign === '-' ? 'outgoing' : 'incoming';
 
   return (
     <TouchableOpacity

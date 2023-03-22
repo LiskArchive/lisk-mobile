@@ -29,8 +29,8 @@ export class Transaction {
   _extraCommandFee = null;
 
   transaction = {
-    module: null,
-    command: null,
+    module: '',
+    command: '',
     priority: null,
     nonce: BigInt(0),
     fee: BigInt(0),
@@ -50,8 +50,8 @@ export class Transaction {
     priorityFee,
     extraCommandFee,
     commandParametersSchemas,
-    module = null,
-    command = null,
+    module = '',
+    command = 'null',
     encodedTransaction = null,
     params = {},
     schema,
@@ -85,7 +85,7 @@ export class Transaction {
     this._paramsSchema = getCommandParamsSchema(
       this.transaction.module,
       this.transaction.command,
-      this._paramsSchemas
+      commandParametersSchemas
     );
 
     if (encodedTransaction) {
@@ -107,6 +107,9 @@ export class Transaction {
     nonce = null,
     ...others
   }) {
+    if (this.module || !command || !this._paramsSchema) {
+      return this.transaction;
+    }
     this._computeParamsSchema(module, command);
 
     const updatedTransaction = {

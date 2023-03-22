@@ -2,12 +2,13 @@ import * as Lisk from '@liskhq/lisk-client';
 
 import { BASE_TRANSACTION_SCHEMA, DRY_RUN_TRANSACTION_RESULTS } from './constants';
 
-export const getCommandParamsSchema = (module, command, schema) => {
+export const getCommandParamsSchema = (module, command, schema = []) => {
+  console.log('schema', schema);
   const moduleCommand = module.concat(':', command);
 
   const commandSchema = schema.find((meta) => meta.moduleCommand === moduleCommand);
 
-  if (!(commandSchema && commandSchema.schema)) {
+  if (!commandSchema?.schema) {
     throw new Error(`Module: ${module} and Command: ${command} is not registered.`);
   }
 
