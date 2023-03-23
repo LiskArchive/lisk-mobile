@@ -57,8 +57,8 @@ export const PRIORITY_NAMES_MAP = {
   high: t('sendToken.tokenSelect.highPriorityLabel'),
 };
 
-export const TRANSACTION_EXECUTION_RESULT = {
+export const TRANSACTION_VERIFY_RESULT = {
   invalid: -1,
-  fail: 0,
+  pending: 0,
   ok: 1,
 };

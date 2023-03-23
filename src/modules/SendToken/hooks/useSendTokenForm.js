@@ -13,7 +13,7 @@ import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
-import { TRANSACTION_EXECUTION_RESULT } from 'modules/Transactions/utils/constants';
+import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
@@ -128,7 +128,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           { transaction: encodedTransaction },
           {
             onSettled: ({ data }) => {
-              if (data.result === TRANSACTION_EXECUTION_RESULT.ok) {
+              if (data.result !== TRANSACTION_VERIFY_RESULT.invalid) {
                 broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
               }
             },
