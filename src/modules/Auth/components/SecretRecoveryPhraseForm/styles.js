@@ -10,6 +10,7 @@ export default () => ({
       fontFamily: fonts.family.passphrase,
       textAlign: 'justify',
       color: colors.dark.whiteSmoke,
+      paddingTop: 15,
     },
     derivationPathContainer: {
       marginTop: 20,

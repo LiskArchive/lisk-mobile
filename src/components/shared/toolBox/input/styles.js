@@ -37,7 +37,7 @@ export default () => ({
       paddingLeft: 40,
     },
     inputWithRightAdornment: {
-      paddingRight: 40,
+      paddingRight: 50,
     },
     inputFocused: {
       borderColor: colors.light.ultramarineBlue,
