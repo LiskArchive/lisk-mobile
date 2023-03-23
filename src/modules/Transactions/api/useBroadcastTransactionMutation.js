@@ -1,7 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import i18next from 'i18next';
 
-import { useAuthQueryParams } from 'modules/Auth/api/useAuthQuery';
 import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
 import DropDownHolder from 'utilities/alert';
@@ -12,10 +11,6 @@ import DropDownHolder from 'utilities/alert';
  * @returns The mutation to trigger the API call.
  */
 export default function useBroadcastTransactionMutation(options = {}) {
-  const queryClient = useQueryClient();
-
-  const { keys: authQueryKeys } = useAuthQueryParams();
-
   return useMutation(
     ({ transaction }) => {
       const config = {
@@ -28,23 +23,6 @@ export default function useBroadcastTransactionMutation(options = {}) {
       return apiClient[METHOD](config);
     },
     {
-      onSuccess: (data) => {
-        const [authQueryCache] = queryClient.getQueriesData(authQueryKeys);
-
-        const authQueryData = authQueryCache[1];
-
-        if (authQueryData) {
-          queryClient.setQueryData(authQueryKeys, {
-            ...authQueryData,
-            data: {
-              ...authQueryData.data,
-              nonce: `${(parseFloat(authQueryData.data.nonce) || 0) + 1}`,
-            },
-          });
-        }
-
-        if (options.onSuccess) options.onSuccess(data);
-      },
       onError: (error) => {
         DropDownHolder.error(
           i18next.t('Error'),

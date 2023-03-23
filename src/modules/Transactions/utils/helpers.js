@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import * as Lisk from '@liskhq/lisk-client';
 
-import { BASE_TRANSACTION_SCHEMA, DRY_RUN_TRANSACTION_RESULTS } from './constants';
+import { findMaxBigInt } from 'utilities/helpers';
+import { BASE_TRANSACTION_SCHEMA, TRANSACTION_EXECUTION_RESULT } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema = []) => {
   console.log('schema', schema);
@@ -90,6 +92,25 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
 };
 
 /**
+ * Computes the valid nonce to use for a transaction given an account on-chain nonce (auth nonce)
+ * and the account transactions in mem pool.
+ * @param {string} authNonce - Account on-chain nonce.
+ * @param {Array<Transaction>} transactionPool - Account transactions in mem pool.
+ * @returns {string} The calculated max nonce.
+ */
+export function computeNonce(authNonce, transactionPool) {
+  if (transactionPool.length === 0) {
+    return authNonce;
+  }
+
+  const transactionNonces = transactionPool.map((transaction) => BigInt(transaction.nonce));
+
+  const poolMaxNonce = findMaxBigInt(transactionNonces).toString();
+
+  return poolMaxNonce;
+}
+
+/**
  * Interprets a transaction dry-run error result. Generates an Error instance with descriptive
  * message if transaction verification failed or is invalid.
  * @param {Object} responseData - Dry-run transaction response.
@@ -98,18 +119,22 @@ export const toTransactionJSON = (transaction, paramsSchema) => {
  * See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
  */
 export function getDryRunTransactionError(responseData) {
-  let error = null;
+  let error;
+  let reasonMessage = '';
 
-  const errorMessage = responseData.errorMessage;
+  const responseErrorMessage = responseData.errorMessage;
+
+  if (responseErrorMessage && responseData.result) {
+    reasonMessage = `Reason: ${responseErrorMessage}`;
+  }
 
   switch (responseData.result) {
-    case DRY_RUN_TRANSACTION_RESULTS.invalid:
-      error = new Error(`Transaction is invalid. Reason: ${errorMessage}`);
-
+    case TRANSACTION_EXECUTION_RESULT.invalid:
+      error = new Error(`Transaction is invalid. ${reasonMessage}`);
       break;
 
-    case DRY_RUN_TRANSACTION_RESULTS.failed:
-      error = new Error(`Transaction failed. Reason: ${errorMessage}`);
+    case TRANSACTION_EXECUTION_RESULT.fail:
+      error = new Error(`Transaction failed. ${reasonMessage}`);
       break;
 
     default:
