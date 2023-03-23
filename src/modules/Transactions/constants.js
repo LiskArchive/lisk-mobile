@@ -20,7 +20,7 @@ const MODULES = {
 
 const COMMANDS = {
   transfer: 'transfer',
-  crossChaintransfer: 'crossChaintransfer',
+  transferCrossChain: 'transferCrossChain',
   registerMultisignatureGroup: 'registerMultisignatureGroup',
   registerDelegate: 'registerDelegate',
   reportDelegateMisbehavior: 'reportDelegateMisbehavior',
@@ -35,7 +35,7 @@ const COMMANDS = {
 
 export const MODULE_COMMAND_NAMES = {
   tokenTransfer: `${MODULES.token}:${COMMANDS.transfer}`,
-  tokenCrossChaintransfer: `${MODULES.token}:${COMMANDS.crossChaintransfer}`,
+  tokenCrossChainTransfer: `${MODULES.token}:${COMMANDS.transferCrossChain}`,
   registerMultisignatureGroup: `${MODULES.auth}:${COMMANDS.registerMultisignatureGroup}`,
   reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
   registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,
