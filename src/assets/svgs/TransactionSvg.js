@@ -21,7 +21,7 @@ export default function TransactionSvg({
 
   switch (moduleCommand) {
     case MODULE_COMMAND_NAMES.tokenTransfer:
-    case MODULE_COMMAND_NAMES.tokenCrossChaintransfer:
+    case MODULE_COMMAND_NAMES.tokenCrossChainTransfer:
       children = (
         <>
           <Path

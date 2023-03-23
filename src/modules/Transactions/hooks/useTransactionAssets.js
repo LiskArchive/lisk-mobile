@@ -21,7 +21,10 @@ export function useTransactionAssets({ transaction, style, address }) {
     icon: <TransactionSvg moduleCommand={transaction.moduleCommand} style={style?.icon} />,
   };
 
-  if (transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenTransfer) {
+  if (
+    transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenTransfer ||
+    transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenCrossChainTransfer
+  ) {
     if (address !== transaction.sender.address) {
       assets = {
         ...assets,
@@ -50,10 +53,10 @@ export function useTransactionAssets({ transaction, style, address }) {
       };
       break;
 
-    case MODULE_COMMAND_NAMES.tokenCrossChaintransfer:
+    case MODULE_COMMAND_NAMES.tokenCrossChainTransfer:
       assets = {
         ...assets,
-        type: 'tokenCrossChaintransfer',
+        type: 'tokenCrossChainTransfer',
         title: 'Cross-chain Transfer',
       };
       break;

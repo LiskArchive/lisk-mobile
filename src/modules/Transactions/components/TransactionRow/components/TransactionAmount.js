@@ -18,10 +18,12 @@ export function TransactionAmount({ transaction, style, address }) {
     sign === '-'
       ? fromRawLsk((BigInt(transaction.params.amount) + BigInt(transaction.fee)).toString())
       : fromRawLsk(BigInt(transaction.params.amount ?? 0).toString());
+
   const transactionAmount = transaction.notRawLisk ? transaction.amount : rawLiskAmount;
 
   if (
-    transactionAssets.type === 'tokenTransfer' &&
+    (transactionAssets.type === 'tokenTransfer' ||
+      transactionAssets.type === 'tokenCrossChainTransfer') &&
     transaction.params.recipientAddress !== transaction.sender.address
   ) {
     return (
