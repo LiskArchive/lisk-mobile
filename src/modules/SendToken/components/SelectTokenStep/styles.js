@@ -1,4 +1,5 @@
 import { themes, colors, boxes } from 'constants/styleGuide';
+import { Platform } from 'react-native';
 
 export default function getSendTokenSelectTokenStepStyles() {
   return {
@@ -161,6 +162,7 @@ export function getSendTokenMessageFieldStyles(styles) {
     input: {
       padding: 16,
       minHeight: 80,
+      paddingTop: Platform.select({ ios: 15, default: 16 }),
       ...styles?.input,
     },
   };

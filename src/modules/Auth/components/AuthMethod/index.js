@@ -71,10 +71,7 @@ export default function AuthMethod({ route }) {
 
   const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
 
-  const showBackButton = React.useMemo(
-    () => navigation.canGoBack() && accounts.length > 0,
-    [navigation, accounts.length]
-  );
+  const showBackButton = accounts.length > 0;
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
