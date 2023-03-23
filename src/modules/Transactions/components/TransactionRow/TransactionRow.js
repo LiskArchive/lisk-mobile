@@ -31,17 +31,15 @@ export default function TransactionRow({ transaction, address }) {
 
   const blurVariant = transactionAssets.amount.sign === '-' ? 'outgoing' : 'incoming';
 
+  const handlePress = () =>
+    navigation.navigate({
+      name: 'TransactionDetails',
+      params: { transactionId: transaction.id, address },
+      key: transaction.id,
+    });
+
   return (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate({
-          name: 'TransactionDetails',
-          params: { transactionId: transaction.id, address },
-          key: transaction.id,
-        })
-      }
-      style={[styles.container, styles.theme.container]}
-    >
+    <TouchableOpacity onPress={handlePress} style={[styles.container, styles.theme.container]}>
       <View style={[styles.row]}>
         {transactionAssets.icon}
 
