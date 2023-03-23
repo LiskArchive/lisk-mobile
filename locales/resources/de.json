@@ -492,9 +492,8 @@
       "pending": "Ausstehend"
     },
     "errors": {
-      "dryRunRequestErrorDescription": "Fehler beim Validieren Ihrer Transaktion. Bitte versuchen Sie es später erneut.",
-      "dryRunInvalidTransactionTitle": "Ungültige Transaktion",
-      "dryRunInvalidTransactionDescription": "Bitte überprüfen Sie Ihre Eingaben oder laden Sie die App neu und versuchen Sie es erneut.",
+      "dryRunErrorMainMessage": "Beim Validieren der Transaktion ist ein Fehler aufgetreten.",
+      "dryRunErrorReasonMessage": "Grund: {{message}}",
       "broadcastErrorDescription": "Fehler beim Senden Ihrer Transaktion. Bitte versuchen Sie es später erneut.",
       "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
     }

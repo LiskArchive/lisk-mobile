@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import * as Lisk from '@liskhq/lisk-client';
+import i18next from 'i18next';
 
 import { findMaxBigInt } from 'utilities/helpers';
 import { BASE_TRANSACTION_SCHEMA, TRANSACTION_VERIFY_RESULT } from './constants';
@@ -124,12 +125,14 @@ export function getDryRunTransactionError(responseData) {
     return null;
   }
 
-  let message = 'Transaction is invalid.';
+  let message = i18next.t('transactions.errors.dryRunErrorMainMessage');
 
   const responseErrorMessage = responseData.errorMessage;
 
   if (responseErrorMessage && responseData.result) {
-    message += ` Reason: ${responseErrorMessage}`;
+    message += ` ${i18next.t('transactions.errors.dryRunErrorReasonMessage', {
+      message: responseErrorMessage,
+    })}`;
   }
 
   return new Error(message);
