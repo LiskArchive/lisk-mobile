@@ -11,7 +11,7 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
  * @param {QueryOptions} configuration.options - The query options object.
  * @returns {QueryResult} The query result object.
  */
-export function useAuthQuery(address, { config: customConfig = {}, options } = {}) {
+export function useAuthQuery(address, { config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/auth`,
     method: 'get',
