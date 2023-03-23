@@ -20,7 +20,7 @@ import { useInitializationFee } from './useInitializationFee';
  * @param {String} params.encodedTransaction - Encoded transaction to create a transaction object from (optional).
  * @returns {Object} The created transaction data, isLoading, isSuccess and isError states.
  */
-export function useCreateTransaction({ module = '', command = '', encodedTransaction = null }) {
+export function useCreateTransaction({ module = null, command = null, encodedTransaction = null }) {
   const transactionRef = useRef(new Transaction());
   const [currentAccount] = useCurrentAccount();
   const transaction = transactionRef.current;

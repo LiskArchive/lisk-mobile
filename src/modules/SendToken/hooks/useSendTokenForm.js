@@ -30,7 +30,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const { data: messageFeeData } = useMessageFee();
 
-  const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount.metadata.address, {
+  const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
   });
 

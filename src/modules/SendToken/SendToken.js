@@ -33,13 +33,49 @@ import AccountItem from '../Accounts/components/AccountItem';
  */
 export default function SendToken() {
   const route = useRoute();
-  const modal = useModal();
   const { accounts } = useAccounts();
-
+  const [currentAccount, setCurrentAccount] = useCurrentAccount();
   const navigation = useNavigation();
 
+  const { styles } = useTheme({
+    styles: getSendTokenStyles(),
+  });
+
+  const handleSelectAccountClick = (account, modal) => {
+    setCurrentAccount(account);
+    modal.close();
+  };
+
+  const renderAccountList = (modal) => {
+    return (
+      <View>
+        <View style={styles.modalTitleContainer}>
+          <H3 style={styles.theme.text}>{i18next.t('sendToken.account.selectAccount')}</H3>
+          <P style={[styles.description, styles.theme.text]}>
+            {i18next.t('sendToken.account.description')}
+          </P>
+        </View>
+        <FlatList
+          data={accounts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <AccountItem
+              key={item.metadata.address}
+              account={item}
+              onPress={() => handleSelectAccountClick(item, modal)}
+              active={item.metadata.address === currentAccount.metadata?.address}
+              testID={`account-list-item`}
+              navigation={navigation}
+            />
+          )}
+        />
+      </View>
+    );
+  };
+
+  const accountListModal = useModal(renderAccountList);
+
   const accountSummary = useSelector(selectAccountSummary);
-  const [currentAccount, setCurrentAccount] = useCurrentAccount();
 
   const createTransactionOptions = useMemo(
     () => ({
@@ -57,10 +93,6 @@ export default function SendToken() {
     initialValues: route.params,
   });
 
-  const { styles } = useTheme({
-    styles: getSendTokenStyles(),
-  });
-
   const steps = [
     {
       component: SendTokenApplicationsStep,
@@ -76,39 +108,7 @@ export default function SendToken() {
     },
   ];
 
-  const handleSelectAccountClick = (account) => {
-    setCurrentAccount(account);
-    modal.close();
-  };
-
-  const renderAccountList = () => {
-    return (
-      <View>
-        <View style={styles.modalTitleContainer}>
-          <H3 style={styles.theme.text}>{i18next.t('sendToken.account.selectAccount')}</H3>
-          <P style={[styles.description, styles.theme.text]}>
-            {i18next.t('sendToken.account.description')}
-          </P>
-        </View>
-        <FlatList
-          data={accounts}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <AccountItem
-              key={item.metadata.address}
-              account={item}
-              onPress={() => handleSelectAccountClick(item)}
-              active={item.metadata.address === currentAccount.metadata?.address}
-              testID={`account-list-item`}
-              navigation={navigation}
-            />
-          )}
-        />
-      </View>
-    );
-  };
-
-  const openSelectAccountModal = () => modal.open(renderAccountList(), false);
+  const openSelectAccountModal = () => accountListModal.open(undefined, false);
 
   useEffect(() => {
     if (!accounts.length) {

@@ -23,15 +23,15 @@ import { ModalContext } from 'contexts/ModalContext';
 export function useModal(renderComponent, componentDeps = []) {
   const modal = useContext(ModalContext);
 
-  const open = (componentRendered = renderComponent(modal), showCloseIcon = true) => {
-    modal.toggle(true);
-    modal.setComponent(componentRendered);
-    modal.setShowClose(showCloseIcon);
-  };
-
   const close = () => {
     modal.toggle(false);
     modal.setComponent(null);
+  };
+
+  const open = (componentRendered = renderComponent({ ...modal, close }), showCloseIcon = true) => {
+    modal.toggle(true);
+    modal.setComponent(componentRendered);
+    modal.setShowClose(showCloseIcon);
   };
 
   useEffect(() => {

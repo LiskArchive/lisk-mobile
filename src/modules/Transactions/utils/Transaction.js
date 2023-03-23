@@ -29,8 +29,8 @@ export class Transaction {
   _extraCommandFee = null;
 
   transaction = {
-    module: '',
-    command: '',
+    module: null,
+    command: null,
     priority: null,
     nonce: BigInt(0),
     fee: BigInt(0),
@@ -50,8 +50,8 @@ export class Transaction {
     priorityFee,
     extraCommandFee,
     commandParametersSchemas,
-    module = '',
-    command = 'null',
+    module = null,
+    command = null,
     encodedTransaction = null,
     params = {},
     schema,

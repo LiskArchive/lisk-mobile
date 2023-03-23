@@ -18,7 +18,7 @@ export function useAccountNonce(address, { config = {}, options = {} } = {}) {
 
   const transactionPoolQuery = useTransactionPoolQuery({
     config: { ...config, params: { address, ...config.params } },
-    options: { cacheTime: 0, ...options },
+    options: { cacheTime: 0, ...options, enabled: !!address },
   });
 
   const prepareData = (accountAuthData, transactionPoolData) => {
