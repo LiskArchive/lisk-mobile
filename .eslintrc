@@ -126,7 +126,8 @@
           ["modules", "./src/modules"],
           ["hooks", "./src/hooks"],
           ["store", "./src/store"],
-          ["tests", "./src/tests"]
+          ["tests", "./src/tests"],
+          ["locales", "./locales"]
         ],
         "extensions": [".js", ".jsx", ".json"]
       }

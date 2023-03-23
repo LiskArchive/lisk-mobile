@@ -1,14 +1,4 @@
-/**
- * Since react-navigation doesn't support i18n
- * I've created this dummy function to help i18n scanner
- * understand about these titles.
- * We can remove this as soon as react-navigation supports i18n or
- * we change the router to another lib with i18n support.
- *
- * @param {String} str
- * @returns {String} same as the input string
- */
-const t = (str) => str;
+import { t } from 'locales/helpers';
 
 const MODULES = {
   token: 'token',
@@ -20,7 +10,7 @@ const MODULES = {
 
 const COMMANDS = {
   transfer: 'transfer',
-  crossChaintransfer: 'crossChaintransfer',
+  transferCrossChain: 'transferCrossChain',
   registerMultisignatureGroup: 'registerMultisignatureGroup',
   registerDelegate: 'registerDelegate',
   reportDelegateMisbehavior: 'reportDelegateMisbehavior',
@@ -35,7 +25,7 @@ const COMMANDS = {
 
 export const MODULE_COMMAND_NAMES = {
   tokenTransfer: `${MODULES.token}:${COMMANDS.transfer}`,
-  tokenCrossChaintransfer: `${MODULES.token}:${COMMANDS.crossChaintransfer}`,
+  tokenCrossChainTransfer: `${MODULES.token}:${COMMANDS.transferCrossChain}`,
   registerMultisignatureGroup: `${MODULES.auth}:${COMMANDS.registerMultisignatureGroup}`,
   reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
   registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,

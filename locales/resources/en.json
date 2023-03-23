@@ -495,9 +495,8 @@
       "pending": "Pending"
     },
     "errors": {
-      "dryRunRequestErrorDescription": "Error validating your transaction. Please try again later.",
-      "dryRunInvalidTransactionTitle": "Invalid transaction",
-      "dryRunInvalidTransactionDescription": "Please check your inputs, or reload the app and try again.",
+      "dryRunErrorMainMessage": "There was an error validating the transaction.",
+      "dryRunErrorReasonMessage": "Reason: {{message}}",
       "broadcastErrorDescription": "Error submitting your transaction. Please try again later.",
       "signErrorDescription": "Error signing your transaction. Please try again later."
     }   

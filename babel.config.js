@@ -10,6 +10,9 @@ module.exports = {
       'module-resolver',
       {
         root: ['./src'],
+        alias: {
+          locales: './locales',
+        },
       },
     ],
   ],

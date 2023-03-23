@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import * as Lisk from '@liskhq/lisk-client';
+import i18next from 'i18next';
 
 import { findMaxBigInt } from 'utilities/helpers';
-import { BASE_TRANSACTION_SCHEMA, TRANSACTION_EXECUTION_RESULT } from './constants';
+import { BASE_TRANSACTION_SCHEMA, TRANSACTION_VERIFY_RESULT } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema = []) => {
   const moduleCommand = module.concat(':', command);
@@ -118,27 +119,21 @@ export function computeNonce(authNonce, transactionPool) {
  * See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
  */
 export function getDryRunTransactionError(responseData) {
-  let error;
-  let reasonMessage = '';
+  const isError = responseData.result === TRANSACTION_VERIFY_RESULT.invalid;
+
+  if (!isError) {
+    return null;
+  }
+
+  let message = i18next.t('transactions.errors.dryRunErrorMainMessage');
 
   const responseErrorMessage = responseData.errorMessage;
 
   if (responseErrorMessage && responseData.result) {
-    reasonMessage = `Reason: ${responseErrorMessage}`;
+    message += ` ${i18next.t('transactions.errors.dryRunErrorReasonMessage', {
+      message: responseErrorMessage,
+    })}`;
   }
 
-  switch (responseData.result) {
-    case TRANSACTION_EXECUTION_RESULT.invalid:
-      error = new Error(`Transaction is invalid. ${reasonMessage}`);
-      break;
-
-    case TRANSACTION_EXECUTION_RESULT.fail:
-      error = new Error(`Transaction failed. ${reasonMessage}`);
-      break;
-
-    default:
-      break;
-  }
-
-  return error;
+  return new Error(message);
 }

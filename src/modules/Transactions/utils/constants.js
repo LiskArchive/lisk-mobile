@@ -1,16 +1,7 @@
-/**
- * Since react-navigation doesn't support i18n
- * I've created this dummy function to help i18n scanner
- * understand about these titles.
- * We can remove this as soon as react-navigation supports i18n or
- * we change the router to another lib with i18n support.
- *
- * @param {String} str
- * @returns {String} same as the input string
- */
-const t = (str) => str;
+import { t } from 'locales/helpers';
 
 // TODO: Use from service endpoint/elements.
+
 // (details on https://github.com/LiskHQ/lisk-mobile/issues/1612).
 export const BASE_TRANSACTION_SCHEMA = {
   $id: '/lisk/baseTransaction',
@@ -57,8 +48,8 @@ export const PRIORITY_NAMES_MAP = {
   high: t('sendToken.tokenSelect.highPriorityLabel'),
 };
 
-export const TRANSACTION_EXECUTION_RESULT = {
+export const TRANSACTION_VERIFY_RESULT = {
   invalid: -1,
-  fail: 0,
+  pending: 0,
   ok: 1,
 };
