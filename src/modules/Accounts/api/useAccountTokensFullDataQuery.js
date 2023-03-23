@@ -30,7 +30,7 @@ export function useAccountTokensFullDataQuery({ config: customConfig = {}, optio
     event: 'get.tokens',
     ...customConfig,
     params: {
-      address: currentAccount.metadata.address,
+      address: currentAccount?.metadata?.address,
       limit: LIMIT,
       ...(customConfig?.params || {}),
     },
@@ -39,13 +39,16 @@ export function useAccountTokensFullDataQuery({ config: customConfig = {}, optio
 
   const keys = useQueryKeys([
     GET_ACCOUNT_TOKENS_FULL_DATA_QUERY,
-    currentAccount.metadata.address,
+    currentAccount?.metadata?.address,
     config,
   ]);
 
   return useCustomInfiniteQuery({
     keys: [...keys],
     config,
-    options,
+    options: {
+      ...options,
+      enabled: !!currentAccount?.metadata,
+    },
   });
 }

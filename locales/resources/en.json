@@ -332,6 +332,10 @@
     "token": "Token"
   },
   "sendToken": {
+    "account": {
+      "selectAccount": "Select account",
+      "description": "Select an account to proceed with this transaction."
+    },
     "applicationsSelect": {
       "loadingApplicationsText": "Loading...",
       "senderApplicationFieldLabel": "From Application",

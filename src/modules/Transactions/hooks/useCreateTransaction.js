@@ -22,10 +22,9 @@ import { useInitializationFee } from './useInitializationFee';
  */
 export function useCreateTransaction({ module = null, command = null, encodedTransaction = null }) {
   const transactionRef = useRef(new Transaction());
-  const transaction = transactionRef.current;
-
   const [currentAccount] = useCurrentAccount();
-  const { address, pubkey } = currentAccount.metadata;
+  const transaction = transactionRef.current;
+  const { address, pubkey } = currentAccount?.metadata ?? {};
 
   const {
     data: networkStatusData,
@@ -47,8 +46,6 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isSuccess: isCommandParametersSchemasSuccess,
     isError: isErrorOnCommandParametersSchemas,
   } = useCommandParametersSchemasQuery();
-
-  const transactionSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
   const {
     data: priorityFeeData,
@@ -84,6 +81,8 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isErrorOnCommandParametersSchemas ||
     isErrorPriorityFee ||
     isErrorInitializationFee;
+
+  const transactionSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
   useEffect(
     () => {

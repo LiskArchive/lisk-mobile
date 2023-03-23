@@ -85,7 +85,7 @@ export class Transaction {
     this._paramsSchema = getCommandParamsSchema(
       this.transaction.module,
       this.transaction.command,
-      this._paramsSchemas
+      commandParametersSchemas
     );
 
     if (encodedTransaction) {
@@ -107,6 +107,9 @@ export class Transaction {
     nonce = null,
     ...others
   }) {
+    if (this.module || !command || !this._paramsSchema) {
+      return this.transaction;
+    }
     this._computeParamsSchema(module, command);
 
     const updatedTransaction = {

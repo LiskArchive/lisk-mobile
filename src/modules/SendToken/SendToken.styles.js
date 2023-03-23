@@ -1,6 +1,6 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 import { deviceType } from 'utilities/device';
 
 const { height } = Dimensions.get('window');
@@ -19,15 +19,30 @@ export function getSendTokenStyles() {
       progressBar: {
         marginBottom: 16,
       },
+      modalTitleContainer: {
+        alignItems: 'center',
+        color: colors.light.zodiacBlue,
+      },
+      description: {
+        marginTop: 10,
+        textAlign: 'center',
+        fontSize: fonts.size.small,
+      },
     },
     [themes.light]: {
       wrapper: {
         backgroundColor: colors.light.white,
       },
+      text: {
+        color: colors.light.zodiacBlue,
+      },
     },
     [themes.dark]: {
       wrapper: {
         backgroundColor: colors.dark.mainBg,
+      },
+      text: {
+        color: colors.dark.whiteSmoke,
       },
     },
   };

@@ -34,7 +34,10 @@ export default function SignTransaction({
 
   const handleSuccessSubmit = () => {
     handleReset();
-    navigation.navigate('AccountHome');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Main' }],
+    });
   };
 
   useEffect(() => {

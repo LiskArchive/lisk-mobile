@@ -333,6 +333,10 @@
     "token": ""
   },
   "sendToken": {
+    "account": {
+      "selectAccount": "",
+      "description": ""
+    },
     "applicationsSelect": {
       "loadingApplicationsText": "Laden...",
       "senderApplicationFieldLabel": "Aus App",
