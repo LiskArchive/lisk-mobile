@@ -333,8 +333,8 @@
   },
   "sendToken": {
     "account": {
-      "selectAccount": "Select Account",
-      "description": "Select an account to proceed with this transaction"
+      "selectAccount": "Select account",
+      "description": "Select an account to proceed with this transaction."
     },
     "applicationsSelect": {
       "loadingApplicationsText": "Loading...",
