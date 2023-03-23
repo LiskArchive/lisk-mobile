@@ -5,7 +5,6 @@ import { findMaxBigInt } from 'utilities/helpers';
 import { BASE_TRANSACTION_SCHEMA, TRANSACTION_EXECUTION_RESULT } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema = []) => {
-  console.log('schema', schema);
   const moduleCommand = module.concat(':', command);
 
   const commandSchema = schema.find((meta) => meta.moduleCommand === moduleCommand);
