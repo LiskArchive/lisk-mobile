@@ -114,7 +114,7 @@ export default function SendToken() {
     if (!accounts.length) {
       navigation.navigate('AuthMethod');
     } else if (!currentAccount?.metadata && accounts.length === 1) {
-      handleSelectAccountClick(accounts[0]);
+      handleSelectAccountClick(accounts[0], accountListModal);
     } else if (!currentAccount?.metadata) {
       openSelectAccountModal();
     }
