@@ -64,6 +64,7 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
       isAgreed: false,
     },
     resolver: yupResolver(validationSchema),
+    mode: 'all',
   });
 
   const handleSubmit = baseHandleSubmit(async (values) => {
