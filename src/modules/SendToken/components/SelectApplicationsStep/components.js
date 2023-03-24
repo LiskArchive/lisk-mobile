@@ -6,6 +6,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { BookmarkList } from 'modules/Bookmark/components';
+import { APPLICATION_STATUSES } from 'modules/BlockchainApplication/constants';
 import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import Picker from 'components/shared/Picker';
 import Avatar from 'components/shared/avatar';
@@ -67,7 +68,13 @@ export function SendTokenRecipientApplicationField({
   applications,
   style,
 }) {
-  const recipientApplication = applications.find((application) => application.chainID === value);
+  const applicationsOptions = applications.filter(
+    (application) => application.status === APPLICATION_STATUSES.active
+  );
+
+  const recipientApplication = applicationsOptions.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -75,7 +82,7 @@ export function SendTokenRecipientApplicationField({
 
   const renderMenuItems = () => (
     <InfiniteScrollList
-      data={applications}
+      data={applicationsOptions}
       keyExtractor={(item) => item.chainID}
       renderItem={(item) => (
         <Picker.Item key={item.chainID} value={item.chainID} onChange={onChange}>
