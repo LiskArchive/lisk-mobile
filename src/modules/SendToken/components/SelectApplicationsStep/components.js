@@ -67,7 +67,11 @@ export function SendTokenRecipientApplicationField({
   applications,
   style,
 }) {
-  const recipientApplication = applications.find((application) => application.chainID === value);
+  const applicationsOptions = applications.filter((application) => application.status === 'active');
+
+  const recipientApplication = applicationsOptions.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -75,7 +79,7 @@ export function SendTokenRecipientApplicationField({
 
   const renderMenuItems = () => (
     <InfiniteScrollList
-      data={applications}
+      data={applicationsOptions}
       keyExtractor={(item) => item.chainID}
       renderItem={(item) => (
         <Picker.Item key={item.chainID} value={item.chainID} onChange={onChange}>
