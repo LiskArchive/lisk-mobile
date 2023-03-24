@@ -12,6 +12,7 @@ import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
+import { Controller } from 'react-hook-form';
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
@@ -26,14 +27,7 @@ export default function PasswordSetupForm() {
   useScreenshotPrevent();
 
   const [
-    {
-      handleSubmit,
-      passwordField,
-      confirmPasswordField,
-      accountNameField,
-      isAgreedField,
-      formState,
-    },
+    { handleSubmit, accountNameField, isAgreedField, formState, control },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(passphrase, derivationPath);
 
@@ -57,30 +51,44 @@ export default function PasswordSetupForm() {
           {i18next.t('auth.setup.passwordSetupDescription')}
         </P>
 
-        <Input
-          testID="enter-password"
-          value={passwordField.value}
-          onChange={passwordField.onChange}
-          label={i18next.t('auth.form.passwordLabel')}
-          secureTextEntry
-          innerStyles={{
-            containerStyle: styles.inputContainer,
-            input: styles.input,
-          }}
-          error={formState.errors?.password?.message}
+        <Controller
+          control={control}
+          name="password"
+          render={({ field }) => (
+            <Input
+              testID="enter-password"
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              label={i18next.t('auth.form.passwordLabel')}
+              secureTextEntry
+              innerStyles={{
+                containerStyle: styles.inputContainer,
+                input: styles.input,
+              }}
+              error={formState.errors?.password?.message}
+            />
+          )}
         />
 
-        <Input
-          testID="confirm-password"
-          value={confirmPasswordField.value}
-          onChange={confirmPasswordField.onChange}
-          label={i18next.t('auth.form.confirmPasswordLabel')}
-          secureTextEntry
-          innerStyles={{
-            containerStyle: styles.inputContainer,
-            input: styles.input,
-          }}
-          error={formState.errors?.confirmPassword?.message}
+        <Controller
+          control={control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <Input
+              testID="confirm-password"
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              label={i18next.t('auth.form.confirmPasswordLabel')}
+              secureTextEntry
+              innerStyles={{
+                containerStyle: styles.inputContainer,
+                input: styles.input,
+              }}
+              error={formState.errors?.confirmPassword?.message}
+            />
+          )}
         />
 
         <Input
