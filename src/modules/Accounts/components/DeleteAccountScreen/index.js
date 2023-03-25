@@ -25,6 +25,7 @@ export default function DeleteAccountScreen({ route }) {
         mode="screen"
         account={account}
         style={{ container: styles.formContainer }}
+        onCompleted={navigation.goBack}
       />
     </SafeAreaView>
   );
