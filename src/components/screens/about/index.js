@@ -17,7 +17,7 @@ const openLiskWebsite = () => {
 };
 
 const About = ({ styles, t }) => (
-  <View style={[styles.container, styles.theme.container]}>
+  <View style={[styles.container, styles.theme.container]} testID="about-screen">
     <View style={styles.logo}>
       <Image source={Logo} style={styles.logoImage} width={logoSize} height={logoSize} />
     </View>

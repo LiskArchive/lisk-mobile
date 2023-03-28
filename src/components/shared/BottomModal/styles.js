@@ -5,8 +5,7 @@ import { setColorOpacity } from 'utilities/helpers';
 export default () => ({
   common: {
     container: {
-      backgroundColor: 'white',
-      padding: 16,
+      padding: 20,
       borderTopRightRadius: 24,
       borderTopLeftRadius: 24,
     },

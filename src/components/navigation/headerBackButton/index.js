@@ -69,6 +69,7 @@ const HeaderBackButton = ({
           icon={rightIcon}
           onPress={onRightPress}
           color={rightColor}
+          testID="header-right-icon"
         />
       ) : null}
       {rightIconComponent && rightIconComponent()}

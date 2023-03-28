@@ -28,23 +28,7 @@ export default function Tabs() {
           style: getNavigationTabBarStyles(modalOpen),
         }}
       >
-        <Tab.Screen
-          name="AccountHome"
-          component={AccountHome}
-          options={getTabBarIcon}
-          listeners={({ route, navigation }) => ({
-            tabPress: (e) => {
-              e.preventDefault();
-              const { history } = navigation.getState();
-              if (history[history.length - 1].key === route.key) {
-                if (route.params?.scrollToTop) {
-                  route.params.scrollToTop();
-                }
-              }
-              navigation.navigate('AccountHome');
-            },
-          })}
-        />
+        <Tab.Screen name="AccountHome" component={AccountHome} options={getTabBarIcon} />
         <Tab.Screen
           name="Applications"
           component={BlockchainApplicationsExplorer}

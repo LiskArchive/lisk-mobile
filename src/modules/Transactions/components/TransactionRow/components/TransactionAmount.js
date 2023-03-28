@@ -5,10 +5,12 @@ import { useSelector } from 'react-redux';
 import { fromRawLsk } from 'utilities/conversions.utils';
 import FormattedNumber from 'components/shared/formattedNumber';
 import { useTransactionAssets } from '../../../hooks/useTransactionAssets';
+import { useTokenMetaQuery } from '../../../../BlockchainApplication/api/useTokenMetaQuery';
 
 export function TransactionAmount({ transaction, style, address }) {
+  const { data: tokenData } = useTokenMetaQuery(transaction.params.tokenID);
+  const tokenSymbol = tokenData?.data[0]?.symbol;
   const transactionAssets = useTransactionAssets({ transaction, address });
-
   const language = useSelector((state) => state.settings.language);
 
   const { sign } = transactionAssets.amount ?? {};
@@ -30,7 +32,9 @@ export function TransactionAmount({ transaction, style, address }) {
       <Text style={[transactionAssets.amount.style, style]}>
         {transactionAssets.amount.sign}
 
-        <FormattedNumber language={language}>{transactionAmount}</FormattedNumber>
+        <FormattedNumber language={language} tokenType={tokenSymbol}>
+          {transactionAmount}
+        </FormattedNumber>
       </Text>
     );
   }
