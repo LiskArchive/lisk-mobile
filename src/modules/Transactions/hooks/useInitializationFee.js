@@ -26,7 +26,6 @@ export function useInitializationFee({
   const initializationFeesQueryConfig = {
     data: {
       endpoint: 'token_getInitializationFees',
-      params: {},
     },
   };
 
