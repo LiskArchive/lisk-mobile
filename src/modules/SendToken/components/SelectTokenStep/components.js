@@ -158,7 +158,7 @@ export function SendTokenAmountField({
           }
           error={errorMessage}
           adornments={{
-            right: tokenAmountInCurrency && (
+            right: tokenAmountInCurrency.amount && (
               <Text style={[styles.tokenAmountInCurrencyText]}>
                 ~ {`${tokenAmountInCurrency.amount} ${tokenAmountInCurrency.currency}`}
               </Text>
