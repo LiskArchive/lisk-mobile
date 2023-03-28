@@ -10,6 +10,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
+import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
@@ -78,6 +79,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
   const senderApplicationChainID = form.watch('senderApplicationChainID');
+  const recipientAddress = form.watch('recipientAccountAddress');
+  const tokenID = form.watch('tokenID');
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
@@ -85,6 +88,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     recipientApplicationChainID,
     { options: { enabled: isCrossChainTransfer } }
   );
+
+  const { data: initializationFeeData, refetch: refetchInitializationFee } = useInitializationFee({
+    address: recipientAddress,
+    tokenID,
+    enabled: false,
+    isCrossChainTransfer,
+  });
 
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
@@ -223,6 +233,27 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     recipientApplicationChainID,
     transaction,
     isTransactionSuccess,
+  ]);
+
+  useEffect(() => {
+    if (!isTransactionSuccess) {
+      return;
+    }
+
+    if (recipientAddress && tokenID) {
+      refetchInitializationFee();
+    }
+
+    if (recipientAddress && tokenID && initializationFeeData !== undefined) {
+      transaction.update({ extraCommandFee: initializationFeeData });
+    }
+  }, [
+    isTransactionSuccess,
+    tokenID,
+    recipientAddress,
+    initializationFeeData,
+    refetchInitializationFee,
+    transaction,
   ]);
 
   return {

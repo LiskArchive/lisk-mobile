@@ -26,7 +26,7 @@ export class Transaction {
 
   _priorityFee = null;
 
-  _extraCommandFee = null;
+  extraCommandFee = null;
 
   transaction = {
     module: null,
@@ -61,7 +61,7 @@ export class Transaction {
     this._auth = auth;
     this._paramsSchemas = commandParametersSchemas;
     this._priorityFee = priorityFee;
-    this._extraCommandFee = BigInt(extraCommandFee || 0);
+    this.extraCommandFee = BigInt(extraCommandFee || 0);
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
       ? pubkey
       : Buffer.from(pubkey, 'hex');
@@ -105,11 +105,16 @@ export class Transaction {
     command = this.transaction.command,
     params = {},
     nonce = null,
+    extraCommandFee = null,
     ...others
   }) {
     if (this.module || !command || !this._paramsSchema) {
       return this.transaction;
     }
+
+    this.extraCommandFee =
+      extraCommandFee !== null ? BigInt(extraCommandFee) : this.extraCommandFee;
+
     this._computeParamsSchema(module, command);
 
     const updatedTransaction = {
@@ -206,7 +211,7 @@ export class Transaction {
 
     const options = {
       numberOfSignatures,
-      additionalFee: this._extraCommandFee + extraFee,
+      additionalFee: this.extraCommandFee + extraFee,
     };
 
     const minFee = Lisk.transactions.computeMinFee(
@@ -228,6 +233,8 @@ export class Transaction {
     const fee = minFee + priorityFee;
 
     this.transaction = { ...this.transaction, fee };
+
+    return fee;
   }
 
   /**
@@ -237,7 +244,7 @@ export class Transaction {
   getFeeBreakdown() {
     const totalFee = this.transaction.fee;
     const priorityFee = this._getPriorityFee();
-    const extraCommandFee = this._extraCommandFee;
+    const extraCommandFee = this.extraCommandFee;
     const byteFee = totalFee - priorityFee - extraCommandFee;
 
     return { totalFee, priorityFee, byteFee, extraCommandFee };
