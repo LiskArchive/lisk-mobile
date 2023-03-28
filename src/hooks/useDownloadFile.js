@@ -62,8 +62,6 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         onCompleted();
       }
     } catch (_error) {
-      console.log('_error', _error);
-
       setIsLoading(false);
       setIsSuccess(false);
       setError(_error);
