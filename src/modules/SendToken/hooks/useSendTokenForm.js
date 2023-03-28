@@ -10,6 +10,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
+import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
@@ -18,7 +19,6 @@ import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
-import { useInitializationFee } from '../../Transactions/hooks/useInitializationFee';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -82,16 +82,18 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
 
-  const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
+  const isCrossChainTransaction = senderApplicationChainID !== recipientApplicationChainID;
 
   const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
     recipientApplicationChainID,
-    { options: { enabled: isCrossChainTransfer } }
+    { options: { enabled: isCrossChainTransaction } }
   );
 
-  const { data: initializationFeeData } = useInitializationFee({
+  const { data: initializationFeeData, refetch: refetchInitializationFee } = useInitializationFee({
     address: recipientAddress,
     tokenID,
+    enabled: false,
+    isCrossChainTransaction,
   });
 
   const handleChange = (field, value, onChange) => {
@@ -208,7 +210,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     if (
-      isCrossChainTransfer &&
+      isCrossChainTransaction &&
       messageFeeData?.data?.fee &&
       recipientApplicationChainChannelData?.data?.messageFeeTokenID
     ) {
@@ -225,7 +227,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
     }
   }, [
-    isCrossChainTransfer,
+    isCrossChainTransaction,
     recipientApplicationChainChannelData?.data?.messageFeeTokenID,
     messageFeeData?.data?.fee,
     recipientApplicationChainID,
@@ -238,10 +240,21 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       return;
     }
 
+    if (recipientAddress && tokenID) {
+      refetchInitializationFee();
+    }
+
     if (recipientAddress && tokenID && initializationFeeData !== undefined) {
       transaction.update({ extraCommandFee: initializationFeeData });
     }
-  }, [isTransactionSuccess, tokenID, recipientAddress, initializationFeeData, transaction]);
+  }, [
+    isTransactionSuccess,
+    tokenID,
+    recipientAddress,
+    initializationFeeData,
+    refetchInitializationFee,
+    transaction,
+  ]);
 
   return {
     ...form,
