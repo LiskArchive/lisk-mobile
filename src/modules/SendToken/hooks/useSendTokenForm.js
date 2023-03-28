@@ -82,18 +82,18 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
 
-  const isCrossChainTransaction = senderApplicationChainID !== recipientApplicationChainID;
+  const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
   const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
     recipientApplicationChainID,
-    { options: { enabled: isCrossChainTransaction } }
+    { options: { enabled: isCrossChainTransfer } }
   );
 
   const { data: initializationFeeData, refetch: refetchInitializationFee } = useInitializationFee({
     address: recipientAddress,
     tokenID,
     enabled: false,
-    isCrossChainTransaction,
+    isCrossChainTransfer,
   });
 
   const handleChange = (field, value, onChange) => {
@@ -210,7 +210,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     if (
-      isCrossChainTransaction &&
+      isCrossChainTransfer &&
       messageFeeData?.data?.fee &&
       recipientApplicationChainChannelData?.data?.messageFeeTokenID
     ) {
@@ -227,7 +227,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
     }
   }, [
-    isCrossChainTransaction,
+    isCrossChainTransfer,
     recipientApplicationChainChannelData?.data?.messageFeeTokenID,
     messageFeeData?.data?.fee,
     recipientApplicationChainID,

@@ -6,7 +6,7 @@ import { useInvokeQuery } from 'utilities/api/hooks/useInvokeQuery';
  * for a given account and token.
  * @param {string} params.address - Account address to verify existence (fee will be 0 if des not exist).
  * @param {string} params.tokenID - Token ID to verify the account address existence.
- * @param {boolean} params.isCrossChainTransaction - Flag that indicates if transaction is cross-chain or not (default: false).
+ * @param {boolean} params.isCrossChainTransfer - Flag that indicates if transaction is cross-chain or not (default: false).
  * @param {QueryOptions} params.options - Initialization fee query custom options.
  * @param {boolean} params.enabled - Flag that indicates if the hook queries are enabled or not. Default is true.
  * @returns {QueryResult<number>} Query state: data (initialization fee), isLoading, isError, error and more.
@@ -14,7 +14,7 @@ import { useInvokeQuery } from 'utilities/api/hooks/useInvokeQuery';
 export function useInitializationFee({
   address,
   tokenID,
-  isCrossChainTransaction = false,
+  isCrossChainTransfer = false,
   options = {},
   enabled = true,
 } = {}) {
@@ -60,7 +60,7 @@ export function useInitializationFee({
 
   const data = isAccountInitialised
     ? 0
-    : initializationFeesQueryData?.data[isCrossChainTransaction ? 'userAccount' : 'escrowAccount'];
+    : initializationFeesQueryData?.data[isCrossChainTransfer ? 'userAccount' : 'escrowAccount'];
   const isLoading = isLoadingIsAccountInitialisedQuery || isLoadingInitializationFeesQuery;
   const isError = isErrorIsAccountInitialisedQuery || isErrorInitializationFeesQuery;
   const error = errorIsAccountInitialisedQuery || errorErrorInitializationFeesQuery;
