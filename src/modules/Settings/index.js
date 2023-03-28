@@ -78,7 +78,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     <NavigationSafeAreaView>
       <HeaderBackButton title={t('Settings')} noIcon />
 
-      <ScrollView style={styles.innerContainer}>
+      <ScrollView style={styles.innerContainer} testID={`${theme}-mode`}>
         <View style={styles.group}>
           <H4 style={[styles.subHeader, styles.theme.subHeader]}>
             {t('settings.headers.security')}
@@ -144,6 +144,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
             <ItemTitle
               navigation={navigation}
               icon="currency"
+              testID="currency"
               title={t('settings.menu.currency')}
               target="CurrencySelection"
               targetStateLabel={<P style={styles.theme.targetStateLabel}>{settings.currency}</P>}
@@ -158,6 +159,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
             <ItemTitle
               navigation={navigation}
               target="About"
+              testID="about"
               icon="about"
               title={t('settings.menu.about')}
             />
@@ -167,6 +169,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
             <ItemTitle
               navigation={navigation}
               icon="terms"
+              testID="terms"
               target="Terms"
               title={t('settings.menu.terms')}
             />
@@ -176,6 +179,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
             <ItemTitle
               navigation={navigation}
               icon={<PrivacySvg />}
+              testID="privacy"
               target="PrivacyPolicy"
               title={t('settings.menu.privacyPolicy')}
             />

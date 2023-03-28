@@ -5,7 +5,11 @@ import URLs from 'constants/URLs';
 
 const Terms = () => (
   <View style={{ flex: 1, overflow: 'hidden' }}>
-    <WebView source={{ uri: URLs.liskTermsAndConditions }} startInLoadingState={true} />
+    <WebView
+      testID="terms-screen"
+      source={{ uri: URLs.liskTermsAndConditions }}
+      startInLoadingState={true}
+    />
   </View>
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 /**
  * Infinite scroll list component for rendering API fetched paginated data.
@@ -41,8 +41,10 @@ export default function InfiniteScrollList({ showVerticalScrollIndicator = false
       renderItem={renderItem}
       onEndReached={fetchMore}
       onEndReachedThreshold={props.onEndReachedThreshold || 0.2}
-      ListFooterComponent={props.isFetchingNextPage ? renderSpinner : null}
-      showVerticalScrollIndicator={showVerticalScrollIndicator}
+      ListFooterComponent={
+        props.isFetchingNextPage ? renderSpinner : <View style={{ height: 50 }} />
+      }
+      showsVerticalScrollIndicator={showVerticalScrollIndicator}
     />
   );
 }

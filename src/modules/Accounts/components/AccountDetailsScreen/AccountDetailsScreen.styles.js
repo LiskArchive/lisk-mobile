@@ -3,8 +3,10 @@ import { themes, colors, boxes } from 'constants/styleGuide';
 export default function getAccountDetailsScreenStyles() {
   return {
     common: {
-      container: {
+      flex: {
         flex: 1,
+      },
+      container: {
         padding: boxes.boxPadding,
       },
     },

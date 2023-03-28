@@ -10,8 +10,6 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
 
   const accountSettings = useSelector((state) => state.settings);
 
-  if (tokenSymbol !== 'LSK') return null;
-
   const priceRate = prices.find(
     (price) => price.to === accountSettings.currency && price.from === tokenSymbol
   );

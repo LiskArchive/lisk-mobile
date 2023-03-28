@@ -1,6 +1,6 @@
 export default {
   secretRecoveryPhrase:
-    'tiny decrease photo key change abuse forward penalty twin foot wish expose',
+    'devote mouse hair cereal maximum trigger puppy blossom adult sort ticket neither',
   address: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu',
   emptyAccount: '',
   password: 'Password1!',

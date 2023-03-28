@@ -5,7 +5,6 @@ export default function getAddApplicationStyles() {
     common: {
       wrapper: {
         flex: 1,
-        paddingTop: 44,
       },
       applicationsListContainer: {
         paddingLeft: 16,

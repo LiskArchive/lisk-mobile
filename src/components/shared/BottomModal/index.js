@@ -83,8 +83,8 @@ const BottomModal = ({ style }) => {
         ]}
       >
         <Animated.View style={[{ top }]}>
-          <SafeAreaView style={[styles.safeArea, styles.theme.container]}>
-            <View style={[styles.container, styles.theme.container, style?.container]}>
+          <SafeAreaView style={[styles.safeArea, styles.container, styles.theme.container]}>
+            <View style={[styles.container, style?.container]}>
               <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
 
               {showClose && (

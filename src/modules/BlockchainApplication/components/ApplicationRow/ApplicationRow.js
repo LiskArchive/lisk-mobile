@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 import React, { memo } from 'react';
-import { View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Image, TouchableOpacity } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';

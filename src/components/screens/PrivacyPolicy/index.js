@@ -6,7 +6,11 @@ import URLs from 'constants/URLs';
 export default function PrivacyPolicy() {
   return (
     <View style={{ flex: 1, overflow: 'hidden' }}>
-      <WebView source={{ uri: URLs.liskPrivacyPolicy }} startInLoadingState={true} />
+      <WebView
+        testID="privacy-screen"
+        source={{ uri: URLs.liskPrivacyPolicy }}
+        startInLoadingState={true}
+      />
     </View>
   );
 }

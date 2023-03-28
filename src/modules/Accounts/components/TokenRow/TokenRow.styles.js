@@ -15,6 +15,11 @@ export default function getTokenRowStyles() {
       flex: {
         flexDirection: 'row',
       },
+      logo: {
+        height: 28,
+        width: 28,
+        borderRadius: 14,
+      },
       title: {
         marginLeft: 8,
       },

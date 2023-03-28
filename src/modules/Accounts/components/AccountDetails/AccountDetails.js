@@ -44,72 +44,70 @@ export default function AccountDetails({ account }) {
     });
 
   return (
-    <>
-      <View style={[styles.container]}>
-        <View style={[styles.accountCard]}>
-          <View style={[styles.row]}>
-            <Avatar address={account.address} size={48} />
+    <View style={[styles.container]}>
+      <View style={[styles.accountCard]}>
+        <View style={[styles.row]}>
+          <Avatar address={account.address} size={48} />
 
-            <View style={[styles.detailsContainer]}>
-              {account.name && (
-                <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
-                  {account.name}
-                </P>
-              )}
+          <View style={[styles.detailsContainer]}>
+            {account.name && (
+              <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
+                {account.name}
+              </P>
+            )}
 
-              <View>
-                <CopyToClipboard
-                  value={account.address}
-                  labelStyle={[styles.addressText, styles.theme.addressText]}
-                  label={stringShortener(account.address, 7, 6)}
-                  iconColor={colors.light.platinumGray}
-                  testID="address-copy-to-clipboard"
-                />
-              </View>
+            <View>
+              <CopyToClipboard
+                value={account.address}
+                labelStyle={[styles.addressText, styles.theme.addressText]}
+                label={stringShortener(account.address, 7, 6)}
+                iconColor={colors.light.platinumGray}
+                testID="address-copy-to-clipboard"
+              />
             </View>
-
-            {isCurrentAccount && (
-              <TouchableOpacity
-                style={[styles.switchContainer]}
-                onPress={accountManager.open}
-                testID="switch-account"
-              >
-                <SwitchSvg />
-              </TouchableOpacity>
-            )}
           </View>
 
-          <View style={[styles.row, styles.buttonContainer]}>
-            {isCurrentAccount && (
-              <TouchableOpacity
-                style={[styles.button, styles.requestButton]}
-                onPress={handleRequestTokensClick}
-              >
-                <P style={[styles.buttonText]}>Request</P>
-              </TouchableOpacity>
-            )}
-
+          {isCurrentAccount && (
             <TouchableOpacity
-              style={[styles.button, styles.sendButton]}
-              onPress={handleSendTokensClick}
+              style={[styles.switchContainer]}
+              onPress={accountManager.open}
+              testID="switch-account"
             >
-              <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
+              <SwitchSvg />
             </TouchableOpacity>
-          </View>
+          )}
         </View>
 
-        <TokenList
-          mode="overview"
-          address={account.address}
-          style={{ container: styles.tokenListContainer }}
-        />
+        <View style={[styles.row, styles.buttonContainer]}>
+          {isCurrentAccount && (
+            <TouchableOpacity
+              style={[styles.button, styles.requestButton]}
+              onPress={handleRequestTokensClick}
+            >
+              <P style={[styles.buttonText]}>Request</P>
+            </TouchableOpacity>
+          )}
 
-        <TransactionList
-          mode="overview"
-          address={account.address}
-          style={{ container: styles.transactionListContainer }}
-        />
+          <TouchableOpacity
+            style={[styles.button, styles.sendButton]}
+            onPress={handleSendTokensClick}
+          >
+            <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
+          </TouchableOpacity>
+        </View>
       </View>
-    </>
+
+      <TokenList
+        mode="overview"
+        address={account.address}
+        style={{ container: styles.tokenListContainer }}
+      />
+
+      <TransactionList
+        mode="overview"
+        address={account.address}
+        style={{ container: styles.transactionListContainer }}
+      />
+    </View>
   );
 }

@@ -1,7 +1,8 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
+import { useSelector } from 'react-redux';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useTokenMetaQuery } from 'modules/BlockchainApplication/api/useTokenMetaQuery';
@@ -10,7 +11,6 @@ import DataRenderer from 'components/shared/DataRenderer';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import { fromRawLsk } from 'utilities/conversions.utils';
-import TokenSvg from 'assets/svgs/TokenSvg';
 
 import getTokenRowStyles from './TokenRow.styles';
 
@@ -19,6 +19,8 @@ export default function TokenRow({ token }) {
   const balance = Number(
     fromRawLsk(BigInt(token.availableBalance ?? 0).toString())
   ).toLocaleString();
+
+  const accountSettings = useSelector((state) => state.settings);
 
   const {
     data: tokenMetaData,
@@ -42,7 +44,7 @@ export default function TokenRow({ token }) {
           error={errorOnTokenMeta}
           renderData={(data) => (
             <>
-              <TokenSvg symbol={data.symbol} height={28} width={28} />
+              <Image source={{ uri: data.logo.png }} style={styles.logo} />
 
               <P style={[styles.title, styles.theme.title]}>{data.chainName}</P>
             </>
@@ -61,7 +63,10 @@ export default function TokenRow({ token }) {
           error={errorOnTokenMeta}
           renderData={() => (
             <DiscreteModeComponent data={balance} blurVariant="balance">
-              <P style={[styles.theme.currency]}>
+              <P
+                style={[styles.theme.currency]}
+                testID={`token-currency-${accountSettings.currency}`}
+              >
                 {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
               </P>
             </DiscreteModeComponent>
