@@ -4,17 +4,19 @@ import { useInvokeQuery } from 'utilities/api/hooks/useInvokeQuery';
 /**
  * Calculates the initialization fee (or extra command fee) of a transaction
  * for a given account and token.
- * @param {Object} params.options - Query custom options.
- * @param {String} params.address - Account address to verify existence (fee will be 0 if des not exist).
- * @param {String} params.tokenID - Token ID to verify the account address existence.
- * @param {Boolean} params.isCrossChainTransaction - Flag that indicates if transaction is cross-chain or not (default: false).
- * @returns {Object} Query state: data, isLoading, isError, error and isSuccess.
+ * @param {string} params.address - Account address to verify existence (fee will be 0 if des not exist).
+ * @param {string} params.tokenID - Token ID to verify the account address existence.
+ * @param {boolean} params.isCrossChainTransfer - Flag that indicates if transaction is cross-chain or not (default: false).
+ * @param {QueryOptions} params.options - Initialization fee query custom options.
+ * @param {boolean} params.enabled - Flag that indicates if the hook queries are enabled or not. Default is true.
+ * @returns {QueryResult<number>} Query state: data (initialization fee), isLoading, isError, error and more.
  */
 export function useInitializationFee({
-  options = {},
   address,
   tokenID,
-  isCrossChainTransaction = false,
+  isCrossChainTransfer = false,
+  options = {},
+  enabled = true,
 } = {}) {
   const isAccountInitialisedQueryConfig = {
     data: {
@@ -26,7 +28,6 @@ export function useInitializationFee({
   const initializationFeesQueryConfig = {
     data: {
       endpoint: 'token_getInitializationFees',
-      params: {},
     },
   };
 
@@ -36,8 +37,10 @@ export function useInitializationFee({
     isErrorIsAccountInitialisedQuery,
     error: errorIsAccountInitialisedQuery,
     isSuccess: isSuccessIsAccountInitialisedQuery,
+    refetch: refetchAccountInitialisedQuery,
   } = useInvokeQuery({
     config: isAccountInitialisedQueryConfig,
+    options: { enabled },
   });
 
   const isAccountInitialised = isAccountInitialisedQueryData?.data.exists;
@@ -50,16 +53,18 @@ export function useInitializationFee({
     isSuccess: isSuccessErrorInitializationFeesQuery,
   } = useInvokeQuery({
     config: initializationFeesQueryConfig,
-    options: { ...options, enabled: !isAccountInitialised },
+    options: { ...options, enabled: isAccountInitialised === false },
   });
+
+  const refetch = () => refetchAccountInitialisedQuery();
 
   const data = isAccountInitialised
     ? 0
-    : initializationFeesQueryData?.data[isCrossChainTransaction ? 'userAccount' : 'escrowAccount'];
+    : initializationFeesQueryData?.data[isCrossChainTransfer ? 'userAccount' : 'escrowAccount'];
   const isLoading = isLoadingIsAccountInitialisedQuery || isLoadingInitializationFeesQuery;
   const isError = isErrorIsAccountInitialisedQuery || isErrorInitializationFeesQuery;
   const error = errorIsAccountInitialisedQuery || errorErrorInitializationFeesQuery;
   const isSuccess = isSuccessIsAccountInitialisedQuery && isSuccessErrorInitializationFeesQuery;
 
-  return { data, isLoading, isError, error, isSuccess };
+  return { data, isLoading, isError, error, isSuccess, refetch };
 }

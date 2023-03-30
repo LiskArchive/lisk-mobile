@@ -9,7 +9,6 @@ import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommand
 
 import { Transaction } from '../utils/Transaction';
 import { usePriorityFee } from './usePriorityFee';
-import { useInitializationFee } from './useInitializationFee';
 
 /**
  * Creates a transaction object with all required build-in
@@ -54,33 +53,23 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isError: isErrorPriorityFee,
   } = usePriorityFee();
 
-  const {
-    data: initializationFeeData,
-    isLoading: isInitializationFeeLoading,
-    isSuccess: isInitializationFeeSuccess,
-    isError: isErrorInitializationFee,
-  } = useInitializationFee();
-
   const isLoading =
     isNetworkStatusLoading ||
     isAuthLoading ||
     isCommandParametersSchemasLoading ||
-    isPriorityFeeLoading ||
-    isInitializationFeeLoading;
+    isPriorityFeeLoading;
 
   const isSuccess =
     isNetworkStatusSuccess &&
     isAuthSuccess &&
     isCommandParametersSchemasSuccess &&
-    isPriorityFeeSuccess &&
-    isInitializationFeeSuccess;
+    isPriorityFeeSuccess;
 
   const isError =
     isErrorOnNetworkStatus ||
     isErrorOnAuth ||
     isErrorOnCommandParametersSchemas ||
-    isErrorPriorityFee ||
-    isErrorInitializationFee;
+    isErrorPriorityFee;
 
   const transactionSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
@@ -92,7 +81,6 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           networkStatus: networkStatusData?.data,
           auth: authData,
           priorityFee: priorityFeeData,
-          extraCommandFee: initializationFeeData,
           commandParametersSchemas: commandParametersSchemasData?.data.commands,
           module,
           command,

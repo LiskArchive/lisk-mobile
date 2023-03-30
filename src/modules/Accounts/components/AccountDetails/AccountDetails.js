@@ -16,6 +16,7 @@ import useAccountManagerModal from '../../hooks/useAccountManagerModal';
 
 import getAccountDetailsStyles from './AccountDetails.styles';
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
+import { useAccountCanSendTokens } from '../../../SendToken/hooks/useAccountCanSendTokens';
 
 /**
  * Renders a account detailed information (personal data, tokens and transactions) given an address.
@@ -31,6 +32,15 @@ export default function AccountDetails({ account }) {
   const { styles } = useTheme({ styles: getAccountDetailsStyles() });
 
   const isCurrentAccount = currentAccount.metadata.address === account.address;
+
+  const {
+    data: accountCanSendTokensData,
+    isLoading: isLoadingAccountCanSendTokens,
+    isError: isErrorAccountCanSendTokens,
+  } = useAccountCanSendTokens(account.address);
+
+  const disableSendTokenButton =
+    !accountCanSendTokensData || isLoadingAccountCanSendTokens || isErrorAccountCanSendTokens;
 
   const handleRequestTokensClick = () => navigation.navigate('Request');
 
@@ -91,6 +101,7 @@ export default function AccountDetails({ account }) {
           <TouchableOpacity
             style={[styles.button, styles.sendButton]}
             onPress={handleSendTokensClick}
+            disabled={disableSendTokenButton}
           >
             <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
           </TouchableOpacity>
