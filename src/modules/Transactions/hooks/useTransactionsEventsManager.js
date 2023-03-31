@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import apiClient from 'utilities/api/APIClient';
@@ -10,6 +10,7 @@ import {
   GET_AUTH_QUERY,
   GET_ACCOUNT_TRANSACTIONS_QUERY,
 } from 'utilities/api/queries';
+import { TRANSACTION_EVENTS } from '../utils/constants';
 
 /**
  * Handles all business logic necessary to execute when a WS transaction event is received.
@@ -20,8 +21,8 @@ export function useTransactionsEventsManager() {
   const [currentAccount] = useCurrentAccount();
   const [currentApplication] = useCurrentApplication();
 
-  useEffect(() => {
-    const handleNewTransactionsEvent = (event) => {
+  const handleNewTransactionsEvent = useCallback(
+    (event) => {
       queryClient.invalidateQueries([GET_AUTH_QUERY]);
       queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY]);
 
@@ -29,6 +30,7 @@ export function useTransactionsEventsManager() {
         [GET_ACCOUNT_TRANSACTIONS_QUERY, currentAccount?.metadata?.address],
         (prevQuery) => {
           const newTransactions = event.data;
+
           const prevTransactions = prevQuery.pages[0].data;
 
           const newPage = {
@@ -41,16 +43,19 @@ export function useTransactionsEventsManager() {
           return { ...prevQuery, pages: newPages };
         }
       );
-    };
+    },
+    [queryClient, currentAccount?.metadata?.address]
+  );
 
+  useEffect(() => {
     if (currentApplication.data && apiClient?.ws) {
-      apiClient.ws.on('new.transactions', handleNewTransactionsEvent);
+      apiClient.ws.on(TRANSACTION_EVENTS.newTransactions, handleNewTransactionsEvent);
     }
 
     return () => {
       if (apiClient?.ws) {
-        apiClient.ws.off('new.transactions');
+        apiClient.ws.off(TRANSACTION_EVENTS.newTransactions);
       }
     };
-  }, [queryClient, currentApplication.data, currentAccount?.metadata?.address]);
+  }, [handleNewTransactionsEvent, currentApplication.data]);
 }
