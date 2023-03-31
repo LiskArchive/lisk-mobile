@@ -16,6 +16,7 @@ import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadca
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
 import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
@@ -247,14 +248,20 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     if (recipientAddress && tokenID && initializationFeeData !== undefined) {
       transaction.update({ extraCommandFee: initializationFeeData });
     }
-  }, [
-    isTransactionSuccess,
-    tokenID,
-    recipientAddress,
-    initializationFeeData,
-    refetchInitializationFee,
-    transaction,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTransactionSuccess, tokenID, recipientAddress, initializationFeeData]);
+
+  const isLoading =
+    form.formState.isSubmitting ||
+    dryRunTransactionMutation.isLoading ||
+    broadcastTransactionMutation.isLoading;
+  const isSuccess = broadcastTransactionMutation.isSuccess;
+  const error =
+    dryRunTransactionMutation.error ||
+    (dryRunTransactionMutation.data?.data &&
+      getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
+    broadcastTransactionMutation.error;
+  const isError = !!error;
 
   return {
     ...form,
@@ -264,5 +271,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     broadcastTransactionMutation,
     dryRunTransactionMutation,
     handleMutationsReset,
+    isLoading,
+    isSuccess,
+    error,
+    isError,
   };
 }

@@ -21,30 +21,39 @@ import { FlatList, Text, View } from 'react-native';
  * length of the list) the bottom edge of the list must be from the end of the content to
  * trigger the onEndReached callback. Default is 0.2.
  */
-export default function InfiniteScrollList({ showVerticalScrollIndicator = false, ...props }) {
+export default function InfiniteScrollList({
+  showVerticalScrollIndicator = false,
+  hasNextPage,
+  fetchNextPage,
+  renderItem: baseRenderItem,
+  withDefaultSpinner,
+  renderSpinner: baseRenderSpinner,
+  data,
+  isFetchingNextPage,
+  onEndReachedThreshold = 0.2,
+  keyExtractor,
+  ...props
+}) {
   const fetchMore = () => {
-    if (props.hasNextPage) {
-      props.fetchNextPage();
+    if (hasNextPage) {
+      fetchNextPage();
     }
   };
 
-  const renderItem = ({ item }) => props.renderItem(item);
+  const renderItem = ({ item }) => baseRenderItem(item);
 
-  const renderSpinner = props.withDefaultSpinner
-    ? () => <Text>Loading...</Text>
-    : props.renderSpinner;
+  const renderSpinner = withDefaultSpinner ? () => <Text>Loading...</Text> : baseRenderSpinner;
 
   return (
     <FlatList
-      data={props.data}
-      keyExtractor={props.keyExtractor}
+      data={data}
+      keyExtractor={keyExtractor}
       renderItem={renderItem}
       onEndReached={fetchMore}
-      onEndReachedThreshold={props.onEndReachedThreshold || 0.2}
-      ListFooterComponent={
-        props.isFetchingNextPage ? renderSpinner : <View style={{ height: 50 }} />
-      }
+      onEndReachedThreshold={onEndReachedThreshold}
+      ListFooterComponent={isFetchingNextPage ? renderSpinner : <View style={{ height: 50 }} />}
       showsVerticalScrollIndicator={showVerticalScrollIndicator}
+      {...props}
     />
   );
 }

@@ -4,7 +4,7 @@ import { getTokensMetaQueryConfig } from 'modules/BlockchainApplication/api/useT
 
 /**
  * Merges tokens data and metadata query results.
- * @param {Array} tokens - Tokens on-chain data obtained from the GET /tokens endpoint.
+ * @param {Array} tokens - Tokens on-chain data obtained from the GET /token/balances endpoint.
  * @returns {Array} List of tokens containing its off-chain and on-chain data merged.
  */
 export async function addTokensMetaData(tokens) {

@@ -10,7 +10,6 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import SignTransaction from 'modules/Transactions/components/SignTransaction/SignTransaction';
-import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
 import getSendTokenSummaryStepStyles from './styles';
@@ -47,13 +46,6 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     styles: getSendTokenSummaryStepStyles(),
   });
 
-  const dryRunTransactionError =
-    form.dryRunTransactionMutation.error ||
-    (form.dryRunTransactionMutation.data?.data &&
-      getDryRunTransactionError(form.dryRunTransactionMutation.data.data));
-
-  const broadcastTransactionError = form.broadcastTransactionMutation.error;
-
   const handleSignTransactionModalReset = (modal) => {
     form.handleReset();
     resetSteps();
@@ -69,12 +61,10 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
         onReset={() => handleSignTransactionModalReset(modal)}
         amount={summary.amount}
         token={summary.token}
-        isSuccess={form.broadcastTransactionMutation.isSuccess}
-        isLoading={
-          form.dryRunTransactionMutation.isLoading || form.broadcastTransactionMutation.isLoading
-        }
+        isSuccess={form.isSuccess}
+        isLoading={form.isLoading}
         isValidationError={Object.keys(form.formState.errors).length > 0}
-        error={dryRunTransactionError || broadcastTransactionError}
+        error={form.error}
         navigation={navigation}
       />
     ),
@@ -82,11 +72,9 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
       userPasswordField.value,
       summary.amount,
       summary.token,
-      form.broadcastTransactionMutation.isSuccess,
-      form.dryRunTransactionMutation.isLoading,
-      form.broadcastTransactionMutation.isLoading,
-      dryRunTransactionError?.message,
-      broadcastTransactionError?.message,
+      form.isSuccess,
+      form.isLoading,
+      form.error,
     ]
   );
 
