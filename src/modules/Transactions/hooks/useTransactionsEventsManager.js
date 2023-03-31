@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import apiClient from 'utilities/api/APIClient';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { queuePush } from 'utilities/helpers';
+import { spliceArray } from 'utilities/helpers';
 import {
   GET_ACCOUNT_TOKENS_QUERY,
   GET_AUTH_QUERY,
@@ -35,10 +35,10 @@ export function useTransactionsEventsManager() {
 
           const newPage = {
             ...prevQuery.pages[0],
-            data: queuePush(prevTransactions, newTransactions),
+            data: [...newTransactions, ...prevTransactions],
           };
 
-          const newPages = queuePush(prevQuery.pages, [newPage]);
+          const newPages = spliceArray(prevQuery.pages, 0, 1, newPage);
 
           return { ...prevQuery, pages: newPages };
         }

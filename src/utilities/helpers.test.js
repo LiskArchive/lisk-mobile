@@ -11,7 +11,7 @@ import {
   isNumeric,
   joinArraysWithoutDuplicates,
   findMaxBigInt,
-  queuePush,
+  spliceArray,
 } from './helpers';
 
 describe('helpers', () => {
@@ -260,48 +260,41 @@ describe('helpers', () => {
     });
   });
 
-  describe('queuePush', () => {
-    it('should add elements to the beginning of the array without changing its length', () => {
-      const arr1 = [1, 2, 3];
-      const arr2 = [4, 5];
-      const result = queuePush(arr1, arr2);
-      expect(result).toEqual([4, 5, 1]);
+  describe('spliceArray', () => {
+    it('should return the original array if no arguments are provided', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 0, 0);
+      expect(result).toEqual(arr);
     });
 
-    it('should handle arrays of equal length', () => {
-      const arr1 = [1, 2, 3];
-      const arr2 = [4, 5, 6];
-      const result = queuePush(arr1, arr2);
-      expect(result).toEqual([4, 5, 6]);
+    it('should add items without deleting any', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 2, 0, 6, 7);
+      expect(result).toEqual([1, 2, 6, 7, 3, 4, 5]);
     });
 
-    it('should handle arrays where arr2 is shorter than arr1', () => {
-      const arr1 = [1, 2, 3];
-      const arr2 = [4];
-      const result = queuePush(arr1, arr2);
-      expect(result).toEqual([4, 1, 2]);
+    it('should delete items without adding any', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 2, 2);
+      expect(result).toEqual([1, 2, 5]);
     });
 
-    it('should handle arrays where arr2 is longer than arr1', () => {
-      const arr1 = [1, 2, 3];
-      const arr2 = [4, 5, 6, 2];
-      const result = queuePush(arr1, arr2);
-      expect(result).toEqual([4, 5, 6]);
+    it('should delete and add items at the same time', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 2, 2, 6, 7);
+      expect(result).toEqual([1, 2, 6, 7, 5]);
     });
 
-    it('should handle arrays of different lengths', () => {
-      const arr1 = [1, 2, 3];
-      const arr2 = [4, 5];
-      const result = queuePush(arr1, arr2);
-      expect(result).toEqual([4, 5, 1]);
+    it('should handle start greater than array length', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 10, 2, 6, 7);
+      expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
     });
 
-    it('should not modify the original arrays', () => {
-      const arr1 = [1, 2, 3];
-      const arr2 = [4, 5];
-      queuePush(arr1, arr2);
-      expect(arr1).toEqual([1, 2, 3]);
-      expect(arr2).toEqual([4, 5]);
+    it('should handle deleteCount greater than remaining elements from start', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 3, 5);
+      expect(result).toEqual([1, 2, 3]);
     });
   });
 });
