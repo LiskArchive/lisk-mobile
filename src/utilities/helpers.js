@@ -204,3 +204,17 @@ export function joinArraysWithoutDuplicates(arr1, arr2, filterProp) {
   // Return the uniqueObjects array
   return uniqueObjects;
 }
+
+/**
+ * Pushes into arr1 the elements of arr2 following a FIFO (queue) approach and maintaining arr1 length.
+ * @param {Array} arr1 - The array to add elements to.
+ * @param {Array} arr2 - The array containing elements to add.
+ * @return {Array} - The modified array.
+ */
+export function queuePush(arr1, arr2) {
+  const concatArrays = [...arr2, ...arr1];
+
+  const queue = concatArrays.slice(0, arr1.length);
+
+  return queue;
+}
