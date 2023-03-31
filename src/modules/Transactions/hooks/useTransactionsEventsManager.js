@@ -11,6 +11,9 @@ import {
   GET_ACCOUNT_TRANSACTIONS_QUERY,
 } from 'utilities/api/queries';
 
+/**
+ * Handles all business logic necessary to execute when a WS transaction event is received.
+ */
 export function useTransactionsEventsManager() {
   const queryClient = useQueryClient();
 
