@@ -248,14 +248,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     if (recipientAddress && tokenID && initializationFeeData !== undefined) {
       transaction.update({ extraCommandFee: initializationFeeData });
     }
-  }, [
-    isTransactionSuccess,
-    tokenID,
-    recipientAddress,
-    initializationFeeData,
-    refetchInitializationFee,
-    transaction,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTransactionSuccess, tokenID, recipientAddress, initializationFeeData]);
 
   const isLoading =
     form.formState.isSubmitting ||
