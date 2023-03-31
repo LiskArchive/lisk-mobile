@@ -16,6 +16,7 @@ import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadca
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
 import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
@@ -256,6 +257,18 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     transaction,
   ]);
 
+  const isLoading =
+    form.formState.isSubmitting ||
+    dryRunTransactionMutation.isLoading ||
+    broadcastTransactionMutation.isLoading;
+  const isSuccess = broadcastTransactionMutation.isSuccess;
+  const error =
+    dryRunTransactionMutation.error ||
+    (dryRunTransactionMutation.data?.data &&
+      getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
+    broadcastTransactionMutation.error;
+  const isError = !!error;
+
   return {
     ...form,
     handleChange,
@@ -264,5 +277,9 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     broadcastTransactionMutation,
     dryRunTransactionMutation,
     handleMutationsReset,
+    isLoading,
+    isSuccess,
+    error,
+    isError,
   };
 }
