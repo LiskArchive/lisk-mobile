@@ -11,6 +11,7 @@ import {
   isNumeric,
   joinArraysWithoutDuplicates,
   findMaxBigInt,
+  queuePush,
 } from './helpers';
 
 describe('helpers', () => {
@@ -256,6 +257,51 @@ describe('helpers', () => {
     it('should return the only value in an array with a single element', () => {
       const arr = [BigInt(123)];
       expect(findMaxBigInt(arr)).toBe(123n);
+    });
+  });
+
+  describe('queuePush', () => {
+    it('should add elements to the beginning of the array without changing its length', () => {
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5];
+      const result = queuePush(arr1, arr2);
+      expect(result).toEqual([4, 5, 1]);
+    });
+
+    it('should handle arrays of equal length', () => {
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5, 6];
+      const result = queuePush(arr1, arr2);
+      expect(result).toEqual([4, 5, 6]);
+    });
+
+    it('should handle arrays where arr2 is shorter than arr1', () => {
+      const arr1 = [1, 2, 3];
+      const arr2 = [4];
+      const result = queuePush(arr1, arr2);
+      expect(result).toEqual([4, 1, 2]);
+    });
+
+    it('should handle arrays where arr2 is longer than arr1', () => {
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5, 6, 2];
+      const result = queuePush(arr1, arr2);
+      expect(result).toEqual([4, 5, 6]);
+    });
+
+    it('should handle arrays of different lengths', () => {
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5];
+      const result = queuePush(arr1, arr2);
+      expect(result).toEqual([4, 5, 1]);
+    });
+
+    it('should not modify the original arrays', () => {
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5];
+      queuePush(arr1, arr2);
+      expect(arr1).toEqual([1, 2, 3]);
+      expect(arr2).toEqual([4, 5]);
     });
   });
 });
