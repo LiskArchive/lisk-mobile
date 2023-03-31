@@ -5,7 +5,6 @@ export function getSignTransactionSuccessStyles() {
     common: {
       container: {
         flex: 1,
-        padding: boxes.boxPadding,
       },
       title: {
         textAlign: 'center',
