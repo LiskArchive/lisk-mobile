@@ -1,6 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'contexts/ThemeContext';
 import ApplicationList from '../ApplicationList/ApplicationList';
@@ -13,7 +13,7 @@ const AddApplication = ({ navigation, t }) => {
   const applications = useApplicationsExplorer();
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
 
       <ApplicationList
@@ -28,7 +28,7 @@ const AddApplication = ({ navigation, t }) => {
         showCaret
         style={{ container: styles.applicationsListContainer }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

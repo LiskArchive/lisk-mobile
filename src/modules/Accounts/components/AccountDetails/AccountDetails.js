@@ -102,6 +102,7 @@ export default function AccountDetails({ account }) {
             style={[styles.button, styles.sendButton]}
             onPress={handleSendTokensClick}
             disabled={disableSendTokenButton}
+            testID="send-tokens"
           >
             <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
           </TouchableOpacity>
