@@ -10,7 +10,7 @@ import {
 } from '../__fixtures__';
 
 export const getAccountTokensMockHandler = rest.get(
-  `*/api/${API_VERSION}/tokens`,
+  `*/api/${API_VERSION}/token/balances`,
   async (_, res, ctx) => {
     const response = mockGetAccountTokensQuery;
 

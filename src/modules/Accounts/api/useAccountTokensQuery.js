@@ -15,9 +15,9 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
  */
 export function useAccountTokensQuery(address, { config: customConfig = {}, options = {} } = {}) {
   const config = {
-    url: `${API_URL}/tokens`,
+    url: `${API_URL}/token/balances`,
     method: 'get',
-    event: 'get.tokens',
+    event: 'get.token.balances',
     ...customConfig,
     params: {
       address,

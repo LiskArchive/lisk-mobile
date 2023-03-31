@@ -13,9 +13,9 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
  */
 export function useSupportedTokensQuery({ config: customConfig = {}, options, client } = {}) {
   const config = {
-    url: `${API_URL}/tokens/summary`,
+    url: `${API_URL}/token/summary`,
     method: 'get',
-    event: 'get.tokens.supported',
+    event: 'get.token.summary',
     ...customConfig,
     params: customConfig?.params,
   };

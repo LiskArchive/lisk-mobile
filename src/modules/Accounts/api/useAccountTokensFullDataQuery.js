@@ -25,9 +25,9 @@ export function useAccountTokensFullDataQuery({ config: customConfig = {}, optio
   };
 
   const config = {
-    url: `${API_URL}/tokens`,
+    url: `${API_URL}/token/balances`,
     method: 'get',
-    event: 'get.tokens',
+    event: 'get.token.balances',
     ...customConfig,
     params: {
       address: currentAccount?.metadata?.address,
