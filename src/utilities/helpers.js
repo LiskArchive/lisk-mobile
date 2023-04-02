@@ -204,3 +204,25 @@ export function joinArraysWithoutDuplicates(arr1, arr2, filterProp) {
   // Return the uniqueObjects array
   return uniqueObjects;
 }
+
+/**
+ * Immutable implementation of Array.prototype.splice() method.
+ * @param {Array} arr - Array to splice.
+ * @param {number} start - Index at which to start changing the array
+ * @param {number | undefined} deleteCount - Number of elements in the array to remove from start.
+ * @param  {(...Array) | undefined} addItem - The elements to add to the array, beginning from start.
+ * @returns {Array} - An array containing the deleted elements.
+ */
+export function spliceArray(arr, start, deleteCount, ...addItem) {
+  const result = [];
+  if (start > 0) {
+    result.push(...arr.slice(0, start));
+  }
+  result.push(...addItem);
+  const len = result.length - addItem.length;
+  const count = deleteCount <= 0 ? len : len + deleteCount;
+  if (arr[count]) {
+    result.push(...arr.slice(count));
+  }
+  return result;
+}

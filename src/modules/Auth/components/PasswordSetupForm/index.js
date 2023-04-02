@@ -46,7 +46,7 @@ export default function PasswordSetupForm() {
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
 
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} testID="password-setup-form">
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.setup.passwordSetupDescription')}
         </P>

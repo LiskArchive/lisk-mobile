@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
@@ -47,7 +47,7 @@ export default function SecretRecoveryPhrase() {
         permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
 
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} testID="secret-recovery-screen">
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.setup.addAccountDescription')}
         </P>
@@ -57,7 +57,7 @@ export default function SecretRecoveryPhrase() {
           onSubmit={handleFormSubmission}
           onScanQrCode={handleScanQrCode}
         />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

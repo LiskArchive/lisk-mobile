@@ -11,6 +11,7 @@ import {
   isNumeric,
   joinArraysWithoutDuplicates,
   findMaxBigInt,
+  spliceArray,
 } from './helpers';
 
 describe('helpers', () => {
@@ -256,6 +257,44 @@ describe('helpers', () => {
     it('should return the only value in an array with a single element', () => {
       const arr = [BigInt(123)];
       expect(findMaxBigInt(arr)).toBe(123n);
+    });
+  });
+
+  describe('spliceArray', () => {
+    it('should return the original array if no arguments are provided', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 0, 0);
+      expect(result).toEqual(arr);
+    });
+
+    it('should add items without deleting any', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 2, 0, 6, 7);
+      expect(result).toEqual([1, 2, 6, 7, 3, 4, 5]);
+    });
+
+    it('should delete items without adding any', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 2, 2);
+      expect(result).toEqual([1, 2, 5]);
+    });
+
+    it('should delete and add items at the same time', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 2, 2, 6, 7);
+      expect(result).toEqual([1, 2, 6, 7, 5]);
+    });
+
+    it('should handle start greater than array length', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 10, 2, 6, 7);
+      expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
+    });
+
+    it('should handle deleteCount greater than remaining elements from start', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const result = spliceArray(arr, 3, 5);
+      expect(result).toEqual([1, 2, 3]);
     });
   });
 });

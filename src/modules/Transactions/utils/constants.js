@@ -53,3 +53,7 @@ export const TRANSACTION_VERIFY_RESULT = {
   pending: 0,
   ok: 1,
 };
+
+export const TRANSACTION_EVENTS = {
+  newTransactions: 'new.transactions',
+};
