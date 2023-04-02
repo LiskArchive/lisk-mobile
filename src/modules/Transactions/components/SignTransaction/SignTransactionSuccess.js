@@ -38,7 +38,6 @@ export default function SignTransactionSuccess({ onSubmit, title, description, a
         <PrimaryButton
           onClick={onSubmit}
           title={i18next.t('sendToken.result.success.closeButtonText')}
-          style={{ marginBottom: 24 }}
         />
       )}
     </View>

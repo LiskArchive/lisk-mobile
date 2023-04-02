@@ -57,7 +57,7 @@ export default function ConfirmTransaction({
               paddingTop: 0,
               paddingRight: 0,
               paddingLeft: 0,
-              marginBottom: 16,
+              marginBottom: 24,
             },
             inputLabel: {
               marginBottom: 8,
@@ -76,12 +76,7 @@ export default function ConfirmTransaction({
           <Text style={[styles.errorText]}>{i18next.t('sendToken.errors.generalMessage')}</Text>
         )}
 
-        <PrimaryButton
-          noTheme
-          onClick={onSubmit}
-          style={{ marginBottom: 24 }}
-          disabled={submitDisabled}
-        >
+        <PrimaryButton noTheme onClick={onSubmit} disabled={submitDisabled}>
           {isLoading
             ? i18next.t('sendToken.confirmAndSign.loadingText')
             : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {

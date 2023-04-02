@@ -118,6 +118,7 @@ export default function SendToken() {
     } else if (!currentAccount?.metadata) {
       openSelectAccountModal();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts, currentAccount]);
 
   const accountIsMultisignature = accountSummary.isMultisignature;

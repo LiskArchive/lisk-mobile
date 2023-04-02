@@ -27,6 +27,8 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
   const [currentAccount] = useCurrentAccount();
 
+  const noOfItemsToRender = mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT;
+
   const {
     data: transactionsData,
     isLoading: isLoadingTransactions,
@@ -36,7 +38,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
     isFetchingNextPage: isFetchingTransactionsNextPage,
   } = useAccountTransactionsQuery(address, {
     config: {
-      params: { limit: mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT },
+      params: { limit: noOfItemsToRender },
     },
   });
 
@@ -104,6 +106,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
             hasNextPage={mode === 'full' && hasTransactionsNextPage}
             isFetchingNextPage={isFetchingTransactionsNextPage}
             ListFooterComponent={mode === 'full' ? <View style={{ height: 50 }} /> : null}
+            initialNumToRender={noOfItemsToRender}
           />
         )}
         renderLoading={() => <TransactionListSkeleton />}
