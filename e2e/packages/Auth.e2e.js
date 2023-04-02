@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import { device, element, by } from 'detox';
+import { device, element, by, waitFor } from 'detox';
 import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
 import testConstants from '../utils/testConstants';
 
@@ -15,16 +15,25 @@ describe('Auth module', () => {
   it('should add an account by recovery phrase', async () => {
     await element(by.id('secret-phrase')).atIndex(1).tap();
     await element(by.id('signInPassphraseInput')).tap();
-    await element(by.id('signInPassphraseInput')).replaceText(testConstants.secretRecoveryPhrase);
+    await element(by.id('signInPassphraseInput')).typeText(`${testConstants.secretRecoveryPhrase}`);
+    await element(by.id('secret-recovery-screen')).tap();
+    await waitFor(element(by.id('continue-button')))
+      .toBeVisible()
+      .withTimeout(1000);
     await element(by.id('continue-button')).tap();
     await element(by.id('enter-password')).tap();
-    await element(by.id('enter-password')).replaceText(testConstants.password);
+    await element(by.id('enter-password')).typeText(`${testConstants.password}`);
     await element(by.id('confirm-password')).tap();
-    await element(by.id('confirm-password')).replaceText(testConstants.password);
+    await element(by.id('confirm-password')).typeText(`${testConstants.password}`);
     await element(by.id('account-name')).tap();
-    await element(by.id('account-name')).replaceText(testConstants.accountName);
+    await element(by.id('account-name')).typeText(`${testConstants.accountName}`);
+    // Dismiss keyboard
+    await element(by.id('password-setup-form')).tap();
     await element(by.id('agree-switch')).tap();
     await element(by.id('save-account')).tap();
+    await waitFor(element(by.id('download-file-button')))
+      .toBeVisible()
+      .withTimeout(5000);
     await element(by.id('download-file-button')).atIndex(0).tap();
     await element(by.id('result-screen-continue')).atIndex(0).tap();
     await expect(element(by.id('accounts-home-container'))).toBeVisible();
@@ -43,6 +52,9 @@ describe('Auth module', () => {
     await element(by.id('edit-account')).atIndex(1).tap();
     await element(by.id('account-name')).atIndex(1).replaceText('tester');
     await element(by.id('edit-name-done-button')).atIndex(0).tap();
+    await waitFor(element(by.id('download-file-button')))
+      .toBeVisible()
+      .withTimeout(5000);
     await element(by.id('download-file-button')).atIndex(1).tap();
     await element(by.id('edit-account-button')).atIndex(0).tap();
     await element(by.id('switch-account')).tap();
