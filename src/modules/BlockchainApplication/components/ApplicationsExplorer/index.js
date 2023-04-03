@@ -102,9 +102,7 @@ export default function ApplicationsExplorer() {
     }
   };
 
-  const handleQRCodeRead = (value) => {
-    console.log(value);
-  };
+  const handleQRCodeRead = () => {};
 
   return (
     <>
@@ -133,7 +131,7 @@ export default function ApplicationsExplorer() {
             cameraRoll: styles.cameraRoll,
             cameraOverlay: styles.cameraOverlay,
           }}
-          fullScreen={true}
+          fullScreen
           navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={handleQRCodeRead}
