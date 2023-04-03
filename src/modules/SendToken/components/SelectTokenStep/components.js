@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
-import * as Lisk from '@liskhq/lisk-client';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
@@ -44,12 +43,16 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
 
   const tokenBalance = selectedToken?.availableBalance
-    ? Number(
-        Lisk.transactions.convertBeddowsToLSK(selectedToken?.availableBalance)
-      ).toLocaleString()
+    ? fromBaseToDisplayDenom({
+        amount: selectedToken.availableBalance,
+        displayDenom: selectedToken.displayDenom,
+        denomUnits: selectedToken.denomUnits,
+        symbol: selectedToken.symbol,
+        withSymbol: true,
+      })
     : 0;
 
-  const MenuOptions = (data = supportedTokensData) => (
+  const renderOptions = (data = supportedTokensData) => (
     <InfiniteScrollList
       data={data}
       keyExtractor={(item) => item.tokenID}
@@ -65,7 +68,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
     />
   );
 
-  const { showOptions } = Picker.usePickerMenu(<MenuOptions />);
+  const { showOptions } = Picker.usePickerMenu(renderOptions());
 
   return (
     <Picker value={value} error={errorMessage}>
@@ -77,9 +80,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         {selectedToken && (
           <Picker.Label style={style?.label}>
             {i18next.t('sendToken.tokenSelect.tokenIDBalanceLabel')}:{' '}
-            <Text style={[styles.primaryText]}>
-              {tokenBalance} {selectedToken.symbol}
-            </Text>
+            <Text style={[styles.primaryText]}>{tokenBalance}</Text>
           </Picker.Label>
         )}
       </View>
