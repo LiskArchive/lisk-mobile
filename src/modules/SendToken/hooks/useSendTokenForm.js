@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
-import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
@@ -20,6 +19,7 @@ import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
+import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -82,6 +82,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
+  const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
@@ -99,9 +100,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
-      const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
+      const amountInBaseDenom = fromDisplayToBaseDenom({
+        amount: (value || 0).toString(),
+        displayDenom: token.displayDenom,
+        denomUnits: token.denomUnits,
+      });
 
-      transaction.update({ params: { amount: amountInBeddows } });
+      transaction.update({ params: { amount: amountInBaseDenom } });
     } else {
       transaction.update(fromPathToObject(field, value));
     }
@@ -171,7 +176,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
       const defaultTokenID = applicationSupportedTokensData.find(
-        (token) => token.symbol === 'LSK'
+        (_token) => _token.symbol === 'LSK'
       )?.tokenID;
 
       if (defaultTokenID) {
