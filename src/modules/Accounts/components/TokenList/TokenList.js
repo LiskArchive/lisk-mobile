@@ -16,7 +16,7 @@ import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
-import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
+import { useAccountTokensFullDataQuery } from '../../api/useAccountTokensFullDataQuery';
 import TokenRow from '../TokenRow/TokenRow';
 
 import TokenListTabs from './components/TokenListTabs';
@@ -39,7 +39,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-  } = useAccountTokensQuery(address, {
+  } = useAccountTokensFullDataQuery({
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
     },

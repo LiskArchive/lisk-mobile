@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
 import { View, Image } from 'react-native';
-import * as Lisk from '@liskhq/lisk-client';
 import { useSelector } from 'react-redux';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -10,14 +9,17 @@ import { useTokenAmountInCurrency } from 'modules/SendToken/components/SelectTok
 import DataRenderer from 'components/shared/DataRenderer';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
-import { fromRawLsk } from 'utilities/conversions.utils';
+import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 
 import getTokenRowStyles from './TokenRow.styles';
 
 export default function TokenRow({ token }) {
-  // eslint-disable-next-line no-undef
   const balance = Number(
-    fromRawLsk(BigInt(token.availableBalance ?? 0).toString())
+    fromBaseToDisplayDenom({
+      amount: token.availableBalance,
+      displayDenom: token.displayDenom,
+      denomUnits: token.denomUnits,
+    })
   ).toLocaleString();
 
   const accountSettings = useSelector((state) => state.settings);
@@ -29,7 +31,11 @@ export default function TokenRow({ token }) {
   } = useTokenMetaQuery(token.tokenID);
 
   const tokenAmountInCurrency = useTokenAmountInCurrency({
-    tokenAmount: Lisk.transactions.convertBeddowsToLSK(token.availableBalance),
+    tokenAmount: fromBaseToDisplayDenom({
+      amount: token.availableBalance,
+      displayDenom: token.displayDenom,
+      denomUnits: token.denomUnits,
+    }),
     tokenSymbol: tokenMetaData?.data[0]?.symbol,
   });
 

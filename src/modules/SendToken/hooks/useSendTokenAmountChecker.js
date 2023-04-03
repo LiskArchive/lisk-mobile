@@ -1,7 +1,5 @@
-/* eslint-disable max-statements */
-import * as Lisk from '@liskhq/lisk-client';
-
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { fromDisplayToBaseDenom } from '../../../utilities/conversions.utils';
 
 export function useSendTokenAmountChecker({
   recipientApplication,
@@ -18,7 +16,15 @@ export function useSendTokenAmountChecker({
   const maxAllowedAmount = tokenBalance - transactionFee;
 
   const isMaxAllowedAmountExceeded =
-    maxAllowedAmount - BigInt(Lisk.transactions.convertLSKToBeddows(amount.toString())) <= 0;
+    maxAllowedAmount -
+      BigInt(
+        fromDisplayToBaseDenom({
+          amount,
+          displayDenom: selectedToken.displayDenom,
+          denomUnits: selectedToken.denomUnits,
+        })
+      ) <=
+    0;
 
   return { maxAllowedAmount, isMaxAllowedAmountExceeded };
 }

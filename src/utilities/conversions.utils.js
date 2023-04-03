@@ -2,30 +2,6 @@ import { BigNumber } from 'bignumber.js';
 
 BigNumber.config({ ERRORS: false });
 
-export const fromRawLsk = (value) => {
-  const bgValue = new BigNumber(value || 0);
-  const factor = new BigNumber(10).pow(8);
-  const result = bgValue.dividedBy(factor).toFixed();
-  return result;
-};
-
-export const toRawLsk = (value) => {
-  const factor = new BigNumber(10).pow(8);
-  const rawValue = new BigNumber(value);
-  const bgRaw = rawValue.multipliedBy(factor);
-  return bgRaw.toFixed(0);
-};
-
-export const includeFee = (value, fee, asRawLsk = false) => {
-  const factor = new BigNumber(10).pow(8);
-  const bigValue = new BigNumber(value);
-  const rawValue = bigValue.multipliedBy(factor);
-  const bigFee = new BigNumber(fee);
-  const result = rawValue.plus(bigFee);
-  // eslint-disable-next-line no-undef
-  return asRawLsk ? result : fromRawLsk(BigInt(result ?? 0));
-};
-
 /**
  * Parses from base-denomination to display-denomination an amount of a given token.
  * @param {string} amount - Amount to convert (in base denomination).
@@ -118,3 +94,13 @@ export function fromLskToBeddows(amount) {
     denomUnits: [{ decimals: 8, denom: 'lsk' }],
   });
 }
+
+export const includeFee = (value, fee, asRawLsk = false) => {
+  const factor = new BigNumber(10).pow(8);
+  const bigValue = new BigNumber(value);
+  const rawValue = bigValue.multipliedBy(factor);
+  const bigFee = new BigNumber(fee);
+  const result = rawValue.plus(bigFee);
+  // eslint-disable-next-line no-undef
+  return asRawLsk ? result : fromBeddowsToLsk(BigInt(result ?? 0));
+};

@@ -5,12 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { stringShortener } from 'utilities/helpers';
-import { fromRawLsk } from 'utilities/conversions.utils';
+import { fromBeddowsToLsk } from 'utilities/conversions.utils';
+import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionRowStyles from './TransactionRow.styles';
-import DiscreteModeComponent from '../../../../components/shared/DiscreteModeComponent';
 import { TransactionAmount } from './components/TransactionAmount';
 import { TransactionStatus } from './components/TransactionStatus';
 
@@ -59,12 +59,7 @@ export default function TransactionRow({ transaction, address }) {
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
         <DiscreteModeComponent
           blurVariant={blurVariant}
-          data={
-            transaction.notRawLisk
-              ? transaction.amount
-              : // eslint-disable-next-line no-undef
-                fromRawLsk(BigInt(transaction.params.amount ?? 0))
-          }
+          data={fromBeddowsToLsk(transaction.params.amount ?? 0)}
         >
           <TransactionAmount
             transaction={transaction}
