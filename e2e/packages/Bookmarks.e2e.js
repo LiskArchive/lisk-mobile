@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
+import { signInUser } from '../commands/auth';
 
 describe('Bookmark Screen', () => {
   beforeAll(async () => {
@@ -9,11 +10,7 @@ describe('Bookmark Screen', () => {
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('continueToAddAccountButton')).tap();
-    await element(by.id('restore-from-file')).atIndex(1).tap();
-    await element(by.id('decrypt-password-input')).tap();
-    await element(by.id('decrypt-password-input')).replaceText('Password1!');
-    await element(by.id('decrypt-button-continue')).tap();
-    await element(by.id('account-list-item')).atIndex(0).tap();
+    await signInUser();
   });
 
   it('should validate errors in adding bookmarks', async () => {

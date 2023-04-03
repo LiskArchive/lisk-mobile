@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import { device, element, by } from 'detox';
-import testConstants from '../utils/testConstants';
+import { signInUser } from '../commands/auth';
 
 // TODO: Fix settings end to end test
 // (details on https://github.com/LiskHQ/lisk-mobile/issues/1604).
@@ -11,24 +11,10 @@ describe('Settings Screen', () => {
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('continueToAddAccountButton')).tap();
+    await signInUser();
   });
 
   it('should navigate to settings menu', async () => {
-    await element(by.id('secret-phrase')).atIndex(1).tap();
-    await element(by.id('signInPassphraseInput')).tap();
-    await element(by.id('signInPassphraseInput')).replaceText(testConstants.secretRecoveryPhrase);
-    await element(by.id('continue-button')).tap();
-    await element(by.id('enter-password')).tap();
-    await element(by.id('enter-password')).replaceText(testConstants.password);
-    await element(by.id('confirm-password')).tap();
-    await element(by.id('confirm-password')).replaceText(testConstants.password);
-    await element(by.id('account-name')).tap();
-    await element(by.id('account-name')).replaceText(testConstants.accountName);
-    await element(by.id('agree-switch')).tap();
-    await element(by.id('save-account')).tap();
-    await element(by.id('download-file-button')).atIndex(0).tap();
-    await element(by.id('result-screen-continue')).atIndex(0).tap();
-    await expect(element(by.id('accounts-home-container'))).toBeVisible();
     await element(by.id('Settings-tab')).atIndex(0).tap();
     await expect(element(by.text('Security'))).toBeVisible();
   });
