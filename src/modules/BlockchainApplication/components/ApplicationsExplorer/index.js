@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState, useContext, useMemo } from 'react';
+import React, { useState, useContext, useMemo, useRef } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -9,6 +9,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
+import Scanner from 'components/shared/scanner';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Tabs from 'components/shared/Tabs';
@@ -46,6 +47,7 @@ const actions = [
  */
 export default function ApplicationsExplorer() {
   const applicationStatsModal = useModal();
+  const scannerRef = useRef();
 
   const navigation = useNavigation();
   const { events } = useContext(WalletConnectContext);
@@ -95,7 +97,12 @@ export default function ApplicationsExplorer() {
     if (item.key === 'paste') {
       showNewConnectionModal();
     }
+    if (item.key === 'scan') {
+      scannerRef.current.toggleCamera();
+    }
   };
+
+  const handleQRCodeRead = () => {};
 
   return (
     <>
@@ -116,6 +123,20 @@ export default function ApplicationsExplorer() {
             />
           )}
           titleStyle={[styles.header]}
+        />
+
+        <Scanner
+          ref={scannerRef}
+          containerStyles={{
+            cameraRoll: styles.cameraRoll,
+            cameraOverlay: styles.cameraOverlay,
+          }}
+          fullScreen
+          navigation={navigation}
+          readFromCameraRoll={false}
+          onQRCodeRead={handleQRCodeRead}
+          permissionDialogTitle={i18next.t('Permission to use camera')}
+          permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
         />
 
         <View style={[styles.body, styles.flex]}>

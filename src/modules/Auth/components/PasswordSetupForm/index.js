@@ -66,7 +66,10 @@ export default function PasswordSetupForm() {
                 containerStyle: styles.inputContainer,
                 input: styles.input,
               }}
-              error={formState.errors?.password?.message}
+              error={
+                formState.errors?.password?.message &&
+                i18next.t(formState.errors?.password?.message)
+              }
             />
           )}
         />
@@ -86,7 +89,10 @@ export default function PasswordSetupForm() {
                 containerStyle: styles.inputContainer,
                 input: styles.input,
               }}
-              error={formState.errors?.confirmPassword?.message}
+              error={
+                formState.errors?.confirmPassword?.message &&
+                i18next.t(formState.errors?.confirmPassword?.message)
+              }
             />
           )}
         />

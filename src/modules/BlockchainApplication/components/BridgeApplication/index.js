@@ -12,7 +12,7 @@ import { STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
 import getStyles from './styles';
 
 export default function BridgeApplication({ nextStep }) {
-  const [status, setStatus] = useState({});
+  const [status, setStatus] = useState({ isLoading: false });
 
   const [inputUri, setInputUri] = useState('');
 
