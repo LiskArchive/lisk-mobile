@@ -49,7 +49,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
       tokenID: initialValues?.tokenID,
-      amount: initialValues?.amount ? BigInt(initialValues.amount) : 0,
+      amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
       message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
