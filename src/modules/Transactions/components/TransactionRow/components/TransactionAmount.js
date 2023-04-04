@@ -24,10 +24,7 @@ export function TransactionAmount({ transaction, style, address }) {
     transactionAssets.type === 'tokenTransfer' ||
     transactionAssets.type === 'tokenCrossChainTransfer';
 
-  if (
-    !isTokenTransfer ||
-    (transaction.params.recipientAddress === transaction.sender.address && !isTokenTransfer)
-  ) {
+  if (!isTokenTransfer) {
     return null;
   }
 
