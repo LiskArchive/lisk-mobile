@@ -24,6 +24,10 @@ export function TransactionAmount({ transaction, style, address }) {
     transactionAssets.type === 'tokenTransfer' ||
     transactionAssets.type === 'tokenCrossChainTransfer';
 
+  if (!isTokenTransfer) {
+    return null;
+  }
+
   if (transaction.params.recipientAddress === transaction.sender.address && !isTokenTransfer) {
     return null;
   }
@@ -36,6 +40,10 @@ export function TransactionAmount({ transaction, style, address }) {
       renderData={(tokens) => {
         const token = tokens[0];
 
+        if (!token) {
+          return null;
+        }
+
         const transactionAmount = fromBaseToDisplayDenom({
           amount: transaction.params.amount,
           displayDenom: token.displayDenom,
@@ -43,10 +51,10 @@ export function TransactionAmount({ transaction, style, address }) {
         });
 
         return (
-          <P style={[transactionAssets.amount.style, style]}>
-            {transactionAssets.amount.sign}
+          <P style={[transactionAssets.amount?.style, style]}>
+            {transactionAssets.amount?.sign}
 
-            <FormattedNumber language={language} tokenType={token?.symbol}>
+            <FormattedNumber language={language} tokenType={token.symbol}>
               {transactionAmount}
             </FormattedNumber>
           </P>
