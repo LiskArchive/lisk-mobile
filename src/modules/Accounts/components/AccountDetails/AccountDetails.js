@@ -102,6 +102,7 @@ export default function AccountDetails({ account }) {
             style={[styles.button, styles.sendButton]}
             onPress={handleSendTokensClick}
             disabled={disableSendTokenButton}
+            testID="send-tokens-button"
           >
             <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
           </TouchableOpacity>
@@ -114,11 +115,7 @@ export default function AccountDetails({ account }) {
         style={{ container: styles.tokenListContainer }}
       />
 
-      <TransactionList
-        mode="overview"
-        address={account.address}
-        style={{ container: styles.transactionListContainer }}
-      />
+      <TransactionList mode="overview" address={account.address} />
     </View>
   );
 }

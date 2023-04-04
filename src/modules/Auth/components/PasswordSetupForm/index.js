@@ -46,7 +46,7 @@ export default function PasswordSetupForm() {
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
 
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} testID="password-setup-form">
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.setup.passwordSetupDescription')}
         </P>
@@ -66,7 +66,10 @@ export default function PasswordSetupForm() {
                 containerStyle: styles.inputContainer,
                 input: styles.input,
               }}
-              error={formState.errors?.password?.message}
+              error={
+                formState.errors?.password?.message &&
+                i18next.t(formState.errors?.password?.message)
+              }
             />
           )}
         />
@@ -86,7 +89,10 @@ export default function PasswordSetupForm() {
                 containerStyle: styles.inputContainer,
                 input: styles.input,
               }}
-              error={formState.errors?.confirmPassword?.message}
+              error={
+                formState.errors?.confirmPassword?.message &&
+                i18next.t(formState.errors?.confirmPassword?.message)
+              }
             />
           )}
         />

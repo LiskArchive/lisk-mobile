@@ -5,7 +5,6 @@ export default function getTransactionsHistoryStyles() {
     common: {
       container: {
         flex: 1,
-        padding: boxes.boxPadding,
       },
       header: {
         marginBottom: 24,

@@ -60,7 +60,7 @@ export default function getAccountDetailsStyles() {
         color: colors.light.ultramarineBlue,
       },
       tokenListContainer: {
-        marginTop: 32,
+        marginVertical: 32,
       },
       transactionListContainer: {
         marginTop: 32,

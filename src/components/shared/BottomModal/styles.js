@@ -1,11 +1,11 @@
 import { themes, colors } from 'constants/styleGuide';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
     container: {
-      padding: 20,
+      padding: Platform.select({ ios: 20, android: 10 }),
       borderTopRightRadius: 24,
       borderTopLeftRadius: 24,
     },

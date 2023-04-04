@@ -105,6 +105,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
             fetchNextPage={fetchNextTransactionsPage}
             hasNextPage={mode === 'full' && hasTransactionsNextPage}
             isFetchingNextPage={isFetchingTransactionsNextPage}
+            ListFooterComponent={mode === 'full' ? <View style={{ height: 50 }} /> : null}
             initialNumToRender={noOfItemsToRender}
           />
         )}
