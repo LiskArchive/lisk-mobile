@@ -164,6 +164,7 @@ export function SendTokenAmountField({
               </Text>
             ),
           }}
+          testID="token-amount"
           innerStyles={getSendTokenAmountFieldStyles(style)}
         />
       )}

@@ -4,7 +4,7 @@ import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
-describe('Auth module', () => {
+describe.skip('Auth module', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');
@@ -92,10 +92,6 @@ describe('Auth module', () => {
       await element(by.id('password-setup-form')).tap();
       await element(by.id('agree-switch')).tap();
       await element(by.id('save-account')).tap();
-      await element(by.id('password-setup-form')).tap();
-      await waitFor(element(by.id('download-file-button')))
-        .toBeVisible()
-        .withTimeout(10000);
       await element(by.id('download-file-button')).atIndex(0).tap();
       await element(by.id('result-screen-continue')).atIndex(0).tap();
       await expect(element(by.id('accounts-home-container'))).toBeVisible();

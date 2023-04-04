@@ -187,6 +187,7 @@ export function SendTokenRecipientAccountField({
           left: <Avatar address={value} size={24} />,
           right: isValidAddress && <CircleCheckedSvg variant="fill" />,
         }}
+        testID="recipient-address"
         onChange={handleInputChange}
         innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
       />

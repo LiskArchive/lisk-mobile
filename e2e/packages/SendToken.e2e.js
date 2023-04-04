@@ -16,7 +16,7 @@ describe('Send Token Screen', () => {
   });
 
   it('should navigate to send token screen', async () => {
-    await element(by.id('send-tokens')).tap();
+    await element(by.id('send-tokens-button')).tap();
     await expect(element(by.id('send-token-screen'))).toBeVisible();
   });
 
@@ -24,5 +24,6 @@ describe('Send Token Screen', () => {
     await element(by.id('recipient-address')).replaceText(testConstants.address);
     await element(by.id('next-step-button')).tap();
     await expect(element(by.id('select-token-step-screen'))).toBeVisible();
+    await element(by.id('token-amount')).typeText('0.01');
   });
 });

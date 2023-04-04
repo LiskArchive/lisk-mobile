@@ -21,8 +21,6 @@ export const signInUser = async () => {
   await element(by.id('password-setup-form')).tap();
   await element(by.id('agree-switch')).tap();
   await element(by.id('save-account')).tap();
-  // Hack **
-  await element(by.id('password-setup-form')).tap();
   await waitFor(element(by.id('download-file-button')))
     .toBeVisible()
     .withTimeout(10000);

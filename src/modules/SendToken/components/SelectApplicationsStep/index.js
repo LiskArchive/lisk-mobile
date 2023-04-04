@@ -108,6 +108,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
                 disabled={disableNextStepButton}
                 title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
                 noTheme
+                testID="next-step-button"
               />
             </View>
           </>
