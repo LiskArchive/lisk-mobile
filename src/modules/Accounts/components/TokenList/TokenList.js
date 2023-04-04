@@ -16,7 +16,7 @@ import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
-import { useAccountTokensQuery } from '../../api/useAccountTokensQuery';
+import { useAccountTokensFullDataQuery } from '../../api/useAccountTokensFullDataQuery';
 import TokenRow from '../TokenRow/TokenRow';
 
 import TokenListTabs from './components/TokenListTabs';
@@ -34,12 +34,12 @@ export default function TokenList({ mode = 'overview', address, style }) {
 
   const {
     data: tokensData,
-    isLoading: isLoadingTokens,
+    isFetching: isFetchingTokens,
     error: errorOnTokens,
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
-  } = useAccountTokensQuery(address, {
+  } = useAccountTokensFullDataQuery({
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
     },
@@ -69,7 +69,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
   const areMoreOnOverview = tokensData?.meta.count < tokensData?.meta.total;
 
   const showViewAllButton =
-    mode === 'overview' && !errorOnTokens && !isLoadingTokens && areMoreOnOverview;
+    mode === 'overview' && !errorOnTokens && !isFetchingTokens && areMoreOnOverview;
 
   const isCurrentAccount = currentAccount.metadata.address === address;
 
@@ -107,7 +107,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
 
       <DataRenderer
         data={activeTab === 0 ? tokensData?.data : lockedTokens}
-        isLoading={isLoadingTokens}
+        isLoading={isFetchingTokens}
         error={errorOnTokens}
         renderData={(data) => (
           <InfiniteScrollList

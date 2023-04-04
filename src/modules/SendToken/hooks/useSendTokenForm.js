@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
-import * as Lisk from '@liskhq/lisk-client';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
@@ -20,15 +19,17 @@ import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
+import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
 
   const [currentApplication] = useCurrentApplication();
 
-  const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
-    currentApplication.data
-  );
+  const {
+    data: applicationSupportedTokensData,
+    isSuccess: isSuccessApplicationSupportedTokensData,
+  } = useApplicationSupportedTokensQuery(currentApplication.data);
 
   const { data: messageFeeData } = useMessageFee();
 
@@ -82,6 +83,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
+  const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
@@ -99,9 +101,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const handleChange = (field, value, onChange) => {
     if (field === 'params.amount') {
-      const amountInBeddows = Lisk.transactions.convertLSKToBeddows(value.toString());
+      const amountInBaseDenom = fromDisplayToBaseDenom({
+        amount: (value || 0).toString(),
+        displayDenom: token.displayDenom,
+        denomUnits: token.denomUnits,
+      });
 
-      transaction.update({ params: { amount: amountInBeddows } });
+      transaction.update({ params: { amount: amountInBaseDenom } });
     } else {
       transaction.update(fromPathToObject(field, value));
     }
@@ -171,7 +177,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
       const defaultTokenID = applicationSupportedTokensData.find(
-        (token) => token.symbol === 'LSK'
+        (_token) => _token.symbol === 'LSK'
       )?.tokenID;
 
       if (defaultTokenID) {
@@ -190,12 +196,20 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   }, [form, defaultValues, isTransactionSuccess, applicationSupportedTokensData, transaction]);
 
   useEffect(() => {
-    if (isTransactionSuccess) {
+    if (isTransactionSuccess && isSuccessApplicationSupportedTokensData) {
+      const amountInBaseDenom = token
+        ? fromDisplayToBaseDenom({
+            amount: defaultValues.amount,
+            displayDenom: token.displayDenom,
+            denomUnits: token.denomUnits,
+          })
+        : 0;
+
       transaction.update({
         params: {
           tokenID: defaultValues.tokenID,
           recipientAddress: defaultValues.recipientAccountAddress,
-          amount: defaultValues.amount,
+          amount: amountInBaseDenom,
           data: defaultValues.message,
         },
         priority: defaultValues.priority,
@@ -203,7 +217,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultValues, isTransactionSuccess]);
+  }, [defaultValues, isTransactionSuccess, isSuccessApplicationSupportedTokensData]);
 
   useEffect(() => {
     if (!isTransactionSuccess) {

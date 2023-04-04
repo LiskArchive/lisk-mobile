@@ -459,7 +459,6 @@
       "recipientLabel": "Recipient",
       "transactionFeeLabel": "Transaction Fee",
       "nonceLabel": "Nonce",
-      "confirmationsLabel": "Confirmations",
       "statusLabel": "Status",
       "transactionIDLabel": "Transaction ID",
       "blockIDLabel": "Block ID",
