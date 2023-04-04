@@ -5,8 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useTokenMetaQuery } from 'modules/BlockchainApplication/api/useTokenMetaQuery';
 import { LabelButton } from 'components/shared/toolBox/button';
-import { fromRawLsk } from 'utilities/conversions.utils';
+import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
@@ -20,20 +21,31 @@ import TransactionTimestamp from '../TransactionTimestamp';
 import getTransactionDetailsStyles from './styles';
 
 export function TransactionDetailsBody({ transaction, address }) {
+  const scrollViewRef = useRef();
+
   const [showParams, setShowParams] = useState(false);
 
   const navigation = useNavigation();
 
-  const transactionAssets = useTransactionAssets({ transaction, address });
+  const { data: tokenMetaData } = useTokenMetaQuery(transaction.params.tokenID);
 
-  const scrollViewRef = useRef();
+  const transactionAssets = useTransactionAssets({ transaction, address });
 
   const { styles } = useTheme({ styles: getTransactionDetailsStyles() });
 
   const addressIsSender = !!transactionAssets.amount?.sign;
+
   const displayedAddress = addressIsSender
     ? transaction.meta.recipient.address
     : transaction.sender.address;
+
+  const fee = fromBaseToDisplayDenom({
+    amount: transaction.fee,
+    displayDenom: tokenMetaData?.data[0]?.displayDenom,
+    denomUnits: tokenMetaData?.data[0]?.denomUnits,
+    symbol: tokenMetaData?.data[0]?.symbol,
+    withSymbol: true,
+  });
 
   const handleAccountClick = () =>
     navigation.navigate({
@@ -41,9 +53,6 @@ export function TransactionDetailsBody({ transaction, address }) {
       key: displayedAddress,
       params: { address: displayedAddress },
     });
-
-  // eslint-disable-next-line no-undef
-  const amountInLsk = fromRawLsk(BigInt(transaction.fee ?? 0));
 
   return (
     <ScrollView
@@ -91,7 +100,7 @@ export function TransactionDetailsBody({ transaction, address }) {
           {i18next.t('transactions.transactionDetails.transactionFeeLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>{amountInLsk} LSK</Text>
+        <Text style={[styles.text, styles.theme.text]}>{fee}</Text>
       </View>
 
       <View style={[styles.section]}>
@@ -100,14 +109,6 @@ export function TransactionDetailsBody({ transaction, address }) {
         </Text>
 
         <Text style={[styles.text, styles.theme.text]}>{transaction.nonce}</Text>
-      </View>
-
-      <View style={[styles.section]}>
-        <Text style={[styles.label, styles.theme.label]}>
-          {i18next.t('transactions.transactionDetails.confirmationsLabel')}
-        </Text>
-
-        <Text style={[styles.text, styles.theme.text]}>{transaction.confirmations}</Text>
       </View>
 
       <View style={[styles.section]}>

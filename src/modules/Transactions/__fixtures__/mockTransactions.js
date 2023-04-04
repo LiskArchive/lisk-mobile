@@ -1,4 +1,4 @@
-import * as Lisk from '@liskhq/lisk-client';
+import { fromLskToBeddows } from 'utilities/conversions.utils';
 
 export const mockTransactions = [...new Array(10)].map((_, index) => ({
   id: `transaction${index}ID`,
@@ -14,7 +14,7 @@ export const mockTransactions = [...new Array(10)].map((_, index) => ({
   },
   params: {
     tokenID: '0400000000000000',
-    amount: Lisk.transactions.convertLSKToBeddows(index.toString()),
+    amount: fromLskToBeddows(index.toString()),
     recipientAddress: 'lsk2447tv63fubjrqpkfn7e9e3zhhwnuhzyhmvhqw',
     data: 'Test transaction',
   },
