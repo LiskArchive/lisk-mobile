@@ -4,7 +4,7 @@ import { signInUser } from '../commands/auth';
 
 // TODO: Fix settings end to end test
 // (details on https://github.com/LiskHQ/lisk-mobile/issues/1604).
-describe.skip('Settings Screen', () => {
+describe('Settings Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');
