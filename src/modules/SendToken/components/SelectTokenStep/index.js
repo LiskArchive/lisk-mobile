@@ -121,6 +121,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
           style={{ flex: 1 }}
+          testID="next-step-button"
         />
       </View>
     </ScrollView>

@@ -85,7 +85,12 @@ export function SendTokenRecipientApplicationField({
       data={applicationsOptions}
       keyExtractor={(item) => item.chainID}
       renderItem={(item) => (
-        <Picker.Item key={item.chainID} value={item.chainID} onChange={onChange}>
+        <Picker.Item
+          key={item.chainID}
+          value={item.chainID}
+          onChange={onChange}
+          testID={`application-list-${item.chainName}`}
+        >
           <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
 
           <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
@@ -110,6 +115,7 @@ export function SendTokenRecipientApplicationField({
         placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
         openMenu={showOptions}
+        testID="to-application-select"
       >
         {recipientApplication && (
           <View style={[styles.row]}>

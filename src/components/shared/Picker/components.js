@@ -19,7 +19,14 @@ export function PickerLabel({ children, style: baseStyle }) {
   return <Text style={[styles.label, styles.theme.label, baseStyle]}>{children}</Text>;
 }
 
-export function PickerToggle({ children, placeholder, disabled, style: baseStyle, openMenu }) {
+export function PickerToggle({
+  children,
+  placeholder,
+  disabled,
+  style: baseStyle,
+  openMenu,
+  testID,
+}) {
   const { value, error } = usePicker();
 
   const { styles, theme } = useTheme({
@@ -51,9 +58,10 @@ export function PickerToggle({ children, placeholder, disabled, style: baseStyle
   return (
     <>
       <TouchableOpacity
-        onPress={() => openMenu()}
+        onPress={openMenu}
         disabled={disabled}
         style={[styles.toggleContainer, styles.theme.toggleContainer, baseStyle?.container]}
+        testID={testID}
       >
         {valueToRender}
 
@@ -85,7 +93,7 @@ export function usePickerMenu(children) {
   return { showOptions: openModal };
 }
 
-export function PickerItem({ value, children, onChange, style: baseStyle }) {
+export function PickerItem({ value, children, onChange, style: baseStyle, testID }) {
   const modal = useModal();
 
   const { styles } = useTheme({
@@ -98,6 +106,7 @@ export function PickerItem({ value, children, onChange, style: baseStyle }) {
         onChange(value);
         modal.toggle(false);
       }}
+      testID={testID}
       style={[styles.itemContainer, styles.theme.itemContainer, baseStyle]}
     >
       {typeof children === 'string' ? <Text>{children}</Text> : children}

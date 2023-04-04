@@ -351,6 +351,7 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
         <TouchableOpacity
           onPress={() => setShowFeesBreakdown((prevState) => !prevState)}
           style={[styles.row]}
+          testID="fees-breakdown-toggle"
         >
           <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>
             {feesLabels.totalFee}
@@ -391,7 +392,7 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
           )}
 
           {feesLabels.extraCommandFee && (
-            <View style={[styles.feeBreakdownRow]}>
+            <View style={[styles.feeBreakdownRow]} testID="initialization-fee">
               <Text style={[styles.secondaryText, styles.iconLabel]}>
                 {i18next.t('sendToken.tokenSelect.extraCommandFeeLabel')}
               </Text>
