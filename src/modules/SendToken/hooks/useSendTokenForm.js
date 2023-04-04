@@ -26,9 +26,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const [currentApplication] = useCurrentApplication();
 
-  const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
-    currentApplication.data
-  );
+  const {
+    data: applicationSupportedTokensData,
+    isSuccess: isSuccessApplicationSupportedTokensData,
+  } = useApplicationSupportedTokensQuery(currentApplication.data);
 
   const { data: messageFeeData } = useMessageFee();
 
@@ -48,7 +49,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
       tokenID: initialValues?.tokenID,
-      amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
+      amount: initialValues?.amount ? BigInt(initialValues.amount) : 0,
       message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
@@ -195,12 +196,20 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   }, [form, defaultValues, isTransactionSuccess, applicationSupportedTokensData, transaction]);
 
   useEffect(() => {
-    if (isTransactionSuccess) {
+    if (isTransactionSuccess && isSuccessApplicationSupportedTokensData) {
+      const amountInBaseDenom = token
+        ? fromDisplayToBaseDenom({
+            amount: defaultValues.amount,
+            displayDenom: token.displayDenom,
+            denomUnits: token.denomUnits,
+          })
+        : 0;
+
       transaction.update({
         params: {
           tokenID: defaultValues.tokenID,
           recipientAddress: defaultValues.recipientAccountAddress,
-          amount: defaultValues.amount,
+          amount: amountInBaseDenom,
           data: defaultValues.message,
         },
         priority: defaultValues.priority,
@@ -208,7 +217,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultValues, isTransactionSuccess]);
+  }, [defaultValues, isTransactionSuccess, isSuccessApplicationSupportedTokensData]);
 
   useEffect(() => {
     if (!isTransactionSuccess) {

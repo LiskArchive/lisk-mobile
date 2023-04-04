@@ -17,13 +17,15 @@ export function useSendTokenAmountChecker({
 
   const isMaxAllowedAmountExceeded =
     maxAllowedAmount -
-      BigInt(
-        fromDisplayToBaseDenom({
-          amount,
-          displayDenom: selectedToken.displayDenom,
-          denomUnits: selectedToken.denomUnits,
-        })
-      ) <=
+      (selectedToken
+        ? BigInt(
+            fromDisplayToBaseDenom({
+              amount,
+              displayDenom: selectedToken.displayDenom,
+              denomUnits: selectedToken.denomUnits,
+            })
+          )
+        : BigInt(0)) <=
     0;
 
   return { maxAllowedAmount, isMaxAllowedAmountExceeded };

@@ -21,6 +21,7 @@ export function useApplicationSupportedTokensQuery(application) {
     isLoading: isAccountTokensFullDataLoading,
     isError: isAccountTokensFullDataError,
     error: errorOnAccountTokensFullData,
+    isSuccess: isSuccessAccountTokensFullData,
   } = useAccountTokensFullDataQuery();
 
   const {
@@ -28,6 +29,7 @@ export function useApplicationSupportedTokensQuery(application) {
     isLoading: isSupportedTokensLoading,
     isError: isSupportedTokensError,
     error: errorOnSupportedTokens,
+    isSuccess: isSuccessSupportedTokens,
   } = useSupportedTokensQuery({
     client: toApplicationApiClient.current,
   });
@@ -63,8 +65,9 @@ export function useApplicationSupportedTokensQuery(application) {
 
   return {
     data,
-    isError: isSupportedTokensError || isAccountTokensFullDataError,
     isLoading: isAccountTokensFullDataLoading || isSupportedTokensLoading,
+    isSuccess: isSuccessAccountTokensFullData && isSuccessSupportedTokens,
+    isError: isSupportedTokensError || isAccountTokensFullDataError,
     error: errorOnSupportedTokens || errorOnAccountTokensFullData,
     errorOnSupportedTokens,
     errorOnAccountTokensFullData,
