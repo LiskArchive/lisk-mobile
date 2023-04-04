@@ -34,7 +34,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
 
   const {
     data: tokensData,
-    isLoading: isLoadingTokens,
+    isFetching: isFetchingTokens,
     error: errorOnTokens,
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
@@ -69,7 +69,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
   const areMoreOnOverview = tokensData?.meta.count < tokensData?.meta.total;
 
   const showViewAllButton =
-    mode === 'overview' && !errorOnTokens && !isLoadingTokens && areMoreOnOverview;
+    mode === 'overview' && !errorOnTokens && !isFetchingTokens && areMoreOnOverview;
 
   const isCurrentAccount = currentAccount.metadata.address === address;
 
@@ -107,7 +107,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
 
       <DataRenderer
         data={activeTab === 0 ? tokensData?.data : lockedTokens}
-        isLoading={isLoadingTokens}
+        isLoading={isFetchingTokens}
         error={errorOnTokens}
         renderData={(data) => (
           <InfiniteScrollList
