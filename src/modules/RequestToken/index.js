@@ -107,7 +107,7 @@ export default function RequestToken() {
   const openQrCode = () => modal.open(renderFullCode());
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} testID="request-token-screen">
       <HeaderBackButton
         title="requestTokens.title"
         onPress={navigation.goBack}
@@ -173,7 +173,7 @@ export default function RequestToken() {
           <SendTokenMessageField onChange={setMessage} value={message} />
         </View>
 
-        <View style={styles.footer}>
+        <View style={styles.footer} testID="request-token-link-button">
           <PrimaryButton
             onPress={handleCopyToClipboard}
             adornments={{

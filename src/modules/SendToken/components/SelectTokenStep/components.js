@@ -196,6 +196,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
         onClick={() => setShowInput(true)}
         style={styles.addMessageLabelContainer}
         textStyle={styles.addMessageLabel}
+        testID="show-message-input"
       >
         {i18next.t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
@@ -231,6 +232,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
         placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
         multiline
         innerStyles={getSendTokenMessageFieldStyles(style)}
+        testID="message-input"
       />
     </FadeInView>
   );
