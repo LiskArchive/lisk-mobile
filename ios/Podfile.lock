@@ -414,7 +414,7 @@ PODS:
     - React-Core
   - RNFS (2.20.0):
     - React-Core
-  - RNGestureHandler (1.10.3):
+  - RNGestureHandler (2.9.0):
     - React-Core
   - RNKeychain (6.2.0):
     - React
@@ -426,6 +426,33 @@ PODS:
     - React-Core
   - RNReactNativeHapticFeedback (1.11.0):
     - React-Core
+  - RNReanimated (3.0.2):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - glog
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (2.18.1):
     - React-Core
   - RNScreenshotPrevent (1.0.5):
@@ -532,6 +559,7 @@ DEPENDENCIES:
   - RNOS (from `../node_modules/react-native-os`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNScreenshotPrevent (from `../node_modules/react-native-screenshot-prevent`)
   - RNShare (from `../node_modules/react-native-share`)
@@ -690,6 +718,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions"
   RNReactNativeHapticFeedback:
     :path: "../node_modules/react-native-haptic-feedback"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNScreenshotPrevent:
@@ -777,12 +807,13 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNDeviceInfo: a9601119924a67d2479d3facf04cec7b658f44ed
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
   RNKeychain: b8e0711b959a19c5b057d1e970d3c83d159b6da5
   RNOpenAppSettings: 1169b90a275e9e18c5973e1608949f97d426e7f3
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNPermissions: 4c8a37b4dde50f1f152bf8cd08c4a43d2355829e
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
+  RNReanimated: 0a5f87ec1da472cca3e835333fdebe51d983c411
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNScreenshotPrevent: 0526b14371b2d0545957070cf30bc0a29a5c4bf5
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c

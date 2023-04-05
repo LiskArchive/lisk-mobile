@@ -102,6 +102,7 @@ const Swipeable = ({ children, leftActions, rightActions, style, enabled = true 
       rightThreshold={40}
       renderLeftActions={leftActions && leftActions.length && renderLeftActions}
       renderRightActions={rightActions && rightActions.length && renderRightActions}
+      shouldCancelWhenOutside={false}
     >
       {children}
     </BaseSwipeable>
