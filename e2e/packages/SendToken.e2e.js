@@ -3,8 +3,6 @@ import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
-// TODO: Fix settings end to end test
-// (details on https://github.com/LiskHQ/lisk-mobile/issues/1604).
 describe('Send Token Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
@@ -85,6 +83,8 @@ describe('Send Token Screen', () => {
     await element(by.id('to-application-select')).tap();
     await element(by.id('application-list-Enevti')).tap();
     await element(by.id('next-step-button')).tap();
+    await element(by.id('select-token-picker')).tap();
+    await element(by.id('token-select-LSK')).tap();
     await element(by.id('token-amount')).typeText('0.01');
     await element(by.id('fees-breakdown-toggle')).tap();
     await element(by.id('next-step-button')).tap();

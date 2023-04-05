@@ -51,7 +51,7 @@ export default function InfiniteScrollList({
       renderItem={renderItem}
       onEndReached={fetchMore}
       onEndReachedThreshold={onEndReachedThreshold}
-      ListFooterComponent={isFetchingNextPage ? renderSpinner : props.ListFooterComponent || null}
+      ListFooterComponent={isFetchingNextPage ? renderSpinner : props.ListFooterComponent}
       showsVerticalScrollIndicator={showVerticalScrollIndicator}
       {...props}
     />

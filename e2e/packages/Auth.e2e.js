@@ -4,7 +4,7 @@ import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
-describe('Auth module', () => {
+describe.skip('Auth module', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');

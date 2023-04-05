@@ -57,7 +57,12 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
       data={data}
       keyExtractor={(item) => item.tokenID}
       renderItem={(item) => (
-        <Picker.Item key={item.tokenID} value={item.tokenID} onChange={onChange}>
+        <Picker.Item
+          key={item.tokenID}
+          value={item.tokenID}
+          onChange={onChange}
+          testID={`token-select-${item.symbol}`}
+        >
           <Text style={[styles.theme.text]}>{item.symbol}</Text>
 
           <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
@@ -93,7 +98,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           <>
             <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
               {selectedToken && (
-                <View style={[styles.row]}>
+                <View style={[styles.row]} testID="select-token-picker">
                   <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
 
                   <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
