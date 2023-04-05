@@ -3,7 +3,8 @@ import { useCallback, useState } from 'react';
 import Share from 'react-native-share';
 import Permissions from 'react-native-permissions';
 import RNFS from 'react-native-fs';
-import { Platform } from 'react-native';
+import { Platform, ToastAndroid } from 'react-native';
+import i18next from 'i18next';
 
 /**
  * Provides a stateful callback to download data as files.
@@ -37,14 +38,24 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
 
       setIsLoading(true);
 
-      let path = `${RNFS.CachesDirectoryPath}/${fileName}`;
+      let path = `${RNFS.CachesDirectoryPath}/-${fileName}`;
 
       if (Platform.OS === 'android') {
         await Permissions.request(Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
 
         path = `${RNFS.DownloadDirectoryPath}/${fileName}`;
 
+        const fileExists = await RNFS.exists(path);
+
+        if (fileExists) {
+          await RNFS.unlink(path);
+        }
         await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+        ToastAndroid.showWithGravity(
+          i18next.t('auth.setup.downloaded'),
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        );
       } else {
         await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
 
@@ -62,6 +73,7 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         onCompleted();
       }
     } catch (_error) {
+      console.log('download____error', _error);
       setIsLoading(false);
       setIsSuccess(false);
       setError(_error);
