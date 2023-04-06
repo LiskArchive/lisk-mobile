@@ -30,13 +30,15 @@ export default function TokenRow({ token }) {
     error: errorOnTokenMeta,
   } = useTokenMetaQuery(token.tokenID);
 
+  const tokenMeta = tokenMetaData?.data[0];
+
   const tokenAmountInCurrency = useTokenAmountInCurrency({
     tokenAmount: fromBaseToDisplayDenom({
       amount: token.availableBalance,
       displayDenom: token.displayDenom,
       denomUnits: token.denomUnits,
     }),
-    tokenSymbol: tokenMetaData?.data[0]?.symbol,
+    tokenSymbol: tokenMeta?.symbol,
   });
 
   const { styles } = useTheme({ styles: getTokenRowStyles() });
@@ -45,7 +47,7 @@ export default function TokenRow({ token }) {
     <View style={[styles.container, styles.theme.container]}>
       <View style={[styles.row, styles.alignCenter]}>
         <DataRenderer
-          data={tokenMetaData?.data[0]}
+          data={tokenMeta}
           isLoading={isTokenMetaLoading}
           error={errorOnTokenMeta}
           renderData={(data) => (
@@ -60,11 +62,13 @@ export default function TokenRow({ token }) {
 
       <View style={[styles.balanceContainer]}>
         <DiscreteModeComponent data={balance} blurVariant="balance">
-          <H3 style={[styles.theme.title]}>{balance}</H3>
+          <H3 style={[styles.theme.title]}>
+            {balance} {tokenMeta?.symbol}
+          </H3>
         </DiscreteModeComponent>
 
         <DataRenderer
-          data={tokenMetaData?.data[0]}
+          data={tokenMeta}
           isLoading={isTokenMetaLoading}
           error={errorOnTokenMeta}
           renderData={() => (
