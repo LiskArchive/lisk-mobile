@@ -1,5 +1,5 @@
 import { cryptography } from '@liskhq/lisk-client';
-import apiClient from 'utilities/api/APIClient';
+import liskAPIClient from 'utilities/api/LiskAPIClient';
 import { getTokensMetaQueryConfig } from 'modules/BlockchainApplication/api/useTokensMetaQuery';
 
 /**
@@ -17,7 +17,7 @@ export async function addTokensMetaData(tokens) {
       },
     });
 
-    const tokenMetaRes = await apiClient.call(metaDataQueryConfig);
+    const tokenMetaRes = await liskAPIClient.call(metaDataQueryConfig);
 
     const tokensFullData = tokens.reduce((acc, tokenData) => {
       const selectedTokenMetaData = tokenMetaRes?.data?.find(
