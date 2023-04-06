@@ -17,7 +17,7 @@ export default function SignTransactionSuccess({ onSubmit, title, description, a
   });
 
   return (
-    <View style={[styles.container, styles.theme.container]}>
+    <View style={[styles.container, styles.theme.container]} testID="sign-transaction-success">
       <View style={styles.illustrationContainer}>
         {theme === themes.dark ? (
           <TxSuccessDarkSvg style={styles.illustration} />

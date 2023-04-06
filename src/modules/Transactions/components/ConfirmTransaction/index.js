@@ -29,7 +29,7 @@ export default function ConfirmTransaction({
   const submitDisabled = isLoading || !userPassword || isValidationError;
 
   return (
-    <View style={[styles.wrapper, styles.theme.wrapper]}>
+    <View style={[styles.wrapper, styles.theme.wrapper]} testID="transaction-confirmation-screen">
       <View style={[styles.contentContainer, styles.theme.contentContainer]}>
         <Text style={[styles.title, styles.theme.title]}>
           {i18next.t('sendToken.confirmAndSign.title')}
@@ -68,6 +68,7 @@ export default function ConfirmTransaction({
           }}
           placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
+          testID="decrypt-password-input"
         />
       </View>
 
@@ -76,7 +77,12 @@ export default function ConfirmTransaction({
           <Text style={[styles.errorText]}>{i18next.t('sendToken.errors.generalMessage')}</Text>
         )}
 
-        <PrimaryButton noTheme onClick={onSubmit} disabled={submitDisabled}>
+        <PrimaryButton
+          noTheme
+          onClick={onSubmit}
+          disabled={submitDisabled}
+          testID="confirm-send-token-button"
+        >
           {isLoading
             ? i18next.t('sendToken.confirmAndSign.loadingText')
             : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {

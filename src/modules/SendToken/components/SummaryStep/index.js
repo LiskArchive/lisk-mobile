@@ -80,7 +80,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
 
   return (
     <>
-      <View style={[styles.container, styles.theme.container]}>
+      <View style={[styles.container, styles.theme.container]} testID="transaction-summary-screen">
         <TransactionSummary {...summary} />
       </View>
 
@@ -89,7 +89,12 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
           {i18next.t('sendToken.summary.prevStepButtonText')}
         </Button>
 
-        <PrimaryButton onPress={() => signTransactionModal.open()} noTheme style={{ flex: 1 }}>
+        <PrimaryButton
+          onPress={() => signTransactionModal.open()}
+          noTheme
+          style={{ flex: 1 }}
+          testID="send-transaction-button"
+        >
           {i18next.t('sendToken.summary.submitTransactionButtonText')}
         </PrimaryButton>
       </View>

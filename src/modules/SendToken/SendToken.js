@@ -124,7 +124,7 @@ export default function SendToken() {
   const accountIsMultisignature = accountSummary.isMultisignature;
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} testID="send-token-screen">
       <HeaderBackButton
         title="Send token"
         onPress={navigation.goBack}

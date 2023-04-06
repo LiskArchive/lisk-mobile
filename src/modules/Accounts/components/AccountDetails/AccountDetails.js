@@ -93,6 +93,7 @@ export default function AccountDetails({ account }) {
             <TouchableOpacity
               style={[styles.button, styles.requestButton]}
               onPress={handleRequestTokensClick}
+              testID="request-tokens-button"
             >
               <P style={[styles.buttonText]}>Request</P>
             </TouchableOpacity>

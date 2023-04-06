@@ -57,7 +57,12 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
       data={data}
       keyExtractor={(item) => item.tokenID}
       renderItem={(item) => (
-        <Picker.Item key={item.tokenID} value={item.tokenID} onChange={onChange}>
+        <Picker.Item
+          key={item.tokenID}
+          value={item.tokenID}
+          onChange={onChange}
+          testID={`token-select-${item.symbol}`}
+        >
           <Text style={[styles.theme.text]}>{item.symbol}</Text>
 
           <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
@@ -93,7 +98,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           <>
             <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
               {selectedToken && (
-                <View style={[styles.row]}>
+                <View style={[styles.row]} testID="select-token-picker">
                   <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
 
                   <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
@@ -165,6 +170,7 @@ export function SendTokenAmountField({
               </Text>
             ),
           }}
+          testID="token-amount"
           innerStyles={getSendTokenAmountFieldStyles(style)}
         />
       )}
@@ -190,6 +196,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
         onClick={() => setShowInput(true)}
         style={styles.addMessageLabelContainer}
         textStyle={styles.addMessageLabel}
+        testID="show-message-input"
       >
         {i18next.t('sendToken.tokenSelect.messageFieldTriggerButtonText')}
       </LabelButton>
@@ -225,6 +232,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
         placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
         multiline
         innerStyles={getSendTokenMessageFieldStyles(style)}
+        testID="message-input"
       />
     </FadeInView>
   );
@@ -350,6 +358,7 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
         <TouchableOpacity
           onPress={() => setShowFeesBreakdown((prevState) => !prevState)}
           style={[styles.row]}
+          testID="fees-breakdown-toggle"
         >
           <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>
             {feesLabels.totalFee}
@@ -390,7 +399,7 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
           )}
 
           {feesLabels.extraCommandFee && (
-            <View style={[styles.feeBreakdownRow]}>
+            <View style={[styles.feeBreakdownRow]} testID="initialization-fee">
               <Text style={[styles.secondaryText, styles.iconLabel]}>
                 {i18next.t('sendToken.tokenSelect.extraCommandFeeLabel')}
               </Text>

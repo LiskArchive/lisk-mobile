@@ -64,7 +64,11 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
   const disableNextStepButton = !form.watch('tokenID') || isMaxAllowedAmountExceeded;
 
   return (
-    <ScrollView contentContainerStyle={styles.wrapper} style={[styles.theme.wrapper]}>
+    <ScrollView
+      contentContainerStyle={styles.wrapper}
+      style={[styles.theme.wrapper]}
+      testID="select-token-step-screen"
+    >
       <View style={[styles.container]}>
         <TokenSelectField
           value={tokenIDField.value}
@@ -117,6 +121,7 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
           style={{ flex: 1 }}
+          testID="next-step-button"
         />
       </View>
     </ScrollView>
