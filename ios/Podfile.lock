@@ -83,18 +83,6 @@ PODS:
     - lottie-ios (~> 3.4.0)
     - React-Core
   - OpenSSL-Universal (1.1.1100)
-  - Permission-BluetoothPeripheral (3.0.1):
-    - RNPermissions
-  - Permission-Calendars (3.0.1):
-    - RNPermissions
-  - Permission-Camera (3.0.1):
-    - RNPermissions
-  - Permission-Contacts (3.0.1):
-    - RNPermissions
-  - Permission-FaceID (3.0.1):
-    - RNPermissions
-  - Permission-PhotoLibrary (3.0.1):
-    - RNPermissions
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -422,7 +410,7 @@ PODS:
     - React
   - RNOS (1.2.6):
     - React
-  - RNPermissions (3.0.1):
+  - RNPermissions (3.8.0):
     - React-Core
   - RNReactNativeHapticFeedback (1.11.0):
     - React-Core
@@ -473,12 +461,6 @@ DEPENDENCIES:
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
   - OpenSSL-Universal (= 1.1.1100)
-  - Permission-BluetoothPeripheral (from `../node_modules/react-native-permissions/ios/BluetoothPeripheral`)
-  - Permission-Calendars (from `../node_modules/react-native-permissions/ios/Calendars`)
-  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
-  - Permission-Contacts (from `../node_modules/react-native-permissions/ios/Contacts`)
-  - Permission-FaceID (from `../node_modules/react-native-permissions/ios/FaceID`)
-  - Permission-PhotoLibrary (from `../node_modules/react-native-permissions/ios/PhotoLibrary`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -576,18 +558,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/lottie-ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
-  Permission-BluetoothPeripheral:
-    :path: "../node_modules/react-native-permissions/ios/BluetoothPeripheral"
-  Permission-Calendars:
-    :path: "../node_modules/react-native-permissions/ios/Calendars"
-  Permission-Camera:
-    :path: "../node_modules/react-native-permissions/ios/Camera"
-  Permission-Contacts:
-    :path: "../node_modules/react-native-permissions/ios/Contacts"
-  Permission-FaceID:
-    :path: "../node_modules/react-native-permissions/ios/FaceID"
-  Permission-PhotoLibrary:
-    :path: "../node_modules/react-native-permissions/ios/PhotoLibrary"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -726,12 +696,6 @@ SPEC CHECKSUMS:
   lottie-ios: 69495122151a378fdc7d1bb4c5930347e37baf1f
   lottie-react-native: b702fab740cdb952a8e2354713d3beda63ff97b0
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  Permission-BluetoothPeripheral: 9f0bd529583f759e49fdc60eaa1191b8be69f709
-  Permission-Calendars: beecff003fc9fa36979f95e19cfcd54ba26a5ddf
-  Permission-Camera: b2e50546c095139bb1264be9c34c796332340d32
-  Permission-Contacts: db364c0086fc1fa1d5af33256cf9ab6ff2336ed1
-  Permission-FaceID: 6db862861e789c479daf88431b5f8f5f3436a65d
-  Permission-PhotoLibrary: 29a07bdd077ae760363f73ab52d22a7b88cbd781
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
   RCTTypeSafety: 27c2ac1b00609a432ced1ae701247593f07f901e
@@ -781,7 +745,7 @@ SPEC CHECKSUMS:
   RNKeychain: b8e0711b959a19c5b057d1e970d3c83d159b6da5
   RNOpenAppSettings: 1169b90a275e9e18c5973e1608949f97d426e7f3
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
-  RNPermissions: 4c8a37b4dde50f1f152bf8cd08c4a43d2355829e
+  RNPermissions: 613f42b5608315d81bd88cb23793dfa1176e7b42
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNScreenshotPrevent: 0526b14371b2d0545957070cf30bc0a29a5c4bf5
@@ -792,6 +756,6 @@ SPEC CHECKSUMS:
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: b771066dcc341bb12e8b7716ce574e25fa0adec0
+PODFILE CHECKSUM: 2254aaf755675025679e4e71e15901ad73f46f28
 
 COCOAPODS: 1.11.3
