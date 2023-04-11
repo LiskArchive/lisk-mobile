@@ -101,6 +101,9 @@ export default {
     registeredContainer: {
       backgroundColor: 'rgba(64, 112, 244, 0.1)',
     },
+    unregisteredContainer: {
+      backgroundColor: 'rgba(64, 112, 244, 0.1)',
+    },
     activeContainer: {
       backgroundColor: 'rgba(0, 213, 99, 0.1)',
     },
@@ -109,9 +112,6 @@ export default {
     },
     active: {
       color: colors.light.ufoGreen,
-    },
-    terminated: {
-      color: colors.light.zodiacBlue,
     },
   },
   [themes.light]: {
@@ -133,6 +133,9 @@ export default {
     terminated: {
       color: colors.light.zodiacBlue,
     },
+    unregistered: {
+      color: colors.light.zodiacBlue,
+    },
   },
   [themes.dark]: {
     container: {
@@ -151,6 +154,9 @@ export default {
       color: colors.dark.white,
     },
     terminated: {
+      color: colors.light.white,
+    },
+    unregistered: {
       color: colors.light.white,
     },
   },
