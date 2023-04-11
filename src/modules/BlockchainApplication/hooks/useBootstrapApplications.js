@@ -61,8 +61,4 @@ export function useBootstrapApplications() {
   useEffect(() => {
     applications.setError(error);
   }, [error, applications]);
-
-  return {
-    applications,
-  };
 }

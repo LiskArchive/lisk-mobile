@@ -26,13 +26,13 @@ export default function BootstrapApp({ children }) {
   // Bootstrap applications
   useBootstrapApplications();
 
-  const handleRetry = () => retryBootstrapCurrentApplication();
-
   // Bootstrap WS connections for handling queries updates based on transactions events.
   useTransactionsEventsManager();
 
   // Bootstrap WC.
   useWalletConnectEventsManager();
+
+  const handleRetry = () => retryBootstrapCurrentApplication();
 
   if (isLoading) {
     return <LoadingFallbackScreen />;

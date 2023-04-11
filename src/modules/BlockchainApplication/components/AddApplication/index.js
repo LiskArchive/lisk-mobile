@@ -9,8 +9,9 @@ import getAddApplicationStyles from './styles';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 
 const AddApplication = ({ navigation, t }) => {
-  const { styles } = useTheme({ styles: getAddApplicationStyles() });
   const applications = useApplicationsExplorer();
+
+  const { styles } = useTheme({ styles: getAddApplicationStyles() });
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
