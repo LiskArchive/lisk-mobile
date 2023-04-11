@@ -229,10 +229,12 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       messageFeeData?.data?.fee &&
       recipientApplicationChainChannelData?.data?.messageFeeTokenID
     ) {
+      // TODO: Fix the message fee computation based on bytes of the params
+      const messageFee = BigInt(messageFeeData.data.fee) * BigInt(10 ** 5);
       transaction.update({
         command: 'transferCrossChain',
         params: {
-          messageFee: messageFeeData.data.fee,
+          messageFee,
           messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
           receivingChainID: recipientApplicationChainID,
         },

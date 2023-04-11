@@ -215,9 +215,11 @@ export default function ApplicationDetails({ route }) {
                 <DataRenderer
                   isLoading={applications.isLoading}
                   error={applications.isError}
-                  data={application?.state}
+                  data={application?.status}
                   renderData={(data) => (
-                    <View style={[styles.stateContainer, styles[`${application?.state}Container`]]}>
+                    <View
+                      style={[styles.stateContainer, styles[`${application?.status}Container`]]}
+                    >
                       <P style={[styles.value, styles[data], styles.theme[data]]}>{data}</P>
                     </View>
                   )}
@@ -251,7 +253,7 @@ export default function ApplicationDetails({ route }) {
                   data={application?.lastUpdated}
                   renderData={(data) => (
                     <P style={[styles.value, styles.theme.value]}>
-                      {moment(data).format('D MMM YYYY')}
+                      {moment(data * 1000).format('D MMM YYYY')}
                     </P>
                   )}
                   renderLoading={() => (

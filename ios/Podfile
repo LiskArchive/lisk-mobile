@@ -26,14 +26,6 @@ target 'Lisk' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  # Permissions
-  permissions_path = '../node_modules/react-native-permissions/ios'
-  pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral"
-  pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars"
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
-  pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
-  pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID"
-  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
   post_install do |installer|

@@ -1,3 +1,4 @@
+![Logo](./src/assets/images/banner_mobile.png)
 # Lisk Mobile
 
 [![Build Status](https://jenkins.lisk.com/buildStatus/icon?job=lisk-mobile/development)](https://jenkins.lisk.com/job/lisk-mobile/job/development)
@@ -6,9 +7,9 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/LiskHQ/lisk-mobile)
 [![DeepScan grade](https://deepscan.io/api/teams/6759/projects/8872/branches/113512/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6759&pid=8872&bid=113512)
 
-Lisk Mobile is a cross-platform application written in React Native and primarily build for iOS and Android. It provides the users with all the functionality they need to send and receive LSK tokens, as well as reviewing the activity history of their or any other account in the Lisk blockchain.
+Lisk Mobile is a cross-platform application written in React Native and primarily built for iOS and Android. It provides the users with all the functionality they need to send and receive LSK tokens, as well as review the activity history of their or any other account on the Lisk blockchain.
 
-[![Get it from iTunes](https://lisk.com/sites/default/files/pictures/2020-01/download_on_the_app_store_badge.svg)](https://itunes.apple.com/us/app/lisk/id1436809559?mt=8) [![Get it on Google Play](https://lisk.com/sites/default/files/pictures/2020-01/download_on_the_play_store_badge.svg)](https://play.google.com/store/apps/details?id=io.lisk.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+[![Get it from iTunes](https://media.lisk.com/init/ios_app_store_a60c851728.png?auto=compress,format&fit=max&w=1940&q=80)](https://itunes.apple.com/us/app/lisk/id1436809559?mt=8) [![Get it on Google Play](https://media.lisk.com/init/google_store_912cd733ee.png?auto=compress,format&fit=max&w=1940&q=80)](https://play.google.com/store/apps/details?id=io.lisk.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
 ## Pre-Installation
 
