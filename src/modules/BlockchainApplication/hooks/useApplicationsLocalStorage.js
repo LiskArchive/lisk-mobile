@@ -4,8 +4,10 @@ import { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
-import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
-import { GET_APPLICATIONS_META_QUERY, APPLICATION } from 'utilities/api/queries';
+import { API_URL } from 'utilities/api/constants';
+import liskAPIClient from 'utilities/api/LiskAPIClient';
+import { addUniqueStringToArray } from 'utilities/helpers';
+import { GET_APPLICATIONS_META_QUERY } from 'utilities/api/queries';
 import { transformApplicationsMetaQueryResult } from '../utils';
 import { APPLICATIONS_STORAGE_KEY } from '../constants';
 
@@ -28,10 +30,11 @@ export function useApplicationsLocalStorage() {
     transformResult: transformApplicationsMetaQueryResult,
     params: {
       network: process.env.NETWORK,
-      limit: LIMIT,
       chainID: localStorageData && localStorageData.join(','),
     },
   };
+
+  const queryEnabled = !!(isSuccessLocalStorageData && localStorageData?.length > 0);
 
   const {
     data: applicationsData,
@@ -39,11 +42,12 @@ export function useApplicationsLocalStorage() {
     isSuccess: isSuccessApplicationsData,
     error: errorOnApplicationsData,
   } = useCustomQuery({
-    keys: [GET_APPLICATIONS_META_QUERY, queryConfig, APPLICATION, METHOD],
+    keys: [GET_APPLICATIONS_META_QUERY],
     options: {
-      enabled: !!(isSuccessLocalStorageData && localStorageData?.length > 0),
+      enabled: queryEnabled,
     },
     config: queryConfig,
+    client: liskAPIClient,
   });
 
   const resetState = () => {
@@ -64,7 +68,7 @@ export function useApplicationsLocalStorage() {
 
         const cachedApplications = cachedApplicationsJSON ? JSON.parse(cachedApplicationsJSON) : [];
 
-        const payload = JSON.stringify([...cachedApplications, chainID]);
+        const payload = JSON.stringify(addUniqueStringToArray(cachedApplications, chainID));
 
         updatedApplications = await AsyncStorage.setItem(APPLICATIONS_STORAGE_KEY, payload);
 
@@ -154,7 +158,7 @@ export function useApplicationsLocalStorage() {
   }, [localStorageData, applicationsData]);
 
   const isLoading = isLoadingLocalStorageData || isLoadingApplicationsData;
-  const isSuccess = isSuccessLocalStorageData && isSuccessApplicationsData;
+  const isSuccess = isSuccessLocalStorageData && (queryEnabled ? isSuccessApplicationsData : true);
   const error = errorOnLocalStorageData || errorOnApplicationsData;
 
   return {
