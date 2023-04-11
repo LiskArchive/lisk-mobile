@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import DataRenderer from 'components/shared/DataRenderer';
@@ -6,7 +7,6 @@ import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ResultScreen from 'components/screens/ResultScreen';
 
-import { View } from 'react-native';
 import ApplicationListSkeleton from './components/ApplicationListSkeleton';
 
 export default function ApplicationList({
