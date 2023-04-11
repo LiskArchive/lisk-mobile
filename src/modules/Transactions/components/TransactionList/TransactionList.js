@@ -31,7 +31,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
   const {
     data: transactionsData,
-    isFetching: isFetchingTransactions,
+    isLoading: isLoadingAccountTransactions,
     error: errorOnTransactions,
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
@@ -48,7 +48,8 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
   const areMoreOnOverview = transactionsData?.meta.count < transactionsData?.meta.total;
 
-  const showViewAllButton = !errorOnTransactions && !isFetchingTransactions && areMoreOnOverview;
+  const showViewAllButton =
+    !errorOnTransactions && !isLoadingAccountTransactions && areMoreOnOverview;
 
   const isCurrentAccount = currentAccount.metadata.address === address;
 
@@ -95,7 +96,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
       <DataRenderer
         data={transactionsData?.data}
-        isLoading={isFetchingTransactions}
+        isLoading={isLoadingAccountTransactions}
         error={errorOnTransactions}
         renderData={(data) => (
           <InfiniteScrollList
