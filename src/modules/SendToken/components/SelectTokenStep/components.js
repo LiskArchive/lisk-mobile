@@ -328,9 +328,9 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
             ...acc,
             [feeKey]: fromBaseToDisplayDenom({
               amount: feeValue,
-              displayDenom: selectedToken.displayDenom,
-              denomUnits: selectedToken.denomUnits,
-              symbol: selectedToken.symbol,
+              displayDenom: selectedToken?.displayDenom,
+              denomUnits: selectedToken?.denomUnits,
+              symbol: selectedToken?.symbol,
               withSymbol: true,
             }),
           }
