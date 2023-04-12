@@ -10,6 +10,7 @@ export function getNavigationTabBarStyles(modalOpen) {
   const paddingTop = Platform.OS === 'android' ? 0 : 28;
 
   return {
+    display: modalOpen ? 'none' : 'flex',
     position: 'absolute',
     width,
     left,

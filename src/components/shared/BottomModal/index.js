@@ -68,7 +68,7 @@ const BottomModal = ({ style }) => {
     };
   }, []);
 
-  if (!isOpen) {
+  if (!isOpen || !component) {
     return null;
   }
 
