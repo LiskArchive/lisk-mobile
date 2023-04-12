@@ -373,7 +373,7 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
       </View>
 
       {showFeesBreakdown && (
-        <FadeInView style={[styles.feeBreakdownContainer]}>
+        <FadeInView style={[styles.feeBreakdownContainer, styles.theme.feeBreakdownContainer]}>
           <View style={[styles.feeBreakdownRow]}>
             <Text style={[styles.primaryText]}>
               {i18next.t('sendToken.tokenSelect.transactionFeeBreakdownText')}

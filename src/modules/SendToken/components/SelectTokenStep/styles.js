@@ -120,6 +120,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       priorityButtonFeeText: {
         color: colors.light.zodiacBlue,
       },
+      feeBreakdownContainer: {
+        backgroundColor: colors.light.white,
+      },
     },
     [themes.dark]: {
       wrapper: {
@@ -142,6 +145,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       },
       prevStepButton: {
         color: colors.light.whiteSmoke,
+      },
+      feeBreakdownContainer: {
+        backgroundColor: colors.dark.textInputBg,
       },
     },
   };
