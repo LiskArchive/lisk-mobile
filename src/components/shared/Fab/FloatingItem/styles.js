@@ -17,7 +17,6 @@ export default StyleSheet.create({
   },
   textContainer: {
     paddingHorizontal: 8,
-    elevation: 5,
     borderRadius: 4,
     height: 22,
   },
