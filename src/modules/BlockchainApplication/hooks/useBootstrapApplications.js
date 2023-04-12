@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 import { useEffect } from 'react';
 
 import { joinArraysWithoutDuplicates } from 'utilities/helpers';
@@ -7,9 +6,7 @@ import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
 import { useApplicationsFullDataQuery } from '../api/useApplicationsFullDataQuery';
 
 /**
- * Provides an API to add, delete and read the blockchain applications saved by the user.
- * @returns {Object} - Applications (data, loading and error states), addApplication
- * callback and deleteApplication callback.
+ * Bootstrap the applications context.
  */
 export function useBootstrapApplications() {
   const { applications } = useApplications();
