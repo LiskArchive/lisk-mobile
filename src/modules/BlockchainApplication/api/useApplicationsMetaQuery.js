@@ -1,4 +1,4 @@
-import { LIMIT, API_URL, METHOD } from 'utilities/api/constants';
+import { LIMIT, API_URL, METHOD, NETWORK } from 'utilities/api/constants';
 import { GET_APPLICATIONS_META_QUERY, APPLICATION } from 'utilities/api/queries';
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
@@ -19,7 +19,7 @@ export function useApplicationsMetaQuery({ config: customConfig = {}, options = 
     ...customConfig,
     params: {
       limit: LIMIT,
-      network: process.env.NETWORK,
+      network: NETWORK,
       ...(customConfig?.params || {}),
     },
   };

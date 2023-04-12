@@ -21,7 +21,7 @@ export function useBootstrapApplications() {
     isSuccess: isSuccessDefaultApplicationsFullData,
     error: errorOnDefaultApplicationsFullData,
   } = useApplicationsFullDataQuery({
-    config: { offChain: { params: { isDefault: true } } },
+    config: { params: { isDefault: true } },
   });
 
   const {

@@ -6,4 +6,5 @@ export const APPLICATION_STATUSES = {
   active: 'active',
   registered: 'registered',
   terminated: 'terminated',
+  unregistered: 'unregistered',
 };
