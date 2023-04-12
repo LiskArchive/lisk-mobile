@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
+import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { P, H3, B } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
@@ -16,6 +17,7 @@ export default function DisconnectExternalApplication({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const modal = useModal();
 
   const { disconnect } = useWalletConnectPairings();
 
@@ -28,6 +30,7 @@ export default function DisconnectExternalApplication({
       await disconnect(application.topic);
       setIsLoading(false);
       onSuccess();
+      modal.close();
     } catch (e) {
       setError(e);
       setIsLoading(false);

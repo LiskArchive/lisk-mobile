@@ -15,6 +15,10 @@ export function useSendTokenAmountChecker({
 
   const maxAllowedAmount = tokenBalance - transactionFee;
 
+  if (!amount) {
+    return { maxAllowedAmount, isMaxAllowedAmountExceeded: false };
+  }
+
   const isMaxAllowedAmountExceeded =
     maxAllowedAmount -
       (selectedToken
