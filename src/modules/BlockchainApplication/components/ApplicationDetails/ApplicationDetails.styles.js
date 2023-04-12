@@ -42,20 +42,14 @@ export default {
       textAlign: 'center',
       fontFamily: fonts.family.contextSemiBold,
     },
-    address: {
-      textAlign: 'center',
-      fontSize: fonts.size.small,
-      fontFamily: fonts.family.context,
-      marginTop: 16,
-      marginBottom: 16,
-    },
     row: {
       flexDirection: 'row',
       alignItems: 'center',
     },
-    appLinkContainer: {
+    projectPageContainer: {
       justifyContent: 'center',
-      marginBottom: 10,
+      marginTop: 8,
+      marginBottom: 8,
     },
     depositedContainer: {
       justifyContent: 'center',
@@ -124,9 +118,6 @@ export default {
     title: {
       color: colors.light.zodiacBlue,
     },
-    address: {
-      color: colors.light.zodiacBlue,
-    },
     value: {
       color: colors.light.zodiacBlue,
     },
@@ -143,9 +134,6 @@ export default {
     },
     logoContainer: {
       backgroundColor: colors.dark.mainBg,
-    },
-    address: {
-      color: colors.dark.white,
     },
     title: {
       color: colors.dark.white,

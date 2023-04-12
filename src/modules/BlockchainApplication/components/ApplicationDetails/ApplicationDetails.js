@@ -138,33 +138,16 @@ export default function ApplicationDetails({ route }) {
             />
           </View>
 
-          <DataRenderer
-            isLoading={applications.isLoading}
-            error={applications.isError}
-            data={application?.address}
-            renderData={(data) => <P style={[styles.address, styles.theme.address]}>{data}</P>}
-            renderLoading={() => (
-              <Skeleton
-                width={288}
-                height={16}
-                style={{
-                  container: [styles.address, styles.theme.address, { alignSelf: 'center' }],
-                }}
-              />
-            )}
-            style={{ empty: [styles.address, styles.theme.address] }}
-          />
-
-          <View style={[styles.row, styles.appLinkContainer]}>
+          <View style={[styles.row, styles.projectPageContainer]}>
             <DataRenderer
               isLoading={applications.isLoading}
               error={applications.isError}
-              data={application?.explorers}
+              data={application?.projectPage}
               renderData={(data) => (
                 <>
                   <UrlSvg size={1} />
 
-                  <P style={styles.url}>{data[0].url}</P>
+                  <P style={styles.url}>{data}</P>
                 </>
               )}
               renderLoading={() => (
