@@ -102,7 +102,7 @@ export default function ApplicationsExplorer() {
         <ApproveConnection event={connectionEvent} onFinish={modal.close} />
       </Stepper>
     ),
-    [connectionEvent?.name]
+    [connectionEvent?.name, scannedUri]
   );
 
   const showNewConnectionModal = () => newConnectionModal.open();

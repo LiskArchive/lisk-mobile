@@ -15,7 +15,7 @@ export function getNavigationTabBarStyles(modalOpen) {
     width,
     left,
     backgroundColor: colors.light.ultramarineBlue,
-    bottom: modalOpen ? 0 : 24,
+    bottom: 24,
     borderRadius: 64,
     height: 64,
     paddingTop,
