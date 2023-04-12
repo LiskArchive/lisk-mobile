@@ -7,6 +7,7 @@ import {
   mockGetTransactionsQuery,
   mockGetTransactionQuery,
   mockTransactions,
+  mockTokensMeta,
 } from '../__fixtures__';
 
 export const getAccountTokensMockHandler = rest.get(
@@ -35,6 +36,25 @@ export const getTransactionsMockHandler = rest.get(
             offset,
           },
         };
+
+    return res(ctx.delay(20), ctx.json(response));
+  }
+);
+
+export const getTokensMetaMockHandler = rest.get(
+  `*/api/${API_VERSION}/blockchain/apps/meta/tokens`,
+  async (req, res, ctx) => {
+    const limit = Number(req.url.searchParams.get('limit' || LIMIT));
+    const offset = Number(req.url.searchParams.get('offset') || 0);
+
+    const response = {
+      data: mockTokensMeta.slice(offset, offset + limit),
+      meta: {
+        total: mockTokensMeta.length,
+        count: limit,
+        offset,
+      },
+    };
 
     return res(ctx.delay(20), ctx.json(response));
   }
