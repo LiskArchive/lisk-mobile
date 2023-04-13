@@ -10,6 +10,7 @@ import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useEncryptAccount } from 'modules/Accounts/hooks/useEncryptAccount';
+import { storeAccountPasswordInKeyChain } from '../utils/passphrase';
 
 const validationSchema = yup
   .object()
@@ -79,6 +80,10 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
         name: values.accountName,
         derivationPath,
       });
+
+      const address = data?.metadata.address;
+
+      storeAccountPasswordInKeyChain(address, values.password);
 
       setEncryptedAccount(data);
       setAccount(data);

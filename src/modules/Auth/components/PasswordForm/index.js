@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
+import { useSelector } from 'react-redux';
 
 import { useTheme } from 'contexts/ThemeContext';
 import Avatar from 'components/shared/avatar';
@@ -11,12 +12,36 @@ import { colors, themes } from 'constants/styleGuide';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 
 import getStyles from './styles';
+import { bioMetricAuthentication, getAccountPasswordFromKeyChain } from '../../utils/passphrase';
 
 export default function PasswordForm({ account, onPress, testID, theme, onSubmit }) {
   useScreenshotPrevent();
   const [password, setPassword] = useState('');
+  const { sensorType } = useSelector((state) => state.settings);
 
   const { styles } = useTheme({ styles: getStyles() });
+
+  const fetchAccountPassword = async () => {
+    const accountDetails = await getAccountPasswordFromKeyChain(account.metadata.address);
+    const accountPassword = accountDetails?.password;
+    if (accountPassword) {
+      onSubmit(accountPassword);
+    }
+  };
+
+  const tryFetchAccontPasswordFromBiometrics = () => {
+    if (sensorType) {
+      bioMetricAuthentication({
+        successCallback: () => {
+          fetchAccountPassword();
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    tryFetchAccontPasswordFromBiometrics();
+  }, []);
 
   return (
     <View style={[styles.container, styles.theme.container]} onPress={onPress} testID={testID}>

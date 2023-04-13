@@ -4,9 +4,9 @@ import {
   getGenericPassword,
   resetGenericPassword,
 } from 'react-native-keychain';
+import { getUniqueId } from 'react-native-device-info';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
-import { extractAddress } from './accountKeys';
 
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 
@@ -54,18 +54,6 @@ export const generatePassphrase = () => {
 };
 
 /**
- * @param {string} passphrase
- * Store the passphrase and address on the keychain of the device
- */
-export const storePassphraseInKeyChain = (passphrase) => {
-  const address = extractAddress(passphrase);
-  setGenericPassword(address, passphrase, {
-    accessGroup: '58UK9RE9TP.io.lisk.mobile',
-    service: 'io.lisk.mobile',
-  });
-};
-
-/**
  * Removes the passphrase and address on the keychain of the device
  */
 export const removePassphraseFromKeyChain = async (
@@ -81,6 +69,44 @@ export const removePassphraseFromKeyChain = async (
 };
 
 export const getPassphraseFromKeyChain = () => getGenericPassword({ service: 'io.lisk.mobile' });
+
+export const getAccountPasswordFromKeyChain = async (address) => {
+  try {
+    const db = await getGenericPassword();
+    const accounts = JSON.parse(db.password);
+    if (accounts && accounts.length && Array.isArray(accounts)) {
+      const accountDetails = accounts.find((account) => account.address === address);
+      return accountDetails;
+    }
+    return { isError: true };
+  } catch (error) {
+    console.log({ error });
+    return { isError: true, error };
+  }
+};
+
+/**
+ * @param {string} passphrase
+ * Store the passphrase and address on the keychain of the device
+ */
+export const storeAccountPasswordInKeyChain = async (address, password) => {
+  const uniqueId = getUniqueId();
+  const db = await getPassphraseFromKeyChain();
+  let deviceAccounts = [];
+  try {
+    const previousAccounts = JSON.parse(db.password);
+    if (previousAccounts && previousAccounts.length && Array.isArray(previousAccounts)) {
+      deviceAccounts = previousAccounts;
+    }
+  } catch (error) {
+    console.log({ error });
+  }
+  deviceAccounts.push({ address, password });
+  setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
+    accessGroup: '58UK9RE9TP.io.lisk.mobile',
+    service: 'io.lisk.mobile',
+  });
+};
 
 /**
  * @param {function} successCallback

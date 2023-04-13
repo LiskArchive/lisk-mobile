@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { LogBox, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { useNavigation } from '@react-navigation/native';
 
 import SwitchButton from 'components/shared/toolBox/switchButton';
@@ -39,8 +40,14 @@ export default function AuthMethod({ route }) {
     styles: getStyles(),
   });
 
+  const setBiometricSensorType = async () => {
+    const sensorType = await FingerprintScanner.isSensorAvailable();
+    dispatch(settingsUpdated({ sensorType }));
+  };
+
   useEffect(() => {
     if (settings.showedIntro) {
+      setBiometricSensorType();
       dispatch(settingsRetrieved());
 
       if (accounts.length && !route.params?.authRequired) {
@@ -49,7 +56,7 @@ export default function AuthMethod({ route }) {
     } else {
       navigation.push('Intro');
     }
-  }, [accounts.length, dispatch, navigation, route.params?.authRequired, settings.showedIntro]);
+  }, [accounts.length, route.params?.authRequired, settings.showedIntro]);
 
   const selectEncryptedJSON = async () => {
     try {
