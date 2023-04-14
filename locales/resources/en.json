@@ -37,11 +37,9 @@
   "Status": "Status",  
   "Cancel": "Cancel",
   "Edit bookmark": "Edit bookmark",  
-  "Here’s what you need to know:": "Here’s what you need to know:",
   "I have read and agreed with the": "I have read and agreed with the",
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
-  "It will still be required for some actions.": "It will still be required for some actions.",
   "Label": "Label",
   "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
@@ -61,9 +59,7 @@
   "terms and conditions.": "terms and conditions.",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
   "You always need to keep your passphrase safe.": "You always need to keep your passphrase safe.",
-  "You can always deactivate it": "You can always deactivate it",
   "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
-  "Your passphrase is still needed": "Your passphrase is still needed",
   "About Lisk": "About Lisk",
   "Disabled": "Disabled",
   "Enabled": "Enabled",
@@ -124,6 +120,15 @@
       "confirmPhrase": "Confirm your secret recovery phrase",
       "continue": "Continue",
       "storePhrase": "Store your secret recovery phrase:"
+    },
+    "biometrics": {
+      "description": "Here’s what you need to know:",
+      "title1": "Your passphrase is still needed",
+      "description1": "You always need to keep your secret recovery phrase safe. It will be still required as a backup.",
+      "title2": "Fast and secure",
+      "description2": "Face ID offers a secure and faster way to decrypt your encrypted secret recovery phrase and sign transactions.",
+      "title3": "You can always turn it off",
+      "description3": "You can disable {{title}} at any time, and authenticate with your secret recovery phrase."
     }
   },
   "multisignature": {

@@ -1,60 +1,63 @@
-import React from 'react';
-import connect from 'redux-connect-decorator';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTheme } from 'contexts/ThemeContext';
 import { View } from 'react-native';
-import { translate } from 'react-i18next';
-import { removePassphraseFromKeyChain } from 'modules/Auth/utils';
+import i18next from 'i18next';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/passphrase';
+import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import withTheme from 'components/shared/withTheme';
-import CopyPassphraseToClipboard from 'components/shared/CopyPassphraseToClipboard/CopyPassphraseToClipboard';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
+import CopyPassphraseToClipboard from 'components/shared/CopyPassphraseToClipboard/CopyPassphraseToClipboard';
+import { settingsUpdated } from 'modules/Settings/store/actions';
 import getStyles from './styles';
 
-@connect(
-  (state) => ({
-    passphrase: state.accounts.passphrase,
-  }),
-  {
-    settingsUpdated: settingsUpdatedAction,
-  }
-)
-class DisableBioAuth extends React.Component {
-  confirm = () => {
-    removePassphraseFromKeyChain();
-    this.props.settingsUpdated({ hasStoredPassphrase: false });
-    this.props.navigation.pop();
+const DisableBioAuth = ({ route, navigation }) => {
+  const [currentAccount] = useCurrentAccount();
+  const title = route.params?.title ?? 'Bio Auth';
+  const { styles } = useTheme({ styles: getStyles() });
+  const [recoveryPhrase, setRecoveryPhrase] = useState('');
+
+  const decryptCurrentAccount = async () => {
+    const accountDetails = await getAccountPasswordFromKeyChain(currentAccount.metadata.address);
+    const accountPassword = accountDetails?.password;
+    if (accountPassword) {
+      const { recoveryPhrase: decryptedRecoveryPhrase } = await decryptAccount(
+        currentAccount.encryptedPassphrase,
+        accountPassword
+      );
+      setRecoveryPhrase(decryptedRecoveryPhrase);
+    }
   };
 
-  componentDidMount() {
-    this.props.navigation.setOptions({
+  const dispatch = useDispatch();
+
+  const confirm = () => {
+    dispatch(settingsUpdated({ biometricsEnabled: false }));
+    navigation.pop();
+  };
+
+  useEffect(() => {
+    navigation.setOptions({
       title: null,
       headerLeft: (props) => (
-        <HeaderBackButton
-          title={this.props.route.params?.title ?? 'Bio Auth'}
-          onPress={this.props.navigation.goBack}
-          {...props}
-        />
+        <HeaderBackButton title={title} onPress={navigation.goBack} {...props} />
       ),
     });
-  }
+    decryptCurrentAccount();
+  }, []);
 
-  render() {
-    const { t, styles, route, passphrase } = this.props;
-
-    const title = route.params?.title ?? 'Bio Auth';
-
-    return (
-      <View style={styles.wrapper}>
-        <View style={[styles.container, styles.theme.container]}>
-          <View style={styles.passphraseContainer}>
-            <CopyPassphraseToClipboard passphrase={passphrase} />
-          </View>
-
-          <PrimaryButton onClick={this.confirm} title={t('Disable bioAuth', { title })} />
+  return (
+    <View style={styles.wrapper}>
+      <View style={[styles.container, styles.theme.container]}>
+        <View style={styles.passphraseContainer}>
+          <CopyPassphraseToClipboard passphrase={recoveryPhrase} />
         </View>
-      </View>
-    );
-  }
-}
 
-export default withTheme(translate()(DisableBioAuth), getStyles());
+        <PrimaryButton onClick={confirm} title={i18next.t('Disable bioAuth', { title })} />
+      </View>
+    </View>
+  );
+};
+
+export default DisableBioAuth;

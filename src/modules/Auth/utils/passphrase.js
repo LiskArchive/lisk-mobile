@@ -80,7 +80,6 @@ export const getAccountPasswordFromKeyChain = async (address) => {
     }
     return { isError: true };
   } catch (error) {
-    console.log({ error });
     return { isError: true, error };
   }
 };

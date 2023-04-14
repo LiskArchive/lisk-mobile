@@ -17,7 +17,7 @@ import { bioMetricAuthentication, getAccountPasswordFromKeyChain } from '../../u
 export default function PasswordForm({ account, onPress, testID, theme, onSubmit }) {
   useScreenshotPrevent();
   const [password, setPassword] = useState('');
-  const { sensorType } = useSelector((state) => state.settings);
+  const { sensorType, biometricsEnabled } = useSelector((state) => state.settings);
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -30,7 +30,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   };
 
   const tryFetchAccontPasswordFromBiometrics = () => {
-    if (sensorType) {
+    if (sensorType && biometricsEnabled) {
       bioMetricAuthentication({
         successCallback: () => {
           fetchAccountPassword();

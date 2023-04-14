@@ -64,7 +64,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
   let target = 'EnableBioAuth';
 
   let targetStateLabel = [t('Disabled'), colors.light.blueGray];
-  if (settings.sensorType && settings.hasStoredPassphrase) {
+  if (settings.biometricsEnabled) {
     targetStateLabel = [
       t('Enabled'),
       theme === themes.light ? colors.light.maastrichtBlue : colors.dark.platinum,
