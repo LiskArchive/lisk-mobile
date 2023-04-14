@@ -186,7 +186,7 @@ export function SendTokenRecipientAccountField({
     <>
       <Input
         label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        value={addressFormat === 'input' ? value : ''}
+        value={value}
         placeholder="Input wallet address or choose a username"
         error={addressFormat === 'input' && errorMessage}
         adornments={{

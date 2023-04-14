@@ -338,6 +338,8 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
     {}
   );
 
+  const shouldShowFeeBreakdown = Object.keys(feesLabels).length > 2;
+
   return (
     <View>
       <View style={[styles.feeContainer]}>
@@ -356,21 +358,24 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
           onPress={() => setShowFeesBreakdown((prevState) => !prevState)}
           style={[styles.row]}
           testID="fees-breakdown-toggle"
+          disabled={!shouldShowFeeBreakdown}
         >
           <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>
             {feesLabels.totalFee}
           </Text>
 
-          <CaretSvg
-            color={colors.light.ultramarineBlue}
-            height={16}
-            direction={showFeesBreakdown ? 'down' : 'right'}
-          />
+          {shouldShowFeeBreakdown && (
+            <CaretSvg
+              color={colors.light.ultramarineBlue}
+              height={16}
+              direction={showFeesBreakdown ? 'down' : 'right'}
+            />
+          )}
         </TouchableOpacity>
       </View>
 
       {showFeesBreakdown && (
-        <FadeInView style={[styles.feeBreakdownContainer]}>
+        <FadeInView style={[styles.feeBreakdownContainer, styles.theme.feeBreakdownContainer]}>
           <View style={[styles.feeBreakdownRow]}>
             <Text style={[styles.primaryText]}>
               {i18next.t('sendToken.tokenSelect.transactionFeeBreakdownText')}
