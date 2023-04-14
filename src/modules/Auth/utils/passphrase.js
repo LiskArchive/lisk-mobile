@@ -72,11 +72,10 @@ export const getPassphraseFromKeyChain = () => getGenericPassword({ service: 'io
 
 export const getAccountPasswordFromKeyChain = async (address) => {
   try {
-    const db = await getGenericPassword();
+    const db = await getPassphraseFromKeyChain();
     const accounts = JSON.parse(db.password);
-    if (accounts && accounts.length && Array.isArray(accounts)) {
-      const accountDetails = accounts.find((account) => account.address === address);
-      return accountDetails;
+    if (accounts) {
+      return accounts[address];
     }
     return { isError: true };
   } catch (error) {
@@ -91,17 +90,21 @@ export const getAccountPasswordFromKeyChain = async (address) => {
 export const storeAccountPasswordInKeyChain = async (address, password) => {
   const uniqueId = getUniqueId();
   const db = await getPassphraseFromKeyChain();
-  let deviceAccounts = [];
+  let deviceAccounts = {};
   try {
     const previousAccounts = JSON.parse(db.password);
-    if (previousAccounts && previousAccounts.length && Array.isArray(previousAccounts)) {
+    if (
+      previousAccounts &&
+      typeof previousAccounts === 'object' &&
+      !Array.isArray(previousAccounts)
+    ) {
       deviceAccounts = previousAccounts;
     }
   } catch (error) {
     console.log({ error });
   }
-  deviceAccounts.push({ address, password });
-  setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
+  deviceAccounts[address] = password;
+  await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
   });

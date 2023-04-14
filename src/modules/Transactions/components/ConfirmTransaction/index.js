@@ -35,8 +35,7 @@ export default function ConfirmTransaction({
   const submitDisabled = isLoading || !userPassword || isValidationError;
 
   const fetchAccountPassword = async () => {
-    const accountDetails = await getAccountPasswordFromKeyChain(currentAccount.metadata?.address);
-    const accountPassword = accountDetails?.password;
+    const accountPassword = await getAccountPasswordFromKeyChain(currentAccount.metadata?.address);
     if (accountPassword) {
       onUserPasswordChange(accountPassword);
       onSubmit();

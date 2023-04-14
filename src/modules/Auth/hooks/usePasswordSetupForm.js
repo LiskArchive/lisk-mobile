@@ -83,7 +83,7 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
 
       const address = data?.metadata.address;
 
-      storeAccountPasswordInKeyChain(address, values.password);
+      await storeAccountPasswordInKeyChain(address, values.password);
 
       setEncryptedAccount(data);
       setAccount(data);

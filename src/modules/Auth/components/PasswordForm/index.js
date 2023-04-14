@@ -22,8 +22,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   const { styles } = useTheme({ styles: getStyles() });
 
   const fetchAccountPassword = async () => {
-    const accountDetails = await getAccountPasswordFromKeyChain(account.metadata.address);
-    const accountPassword = accountDetails?.password;
+    const accountPassword = await getAccountPasswordFromKeyChain(account.metadata.address);
     if (accountPassword) {
       onSubmit(accountPassword);
     }

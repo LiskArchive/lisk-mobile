@@ -19,8 +19,7 @@ const DisableBioAuth = ({ route, navigation }) => {
   const [recoveryPhrase, setRecoveryPhrase] = useState('');
 
   const decryptCurrentAccount = async () => {
-    const accountDetails = await getAccountPasswordFromKeyChain(currentAccount.metadata.address);
-    const accountPassword = accountDetails?.password;
+    const accountPassword = await getAccountPasswordFromKeyChain(currentAccount.metadata.address);
     if (accountPassword) {
       const { recoveryPhrase: decryptedRecoveryPhrase } = await decryptAccount(
         currentAccount.encryptedPassphrase,
