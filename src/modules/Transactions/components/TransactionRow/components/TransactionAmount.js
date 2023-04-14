@@ -21,8 +21,8 @@ export function TransactionAmount({ transaction, style, address }) {
   const language = useSelector((state) => state.settings.language);
 
   const isTokenTransfer =
-    transactionAssets.type === 'tokenTransfer' ||
-    transactionAssets.type === 'tokenCrossChainTransfer';
+    transactionAssets.type === 'token:transfer' ||
+    transactionAssets.type === 'token:transferCrossChain';
 
   if (!isTokenTransfer) {
     return null;

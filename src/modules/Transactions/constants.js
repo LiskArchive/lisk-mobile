@@ -1,36 +1,25 @@
 import { t } from 'locales/helpers';
 
-const MODULES = {
-  token: 'token',
-  auth: 'auth',
-  legacy: 'legacy',
-  pos: 'pos',
-  interoperability: 'interoperability',
-};
-
-const COMMANDS = {
-  transfer: 'transfer',
-  transferCrossChain: 'transferCrossChain',
-  registerMultisignatureGroup: 'registerMultisignatureGroup',
-  registerDelegate: 'registerDelegate',
-  reportDelegateMisbehavior: 'reportDelegateMisbehavior',
-  unlockToken: 'unlockToken',
-  updateGeneratorKey: 'updateGeneratorKey',
-  voteDelegate: 'voteDelegate',
-  reclaimLSK: 'reclaimLSK',
-  registerkeys: 'registerKeys',
-  stake: 'stake',
-  registerSidechain: 'registerSidechain',
-};
-
-export const MODULE_COMMAND_NAMES = {
-  tokenTransfer: `${MODULES.token}:${COMMANDS.transfer}`,
-  tokenCrossChainTransfer: `${MODULES.token}:${COMMANDS.transferCrossChain}`,
-  registerMultisignatureGroup: `${MODULES.auth}:${COMMANDS.registerMultisignatureGroup}`,
-  reclaimLSK: `${MODULES.legacy}:${COMMANDS.reclaimLSK}`,
-  registerkeys: `${MODULES.legacy}:${COMMANDS.registerkeys}`,
-  stake: `${MODULES.pos}:${COMMANDS.stake}`,
-  registerSidechain: `${MODULES.interoperability}:${COMMANDS.registerSidechain}`,
+export const MODULE_COMMANDS_NAMES = {
+  'auth:registerMultisignature': 'Register Multisignature',
+  'interoperability:submitMainchainCrossChainUpdate': 'Submit Mainchain CrossChain Update',
+  'interoperability:submitSidechainCrossChainUpdate': 'Submit Sidechain CrossChain Update',
+  'interoperability:initializeMessageRecovery': 'Initialize Message Recovery',
+  'interoperability:recoverMessage': 'Recover Message',
+  'interoperability:registerSidechain': 'Register Sidechain',
+  'interoperability:recoverState': 'Recover State',
+  'interoperability:terminateSidechainForLiveness': 'Terminate Sidechain for Liveness',
+  'legacy:legacyReclaimLSK': 'Reclaim LSK',
+  'legacy:legacyRegisterKeys': 'Legacy Register Keys',
+  'pos:registerValidator': 'Register Validator',
+  'pos:reportMisbehavior': 'Report Misbehavior',
+  'pos:unlock': 'Unlock',
+  'pos:updateGeneratorKey': 'Update Generator Key',
+  'pos:stake': 'Stake',
+  'pos:changeCommission': 'Change Commission',
+  'pos:claimRewards': 'Claim Rewards',
+  'token:transfer': 'Token Transfer',
+  'token:transferCrossChain': 'Token Cross Chain Transfer',
 };
 
 export const TRANSACTION_STATUS_NAMES = {
