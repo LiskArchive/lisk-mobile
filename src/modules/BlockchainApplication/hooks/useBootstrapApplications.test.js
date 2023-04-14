@@ -115,15 +115,10 @@ describe('useBootstrapApplications', () => {
   });
 
   it('should set error when any of the API calls returns an error', () => {
-    const error1 = new Error('Error 1');
-    const error2 = new Error('Error 2');
+    const error = new Error('Error');
 
     useApplicationsFullDataQuery.mockReturnValue({
-      error: error1,
-    });
-
-    useApplicationsLocalStorage.mockReturnValue({
-      error: error2,
+      error,
     });
 
     const { result } = renderHook(
@@ -134,6 +129,6 @@ describe('useBootstrapApplications', () => {
       { wrapper: createWrapper() }
     );
 
-    expect(result.current.applications.error).toEqual(error1 || error2);
+    expect(result.current.applications.error).toEqual(error);
   });
 });
