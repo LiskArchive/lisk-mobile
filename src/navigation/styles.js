@@ -10,11 +10,12 @@ export function getNavigationTabBarStyles(modalOpen) {
   const paddingTop = Platform.OS === 'android' ? 0 : 28;
 
   return {
+    display: modalOpen ? 'none' : 'flex',
     position: 'absolute',
     width,
     left,
     backgroundColor: colors.light.ultramarineBlue,
-    bottom: modalOpen ? 0 : 24,
+    bottom: 24,
     borderRadius: 64,
     height: 64,
     paddingTop,
