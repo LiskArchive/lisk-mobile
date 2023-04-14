@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable max-lines, max-statements */
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
@@ -18,7 +18,6 @@ import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
 import DataRenderer from 'components/shared/DataRenderer';
 import { fromBaseToDisplayDenom, fromBeddowsToLsk } from 'utilities/conversions.utils';
-import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import colors from 'constants/styleGuide/colors';
@@ -64,8 +63,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           testID={`token-select-${item.symbol}`}
         >
           <Text style={[styles.theme.text]}>{item.symbol}</Text>
-
-          <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+          <Image source={{ uri: item.logo.png }} style={styles.logo} />
         </Picker.Item>
       )}
       // TODO: Integrate pagination props.
@@ -100,8 +98,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
               {selectedToken && (
                 <View style={[styles.row]} testID="select-token-picker">
                   <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
-
-                  <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+                  <Image source={{ uri: selectedToken.logo.png }} style={styles.logo} />
                 </View>
               )}
             </Picker.Toggle>

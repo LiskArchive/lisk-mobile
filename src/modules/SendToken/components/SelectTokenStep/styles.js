@@ -40,7 +40,10 @@ export default function getSendTokenSelectTokenStepStyles() {
         alignItems: 'center',
         marginBottom: 8,
       },
-      tokenSvg: {
+      logo: {
+        height: 20,
+        width: 20,
+        borderRadius: 10,
         marginLeft: 8,
       },
       primaryText: {

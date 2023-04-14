@@ -8,7 +8,6 @@ import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
-import TokenSvg from 'assets/svgs/TokenSvg';
 import { stringShortener } from 'utilities/helpers';
 
 import getTransactionSummaryStyles from './styles';
@@ -100,7 +99,10 @@ export default function TransactionSummary(transaction) {
             {transaction.token?.symbol}
           </Text>
 
-          <TokenSvg symbol={transaction.token?.symbol} style={styles.tokenSvg} />
+          <Image
+            source={{ uri: transaction.token?.logo?.png }}
+            style={styles.applicationLogoImage}
+          />
         </View>
       </View>
 
