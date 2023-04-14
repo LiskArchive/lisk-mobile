@@ -95,10 +95,12 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}</Text>
 
         <View style={[styles.row]}>
-          <Text style={[styles.valueText, styles.theme.valueText]}>{transaction.token.symbol}</Text>
+          <Text style={[styles.valueText, styles.theme.valueText]}>
+            {transaction.token?.symbol}
+          </Text>
 
           <Image
-            source={{ uri: transaction.token.logo?.png }}
+            source={{ uri: transaction.token?.logo?.png }}
             style={styles.applicationLogoImage}
           />
         </View>
@@ -110,7 +112,7 @@ export default function TransactionSummary(transaction) {
         </Text>
 
         <Text style={[styles.valueText, styles.theme.valueText]}>
-          {transaction.amount} {transaction.token.symbol}
+          {transaction.amount} {transaction.token?.symbol}
         </Text>
       </View>
 
