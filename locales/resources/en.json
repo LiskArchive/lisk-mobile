@@ -261,7 +261,8 @@
       "add": {
         "buttonText": "Add application",
         "successTitle": "Perfect! Application has now been added",
-        "confirmButtonText": "Add application now"
+        "confirmButtonText": "Add application now",
+        "errorConnecting": "Error connecting application. Please try again."
       },
       "delete": {
         "title": "Remove application?",
@@ -374,9 +375,9 @@
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
       "transactionFeeBreakdownText": "Fee breakdown",
-      "bytesFeeLabel": "Bytes",      
-      "priorityFeeLabel": "Priority",
-      "extraCommandFeeLabel": "Initialization",
+      "bytesFeeLabel": "Minimum fee",      
+      "priorityFeeLabel": "Network priority",
+      "extraCommandFeeLabel": "Account initialization",
       "messageFeeLabel": "Message fee"
     },
     "summary": {

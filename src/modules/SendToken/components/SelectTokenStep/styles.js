@@ -40,7 +40,10 @@ export default function getSendTokenSelectTokenStepStyles() {
         alignItems: 'center',
         marginBottom: 8,
       },
-      tokenSvg: {
+      logo: {
+        height: 20,
+        width: 20,
+        borderRadius: 10,
         marginLeft: 8,
       },
       primaryText: {
@@ -120,6 +123,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       priorityButtonFeeText: {
         color: colors.light.zodiacBlue,
       },
+      feeBreakdownContainer: {
+        backgroundColor: colors.light.white,
+      },
     },
     [themes.dark]: {
       wrapper: {
@@ -142,6 +148,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       },
       prevStepButton: {
         color: colors.light.whiteSmoke,
+      },
+      feeBreakdownContainer: {
+        backgroundColor: colors.dark.textInputBg,
       },
     },
   };

@@ -30,6 +30,7 @@ import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
+import { BridgeApplicationByQr } from '../BridgeApplicationByQr';
 
 const actions = [
   {
@@ -52,6 +53,8 @@ export default function ApplicationsExplorer() {
   const navigation = useNavigation();
   const { events } = useContext(WalletConnectContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
+  const [cameraIsOpen, setCameraIsOpen] = useState(false);
+  const [scannedUri, setScannedUri] = useState('');
   const tabBarHeight = useBottomTabBarHeight();
 
   const applications = useApplicationsExplorer();
@@ -91,7 +94,20 @@ export default function ApplicationsExplorer() {
     [connectionEvent?.name]
   );
 
+  const qrCodeConnectionModal = useModal(
+    (modal) => (
+      <Stepper>
+        <BridgeApplicationByQr uri={scannedUri} />
+        <InitiateConnection event={connectionEvent} onFinish={modal.close} />
+        <ApproveConnection event={connectionEvent} onFinish={modal.close} />
+      </Stepper>
+    ),
+    [connectionEvent?.name, scannedUri]
+  );
+
   const showNewConnectionModal = () => newConnectionModal.open();
+
+  const showFab = activeTab === 'externalApplications' && !cameraIsOpen;
 
   const onFabItemPress = (item) => {
     if (item.key === 'paste') {
@@ -102,7 +118,14 @@ export default function ApplicationsExplorer() {
     }
   };
 
-  const handleQRCodeRead = () => {};
+  const handleQRCodeRead = (value) => {
+    setScannedUri(value);
+    qrCodeConnectionModal.open();
+  };
+
+  const closeCamera = () => {
+    scannerRef.current.closeCamera();
+  };
 
   return (
     <>
@@ -135,6 +158,7 @@ export default function ApplicationsExplorer() {
           navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={handleQRCodeRead}
+          onCameraVisibilityChange={setCameraIsOpen}
           permissionDialogTitle={i18next.t('Permission to use camera')}
           permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
         />
@@ -169,8 +193,13 @@ export default function ApplicationsExplorer() {
         </View>
       </NavigationSafeAreaView>
 
-      {activeTab === 'externalApplications' && (
-        <Fab actions={actions} bottom={tabBarHeight} onPressItem={onFabItemPress} />
+      {showFab && (
+        <Fab
+          actions={actions}
+          bottom={tabBarHeight}
+          onPressItem={onFabItemPress}
+          onPressMain={closeCamera}
+        />
       )}
     </>
   );

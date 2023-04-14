@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable max-lines, max-statements */
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
@@ -18,7 +18,6 @@ import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
 import DataRenderer from 'components/shared/DataRenderer';
 import { fromBaseToDisplayDenom, fromBeddowsToLsk } from 'utilities/conversions.utils';
-import TokenSvg from 'assets/svgs/TokenSvg';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import colors from 'constants/styleGuide/colors';
@@ -64,8 +63,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           testID={`token-select-${item.symbol}`}
         >
           <Text style={[styles.theme.text]}>{item.symbol}</Text>
-
-          <TokenSvg symbol={item.symbol} style={styles.tokenSvg} />
+          <Image source={{ uri: item.logo.png }} style={styles.logo} />
         </Picker.Item>
       )}
       // TODO: Integrate pagination props.
@@ -100,8 +98,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
               {selectedToken && (
                 <View style={[styles.row]} testID="select-token-picker">
                   <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
-
-                  <TokenSvg symbol={selectedToken.symbol} style={styles.tokenSvg} />
+                  <Image source={{ uri: selectedToken.logo.png }} style={styles.logo} />
                 </View>
               )}
             </Picker.Toggle>
@@ -341,6 +338,8 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
     {}
   );
 
+  const shouldShowFeeBreakdown = Object.keys(feesLabels).length > 2;
+
   return (
     <View>
       <View style={[styles.feeContainer]}>
@@ -359,21 +358,24 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
           onPress={() => setShowFeesBreakdown((prevState) => !prevState)}
           style={[styles.row]}
           testID="fees-breakdown-toggle"
+          disabled={!shouldShowFeeBreakdown}
         >
           <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>
             {feesLabels.totalFee}
           </Text>
 
-          <CaretSvg
-            color={colors.light.ultramarineBlue}
-            height={16}
-            direction={showFeesBreakdown ? 'down' : 'right'}
-          />
+          {shouldShowFeeBreakdown && (
+            <CaretSvg
+              color={colors.light.ultramarineBlue}
+              height={16}
+              direction={showFeesBreakdown ? 'down' : 'right'}
+            />
+          )}
         </TouchableOpacity>
       </View>
 
       {showFeesBreakdown && (
-        <FadeInView style={[styles.feeBreakdownContainer]}>
+        <FadeInView style={[styles.feeBreakdownContainer, styles.theme.feeBreakdownContainer]}>
           <View style={[styles.feeBreakdownRow]}>
             <Text style={[styles.primaryText]}>
               {i18next.t('sendToken.tokenSelect.transactionFeeBreakdownText')}

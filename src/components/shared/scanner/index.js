@@ -7,6 +7,7 @@ import React, {
   useImperativeHandle,
   useCallback,
 } from 'react';
+import { useModal } from 'hooks/useModal';
 import { AppState, SafeAreaView } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
@@ -25,7 +26,7 @@ const Scanner = forwardRef(
       containerStyles: { scanner, cameraOverlay } = {},
       onQRCodeRead,
       onClose,
-      isCameraOpen,
+      onCameraVisibilityChange,
       fullScreen,
       permissionDialogTitle,
       permissionDialogMessage,
@@ -34,6 +35,7 @@ const Scanner = forwardRef(
     },
     ref
   ) => {
+    const { toggle: toggleModalContext } = useModal();
     const [camera, setCamera] = useState({
       permission: 'undetermined',
       visible: false,
@@ -72,9 +74,6 @@ const Scanner = forwardRef(
     };
 
     const toggleCamera = useCallback(() => {
-      if (typeof isCameraOpen === 'function') {
-        isCameraOpen(!camera.visible);
-      }
       setCamera((prevState) => ({ ...prevState, visible: !prevState.visible }));
 
       if (!camera.visible && typeof onClose === 'function') {
@@ -82,7 +81,19 @@ const Scanner = forwardRef(
       }
     }, []);
 
-    useImperativeHandle(ref, () => ({ toggleCamera }));
+    const closeCamera = useCallback(
+      () => setCamera((prevState) => ({ ...prevState, visible: false })),
+      []
+    );
+
+    useEffect(() => {
+      if (typeof onCameraVisibilityChange === 'function') {
+        onCameraVisibilityChange(camera.visible);
+      }
+      toggleModalContext(camera.visible);
+    }, [camera.visible]);
+
+    useImperativeHandle(ref, () => ({ toggleCamera, closeCamera }));
 
     const toggleGallery = async () => {
       const result = await launchImageLibrary();
