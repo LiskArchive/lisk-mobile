@@ -257,7 +257,8 @@
       "add": {
         "buttonText": "App hinzufügen",
         "successTitle": "Perfekt! App wurde jetzt hinzugefügt",
-        "confirmButtonText": "App jetzt hinzufügen"
+        "confirmButtonText": "App jetzt hinzufügen",
+        "errorConnecting": ""
       },
       "delete": {
         "title": "App entfernen?",

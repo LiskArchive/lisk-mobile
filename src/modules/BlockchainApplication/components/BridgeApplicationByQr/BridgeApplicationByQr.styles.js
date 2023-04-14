@@ -1,7 +1,7 @@
 import { themes, boxes, colors, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
-export default {
+export default () => ({
   common: {
     container: {
       flex: 1,
@@ -49,4 +49,4 @@ export default {
       color: colors.light.burntSieanna,
     },
   },
-};
+});

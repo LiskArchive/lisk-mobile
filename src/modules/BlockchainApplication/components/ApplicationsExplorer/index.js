@@ -30,7 +30,7 @@ import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
-import BridgeApplicationByQr from '../BridgeApplicationByQr';
+import { BridgeApplicationByQr } from '../BridgeApplicationByQr';
 
 const actions = [
   {

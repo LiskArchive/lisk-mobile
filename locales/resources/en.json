@@ -256,7 +256,8 @@
       "add": {
         "buttonText": "Add application",
         "successTitle": "Perfect! Application has now been added",
-        "confirmButtonText": "Add application now"
+        "confirmButtonText": "Add application now",
+        "errorConnecting": "Error connecting application. Please try again."
       },
       "delete": {
         "title": "Remove application?",
