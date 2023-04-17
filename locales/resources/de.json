@@ -82,7 +82,7 @@
   "Register multisignature group": "Multisignaturgruppe registrieren",
   "Transfer": "Senden",
   "Vote": "Abstimmen",
-  "Disable bioAuth": "{{title}} deaktivieren",
+  "Disable bioAuth": "{{sensorType}} deaktivieren",
   "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
   "Error": "Fehler",
   "Unparsed Address": "Unbekannte Adresse",
@@ -124,13 +124,14 @@
       "storePhrase": ""
     },
     "biometrics": {
+      "enableTitle": "",
+      "disableTitle": "",
+      "disableDescription": "",
       "description": "",
       "title1": "",
       "description1": "",
       "title2": "",
-      "description2": "",
-      "title3": "",
-      "description3": ""
+      "description2": ""
     }
   },
   "multisignature": {

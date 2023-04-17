@@ -1,114 +1,82 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { themes, colors } from 'constants/styleGuide';
-import { B, P, Small } from 'components/shared/toolBox/typography';
+import { B, Small } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import Icon from 'components/shared/toolBox/icon';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import i18next from 'i18next';
-import HeaderBackButton from 'components/navigation/headerBackButton';
 import { settingsUpdated } from 'modules/Settings/store/actions';
+import { bioMetricAuthentication } from 'modules/Auth/utils/passphrase';
 import getStyles from './styles';
+import { useModal } from '../../../hooks/useModal';
 
-const EnableBioAuth = ({ navigation, route }) => {
+const EnableBioAuth = () => {
   const { styles, theme } = useTheme({ styles: getStyles() });
   const dispatch = useDispatch();
+  const modal = useModal();
+  const { sensorType } = useSelector((state) => state.settings);
 
   const confirm = () => {
-    dispatch(settingsUpdated({ biometricsEnabled: true }));
-    navigation.pop();
+    bioMetricAuthentication({
+      successCallback: () => {
+        dispatch(settingsUpdated({ biometricsEnabled: true }));
+        modal.close();
+      },
+    });
   };
 
-  const title = route.params?.title ?? 'Bio Auth';
-
-  useEffect(() => {
-    navigation.setOptions({
-      title: null,
-      headerLeft: (props) => (
-        <HeaderBackButton title={`Enable ${title}`} onPress={navigation.goBack} {...props} />
-      ),
-    });
-  }, []);
-
   return (
-    <View style={styles.wrapper}>
-      <View style={[styles.container, styles.theme.container]}>
-        <View>
-          <P style={[styles.subHeader, styles.theme.subHeader]}>
-            {i18next.t('Here’s what you need to know:')}
-          </P>
-          <View style={[styles.row, styles.separator, styles.theme.separator]}>
-            <View style={styles.iconWrapper}>
-              <Icon
-                name="passphrase"
-                color={
-                  theme === themes.light
-                    ? colors.light.ultramarineBlue
-                    : colors.dark.ultramarineBlue
-                }
-                size={30}
-              />
-            </View>
-            <View style={styles.textWrapper}>
-              <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                {i18next.t('settings.biometrics.description')}
-              </B>
-              <Small style={[styles.description, styles.theme.description]}>
-                {i18next.t('settings.biometrics.title1')}
-                {i18next.t('settings.biometrics.description1')}
-              </Small>
-            </View>
-          </View>
-          <View style={[styles.row, styles.separator, styles.theme.separator]}>
-            <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
-              <Icon
-                name="secure"
-                color={
-                  theme === themes.light
-                    ? colors.light.ultramarineBlue
-                    : colors.dark.ultramarineBlue
-                }
-                size={30}
-              />
-            </View>
-            <View style={styles.textWrapper}>
-              <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                {i18next.t('settings.biometrics.title2')}
-              </B>
-              <Small style={[styles.description, styles.theme.description]}>
-                {i18next.t(`settings.biometrics.description2`)}
-              </Small>
-            </View>
-          </View>
-          <View style={[styles.row, styles.separator, styles.theme.separator]}>
-            <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
-              <Icon
-                name="settings-bg"
-                color={
-                  theme === themes.light
-                    ? colors.light.ultramarineBlue
-                    : colors.dark.ultramarineBlue
-                }
-                size={30}
-              />
-            </View>
-            <View style={styles.textWrapper}>
-              <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-                {i18next.t('settings.biometrics.title3')}
-              </B>
-              <Small style={[styles.description, styles.theme.description]}>
-                {i18next.t(`settings.biometrics.description3`, { title })}
-              </Small>
-            </View>
-          </View>
-        </View>
-        <PrimaryButton
-          style={styles.button}
-          onClick={confirm}
-          title={i18next.t(`Enable ${title}`)}
-        />
+    <View>
+      <View>
+        <B style={[styles.heading, styles.theme.rowTitle]}>
+          {i18next.t('settings.biometrics.enableTitle', { sensorType })}
+        </B>
       </View>
+      <View style={[styles.row, styles.separator, styles.theme.separator]}>
+        <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
+          <Icon
+            name="secure"
+            color={
+              theme === themes.light ? colors.light.ultramarineBlue : colors.dark.ultramarineBlue
+            }
+            size={30}
+          />
+        </View>
+        <View style={styles.textWrapper}>
+          <B style={[styles.rowTitle, styles.theme.rowTitle]}>
+            {i18next.t('settings.biometrics.title2')}
+          </B>
+          <Small style={[styles.description, styles.theme.description]}>
+            {i18next.t(`settings.biometrics.description2`)}
+          </Small>
+        </View>
+      </View>
+      <View style={[styles.row, styles.separator, styles.theme.separator]}>
+        <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
+          <Icon
+            name="settings-bg"
+            color={
+              theme === themes.light ? colors.light.ultramarineBlue : colors.dark.ultramarineBlue
+            }
+            size={30}
+          />
+        </View>
+        <View style={styles.textWrapper}>
+          <B style={[styles.rowTitle, styles.theme.rowTitle]}>
+            {i18next.t('settings.biometrics.title2')}
+          </B>
+          <Small style={[styles.description, styles.theme.description]}>
+            {i18next.t(`settings.biometrics.description2`, { sensorType })}
+          </Small>
+        </View>
+      </View>
+      <PrimaryButton
+        style={styles.button}
+        onClick={confirm}
+        title={i18next.t(`Enable ${sensorType}`)}
+      />
     </View>
   );
 };

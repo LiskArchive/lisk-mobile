@@ -41,8 +41,12 @@ export default function AuthMethod({ route }) {
   });
 
   const setBiometricSensorType = async () => {
-    const sensorType = await FingerprintScanner.isSensorAvailable();
-    dispatch(settingsUpdated({ sensorType }));
+    try {
+      const sensorType = await FingerprintScanner.isSensorAvailable();
+      dispatch(settingsUpdated({ sensorType }));
+    } catch (error) {
+      dispatch(settingsUpdated({ sensorType: null }));
+    }
   };
 
   useEffect(() => {
@@ -110,7 +114,7 @@ export default function AuthMethod({ route }) {
           testID="derivation-switch"
           onPress={toggleUseDerivationPath}
         >
-          <SwitchButton value={settings.useDerivationPath} onSyncPress={toggleUseDerivationPath} />
+          <SwitchButton value={settings.useDerivationPath} onChange={toggleUseDerivationPath} />
           <Text style={[styles.derivationPath, styles.theme.derivationPath]}>
             {i18next.t('settings.menu.enableDerivationPath')}
           </Text>

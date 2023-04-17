@@ -80,7 +80,7 @@
   "Register multisignature group": "Register multisignature group",
   "Transfer": "Transfer",
   "Vote": "Vote",
-  "Disable bioAuth": "Disable {{title}}",
+  "Disable bioAuth": "Disable {{sensorType}}",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
   "Unparsed Address": "Unparsed Address",
@@ -122,13 +122,14 @@
       "storePhrase": "Store your secret recovery phrase:"
     },
     "biometrics": {
+      "enableTitle": "Enable {{sensorType}}",
+      "disableTitle": "Enable {{sensorType}}",
+      "disableDescription": "Disabling your face ID requires you to enter account specific password to sign transaction.",
       "description": "Here’s what you need to know:",
-      "title1": "Your passphrase is still needed",
-      "description1": "You always need to keep your secret recovery phrase safe. It will be still required as a backup.",
-      "title2": "Fast and secure",
-      "description2": "Face ID offers a secure and faster way to decrypt your encrypted secret recovery phrase and sign transactions.",
-      "title3": "You can always turn it off",
-      "description3": "You can disable {{title}} at any time, and authenticate with your secret recovery phrase."
+      "title1": "Fast and secure",
+      "description1": "Face ID offers a secure and faster way to decrypt your encrypted secret recovery phrase and sign transactions.",
+      "title2": "You can always turn it off",
+      "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password."
     }
   },
   "multisignature": {

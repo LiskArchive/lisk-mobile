@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
-import Switch from 'react-native-switch-pro';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -9,7 +8,7 @@ import { H4, B, P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { colors } from 'constants/styleGuide';
+import SwitchButton from 'components/shared/toolBox/switchButton';
 
 import getRegisterSafeKeepingStyles from './styles';
 
@@ -75,15 +74,12 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
 
       <View style={[styles.footer]}>
         <View style={[styles.switchContainer]}>
-          <Switch
+          <SwitchButton
             testID="understandResponsibilitySwitch"
             height={26}
             width={43}
-            onSyncPress={handleConfirm}
-            backgroundActive={colors.light.ultramarineBlue}
-            backgroundInactive={colors.light.platinum}
+            onChange={handleConfirm}
           />
-
           <P style={[styles.confirmText]}>
             {i18next.t('auth.register.safeKeeping.understandResponsibilityDescription')}
           </P>

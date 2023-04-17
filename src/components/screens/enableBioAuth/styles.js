@@ -17,6 +17,11 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: 20,
     },
+    heading: {
+      textAlign: 'center',
+      fontSize: fonts.size.h3,
+      marginBottom: 10,
+    },
     subHeader: {
       marginBottom: boxes.boxPadding,
       fontFamily: fonts.family.context,

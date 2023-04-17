@@ -1,60 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTheme } from 'contexts/ThemeContext';
+import React from 'react';
 import { View } from 'react-native';
-import i18next from 'i18next';
-import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/passphrase';
-import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { useDispatch, useSelector } from 'react-redux';
+import { B, Small } from 'components/shared/toolBox/typography';
+import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import HeaderBackButton from 'components/navigation/headerBackButton';
-import CopyPassphraseToClipboard from 'components/shared/CopyPassphraseToClipboard/CopyPassphraseToClipboard';
+import i18next from 'i18next';
+import { bioMetricAuthentication } from 'modules/Auth/utils/passphrase';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import getStyles from './styles';
+import { useModal } from '../../../hooks/useModal';
 
-const DisableBioAuth = ({ route, navigation }) => {
-  const [currentAccount] = useCurrentAccount();
-  const title = route.params?.title ?? 'Bio Auth';
+const DisableBioAuth = () => {
   const { styles } = useTheme({ styles: getStyles() });
-  const [recoveryPhrase, setRecoveryPhrase] = useState('');
-
-  const decryptCurrentAccount = async () => {
-    const accountPassword = await getAccountPasswordFromKeyChain(currentAccount.metadata.address);
-    if (accountPassword) {
-      const { recoveryPhrase: decryptedRecoveryPhrase } = await decryptAccount(
-        currentAccount.encryptedPassphrase,
-        accountPassword
-      );
-      setRecoveryPhrase(decryptedRecoveryPhrase);
-    }
-  };
-
   const dispatch = useDispatch();
+  const modal = useModal();
+  const { sensorType } = useSelector((state) => state.settings);
 
   const confirm = () => {
-    dispatch(settingsUpdated({ biometricsEnabled: false }));
-    navigation.pop();
+    bioMetricAuthentication({
+      successCallback: () => {
+        dispatch(settingsUpdated({ biometricsEnabled: false }));
+        modal.close();
+      },
+    });
   };
 
-  useEffect(() => {
-    navigation.setOptions({
-      title: null,
-      headerLeft: (props) => (
-        <HeaderBackButton title={title} onPress={navigation.goBack} {...props} />
-      ),
-    });
-    decryptCurrentAccount();
-  }, []);
-
   return (
-    <View style={styles.wrapper}>
-      <View style={[styles.container, styles.theme.container]}>
-        <View style={styles.passphraseContainer}>
-          <CopyPassphraseToClipboard passphrase={recoveryPhrase} />
-        </View>
-
-        <PrimaryButton onClick={confirm} title={i18next.t('Disable bioAuth', { title })} />
+    <View>
+      <View>
+        <B style={[styles.heading, styles.theme.rowTitle]}>
+          {i18next.t('settings.biometrics.disableTitle', { sensorType })}
+        </B>
       </View>
+      <Small style={[styles.description, styles.theme.description]}>
+        {i18next.t(`settings.biometrics.disableDescription`)}
+      </Small>
+      <PrimaryButton
+        style={styles.button}
+        onClick={confirm}
+        title={i18next.t(`Disable ${sensorType}`)}
+      />
     </View>
   );
 };
