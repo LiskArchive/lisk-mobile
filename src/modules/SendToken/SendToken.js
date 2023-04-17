@@ -18,7 +18,6 @@ import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction
 
 import useSendTokenForm from './hooks/useSendTokenForm';
 import SendTokenApplicationsStep from './components/SelectApplicationsStep';
-import SendTokenSelectTokenStep from './components/SelectTokenStep';
 import SendTokenSummaryStep from './components/SummaryStep';
 import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisignatureAccount';
 import { getSendTokenStyles } from './SendToken.styles';
@@ -99,10 +98,6 @@ export default function SendToken() {
       title: 'selectApplications',
     },
     {
-      component: SendTokenSelectTokenStep,
-      title: 'selectToken',
-    },
-    {
       component: SendTokenSummaryStep,
       title: 'summary',
     },
@@ -140,7 +135,7 @@ export default function SendToken() {
             {accountIsMultisignature ? (
               <SendTokenOnMultisignatureAccount />
             ) : (
-              <Stepper showProgressBar styles={{ progressBar: { wrapper: styles.progressBar } }}>
+              <Stepper>
                 {steps.map((step) => (
                   <step.component key={step.title} route={route} form={form} transaction={data} />
                 ))}

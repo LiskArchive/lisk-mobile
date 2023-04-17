@@ -1,12 +1,12 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
-import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
 
 import getSendTokenSelectTokenStepStyles from './styles';
@@ -18,7 +18,7 @@ import {
   TokenSelectField,
 } from './components';
 
-export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, transaction }) {
+export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, form, transaction }) {
   const applications = useApplicationsExplorer();
 
   const { field: tokenIDField } = useController({
@@ -58,63 +58,57 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
     recipientApplication,
     selectedTokenID: tokenIDField.value,
     amount: amountField.value,
-    transactionFee: transaction.data.transaction.fee,
+    transactionFee: transaction?.data?.transaction?.fee,
   });
 
-  const disableNextStepButton = !form.watch('tokenID') || isMaxAllowedAmountExceeded;
+  const disableNextStepButton =
+    !form.watch('tokenID') ||
+    !form.watch('senderApplicationChainID') ||
+    !form.watch('recipientApplicationChainID') ||
+    !isValidAddress ||
+    isMaxAllowedAmountExceeded;
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.wrapper}
-      style={[styles.theme.wrapper]}
-      testID="select-token-step-screen"
-    >
-      <View style={[styles.container]}>
-        <TokenSelectField
-          value={tokenIDField.value}
-          onChange={(value) => form.handleChange('params.tokenID', value, tokenIDField.onChange)}
-          errorMessage={form.formState.errors.tokenID?.message}
-          recipientApplication={recipientApplication}
-          style={{ toggle: { container: { marginBottom: 16 } } }}
-        />
+    <View style={[styles.container]}>
+      <TokenSelectField
+        value={tokenIDField.value}
+        onChange={(value) => form.handleChange('params.tokenID', value, tokenIDField.onChange)}
+        errorMessage={form.formState.errors.tokenID?.message}
+        recipientApplication={recipientApplication}
+        style={{ toggle: { container: { marginBottom: 16 } } }}
+      />
 
-        <SendTokenAmountField
-          value={amountField.value}
-          onChange={(value) => form.handleChange('params.amount', value, amountField.onChange)}
-          tokenID={tokenIDField.value}
-          errorMessage={
-            form.formState.errors.amount?.message ||
-            (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance'))
-          }
-          recipientApplication={recipientApplication}
-          style={{ container: { marginBottom: 16 } }}
-        />
+      <SendTokenAmountField
+        value={amountField.value}
+        onChange={(value) => form.handleChange('params.amount', value, amountField.onChange)}
+        tokenID={tokenIDField.value}
+        errorMessage={
+          form.formState.errors.amount?.message ||
+          (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance'))
+        }
+        recipientApplication={recipientApplication}
+        style={{ container: { marginBottom: 16 } }}
+      />
 
-        <SendTokenMessageField
-          value={messageField.value}
-          onChange={(value) => form.handleChange('params.data', value, messageField.onChange)}
-          style={{ container: { marginBottom: 16 } }}
-        />
+      <SendTokenMessageField
+        value={messageField.value}
+        onChange={(value) => form.handleChange('params.data', value, messageField.onChange)}
+        style={{ container: { marginBottom: 16 } }}
+      />
 
-        <SendTokenPriorityField
-          value={priorityField.value}
-          onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
-        />
+      <SendTokenPriorityField
+        value={priorityField.value}
+        onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
+      />
 
+      {tokenIDField.value && (
         <SendTokenTransactionFeesLabels
           tokenID={tokenIDField.value}
           recipientApplication={recipientApplication}
           transaction={transaction}
         />
-      </View>
-
+      )}
       <View style={[styles.footer]}>
-        <Button
-          style={[styles.prevStepButton, styles.theme.prevStepButton]}
-          onClick={prevStep}
-          title={i18next.t('sendToken.tokenSelect.prevStepButtonText')}
-        />
-
         <PrimaryButton
           onClick={nextStep}
           disabled={disableNextStepButton}
@@ -124,6 +118,6 @@ export default function SendTokenSelectTokenStep({ nextStep, prevStep, form, tra
           testID="next-step-button"
         />
       </View>
-    </ScrollView>
+    </View>
   );
 }

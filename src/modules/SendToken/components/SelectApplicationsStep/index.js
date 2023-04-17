@@ -2,12 +2,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { View, ScrollView } from 'react-native';
 import { useController } from 'react-hook-form';
-import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import DataRenderer from 'components/shared/DataRenderer';
-import { PrimaryButton } from 'components/shared/toolBox/button';
 import ResultScreen from 'components/screens/ResultScreen';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import { validateAddress } from 'utilities/validators';
@@ -18,8 +16,9 @@ import {
   SendTokenRecipientApplicationField,
   SendTokenSenderApplicationField,
 } from './components';
+import SendTokenSelectTokenStep from '../SelectTokenStep';
 
-export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
+export default function SendTokenSelectApplicationsStep({ nextStep, form, transaction }) {
   const applications = useApplicationsExplorer();
 
   const { field: senderApplicationChainIDField } = useController({
@@ -62,13 +61,8 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
-  const disableNextStepButton =
-    !form.watch('senderApplicationChainID') ||
-    !form.watch('recipientApplicationChainID') ||
-    !isValidAddress;
-
   return (
-    <ScrollView contentContainerStyle={styles.wrapper} style={[styles.theme.wrapper]}>
+    <ScrollView style={[styles.theme.wrapper]}>
       <DataRenderer
         data={applications.data}
         isLoading={applications.isLoading}
@@ -100,15 +94,11 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form }) {
                 onAddressFormatChange={addressFormatField.onChange}
                 isValidAddress={isValidAddress}
               />
-            </View>
-
-            <View style={[styles.footer]}>
-              <PrimaryButton
-                onClick={nextStep}
-                disabled={disableNextStepButton}
-                title={i18next.t('sendToken.applicationsSelect.nextStepButtonText')}
-                noTheme
-                testID="next-step-button"
+              <SendTokenSelectTokenStep
+                form={form}
+                nextStep={nextStep}
+                transaction={transaction}
+                isValidAddress={isValidAddress}
               />
             </View>
           </>
