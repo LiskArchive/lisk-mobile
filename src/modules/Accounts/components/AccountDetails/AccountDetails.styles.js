@@ -1,4 +1,5 @@
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default function getAccountDetailsStyles() {
   return {
@@ -51,6 +52,9 @@ export default function getAccountDetailsStyles() {
       },
       sendButton: {
         backgroundColor: colors.light.white,
+      },
+      sendButtonDisabled: {
+        backgroundColor: setColorOpacity(colors.light.white, 0.7),
       },
       buttonText: {
         textAlign: 'center',
