@@ -74,7 +74,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
       summary.token,
       form.isSuccess,
       form.isLoading,
-      form.error,
+      form.isError,
     ]
   );
 
