@@ -28,8 +28,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const [account] = useCurrentAccount();
-  const enableBiometricsModal = useModal(() => <EnableBioAuth />);
-  const disableBiometricsModal = useModal(() => <DisableBioAuth />);
+  const modal = useModal();
 
   const setErrorMessage = (error) => {
     setError(error.message);
@@ -68,9 +67,9 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
 
   const toggleBiometrics = () => {
     if (settings.biometricsEnabled) {
-      disableBiometricsModal.open();
+      modal.open(() => <DisableBioAuth />);
     } else {
-      enableBiometricsModal.open();
+      modal.open(() => <EnableBioAuth />);
     }
   };
 

@@ -19,8 +19,8 @@ const DisableBioAuth = () => {
   const confirm = () => {
     bioMetricAuthentication({
       successCallback: () => {
-        dispatch(settingsUpdated({ biometricsEnabled: false }));
         modal.close();
+        dispatch(settingsUpdated({ biometricsEnabled: false }));
       },
     });
   };
