@@ -1,4 +1,6 @@
+/* eslint-disable max-statements */
 import { BigNumber } from 'bignumber.js';
+import { countDecimals } from './helpers';
 
 BigNumber.config({ ERRORS: false });
 
@@ -57,6 +59,10 @@ export function fromDisplayToBaseDenom({ amount, displayDenom, denomUnits }) {
   }
 
   const conversionDecimals = conversionUnit.decimals;
+
+  if (countDecimals(amount) > conversionDecimals) {
+    throw new Error(`Maximum allowed decimal point is ${conversionDecimals}.`);
+  }
 
   const conversionFactor = new BigNumber(10).pow(conversionDecimals);
 

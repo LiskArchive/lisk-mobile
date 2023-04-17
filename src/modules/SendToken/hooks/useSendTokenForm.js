@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -100,19 +101,31 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   });
 
   const handleChange = (field, value, onChange) => {
-    if (field === 'params.amount') {
-      const amountInBaseDenom = fromDisplayToBaseDenom({
-        amount: (value || 0).toString(),
-        displayDenom: token.displayDenom,
-        denomUnits: token.denomUnits,
-      });
+    const [fieldPrefix, fieldSuffix] = field.split('.');
 
-      transaction.update({ params: { amount: amountInBaseDenom } });
-    } else {
-      transaction.update(fromPathToObject(field, value));
+    const fieldName = fieldSuffix || fieldPrefix;
+
+    if (form.formState.errors[fieldName]) {
+      form.clearErrors(fieldName);
     }
 
-    onChange(value);
+    try {
+      if (field === 'params.amount') {
+        const amountInBaseDenom = fromDisplayToBaseDenom({
+          amount: (value || 0).toString(),
+          displayDenom: token.displayDenom,
+          denomUnits: token.denomUnits,
+        });
+
+        transaction.update({ params: { amount: amountInBaseDenom } });
+      } else {
+        transaction.update(fromPathToObject(field, value));
+      }
+
+      onChange(value);
+    } catch (error) {
+      form.setError(fieldName, { type: 'custom', message: error.message });
+    }
   };
 
   const handleSubmit = baseHandleSubmit(async (values) => {
