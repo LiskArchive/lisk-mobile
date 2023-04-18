@@ -56,7 +56,7 @@ export function fromDisplayToBaseDenom({ amount, displayDenom, denomUnits }) {
 
   const conversionUnit = denomUnits.find((unit) => unit.denom === displayDenom);
 
-  if (conversionUnit) {
+  if (!conversionUnit) {
     throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));
   }
 
