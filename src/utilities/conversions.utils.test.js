@@ -82,7 +82,7 @@ describe('conversion utils', () => {
           displayDenom,
           denomUnits,
         });
-      }).toThrow('Display denomination not found on units.');
+      }).toThrowError();
     });
   });
 

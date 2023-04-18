@@ -12,6 +12,7 @@ import {
   joinArraysWithoutDuplicates,
   findMaxBigInt,
   spliceArray,
+  countDecimals,
 } from './helpers';
 
 describe('helpers', () => {
@@ -295,6 +296,26 @@ describe('helpers', () => {
       const arr = [1, 2, 3, 4, 5];
       const result = spliceArray(arr, 3, 5);
       expect(result).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe('countDecimals', () => {
+    it('should return the correct number of decimals for a given number', () => {
+      expect(countDecimals(0)).toEqual(0);
+      expect(countDecimals(1)).toEqual(0);
+      expect(countDecimals(1.0)).toEqual(0);
+      expect(countDecimals(0.1)).toEqual(1);
+      expect(countDecimals(1.23)).toEqual(2);
+      expect(countDecimals(0.12345)).toEqual(5);
+    });
+
+    it('should return the correct number of decimals for a given string', () => {
+      expect(countDecimals('0')).toEqual(0);
+      expect(countDecimals('1')).toEqual(0);
+      expect(countDecimals('1.0')).toEqual(1);
+      expect(countDecimals('0.1')).toEqual(1);
+      expect(countDecimals('1.23')).toEqual(2);
+      expect(countDecimals('0.12345')).toEqual(5);
     });
   });
 });

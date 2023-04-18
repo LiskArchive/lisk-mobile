@@ -507,5 +507,11 @@
       "broadcastErrorDescription": "Fehler beim Senden Ihrer Transaktion. Bitte versuchen Sie es später erneut.",
       "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
     }
+  },
+  "tokens": {
+    "errors": {
+      "displayDenomNotFoundMessage": "",
+      "maxDecimalPointExceededMessage": ""
+    }
   }
 }

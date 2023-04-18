@@ -226,3 +226,14 @@ export function spliceArray(arr, start, deleteCount, ...addItem) {
   }
   return result;
 }
+
+export function countDecimals(value) {
+  const numberStr = typeof value === 'number' ? value.toString() : value;
+  const decimalPointIndex = numberStr.indexOf('.');
+
+  if (decimalPointIndex === -1) {
+    return 0;
+  }
+
+  return numberStr.length - decimalPointIndex - 1;
+}
