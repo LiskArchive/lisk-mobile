@@ -38,6 +38,27 @@ describe('conversion utils', () => {
       expect(fromBaseToDisplayDenom({ ...baseProps, withSymbol: true })).toBe(expectedAmount);
     });
 
+    it('formats the token balance if specified on props', () => {
+      const expectedAmount = '5,000,000';
+
+      expect(
+        fromBaseToDisplayDenom({ ...baseProps, amount: '500000000000000', formatAmount: true })
+      ).toBe(expectedAmount);
+    });
+
+    it('formats the token balance if specified on props and adds symbol', () => {
+      const expectedAmount = '5,000,000 LSK';
+
+      expect(
+        fromBaseToDisplayDenom({
+          ...baseProps,
+          amount: '500000000000000',
+          formatAmount: true,
+          withSymbol: true,
+        })
+      ).toBe(expectedAmount);
+    });
+
     it('falls into error if specified display denom is not in units', () => {
       expect(() =>
         fromBaseToDisplayDenom({ ...baseProps, displayDenom: 'nonExistingDenom' })

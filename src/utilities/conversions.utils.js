@@ -22,6 +22,7 @@ export function fromBaseToDisplayDenom({
   denomUnits,
   symbol,
   withSymbol = false,
+  formatAmount = false,
 }) {
   const bigAmount = new BigNumber(amount);
 
@@ -31,11 +32,13 @@ export function fromBaseToDisplayDenom({
     throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));
   }
 
-  const conversionDecimals = conversionUnit.decimals;
-
-  const conversionFactor = new BigNumber(10).pow(conversionDecimals);
+  const conversionFactor = new BigNumber(10).pow(conversionUnit.decimals);
 
   let convertedAmount = bigAmount.dividedBy(conversionFactor).toFixed();
+
+  if (formatAmount) {
+    convertedAmount = Number(convertedAmount).toLocaleString();
+  }
 
   if (withSymbol) {
     convertedAmount += ` ${symbol}`;
