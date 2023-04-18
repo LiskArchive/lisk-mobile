@@ -48,8 +48,11 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         denomUnits: selectedToken.denomUnits,
         symbol: selectedToken.symbol,
         withSymbol: true,
+        formatAmount: true,
       })
     : 0;
+
+  console.log({ tokenBalance });
 
   const renderOptions = (data = supportedTokensData) => (
     <InfiniteScrollList

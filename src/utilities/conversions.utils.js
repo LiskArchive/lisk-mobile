@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { BigNumber } from 'bignumber.js';
 
 BigNumber.config({ ERRORS: false });
@@ -18,6 +19,7 @@ export function fromBaseToDisplayDenom({
   denomUnits,
   symbol,
   withSymbol = false,
+  formatAmount = false,
 }) {
   const bigAmount = new BigNumber(amount);
 
@@ -27,11 +29,13 @@ export function fromBaseToDisplayDenom({
     throw new Error('Display denomination not found on units.');
   }
 
-  const conversionDecimals = conversionUnit.decimals;
-
-  const conversionFactor = new BigNumber(10).pow(conversionDecimals);
+  const conversionFactor = new BigNumber(10).pow(conversionUnit.decimals);
 
   let convertedAmount = bigAmount.dividedBy(conversionFactor).toFixed();
+
+  if (formatAmount) {
+    convertedAmount = Number(convertedAmount).toLocaleString();
+  }
 
   if (withSymbol) {
     convertedAmount += ` ${symbol}`;
