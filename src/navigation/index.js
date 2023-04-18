@@ -12,8 +12,6 @@ import About from 'components/screens/about';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
-import EnableBioAuth from 'components/screens/enableBioAuth';
-import DisableBioAuth from 'components/screens/disableBioAuth';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
 
@@ -144,16 +142,6 @@ export default function Navigator({ children }) {
             name="AccountDetails"
             component={AccountDetailsScreen}
             options={navigationOptions.AccountDetails}
-          />
-          <StackNavigator.Screen
-            name="EnableBioAuth"
-            component={EnableBioAuth}
-            options={navigationOptions.EnableBioAuth}
-          />
-          <StackNavigator.Screen
-            name="DisableBioAuth"
-            component={DisableBioAuth}
-            options={navigationOptions.DisableBioAuth}
           />
           <StackNavigator.Screen
             name="BackupPassphrase"

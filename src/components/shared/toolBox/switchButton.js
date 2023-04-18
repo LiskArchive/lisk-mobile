@@ -1,14 +1,12 @@
 import React from 'react';
-import Switch from 'react-native-switch-pro';
-import { useTheme } from 'contexts/ThemeContext';
+import { Switch } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { colors, themes } from 'constants/styleGuide';
+import { colors } from 'constants/styleGuide';
 
-const SwitchButton = ({ value, height, onSyncPress, style }) => {
-  const { theme } = useTheme({});
+const SwitchButton = ({ value, height, onChange, style }) => {
   const onPress = (...params) => {
     ReactNativeHapticFeedback.trigger('selection');
-    onSyncPress(...params);
+    onChange(...params);
   };
 
   return (
@@ -17,11 +15,10 @@ const SwitchButton = ({ value, height, onSyncPress, style }) => {
       height={height || 26}
       style={style}
       width={43}
-      onSyncPress={onPress}
-      backgroundActive={
-        theme === themes.light ? colors.light.ultramarineBlue : colors.dark.ultramarineBlue
-      }
-      backgroundInactive={theme === themes.light ? colors.light.platinum : colors.dark.slateGray}
+      onValueChange={onPress}
+      trackColor={{ false: colors.light.greenBackground, true: colors.light.ultramarineBlue }}
+      thumbColor={colors.light.whiteSmoke}
+      ios_backgroundColor={colors.light.greenBackground}
     />
   );
 };

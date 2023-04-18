@@ -35,11 +35,8 @@ export default function BackupPassphrase() {
             },
           }}
         />
-
         <CopyPassphrase />
-
         <PassphraseQuiz customHeader />
-
         <PasswordSetupSuccess
           route={{
             params: {

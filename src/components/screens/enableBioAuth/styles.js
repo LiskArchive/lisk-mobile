@@ -17,12 +17,16 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: 20,
     },
+    header: {
+      textAlign: 'center',
+      fontSize: fonts.size.h3,
+      marginBottom: 10,
+    },
     subHeader: {
       marginBottom: boxes.boxPadding,
-      fontFamily: fonts.family.contextSemiBold,
+      fontFamily: fonts.family.context,
     },
     row: {
-      alignItems: 'center',
       flexDirection: 'row',
       paddingRight: 50,
       marginBottom: isSmallScreen ? 8 : 10,

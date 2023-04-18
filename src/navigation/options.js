@@ -67,16 +67,6 @@ const navigationOptions = {
     headerStyle: navigationNoShadowStyle,
     headerTitleStyle: navigationGenericTitleStyle,
   },
-  EnableBioAuth: {
-    title: null,
-    headerStyle: navigationNoShadowStyle,
-    headerTitleStyle: navigationGenericTitleStyle,
-  },
-  DisableBioAuth: {
-    title: null,
-    headerStyle: navigationNoShadowStyle,
-    headerTitleStyle: navigationGenericTitleStyle,
-  },
   BackupPassphrase: {
     title: null,
     headerLeft: (props) => <HeaderBackButton title="Passphrase backup" {...props} />,

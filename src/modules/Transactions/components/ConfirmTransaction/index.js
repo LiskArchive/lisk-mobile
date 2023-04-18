@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import {
+  bioMetricAuthentication,
+  getAccountPasswordFromKeyChain,
+} from 'modules/Auth/utils/passphrase';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import Input from 'components/shared/toolBox/input';
@@ -21,12 +26,35 @@ export default function ConfirmTransaction({
   onSubmit,
 }) {
   const [currentAccount] = useCurrentAccount();
+  const { sensorType, biometricsEnabled } = useSelector((state) => state.settings);
 
   const { styles } = useTheme({
     styles: getConfirmTransactionStyles(),
   });
 
   const submitDisabled = isLoading || !userPassword || isValidationError;
+
+  const fetchAccountPassword = async () => {
+    const accountPassword = await getAccountPasswordFromKeyChain(currentAccount.metadata?.address);
+    if (accountPassword) {
+      onUserPasswordChange(accountPassword);
+      onSubmit();
+    }
+  };
+
+  const fetchAccontPasswordFromBiometrics = useCallback(() => {
+    bioMetricAuthentication({
+      successCallback: () => {
+        fetchAccountPassword();
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (sensorType && biometricsEnabled) {
+      fetchAccontPasswordFromBiometrics();
+    }
+  }, [sensorType]);
 
   return (
     <View style={[styles.wrapper, styles.theme.wrapper]} testID="transaction-confirmation-screen">

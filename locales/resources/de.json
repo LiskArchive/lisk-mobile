@@ -37,12 +37,10 @@
   "Status": "",  
   "Cancel": "Abbrechen",
   "Edit bookmark": "Lesezeichen bearbeiten",  
-  "Here’s what you need to know:": "Hier ist was du wissen musst:",
   "I have read and agreed with the": "Ich akzeptiere die",
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
-  "It will still be required for some actions.": "Sie wird immer noch für manche Aktionen gebraucht.",
   "Label": "Bezeichnung",
   "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk benötigt Zugriff auf deine Kamera, um QR Codes zu scannen. Tippe hier, um zu den Einstellungen zu gelangen.",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
@@ -63,9 +61,7 @@
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Wilkommen bei Lisk. Jetzt kannst du LSK Tokens unterwegs senden und empfangen.",
   "You always need to keep your passphrase safe.": "Du musst deine Passphrase immer sicher aufbewahren.",
-  "You can always deactivate it": "Du kannst es immer deaktivieren",
   "Your connection seems to be down, try again later.": "Deine Verbindung scheint unterbrochen zu sein, bitte versuch es spääter noch einmal.",
-  "Your passphrase is still needed": "Deine Passphrase wird immer noch gebraucht",
   "About Lisk": "Über Lisk",
   "Disabled": "Deaktiviert",
   "Enabled": "Aktiviert",
@@ -86,7 +82,7 @@
   "Register multisignature group": "Multisignaturgruppe registrieren",
   "Transfer": "Senden",
   "Vote": "Abstimmen",
-  "Disable bioAuth": "{{title}} deaktivieren",
+  "Disable bioAuth": "{{sensorType}} deaktivieren",
   "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
   "Error": "Fehler",
   "Unparsed Address": "Unbekannte Adresse",
@@ -126,6 +122,16 @@
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
       "continue": "Weiter",
       "storePhrase": ""
+    },
+    "biometrics": {
+      "enableTitle": "",
+      "disableTitle": "",
+      "disableDescription": "",
+      "description": "",
+      "title1": "",
+      "description1": "",
+      "title2": "",
+      "description2": ""
     }
   },
   "multisignature": {

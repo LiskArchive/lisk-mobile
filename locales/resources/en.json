@@ -37,11 +37,9 @@
   "Status": "Status",  
   "Cancel": "Cancel",
   "Edit bookmark": "Edit bookmark",  
-  "Here’s what you need to know:": "Here’s what you need to know:",
   "I have read and agreed with the": "I have read and agreed with the",
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
-  "It will still be required for some actions.": "It will still be required for some actions.",
   "Label": "Label",
   "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
@@ -61,9 +59,7 @@
   "terms and conditions.": "terms and conditions.",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
   "You always need to keep your passphrase safe.": "You always need to keep your passphrase safe.",
-  "You can always deactivate it": "You can always deactivate it",
   "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
-  "Your passphrase is still needed": "Your passphrase is still needed",
   "About Lisk": "About Lisk",
   "Disabled": "Disabled",
   "Enabled": "Enabled",
@@ -84,7 +80,7 @@
   "Register multisignature group": "Register multisignature group",
   "Transfer": "Transfer",
   "Vote": "Vote",
-  "Disable bioAuth": "Disable {{title}}",
+  "Disable bioAuth": "Disable {{sensorType}}",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
   "Unparsed Address": "Unparsed Address",
@@ -124,6 +120,16 @@
       "confirmPhrase": "Confirm your secret recovery phrase",
       "continue": "Continue",
       "storePhrase": "Store your secret recovery phrase:"
+    },
+    "biometrics": {
+      "enableTitle": "Enable {{sensorType}}",
+      "disableTitle": "Enable {{sensorType}}",
+      "disableDescription": "Disabling your face ID requires you to enter account specific password to sign transaction.",
+      "description": "Here’s what you need to know:",
+      "title1": "Fast and secure",
+      "description1": "Face ID offers a secure and faster way to decrypt your encrypted secret recovery phrase and sign transactions.",
+      "title2": "You can always turn it off",
+      "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password."
     }
   },
   "multisignature": {

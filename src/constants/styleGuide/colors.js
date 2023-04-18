@@ -22,6 +22,7 @@ const common = {
   yellowCopacabana: '#F7E36D',
   smoothGray: '#70778B',
   satinDeepBlack: '#1C1C1E',
+  greenBackground: '#E1E3EB',
 };
 
 const light = {

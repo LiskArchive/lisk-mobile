@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { H4, P } from 'components/shared/toolBox/typography';
 import FingerprintOverlay from 'components/shared/fingerprintOverlay';
-import { colors, themes } from 'constants/styleGuide';
+import { themes } from 'constants/styleGuide';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import Checkbox from 'components/shared/Checkbox';
@@ -15,16 +15,20 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
+import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import DisableBioAuth from 'components/screens/disableBioAuth';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
+import { useModal } from '../../hooks/useModal';
 
 // eslint-disable-next-line max-statements
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const [account] = useCurrentAccount();
+  const modal = useModal();
 
   const setErrorMessage = (error) => {
     setError(error.message);
@@ -61,19 +65,18 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     });
   };
 
-  let target = 'EnableBioAuth';
+  const toggleBiometrics = () => {
+    if (settings.biometricsEnabled) {
+      modal.open(() => <DisableBioAuth />);
+    } else {
+      modal.open(() => <EnableBioAuth />);
+    }
+  };
 
-  let targetStateLabel = [t('Disabled'), colors.light.blueGray];
-  if (settings.sensorType && settings.hasStoredPassphrase) {
-    targetStateLabel = [
-      t('Enabled'),
-      theme === themes.light ? colors.light.maastrichtBlue : colors.dark.platinum,
-    ];
-    target = 'DisableBioAuth';
-  }
   const sensorStatus = (
-    <P style={{ color: targetStateLabel[1] || colors[theme].platinum }}>{targetStateLabel[0]}</P>
+    <SwitchButton value={settings.biometricsEnabled} onChange={toggleBiometrics} />
   );
+
   return (
     <NavigationSafeAreaView>
       <HeaderBackButton title={t('Settings')} noIcon />
@@ -90,7 +93,6 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
                 showDialog={showDialog}
                 hideDialog={hideDialog}
                 setError={setErrorMessage}
-                target={target}
                 authenticate={true}
                 targetStateLabel={sensorStatus}
                 icon={settings.sensorType === app.faceId ? 'face-id-small' : 'touch-id-small'}
@@ -117,7 +119,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               testID="enable-incognito"
               icon="enable-incognito"
               targetStateLabel={
-                <SwitchButton value={settings.discrete} onSyncPress={toggleIncognito} />
+                <SwitchButton value={settings.discrete} onChange={toggleIncognito} />
               }
               title={t('settings.menu.discreetMode')}
               description={t('settings.descriptions.discreetMode')}
@@ -134,7 +136,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               testID="dark-mode"
               icon="dark-mode"
               targetStateLabel={
-                <SwitchButton value={settings.theme === themes.dark} onSyncPress={switchTheme} />
+                <SwitchButton value={settings.theme === themes.dark} onChange={switchTheme} />
               }
               title={t('settings.menu.darkMode')}
             />

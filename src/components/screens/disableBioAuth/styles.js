@@ -1,31 +1,44 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
+import { themes, colors, fonts } from 'constants/styleGuide';
+
+const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-      backgroundColor: colors.light.white,
+    header: {
+      textAlign: 'center',
+      fontSize: fonts.size.h3,
+      marginBottom: 10,
+      marginTop: 5,
     },
-    container: {
-      flex: 1,
-      padding: boxes.boxPadding,
+    row: {
+      flexDirection: 'row',
+      paddingRight: 50,
+      marginBottom: isSmallScreen ? 8 : 10,
+      paddingBottom: isSmallScreen ? 12 : 14,
     },
-    passphraseContainer: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+    description: {
+      marginTop: 5,
+      textAlign: 'center',
+      marginBottom: 20,
     },
   },
 
   [themes.light]: {
-    container: {
-      backgroundColor: colors.light.white,
+    rowTitle: {
+      color: colors.light.maastrichtBlue,
+    },
+    description: {
+      color: colors.light.slateGray,
     },
   },
 
   [themes.dark]: {
-    container: {
-      backgroundColor: colors.dark.mainBg,
+    rowTitle: {
+      color: colors.dark.white,
+    },
+    description: {
+      color: colors.dark.platinum,
     },
   },
 });
