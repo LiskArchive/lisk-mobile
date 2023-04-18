@@ -48,6 +48,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         denomUnits: selectedToken.denomUnits,
         symbol: selectedToken.symbol,
         withSymbol: true,
+        formatAmount: true,
       })
     : 0;
 
