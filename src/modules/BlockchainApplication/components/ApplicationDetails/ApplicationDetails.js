@@ -167,26 +167,28 @@ export default function ApplicationDetails({ route }) {
             />
           </View>
 
-          <View style={[styles.row, styles.depositedContainer]}>
-            <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
-
-            <DataRenderer
-              isLoading={applications.isLoading}
-              error={applications.isError}
-              data={application?.deposited}
-              renderData={(data) => <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>}
-              renderLoading={() => (
-                <Skeleton
-                  width={144}
-                  height={16}
-                  style={{
-                    container: [styles.amount, { alignSelf: 'center' }],
-                  }}
-                />
-              )}
-              style={{ empty: styles.amount }}
-            />
-          </View>
+          <DataRenderer
+            data={application?.deposited}
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            hideOnEmpty
+            renderData={(data) => (
+              <View style={[styles.row, styles.depositedContainer]}>
+                <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
+                <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>
+              </View>
+            )}
+            renderLoading={() => (
+              <Skeleton
+                width={144}
+                height={16}
+                style={{
+                  container: [styles.amount, { alignSelf: 'center' }],
+                }}
+              />
+            )}
+            style={{ empty: styles.amount }}
+          />
 
           <View style={styles.stats}>
             <View style={styles.flex}>
@@ -200,9 +202,9 @@ export default function ApplicationDetails({ route }) {
                 <P style={styles.smallTitle}>{i18next.t('application.details.status')}</P>
 
                 <DataRenderer
+                  data={application?.status}
                   isLoading={applications.isLoading}
                   error={applications.isError}
-                  data={application?.status}
                   renderData={(data) => (
                     <View
                       style={[styles.stateContainer, styles[`${application?.status}Container`]]}
@@ -231,53 +233,57 @@ export default function ApplicationDetails({ route }) {
             </View>
 
             <View style={styles.flex}>
-              <View style={styles.item}>
-                <P style={styles.smallTitle}>{i18next.t('application.details.lastUpdated')}</P>
+              <DataRenderer
+                data={application?.lastUpdated}
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                hideOnEmpty
+                renderData={(data) => (
+                  <View style={styles.item}>
+                    <P style={styles.smallTitle}>{i18next.t('application.details.lastUpdated')}</P>
 
-                <DataRenderer
-                  isLoading={applications.isLoading}
-                  error={applications.isError}
-                  data={application?.lastUpdated}
-                  renderData={(data) => (
                     <P style={[styles.value, styles.theme.value]}>
                       {moment(data * 1000).format('D MMM YYYY')}
                     </P>
-                  )}
-                  renderLoading={() => (
-                    <Skeleton
-                      width={80}
-                      height={16}
-                      style={{
-                        container: [styles.value],
-                      }}
-                    />
-                  )}
-                  style={{ empty: [styles.value, styles.theme.value] }}
-                />
-              </View>
+                  </View>
+                )}
+                renderLoading={() => (
+                  <Skeleton
+                    width={80}
+                    height={16}
+                    style={{
+                      container: [styles.value],
+                    }}
+                  />
+                )}
+                style={{ empty: [styles.value, styles.theme.value] }}
+              />
 
-              <View style={styles.item}>
-                <P style={styles.smallTitle}>
-                  {i18next.t('application.details.lastCertificateHeight')}
-                </P>
+              <DataRenderer
+                data={application?.lastCertificateHeight}
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                hideOnEmpty
+                renderData={(data) => (
+                  <View style={styles.item}>
+                    <P style={styles.smallTitle}>
+                      {i18next.t('application.details.lastCertificateHeight')}
+                    </P>
 
-                <DataRenderer
-                  isLoading={applications.isLoading}
-                  error={applications.isError}
-                  data={application?.lastCertificateHeight}
-                  renderData={(data) => <P style={[styles.value, styles.theme.value]}>{data}</P>}
-                  renderLoading={() => (
-                    <Skeleton
-                      width={48}
-                      height={16}
-                      style={{
-                        container: [styles.value],
-                      }}
-                    />
-                  )}
-                  style={{ empty: [styles.value, styles.theme.value] }}
-                />
-              </View>
+                    <P style={[styles.value, styles.theme.value]}>{data}</P>
+                  </View>
+                )}
+                renderLoading={() => (
+                  <Skeleton
+                    width={48}
+                    height={16}
+                    style={{
+                      container: [styles.value],
+                    }}
+                  />
+                )}
+                style={{ empty: [styles.value, styles.theme.value] }}
+              />
             </View>
           </View>
 

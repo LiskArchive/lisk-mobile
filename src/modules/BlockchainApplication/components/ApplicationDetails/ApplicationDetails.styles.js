@@ -54,7 +54,6 @@ export default {
     depositedContainer: {
       justifyContent: 'center',
       marginTop: 8,
-      marginBottom: 32,
     },
     deposited: {
       fontSize: fonts.size.input,
@@ -79,6 +78,7 @@ export default {
     stats: {
       flex: 1,
       flexDirection: 'row',
+      marginTop: 32,
     },
     item: {
       marginBottom: 20,
