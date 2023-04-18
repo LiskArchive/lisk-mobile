@@ -17,7 +17,7 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: 20,
     },
-    heading: {
+    header: {
       textAlign: 'center',
       fontSize: fonts.size.h3,
       marginBottom: 10,

@@ -15,13 +15,13 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
+import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import DisableBioAuth from 'components/screens/disableBioAuth';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
 import { useModal } from '../../hooks/useModal';
-import EnableBioAuth from '../../components/screens/enableBioAuth';
-import DisableBioAuth from '../../components/screens/disableBioAuth';
 
 // eslint-disable-next-line max-statements
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {

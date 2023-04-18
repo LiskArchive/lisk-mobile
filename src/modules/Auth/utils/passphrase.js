@@ -70,6 +70,11 @@ export const removePassphraseFromKeyChain = async (
 
 export const getPassphraseFromKeyChain = () => getGenericPassword({ service: 'io.lisk.mobile' });
 
+/**
+ * @param {string} address
+ * @returns {string | Error} password to account or error object if not found
+ * fetch account password from keychain
+ */
 export const getAccountPasswordFromKeyChain = async (address) => {
   try {
     const db = await getPassphraseFromKeyChain();
@@ -84,6 +89,7 @@ export const getAccountPasswordFromKeyChain = async (address) => {
 };
 
 /**
+ * @param {string} address
  * @param {string} passphrase
  * Store the passphrase and address on the keychain of the device
  */
@@ -101,7 +107,7 @@ export const storeAccountPasswordInKeyChain = async (address, password) => {
       deviceAccounts = previousAccounts;
     }
   } catch (error) {
-    console.log({ error });
+    deviceAccounts = {};
   }
   deviceAccounts[address] = password;
   await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {

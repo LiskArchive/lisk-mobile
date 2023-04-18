@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useModal } from 'hooks/useModal';
 import { themes, colors } from 'constants/styleGuide';
 import { B, Small } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
@@ -10,7 +11,6 @@ import i18next from 'i18next';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { bioMetricAuthentication } from 'modules/Auth/utils/passphrase';
 import getStyles from './styles';
-import { useModal } from '../../../hooks/useModal';
 
 const EnableBioAuth = () => {
   const { styles, theme } = useTheme({ styles: getStyles() });
@@ -29,11 +29,9 @@ const EnableBioAuth = () => {
 
   return (
     <View>
-      <View>
-        <B style={[styles.heading, styles.theme.rowTitle]}>
-          {i18next.t('settings.biometrics.enableTitle', { sensorType })}
-        </B>
-      </View>
+      <B style={[styles.header, styles.theme.rowTitle]}>
+        {i18next.t('settings.biometrics.enableTitle', { sensorType })}
+      </B>
       <View style={[styles.row, styles.separator, styles.theme.separator]}>
         <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
           <Icon

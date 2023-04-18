@@ -5,19 +5,17 @@ const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default () => ({
   common: {
-    heading: {
+    header: {
       textAlign: 'center',
       fontSize: fonts.size.h3,
       marginBottom: 10,
+      marginTop: 5,
     },
     row: {
       flexDirection: 'row',
       paddingRight: 50,
       marginBottom: isSmallScreen ? 8 : 10,
       paddingBottom: isSmallScreen ? 12 : 14,
-    },
-    rowTitle: {
-      marginTop: 5,
     },
     description: {
       marginTop: 5,
