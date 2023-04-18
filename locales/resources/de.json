@@ -346,7 +346,7 @@
       "recipientApplicationFieldLabel": "Zur App",
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
-      "recipientAccountFieldPlaceholder": "Aus Lesezeichen auswählen",
+      "addressPlaceholder": "Input address",
       "nextStepButtonText": "Weiter"
     },
     "tokenSelect": {
