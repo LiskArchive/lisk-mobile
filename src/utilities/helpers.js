@@ -239,18 +239,16 @@ export function countDecimals(value) {
 }
 
 /**
- * Adds a string to an array without repeating it and returns a new array.
+ * Adds a value to an array without repeating it and returns a new array.
  *
  * @param {string[]} array - The input array.
- * @param {string} string - The string to be added.
- * @returns {string[]} A new array with the added string, if it was not already present.
+ * @param {string} value - The value to be added.
+ * @returns {string[]} A new array with the added value, if it was not already present.
  */
-export function addUniqueStringToArray(array, string) {
-  const newArray = [...array];
-
-  if (!newArray.includes(string)) {
-    newArray.push(string);
+export function addUniqueStringToArray(array, value) {
+  if (array.includes(value)) {
+    return array;
   }
 
-  return newArray;
+  return [...array, value];
 }
