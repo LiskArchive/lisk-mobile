@@ -52,8 +52,6 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
       })
     : 0;
 
-  console.log({ tokenBalance });
-
   const renderOptions = (data = supportedTokensData) => (
     <InfiniteScrollList
       data={data}
