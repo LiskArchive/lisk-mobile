@@ -100,7 +100,11 @@ export default function AccountDetails({ account }) {
           )}
 
           <TouchableOpacity
-            style={[styles.button, styles.sendButton]}
+            style={[
+              styles.button,
+              styles.sendButton,
+              disableSendTokenButton && styles.sendButtonDisabled,
+            ]}
             onPress={handleSendTokensClick}
             disabled={disableSendTokenButton}
             testID="send-tokens-button"
