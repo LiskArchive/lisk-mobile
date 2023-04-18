@@ -1,5 +1,7 @@
 /* eslint-disable max-statements */
 import { BigNumber } from 'bignumber.js';
+import i18next from 'i18next';
+
 import { countDecimals } from './helpers';
 
 BigNumber.config({ ERRORS: false });
@@ -26,7 +28,7 @@ export function fromBaseToDisplayDenom({
   const conversionUnit = denomUnits.find((unit) => unit.denom === displayDenom);
 
   if (!conversionUnit) {
-    throw new Error('Display denomination not found on units.');
+    throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));
   }
 
   const conversionDecimals = conversionUnit.decimals;
@@ -54,14 +56,16 @@ export function fromDisplayToBaseDenom({ amount, displayDenom, denomUnits }) {
 
   const conversionUnit = denomUnits.find((unit) => unit.denom === displayDenom);
 
-  if (!conversionUnit) {
-    throw new Error('Display denomination not found on units.');
+  if (conversionUnit) {
+    throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));
   }
 
   const conversionDecimals = conversionUnit.decimals;
 
   if (countDecimals(amount) > conversionDecimals) {
-    throw new Error(`Maximum allowed decimal point is ${conversionDecimals}.`);
+    throw new Error(
+      i18next.t('tokens.errors.maxDecimalPointExceededMessage', { conversionDecimals })
+    );
   }
 
   const conversionFactor = new BigNumber(10).pow(conversionDecimals);

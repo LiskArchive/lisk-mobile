@@ -500,5 +500,11 @@
       "broadcastErrorDescription": "Error submitting your transaction. Please try again later.",
       "signErrorDescription": "Error signing your transaction. Please try again later."
     }   
+  },
+  "tokens": {
+    "errors": {
+      "displayDenomNotFoundMessage": "Display denomination not found on units.",
+      "maxDecimalPointExceededMessage": "Maximum allowed decimal point is {{conversionDecimals}}"
+    }
   }
 }
