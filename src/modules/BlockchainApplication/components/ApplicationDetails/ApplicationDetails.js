@@ -1,14 +1,14 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import { ScrollView, View, ImageBackground, Image } from 'react-native';
+import { ScrollView, View, ImageBackground, Image, Linking } from 'react-native';
 import { useTheme } from 'contexts/ThemeContext';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { H3, P } from 'components/shared/toolBox/typography';
+import { H3, P, A } from 'components/shared/toolBox/typography';
 import DataRenderer from 'components/shared/DataRenderer';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -56,6 +56,8 @@ export default function ApplicationDetails({ route }) {
     navigation.navigate('AddApplicationSuccess');
   };
 
+  const handleUrlPress = (url) => Linking.openURL(url);
+
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <ScrollView>
@@ -96,9 +98,9 @@ export default function ApplicationDetails({ route }) {
         )}
 
         <DataRenderer
+          data={application?.logo}
           isLoading={applications.isLoading}
           error={applications.isError}
-          data={application?.logo}
           renderData={(data) => (
             <Image
               style={[styles.logoContainer, styles.theme.logoContainer]}
@@ -117,9 +119,9 @@ export default function ApplicationDetails({ route }) {
         <SafeAreaView style={[styles.flex, styles.body]}>
           <View style={styles.titleRow}>
             <DataRenderer
+              data={application?.chainName}
               isLoading={applications.isLoading}
               error={applications.isError}
-              data={application?.chainName}
               renderData={(data) => (
                 <>
                   <H3 style={[styles.title, styles.theme.title]}>{data}</H3>
@@ -140,14 +142,16 @@ export default function ApplicationDetails({ route }) {
 
           <View style={[styles.row, styles.projectPageContainer]}>
             <DataRenderer
+              data={application?.projectPage}
               isLoading={applications.isLoading}
               error={applications.isError}
-              data={application?.projectPage}
               renderData={(data) => (
                 <>
                   <UrlSvg size={1} />
 
-                  <P style={styles.url}>{data}</P>
+                  <A onPress={() => handleUrlPress(data)} style={[styles.url]}>
+                    {data}
+                  </A>
                 </>
               )}
               renderLoading={() => (
