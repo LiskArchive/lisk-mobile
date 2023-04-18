@@ -183,11 +183,11 @@ export function SendTokenRecipientAccountField({
   const { showOptions } = Picker.usePickerMenu(renderOptions());
 
   return (
-    <>
+    <View style={[styles.row, styles.recipientRow]}>
       <Input
         label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
         value={value}
-        placeholder="Input wallet address or choose a username"
+        placeholder={i18next.t('sendToken.applicationsSelect.addressPlaceholder')}
         error={addressFormat === 'input' && errorMessage}
         adornments={{
           left: <Avatar address={value} size={24} />,
@@ -206,23 +206,12 @@ export function SendTokenRecipientAccountField({
         >
           <Picker.Toggle
             openMenu={showOptions}
-            placeholder={
-              <View style={[styles.row]}>
-                <BookmarksSvg
-                  variant="outline"
-                  color={colors.light.blueGray}
-                  style={{ marginRight: 4 }}
-                />
-
-                <Text style={[styles.placeholder]}>
-                  {i18next.t('sendToken.applicationsSelect.recipientAccountFieldPlaceholder')}
-                </Text>
-              </View>
-            }
-            style={style?.picker}
+            showCaret={false}
+            style={{ container: [styles.bookmarkIcon, styles.theme.bookmarkIcon] }}
+            placeholder={<BookmarksSvg variant="outline" color={colors.light.blueGray} />}
           />
         </Picker>
       ) : null}
-    </>
+    </View>
   );
 }

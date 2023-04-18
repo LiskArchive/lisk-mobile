@@ -25,6 +25,7 @@ export function PickerToggle({
   disabled,
   style: baseStyle,
   openMenu,
+  showCaret = true,
   testID,
 }) {
   const { value, error } = usePicker();
@@ -55,6 +56,8 @@ export function PickerToggle({
     }
   }
 
+  const shouldShowCaret = showCaret && !disabled;
+
   return (
     <>
       <TouchableOpacity
@@ -65,7 +68,7 @@ export function PickerToggle({
       >
         {valueToRender}
 
-        {!disabled && (
+        {shouldShowCaret && (
           <CaretSvg
             color={theme === themes.dark ? colors.dark.volcanicSand : colors.light.silverGrey}
             direction="right"
