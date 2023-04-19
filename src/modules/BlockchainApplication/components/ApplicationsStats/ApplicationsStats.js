@@ -7,6 +7,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors, themes } from 'constants/styleGuide';
+import { fromBeddowsToLsk } from 'utilities/conversions.utils';
 import TotalSupplySvg from 'assets/svgs/TotalSupplySvg';
 import StakedSvg from 'assets/svgs/StakedSvg';
 
@@ -72,7 +73,9 @@ export default function ApplicationsStats(props) {
                 <View style={[styles.flex]}>
                   <P style={[styles.cardTitle]}>{i18next.t('application.stats.totalSupply')}</P>
 
-                  <P style={[styles.amount]}>{data.totalSupplyLSK.toLocaleString()} LSK</P>
+                  <P style={[styles.amount]}>
+                    {Number(fromBeddowsToLsk(data.totalSupplyLSK)).toLocaleString()} LSK
+                  </P>
                 </View>
 
                 <TotalSupplySvg />
@@ -85,7 +88,7 @@ export default function ApplicationsStats(props) {
                   </P>
 
                   <P style={[styles.amount, styles.blackText]}>
-                    {data.totalStakedLSK.toLocaleString()} LSK
+                    {Number(fromBeddowsToLsk(data.totalStakedLSK)).toLocaleString()} LSK
                   </P>
                 </View>
 
