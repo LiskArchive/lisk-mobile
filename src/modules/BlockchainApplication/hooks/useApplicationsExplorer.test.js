@@ -15,7 +15,7 @@ describe('useApplicationsExplorer', () => {
   });
 
   it('should return all applications in explore mode', () => {
-    const mockData = { data: [{ chainID: 1 }, { chainID: 2 }] };
+    const mockData = { data: [{ chainID: '1' }, { chainID: '2' }] };
     useApplicationsMetaQuery.mockReturnValue({ data: mockData });
 
     const { result } = renderHook(() => useApplicationsExplorer('explore'), { wrapper });
@@ -26,8 +26,8 @@ describe('useApplicationsExplorer', () => {
   it('should return only registered applications in manage mode', () => {
     const mockData = {
       data: [
-        { chainID: 1, status: APPLICATION_STATUSES.registered },
-        { chainID: 2, status: APPLICATION_STATUSES.unregistered },
+        { chainID: '1', status: APPLICATION_STATUSES.registered },
+        { chainID: '2', status: APPLICATION_STATUSES.unregistered },
       ],
     };
     useApplicationsMetaQuery.mockReturnValue({ data: mockData });
