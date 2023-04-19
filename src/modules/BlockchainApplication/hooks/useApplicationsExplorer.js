@@ -1,6 +1,6 @@
 import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
 import { APPLICATION_STATUSES } from '../constants';
-import { transformApplicationsMetaQueryResult } from '../utils';
+import { isMainchainApplication, transformApplicationsMetaQueryResult } from '../utils';
 
 /**
  * Hook that handle all the logic related to blockchain applications explorer.
@@ -19,7 +19,8 @@ export function useApplicationsExplorer(mode = 'explore') {
     config,
   });
 
-  let data = applicationsData?.data;
+  // exclude mainchain applications from the data.
+  let data = applicationsData?.data.filter((app) => !isMainchainApplication(app.chainID));
 
   // exclude unregistered apps in manage mode.
   if (mode === 'manage') {
