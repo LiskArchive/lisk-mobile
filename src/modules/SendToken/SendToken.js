@@ -4,7 +4,7 @@ import { View, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import i18next from 'i18next';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 import { H3, P } from 'components/shared/toolBox/typography';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -32,9 +32,13 @@ import AccountItem from '../Accounts/components/AccountItem';
  */
 export default function SendToken() {
   const route = useRoute();
-  const { accounts } = useAccounts();
-  const [currentAccount, setCurrentAccount] = useCurrentAccount();
   const navigation = useNavigation();
+
+  const navigationStateIndex = useNavigationState((state) => state.index);
+
+  const { accounts } = useAccounts();
+
+  const [currentAccount, setCurrentAccount] = useCurrentAccount();
 
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
@@ -45,32 +49,30 @@ export default function SendToken() {
     modal.close();
   };
 
-  const renderAccountList = (modal) => {
-    return (
-      <View>
-        <View style={styles.modalTitleContainer}>
-          <H3 style={styles.theme.text}>{i18next.t('sendToken.account.selectAccount')}</H3>
-          <P style={[styles.description, styles.theme.text]}>
-            {i18next.t('sendToken.account.description')}
-          </P>
-        </View>
-        <FlatList
-          data={accounts}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <AccountItem
-              key={item.metadata.address}
-              account={item}
-              onPress={() => handleSelectAccountClick(item, modal)}
-              active={item.metadata.address === currentAccount.metadata?.address}
-              testID={`account-list-item`}
-              navigation={navigation}
-            />
-          )}
-        />
+  const renderAccountList = (modal) => (
+    <View>
+      <View style={styles.modalTitleContainer}>
+        <H3 style={styles.theme.text}>{i18next.t('sendToken.account.selectAccount')}</H3>
+        <P style={[styles.description, styles.theme.text]}>
+          {i18next.t('sendToken.account.description')}
+        </P>
       </View>
-    );
-  };
+      <FlatList
+        data={accounts}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <AccountItem
+            key={item.metadata.address}
+            account={item}
+            onPress={() => handleSelectAccountClick(item, modal)}
+            active={item.metadata.address === currentAccount.metadata?.address}
+            testID={`account-list-item`}
+            navigation={navigation}
+          />
+        )}
+      />
+    </View>
+  );
 
   const accountListModal = useModal(renderAccountList);
 
@@ -92,6 +94,16 @@ export default function SendToken() {
     initialValues: route.params,
   });
 
+  const openSelectAccountModal = () => accountListModal.open(undefined, false);
+
+  const handleGoBackPress = () => {
+    if (navigationStateIndex === 0) {
+      navigation.navigate('Main');
+    } else {
+      navigation.goBack();
+    }
+  };
+
   const steps = [
     {
       component: SendTokenApplicationsStep,
@@ -103,7 +115,7 @@ export default function SendToken() {
     },
   ];
 
-  const openSelectAccountModal = () => accountListModal.open(undefined, false);
+  const accountIsMultisignature = accountSummary.isMultisignature;
 
   useEffect(() => {
     if (!accounts.length) {
@@ -116,13 +128,11 @@ export default function SendToken() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts, currentAccount]);
 
-  const accountIsMultisignature = accountSummary.isMultisignature;
-
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} testID="send-token-screen">
       <HeaderBackButton
         title="Send token"
-        onPress={navigation.goBack}
+        onPress={handleGoBackPress}
         containerStyle={[styles.header]}
       />
 
