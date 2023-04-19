@@ -1,4 +1,4 @@
-import { boxes, colors, fonts } from 'constants/styleGuide';
+import { themes, boxes, colors, fonts } from 'constants/styleGuide';
 
 export default {
   common: {
@@ -80,6 +80,21 @@ export default {
       backgroundColor: 'transparent',
       borderWidth: 2,
       borderColor: colors.light.platinumGray,
+    },
+  },
+  [themes.light]: {
+    text: {
+      color: colors.light.zodiacBlue,
+    },
+
+    errorMessage: {
+      color: colors.light.burntSieanna,
+    },
+  },
+
+  [themes.dark]: {
+    text: {
+      color: colors.dark.white,
     },
   },
 };
