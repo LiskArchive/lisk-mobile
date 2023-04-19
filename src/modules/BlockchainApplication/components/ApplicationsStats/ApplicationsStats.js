@@ -69,21 +69,26 @@ export default function ApplicationsStats(props) {
                 </View>
               </View>
               <View style={[styles.card]}>
-                <View>
+                <View style={[styles.flex]}>
                   <P style={[styles.cardTitle]}>{i18next.t('application.stats.totalSupply')}</P>
-                  <P style={[styles.amount]}>{data.totalSupplyLSK.toLocaleString() || 0}</P>
+
+                  <P style={[styles.amount]}>{data.totalSupplyLSK.toLocaleString()} LSK</P>
                 </View>
+
                 <TotalSupplySvg />
               </View>
+
               <View style={[styles.card, styles.staked]}>
-                <View>
+                <View style={[styles.flex]}>
                   <P style={[styles.cardTitle, styles.blackText]}>
                     {i18next.t('application.stats.staked')}
                   </P>
+
                   <P style={[styles.amount, styles.blackText]}>
-                    {data.stakedLSK.toLocaleString() || 0}
+                    {data.totalStakedLSK.toLocaleString()} LSK
                   </P>
                 </View>
+
                 <StakedSvg />
               </View>
             </>

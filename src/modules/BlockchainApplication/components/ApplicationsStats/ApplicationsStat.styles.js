@@ -10,7 +10,7 @@ export default () => ({
       color: colors.light.zodiacBlue,
     },
     chartContainer: {
-      marginVertical: 10,
+      marginVertical: 8,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -21,14 +21,14 @@ export default () => ({
     legendItem: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginVertical: 5,
+      marginVertical: 4,
     },
     legendIcon: {
-      width: 15,
-      height: 15,
+      width: 16,
+      height: 16,
       backgroundColor: colors.light.ultramarineBlue,
       borderRadius: 8,
-      marginRight: 10,
+      marginRight: 8,
     },
     registeredIcon: {
       backgroundColor: colors.light.ultramarineBlue,
@@ -43,10 +43,10 @@ export default () => ({
       flex: 1,
     },
     card: {
-      borderRadius: 15,
+      borderRadius: 16,
       backgroundColor: colors.light.ultramarineBlue,
       padding: boxes.boxPadding,
-      marginVertical: 10,
+      marginVertical: 8,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -57,8 +57,8 @@ export default () => ({
       color: colors.light.white,
     },
     amount: {
-      paddingVertical: 5,
-      fontSize: fonts.size.h2,
+      paddingVertical: 4,
+      fontSize: fonts.size.h4,
       color: colors.light.white,
       letterSpacing: 1,
     },
