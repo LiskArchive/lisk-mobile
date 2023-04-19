@@ -31,7 +31,7 @@ export default function ExternalAppSignatureRequestNotification({
           />
         </View>
 
-        <H3 style={styles.applicationTitle}>{session.peer.metadata.name}</H3>
+        <H3 style={[styles.applicationTitle, styles.theme.text]}>{session.peer.metadata.name}</H3>
 
         <View style={styles.applicationUrlContainer}>
           <UrlSvg />
@@ -44,7 +44,9 @@ export default function ExternalAppSignatureRequestNotification({
             :
           </P>
 
-          <P style={styles.description}>{stringShortener(recipientApplicationChainID, 20, 4)}</P>
+          <P style={[styles.description, styles.theme.text]}>
+            {stringShortener(recipientApplicationChainID, 20, 4)}
+          </P>
         </View>
       </View>
 
@@ -57,7 +59,7 @@ export default function ExternalAppSignatureRequestNotification({
           )}
         </P>
 
-        <P style={styles.description}>
+        <P style={[styles.description, styles.theme.text]}>
           {i18next.t('application.externalApplicationSignatureRequest.notification.description', {
             appName: session.peer.metadata.name,
           })}
@@ -74,7 +76,9 @@ export default function ExternalAppSignatureRequestNotification({
         <Avatar address={senderAccountAddress} size={35} />
 
         <View style={styles.accountContent}>
-          <P style={styles.address}>{stringShortener(senderAccountAddress, 7, 4)}</P>
+          <P style={[styles.address, styles.theme.text]}>
+            {stringShortener(senderAccountAddress, 7, 4)}
+          </P>
         </View>
       </View>
 
