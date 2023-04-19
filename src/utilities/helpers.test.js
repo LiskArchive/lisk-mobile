@@ -13,6 +13,7 @@ import {
   findMaxBigInt,
   spliceArray,
   countDecimals,
+  addUniqueStringToArray,
 } from './helpers';
 
 describe('helpers', () => {
@@ -316,6 +317,33 @@ describe('helpers', () => {
       expect(countDecimals('0.1')).toEqual(1);
       expect(countDecimals('1.23')).toEqual(2);
       expect(countDecimals('0.12345')).toEqual(5);
+    });
+  });
+
+  describe('addUniqueStringToArray', () => {
+    it('adds a unique string to an array', () => {
+      const array = ['apple', 'banana', 'orange'];
+      const string = 'grape';
+      const expected = ['apple', 'banana', 'orange', 'grape'];
+
+      expect(addUniqueStringToArray(array, string)).toEqual(expected);
+    });
+
+    it('does not add a duplicate string to an array', () => {
+      const array = ['apple', 'banana', 'orange'];
+      const string = 'banana';
+      const expected = ['apple', 'banana', 'orange'];
+
+      expect(addUniqueStringToArray(array, string)).toEqual(expected);
+    });
+
+    it('does not modify the original array', () => {
+      const array = ['apple', 'banana', 'orange'];
+      const string = 'grape';
+      const originalArray = [...array];
+
+      addUniqueStringToArray(array, string);
+      expect(array).toEqual(originalArray);
     });
   });
 });

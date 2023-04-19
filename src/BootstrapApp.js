@@ -7,6 +7,7 @@ import { useBootstrapCurrentApplication } from 'modules/BlockchainApplication/ho
 import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
 import LoadingFallbackScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
 import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
+import { useBootstrapApplications } from './modules/BlockchainApplication/hooks/useBootstrapApplications';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
@@ -22,13 +23,16 @@ export default function BootstrapApp({ children }) {
   // Bootstrap API client with current application.
   const retryBootstrapCurrentApplication = useBootstrapCurrentApplication();
 
-  const handleRetry = () => retryBootstrapCurrentApplication();
+  // Bootstrap applications
+  useBootstrapApplications();
 
   // Bootstrap WS connections for handling queries updates based on transactions events.
   useTransactionsEventsManager();
 
   // Bootstrap WC.
   useWalletConnectEventsManager();
+
+  const handleRetry = () => retryBootstrapCurrentApplication();
 
   if (isLoading) {
     return <LoadingFallbackScreen />;

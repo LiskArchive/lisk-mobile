@@ -117,6 +117,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
             fetchNextPage={fetchNextTokensPage}
             hasNextPage={mode === 'full' && hasTokensNextPage}
             isFetchingNextPage={isFetchingTokensNextPage}
+            ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
           />
         )}
         renderLoading={() => <TokenListSkeleton />}

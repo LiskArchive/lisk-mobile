@@ -3,7 +3,7 @@ import React from 'react';
 
 import { useTheme } from 'contexts/ThemeContext';
 import TransactionSvg from 'assets/svgs/TransactionSvg';
-import { MODULE_COMMAND_NAMES } from '../constants';
+import { MODULE_COMMANDS_NAMES } from '../constants';
 import getTransactionRowStyles from '../components/TransactionRow/TransactionRow.styles';
 
 /**
@@ -18,12 +18,14 @@ export function useTransactionAssets({ transaction, style, address }) {
   });
 
   let assets = {
+    type: transaction.moduleCommand,
+    title: MODULE_COMMANDS_NAMES[transaction.moduleCommand],
     icon: <TransactionSvg moduleCommand={transaction.moduleCommand} style={style?.icon} />,
   };
 
   if (
-    transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenTransfer ||
-    transaction.moduleCommand === MODULE_COMMAND_NAMES.tokenCrossChainTransfer
+    transaction.moduleCommand === 'token:transfer' ||
+    transaction.moduleCommand === 'token:transferCrossChain'
   ) {
     if (address !== transaction.sender.address) {
       assets = {
@@ -42,98 +44,6 @@ export function useTransactionAssets({ transaction, style, address }) {
         },
       };
     }
-  }
-
-  switch (transaction.moduleCommand) {
-    case MODULE_COMMAND_NAMES.tokenTransfer:
-      assets = {
-        ...assets,
-        type: 'tokenTransfer',
-        title: 'Token Transfer',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.tokenCrossChainTransfer:
-      assets = {
-        ...assets,
-        type: 'tokenCrossChainTransfer',
-        title: 'Cross-chain Transfer',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.registerMultisignatureGroup:
-      assets = {
-        ...assets,
-        type: 'registerMultisignatureGroup',
-        title: 'Register multisignature group',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.registerDelegate:
-      assets = {
-        ...assets,
-        type: 'registerDelegate',
-        title: 'Delegate registration',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.reportDelegateMisbehavior:
-      assets = {
-        ...assets,
-        type: 'reportDelegateMisbehavior',
-        title: 'Report Delegate Misbehavior',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.unlockToken:
-      assets = {
-        ...assets,
-        type: 'unlockToken',
-        title: 'Unlock',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.updateGeneratorKey:
-      assets = {
-        ...assets,
-        type: 'updateGeneratorKey',
-        title: 'Update Generator Key',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.stake:
-      assets = {
-        ...assets,
-        type: 'voteDelegate',
-        title: 'Staking',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.reclaimLSK:
-      assets = {
-        ...assets,
-        type: 'reclaimLSK',
-        title: 'Reclaim LSK',
-      };
-      break;
-
-    case MODULE_COMMAND_NAMES.registerkeys:
-      assets = {
-        ...assets,
-        type: 'registerkeys',
-        title: 'Register keys',
-      };
-      break;
-    case MODULE_COMMAND_NAMES.registerSidechain:
-      assets = {
-        ...assets,
-        type: 'registerSidechain',
-        title: 'Register Sidechain',
-      };
-      break;
-
-    default:
-      break;
   }
 
   return assets;

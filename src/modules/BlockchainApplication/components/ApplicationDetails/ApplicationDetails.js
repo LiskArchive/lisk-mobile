@@ -1,14 +1,14 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import { ScrollView, View, ImageBackground, Image } from 'react-native';
+import { ScrollView, View, ImageBackground, Image, Linking } from 'react-native';
 import { useTheme } from 'contexts/ThemeContext';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { H3, P } from 'components/shared/toolBox/typography';
+import { H3, P, A } from 'components/shared/toolBox/typography';
 import DataRenderer from 'components/shared/DataRenderer';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -56,6 +56,8 @@ export default function ApplicationDetails({ route }) {
     navigation.navigate('AddApplicationSuccess');
   };
 
+  const handleUrlPress = (url) => Linking.openURL(url);
+
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <ScrollView>
@@ -96,9 +98,9 @@ export default function ApplicationDetails({ route }) {
         )}
 
         <DataRenderer
+          data={application?.logo}
           isLoading={applications.isLoading}
           error={applications.isError}
-          data={application?.logo}
           renderData={(data) => (
             <Image
               style={[styles.logoContainer, styles.theme.logoContainer]}
@@ -117,9 +119,9 @@ export default function ApplicationDetails({ route }) {
         <SafeAreaView style={[styles.flex, styles.body]}>
           <View style={styles.titleRow}>
             <DataRenderer
+              data={application?.chainName}
               isLoading={applications.isLoading}
               error={applications.isError}
-              data={application?.chainName}
               renderData={(data) => (
                 <>
                   <H3 style={[styles.title, styles.theme.title]}>{data}</H3>
@@ -138,33 +140,18 @@ export default function ApplicationDetails({ route }) {
             />
           </View>
 
-          <DataRenderer
-            isLoading={applications.isLoading}
-            error={applications.isError}
-            data={application?.address}
-            renderData={(data) => <P style={[styles.address, styles.theme.address]}>{data}</P>}
-            renderLoading={() => (
-              <Skeleton
-                width={288}
-                height={16}
-                style={{
-                  container: [styles.address, styles.theme.address, { alignSelf: 'center' }],
-                }}
-              />
-            )}
-            style={{ empty: [styles.address, styles.theme.address] }}
-          />
-
-          <View style={[styles.row, styles.appLinkContainer]}>
+          <View style={[styles.row, styles.projectPageContainer]}>
             <DataRenderer
+              data={application?.projectPage}
               isLoading={applications.isLoading}
               error={applications.isError}
-              data={application?.explorers}
               renderData={(data) => (
                 <>
                   <UrlSvg size={1} />
 
-                  <P style={styles.url}>{data[0].url}</P>
+                  <A onPress={() => handleUrlPress(data)} style={[styles.url]}>
+                    {data}
+                  </A>
                 </>
               )}
               renderLoading={() => (
@@ -180,26 +167,28 @@ export default function ApplicationDetails({ route }) {
             />
           </View>
 
-          <View style={[styles.row, styles.depositedContainer]}>
-            <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
-
-            <DataRenderer
-              isLoading={applications.isLoading}
-              error={applications.isError}
-              data={application?.deposited}
-              renderData={(data) => <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>}
-              renderLoading={() => (
-                <Skeleton
-                  width={144}
-                  height={16}
-                  style={{
-                    container: [styles.amount, { alignSelf: 'center' }],
-                  }}
-                />
-              )}
-              style={{ empty: styles.amount }}
-            />
-          </View>
+          <DataRenderer
+            data={application?.deposited}
+            isLoading={applications.isLoading}
+            error={applications.isError}
+            hideOnEmpty
+            renderData={(data) => (
+              <View style={[styles.row, styles.depositedContainer]}>
+                <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
+                <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>
+              </View>
+            )}
+            renderLoading={() => (
+              <Skeleton
+                width={144}
+                height={16}
+                style={{
+                  container: [styles.amount, { alignSelf: 'center' }],
+                }}
+              />
+            )}
+            style={{ empty: styles.amount }}
+          />
 
           <View style={styles.stats}>
             <View style={styles.flex}>
@@ -213,9 +202,9 @@ export default function ApplicationDetails({ route }) {
                 <P style={styles.smallTitle}>{i18next.t('application.details.status')}</P>
 
                 <DataRenderer
+                  data={application?.status}
                   isLoading={applications.isLoading}
                   error={applications.isError}
-                  data={application?.status}
                   renderData={(data) => (
                     <View
                       style={[styles.stateContainer, styles[`${application?.status}Container`]]}
@@ -244,53 +233,57 @@ export default function ApplicationDetails({ route }) {
             </View>
 
             <View style={styles.flex}>
-              <View style={styles.item}>
-                <P style={styles.smallTitle}>{i18next.t('application.details.lastUpdated')}</P>
+              <DataRenderer
+                data={application?.lastUpdated}
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                hideOnEmpty
+                renderData={(data) => (
+                  <View style={styles.item}>
+                    <P style={styles.smallTitle}>{i18next.t('application.details.lastUpdated')}</P>
 
-                <DataRenderer
-                  isLoading={applications.isLoading}
-                  error={applications.isError}
-                  data={application?.lastUpdated}
-                  renderData={(data) => (
                     <P style={[styles.value, styles.theme.value]}>
                       {moment(data * 1000).format('D MMM YYYY')}
                     </P>
-                  )}
-                  renderLoading={() => (
-                    <Skeleton
-                      width={80}
-                      height={16}
-                      style={{
-                        container: [styles.value],
-                      }}
-                    />
-                  )}
-                  style={{ empty: [styles.value, styles.theme.value] }}
-                />
-              </View>
+                  </View>
+                )}
+                renderLoading={() => (
+                  <Skeleton
+                    width={80}
+                    height={16}
+                    style={{
+                      container: [styles.value],
+                    }}
+                  />
+                )}
+                style={{ empty: [styles.value, styles.theme.value] }}
+              />
 
-              <View style={styles.item}>
-                <P style={styles.smallTitle}>
-                  {i18next.t('application.details.lastCertificateHeight')}
-                </P>
+              <DataRenderer
+                data={application?.lastCertificateHeight}
+                isLoading={applications.isLoading}
+                error={applications.isError}
+                hideOnEmpty
+                renderData={(data) => (
+                  <View style={styles.item}>
+                    <P style={styles.smallTitle}>
+                      {i18next.t('application.details.lastCertificateHeight')}
+                    </P>
 
-                <DataRenderer
-                  isLoading={applications.isLoading}
-                  error={applications.isError}
-                  data={application?.lastCertificateHeight}
-                  renderData={(data) => <P style={[styles.value, styles.theme.value]}>{data}</P>}
-                  renderLoading={() => (
-                    <Skeleton
-                      width={48}
-                      height={16}
-                      style={{
-                        container: [styles.value],
-                      }}
-                    />
-                  )}
-                  style={{ empty: [styles.value, styles.theme.value] }}
-                />
-              </View>
+                    <P style={[styles.value, styles.theme.value]}>{data}</P>
+                  </View>
+                )}
+                renderLoading={() => (
+                  <Skeleton
+                    width={48}
+                    height={16}
+                    style={{
+                      container: [styles.value],
+                    }}
+                  />
+                )}
+                style={{ empty: [styles.value, styles.theme.value] }}
+              />
             </View>
           </View>
 

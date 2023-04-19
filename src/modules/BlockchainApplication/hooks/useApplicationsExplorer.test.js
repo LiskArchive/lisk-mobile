@@ -1,35 +1,53 @@
 import { renderHook } from '@testing-library/react-hooks';
-
+import { applicationsWrapper } from '../../../tests/applicationsWrapper';
+import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
+import { APPLICATION_STATUSES } from '../constants';
+import { transformApplicationsMetaQueryResult } from '../utils';
 import { useApplicationsExplorer } from './useApplicationsExplorer';
-import * as useApplicationsFullDataQuery from '../api/useApplicationsFullDataQuery';
-import { mockApplicationsFullData } from '../__fixtures__/mockApplicationsFullData';
 
-jest.spyOn(useApplicationsFullDataQuery, 'useApplicationsFullDataQuery').mockImplementation(() => ({
-  data: { data: mockApplicationsFullData },
-  status: 'success',
-  error: null,
-}));
+jest.mock('../api/useApplicationsMetaQuery');
 
-describe('useApplicationsExplorer hook', () => {
+const wrapper = ({ children }) => applicationsWrapper({ children });
+
+describe('useApplicationsExplorer', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should be defined', () => {
-    expect(useApplicationsExplorer).toBeDefined();
+  it('should return all applications in explore mode', () => {
+    const mockData = { data: [{ chainID: '1' }, { chainID: '2' }] };
+    useApplicationsMetaQuery.mockReturnValue({ data: mockData });
+
+    const { result } = renderHook(() => useApplicationsExplorer('explore'), { wrapper });
+
+    expect(result.current.data).toEqual(mockData.data);
   });
 
-  it('should return the data, status, error and refetch function', () => {
-    const { result } = renderHook(() => useApplicationsExplorer());
+  it('should return only registered applications in manage mode', () => {
+    const mockData = {
+      data: [
+        { chainID: '1', status: APPLICATION_STATUSES.registered },
+        { chainID: '2', status: APPLICATION_STATUSES.unregistered },
+      ],
+    };
+    useApplicationsMetaQuery.mockReturnValue({ data: mockData });
 
-    expect(result.current.data).toEqual(mockApplicationsFullData);
-    expect(result.current.status).toBe('success');
-    expect(result.current.error).toBeNull();
+    const { result } = renderHook(() => useApplicationsExplorer('manage'), { wrapper });
+
+    expect(result.current.data).toEqual([mockData.data[0]]);
   });
 
-  it('should call useApplicationsFullDataQuery on mount', () => {
-    renderHook(() => useApplicationsExplorer());
+  it('should call useApplicationsMetaQuery with transformResult in explore mode', () => {
+    renderHook(() => useApplicationsExplorer('explore'), { wrapper });
 
-    expect(useApplicationsFullDataQuery.useApplicationsFullDataQuery).toHaveBeenCalled();
+    expect(useApplicationsMetaQuery).toHaveBeenCalledWith({
+      config: { transformResult: transformApplicationsMetaQueryResult },
+    });
+  });
+
+  it('should call useApplicationsMetaQuery without transformResult in manage mode', () => {
+    renderHook(() => useApplicationsExplorer('manage'), { wrapper });
+
+    expect(useApplicationsMetaQuery).toHaveBeenCalledWith({ config: {} });
   });
 });

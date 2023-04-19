@@ -237,3 +237,18 @@ export function countDecimals(value) {
 
   return numberStr.length - decimalPointIndex - 1;
 }
+
+/**
+ * Adds a value to an array without repeating it and returns a new array.
+ *
+ * @param {string[]} array - The input array.
+ * @param {string} value - The value to be added.
+ * @returns {string[]} A new array with the added value, if it was not already present.
+ */
+export function addUniqueStringToArray(array, value) {
+  if (array.includes(value)) {
+    return array;
+  }
+
+  return [...array, value];
+}

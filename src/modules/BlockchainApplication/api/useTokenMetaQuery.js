@@ -1,6 +1,6 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
+import { LIMIT, API_URL } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
 
@@ -19,7 +19,6 @@ export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options 
     event: 'get.blockchain.apps.meta.tokens',
     ...customConfig,
     params: {
-      network: NETWORK,
       limit: LIMIT,
       tokenID,
       ...customConfig.params,

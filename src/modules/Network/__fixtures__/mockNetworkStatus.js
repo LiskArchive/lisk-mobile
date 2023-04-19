@@ -19,9 +19,9 @@ export const mockNetworkStatus = {
     moduleCommands: [
       { id: '00000002:00000000', name: 'token:transfer' },
       { id: '00000002:00000000', name: 'token:transferCrossChain' },
-      { id: '0000000c:00000000', name: 'auth:registerMultisignatureGroup' },
-      { id: '00008000:00000000', name: 'legacy:reclaimLSK' },
-      { id: '00008000:00000001', name: 'legacy:registerkeys' },
+      { id: '0000000c:00000000', name: 'auth:authRegisterMultisignature' },
+      { id: '00008000:00000000', name: 'legacy:legacyReclaimLSK' },
+      { id: '00008000:00000001', name: 'legacy:legacyRegisterKeys' },
     ],
     network: {
       port: 7667,

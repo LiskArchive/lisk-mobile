@@ -76,3 +76,12 @@ export function getCurrentApplicationData(applicationsMetadata, applicationsData
 
   return { ...applicationMetadata, ...applicationData };
 }
+
+/**
+ * Determines if a given chainID belongs to a mainchain application.
+ * @param {string} chainID - Chain ID of the application to evaluate.
+ * @returns {boolean} True if the provided ID belongs to a mainchain application, false if not.
+ */
+export function isMainchainApplication(chainID) {
+  return chainID.endsWith('0000');
+}
