@@ -67,8 +67,8 @@ export function useApplicationSupportedTokensQuery(application) {
     data,
     isLoading: isAccountTokensFullDataLoading || isSupportedTokensLoading,
     isSuccess: isSuccessAccountTokensFullData && isSuccessSupportedTokens,
-    isError: isSupportedTokensError || isAccountTokensFullDataError,
-    error: errorOnSupportedTokens || errorOnAccountTokensFullData,
+    isError: (!data && isSupportedTokensError) || isAccountTokensFullDataError,
+    error: (!data && errorOnSupportedTokens) || errorOnAccountTokensFullData,
     errorOnSupportedTokens,
     errorOnAccountTokensFullData,
   };

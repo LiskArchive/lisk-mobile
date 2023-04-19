@@ -11,7 +11,7 @@ import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import getAddApplicationStyles from './styles';
 
 const AddApplication = ({ navigation, t }) => {
-  const applications = useApplicationsExplorer('manage');
+  const applications = useApplicationsExplorer();
 
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
 

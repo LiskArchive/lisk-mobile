@@ -136,7 +136,7 @@ export function SendTokenRecipientAccountField({
 }) {
   const bookmarks = useSelector(selectBookmarkList);
 
-  const { styles } = useTheme({
+  const { styles, theme } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
   });
 
@@ -157,7 +157,7 @@ export function SendTokenRecipientAccountField({
       renderEmpty
       Component={({ data }) => (
         <Picker.Item key={data.address} onChange={handleInputChange} value={data.address}>
-          <Avatar address={data.address} size={40} />
+          <Avatar theme={theme} address={data.address} size={40} />
 
           <View>
             {!!data.label && (

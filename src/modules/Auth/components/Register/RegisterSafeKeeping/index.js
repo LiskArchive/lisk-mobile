@@ -79,6 +79,7 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
             height={26}
             width={43}
             onChange={handleConfirm}
+            value={confirmed}
           />
           <P style={[styles.confirmText]}>
             {i18next.t('auth.register.safeKeeping.understandResponsibilityDescription')}

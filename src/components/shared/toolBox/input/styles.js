@@ -15,6 +15,7 @@ export default () => ({
       position: 'absolute',
       left: 4,
       padding: 8,
+      zIndex: 1,
     },
     secureTextEntryIcon: {
       position: 'absolute',

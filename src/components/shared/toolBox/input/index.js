@@ -2,12 +2,11 @@
 /* eslint-disable complexity */
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-
-import { themes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 import EyeSvg from 'assets/svgs/EyeSvg';
 import EyeClosedSvg from 'assets/svgs/EyeClosedSvg';
-import withTheme from '../../withTheme';
 
+import withTheme from '../../withTheme';
 import getStyles from './styles';
 
 class Input extends React.Component {
@@ -85,6 +84,13 @@ class Input extends React.Component {
       inputStyle = [...inputStyle, styles.theme.inputErrorStyle];
     }
 
+    let placeholderColor =
+      theme === themes.dark ? colors.dark.mountainMist : colors.light.maastrichtBlue;
+
+    if (placeholderTextColor) {
+      placeholderColor = this.props.placeholderTextColor;
+    }
+
     return (
       <View style={[innerStyles.containerStyle]}>
         {typeof label === 'string' ? (
@@ -117,7 +123,7 @@ class Input extends React.Component {
             secureTextEntry={this.state.secureTextEntry}
             onBlur={this.onBlur}
             placeholder={placeholder}
-            placeholderTextColor={placeholderTextColor}
+            placeholderTextColor={placeholderColor}
             accessibilityLabel={accessibilityLabel}
           />
 

@@ -152,6 +152,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       try {
         const signedTransaction = await transaction.sign(privateKey);
 
+        console.log({ signedTransaction: transaction.toJSON() });
+
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
         dryRunTransactionMutation.mutate(

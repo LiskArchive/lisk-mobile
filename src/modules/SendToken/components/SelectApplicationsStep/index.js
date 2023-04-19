@@ -19,7 +19,7 @@ import {
 import SendTokenSelectTokenStep from '../SelectTokenStep';
 
 export default function SendTokenSelectApplicationsStep({ nextStep, form, transaction }) {
-  const applications = useApplicationsExplorer('manage');
+  const applications = useApplicationsExplorer();
 
   const { field: senderApplicationChainIDField } = useController({
     name: 'senderApplicationChainID',

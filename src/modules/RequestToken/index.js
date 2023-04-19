@@ -44,7 +44,7 @@ export default function RequestToken() {
 
   const [currentApplication] = useCurrentApplication();
 
-  const applications = useApplicationsExplorer('manage');
+  const applications = useApplicationsExplorer();
 
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
