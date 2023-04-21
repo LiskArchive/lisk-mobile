@@ -1,7 +1,6 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { API_URL } from 'utilities/api/constants';
 import { GET_NETWORK_STATUS_QUERY } from 'utilities/api/queries';
-import liskAPIClient from 'utilities/api/LiskAPIClient';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 
 /**
@@ -28,6 +27,5 @@ export function useNetworkStatusQuery({ config: customConfig = {}, options = {} 
     keys,
     config,
     options,
-    client: liskAPIClient,
   });
 }
