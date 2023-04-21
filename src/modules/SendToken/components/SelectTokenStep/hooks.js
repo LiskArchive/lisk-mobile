@@ -14,10 +14,12 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
     (price) => price.to === accountSettings.currency && price.from === tokenSymbol
   );
 
-  let rawAmountInCurrency = 0;
+  let rawAmountInCurrency;
 
   if (tokenAmount && priceRate) {
     rawAmountInCurrency = (parseFloat(tokenAmount) * Number(priceRate.rate)).toFixed(2);
+  } else {
+    rawAmountInCurrency = null;
   }
 
   function localizeAmount(amount) {
@@ -29,7 +31,7 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
     );
   }
 
-  const tokenAmountInCurrency = localizeAmount(rawAmountInCurrency);
+  const tokenAmountInCurrency = rawAmountInCurrency && localizeAmount(rawAmountInCurrency);
 
   return { amount: tokenAmountInCurrency, currency: accountSettings.currency };
 }
