@@ -57,7 +57,7 @@ export default function ApplicationsExplorer() {
   const [scannedUri, setScannedUri] = useState('');
   const tabBarHeight = useBottomTabBarHeight();
 
-  const applications = useApplicationsExplorer();
+  const applications = useApplicationsExplorer('explore');
 
   const { theme, styles } = useTheme({
     styles: getApplicationsExplorerStyles(),

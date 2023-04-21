@@ -7,7 +7,7 @@ import { isMainchainApplication, transformApplicationsMetaQueryResult } from '..
  * @param {'explore' | 'manage'} mode - Mode in which the apps exploring is consumed by the user. For 'explore', all apps are returned including onchain and offchain data. For 'manage', only off-chain data is returned and unregistered apps are excluded. Default: 'explore'
  * @returns {QueryResult<Array<Application>>} Available blockchain applications for users exploring.
  */
-export function useApplicationsExplorer(mode = 'explore') {
+export function useApplicationsExplorer(mode = 'manage') {
   let config = {};
 
   // include on-chain data on the query result on exploring mode.
@@ -20,7 +20,11 @@ export function useApplicationsExplorer(mode = 'explore') {
   });
 
   // exclude mainchain applications from the data.
-  let data = applicationsData?.data.filter((app) => !isMainchainApplication(app.chainID));
+  let data = applicationsData?.data;
+
+  if (mode === 'explore') {
+    data = applicationsData?.data.filter((app) => !isMainchainApplication(app.chainID));
+  }
 
   // exclude unregistered apps in manage mode.
   if (mode === 'manage') {
