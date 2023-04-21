@@ -23,7 +23,7 @@
     "uniqueAvatarTitle": "A unique avatar",
     "uniqueAvatarDescription": "The Avatar represents the address, making it easy to recognize.",
     "manageApplicationsTitle": "Manage blockchain application assets",
-    "manageApplicationsDescription": "You can manage several blockchain application assets (claim tokens, NFTs, etc..) using your accounts.",
+    "manageApplicationsDescription": "You can manage several blockchain application assets using your accounts.",
     "skipButton": "Skip",
     "nextButton": "Continue",
     "continueToAddAccountButton": "Continue to add account",
@@ -212,11 +212,11 @@
       "decryptPassphrase": "Decrypt your secret recovery phrase",
       "decryptPassphraseError": "Unable to decrypt account. Please check your password",
       "encryptPassphraseError": "Unable to encrypt account.",
-      "addAccountDescription": "Enter your secret recovery phrase to manage your account",
-      "passwordSetupTitle": "Set up device password",
+      "addAccountDescription": "Enter your secret recovery phrase to manage your account.",
+      "passwordSetupTitle": "Set up account password",
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "passwordSetupSuccessTitle": "Perfect! You're all set",
-      "passwordSetupSuccessDescription": "You can now download encrypted secret recovery phrase.",
+      "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase.",
       "secretPhrase": "Secret recovery phrase",
       "restoreFromFile": "Restore from file",
       "downloaded": "Downloaded!",
@@ -226,11 +226,11 @@
       }
     },
     "form": {
-      "passwordLabel": "Enter password",
-      "confirmPasswordLabel": "Confirm your password",
-      "accountNameLabel": "Account name (optional)",
+      "passwordLabel": "Enter account password",
+      "confirmPasswordLabel": "Confirm account password",
+      "accountNameLabel": "Enter account name (optional)",
       "passwordSetupContinueButton": "Continue to Dashboard",
-      "termsAgreementText": "I agree to store my encrypted secret recovery phrase on this device",
+      "termsAgreementText": "I agree to store my encrypted secret recovery phrase on this device.",
       "errors": {
         "noEmptyPasswordError": "Password must have a value",
         "noEmptyConfirmPasswordError": "Confirm password must have a value",
@@ -248,7 +248,7 @@
       "registered": "Registered",
       "active": "Active",
       "terminated": "Terminated",
-      "totalSupply": "Total Supply",
+      "totalSupply": "Total supply",
       "staked": "Staked"
     },
     "details": {
@@ -262,13 +262,13 @@
       "add": {
         "buttonText": "Add application",
         "successTitle": "Perfect! Application has now been added",
-        "confirmButtonText": "Add application now",
+        "confirmButtonText": "Add application",
         "errorConnecting": "Error connecting application. Please try again."
       },
       "delete": {
         "title": "Remove application?",
         "descriptionText": "This application will no longer be in your application list.",
-        "confirmButtonText": "Remove now",
+        "confirmButtonText": "Remove application",
         "success": {
           "title": "Application has now been removed",
           "description": "You can always add {{applicationName}} again to your application list."
@@ -345,11 +345,11 @@
     },
     "applicationsSelect": {
       "loadingApplicationsText": "Loading...",
-      "senderApplicationFieldLabel": "From Application",
+      "senderApplicationFieldLabel": "From application",
       "senderApplicationFieldPlaceholder": "Select sender application",
       "notApplicationFoundText": "No application found",
-      "recipientApplicationFieldLabel": "To Application",
-      "recipientApplicationFieldPlaceholder": "Select an Application",
+      "recipientApplicationFieldLabel": "To application",
+      "recipientApplicationFieldPlaceholder": "Select an application",
       "recipientAccountFieldLabel": "Recipient",
       "addressPlaceholder": "Input address",
       "nextStepButtonText": "Continue"
@@ -386,16 +386,16 @@
       "submitTransactionButtonText": "Send"
     },
     "confirmAndSign": {
-      "title": "Enter your password",
-      "description": "Please provide your device password to sign a transaction.",
+      "title": "Enter your account password",
+      "description": "Please provide your account password to sign this transaction.",
       "passwordInputPlaceholder": "Enter password",
       "loadingText": "Loading...",
-      "sendTokenSubmitButtonText": "Confirm and send {{amount}} {{tokenSymbol}}"
+      "sendTokenSubmitButtonText": "Confirm and send"
     },
     "result": {
       "success": {
         "title": "Transaction submitted",
-        "description": "You will find it in your Wallet and it will be confirmed in a matter of seconds.",
+        "description": "Your transaction has been successfully submitted to the network.",
         "closeButtonText": "Back to wallet"
       },
       "error": {
@@ -426,19 +426,19 @@
       },
       "transactionFee": {
         "title": "Transaction fee",
-        "description1": "Is the sum of byte based fee, Initialization and selected network priority"
+        "description1": "Transaction fees are the sum of the byte based fee, account initialisation fee, and the selected network priority fee."
       },
       "messageFee": {
         "title": "Message fee",
-        "description1": "Messages are the objects containing the cross-chain commands, in the same way in which transactions contain commands. They have a fee property also called message fee to distinguish from transaction fees."
+        "description1": "Message fees are the incentive given to relayer for collecting messages to be transported from sending network to recipient network."
       }   
     }
   },
   "accounts": {
     "accountsManager": {
       "title": "Manage accounts",
-      "modalDescription": "You can edit, switch and backup your account and also you can remove an account that you’re not using at the moment",
-      "screenDescription": "You can switch your account and also remove any account you’re not using at the moment",
+      "modalDescription": "You can edit, switch and backup your account and also you can remove an account that you’re not using at the moment.",
+      "screenDescription": "You can switch your account and also remove any account you’re not using at the moment.",
       "addAccountButtonText": "Add account",
       "deleteAccountTitle": "Remove account?",
       "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
@@ -448,7 +448,7 @@
     },
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",
-    "emptyTokenMessage": "You do not have any token on this account. You can request for tokens",
+    "emptyTokenMessage": "You have no tokens on this account yet.",
     "errorOnTokensText": "Error loading tokens!",
     "allTokens": "All Tokens",
     "buttons": {
@@ -464,12 +464,12 @@
       "title": "Transaction details",
       "senderLabel": "Sender",
       "recipientLabel": "Recipient",
-      "transactionFeeLabel": "Transaction Fee",
+      "transactionFeeLabel": "Transaction fee",
       "nonceLabel": "Nonce",
       "statusLabel": "Status",
       "transactionIDLabel": "Transaction ID",
       "blockIDLabel": "Block ID",
-      "blockHeightLabel": "Block Height",
+      "blockHeightLabel": "Block height",
       "paramsLabel": "Parameters",
       "showParamsButtonText": "Expand",
       "hideParamsButtonText": "Close",
@@ -477,7 +477,7 @@
       "recipientAddressParamsLabel": "Recipient address",
       "dataParamsLabel": "Data",
       "tokenIDParamsLabel": "Token ID",
-      "receivingChainIDParamsLabel": "Receiving Chain ID",
+      "receivingChainIDParamsLabel": "Receiving chain ID",
       "messageFeeParamsLabel": "Fee message",
       "numberOfSignaturesParamsLabel": "Number of signatures",
       "generatorKeyParamsLabel": "Generator key",
@@ -488,7 +488,7 @@
     },
     "transactionList": {
       "errorText": "Error loading transactions!",
-      "emptyText": "You have no transactions yet.",
+      "emptyText": "You have no transactions on this account yet.",
       "title": "Transactions",
       "goToTransactionHistoryButtonText": "View all"
     },

@@ -6,8 +6,6 @@ import SignTransactionSuccess from './SignTransactionSuccess';
 
 export default function SignTransaction({
   isValidationError,
-  amount,
-  token,
   successActionButton,
   successTitle,
   successDescription,
@@ -57,8 +55,6 @@ export default function SignTransaction({
       return (
         <ConfirmTransaction
           onSubmit={onSubmit}
-          amount={amount}
-          token={token}
           userPassword={userPassword}
           onUserPasswordChange={onUserPasswordChange}
           isLoading={isLoading}

@@ -391,7 +391,7 @@
       "description": "Bitte geben Sie Ihr Gerätekennwort ein, um eine Transaktion zu unterzeichnen.",
       "passwordInputPlaceholder": "Passwort eingeben",
       "loadingText": "Laden...",
-      "sendTokenSubmitButtonText": "Bestätigen und senden Sie {{amount}} {{tokenSymbol}}"
+      "sendTokenSubmitButtonText": "Bestätigen und senden"
     },
     "result": {
       "success": {

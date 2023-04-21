@@ -59,8 +59,6 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
         userPassword={userPasswordField.value}
         onUserPasswordChange={userPasswordField.onChange}
         onReset={() => handleSignTransactionModalReset(modal)}
-        amount={summary.amount}
-        token={summary.token}
         isSuccess={form.isSuccess}
         isLoading={form.isLoading}
         isValidationError={Object.keys(form.formState.errors).length > 0}

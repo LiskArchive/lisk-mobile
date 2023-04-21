@@ -44,10 +44,10 @@ const EnableBioAuth = () => {
         </View>
         <View style={styles.textWrapper}>
           <B style={[styles.rowTitle, styles.theme.rowTitle]}>
-            {i18next.t('settings.biometrics.title2')}
+            {i18next.t('settings.biometrics.title1')}
           </B>
           <Small style={[styles.description, styles.theme.description]}>
-            {i18next.t(`settings.biometrics.description2`)}
+            {i18next.t(`settings.biometrics.description1`)}
           </Small>
         </View>
       </View>
