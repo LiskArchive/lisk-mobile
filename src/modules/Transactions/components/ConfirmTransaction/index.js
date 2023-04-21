@@ -17,8 +17,6 @@ import { stringShortener } from 'utilities/helpers';
 import getConfirmTransactionStyles from './styles';
 
 export default function ConfirmTransaction({
-  amount,
-  token,
   userPassword,
   onUserPasswordChange,
   isLoading,
@@ -113,10 +111,7 @@ export default function ConfirmTransaction({
         >
           {isLoading
             ? i18next.t('sendToken.confirmAndSign.loadingText')
-            : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText', {
-                amount,
-                tokenSymbol: token?.symbol,
-              })}
+            : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText')}
         </PrimaryButton>
       </View>
     </View>
