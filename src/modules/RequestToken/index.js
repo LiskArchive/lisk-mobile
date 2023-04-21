@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -12,8 +12,8 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useModal } from 'hooks/useModal';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import {
   SendTokenMessageField,
   SendTokenAmountField,
@@ -46,14 +46,16 @@ export default function RequestToken() {
 
   const applications = useApplicationsExplorer();
 
+  const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
+    currentApplication.data
+  );
+
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
   const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
     currentApplication.data?.chainID
   );
-  const [tokenID, setTokenID] = useState(
-    mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
-  );
+  const [tokenID, setTokenID] = useState();
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -105,6 +107,15 @@ export default function RequestToken() {
   );
 
   const openQrCode = () => modal.open(renderFullCode());
+
+  const defaultTokenID =
+    applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
+
+  useEffect(() => {
+    if (defaultTokenID) {
+      setTokenID(defaultTokenID);
+    }
+  }, [defaultTokenID]);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} testID="request-token-screen">

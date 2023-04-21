@@ -189,9 +189,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
-      const defaultTokenID = applicationSupportedTokensData.find(
-        (_token) => _token.symbol === 'LSK'
-      )?.tokenID;
+      const defaultTokenID = applicationSupportedTokensData[0]?.tokenID;
 
       if (defaultTokenID) {
         transaction.update({
