@@ -11,8 +11,10 @@ import AllSetIllustrationSvg from 'assets/svgs/AllSetIllustrationSvg';
 
 import getRegisterSuccessStyles from './styles';
 
-export default function RegisterSuccess({ hideNav }) {
+export default function RegisterSuccess({ hideNav, sharedData: data }) {
   const navigation = useNavigation();
+
+  const { passphrase } = data;
 
   const { styles } = useTheme({
     styles: getRegisterSuccessStyles(),
@@ -45,12 +47,7 @@ export default function RegisterSuccess({ hideNav }) {
         <PrimaryButton
           testID="register-continue-button"
           style={styles.button}
-          onClick={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'AuthMethod', params: { authRequired: true } }],
-            })
-          }
+          onClick={() => navigation.navigate('PasswordSetupForm', { passphrase })}
         >
           {i18next.t('auth.register.success.continueButtonText')}
         </PrimaryButton>
