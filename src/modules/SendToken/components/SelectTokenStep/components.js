@@ -432,7 +432,9 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
             />
           </View>
 
-          <Text style={[styles.messageFeeText, styles.theme.text]}>{messageFee}</Text>
+          <Text style={[shouldShowFeeBreakdown && styles.messageFeeText, styles.theme.text]}>
+            {messageFee}
+          </Text>
         </View>
       )}
     </View>
