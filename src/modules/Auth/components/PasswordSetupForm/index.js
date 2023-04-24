@@ -9,7 +9,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
-import { P, H3 } from 'components/shared/toolBox/typography';
+import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import { Controller } from 'react-hook-form';
@@ -38,7 +38,12 @@ export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: () => <HeaderBackButton title={''} onPress={() => move({ moves: -1, data })} />,
+      headerLeft: () => (
+        <HeaderBackButton
+          title="auth.setup.passwordSetupTitle"
+          onPress={() => move({ moves: -1, data })}
+        />
+      ),
       title: null,
     });
   }, [navigation, hideNav]);
@@ -68,11 +73,6 @@ export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
       )}
 
       <ScrollView contentContainerStyle={styles.container} testID="password-setup-form">
-        {hideNav && (
-          <H3 style={[styles.title, styles.theme.description]}>
-            {i18next.t('auth.setup.passwordSetupTitle')}
-          </H3>
-        )}
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.setup.passwordSetupDescription')}
         </P>

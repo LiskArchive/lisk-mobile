@@ -7,7 +7,6 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'contexts/ThemeContext';
-import regex from 'constants/regex';
 
 import { colors } from 'constants/styleGuide';
 import { decodeLaunchUrl } from 'utilities/qrCode';
@@ -57,16 +56,19 @@ export default function AddBookmark({ route }) {
     }
   };
 
-  const validateLabel = (str) => {
-    if (str === '') {
+  const validateLabel = (str = '') => {
+    if (str?.trim().length === '') {
       return -1;
     }
-    return regex.delegateName.test(str) ? 0 : 1;
+    if (str.length < 3 || str.length > 20) {
+      return 1;
+    }
+    return 0;
   };
 
-  const handleLabel = (value) => {
+  const handleLabel = (value = '') => {
     setLabel({
-      value,
+      value: value.trim(),
       validity: validateLabel(value.toLocaleLowerCase()),
     });
   };

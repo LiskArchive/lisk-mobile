@@ -1,4 +1,4 @@
-import { colors, fonts } from 'constants/styleGuide';
+import { colors, fonts, boxes } from 'constants/styleGuide';
 import { deviceType } from 'utilities/device';
 
 const type = deviceType();
@@ -13,13 +13,19 @@ if (type === 'android') {
 export default () => ({
   common: {
     title: {
-      fontFamily: fonts.family.heading,
-      fontSize: 24,
-      flex: 1,
+      fontFamily: fonts.family.contextSemiBold,
+      fontSize: 22,
     },
     titleContainer: {
       flex: 1,
       minHeight: 40,
+    },
+    mainContainer: {
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
+      marginBottom: boxes.boxPadding,
+      marginTop: normalMarginTop,
+      paddingTop: 10,
     },
     whiteBackground: {
       backgroundColor: colors.light.white,
@@ -30,13 +36,12 @@ export default () => ({
     container: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginTop: normalMarginTop,
-      paddingRight: 20,
-      paddingTop: 10,
+      justifyContent: 'space-between',
     },
     main: {
       width: 50,
       height: 40,
+      marginLeft: -20,
     },
     safeArea: {
       marginTop: safeAreaMarginTop,
