@@ -208,19 +208,9 @@ export function SendTokenMessageField({ value, onChange, style }) {
         onChange={onChange}
         label={
           <View style={[styles.labelContainer, { justifyContent: 'space-between' }]}>
-            <View style={[styles.row]}>
-              <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
-                {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
-              </P>
-
-              <InfoToggler
-                title={i18next.t('sendToken.info.bytesCounter.title')}
-                description={[
-                  i18next.t('sendToken.info.bytesCounter.description1'),
-                  i18next.t('sendToken.info.bytesCounter.description2'),
-                ]}
-              />
-            </View>
+            <P style={[styles.label, styles.theme.label, styles.iconLabel]}>
+              {i18next.t('sendToken.tokenSelect.messageFieldLabel')}
+            </P>
 
             <TouchableOpacity onPress={handleRemove}>
               <DeleteSvg color={colors.light.ultramarineBlue} height={16} />
