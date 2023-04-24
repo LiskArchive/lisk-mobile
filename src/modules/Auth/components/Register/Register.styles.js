@@ -30,8 +30,6 @@ export default function getRegisterStyles() {
       multiStepGroupWrapper: {
         width: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
       },
       multiStepGroup: {
         height: '100%',

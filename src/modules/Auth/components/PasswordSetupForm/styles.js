@@ -10,6 +10,10 @@ export default () => ({
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
+    title: {
+      fontFamily: fonts.family.context,
+      marginTop: 16,
+    },
     description: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.base,

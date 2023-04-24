@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+/* eslint-disable max-statements */
+import React, { useEffect, useState } from 'react';
+import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import i18next from 'i18next';
 import { Switch } from 'react-native-gesture-handler';
@@ -9,7 +9,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
-import { P } from 'components/shared/toolBox/typography';
+import { P, H3 } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import colors from 'constants/styleGuide/colors';
 import { Controller } from 'react-hook-form';
@@ -17,14 +17,31 @@ import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
 
-export default function PasswordSetupForm() {
+export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
+  useScreenshotPrevent();
+
   const navigation = useNavigation();
 
   const route = useRoute();
 
-  const { passphrase, derivationPath } = route.params;
+  const [passphrase, setPassphrase] = useState('');
 
-  useScreenshotPrevent();
+  const { derivationPath } = route.params ?? {};
+
+  useEffect(() => {
+    if (route.params?.passphrase) {
+      setPassphrase(route.params.passphrase);
+    } else {
+      setPassphrase(data.passphrase);
+    }
+  }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <HeaderBackButton title={''} onPress={() => move({ moves: -1, data })} />,
+      title: null,
+    });
+  }, [navigation, hideNav]);
 
   const [
     { handleSubmit, accountNameField, isAgreedField, formState, control },
@@ -42,11 +59,20 @@ export default function PasswordSetupForm() {
     }
   }, [navigation, isSuccess, encryptedAccount]);
 
+  const Wrapper = hideNav ? View : SafeAreaView;
+
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
+    <Wrapper style={[styles.wrapper, styles.theme.wrapper]}>
+      {!hideNav && (
+        <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
+      )}
 
       <ScrollView contentContainerStyle={styles.container} testID="password-setup-form">
+        {hideNav && (
+          <H3 style={[styles.title, styles.theme.description]}>
+            {i18next.t('auth.setup.passwordSetupTitle')}
+          </H3>
+        )}
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.setup.passwordSetupDescription')}
         </P>
@@ -132,6 +158,6 @@ export default function PasswordSetupForm() {
           {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
         </PrimaryButton>
       </View>
-    </SafeAreaView>
+    </Wrapper>
   );
 }
