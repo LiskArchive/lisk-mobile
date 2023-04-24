@@ -94,6 +94,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
                 onAddressFormatChange={addressFormatField.onChange}
                 isValidAddress={isValidAddress}
               />
+
               <SendTokenSelectTokenStep
                 form={form}
                 nextStep={nextStep}

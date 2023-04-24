@@ -100,7 +100,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: boxes.boxPadding,
+        paddingTop: boxes.boxPadding,
       },
     },
     [themes.light]: {
