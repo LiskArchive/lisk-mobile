@@ -108,7 +108,7 @@
       "enabled": "Enabled",
       "discreetMode": "Discreet mode",
       "terms": "Terms of use",
-      "privacyPolicy": "Privacy Policy",
+      "privacyPolicy": "Privacy policy",
       "currency": "Currency",
       "enableDerivationPath": "Enable custom derivation path"
     },
@@ -117,7 +117,7 @@
       "biometrics": "Use {{sensorType}} to encrypt and use account password."
     },
     "backupPhrase": {
-      "title": "Backup secret recovery phrase",
+      "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",
       "continue": "Continue",
       "storePhrase": "Store your secret recovery phrase:"
@@ -363,7 +363,7 @@
       "loadingTokensText": "Loading...",
       "tokenAmountFieldLabel": "Amount ({{selectedTokenSymbol}})",
       "tokenAmountFieldLabelPlain": "Amount",
-      "tokenAmountFieldPlaceholder": "Add your amount of ({{selectedTokenSymbol}})",
+      "tokenAmountFieldPlaceholder": "Enter amount ({{selectedTokenSymbol}})",
       "tokenAmountFieldPlaceholderPlain": "Select a token to add amount",
       "messageFieldTriggerButtonText": "+ Add message (optional)",
       "messageFieldLabel": "Message (optional)",
