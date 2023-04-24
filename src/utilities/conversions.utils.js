@@ -29,7 +29,7 @@ export function fromBaseToDisplayDenom({
   const conversionUnit = denomUnits?.find((unit) => unit.denom === displayDenom);
 
   if (!conversionUnit) {
-    throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));
+    return '';
   }
 
   const conversionFactor = new BigNumber(10).pow(conversionUnit.decimals);

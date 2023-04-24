@@ -54,6 +54,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
+      command: 'transfer',
     }),
     [currentApplication.data?.chainID, initialValues]
   );
@@ -85,6 +86,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
   const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
+  const command = form.watch('command');
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
@@ -250,10 +252,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           receivingChainID: recipientApplicationChainID,
         },
       });
+
+      form.setValue('command', 'transferCrossChain');
     } else if (transaction.command !== 'transfer') {
       transaction.update({ command: 'transfer' });
       transaction.deleteParams(['messageFee', 'receivingChainID', 'messageFeeTokenID']);
+
+      form.setValue('command', 'transfer');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isCrossChainTransfer,
     recipientApplicationChainChannelData?.data?.messageFeeTokenID,
@@ -302,5 +309,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     isSuccess,
     error,
     isError,
+    command,
   };
 }
