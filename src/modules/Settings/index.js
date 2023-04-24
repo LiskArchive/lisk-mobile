@@ -86,21 +86,24 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
           <H4 style={[styles.subHeader, styles.theme.subHeader]}>
             {t('settings.headers.security')}
           </H4>
-          {settings.sensorType ? (
+          {settings.sensorType && (
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
                 showDialog={showDialog}
                 hideDialog={hideDialog}
                 setError={setErrorMessage}
-                authenticate={true}
+                authenticate
                 targetStateLabel={sensorStatus}
                 icon={settings.sensorType === app.faceId ? 'face-id-small' : 'touch-id-small'}
                 iconSize={settings.sensorType === app.faceId ? 18 : 20}
                 title={settings.sensorType}
+                description={t('settings.descriptions.biometrics', {
+                  sensorType: settings.sensorType,
+                })}
               />
             </View>
-          ) : null}
+          )}
 
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle

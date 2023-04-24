@@ -3,17 +3,14 @@ import React from 'react';
 import { Linking } from 'react-native';
 import i18next from 'i18next';
 
-import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import SignTransaction from '../../../Transactions/components/SignTransaction/SignTransaction';
+import SignTransaction from 'modules/Transactions/components/SignTransaction/SignTransaction';
 
 export default function ExternalAppSignatureRequestSignTransaction({
   session,
   transaction,
-  recipientApplicationChainID,
   onSubmit,
   isSuccess,
   isLoading,
@@ -26,18 +23,6 @@ export default function ExternalAppSignatureRequestSignTransaction({
 
   const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
     useCopyToClipboard(signedTransactionString);
-
-  const applications = useApplicationsExplorer();
-
-  const recipientApplication = applications.data?.find(
-    (application) => application.chainID === recipientApplicationChainID
-  );
-
-  const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
-
-  const token = supportedTokensData?.find(
-    (_token) => _token.tokenID === transaction.transaction.params.tokenID
-  );
 
   const handleSubmit = () => onSubmit(passwordController.field.value);
 
@@ -52,8 +37,6 @@ export default function ExternalAppSignatureRequestSignTransaction({
       onSubmit={handleSubmit}
       userPassword={passwordController.field.value}
       onUserPasswordChange={passwordController.field.onChange}
-      amount={transaction.transaction.params.amount}
-      token={token}
       isSuccess={isSuccess}
       isLoading={isLoading}
       isValidationError={Object.keys(passwordForm.formState.errors).length > 0}

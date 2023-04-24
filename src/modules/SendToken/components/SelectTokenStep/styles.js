@@ -27,6 +27,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         padding: 8,
         borderRadius: 4,
         backgroundColor: colors.light.athensWhite,
+        marginBottom: 8,
       },
       feeBreakdownRow: {
         flexDirection: 'row',
@@ -100,7 +101,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: boxes.boxPadding,
+        paddingTop: boxes.boxPadding,
       },
     },
     [themes.light]: {
@@ -123,7 +124,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         color: colors.light.zodiacBlue,
       },
       feeBreakdownContainer: {
-        backgroundColor: colors.light.white,
+        backgroundColor: colors.light.athensWhite,
       },
     },
     [themes.dark]: {

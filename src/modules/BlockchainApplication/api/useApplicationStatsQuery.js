@@ -1,7 +1,8 @@
 import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_APPLICATION_STATS } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
-import { useQueryKeys } from '../../../utilities/api/hooks/useQueryKeys';
+import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
+import liskAPIClient from 'utilities/api/LiskAPIClient';
 
 export function useApplicationStatsQuery() {
   const config = {
@@ -14,5 +15,6 @@ export function useApplicationStatsQuery() {
   return useCustomQuery({
     keys,
     config,
+    client: liskAPIClient,
   });
 }

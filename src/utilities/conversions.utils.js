@@ -26,10 +26,10 @@ export function fromBaseToDisplayDenom({
 }) {
   const bigAmount = new BigNumber(amount);
 
-  const conversionUnit = denomUnits.find((unit) => unit.denom === displayDenom);
+  const conversionUnit = denomUnits?.find((unit) => unit.denom === displayDenom);
 
   if (!conversionUnit) {
-    throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));
+    return '';
   }
 
   const conversionFactor = new BigNumber(10).pow(conversionUnit.decimals);
@@ -57,7 +57,7 @@ export function fromBaseToDisplayDenom({
 export function fromDisplayToBaseDenom({ amount, displayDenom, denomUnits }) {
   const bigAmount = new BigNumber(amount);
 
-  const conversionUnit = denomUnits.find((unit) => unit.denom === displayDenom);
+  const conversionUnit = denomUnits?.find((unit) => unit.denom === displayDenom);
 
   if (!conversionUnit) {
     throw new Error(i18next.t('tokens.errors.displayDenomNotFoundMessage'));

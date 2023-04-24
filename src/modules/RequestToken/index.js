@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -12,8 +12,8 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useModal } from 'hooks/useModal';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { mockTokensMeta } from 'modules/Transactions/__fixtures__';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import {
   SendTokenMessageField,
   SendTokenAmountField,
@@ -26,6 +26,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import Avatar from 'components/shared/avatar';
+import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
@@ -46,14 +47,16 @@ export default function RequestToken() {
 
   const applications = useApplicationsExplorer();
 
+  const { data: applicationSupportedTokensData } = useApplicationSupportedTokensQuery(
+    currentApplication.data
+  );
+
   const [amount, setAmount] = useState({ value: '', validity: -1 });
   const [message, setMessage] = useState('');
   const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
     currentApplication.data?.chainID
   );
-  const [tokenID, setTokenID] = useState(
-    mockTokensMeta.find((token) => token.symbol === 'LSK')?.tokenID
-  );
+  const [tokenID, setTokenID] = useState();
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -106,6 +109,15 @@ export default function RequestToken() {
 
   const openQrCode = () => modal.open(renderFullCode());
 
+  const defaultTokenID =
+    applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
+
+  useEffect(() => {
+    if (defaultTokenID) {
+      setTokenID(defaultTokenID);
+    }
+  }, [defaultTokenID]);
+
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} testID="request-token-screen">
       <HeaderBackButton
@@ -150,7 +162,14 @@ export default function RequestToken() {
                 value={recipientApplicationChainID}
                 onChange={setRecipientApplicationChainID}
                 applications={data}
-                style={{ toggle: { container: { marginBottom: 16 } } }}
+                style={{ toggle: { container: styles.fieldContainer } }}
+              />
+            )}
+            renderLoading={() => (
+              <Skeleton
+                height={48}
+                width={deviceWidth() - 44}
+                style={{ container: styles.fieldContainer }}
               />
             )}
           />
@@ -159,7 +178,7 @@ export default function RequestToken() {
             value={tokenID}
             onChange={setTokenID}
             recipientApplication={currentApplication.data}
-            style={{ toggle: { container: { marginBottom: 16 } } }}
+            style={{ toggle: { container: styles.fieldContainer } }}
           />
 
           <SendTokenAmountField
@@ -167,7 +186,7 @@ export default function RequestToken() {
             onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
             tokenID={tokenID}
             recipientApplication={currentApplication.data}
-            style={{ container: { marginBottom: 16 } }}
+            style={{ container: styles.fieldContainer }}
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />

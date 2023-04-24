@@ -68,40 +68,39 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
         isLoading={applications.isLoading}
         error={applications.error}
         renderData={(data) => (
-          <>
-            <View style={[styles.container]}>
-              <SendTokenSenderApplicationField
-                value={senderApplicationChainIDField.value}
-                onChange={senderApplicationChainIDField.onChange}
-                errorMessage={form.formState.errors.senderApplicationChainID?.message}
-                applications={data}
-                style={{ toggle: { container: { marginBottom: 16 } } }}
-              />
+          <View style={[styles.container]}>
+            <SendTokenSenderApplicationField
+              value={senderApplicationChainIDField.value}
+              onChange={senderApplicationChainIDField.onChange}
+              errorMessage={form.formState.errors.senderApplicationChainID?.message}
+              applications={data}
+              style={{ toggle: { container: { marginBottom: 16 } } }}
+            />
 
-              <SendTokenRecipientApplicationField
-                value={recipientApplicationChainIDField.value}
-                onChange={recipientApplicationChainIDField.onChange}
-                errorMessage={form.formState.errors.recipientApplicationChainID?.message}
-                applications={data}
-                style={{ toggle: { container: { marginBottom: 16 } } }}
-              />
+            <SendTokenRecipientApplicationField
+              value={recipientApplicationChainIDField.value}
+              onChange={recipientApplicationChainIDField.onChange}
+              errorMessage={form.formState.errors.recipientApplicationChainID?.message}
+              applications={data}
+              style={{ toggle: { container: { marginBottom: 16 } } }}
+            />
 
-              <SendTokenRecipientAccountField
-                value={recipientAccountAddressField.value}
-                onChange={recipientAccountAddressField.onChange}
-                errorMessage={form.formState.errors.recipientAccountAddress?.message}
-                addressFormat={addressFormatField.value}
-                onAddressFormatChange={addressFormatField.onChange}
-                isValidAddress={isValidAddress}
-              />
-              <SendTokenSelectTokenStep
-                form={form}
-                nextStep={nextStep}
-                transaction={transaction}
-                isValidAddress={isValidAddress}
-              />
-            </View>
-          </>
+            <SendTokenRecipientAccountField
+              value={recipientAccountAddressField.value}
+              onChange={recipientAccountAddressField.onChange}
+              errorMessage={form.formState.errors.recipientAccountAddress?.message}
+              addressFormat={addressFormatField.value}
+              onAddressFormatChange={addressFormatField.onChange}
+              isValidAddress={isValidAddress}
+            />
+
+            <SendTokenSelectTokenStep
+              form={form}
+              nextStep={nextStep}
+              transaction={transaction}
+              isValidAddress={isValidAddress}
+            />
+          </View>
         )}
         renderError={() => (
           <ResultScreen

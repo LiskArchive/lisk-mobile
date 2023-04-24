@@ -49,7 +49,6 @@ export default function AccountDetails({ account }) {
       name: 'Send',
       params: !isCurrentAccount && {
         recipientAccountAddress: account.address,
-        recipientAccountAddressFormat: 'picker',
       },
     });
 

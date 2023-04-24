@@ -114,7 +114,6 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
           <ExternalAppSignatureRequestSignTransaction
             session={session}
             transaction={_transaction}
-            recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
             onSubmit={handleSubmit}
             isSuccess={status.isSuccess}
             isLoading={status.isLoading}
