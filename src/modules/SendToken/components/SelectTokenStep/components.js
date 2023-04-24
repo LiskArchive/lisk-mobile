@@ -16,8 +16,10 @@ import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { P } from 'components/shared/toolBox/typography';
 import InfoToggler from 'components/shared/InfoToggler';
 import FadeInView from 'components/shared/fadeInView';
+import Skeleton from 'components/shared/Skeleton/Skeleton';
 import DataRenderer from 'components/shared/DataRenderer';
 import { fromBaseToDisplayDenom, fromBeddowsToLsk } from 'utilities/conversions.utils';
+import { deviceWidth } from 'utilities/device';
 import DeleteSvg from 'assets/svgs/DeleteSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import colors from 'constants/styleGuide/colors';
@@ -94,16 +96,21 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         isLoading={isLoadingSupportedTokens}
         error={isSupportedTokensError}
         renderData={() => (
-          <>
-            <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
-              {selectedToken && (
-                <View style={[styles.row]} testID="select-token-picker">
-                  <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
-                  <Image source={{ uri: selectedToken.logo.png }} style={styles.logo} />
-                </View>
-              )}
-            </Picker.Toggle>
-          </>
+          <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
+            {selectedToken && (
+              <View style={[styles.row]} testID="select-token-picker">
+                <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
+                <Image source={{ uri: selectedToken.logo.png }} style={styles.logo} />
+              </View>
+            )}
+          </Picker.Toggle>
+        )}
+        renderLoading={() => (
+          <Skeleton
+            height={48}
+            width={deviceWidth() - 44}
+            style={{ container: { marginBottom: 16 } }}
+          />
         )}
       />
     </Picker>
@@ -170,6 +177,13 @@ export function SendTokenAmountField({
           }}
           testID="token-amount"
           innerStyles={getSendTokenAmountFieldStyles(style)}
+        />
+      )}
+      renderLoading={() => (
+        <Skeleton
+          height={48}
+          width={deviceWidth() - 44}
+          style={{ container: { marginBottom: 16 } }}
         />
       )}
     />

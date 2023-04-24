@@ -63,6 +63,9 @@ export default () => ({
       textAlign: 'center',
       marginTop: boxes.boxPadding,
     },
+    fieldContainer: {
+      marginBottom: 16,
+    },
   },
 
   [themes.light]: {

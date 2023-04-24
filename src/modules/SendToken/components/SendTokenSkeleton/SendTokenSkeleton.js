@@ -11,7 +11,7 @@ import { getSendTokenSkeletonStyles } from './SendTokenSkeleton.styles';
 export default function SendTokenSkeleton() {
   const { styles } = useTheme({ styles: getSendTokenSkeletonStyles() });
 
-  const SKELETON_FIELDS_COUNT = 4;
+  const SKELETON_FIELDS_COUNT = 6;
 
   return (
     <View style={[styles.container]}>

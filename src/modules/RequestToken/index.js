@@ -26,6 +26,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import Avatar from 'components/shared/avatar';
+import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
@@ -161,7 +162,14 @@ export default function RequestToken() {
                 value={recipientApplicationChainID}
                 onChange={setRecipientApplicationChainID}
                 applications={data}
-                style={{ toggle: { container: { marginBottom: 16 } } }}
+                style={{ toggle: { container: styles.fieldContainer } }}
+              />
+            )}
+            renderLoading={() => (
+              <Skeleton
+                height={48}
+                width={deviceWidth() - 44}
+                style={{ container: styles.fieldContainer }}
               />
             )}
           />
@@ -170,7 +178,7 @@ export default function RequestToken() {
             value={tokenID}
             onChange={setTokenID}
             recipientApplication={currentApplication.data}
-            style={{ toggle: { container: { marginBottom: 16 } } }}
+            style={{ toggle: { container: styles.fieldContainer } }}
           />
 
           <SendTokenAmountField
@@ -178,7 +186,7 @@ export default function RequestToken() {
             onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
             tokenID={tokenID}
             recipientApplication={currentApplication.data}
-            style={{ container: { marginBottom: 16 } }}
+            style={{ container: styles.fieldContainer }}
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
