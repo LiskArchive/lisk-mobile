@@ -113,7 +113,8 @@
       "enableDerivationPath": "Enable custom derivation path"
     },
     "descriptions": {
-      "discreetMode": "Hide balance and transaction amounts."
+      "discreetMode": "Hide balance and transaction amounts.",
+      "biometrics": "Use {{sensorType}} to encrypt and use account password."
     },
     "backupPhrase": {
       "title": "Backup secret recovery phrase",

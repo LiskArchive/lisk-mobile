@@ -115,7 +115,8 @@
       "enableDerivationPath": ""
     },
     "descriptions": {
-      "discreetMode": "Guthaben und Transaktionsbeträge ausblenden."
+      "discreetMode": "Guthaben und Transaktionsbeträge ausblenden.",
+      "biometrics": "Verwenden Sie {{sensorType}}, um das Kontopasswort zu verschlüsseln und zu verwenden."
     },
     "backupPhrase": {
       "title": "Sichern Sie die geheime Wiederherstellungsphrase",
