@@ -59,10 +59,8 @@ describe('conversion utils', () => {
       ).toBe(expectedAmount);
     });
 
-    it('falls into error if specified display denom is not in units', () => {
-      expect(() =>
-        fromBaseToDisplayDenom({ ...baseProps, displayDenom: 'nonExistingDenom' })
-      ).toThrow(Error);
+    it('returns empty string if specified display denom is not in units', () => {
+      expect(fromBaseToDisplayDenom({ ...baseProps, displayDenom: 'nonExistingDenom' })).toBe('');
     });
   });
 
