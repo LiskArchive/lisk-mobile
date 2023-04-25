@@ -11,7 +11,7 @@ import { getAccountDownloadableFilename } from 'modules/Auth/utils/downloadAccou
 
 import getEditAccountFormStyles from './styles';
 
-export default function EditAccountSuccess({ account, onCompleted, style }) {
+export default function EditAccountSuccess({ account, onCompleted }) {
   const { styles } = useTheme({ styles: getEditAccountFormStyles() });
 
   function handleSubmit() {
@@ -27,7 +27,7 @@ export default function EditAccountSuccess({ account, onCompleted, style }) {
       <View style={[styles.body]}>
         <CompletedIllustrationSvg style={[styles.illustration]} />
 
-        <P style={[styles.description, styles.theme.description, style?.description]}>
+        <P style={[styles.description, styles.theme.title]}>
           {i18next.t('accounts.editAccount.editAccountSuccess')}
         </P>
 
@@ -36,7 +36,7 @@ export default function EditAccountSuccess({ account, onCompleted, style }) {
 
       <PrimaryButton
         onClick={handleSubmit}
-        style={[styles.submitButton, style?.submitButton]}
+        style={[styles.submitButton]}
         testID="edit-account-button"
       >
         {i18next.t('accounts.editAccount.continue')}
