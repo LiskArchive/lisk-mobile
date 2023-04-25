@@ -41,7 +41,7 @@ export default function ApplicationDetails({ route }) {
 
   const { checkPin, togglePin } = usePinApplications();
   const { addApplication } = useApplicationsManagement();
-  const applications = useApplicationsExplorer();
+  const applications = useApplicationsExplorer('explore');
 
   const application = useMemo(
     () => applications.data?.find((app) => app.chainID === chainID),

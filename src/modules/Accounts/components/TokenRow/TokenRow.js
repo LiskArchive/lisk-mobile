@@ -67,21 +67,23 @@ export default function TokenRow({ token }) {
           </H3>
         </DiscreteModeComponent>
 
-        <DataRenderer
-          data={tokenMeta}
-          isLoading={isTokenMetaLoading}
-          error={errorOnTokenMeta}
-          renderData={() => (
-            <DiscreteModeComponent data={balance} blurVariant="balance">
-              <P
-                style={[styles.theme.currency]}
-                testID={`token-currency-${accountSettings.currency}`}
-              >
-                {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
-              </P>
-            </DiscreteModeComponent>
-          )}
-        />
+        {tokenAmountInCurrency.amount && (
+          <DataRenderer
+            data={tokenMeta}
+            isLoading={isTokenMetaLoading}
+            error={errorOnTokenMeta}
+            renderData={() => (
+              <DiscreteModeComponent data={balance} blurVariant="balance">
+                <P
+                  style={[styles.theme.currency]}
+                  testID={`token-currency-${accountSettings.currency}`}
+                >
+                  {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
+                </P>
+              </DiscreteModeComponent>
+            )}
+          />
+        )}
       </View>
     </View>
   );

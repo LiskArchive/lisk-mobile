@@ -53,7 +53,7 @@ describe.skip('Settings Screen', () => {
     await expect(element(by.id('terms-screen'))).toBeVisible();
   });
 
-  it('should open Privacy Policy', async () => {
+  it('should open Privacy policy', async () => {
     await element(by.id('header-left-icon')).atIndex(0).tap();
     await element(by.id('privacy')).tap();
     await expect(element(by.id('privacy-screen'))).toBeVisible();

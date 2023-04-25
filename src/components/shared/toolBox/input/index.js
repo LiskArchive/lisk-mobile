@@ -85,7 +85,7 @@ class Input extends React.Component {
     }
 
     let placeholderColor =
-      theme === themes.dark ? colors.dark.mountainMist : colors.light.maastrichtBlue;
+      theme === themes.dark ? colors.dark.mountainMist : colors.light.smoothGray;
 
     if (placeholderTextColor) {
       placeholderColor = this.props.placeholderTextColor;

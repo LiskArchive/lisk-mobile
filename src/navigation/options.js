@@ -63,7 +63,7 @@ const navigationOptions = {
   },
   PrivacyPolicy: {
     title: null,
-    headerLeft: (props) => <HeaderBackButton title="Privacy Policy" {...props} alwaysLight />,
+    headerLeft: (props) => <HeaderBackButton title="Privacy policy" {...props} alwaysLight />,
     headerStyle: navigationNoShadowStyle,
     headerTitleStyle: navigationGenericTitleStyle,
   },
