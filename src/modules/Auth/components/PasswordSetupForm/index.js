@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -24,28 +24,22 @@ export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
 
   const route = useRoute();
 
-  const [passphrase, setPassphrase] = useState('');
+  const passphrase = route.params?.passphrase || data.passphrase;
 
   const { derivationPath } = route.params ?? {};
 
   useEffect(() => {
-    if (route.params?.passphrase) {
-      setPassphrase(route.params.passphrase);
-    } else {
-      setPassphrase(data.passphrase);
+    if (hideNav) {
+      navigation.setOptions({
+        headerLeft: () => (
+          <HeaderBackButton
+            title="auth.setup.passwordSetupTitle"
+            onPress={() => move({ moves: -1, data })}
+          />
+        ),
+        title: null,
+      });
     }
-  }, []);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <HeaderBackButton
-          title="auth.setup.passwordSetupTitle"
-          onPress={() => move({ moves: -1, data })}
-        />
-      ),
-      title: null,
-    });
   }, [navigation, hideNav]);
 
   const [

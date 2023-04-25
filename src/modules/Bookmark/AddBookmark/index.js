@@ -57,7 +57,7 @@ export default function AddBookmark({ route }) {
   };
 
   const validateLabel = (str = '') => {
-    if (str?.trim().length === '') {
+    if (str.trim().length === '') {
       return -1;
     }
     if (str.length < 3 || str.length > 20) {
