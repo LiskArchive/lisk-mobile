@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import i18next from 'i18next';
-import { Switch } from 'react-native-gesture-handler';
+import SwitchButton from 'components/shared/toolBox/switchButton';
 
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
@@ -11,7 +11,6 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import colors from 'constants/styleGuide/colors';
 import { Controller } from 'react-hook-form';
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
@@ -127,10 +126,9 @@ export default function PasswordSetupForm({
 
         <View style={styles.actionContainer}>
           <View style={styles.switch} testID="agree-switch">
-            <Switch
+            <SwitchButton
               value={isAgreedField.value}
-              onValueChange={(value) => isAgreedField.onChange(value)}
-              trackColor={{ true: colors.light.ultramarineBlue }}
+              onChange={(value) => isAgreedField.onChange(value)}
             />
           </View>
 
