@@ -448,6 +448,10 @@
       "downloadFileButtonText": "Download",
       "backButtonText": "Zurück"
     },
+    "editAccount": {
+      "editAccountSuccess": "",
+      "continue": ""
+    },
     "tokens": "",
     "lockedTokens": "",
     "emptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern",

@@ -54,7 +54,7 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="Register"
             component={Register}
-            options={navigationOptions.Register}
+            options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
             name="AuthMethod"

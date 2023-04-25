@@ -217,7 +217,7 @@
       "passwordSetupTitle": "Set up your account password",
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "passwordSetupSuccessTitle": "Perfect! You're all set",
-      "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase.",
+      "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase and use it to add your account on other devices.",
       "secretPhrase": "Secret recovery phrase",
       "restoreFromFile": "Restore from file",
       "downloaded": "Downloaded!",
@@ -446,6 +446,10 @@
       "deleteAccountButtonText": "Remove now",
       "downloadFileButtonText": "Download",
       "backButtonText": "Back"
+    },
+    "editAccount": {
+      "editAccountSuccess": "You can now download encrypted secret recovery phrase to this effect.",
+      "continue": "Continue to wallet"
     },
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",

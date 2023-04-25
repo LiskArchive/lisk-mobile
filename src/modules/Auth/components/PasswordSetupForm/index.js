@@ -17,7 +17,13 @@ import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
 
-export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
+export default function PasswordSetupForm({
+  sharedData: data,
+  hideNav,
+  move,
+  currentIndex,
+  length,
+}) {
   useScreenshotPrevent();
 
   const navigation = useNavigation();
@@ -27,27 +33,12 @@ export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
   const passphrase = route.params?.passphrase || data.passphrase;
 
   const { derivationPath } = route.params ?? {};
-
-  useEffect(() => {
-    if (hideNav) {
-      navigation.setOptions({
-        headerLeft: () => (
-          <HeaderBackButton
-            title="auth.setup.passwordSetupTitle"
-            onPress={() => move({ moves: -1, data })}
-          />
-        ),
-        title: null,
-      });
-    }
-  }, [navigation, hideNav]);
+  const { styles } = useTheme({ styles: getStyles() });
 
   const [
     { handleSubmit, accountNameField, isAgreedField, formState, control },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(passphrase, derivationPath);
-
-  const { styles } = useTheme({ styles: getStyles() });
 
   useEffect(() => {
     if (isSuccess) {
@@ -58,11 +49,17 @@ export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
     }
   }, [navigation, isSuccess, encryptedAccount]);
 
-  const Wrapper = hideNav ? View : SafeAreaView;
-
   return (
-    <Wrapper style={[styles.wrapper, styles.theme.wrapper]}>
-      {!hideNav && (
+    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+      {hideNav ? (
+        <HeaderBackButton
+          title="auth.setup.passwordSetupTitle"
+          onPress={() => move({ moves: -1, data })}
+          withProgressBar
+          currentIndex={currentIndex}
+          length={length}
+        />
+      ) : (
         <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
       )}
 
@@ -152,6 +149,6 @@ export default function PasswordSetupForm({ sharedData: data, hideNav, move }) {
           {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
         </PrimaryButton>
       </View>
-    </Wrapper>
+    </SafeAreaView>
   );
 }

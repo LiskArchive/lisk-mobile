@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -27,7 +28,7 @@ export default function EditAccountSuccess({ account, onCompleted, style }) {
         <CompletedIllustrationSvg style={[styles.illustration]} />
 
         <P style={[styles.description, styles.theme.description, style?.description]}>
-          You can now download encrypted secret recovery phrase to this effect.
+          {i18next.t('accounts.editAccount.editAccountSuccess')}
         </P>
 
         <DownloadFile data={account} fileName={accountFilename} />
@@ -38,7 +39,7 @@ export default function EditAccountSuccess({ account, onCompleted, style }) {
         style={[styles.submitButton, style?.submitButton]}
         testID="edit-account-button"
       >
-        Continue to wallet
+        {i18next.t('accounts.editAccount.continue')}
       </PrimaryButton>
     </>
   );

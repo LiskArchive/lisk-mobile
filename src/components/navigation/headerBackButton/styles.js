@@ -13,13 +13,12 @@ if (type === 'android') {
 export default () => ({
   common: {
     title: {
-      fontFamily: fonts.family.heading,
+      fontFamily: fonts.family.contextSemiBold,
       fontSize: 24,
       flex: 1,
     },
-    titleContainer: {
-      flex: 1,
-      minHeight: 40,
+    progressWrapper: {
+      marginTop: 10,
     },
     whiteBackground: {
       backgroundColor: colors.light.white,

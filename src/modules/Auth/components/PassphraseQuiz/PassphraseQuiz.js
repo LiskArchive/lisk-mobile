@@ -12,7 +12,15 @@ import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 
 import getPassphraseQuizStyles from './PassphraseQuiz.styles';
 
-export default function PassphraseQuiz({ nextStep, sharedData: data, prevStep, customHeader }) {
+export default function PassphraseQuiz({
+  nextStep,
+  sharedData: data,
+  prevStep,
+  customHeader,
+  showHeader,
+  currentIndex,
+  length,
+}) {
   const navigation = useNavigation();
 
   const { passphrase } = data;
@@ -133,15 +141,8 @@ export default function PassphraseQuiz({ nextStep, sharedData: data, prevStep, c
   };
 
   useEffect(() => {
-    navigation.setOptions({
-      headerLeft: (props) => (
-        <HeaderBackButton {...props} onPress={prevStep} title={i18next.t('auth.register.title')} />
-      ),
-      title: null,
-    });
-
     generateTest();
-  }, [navigation, generateTest, prevStep]);
+  }, [generateTest]);
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -149,6 +150,15 @@ export default function PassphraseQuiz({ nextStep, sharedData: data, prevStep, c
         <HeaderBackButton
           title={'settings.backupPhrase.confirmPhrase'}
           onPress={navigation.goBack}
+        />
+      )}
+      {showHeader && (
+        <HeaderBackButton
+          onPress={prevStep}
+          title={i18next.t('auth.register.title')}
+          withProgressBar
+          currentIndex={currentIndex}
+          length={length}
         />
       )}
 

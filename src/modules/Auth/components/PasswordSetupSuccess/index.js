@@ -5,7 +5,7 @@ import { useDownloadFile } from 'hooks/useDownloadFile';
 import { useTheme } from 'contexts/ThemeContext';
 import DownloadFile from 'components/shared/DownloadFile';
 import ResultScreen from 'components/screens/ResultScreen';
-import CompletedIllustrationSvg from 'assets/svgs/CompletedIllustrationSvg';
+import NewAccountSuccessIllustrationSvg from 'assets/svgs/NewAccountSuccessIllustrationSvg';
 import { getAccountDownloadableFilename } from '../../utils/downloadAccount';
 
 import getPasswordSetupSuccessStyles from './styles';
@@ -20,21 +20,19 @@ export default function PasswordSetupSuccess({ route }) {
 
   const accountFilename = getAccountDownloadableFilename(encryptedAccount.metadata.address);
 
-  const [downloadFile, { isLoading: isLoadingDownloadFile, isSuccess: isSuccessDownloadFile }] =
-    useDownloadFile({
-      data: encryptedAccount,
-      fileName: accountFilename,
-    });
+  const [downloadFile, { isLoading: isLoadingDownloadFile }] = useDownloadFile({
+    data: encryptedAccount,
+    fileName: accountFilename,
+  });
 
   const { styles } = useTheme({ styles: getPasswordSetupSuccessStyles() });
 
   return (
     <ResultScreen
-      illustration={<CompletedIllustrationSvg />}
+      illustration={<NewAccountSuccessIllustrationSvg />}
       title={i18next.t('auth.setup.passwordSetupSuccessTitle')}
       description={i18next.t('auth.setup.passwordSetupSuccessDescription')}
       buttonText={i18next.t('auth.setup.buttons.passwordSetupContinueButton')}
-      disabled={!isSuccessDownloadFile}
       onContinue={onContinue}
     >
       <DownloadFile
