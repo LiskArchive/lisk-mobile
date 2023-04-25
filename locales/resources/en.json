@@ -223,7 +223,7 @@
       "restoreFromFile": "Restore from file",
       "downloaded": "Downloaded!",
       "buttons": {
-        "passwordSetupContinueButton": "Continue",
+        "passwordSetupContinueButton": "Continue to wallet",
         "saveAccountButton": "Save account"
       }
     },
