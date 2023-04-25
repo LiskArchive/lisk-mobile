@@ -58,6 +58,8 @@ export default function Stepper({
     sharedData: data,
     reset,
     setShowProgressBar,
+    currentIndex,
+    length: customProgressLength || children.length,
   };
 
   if (currentIndex === children.length - 1) {

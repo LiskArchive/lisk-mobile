@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +12,13 @@ import SwitchButton from 'components/shared/toolBox/switchButton';
 
 import getRegisterSafeKeepingStyles from './styles';
 
-export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgressBar }) {
+export default function RegisterSafeKeeping({
+  passphrase,
+  nextStep,
+  showHeader,
+  currentIndex,
+  length,
+}) {
   const navigation = useNavigation();
 
   const [confirmed, setConfirmed] = useState(false);
@@ -21,27 +27,21 @@ export default function RegisterSafeKeeping({ passphrase, nextStep, setShowProgr
     styles: getRegisterSafeKeepingStyles(),
   });
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerLeft: (props) => (
-        <HeaderBackButton
-          {...props}
-          onPress={navigation.goBack}
-          title={i18next.t('auth.register.title')}
-        />
-      ),
-      title: null,
-    });
-
-    setShowProgressBar(true);
-  }, [navigation, setShowProgressBar]);
-
   const handleConfirm = (status) => setConfirmed(status);
 
   const onContinue = () => nextStep({ passphrase });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
+      {showHeader && (
+        <HeaderBackButton
+          title={'auth.register.title'}
+          onPress={navigation.goBack}
+          withProgressBar
+          currentIndex={currentIndex}
+          length={length}
+        />
+      )}
       <View style={[styles.body]}>
         <H4 style={[styles.title, styles.theme.title]}>
           {i18next.t('auth.register.safeKeeping.title')}

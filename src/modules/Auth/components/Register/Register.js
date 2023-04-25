@@ -1,21 +1,19 @@
 /* eslint-disable max-statements */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { BackHandler, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { BackHandler, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useTheme } from 'contexts/ThemeContext';
 
 import Stepper from 'components/shared/Stepper';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-import { useTheme } from 'contexts/ThemeContext';
 import { generatePassphrase } from '../../utils';
-
 import PassphraseQuiz from '../PassphraseQuiz/PassphraseQuiz';
-import RegisterSuccess from './RegisterSuccess';
 import RegisterSafeKeeping from './RegisterSafeKeeping';
+import PasswordSetupForm from '../PasswordSetupForm';
+
 import getRegisterStyles from './Register.styles';
 
 export default function Register() {
-  const [showNav, setShowNav] = useState(true);
-
   const route = useRoute();
 
   const passphrase = useMemo(
@@ -26,10 +24,6 @@ export default function Register() {
   const { styles } = useTheme({
     styles: getRegisterStyles(),
   });
-
-  const noNavStyle = showNav ? {} : { paddingBottom: 0 };
-
-  const hideNav = () => setShowNav(false);
 
   const onBackButtonPressedAndroid = useCallback(() => {
     const action = route.params?.action ?? false;
@@ -50,14 +44,18 @@ export default function Register() {
   useScreenshotPrevent();
 
   return (
-    <View style={[styles.container, styles.theme.container, noNavStyle]} testID="register-screen">
-      <Stepper showProgressBar customProgressLength={3} styles={{ container: { marginTop: 16 } }}>
-        <RegisterSafeKeeping passphrase={passphrase} />
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <Stepper
+        showProgressBar={false}
+        customProgressLength={3}
+        styles={{ container: { flex: 1, marginTop: 16 } }}
+      >
+        <RegisterSafeKeeping showHeader passphrase={passphrase} />
 
-        <PassphraseQuiz />
+        <PassphraseQuiz showHeader />
 
-        <RegisterSuccess hideNav={hideNav} />
+        <PasswordSetupForm hideNav />
       </Stepper>
-    </View>
+    </SafeAreaView>
   );
 }

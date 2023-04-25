@@ -1,9 +1,9 @@
+/* eslint-disable max-statements */
 import React, { useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import i18next from 'i18next';
-import { Switch } from 'react-native-gesture-handler';
+import SwitchButton from 'components/shared/toolBox/switchButton';
 
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
@@ -11,27 +11,33 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import colors from 'constants/styleGuide/colors';
 import { Controller } from 'react-hook-form';
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
 
-export default function PasswordSetupForm() {
+export default function PasswordSetupForm({
+  sharedData: data,
+  hideNav,
+  move,
+  currentIndex,
+  length,
+}) {
+  useScreenshotPrevent();
+
   const navigation = useNavigation();
 
   const route = useRoute();
 
-  const { passphrase, derivationPath } = route.params;
+  const passphrase = route.params?.passphrase || data.passphrase;
 
-  useScreenshotPrevent();
+  const { derivationPath } = route.params ?? {};
+  const { styles } = useTheme({ styles: getStyles() });
 
   const [
     { handleSubmit, accountNameField, isAgreedField, formState, control },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(passphrase, derivationPath);
-
-  const { styles } = useTheme({ styles: getStyles() });
 
   useEffect(() => {
     if (isSuccess) {
@@ -44,7 +50,17 @@ export default function PasswordSetupForm() {
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
+      {hideNav ? (
+        <HeaderBackButton
+          title="auth.setup.passwordSetupTitle"
+          onPress={() => move({ moves: -1, data })}
+          withProgressBar
+          currentIndex={currentIndex}
+          length={length}
+        />
+      ) : (
+        <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
+      )}
 
       <ScrollView contentContainerStyle={styles.container} testID="password-setup-form">
         <P style={[styles.description, styles.theme.description]}>
@@ -110,10 +126,9 @@ export default function PasswordSetupForm() {
 
         <View style={styles.actionContainer}>
           <View style={styles.switch} testID="agree-switch">
-            <Switch
+            <SwitchButton
               value={isAgreedField.value}
-              onValueChange={(value) => isAgreedField.onChange(value)}
-              trackColor={{ true: colors.light.ultramarineBlue }}
+              onChange={(value) => isAgreedField.onChange(value)}
             />
           </View>
 

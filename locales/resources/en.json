@@ -211,18 +211,19 @@
       "addAccountTitle": "Add account",
       "switchAccount": "Switch account",
       "decryptPassphrase": "Decrypt your secret recovery phrase",
-      "decryptPassphraseError": "Unable to decrypt account. Please check your password",
+      "decryptPassphraseError": "Unable to decrypt account. Please check your password.",
       "encryptPassphraseError": "Unable to encrypt account.",
       "addAccountDescription": "Enter your secret recovery phrase to manage your account.",
-      "passwordSetupTitle": "Set up account password",
+      "passwordSetupTitle": "Set up your account password",
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
       "passwordSetupSuccessTitle": "Perfect! You're all set",
-      "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase.",
+      "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase and use it to add your account on other devices.",
+      "enableDiscreteMode": "Enable discreet mode (optional)",
       "secretPhrase": "Secret recovery phrase",
       "restoreFromFile": "Restore from file",
       "downloaded": "Downloaded!",
       "buttons": {
-        "passwordSetupContinueButton": "Continue",
+        "passwordSetupContinueButton": "Continue to wallet",
         "saveAccountButton": "Save account"
       }
     },
@@ -235,7 +236,7 @@
       "errors": {
         "noEmptyPasswordError": "Password must have a value",
         "noEmptyConfirmPasswordError": "Confirm password must have a value",
-        "passwordRequirementsError": "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character",
+        "passwordRequirementsError": "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character.",
         "passwordsDontMatchError": "Confirm that passwords match"
       }
     }
@@ -446,6 +447,10 @@
       "deleteAccountButtonText": "Remove now",
       "downloadFileButtonText": "Download",
       "backButtonText": "Back"
+    },
+    "editAccount": {
+      "editAccountSuccess": "You can now download encrypted secret recovery phrase to this effect.",
+      "continue": "Continue to wallet"
     },
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",

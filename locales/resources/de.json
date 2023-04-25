@@ -219,6 +219,7 @@
       "passwordSetupDescription": "Dieses Passwort wird verwendet, um Ihre geheime Wiederherstellungsphrase zu verschlüsseln, die für die Verwaltung Ihres Kontos verwendet wird.",
       "passwordSetupSuccessTitle": "Perfekt!",
       "passwordSetupSuccessDescription": "Sie können jetzt verschlüsselte geheime Wiederherstellungsphrasen herunterladen.",
+      "enableDiscreteMode": "",
       "secretPhrase": "Geheime Wiederherstellungsphrase",
       "restoreFromFile": "Aus Datei wiederherstellen",
       "downloaded": "Heruntergeladen!",
@@ -447,6 +448,10 @@
       "deleteAccountButtonText": "Jetzt entfernen",
       "downloadFileButtonText": "Download",
       "backButtonText": "Zurück"
+    },
+    "editAccount": {
+      "editAccountSuccess": "",
+      "continue": ""
     },
     "tokens": "",
     "lockedTokens": "",
