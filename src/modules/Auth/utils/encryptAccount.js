@@ -15,8 +15,8 @@ export const encryptAccount = async ({
     const { encrypt } = cryptography;
     const options = {
       passphrase: recoveryPhrase,
-      enableCustomDerivationPath,
-      derivationPath: enableCustomDerivationPath ? derivationPath : defaultDerivationPath,
+      enableCustomDerivationPath: derivationPath && enableCustomDerivationPath,
+      derivationPath,
     };
     const { privateKey, publicKey, isValid } = await extractKeyPair(options);
     if (!isValid) {
