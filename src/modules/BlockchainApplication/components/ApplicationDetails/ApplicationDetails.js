@@ -23,6 +23,7 @@ import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 import getStyles from './ApplicationDetails.styles';
+import { isColorBright } from '../../../../utilities/colors.utils';
 
 /**
  *
@@ -58,6 +59,10 @@ export default function ApplicationDetails({ route }) {
 
   const handleUrlPress = (url) => Linking.openURL(url);
 
+  const buttonColor = isColorBright(application.backgroundColor)
+    ? colors.dark.headerBg
+    : colors.light.white;
+
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <ScrollView>
@@ -73,7 +78,7 @@ export default function ApplicationDetails({ route }) {
             source={wavesPattern}
             resizeMode="cover"
           >
-            <HeaderBackButton color={colors.dark.white} onPress={navigation.goBack} />
+            <HeaderBackButton color={buttonColor} onPress={navigation.goBack} />
           </ImageBackground>
         )}
 
