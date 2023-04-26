@@ -13,7 +13,7 @@ Lisk Mobile is a cross-platform application written in React Native and primaril
 
 ## Pre-Installation
 
-The prerequisites to install and run Lisk Mobile from source using the different tagged releases are listed bellow. If you don't have them installed on your machine, please run the attached commands from your terminal.
+Please install the required prerequisites to run Lisk Mobile from source.
 
 - [Brew](https://brew.sh/)
 
@@ -57,11 +57,11 @@ The prerequisites to install and run Lisk Mobile from source using the different
 
 ### iOS
 
-- Install the latest version of [Xcode](https://apps.apple.com/ng/app/xcode/id497799835?mt=12)
+- Install the latest version of [Xcode](https://apps.apple.com/ng/app/xcode/id497799835?mt=12) to use simulator
 
 ### Android
 
-- Install [Android Studio](https://developer.android.com/studio/index.html), which sould have these options checked installed:
+- Install [Android Studio](https://developer.android.com/studio/index.html), ensure the below listed options are checked and installed:
   - Android SDK
   - Android SDK Platform
   - Performance (Intel ® HAXM)
@@ -115,14 +115,6 @@ The process is:
 
 More details [here](https://armen-mkrtchian.medium.com/run-cocoapods-on-apple-silicon-and-macos-big-sur-developer-transition-kit-b62acffc1387).
 
-### Run on Android
-
-To run android:
-
-```bash
-$ npm run android
-```
-
 ### Build on iOS
 
 ```bash
@@ -135,6 +127,14 @@ $ npm run build:ios
 $ npm run build:android
 ```
 
+### Run on Android
+
+To run android:
+
+```bash
+$ npm run android
+```
+
 ### Unit Tests
 
 #### Single run
@@ -145,9 +145,9 @@ $ npm run test
 
 ## Development
 
-You can run the project in Xcode and use iOS simulators or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more info.
+You can run the project in Xcode and use iOS simulators, or alternatively use Android simulators. There are several options to set up your Android development environment. Please read [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for more information.
 
-There is a standalone app for debugging React Native. it has React and Redux debugger enabled by default. Please read [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more info.
+There is a standalone app for debugging React Native. It has React and Redux debugger enabled by default. Please read [React Native Debugger](https://github.com/jhen0409/react-native-debugger) for more information.
 
 ### Possible Errors for Mac Users
 
@@ -159,7 +159,7 @@ If you face this error when trying to run the app:
 /Users/***/Library/Developer/Xcode/DerivedData/Lisk-***/Build/Products/Debug-iphonesimulator/lottie-ios/Lottie.modulemap
 ```
 
-Follow this steps to solve it:
+Follow these steps to solve it:
 
 1. Add the following to the end of your Podfile (especially M1 users)
 
@@ -203,6 +203,7 @@ sdk.dir=/Users/username/Library/Android/sdk
 ```
 
 OR
+
 Set the environmental PATH to your sdk installation location.
 
 ### Using Commercial Fonts
