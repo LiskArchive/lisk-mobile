@@ -1,4 +1,4 @@
-![Logo](./src/assets/images/banner_mobile.png)
+![Logo](./docs/assets/banner_mobile.png)
 # Lisk Mobile
 
 [![Build Status](https://jenkins.lisk.com/buildStatus/icon?job=lisk-mobile/development)](https://jenkins.lisk.com/job/lisk-mobile/job/development)
