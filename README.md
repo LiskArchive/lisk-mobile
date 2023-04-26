@@ -9,7 +9,7 @@
 
 Lisk Mobile is a cross-platform application written in React Native and primarily built for iOS and Android. It provides the users with all the functionality they need to send and receive LSK tokens, as well as review the activity history of their or any other account on the Lisk blockchain.
 
-[![Get it from iTunes](https://media.lisk.com/init/ios_app_store_a60c851728.png)](https://itunes.apple.com/us/app/lisk/id1436809559?mt=8) [![Get it on Google Play](https://media.lisk.com/init/google_store_912cd733ee.png)](https://play.google.com/store/apps/details?id=io.lisk.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+[![Get it from iTunes](https://media.lisk.com/init/ios_app_store_a60c851728.png?auto=compress,format&fit=max&w=96&q=80)](https://itunes.apple.com/us/app/lisk/id1436809559?mt=8) [![Get it on Google Play](https://media.lisk.com/init/google_store_912cd733ee.png?auto=compress,format&fit=max&w=96&q=80)](https://play.google.com/store/apps/details?id=io.lisk.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
 ## Pre-Installation
 
