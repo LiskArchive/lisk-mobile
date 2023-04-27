@@ -12,9 +12,12 @@ import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { Controller } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
+import { useModal } from '../../../../hooks/useModal';
+import EnableBioAuth from '../../../../components/screens/enableBioAuth';
 
 export default function PasswordSetupForm({
   sharedData: data,
@@ -34,10 +37,31 @@ export default function PasswordSetupForm({
   const { derivationPath } = route.params ?? {};
   const { styles } = useTheme({ styles: getStyles() });
 
+  const { sensorType } = useSelector((state) => state.settings);
+
   const [
-    { handleSubmit, accountNameField, isAgreedField, formState, control },
+    { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(passphrase, derivationPath);
+
+  const biometricsModal = useModal();
+
+  const encryptAccount = () => {
+    if (!Object.keys(formState.errors).length) {
+      if (sensorType) {
+        biometricsModal.open(
+          <EnableBioAuth
+            onSubmit={() => {
+              isBiometricsEnabled.onChange(true);
+              handleSubmit();
+            }}
+          />
+        );
+      } else {
+        handleSubmit();
+      }
+    }
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -140,7 +164,7 @@ export default function PasswordSetupForm({
 
       <View style={[styles.footer]}>
         <PrimaryButton
-          onPress={handleSubmit}
+          onPress={encryptAccount}
           disabled={!isAgreedField.value || isLoading}
           testID="save-account"
         >

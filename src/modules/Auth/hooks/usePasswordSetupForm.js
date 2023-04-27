@@ -63,6 +63,7 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
       confirmPassword: '',
       accountName: '',
       isAgreed: false,
+      isBiometricsEnabled: false,
     },
     resolver: yupResolver(validationSchema),
     mode: 'onTouched',
@@ -83,7 +84,9 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
 
       const address = data?.metadata.address;
 
-      await storeAccountPasswordInKeyChain(address, values.password);
+      if (values.isBiometricsEnabled) {
+        await storeAccountPasswordInKeyChain(address, values.password);
+      }
 
       setEncryptedAccount(data);
       setAccount(data);
@@ -121,6 +124,11 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
     control: form.control,
   });
 
+  const { field: isBiometricsEnabled } = useController({
+    name: 'isBiometricsEnabled',
+    control: form.control,
+  });
+
   return [
     {
       ...form,
@@ -129,6 +137,7 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
       confirmPasswordField,
       accountNameField,
       isAgreedField,
+      isBiometricsEnabled,
     },
     {
       encryptedAccount,

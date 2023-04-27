@@ -12,7 +12,7 @@ import { settingsUpdated } from 'modules/Settings/store/actions';
 import { bioMetricAuthentication } from 'modules/Auth/utils/passphrase';
 import getStyles from './styles';
 
-const EnableBioAuth = () => {
+const EnableBioAuth = ({ onSubmit }) => {
   const { styles, theme } = useTheme({ styles: getStyles() });
   const dispatch = useDispatch();
   const modal = useModal();
@@ -23,6 +23,9 @@ const EnableBioAuth = () => {
       successCallback: () => {
         modal.close();
         dispatch(settingsUpdated({ biometricsEnabled: true }));
+        if (onSubmit) {
+          onSubmit();
+        }
       },
     });
   };
