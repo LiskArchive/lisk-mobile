@@ -14,15 +14,15 @@
 
 ## How to contribute
 
-First and foremost, we would like to thank you for taking the time to contribute to this project. We try to create a stable project, fix bugs and add new features continuously. You can help us do more.
+First and foremost, we would like to thank you for taking the time to contribute to this project. Our goal is to create a stable project, fix bugs, and continually update and add new features. You can help us do more.
 
 Before you start, read the **[README.md](/README.md)** file for info on the project and how to set it up.
 
 ## Reporting issues
 
-1.  Check if the issues are already reported in the [issues tab](https://github.com/LiskHQ/lisk-mobile/issues)
-2.  If not, create a new [issue](https://github.com/LiskHQ/lisk-mobile/issues/new/choose)
-3.  Please provide comprehensive issue details 
+1.  Check if the issues are already reported in the [issues tab](https://github.com/LiskHQ/lisk-mobile/issues).
+2.  If not, create a new [issue](https://github.com/LiskHQ/lisk-mobile/issues/new/choose).
+3.  Please provide comprehensive details in the new issue. 
 4.  Click `Submit new issue`
 
 ##### Guidance
@@ -67,9 +67,9 @@ When you're done, submit a pull request and for one of the maintainers to check 
 ## Pull Requests
 
 - Title
-  - Use the imperative mood ("Fix bug" not "Fixed bug")
-  - Use this structure `[What the PR is about]` it will automatically close issue after PR will get merged.
-    ex. `Fix bug`
+  - Use the imperative mood ("Fix bug" not "Fixed bug").
+  - Use this structure `[What the PR is about]` it will automatically close the issue after the PR is merged.
+    ex. `Fix bug`.
 - Description
   - Fill our [description template](/.github/pull_request_template.md)
 - Base branch
