@@ -42,35 +42,32 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
   return (
     <SwipeableRow
       style={[styles.itemContainer, styles.theme.itemContainer]}
-      leftActions={
-        !isInvalidAddress && [
-          {
-            title: 'Edit',
-            color: colors.dark.blueGray,
-            testID: 'edit-bookmark',
-            icon: () => (
-              <Icon
-                name="edit-bookmark"
-                size={20}
-                style={[isInvalidAddress && { opacity: 0.5 }]}
-                color={colors[theme].white}
-              />
-            ),
-            onPress: () =>
-              navigation.navigate({
-                name: 'AddBookmark',
-                params: {
-                  account: data,
-                  title: t('Edit bookmark'),
-                },
-              }),
-          },
-        ]
-      }
       rightActions={[
+        !isInvalidAddress && {
+          title: 'Edit',
+          color: colors.dark.blueGray,
+          testID: 'edit-bookmark',
+          icon: () => (
+            <Icon
+              name="edit-bookmark"
+              size={20}
+              style={[isInvalidAddress && { opacity: 0.5 }]}
+              color={colors[theme].white}
+            />
+          ),
+          onPress: () =>
+            navigation.navigate({
+              name: 'AddBookmark',
+              params: {
+                account: data,
+                title: t('Edit bookmark'),
+              },
+            }),
+        },
+
         {
           title: 'Delete',
-          color: colors.light.burntSieanna,
+          color: colors.light.furyRed,
           testID: 'delete-bookmark',
           icon: () => (
             <Icon
