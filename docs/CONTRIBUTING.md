@@ -14,22 +14,15 @@
 
 ## How to contribute
 
-First and foremost, we would like to thank you for taking the time to contribute to this project. :tada::tada::tada:
-We try to create a stable project, fix bugs and add new features continuously. You can help us do more.
+First and foremost, we would like to thank you for taking the time to contribute to this project. Our goal is to create a stable project, fix bugs, and continually update and add new features. You can help us do more.
 
 Before you start, read the **[README.md](/README.md)** file for info on the project and how to set it up.
 
-## Finding first issue
-
-Go to [issues tab](https://github.com/LiskHQ/lisk-mobile/issues) and look for
-
-_✏️ `good first issue`_ - it is a label for tasks that are perfect for people who want to start with lisk-mobile.
-
 ## Reporting issues
 
-1.  Check if problem already exist in [issues tab](https://github.com/LiskHQ/lisk-mobile/issues)
-2.  If not, create a new [issue](https://github.com/LiskHQ/lisk-mobile/issues/new/choose)
-3.  Fill our [template](/.github/issue_template.md)
+1.  Check if the issues are already reported in the [issues tab](https://github.com/LiskHQ/lisk-mobile/issues).
+2.  If not, create a new [issue](https://github.com/LiskHQ/lisk-mobile/issues/new/choose).
+3.  Please provide comprehensive details in the new issue. 
 4.  Click `Submit new issue`
 
 ##### Guidance
@@ -40,7 +33,7 @@ _✏️ `good first issue`_ - it is a label for tasks that are perfect for peopl
 
 ##### Example
 
-![Alt text](/.github/issue.png?raw=true 'Perfect Issue')
+![Alt text](./assets/issue.png?raw=true 'Perfect Issue')
 
 :heavy_exclamation_mark: Issues created that are not relevant to this project will be closed immediately.
 
@@ -74,21 +67,13 @@ When you're done, submit a pull request and for one of the maintainers to check 
 ## Pull Requests
 
 - Title
-  - Use the imperative mood ("Fix bug" not "Fixed bug")
-  - Use this structure `[What the PR is about] - Closes #[issue number]` it will automatically close issue after PR will get merged.
-    ex. `Fix bug - Closes #123`
+  - Use the imperative mood ("Fix bug" not "Fixed bug").
+  - Use this structure `[What the PR is about]` it will automatically close the issue after the PR is merged.
+    ex. `Fix bug`.
 - Description
   - Fill our [description template](/.github/pull_request_template.md)
-- Labels
-  - Use labels accordingly to current condition of PR
-    - :eye: `pending review` - When PR is ready to Review
-    - :building_construction: `in progress` - When there are still some changes to do on your PR
-    - :white_check_mark: `ready` - After your PR gets approved and merged
 - Base branch
   - Make sure that base branch of PR is the same one as issue version project, e.g. the branch for Project `Version 0.1.0` is `0.1.0`.
-- Projects
-  - Assign version according to issue version
-  - Assign sprint according to issue sprint
 
 ##### Guidance
 
@@ -98,7 +83,7 @@ When you're done, submit a pull request and for one of the maintainers to check 
 
 ##### Example
 
-![Alt text](/.github/pr.png?raw=true 'Perfect PR')
+![Alt text](./assets/pr.png?raw=true 'Perfect PR')
 
 ### Creating branch
 
