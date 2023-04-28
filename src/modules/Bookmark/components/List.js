@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+
+import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import { validateAddress } from 'utilities/validators';
 import withTheme from 'components/shared/withTheme';
 import { DraggableItem, Item } from './Item';
@@ -9,9 +10,9 @@ const List = ({ list, onPress, draggable, Component }) => {
   const Element = Component || (draggable ? DraggableItem : Item);
 
   return (
-    <FlatList
+    <InfiniteScrollList
       data={list}
-      renderItem={({ item }) => (
+      renderItem={(item) => (
         <Element
           showAvatar
           onPress={onPress}

@@ -87,38 +87,34 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => !isInvalidAddress && onPress(data)}
-        style={[styles.row, styles.swipeBookmark]}
+        style={[styles.row, styles.innerContainer]}
       >
-        <View style={[styles.innerContainer]}>
-          {showAvatar ? (
-            <View
-              style={[
-                styles.itemColumn,
-                styles.avatarContainer,
-                isInvalidAddress && styles.lightOpacity,
-              ]}
-            >
-              <Avatar address={data.address} size={43} style={styles.theme.avatar} />
-            </View>
-          ) : null}
-          <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
-            <B style={[styles.address, styles.theme.address]}>{data.label}</B>
-            <Small style={[styles.label, styles.theme.label]}>
-              {stringShortener(data.address, 6, 5)}
-            </Small>
-          </View>
-          {isInvalidAddress && (
-            <View>
-              <TouchableOpacity style={styles.infoButton} onPress={openDisabledModal}>
-                <WarningSvg
-                  color={
-                    theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist
-                  }
-                />
-              </TouchableOpacity>
-            </View>
-          )}
+        {showAvatar && (
+          <Avatar
+            address={data.address}
+            size={40}
+            style={[
+              styles.theme.avatar,
+              styles.avatarContainer,
+              isInvalidAddress && styles.lightOpacity,
+            ]}
+          />
+        )}
+
+        <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
+          <B style={[styles.address, styles.theme.address]}>{data.label}</B>
+          <Small style={[styles.label, styles.theme.label]}>
+            {stringShortener(data.address, 6, 5)}
+          </Small>
         </View>
+
+        {isInvalidAddress && (
+          <TouchableOpacity style={styles.infoButton} onPress={openDisabledModal}>
+            <WarningSvg
+              color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist}
+            />
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     </SwipeableRow>
   );

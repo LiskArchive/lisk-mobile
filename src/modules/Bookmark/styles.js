@@ -1,11 +1,15 @@
 import { Platform } from 'react-native';
-import { themes, colors, fonts } from 'constants/styleGuide';
+import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
     container: {
       flex: 1,
+    },
+    body: {
+      flex: 1,
+      padding: boxes.boxPadding,
     },
     titleContainer: {
       backgroundColor: colors.light.ultramarineBlue,
