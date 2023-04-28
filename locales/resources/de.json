@@ -85,9 +85,7 @@
   "Disable bioAuth": "{{sensorType}} deaktivieren",
   "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
   "Error": "Fehler",
-  "Unparsed Address": "Unbekannte Adresse",
-  "Are you sure about deleting this bookmark?": "Bist du sicher, dass du dieses Lesezeichen löschen willst?",
-  "Delete this bookmark": "Dieses Lesezeichen löschen",
+  "Unparsed Address": "Unbekannte Adresse",  
   "You will be able to add it again anytime.": "Du kannst es jederzeit wieder hinzufügen.",
   "We’ve got good news!": "Gute Neuigkeiten für dich!",
   "Info": "Info",
@@ -168,6 +166,12 @@
       "invalidLabel": "",
       "invalidAddress": "",
       "required": ""
+    },
+    "deleteBookmark": {
+      "title": "Lesezeichen löschen",
+      "description": "Möchten Sie dieses Konto wirklich löschen? Sie können das Konto erneut hinzufügen.",
+      "submitButton": "Bestätigen und löschen",
+      "cancelButton": "Abbrechen"
     },
     "disabled": {
       "title": "",
