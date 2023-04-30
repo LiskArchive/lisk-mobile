@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LogBox, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { useTheme } from 'contexts/ThemeContext';
+import { validatePassphrase } from 'modules/Auth/utils';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { settingsRetrieved, settingsUpdated } from 'modules/Settings/store/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -20,6 +21,8 @@ import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
 import { selectEncryptedFile } from '../../utils/documentPicker';
+import { getPassphraseFromKeyChain } from '../../utils/passphrase';
+import Version2Migration from '../Version2Migration';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -29,6 +32,7 @@ export default function AuthMethod({ route }) {
 
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
+  const [v2Passphrase, setV2Passphrase] = useState('');
 
   const { accounts } = useAccounts();
 
@@ -60,7 +64,21 @@ export default function AuthMethod({ route }) {
     } else {
       navigation.push('Intro');
     }
-  }, [accounts.length, route.params?.authRequired, settings.showedIntro]);
+  }, [accounts.length, settings.showedIntro]);
+
+  const checkVersion2Migration = async () => {
+    const { password: passphrase } = await getPassphraseFromKeyChain();
+    const validity = validatePassphrase(passphrase);
+    if (!validity.length && !accounts.length) {
+      setV2Passphrase(passphrase);
+    }
+  };
+
+  useEffect(() => {
+    if (settings.showedIntro) {
+      checkVersion2Migration();
+    }
+  }, [settings.showedIntro]);
 
   const selectEncryptedJSON = async () => {
     try {
@@ -84,7 +102,9 @@ export default function AuthMethod({ route }) {
 
   const showBackButton = accounts.length > 0;
 
-  return (
+  return v2Passphrase ? (
+    <Version2Migration passphrase={v2Passphrase} />
+  ) : (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
       {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
 

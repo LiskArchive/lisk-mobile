@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable complexity */
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -22,11 +22,13 @@ import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
 import { useModal } from '../../hooks/useModal';
+import { getAccountPasswordFromKeyChain } from '../Auth/utils/passphrase';
 
 // eslint-disable-next-line max-statements
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
+  const [biometricsEnabled, setBiometricsEnabled] = useState(false);
   const [account] = useCurrentAccount();
   const modal = useModal();
 
@@ -73,9 +75,16 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     }
   };
 
-  const sensorStatus = (
-    <SwitchButton value={settings.biometricsEnabled} onChange={toggleBiometrics} />
-  );
+  const checkBiometricsFeature = async () => {
+    const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
+    setBiometricsEnabled(accountPassword && settings.biometricsEnabled);
+  };
+
+  useEffect(() => {
+    checkBiometricsFeature();
+  }, [settings.biometricsEnabled]);
+
+  const sensorStatus = <SwitchButton value={biometricsEnabled} onChange={toggleBiometrics} />;
 
   return (
     <NavigationSafeAreaView>
