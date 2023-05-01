@@ -8,10 +8,12 @@ import { translate } from 'react-i18next';
 import { H4, P } from 'components/shared/toolBox/typography';
 import FingerprintOverlay from 'components/shared/fingerprintOverlay';
 import { themes } from 'constants/styleGuide';
+import Stepper from 'components/shared/Stepper';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import Checkbox from 'components/shared/Checkbox';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
+import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
@@ -71,7 +73,22 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     if (settings.biometricsEnabled) {
       modal.open(() => <DisableBioAuth />);
     } else {
-      modal.open(() => <EnableBioAuth />);
+      modal.open(() => (
+        <Stepper>
+          <DecryptPassphrase
+            account={account}
+            route={{
+              params: {
+                address: account.metadata.address,
+                title: 'settings.backupPhrase.title',
+              },
+            }}
+            showsHeader={false}
+            navigation={navigation}
+          />
+          <EnableBioAuth />
+        </Stepper>
+      ));
     }
   };
 

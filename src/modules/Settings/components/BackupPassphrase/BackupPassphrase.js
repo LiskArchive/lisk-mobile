@@ -34,6 +34,7 @@ export default function BackupPassphrase() {
               title: 'settings.backupPhrase.title',
             },
           }}
+          navigation={navigation}
         />
         <CopyPassphrase />
         <PassphraseQuiz customHeader />

@@ -9,18 +9,25 @@ import Icon from 'components/shared/toolBox/icon';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import i18next from 'i18next';
 import { settingsUpdated } from 'modules/Settings/store/actions';
-import { bioMetricAuthentication } from 'modules/Auth/utils/passphrase';
+import {
+  bioMetricAuthentication,
+  storeAccountPasswordInKeyChain,
+} from 'modules/Auth/utils/passphrase';
 import getStyles from './styles';
 
-const EnableBioAuth = ({ onSubmit }) => {
+const EnableBioAuth = ({ onSubmit, sharedData = {} }) => {
   const { styles, theme } = useTheme({ styles: getStyles() });
+  const { address, password } = sharedData;
   const dispatch = useDispatch();
   const modal = useModal();
   const { sensorType } = useSelector((state) => state.settings);
 
   const confirm = () => {
     bioMetricAuthentication({
-      successCallback: () => {
+      successCallback: async () => {
+        if (password && address) {
+          await storeAccountPasswordInKeyChain(address, password);
+        }
         modal.close();
         dispatch(settingsUpdated({ biometricsEnabled: true }));
         if (onSubmit) {
