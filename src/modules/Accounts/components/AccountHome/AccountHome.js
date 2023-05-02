@@ -30,17 +30,14 @@ function AccountHome() {
   const [currentAccount] = useCurrentAccount();
 
   const { refetch: refetchTokens, isRefetching: isRefetchingTokens } =
-    useAccountTokensFullDataQuery(currentAccount?.metadata.address, {
+    useAccountTokensFullDataQuery(currentAccount.metadata.address, {
       config: {
         params: { limit: NO_OF_TOKENS_ON_OVERVIEW },
-      },
-      options: {
-        enabled: !!currentAccount?.metadata,
       },
     });
 
   const { refetch: refetchTransactions, isRefetching: isRefetchingTransactions } =
-    useAccountTransactionsQuery(currentAccount?.metadata.address, {
+    useAccountTransactionsQuery(currentAccount.metadata.address, {
       config: {
         params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
       },
