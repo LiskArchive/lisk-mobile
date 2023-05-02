@@ -30,16 +30,16 @@ export default function Bookmarks() {
 
   return (
     <NavigationSafeAreaView>
-      <View style={{ flex: 1 }}>
-        <HeaderSearchBar
-          title={'Bookmarks'}
-          noIcon
-          onChange={handleSearchTermChange}
-          value={search.term}
-          isSearchOpen={isSearchOpen}
-          setIsSearchOpen={(val) => setIsSearchOpen(val)}
-        />
+      <HeaderSearchBar
+        title={'Bookmarks'}
+        noIcon
+        onChange={handleSearchTermChange}
+        value={search.term}
+        isSearchOpen={isSearchOpen}
+        setIsSearchOpen={(val) => setIsSearchOpen(val)}
+      />
 
+      <View style={[styles.body]}>
         <BookmarkList draggable query={search.term} renderEmpty onPress={handlePress} />
 
         <TouchableOpacity
