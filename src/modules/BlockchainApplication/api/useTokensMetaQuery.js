@@ -1,6 +1,6 @@
 import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
 import { GET_TOKENS_METADATA_QUERY } from 'utilities/api/queries';
-import { LIMIT, API_URL, NETWORK } from 'utilities/api/constants';
+import { LIMIT, API_URL } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
 
@@ -10,7 +10,7 @@ export function getTokensMetaQueryConfig(customConfig = {}) {
     method: 'get',
     event: 'get.blockchain.apps.meta.tokens',
     ...customConfig,
-    params: { network: NETWORK, limit: LIMIT, ...customConfig.params },
+    params: { limit: LIMIT, ...customConfig.params },
   };
 }
 
