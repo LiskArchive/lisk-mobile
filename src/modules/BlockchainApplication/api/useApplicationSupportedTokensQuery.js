@@ -17,7 +17,7 @@ export function useApplicationSupportedTokensQuery(application) {
 
   toApplicationApiClient.current.create(application?.serviceURLs[0]);
 
-  const [currentAccount] = useCurrentAccount;
+  const [currentAccount] = useCurrentAccount();
 
   const {
     data: { data: accountTokensFullData } = {},
