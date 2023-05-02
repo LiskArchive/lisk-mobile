@@ -40,7 +40,7 @@ function AccountHome() {
     });
 
   const { refetch: refetchTransactions, isRefetching: isRefetchingTransactions } =
-    useAccountTransactionsQuery(currentAccount.metadata.address, {
+    useAccountTransactionsQuery(currentAccount?.metadata.address, {
       config: {
         params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
       },
