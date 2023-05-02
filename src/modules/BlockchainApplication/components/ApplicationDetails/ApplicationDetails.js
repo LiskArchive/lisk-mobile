@@ -59,7 +59,7 @@ export default function ApplicationDetails({ route }) {
 
   const handleUrlPress = (url) => Linking.openURL(url);
 
-  const buttonColor = isColorBright(application.backgroundColor)
+  const buttonColor = isColorBright(application?.backgroundColor)
     ? colors.dark.headerBg
     : colors.light.white;
 
