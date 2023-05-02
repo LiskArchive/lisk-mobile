@@ -71,6 +71,32 @@ export const removePassphraseFromKeyChain = async (
 export const getPassphraseFromKeyChain = () => getGenericPassword({ service: 'io.lisk.mobile' });
 
 /**
+ * Removes the account password and address on the keychain of the device
+ */
+export const removeAccountPasswordFromKeychain = async (address) => {
+  const uniqueId = getUniqueId();
+  const db = await getPassphraseFromKeyChain();
+  let deviceAccounts = {};
+  try {
+    const previousAccounts = JSON.parse(db.password);
+    if (
+      previousAccounts &&
+      typeof previousAccounts === 'object' &&
+      !Array.isArray(previousAccounts)
+    ) {
+      deviceAccounts = previousAccounts;
+    }
+  } catch (error) {
+    deviceAccounts = {};
+  }
+  delete deviceAccounts[address];
+  await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
+    accessGroup: '58UK9RE9TP.io.lisk.mobile',
+    service: 'io.lisk.mobile',
+  });
+};
+
+/**
  * @param {string} address
  * @returns {string | Error} password to account or error object if not found
  * fetch account password from keychain

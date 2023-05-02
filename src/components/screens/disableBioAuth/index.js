@@ -1,12 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useModal } from 'hooks/useModal';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useDispatch, useSelector } from 'react-redux';
 import { B, Small } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import i18next from 'i18next';
-import { bioMetricAuthentication } from 'modules/Auth/utils/passphrase';
+import {
+  bioMetricAuthentication,
+  removeAccountPasswordFromKeychain,
+} from 'modules/Auth/utils/passphrase';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import getStyles from './styles';
 
@@ -15,10 +19,12 @@ const DisableBioAuth = () => {
   const dispatch = useDispatch();
   const modal = useModal();
   const { sensorType } = useSelector((state) => state.settings);
+  const [account] = useCurrentAccount();
 
   const confirm = () => {
     bioMetricAuthentication({
       successCallback: () => {
+        removeAccountPasswordFromKeychain(account.metadata.address);
         modal.close();
         dispatch(settingsUpdated({ biometricsEnabled: false }));
       },
