@@ -1,8 +1,9 @@
 import { useMemo, useRef } from 'react';
 
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useAccountTokensFullDataQuery } from 'modules/Accounts/api/useAccountTokensFullDataQuery';
 import { APIClient } from 'utilities/api/APIClient';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
-import { useAccountTokensFullDataQuery } from '../../Accounts/api/useAccountTokensFullDataQuery';
 
 /**
  * Fetch list of supported tokens for a given account and blockchain application.
@@ -16,13 +17,19 @@ export function useApplicationSupportedTokensQuery(application) {
 
   toApplicationApiClient.current.create(application?.serviceURLs[0]);
 
+  const [currentAccount] = useCurrentAccount;
+
   const {
     data: { data: accountTokensFullData } = {},
     isLoading: isAccountTokensFullDataLoading,
     isError: isAccountTokensFullDataError,
     error: errorOnAccountTokensFullData,
     isSuccess: isSuccessAccountTokensFullData,
-  } = useAccountTokensFullDataQuery();
+  } = useAccountTokensFullDataQuery(currentAccount?.metadata.address, {
+    options: {
+      enabled: !!currentAccount?.metadata,
+    },
+  });
 
   const {
     data: { data: { supportedTokens: supportedTokensData } = {} } = {},
