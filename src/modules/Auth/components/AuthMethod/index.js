@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LogBox, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
@@ -26,7 +26,8 @@ LogBox.ignoreAllLogs();
 
 export default function AuthMethod({ route }) {
   const navigation = useNavigation();
-
+  const timeout = useRef();
+  const [isScreenReady, setScreenReady] = useState(false);
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
@@ -53,7 +54,6 @@ export default function AuthMethod({ route }) {
     if (settings.showedIntro) {
       setBiometricSensorType();
       dispatch(settingsRetrieved());
-
       if (accounts.length && !route.params?.authRequired) {
         navigation.navigate('AccountsManagerScreen');
       }
@@ -61,6 +61,11 @@ export default function AuthMethod({ route }) {
       navigation.push('Intro');
     }
   }, [accounts.length, route.params?.authRequired, settings.showedIntro]);
+
+  useEffect(() => {
+    timeout.current = setTimeout(() => setScreenReady(true), 500);
+    return () => clearTimeout(timeout.current);
+  }, []);
 
   const selectEncryptedJSON = async () => {
     try {
@@ -83,6 +88,10 @@ export default function AuthMethod({ route }) {
   const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
 
   const showBackButton = accounts.length > 0;
+
+  if (!isScreenReady) {
+    return <SafeAreaView style={[styles.container, styles.theme.container]}></SafeAreaView>;
+  }
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
