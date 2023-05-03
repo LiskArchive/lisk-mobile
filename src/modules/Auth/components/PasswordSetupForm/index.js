@@ -8,16 +8,16 @@ import SwitchButton from 'components/shared/toolBox/switchButton';
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import EnableBioAuth from 'components/screens/enableBioAuth';
 import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { Controller } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { useModal } from 'hooks/useModal';
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
-import { useModal } from '../../../../hooks/useModal';
-import EnableBioAuth from '../../../../components/screens/enableBioAuth';
 
 export default function PasswordSetupForm({
   sharedData: data,

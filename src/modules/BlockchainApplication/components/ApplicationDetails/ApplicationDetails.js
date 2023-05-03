@@ -18,12 +18,12 @@ import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
+import { isColorBright } from 'utilities/colors.utils';
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 import getStyles from './ApplicationDetails.styles';
-import { isColorBright } from '../../../../utilities/colors.utils';
 
 /**
  *

@@ -4,9 +4,9 @@ import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 import { P, H2 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
+import MigrateIllustration from 'assets/svgs/MigrateIllustration';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import getStyles from './styles';
-import MigrateIllustration from '../../../../assets/svgs/MigrateIllustration';
 
 const Version2Migration = ({ passphrase }) => {
   const navigation = useNavigation();

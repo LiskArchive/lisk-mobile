@@ -16,6 +16,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store
 import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/passphrase';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -24,7 +25,6 @@ import PrivacySvg from 'assets/svgs/PrivacySvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
 import { useModal } from '../../hooks/useModal';
-import { getAccountPasswordFromKeyChain } from '../Auth/utils/passphrase';
 
 // eslint-disable-next-line max-statements
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {

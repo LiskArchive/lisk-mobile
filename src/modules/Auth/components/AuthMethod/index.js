@@ -102,9 +102,11 @@ export default function AuthMethod({ route }) {
 
   const showBackButton = accounts.length > 0;
 
-  return v2Passphrase ? (
-    <Version2Migration passphrase={v2Passphrase} />
-  ) : (
+  if (v2Passphrase) {
+    return <Version2Migration passphrase={v2Passphrase} />;
+  }
+
+  return (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
       {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
 
