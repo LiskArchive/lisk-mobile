@@ -1,33 +1,33 @@
 import React from 'react';
 import { View } from 'react-native';
 import { translate } from 'react-i18next';
-import { A, Small } from 'components/shared/toolBox/typography';
-import { Button } from 'components/shared/toolBox/button';
+
+import { H3, P } from 'components/shared/toolBox/typography';
+import { Button, LabelButton } from 'components/shared/toolBox/button';
 import withTheme from 'components/shared/withTheme';
 import getStyles from './styles';
 
 const DeleteBookmark = ({ styles, t, close, onDelete }) => {
   return (
     <View style={styles.container}>
-      <Small style={[styles.text, styles.theme.text]}>
-        {t('Are you sure about deleting this bookmark?')}
-      </Small>
+      <H3 style={[styles.title, styles.theme.title]}>{t('bookmarks.deleteBookmark.title')}</H3>
 
-      <Small style={[styles.text, styles.theme.text]}>
-        {t('You will be able to add it again anytime.')}
-      </Small>
+      <P style={[styles.description, styles.theme.description]}>
+        {t('bookmarks.deleteBookmark.description')}
+      </P>
 
       <Button
-        style={[styles.actionButton, styles.theme.actionButton]}
-        textStyle={[styles.buttonText, styles.theme.buttonText]}
-        onClick={onDelete}
-        title={t('Delete this bookmark')}
+        style={[styles.button, styles.theme.submitButton]}
+        textStyle={[styles.theme.buttonText]}
+        onPress={onDelete}
         testID="delete-bookmark-button"
-      />
+      >
+        {t('bookmarks.deleteBookmark.submitButton')}
+      </Button>
 
-      <A onPress={close} style={styles.theme.cancelButton}>
-        {t('Cancel')}
-      </A>
+      <LabelButton style={[styles.button]} onPress={close}>
+        {t('bookmarks.deleteBookmark.cancelButton')}
+      </LabelButton>
     </View>
   );
 };

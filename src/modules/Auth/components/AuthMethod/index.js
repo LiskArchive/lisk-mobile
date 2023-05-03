@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LogBox, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
@@ -29,7 +29,8 @@ LogBox.ignoreAllLogs();
 
 export default function AuthMethod({ route }) {
   const navigation = useNavigation();
-
+  const timeout = useRef();
+  const [isScreenReady, setScreenReady] = useState(false);
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
   const [v2Passphrase, setV2Passphrase] = useState('');
@@ -57,7 +58,6 @@ export default function AuthMethod({ route }) {
     if (settings.showedIntro) {
       setBiometricSensorType();
       dispatch(settingsRetrieved());
-
       if (accounts.length && !route.params?.authRequired) {
         navigation.navigate('AccountsManagerScreen');
       }
@@ -80,6 +80,11 @@ export default function AuthMethod({ route }) {
     }
   }, [settings.showedIntro]);
 
+  useEffect(() => {
+    timeout.current = setTimeout(() => setScreenReady(true), 500);
+    return () => clearTimeout(timeout.current);
+  }, []);
+
   const selectEncryptedJSON = async () => {
     try {
       const encryptedData = await selectEncryptedFile();
@@ -101,6 +106,10 @@ export default function AuthMethod({ route }) {
   const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
 
   const showBackButton = accounts.length > 0;
+
+  if (!isScreenReady) {
+    return <SafeAreaView style={[styles.container, styles.theme.container]}></SafeAreaView>;
+  }
 
   if (v2Passphrase) {
     return <Version2Migration passphrase={v2Passphrase} />;

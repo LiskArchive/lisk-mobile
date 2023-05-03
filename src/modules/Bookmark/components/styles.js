@@ -11,9 +11,6 @@ export default () => ({
       paddingLeft: 20,
       flex: 1,
     },
-    swipeBookmark: {
-      paddingHorizontal: 20,
-    },
     column: {
       flex: 1,
     },
@@ -30,8 +27,6 @@ export default () => ({
     itemContainer: {
       flex: 1,
       width: '100%',
-      paddingTop: 10,
-      paddingBottom: 10,
       borderBottomWidth: 1,
     },
     infoButton: {
@@ -66,7 +61,7 @@ export default () => ({
       paddingBottom: 4,
     },
     avatarContainer: {
-      paddingRight: 15,
+      marginRight: 16,
     },
     avatar: {
       borderWidth: 1,

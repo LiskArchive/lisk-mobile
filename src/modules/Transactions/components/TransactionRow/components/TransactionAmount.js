@@ -48,8 +48,7 @@ export function TransactionAmount({ transaction, style, address }) {
 
         return (
           <P style={[transactionAssets.amount?.style, style]}>
-            {transactionAssets.amount?.sign}
-
+            {`${transactionAssets.amount?.sign} `}
             <FormattedNumber language={language} tokenType={token.symbol}>
               {transactionAmount}
             </FormattedNumber>

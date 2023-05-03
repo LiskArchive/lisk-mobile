@@ -1,60 +1,54 @@
-import { themes, colors, fonts, boxes } from 'constants/styleGuide';
-import { deviceWidth } from 'utilities/device';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
     container: {
       flex: 1,
-      alignItems: 'center',
     },
-    text: {
-      textAlign: 'center',
-      lineHeight: 22,
-    },
-    actionButton: {
-      width: deviceWidth() - boxes.boxPadding * 2,
-      height: boxes.buttonHeight,
-      borderWidth: 1,
-      borderRadius: boxes.buttonBorderRadius,
-      margin: boxes.boxPadding,
+    title: {
+      fontFamily: fonts.family.heading,
+      fontSize: fonts.size.h3,
+      marginBottom: 16,
       textAlign: 'center',
     },
-    buttonText: {
-      lineHeight: boxes.buttonHeight,
-      fontSize: fonts.size.base,
+    description: {
       fontFamily: fonts.family.context,
+      fontSize: fonts.size.base,
+      textAlign: 'center',
+      marginBottom: 16,
+    },
+    button: {
+      width: '100%',
+      marginTop: 8,
     },
   },
 
   [themes.light]: {
-    text: {
-      color: colors.light.slateGray,
+    title: {
+      color: colors.light.zodiacBlue,
     },
-    actionButton: {
-      borderColor: colors.light.burntSieanna,
-      backgroundColor: colors.light.burntSieanna,
+    description: {
+      color: colors.light.zodiacBlue,
+    },
+    submitButton: {
+      backgroundColor: colors.light.furyRed,
+      borderColor: colors.light.furyRed,
     },
     buttonText: {
       color: colors.light.white,
     },
-    cancelButton: {
-      color: colors.light.slateGray,
-    },
   },
 
   [themes.dark]: {
-    text: {
-      color: colors.dark.slateGray,
-    },
-    actionButton: {
-      borderColor: colors.dark.burntSieanna,
-      backgroundColor: colors.dark.burntSieanna,
-    },
-    buttonText: {
+    title: {
       color: colors.dark.white,
     },
-    cancelButton: {
-      color: colors.dark.slateGray,
+    description: {
+      color: colors.dark.ghost,
+    },
+    submitButton: {
+      backgroundColor: colors.dark.furyRed,
+      borderColor: colors.dark.furyRed,
     },
   },
 });

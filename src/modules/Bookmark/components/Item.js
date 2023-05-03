@@ -26,11 +26,14 @@ class Item extends React.Component {
         onPress={this.showDetail}
       >
         <View style={[styles.innerContainer]}>
-          {showAvatar ? (
-            <View style={[styles.itemColumn, styles.avatarContainer]}>
-              <Avatar address={data.address} size={43} style={styles.theme.avatar} />
-            </View>
-          ) : null}
+          {showAvatar && (
+            <Avatar
+              address={data.address}
+              size={40}
+              style={[styles.avatarContainer, styles.theme.avatar]}
+            />
+          )}
+
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>{data.label}</B>
             <Small style={[styles.label, styles.theme.label]} numberOfLines={1}>
@@ -38,6 +41,7 @@ class Item extends React.Component {
             </Small>
           </View>
         </View>
+
         <View style={[styles.amountWrapper]}>
           <Icon
             name="forward"

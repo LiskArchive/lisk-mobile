@@ -42,35 +42,32 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
   return (
     <SwipeableRow
       style={[styles.itemContainer, styles.theme.itemContainer]}
-      leftActions={
-        !isInvalidAddress && [
-          {
-            title: 'Edit',
-            color: colors.dark.blueGray,
-            testID: 'edit-bookmark',
-            icon: () => (
-              <Icon
-                name="edit-bookmark"
-                size={20}
-                style={[isInvalidAddress && { opacity: 0.5 }]}
-                color={colors[theme].white}
-              />
-            ),
-            onPress: () =>
-              navigation.navigate({
-                name: 'AddBookmark',
-                params: {
-                  account: data,
-                  title: t('Edit bookmark'),
-                },
-              }),
-          },
-        ]
-      }
       rightActions={[
+        !isInvalidAddress && {
+          title: 'Edit',
+          color: colors.dark.blueGray,
+          testID: 'edit-bookmark',
+          icon: () => (
+            <Icon
+              name="edit-bookmark"
+              size={20}
+              style={[isInvalidAddress && { opacity: 0.5 }]}
+              color={colors[theme].white}
+            />
+          ),
+          onPress: () =>
+            navigation.navigate({
+              name: 'AddBookmark',
+              params: {
+                account: data,
+                title: t('Edit bookmark'),
+              },
+            }),
+        },
+
         {
           title: 'Delete',
-          color: colors.light.burntSieanna,
+          color: colors.light.furyRed,
           testID: 'delete-bookmark',
           icon: () => (
             <Icon
@@ -87,38 +84,34 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => !isInvalidAddress && onPress(data)}
-        style={[styles.row, styles.swipeBookmark]}
+        style={[styles.row, styles.innerContainer]}
       >
-        <View style={[styles.innerContainer]}>
-          {showAvatar ? (
-            <View
-              style={[
-                styles.itemColumn,
-                styles.avatarContainer,
-                isInvalidAddress && styles.lightOpacity,
-              ]}
-            >
-              <Avatar address={data.address} size={43} style={styles.theme.avatar} />
-            </View>
-          ) : null}
-          <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
-            <B style={[styles.address, styles.theme.address]}>{data.label}</B>
-            <Small style={[styles.label, styles.theme.label]}>
-              {stringShortener(data.address, 6, 5)}
-            </Small>
-          </View>
-          {isInvalidAddress && (
-            <View>
-              <TouchableOpacity style={styles.infoButton} onPress={openDisabledModal}>
-                <WarningSvg
-                  color={
-                    theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist
-                  }
-                />
-              </TouchableOpacity>
-            </View>
-          )}
+        {showAvatar && (
+          <Avatar
+            address={data.address}
+            size={40}
+            style={[
+              styles.theme.avatar,
+              styles.avatarContainer,
+              isInvalidAddress && styles.lightOpacity,
+            ]}
+          />
+        )}
+
+        <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
+          <B style={[styles.address, styles.theme.address]}>{data.label}</B>
+          <Small style={[styles.label, styles.theme.label]}>
+            {stringShortener(data.address, 6, 5)}
+          </Small>
         </View>
+
+        {isInvalidAddress && (
+          <TouchableOpacity style={styles.infoButton} onPress={openDisabledModal}>
+            <WarningSvg
+              color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.mountainMist}
+            />
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     </SwipeableRow>
   );

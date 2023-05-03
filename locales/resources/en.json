@@ -84,9 +84,6 @@
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
   "Unparsed Address": "Unparsed Address",
-  "Are you sure about deleting this bookmark?": "Are you sure about deleting this bookmark?",
-  "Delete this bookmark": "Delete this bookmark",
-  "You will be able to add it again anytime.": "You will be able to add it again anytime.",
   "We’ve got good news!": "We’ve got good news!",
   "Info": "Info",
   "Locked balance details": "Locked balance details",
@@ -166,6 +163,12 @@
       "invalidLabel": "The label must be between 3 to 20 characters",
       "invalidAddress": "Invalid address",
       "required": "This field is required"
+    },
+    "deleteBookmark": {
+      "title": "Delete bookmark",
+      "description": "Are you sure you want to delete this account? You’ll be able to add the account again.",
+      "submitButton": "Confirm and delete",
+      "cancelButton": "Cancel"
     },
     "disabled": {
       "title": "Disabled Bookmark",

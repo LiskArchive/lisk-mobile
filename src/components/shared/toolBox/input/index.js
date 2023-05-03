@@ -58,7 +58,7 @@ class Input extends React.Component {
       placeholder,
       testID,
       accessibilityLabel,
-      returnKeyType,
+      returnKeyType = 'done',
       placeholderTextColor,
       disabled,
       adornments,
