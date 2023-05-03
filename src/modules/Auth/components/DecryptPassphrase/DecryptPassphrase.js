@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView, View } from 'react-native';
 import { translate } from 'react-i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -12,11 +11,9 @@ import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import PasswordForm from '../PasswordForm';
 import getStyles from './DecryptPassphrase.styles';
 
-const DecryptPassphrase = ({ account, route, nextStep, t }) => {
-  const navigation = useNavigation();
+const DecryptPassphrase = ({ account, showsHeader = true, route, nextStep, t, navigation }) => {
   const { setAccount } = useAccounts();
   const { styles } = useTheme({ styles: getStyles });
-
   const { title, encryptedData } = route.params;
   const encryptedAccount = account || JSON.parse(encryptedData);
 
@@ -29,6 +26,8 @@ const DecryptPassphrase = ({ account, route, nextStep, t }) => {
       );
       if (nextStep && typeof nextStep === 'function') {
         nextStep({
+          password,
+          address: account.metadata.address,
           recoveryPhrase,
           encryptedAccount,
         });
@@ -41,11 +40,13 @@ const DecryptPassphrase = ({ account, route, nextStep, t }) => {
     }
   };
 
+  const Wrapper = showsHeader ? View : SafeAreaView;
+
   return (
-    <SafeAreaView style={[styles.container, styles.theme.wrapper]}>
-      <HeaderBackButton title={title} onPress={navigation.goBack} />
+    <Wrapper style={[styles.container, styles.theme.wrapper]}>
+      {showsHeader && <HeaderBackButton title={title} onPress={navigation.goBack} />}
       <PasswordForm account={encryptedAccount} onSubmit={onSubmit} />
-    </SafeAreaView>
+    </Wrapper>
   );
 };
 

@@ -23,18 +23,19 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
 
   const fetchAccountPassword = async () => {
     const accountPassword = await getAccountPasswordFromKeyChain(account.metadata.address);
-    if (accountPassword) {
-      onSubmit(accountPassword);
-    }
+    return accountPassword;
   };
 
-  const tryFetchAccontPasswordFromBiometrics = () => {
+  const tryFetchAccontPasswordFromBiometrics = async () => {
     if (sensorType && biometricsEnabled) {
-      bioMetricAuthentication({
-        successCallback: () => {
-          fetchAccountPassword();
-        },
-      });
+      const accountPassword = await fetchAccountPassword();
+      if (accountPassword) {
+        bioMetricAuthentication({
+          successCallback: () => {
+            onSubmit(accountPassword);
+          },
+        });
+      }
     }
   };
 

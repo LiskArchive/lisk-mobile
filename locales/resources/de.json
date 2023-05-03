@@ -230,6 +230,13 @@
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",
         "saveAccountButton": "Konto speichern"
+      },
+      "migration": {
+        "title": "",
+        "content": "",
+        "button": {
+          "continue": ""
+        }
       }
     },
     "form": {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import i18next from 'i18next';
@@ -34,19 +34,22 @@ export default function ConfirmTransaction({
 
   const fetchAccountPassword = async () => {
     const accountPassword = await getAccountPasswordFromKeyChain(currentAccount.metadata?.address);
-    if (accountPassword) {
-      onUserPasswordChange(accountPassword);
-      onSubmit();
-    }
+    return accountPassword;
   };
 
-  const fetchAccontPasswordFromBiometrics = useCallback(() => {
-    bioMetricAuthentication({
-      successCallback: () => {
-        fetchAccountPassword();
-      },
-    });
-  }, []);
+  const fetchAccontPasswordFromBiometrics = async () => {
+    if (sensorType && biometricsEnabled) {
+      const accountPassword = await fetchAccountPassword();
+      if (accountPassword) {
+        bioMetricAuthentication({
+          successCallback: () => {
+            onUserPasswordChange(accountPassword);
+            onSubmit?.();
+          },
+        });
+      }
+    }
+  };
 
   useEffect(() => {
     if (sensorType && biometricsEnabled) {

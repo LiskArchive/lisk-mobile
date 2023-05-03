@@ -18,6 +18,7 @@ import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
+import { isColorBright } from 'utilities/colors.utils';
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
@@ -58,6 +59,11 @@ export default function ApplicationDetails({ route }) {
 
   const handleUrlPress = (url) => Linking.openURL(url);
 
+  const isBrightBackground =
+    application?.backgroundColor && isColorBright(application.backgroundColor);
+
+  const buttonColor = isBrightBackground ? colors.dark.headerBg : colors.light.white;
+
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <ScrollView>
@@ -73,7 +79,7 @@ export default function ApplicationDetails({ route }) {
             source={wavesPattern}
             resizeMode="cover"
           >
-            <HeaderBackButton color={colors.dark.white} onPress={navigation.goBack} />
+            <HeaderBackButton color={buttonColor} onPress={navigation.goBack} />
           </ImageBackground>
         )}
 

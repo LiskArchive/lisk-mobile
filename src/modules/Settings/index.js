@@ -1,19 +1,22 @@
 /* eslint-disable no-shadow */
 /* eslint-disable complexity */
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { H4, P } from 'components/shared/toolBox/typography';
 import FingerprintOverlay from 'components/shared/fingerprintOverlay';
 import { themes } from 'constants/styleGuide';
+import Stepper from 'components/shared/Stepper';
 import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import Checkbox from 'components/shared/Checkbox';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
+import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/passphrase';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -27,6 +30,7 @@ import { useModal } from '../../hooks/useModal';
 const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
+  const [biometricsEnabled, setBiometricsEnabled] = useState(false);
   const [account] = useCurrentAccount();
   const modal = useModal();
 
@@ -69,13 +73,35 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     if (settings.biometricsEnabled) {
       modal.open(() => <DisableBioAuth />);
     } else {
-      modal.open(() => <EnableBioAuth />);
+      modal.open(() => (
+        <Stepper>
+          <DecryptPassphrase
+            account={account}
+            route={{
+              params: {
+                address: account.metadata.address,
+                title: 'settings.backupPhrase.title',
+              },
+            }}
+            showsHeader={false}
+            navigation={navigation}
+          />
+          <EnableBioAuth />
+        </Stepper>
+      ));
     }
   };
 
-  const sensorStatus = (
-    <SwitchButton value={settings.biometricsEnabled} onChange={toggleBiometrics} />
-  );
+  const checkBiometricsFeature = async () => {
+    const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
+    setBiometricsEnabled(accountPassword && settings.biometricsEnabled);
+  };
+
+  useEffect(() => {
+    checkBiometricsFeature();
+  }, [settings.biometricsEnabled]);
+
+  const sensorStatus = <SwitchButton value={biometricsEnabled} onChange={toggleBiometrics} />;
 
   return (
     <NavigationSafeAreaView>
