@@ -55,16 +55,15 @@ export default function AuthMethod({ route }) {
       setBiometricSensorType();
       dispatch(settingsRetrieved());
       if (accounts.length && !route.params?.authRequired) {
-        return navigation.navigate('AccountsManagerScreen');
+        navigation.navigate('AccountsManagerScreen');
       }
     } else {
-      return navigation.push('Intro');
+      navigation.push('Intro');
     }
-    return setScreenReady(true);
   }, [accounts.length, route.params?.authRequired, settings.showedIntro]);
 
   useEffect(() => {
-    timeout.current = setTimeout(() => setScreenReady(true), 1000);
+    timeout.current = setTimeout(() => setScreenReady(true), 500);
     return () => clearTimeout(timeout.current);
   }, []);
 
@@ -91,12 +90,7 @@ export default function AuthMethod({ route }) {
   const showBackButton = accounts.length > 0;
 
   if (!isScreenReady) {
-    return (
-      <SafeAreaView
-        style={[styles.container, styles.theme.container]}
-        testID="auth-method-screen"
-      ></SafeAreaView>
-    );
+    return <SafeAreaView style={[styles.container, styles.theme.container]}></SafeAreaView>;
   }
 
   return (
