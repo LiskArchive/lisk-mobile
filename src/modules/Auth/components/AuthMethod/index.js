@@ -55,7 +55,6 @@ export default function AuthMethod({ route }) {
       setBiometricSensorType();
       dispatch(settingsRetrieved());
       if (accounts.length && !route.params?.authRequired) {
-        console.log('not-here');
         return navigation.navigate('AccountsManagerScreen');
       }
     } else {
