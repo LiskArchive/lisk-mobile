@@ -365,7 +365,7 @@
       "recipientApplicationFieldLabel": "Zur App",
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
-      "addressPlaceholder": "Input address",
+      "addressPlaceholder": "Adresse eingeben",
       "nextStepButtonText": "Weiter"
     },
     "tokenSelect": {
