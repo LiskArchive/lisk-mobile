@@ -363,7 +363,7 @@
       "recipientApplicationFieldLabel": "To application",
       "recipientApplicationFieldPlaceholder": "Select an application",
       "recipientAccountFieldLabel": "Recipient",
-      "addressPlaceholder": "Input address",
+      "addressPlaceholder": "Enter address",
       "nextStepButtonText": "Continue"
     },
     "tokenSelect": {
