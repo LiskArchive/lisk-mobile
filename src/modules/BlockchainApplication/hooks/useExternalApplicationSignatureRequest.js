@@ -13,16 +13,19 @@ export function useExternalApplicationSignatureRequest() {
   const modal = useModal();
 
   useEffect(() => {
-    const rejectRequest = () => {
+    const handleRejectRequest = () => {
       reject();
       modal.close();
     };
+
+    const handleClose = () => modal.close();
 
     if (session.request) {
       modal.open(
         <ExternalApplicationSignatureRequest
           session={session.request}
-          onCancel={rejectRequest}
+          onClose={handleClose}
+          onCancel={handleRejectRequest}
           navigation={navigation}
         />,
         true

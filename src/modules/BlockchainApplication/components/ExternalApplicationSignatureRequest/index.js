@@ -16,7 +16,7 @@ import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSum
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
 
-export default function ExternalApplicationSignatureRequest({ session, onCancel }) {
+export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
 
@@ -34,6 +34,8 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
     }),
     [event.meta.params.request.params.payload]
   );
+
+  console.log(event.meta.params.request.params.payload);
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
@@ -115,6 +117,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
             session={session}
             transaction={_transaction}
             onSubmit={handleSubmit}
+            onClose={onClose}
             isSuccess={status.isSuccess}
             isLoading={status.isLoading}
             error={status.error}
