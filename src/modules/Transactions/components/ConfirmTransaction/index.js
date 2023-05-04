@@ -22,6 +22,7 @@ export default function ConfirmTransaction({
   isLoading,
   isValidationError,
   onSubmit,
+  submitButtonTitle,
 }) {
   const [currentAccount] = useCurrentAccount();
   const { sensorType, biometricsEnabled } = useSelector((state) => state.settings);
@@ -37,7 +38,7 @@ export default function ConfirmTransaction({
     return accountPassword;
   };
 
-  const fetchAccontPasswordFromBiometrics = async () => {
+  const fetchAccountPasswordFromBiometrics = async () => {
     if (sensorType && biometricsEnabled) {
       const accountPassword = await fetchAccountPassword();
       if (accountPassword) {
@@ -53,7 +54,7 @@ export default function ConfirmTransaction({
 
   useEffect(() => {
     if (sensorType && biometricsEnabled) {
-      fetchAccontPasswordFromBiometrics();
+      fetchAccountPasswordFromBiometrics();
     }
   }, [sensorType]);
 
@@ -114,7 +115,7 @@ export default function ConfirmTransaction({
         >
           {isLoading
             ? i18next.t('sendToken.confirmAndSign.loadingText')
-            : i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText')}
+            : submitButtonTitle || i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText')}
         </PrimaryButton>
       </View>
     </View>

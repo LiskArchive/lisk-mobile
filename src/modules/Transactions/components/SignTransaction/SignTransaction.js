@@ -6,6 +6,7 @@ import SignTransactionSuccess from './SignTransactionSuccess';
 
 export default function SignTransaction({
   isValidationError,
+  submitButtonTitle,
   successActionButton,
   successTitle,
   successDescription,
@@ -59,6 +60,7 @@ export default function SignTransaction({
           onUserPasswordChange={onUserPasswordChange}
           isLoading={isLoading}
           isValidationError={isValidationError}
+          submitButtonTitle={submitButtonTitle}
         />
       );
 

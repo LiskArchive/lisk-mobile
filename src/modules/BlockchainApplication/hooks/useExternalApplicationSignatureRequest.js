@@ -10,12 +10,10 @@ import { EVENTS } from '../../../../libs/wcm/constants/lifeCycle';
 export function useExternalApplicationSignatureRequest() {
   const { session, reject } = useWalletConnectSession();
   const { events } = useContext(WalletConnectContext);
+  const navigation = useNavigation();
+  const modal = useModal();
 
   const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
-
-  const navigation = useNavigation();
-
-  const modal = useModal();
 
   useEffect(() => {
     const handleRejectRequest = () => {
@@ -25,7 +23,7 @@ export function useExternalApplicationSignatureRequest() {
 
     const handleClose = () => modal.close();
 
-    if (session.request) {
+    if (session.request && event?.meta.id) {
       modal.open(
         <ExternalApplicationSignatureRequest
           session={session.request}

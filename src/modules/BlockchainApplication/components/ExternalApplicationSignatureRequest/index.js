@@ -26,7 +26,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
   const { events } = useContext(WalletConnectContext);
 
-  const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
+  const event = useMemo(() => events.find((e) => e.name === EVENTS.SESSION_REQUEST), []);
 
   const createTransactionOptions = useMemo(
     () => ({

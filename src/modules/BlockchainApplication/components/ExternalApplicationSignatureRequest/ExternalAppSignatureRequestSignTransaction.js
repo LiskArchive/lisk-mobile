@@ -43,6 +43,9 @@ export default function ExternalAppSignatureRequestSignTransaction({
       isLoading={isLoading}
       isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
       error={error}
+      submitButtonTitle={i18next.t(
+        'application.externalApplicationSignatureRequest.sign.submitButtonTitle'
+      )}
       successActionButton={
         <PrimaryButton onClick={handleSuccessSubmit}>
           {!isSignedTransactionCopiedToClipboard

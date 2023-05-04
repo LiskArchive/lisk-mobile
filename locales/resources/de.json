@@ -338,6 +338,7 @@
         "continueButtonText": "Zustimmen"
       },
       "sign": {
+        "submitButtonTitle": "Bestätigen und unterschreiben",
         "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
         "copiedToClipboardButtonText": "Kopiert",
         "errorButtonText": "Weiterleitung zur App-Site"
