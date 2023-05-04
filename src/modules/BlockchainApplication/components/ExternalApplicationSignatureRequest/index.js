@@ -35,8 +35,6 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     [event.meta.params.request.params.payload]
   );
 
-  console.log(event.meta.params.request.params.payload);
-
   const transaction = useCreateTransaction(createTransactionOptions);
 
   const senderAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);

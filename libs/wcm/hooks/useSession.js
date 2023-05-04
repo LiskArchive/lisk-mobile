@@ -63,6 +63,7 @@ const useSession = () => {
         topic,
         response,
       });
+
       return {
         status: STATUS.SUCCESS,
         data,
