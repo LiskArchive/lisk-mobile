@@ -3,7 +3,6 @@ import React from 'react';
 import { Linking } from 'react-native';
 import i18next from 'i18next';
 
-import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
 import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import SignTransaction from 'modules/Transactions/components/SignTransaction/SignTransaction';
@@ -12,36 +11,36 @@ export default function ExternalAppSignatureRequestSignTransaction({
   session,
   transaction,
   onSubmit,
+  userPassword,
+  onUserPasswordChange,
+  isValidationError,
   onClose,
   isSuccess,
   isLoading,
   error,
   navigation,
 }) {
-  const [passwordForm, passwordController] = usePasswordForm();
-
   const signedTransactionString = JSON.stringify(transaction.toJSON());
 
   const [isSignedTransactionCopiedToClipboard, handleCopySignedTransactionToClipboard] =
     useCopyToClipboard(signedTransactionString);
-
-  const handleSubmit = () => onSubmit(passwordController.field.value);
 
   const handleSuccessSubmit = () => {
     handleCopySignedTransactionToClipboard();
     onClose();
     Linking.openURL(session.peer.metadata.url);
   };
+
   const handleErrorSubmit = () => Linking.openURL(session.peer.metadata.url);
 
   return (
     <SignTransaction
-      onSubmit={handleSubmit}
-      userPassword={passwordController.field.value}
-      onUserPasswordChange={passwordController.field.onChange}
+      onSubmit={onSubmit}
+      userPassword={userPassword}
+      onUserPasswordChange={onUserPasswordChange}
       isSuccess={isSuccess}
       isLoading={isLoading}
-      isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
+      isValidationError={isValidationError}
       error={error}
       submitButtonTitle={i18next.t(
         'application.externalApplicationSignatureRequest.sign.submitButtonTitle'

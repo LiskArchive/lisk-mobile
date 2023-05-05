@@ -15,10 +15,12 @@ import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
+import { usePasswordForm } from '../../../Auth/hooks/usePasswordForm';
 
 export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
+  const [passwordForm, passwordFormController] = usePasswordForm();
 
   const [currentAccount] = useCurrentAccount();
 
@@ -51,11 +53,14 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     }
   };
 
-  const handleSubmit = async (password) => {
+  const handleSubmit = passwordForm.handleSubmit(async (values) => {
     let privateKey;
 
     try {
-      const decryptedAccount = await decryptAccount(currentAccount.encryptedPassphrase, password);
+      const decryptedAccount = await decryptAccount(
+        currentAccount.encryptedPassphrase,
+        values.password
+      );
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
@@ -83,7 +88,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
         );
       }
     }
-  };
+  });
 
   const renderStep = (_transaction) => {
     switch (activeStep) {
@@ -116,6 +121,9 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             transaction={_transaction}
             onSubmit={handleSubmit}
             onClose={onClose}
+            userPassword={passwordFormController.field.value}
+            onUserPasswordChange={passwordFormController.field.onChange}
+            isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
             isSuccess={status.isSuccess}
             isLoading={status.isLoading}
             error={status.error}
