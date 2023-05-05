@@ -107,7 +107,7 @@
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
-      "enableDerivationPath": "Enable custom derivation path"
+      "enableDerivationPath": "Enable access to legacy Lisk accounts"
     },
     "descriptions": {
       "discreetMode": "Hide balance and transaction amounts.",
@@ -380,7 +380,7 @@
       "messageFieldTriggerButtonText": "+ Add message (optional)",
       "messageFieldLabel": "Message (optional)",
       "messageFieldLabelPlain": "Message",
-      "messageFieldPlaceholder": "Add an optional message",
+      "messageFieldPlaceholder": "Enter an optional message",
       "priorityFieldLabel": "Priority",
       "loadingPrioritiesText": "Loading priorities...",
       "errorLoadingPrioritiesText": "Error loading priorities!",

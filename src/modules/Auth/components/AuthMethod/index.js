@@ -145,7 +145,7 @@ export default function AuthMethod({ route }) {
           testID="derivation-switch"
           onPress={toggleUseDerivationPath}
         >
-          <SwitchButton value={settings.useDerivationPath} onChange={toggleUseDerivationPath} />
+          <SwitchButton value={!settings.useDerivationPath} onChange={toggleUseDerivationPath} />
           <Text style={[styles.derivationPath, styles.theme.derivationPath]}>
             {i18next.t('settings.menu.enableDerivationPath')}
           </Text>
