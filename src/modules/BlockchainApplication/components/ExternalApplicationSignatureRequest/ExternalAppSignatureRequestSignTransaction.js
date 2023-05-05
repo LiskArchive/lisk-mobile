@@ -12,6 +12,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
   session,
   transaction,
   onSubmit,
+  onClose,
   isSuccess,
   isLoading,
   error,
@@ -28,6 +29,7 @@ export default function ExternalAppSignatureRequestSignTransaction({
 
   const handleSuccessSubmit = () => {
     handleCopySignedTransactionToClipboard();
+    onClose();
     Linking.openURL(session.peer.metadata.url);
   };
   const handleErrorSubmit = () => Linking.openURL(session.peer.metadata.url);
@@ -41,6 +43,9 @@ export default function ExternalAppSignatureRequestSignTransaction({
       isLoading={isLoading}
       isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
       error={error}
+      submitButtonTitle={i18next.t(
+        'application.externalApplicationSignatureRequest.sign.submitButtonTitle'
+      )}
       successActionButton={
         <PrimaryButton onClick={handleSuccessSubmit}>
           {!isSignedTransactionCopiedToClipboard

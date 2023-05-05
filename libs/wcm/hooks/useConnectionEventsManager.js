@@ -30,13 +30,13 @@ const useWalletConnectEventsManager = () => {
   }, []);
 
   useEffect(() => {
-    if (signClient?.on) {
+    if (signClient) {
       Object.keys(EVENTS).forEach((eventName) => {
         signClient.on(EVENTS[eventName], eventHandler.bind(null, EVENTS[eventName]));
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onSessionRequest, onSessionDelete, eventHandler, signClient?.on]);
+  }, [onSessionRequest, onSessionDelete, eventHandler, signClient]);
 };
 
 export default useWalletConnectEventsManager;

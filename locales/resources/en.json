@@ -336,6 +336,7 @@
         "continueButtonText": "Approve"
       },
       "sign": {
+        "submitButtonTitle": "Confirm and sign",
         "copyToClipboardButtonText": "Copy and redirect to application site",
         "copiedToClipboardButtonText": "Copied",
         "errorButtonText": "Redirect to application site"

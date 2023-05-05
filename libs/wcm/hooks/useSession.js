@@ -14,6 +14,7 @@ const useSession = () => {
 
   const approve = useCallback(async (selectedAccounts) => {
     const proposalEvents = events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
+
     try {
       await setSession({
         ...session,
@@ -37,8 +38,9 @@ const useSession = () => {
 
   const reject = useCallback(async () => {
     const proposalEvents = events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
+
     try {
-      setSession({ ...session, request: false });
+      await setSession({ ...session, request: false });
       await onReject(proposalEvents.meta);
       removeEvent(proposalEvents);
       return {
@@ -59,10 +61,13 @@ const useSession = () => {
     const response = formatJsonRpcResult(requestEvent.meta.id, payload);
 
     try {
+      await setSession({ ...session, request: false });
+
       const data = await signClient.respond({
         topic,
         response,
       });
+
       return {
         status: STATUS.SUCCESS,
         data,

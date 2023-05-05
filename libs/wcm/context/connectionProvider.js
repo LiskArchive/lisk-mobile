@@ -19,6 +19,7 @@ const ConnectionProvider = ({ children }) => {
 
   const removeEvent = (event) => {
     const newEvents = events.filter((e) => e.name !== event.name);
+
     setEvents(newEvents);
   };
 

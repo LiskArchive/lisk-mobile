@@ -16,7 +16,7 @@ import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSum
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
 
-export default function ExternalApplicationSignatureRequest({ session, onCancel }) {
+export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
 
@@ -26,7 +26,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
 
   const { events } = useContext(WalletConnectContext);
 
-  const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
+  const event = useMemo(() => events.find((e) => e.name === EVENTS.SESSION_REQUEST), []);
 
   const createTransactionOptions = useMemo(
     () => ({
@@ -115,6 +115,7 @@ export default function ExternalApplicationSignatureRequest({ session, onCancel 
             session={session}
             transaction={_transaction}
             onSubmit={handleSubmit}
+            onClose={onClose}
             isSuccess={status.isSuccess}
             isLoading={status.isLoading}
             error={status.error}

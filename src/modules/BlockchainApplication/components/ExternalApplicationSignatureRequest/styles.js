@@ -70,6 +70,7 @@ export default {
     },
     buttonContainer: {
       flexDirection: 'row',
+      paddingTop: boxes.boxPadding,
       paddingBottom: boxes.boxPadding,
     },
     button: {
