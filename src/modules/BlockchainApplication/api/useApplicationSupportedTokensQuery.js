@@ -25,7 +25,7 @@ export function useApplicationSupportedTokensQuery(application) {
     isError: isAccountTokensFullDataError,
     error: errorOnAccountTokensFullData,
     isSuccess: isSuccessAccountTokensFullData,
-  } = useAccountTokensFullDataQuery(currentAccount?.metadata.address, {
+  } = useAccountTokensFullDataQuery(currentAccount?.metadata?.address, {
     options: {
       enabled: !!currentAccount?.metadata,
     },
