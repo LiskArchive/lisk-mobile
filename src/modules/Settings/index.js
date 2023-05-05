@@ -223,7 +223,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
           </H4>
 
           <View style={[styles.item, styles.theme.item]}>
-            <Checkbox selected={settings.useDerivationPath} onPress={toggleUseDerivationPath}>
+            <Checkbox selected={!settings.useDerivationPath} onPress={toggleUseDerivationPath}>
               <P style={[styles.subtitle, styles.theme.subtitle]}>
                 {t('settings.menu.enableDerivationPath')}
               </P>
