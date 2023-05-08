@@ -29,7 +29,6 @@ export function useApplicationsLocalStorage() {
     event: 'get.blockchain.apps.meta',
     transformResult: transformApplicationsMetaQueryResult,
     params: {
-      network: process.env.NETWORK,
       chainID: localStorageData && localStorageData.join(','),
     },
   };
