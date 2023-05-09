@@ -274,6 +274,11 @@
       "add": {
         "buttonText": "Add application",
         "successTitle": "Perfect! Application has now been added",
+        "successDescription": "You can see a list of your applications on the application dropdown.",
+        "errorTitle": "Error adding application",
+        "errorGenericDescription": "We’re unable to add your application to your Lisk Mobile. Please try again.",
+        "errorDescription": "We’re unable to add {{appName}} application to your Lisk Mobile. Please try again.",
+        "errorOnContinueButtonText": "Try again",
         "confirmButtonText": "Add application",
         "errorConnecting": "Error connecting application. Please try again."
       },

@@ -19,16 +19,15 @@ export function useApplicationsManagement() {
   } = useApplicationsLocalStorage();
 
   const addApplication = useCallback(
-    async (application) => {
+    async (application, options) => {
       try {
         await addApplicationToStorage(application.chainID);
 
         applications.dispatchData({ type: 'add', application });
+
+        options?.onSuccess();
       } catch (_error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          'Error adding application. Please try again later.'
-        );
+        options?.onError(_error);
       }
     },
     [addApplicationToStorage, applications]
