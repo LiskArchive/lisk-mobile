@@ -20,10 +20,7 @@ const DecryptPassphrase = ({ account, showsHeader = true, route, nextStep, t, na
   const onSubmit = async (password) => {
     try {
       const { successRoute } = route.params;
-      const { recoveryPhrase } = await decryptAccount(
-        encryptedAccount.encryptedPassphrase,
-        password
-      );
+      const { recoveryPhrase } = await decryptAccount(encryptedAccount.crypto, password);
       if (nextStep && typeof nextStep === 'function') {
         nextStep({
           password,

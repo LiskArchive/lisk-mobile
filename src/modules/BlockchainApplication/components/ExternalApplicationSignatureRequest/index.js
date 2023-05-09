@@ -57,10 +57,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     let privateKey;
 
     try {
-      const decryptedAccount = await decryptAccount(
-        currentAccount.encryptedPassphrase,
-        values.password
-      );
+      const decryptedAccount = await decryptAccount(currentAccount.crypto, values.password);
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {

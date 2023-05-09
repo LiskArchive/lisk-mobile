@@ -3,7 +3,7 @@ import { decryptAccount } from './decryptAccount';
 
 const recoveryPhrase =
   'target cancel solution recipe vague faint bomb convince pink vendor fresh patrol';
-const encryptedPassphrase = {
+const crypto = {
   kdf: 'argon2id',
   kdfparams: {
     parallelism: 4,
@@ -38,7 +38,7 @@ jest.spyOn(cryptography.encrypt, 'decryptMessageWithPassword').mockResolvedValue
 describe('decryptAccount', () => {
   it('decrypts account when the correct arguments are passed', async () => {
     const password = 'samplePassword@1';
-    const res = await decryptAccount(encryptedPassphrase, password);
+    const res = await decryptAccount(crypto, password);
     expect(res.recoveryPhrase).toEqual(recoveryPhrase);
   });
 });
