@@ -52,9 +52,11 @@ export default function ApplicationDetails({ route }) {
   const isPinned = checkPin(chainID);
 
   const handleAddApplicationClick = () => {
-    addApplication(application);
-
-    navigation.navigate('AddApplicationSuccess');
+    addApplication(application, {
+      onSuccess: () => navigation.navigate('AddApplicationSuccessScreen'),
+      onError: () =>
+        navigation.navigate('AddApplicationErrorScreen', { chainName: application?.chainName }),
+    });
   };
 
   const handleUrlPress = (url) => Linking.openURL(url);

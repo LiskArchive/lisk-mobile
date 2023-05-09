@@ -13,10 +13,30 @@ export default function ApplicationList({
   applications,
   Component,
   onItemPress,
+  renderError,
+  renderEmpty,
   style,
   navigation,
   ...props
 }) {
+  const handleRenderEmpty =
+    renderEmpty ||
+    (() => (
+      <ResultScreen
+        illustration={<EmptyIllustrationSvg />}
+        description="No applications available for now. Please try again later."
+      />
+    ));
+
+  const handleRenderError =
+    renderError ||
+    (() => (
+      <ResultScreen
+        illustration={<ErrorIllustrationSvg />}
+        description="Error loading applications. Please try again later."
+      />
+    ));
+
   return (
     <DataRenderer
       data={applications.data}
@@ -44,18 +64,8 @@ export default function ApplicationList({
         </View>
       )}
       renderLoading={() => <ApplicationListSkeleton style={[style?.container]} />}
-      renderEmpty={() => (
-        <ResultScreen
-          illustration={<EmptyIllustrationSvg />}
-          description="No applications available for now. Please try again later."
-        />
-      )}
-      renderError={() => (
-        <ResultScreen
-          illustration={<ErrorIllustrationSvg />}
-          description="Error loading applications. Please try again later."
-        />
-      )}
+      renderEmpty={handleRenderEmpty}
+      renderError={handleRenderError}
     />
   );
 }

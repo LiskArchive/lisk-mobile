@@ -276,8 +276,13 @@
       "add": {
         "buttonText": "App hinzufügen",
         "successTitle": "Perfekt! App wurde jetzt hinzugefügt",
+        "successDescription": "Sie können eine Liste Ihrer Anwendungen in der Anwendungs-Dropdown-Liste sehen.",
+        "errorTitle": "Fehler beim Hinzufügen der Anwendung",
+        "errorGenericDescription": "Wir können Ihre Anwendung nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
+        "errorDescription": "Wir können die Anwendung {{appName}} nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
+        "errorOnContinueButtonText": "Versuchen Sie es erneut",
         "confirmButtonText": "App jetzt hinzufügen",
-        "errorConnecting": ""
+        "errorConnecting": "Fehler beim Verbinden der Anwendung. Bitte versuche es erneut."
       },
       "delete": {
         "title": "App entfernen?",
