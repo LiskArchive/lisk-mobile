@@ -61,7 +61,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptPassphraseError'));
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
     }
 
     if (privateKey) {

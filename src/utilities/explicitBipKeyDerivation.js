@@ -35,15 +35,15 @@ const ckdPriv = ({ key, chainCode }, index) => {
 export const defaultDerivationPath = "m/44'/134'/0'";
 
 /**
- * Derives public pair from a given valid mnemonic passphrase
+ * Derives public pair from a given valid mnemonic recoveryPhrase
  * for a given derivation path.
  *
- * @param {string} passphrase - Valid mnemonic passphrase
+ * @param {string} recoveryPhrase - Valid mnemonic recoveryPhrase
  * @param {string?} path - Valid derivation pass
  * @returns {object} - public key in hex string
  */
-export const getCustomDerivationPublicKey = (passphrase, path = defaultDerivationPath) => {
-  const mn = new mnemonic(passphrase);
+export const getCustomDerivationPublicKey = (recoveryPhrase, path = defaultDerivationPath) => {
+  const mn = new mnemonic(recoveryPhrase);
   const masterSeed = mn.toSeed();
 
   let node = getMasterKeyFromSeed(masterSeed);
@@ -64,15 +64,15 @@ export const getCustomDerivationPublicKey = (passphrase, path = defaultDerivatio
 };
 
 /**
- * Derives private-public pair from a given valid mnemonic passphrase
+ * Derives private-public pair from a given valid mnemonic recoveryPhrase
  * for a given derivation path.
  *
- * @param {string} passphrase - Valid mnemonic passphrase
+ * @param {string} recoveryPhrase - Valid mnemonic recoveryPhrase
  * @param {string?} path - Valid derivation pass
  * @returns {object} - public and private key pair in hex string
  */
-export const getCustomDerivationKeyPair = (passphrase, path = defaultDerivationPath) => {
-  const mn = new mnemonic(passphrase);
+export const getCustomDerivationKeyPair = (recoveryPhrase, path = defaultDerivationPath) => {
+  const mn = new mnemonic(recoveryPhrase);
   const masterSeed = mn.toSeed();
 
   let node = getMasterKeyFromSeed(masterSeed);

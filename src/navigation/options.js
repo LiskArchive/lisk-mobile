@@ -67,9 +67,9 @@ const navigationOptions = {
     headerStyle: navigationNoShadowStyle,
     headerTitleStyle: navigationGenericTitleStyle,
   },
-  BackupPassphrase: {
+  BackupRecoveryPhrase: {
     title: null,
-    headerLeft: (props) => <HeaderBackButton title="Passphrase backup" {...props} />,
+    headerLeft: (props) => <HeaderBackButton title="Recovery phrase backup" {...props} />,
     headerStyle: navigationNoShadowStyle,
     headerTitleStyle: navigationGenericTitleStyle,
   },

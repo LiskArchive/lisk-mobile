@@ -14,7 +14,7 @@ export const encryptAccount = async ({
   try {
     const { encrypt } = cryptography;
     const options = {
-      passphrase: recoveryPhrase,
+      recoveryPhrase,
       enableCustomDerivationPath: derivationPath && enableCustomDerivationPath,
       derivationPath,
     };

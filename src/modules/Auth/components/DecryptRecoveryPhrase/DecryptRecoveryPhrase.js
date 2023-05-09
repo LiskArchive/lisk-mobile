@@ -9,9 +9,9 @@ import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import DropDownHolder from 'utilities/alert';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import PasswordForm from '../PasswordForm';
-import getStyles from './DecryptPassphrase.styles';
+import getStyles from './DecryptRecoveryPhrase.styles';
 
-const DecryptPassphrase = ({ account, showsHeader = true, route, nextStep, t, navigation }) => {
+const DecryptRecoveryPhrase = ({ account, showsHeader = true, route, nextStep, t, navigation }) => {
   const { setAccount } = useAccounts();
   const { styles } = useTheme({ styles: getStyles });
   const { title, encryptedData } = route.params;
@@ -33,7 +33,7 @@ const DecryptPassphrase = ({ account, showsHeader = true, route, nextStep, t, na
         navigation.navigate(successRoute);
       }
     } catch (error) {
-      DropDownHolder.error(t('Error'), t('auth.setup.decryptPassphraseError'));
+      DropDownHolder.error(t('Error'), t('auth.setup.decryptRecoveryPhraseError'));
     }
   };
 
@@ -47,4 +47,4 @@ const DecryptPassphrase = ({ account, showsHeader = true, route, nextStep, t, na
   );
 };
 
-export default translate()(DecryptPassphrase);
+export default translate()(DecryptRecoveryPhrase);

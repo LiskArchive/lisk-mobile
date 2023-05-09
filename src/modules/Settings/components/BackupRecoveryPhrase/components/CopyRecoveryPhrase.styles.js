@@ -1,6 +1,6 @@
 import { themes, colors, boxes } from 'constants/styleGuide';
 
-export function getCopyPassphraseStyles() {
+export function getCopyRecoveryPhraseStyles() {
   return {
     common: {
       container: {

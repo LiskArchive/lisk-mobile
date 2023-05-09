@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 const wallets = {
   genesis: {
-    passphrase: 'peanut hundred pen hawk invite exclude brain chunk gadget wait wrong ready',
+    recoveryPhrase: 'peanut hundred pen hawk invite exclude brain chunk gadget wait wrong ready',
     summary: {
       publicKey: '0fe9a3f1a21b5530f27f87a414b549e79a940bf24fdf2b2f05e7f22aeeecc86a',
       serverPublicKey: '0fe9a3f1a21b5530f27f87a414b549e79a940bf24fdf2b2f05e7f22aeeecc86a',

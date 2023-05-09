@@ -3,7 +3,7 @@ import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
-export default function getPassphraseQuizStyles() {
+export default function getRecoveryPhraseQuizStyles() {
   return {
     common: {
       container: {
@@ -33,17 +33,17 @@ export default function getPassphraseQuizStyles() {
         textAlign: 'center',
         marginBottom: 24,
       },
-      passphraseContainer: {
+      recoveryPhraseContainer: {
         flexDirection: 'row',
         width: '100%',
         flexWrap: 'wrap',
         justifyContent: 'center',
       },
-      passphraseText: {
+      recoveryPhraseText: {
         marginHorizontal: 7,
         fontSize: isSmallScreen ? 16 : 18,
         lineHeight: 33,
-        fontFamily: fonts.family.passphraseText,
+        fontFamily: fonts.family.recoveryPhraseText,
       },
       placeholder: {
         borderBottomWidth: 1.5,
@@ -53,7 +53,7 @@ export default function getPassphraseQuizStyles() {
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: fonts.family.passphraseText,
+        fontFamily: fonts.family.recoveryPhraseText,
         fontSize: isSmallScreen ? 14 : 16,
       },
       deActivePlaceholder: {
@@ -79,7 +79,7 @@ export default function getPassphraseQuizStyles() {
         height: 33,
       },
       label: {
-        fontFamily: fonts.family.passphraseText,
+        fontFamily: fonts.family.recoveryPhraseText,
         fontSize: isSmallScreen ? 16 : 18,
         lineHeight: 33,
       },
@@ -111,7 +111,7 @@ export default function getPassphraseQuizStyles() {
       description: {
         color: colors.light.smoothGray,
       },
-      passphraseText: {
+      recoveryPhraseText: {
         color: colors.light.zodiacBlue,
       },
       label: {
@@ -128,7 +128,7 @@ export default function getPassphraseQuizStyles() {
       description: {
         color: colors.dark.mountainMist,
       },
-      passphraseText: {
+      recoveryPhraseText: {
         color: colors.dark.white,
       },
       label: {

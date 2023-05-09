@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
 
-import { getPassphraseFromKeyChain } from 'modules/Auth/utils';
+import { getRecoveryPhraseFromKeyChain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import { ThemeContext } from '../../../contexts/ThemeContext';
@@ -31,15 +31,15 @@ class LiskMessageExtension extends Component {
   };
 
   setAccount = () => {
-    getPassphraseFromKeyChain().then((account) => {
+    getRecoveryPhraseFromKeyChain().then((account) => {
       if (account) {
         this.userData = {
-          passphrase: account.password,
+          recoveryPhrase: account.password,
           address: account.username,
         };
         this.setState(
           {
-            passphrase: account.password,
+            recoveryPhrase: account.password,
             address: {
               value: account.username,
               validity: -1,
@@ -160,7 +160,7 @@ class LiskMessageExtension extends Component {
       parsedData,
       avatarPreview,
       state,
-      passphrase,
+      recoveryPhrase,
       presentationStyle,
       conversation,
     } = this.state;
@@ -185,7 +185,7 @@ class LiskMessageExtension extends Component {
                 message={message}
                 conversation={conversation}
                 sharedData={parsedData}
-                passphrase={passphrase}
+                recoveryPhrase={recoveryPhrase}
                 composeMessage={this.composeMessage}
                 language={language}
               />
@@ -197,7 +197,7 @@ class LiskMessageExtension extends Component {
 
     let content = <SignInWarning />;
 
-    if (passphrase) {
+    if (recoveryPhrase) {
       content = message.url ? (
         <Element />
       ) : (

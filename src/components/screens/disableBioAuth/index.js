@@ -10,7 +10,7 @@ import i18next from 'i18next';
 import {
   bioMetricAuthentication,
   removeAccountPasswordFromKeychain,
-} from 'modules/Auth/utils/passphrase';
+} from 'modules/Auth/utils/recoveryPhrase';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import getStyles from './styles';
 

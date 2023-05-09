@@ -34,7 +34,7 @@ export default function AccountItem({
           color: colors.dark.blueGray,
           icon: () => <RefreshSvg />,
           testID: 'backup-account',
-          onPress: () => navigation.navigate('BackupPassphrase', { account }),
+          onPress: () => navigation.navigate('BackupRecoveryPhrase', { account }),
         },
       ]}
       rightActions={[

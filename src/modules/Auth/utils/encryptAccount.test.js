@@ -73,7 +73,7 @@ describe('encryptAccount', () => {
     expect(encryptedAccount).toEqual(updatedMockAccount);
   });
 
-  it('returns an error if passphrase is invalid', async () => {
+  it('returns an error if recoveryPhrase is invalid', async () => {
     const incorrectRecoveryPhrase = 'target cancel solution recipe vague faint bomb convince pink';
     const password = 'samplePassword@1';
     const name = 'test account';

@@ -15,13 +15,13 @@ import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
 
-import BackupPassphrase from 'modules/Settings/components/BackupPassphrase/BackupPassphrase';
+import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
 import SecretRecoveryPhrase from 'modules/Auth/components/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/components/PasswordSetupForm';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
-import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
+import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccessScreen from 'modules/BlockchainApplication/components/AddApplicationSuccessScreen/AddApplicationSuccessScreen';
 import AddApplicationErrorScreen from 'modules/BlockchainApplication/components/AddApplicationErrorScreen/AddApplicationErrorScreen';
@@ -63,8 +63,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="DecryptPassphrase"
-            component={DecryptPassphrase}
+            name="DecryptRecoveryPhrase"
+            component={DecryptRecoveryPhrase}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
@@ -150,8 +150,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.AccountDetails}
           />
           <StackNavigator.Screen
-            name="BackupPassphrase"
-            component={BackupPassphrase}
+            name="BackupRecoveryPhrase"
+            component={BackupRecoveryPhrase}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen

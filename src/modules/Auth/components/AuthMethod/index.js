@@ -8,20 +8,20 @@ import { useNavigation } from '@react-navigation/native';
 
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import { useTheme } from 'contexts/ThemeContext';
-import { validatePassphrase } from 'modules/Auth/utils';
+import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { settingsRetrieved, settingsUpdated } from 'modules/Settings/store/actions';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
-import PassphraseSvg from 'assets/svgs/PassphraseSvg';
+import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import CreateAccount from '../CreateAccount';
 import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
 import { selectEncryptedFile } from '../../utils/documentPicker';
-import { getPassphraseFromKeyChain } from '../../utils/passphrase';
+import { getRecoveryPhraseFromKeyChain } from '../../utils/recoveryPhrase';
 import Version2Migration from '../Version2Migration';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
@@ -33,7 +33,7 @@ export default function AuthMethod({ route }) {
   const [isScreenReady, setScreenReady] = useState(false);
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
-  const [v2Passphrase, setV2Passphrase] = useState('');
+  const [v2RecoveryPhrase, setV2RecoveryPhrase] = useState('');
 
   const { accounts } = useAccounts();
 
@@ -67,10 +67,10 @@ export default function AuthMethod({ route }) {
   }, [accounts.length, settings.showedIntro]);
 
   const checkVersion2Migration = async () => {
-    const { password: passphrase } = await getPassphraseFromKeyChain();
-    const validity = validatePassphrase(passphrase);
+    const { password: recoveryPhrase } = await getRecoveryPhraseFromKeyChain();
+    const validity = validateRecoveryPhrase(recoveryPhrase);
     if (!validity.length && !accounts.length) {
-      setV2Passphrase(passphrase);
+      setV2RecoveryPhrase(recoveryPhrase);
     }
   };
 
@@ -91,8 +91,8 @@ export default function AuthMethod({ route }) {
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
-      navigation.navigate('DecryptPassphrase', {
-        title: 'auth.setup.decryptPassphrase',
+      navigation.navigate('DecryptRecoveryPhrase', {
+        title: 'auth.setup.decryptRecoveryPhrase',
         encryptedData,
         successRoute: 'AccountsManagerScreen',
       });
@@ -111,8 +111,8 @@ export default function AuthMethod({ route }) {
     return <SafeAreaView style={[styles.container, styles.theme.container]}></SafeAreaView>;
   }
 
-  if (v2Passphrase) {
-    return <Version2Migration passphrase={v2Passphrase} />;
+  if (v2RecoveryPhrase) {
+    return <Version2Migration recoveryPhrase={v2RecoveryPhrase} />;
   }
 
   return (
@@ -127,7 +127,7 @@ export default function AuthMethod({ route }) {
         </H2>
 
         <AuthTypeItem
-          illustration={<PassphraseSvg />}
+          illustration={<RecoveryPhaseSvg />}
           label={i18next.t('auth.setup.secretPhrase')}
           onPress={() => navigation.navigate('SecretRecoveryPhrase')}
           testID="secret-phrase"

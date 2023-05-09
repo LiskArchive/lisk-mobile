@@ -3,7 +3,7 @@ import { tokenMap } from './tokens';
 const data = {
   activeToken: tokenMap.LSK.key,
   address: '7056261880661230236L',
-  passphrase:
+  recoveryPhrase:
     'truly chicken bracket giant lecture coyote undo tourist portion damage mansion together',
   account: {
     address: 'lskebd9zfkhz6ep9kde24u8h7uxarssxxdnru2xgw',

@@ -10,7 +10,7 @@ import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useEncryptAccount } from 'modules/Accounts/hooks/useEncryptAccount';
-import { storeAccountPasswordInKeyChain } from '../utils/passphrase';
+import { storeAccountPasswordInKeyChain } from '../utils/recoveryPhrase';
 
 const validationSchema = yup
   .object()
@@ -29,12 +29,12 @@ const validationSchema = yup
 
 /**
  * Provides a stateful form to handle users passwords setup process.
- * @param {String} passphrase - Generated passphrase to consider on the submit.
+ * @param {String} recoveryPhrase - Generated recoveryPhrase to consider on the submit.
  * @param {String} derivationPath - optional derivation path to be used to generate address
  * @returns - The form fields, error state, submit callback and other handlers.
  * Also, the encrypt process state (isLoading, isError, isSuccess, among others).
  */
-export function usePasswordSetupForm(passphrase, derivationPath) {
+export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
   const [isError, setIsError] = useState();
@@ -76,7 +76,7 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
       setIsLoading(true);
 
       const data = await encryptAccount({
-        recoveryPhrase: passphrase,
+        recoveryPhrase,
         password: values.password,
         name: values.accountName,
         derivationPath,
@@ -100,7 +100,7 @@ export function usePasswordSetupForm(passphrase, derivationPath) {
       setError(_error);
       setIsError(true);
 
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.encryptPassphraseError'));
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.encryptRecoveryPhraseError'));
     }
   });
 

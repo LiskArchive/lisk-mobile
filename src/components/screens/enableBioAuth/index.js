@@ -12,7 +12,7 @@ import { settingsUpdated } from 'modules/Settings/store/actions';
 import {
   bioMetricAuthentication,
   storeAccountPasswordInKeyChain,
-} from 'modules/Auth/utils/passphrase';
+} from 'modules/Auth/utils/recoveryPhrase';
 import getStyles from './styles';
 
 const EnableBioAuth = ({ onSubmit, sharedData = {} }) => {

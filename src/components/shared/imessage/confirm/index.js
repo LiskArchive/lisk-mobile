@@ -25,7 +25,7 @@ class Confirm extends Component {
 
     const {
       composeMessage,
-      passphrase,
+      recoveryPhrase,
       sharedData: { address, amount },
     } = this.props;
 
@@ -38,7 +38,7 @@ class Confirm extends Component {
       // const data = {
       //   recipientAddress: address,
       //   amount: toRawLsk(amount),
-      //   passphrase,
+      //   recoveryPhrase,
       // };
       // const tx = await transactionsAPI.create(data);
       // const { id } = await transactionsAPI.broadcast(tx);
@@ -46,7 +46,7 @@ class Confirm extends Component {
 
       composeMessage({
         id: '',
-        address: { value: extractAddress(passphrase), validity: 0 },
+        address: { value: extractAddress(recoveryPhrase), validity: 0 },
         amount,
         state: 'transferred',
         recipientAddress: address,

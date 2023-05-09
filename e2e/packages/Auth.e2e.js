@@ -62,10 +62,10 @@ describe.skip('Auth module', () => {
     await element(by.id('createAccountButton')).atIndex(1).tap();
     await element(by.id('understandResponsibilitySwitch')).tap();
     await element(by.id('safeKeepingButton')).tap();
-    await element(by.id(`passphrasePlaceholderFor-${recoveryPhraseArray[0]}`)).tap();
-    await element(by.id(`passphraseOptionFor-${recoveryPhraseArray[0]}`)).tap();
-    await element(by.id(`passphrasePlaceholderFor-${recoveryPhraseArray[1]}`)).tap();
-    await element(by.id(`passphraseOptionFor-${recoveryPhraseArray[1]}`)).tap();
+    await element(by.id(`recoveryPhrasePlaceholderFor-${recoveryPhraseArray[0]}`)).tap();
+    await element(by.id(`recoveryPhraseOptionFor-${recoveryPhraseArray[0]}`)).tap();
+    await element(by.id(`recoveryPhrasePlaceholderFor-${recoveryPhraseArray[1]}`)).tap();
+    await element(by.id(`recoveryPhraseOptionFor-${recoveryPhraseArray[1]}`)).tap();
     await element(by.id('registerConfirmButton')).atIndex(0).tap();
     await element(by.id('register-continue-button')).atIndex(0).tap();
     await expect(element(by.id('auth-method-screen')).atIndex(0)).toBeVisible();
@@ -79,8 +79,8 @@ describe.skip('Auth module', () => {
       await element(by.id('derivation-path-input')).typeText('invalid-path');
       await expect(element(by.id('derivation-path-input-error'))).toBeVisible();
       await element(by.id('derivation-path-input')).replaceText(defaultDerivationPath);
-      await element(by.id('signInPassphraseInput')).tap();
-      await element(by.id('signInPassphraseInput')).typeText(testConstants.secretRecoveryPhrase);
+      await element(by.id('signInRecoveryPhaseInput')).tap();
+      await element(by.id('signInRecoveryPhaseInput')).typeText(testConstants.secretRecoveryPhrase);
       await element(by.id('secret-recovery-screen')).tap();
       await element(by.id('continue-button')).tap();
       await element(by.id('enter-password')).tap();

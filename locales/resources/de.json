@@ -60,7 +60,6 @@
   "The official Lisk mobile wallet.": "Das offizielle Lisk Mobile Wallet.",
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Wilkommen bei Lisk. Jetzt kannst du LSK Tokens unterwegs senden und empfangen.",
-  "You always need to keep your passphrase safe.": "Du musst deine Passphrase immer sicher aufbewahren.",
   "Your connection seems to be down, try again later.": "Deine Verbindung scheint unterbrochen zu sein, bitte versuch es spääter noch einmal.",
   "About Lisk": "Über Lisk",
   "Disabled": "Deaktiviert",
@@ -70,7 +69,7 @@
   "Delete": "Löschen",
   "Edit": "Bearbeiten",
   "Bookmarks": "Lesezeichen",
-  "Passphrase backup": "Passphrase Sicherung",
+  "Recovery phrase": "Recovery phrase Sicherung",
   "Request": "Anfrage",
   "Select your currency": "Wähle deine Währung",
   "Settings": "Einstellungen",
@@ -101,7 +100,7 @@
       "advanced": ""
     },
     "menu": {
-      "backupPassphrase": "Sichern Sie Ihre Passphrase",
+      "backupRecoveryPhrase": "Sichern Sie Ihre Secret Recovery Phrase",
       "about": "Über Lisk",
       "darkMode": "Dunkler Modus",
       "disabled": "Deaktiviert",
@@ -216,8 +215,8 @@
     "setup": {
       "addAccountTitle": "Konto hinzufügen",
       "switchAccount": "Benutzer wechseln",
-      "decryptPassphrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
-      "decryptPassphraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
+      "decryptRecoveryPhrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
+      "decryptRecoveryPhraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
       "addAccountDescription": "Geben Sie Ihre geheime Wiederherstellungsphrase ein, um Ihr Konto zu verwalten",
       "passwordSetupTitle": "Gerätekennwort einrichten",
       "passwordSetupDescription": "Dieses Passwort wird verwendet, um Ihre geheime Wiederherstellungsphrase zu verschlüsseln, die für die Verwaltung Ihres Kontos verwendet wird.",

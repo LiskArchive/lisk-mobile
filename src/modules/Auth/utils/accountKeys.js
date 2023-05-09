@@ -3,32 +3,32 @@ import { passphrase as LiskPassphrase, cryptography } from '@liskhq/lisk-client'
 import regex from 'constants/regex';
 
 /**
- * Extracts wallet address from passphrase for given token.
+ * Extracts wallet address from recoveryPhrase for given token.
  * @param {String} tokenType
- * @param {String} passphrase
+ * @param {String} recoveryPhrase
  * @returns {String}
  */
-export const extractAddress = (passphrase) => {
-  const { publicKey } = cryptography.legacy.getKeys(passphrase);
+export const extractAddress = (recoveryPhrase) => {
+  const { publicKey } = cryptography.legacy.getKeys(recoveryPhrase);
   return cryptography.address.getLisk32AddressFromPublicKey(publicKey).toString('hex');
 };
 
 /**
- * Extracts Lisk PrivateKey/PublicKey pair from a given valid Mnemonic passphrase
+ * Extracts Lisk PrivateKey/PublicKey pair from a given valid Mnemonic recoveryPhrase
  *
- * @param {String} passphrase - Valid Mnemonic passphrase
+ * @param {String} recoveryPhrase - Valid Mnemonic recoveryPhrase
  * @param {boolean} enableCustomDerivationPath - enable custom derivation for HW
  * @param {String} derivationPath - custom derivation path for HW
- * @returns {object} - Extracted publicKey for a given valid passphrase
+ * @returns {object} - Extracted publicKey for a given valid recoveryPhrase
  */
 export const extractKeyPair = async ({
-  passphrase,
+  recoveryPhrase,
   enableCustomDerivationPath = false,
   derivationPath,
 }) => {
   if (enableCustomDerivationPath) {
     const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(
-      passphrase,
+      recoveryPhrase,
       derivationPath
     );
     const publicKey = cryptography.ed.getPublicKeyFromPrivateKey(privateKey).toString('hex');
@@ -39,8 +39,8 @@ export const extractKeyPair = async ({
     };
   }
 
-  if (LiskPassphrase.Mnemonic.validateMnemonic(passphrase)) {
-    const keyPair = cryptography.legacy.getKeys(passphrase);
+  if (LiskPassphrase.Mnemonic.validateMnemonic(recoveryPhrase)) {
+    const keyPair = cryptography.legacy.getKeys(recoveryPhrase);
     return {
       publicKey: keyPair.publicKey.toString('hex'),
       privateKey: keyPair.privateKey.toString('hex'),
@@ -51,25 +51,25 @@ export const extractKeyPair = async ({
 };
 
 /**
- * Extracts Lisk PublicKey from a given valid Mnemonic passphrase
+ * Extracts Lisk PublicKey from a given valid Mnemonic recoveryPhrase
  *
- * @param {String} passphrase - Valid Mnemonic passphrase
+ * @param {String} recoveryPhrase - Valid Mnemonic recoveryPhrase
  * @param {boolean} enableCustomDerivationPath - enable custom derivation for HW
  * @param {String} derivationPath - custom derivation path for HW
- * @returns {String?} - Extracted publicKey for a given valid passphrase
+ * @returns {String?} - Extracted publicKey for a given valid recoveryPhrase
  */
 export const extractPublicKey = (
-  passphrase,
+  recoveryPhrase,
   enableCustomDerivationPath = false,
   derivationPath
 ) => {
-  const keyPair = extractKeyPair({ passphrase, enableCustomDerivationPath, derivationPath });
+  const keyPair = extractKeyPair({ recoveryPhrase, enableCustomDerivationPath, derivationPath });
 
   if (keyPair.isValid) {
     return keyPair.publicKey;
   }
 
-  throw Error('Invalid passphrase');
+  throw Error('Invalid secret recovery phrase');
 };
 
 /**

@@ -7,7 +7,7 @@ export default () => ({
       flex: 1,
     },
     input: {
-      fontFamily: fonts.family.passphrase,
+      fontFamily: fonts.family.recoveryPhrase,
       textAlign: 'justify',
       color: colors.dark.whiteSmoke,
       paddingTop: 15,
@@ -20,7 +20,7 @@ export default () => ({
       paddingRight: 0,
     },
     inputRevealed: {
-      fontFamily: fonts.family.passphraseText,
+      fontFamily: fonts.family.recoveryPhraseText,
     },
     scanButtonTitle: {
       fontSize: fonts.size.small,

@@ -22,8 +22,8 @@ export default function SecretRecoveryPhrase() {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const handleFormSubmission = (passphrase, derivationPath) =>
-    navigation.navigate('PasswordSetupForm', { passphrase, derivationPath });
+  const handleFormSubmission = (recoveryPhrase, derivationPath) =>
+    navigation.navigate('PasswordSetupForm', { recoveryPhrase, derivationPath });
 
   const handleQRCodeRead = (value) => handleFormSubmission(value);
 

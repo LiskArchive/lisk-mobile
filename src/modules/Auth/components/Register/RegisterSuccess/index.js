@@ -14,7 +14,7 @@ import getRegisterSuccessStyles from './styles';
 export default function RegisterSuccess({ hideNav, sharedData: data }) {
   const navigation = useNavigation();
 
-  const { passphrase } = data;
+  const { recoveryPhrase } = data;
 
   const { styles } = useTheme({
     styles: getRegisterSuccessStyles(),
@@ -47,7 +47,7 @@ export default function RegisterSuccess({ hideNav, sharedData: data }) {
         <PrimaryButton
           testID="register-continue-button"
           style={styles.button}
-          onClick={() => navigation.navigate('PasswordSetupForm', { passphrase })}
+          onClick={() => navigation.navigate('PasswordSetupForm', { recoveryPhrase })}
         >
           {i18next.t('auth.register.success.continueButtonText')}
         </PrimaryButton>

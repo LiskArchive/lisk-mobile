@@ -13,7 +13,7 @@ import SwitchButton from 'components/shared/toolBox/switchButton';
 import getRegisterSafeKeepingStyles from './styles';
 
 export default function RegisterSafeKeeping({
-  passphrase,
+  recoveryPhrase,
   nextStep,
   showHeader,
   currentIndex,
@@ -29,7 +29,7 @@ export default function RegisterSafeKeeping({
 
   const handleConfirm = (status) => setConfirmed(status);
 
-  const onContinue = () => nextStep({ passphrase });
+  const onContinue = () => nextStep({ recoveryPhrase });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -51,12 +51,12 @@ export default function RegisterSafeKeeping({
           {i18next.t('auth.register.safeKeeping.description')}
         </P>
 
-        <View style={styles.passphraseContainer}>
+        <View style={styles.recoveryPhraseContainer}>
           <Text
-            style={[styles.passphraseText, styles.theme.passphraseText]}
-            testID="passphraseText"
+            style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}
+            testID="recoveryPhraseText"
           >
-            {passphrase.replace(/\s+/g, '  ')}
+            {recoveryPhrase.replace(/\s+/g, '  ')}
           </Text>
 
           <CopyToClipboard
@@ -66,7 +66,7 @@ export default function RegisterSafeKeeping({
             label={i18next.t('commons.copyToClipboard')}
             showIcon={true}
             iconSize={14}
-            value={passphrase}
+            value={recoveryPhrase}
             type={B}
           />
         </View>

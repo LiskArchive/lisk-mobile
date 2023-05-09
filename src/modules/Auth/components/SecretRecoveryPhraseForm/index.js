@@ -7,7 +7,7 @@ import i18next from 'i18next';
 import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
-import { validatePassphrase } from 'modules/Auth/utils';
+import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
@@ -15,7 +15,7 @@ import DropDownHolder from 'utilities/alert';
 
 import getStyles from './styles';
 
-const devDefaultPass = process.env.passphrase || '';
+const devDefaultRecoveryPhrase = process.env.RECOVERY_PHRASE || '';
 
 export default function SecretRecoveryPhraseForm({
   onSubmit,
@@ -24,8 +24,8 @@ export default function SecretRecoveryPhraseForm({
   useDerivationPath,
 }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [passphrase, setPassphrase] = useState({
-    value: devDefaultPass,
+  const [recoveryPhrase, setRecoveryPhrase] = useState({
+    value: devDefaultRecoveryPhrase,
     validity: [],
   });
   const [derivationPath, setDerivationPath] = useState(`m/44'/134'/0'`);
@@ -38,39 +38,42 @@ export default function SecretRecoveryPhraseForm({
   );
 
   const handleInputChange = (value) => {
-    setPassphrase({
+    setRecoveryPhrase({
       value,
       validity: [],
     });
   };
 
   const onFormSubmission = () => {
-    const secretRecoveryPhrase = passphrase.value;
-    const normalizedPassphrase = secretRecoveryPhrase.trim();
-    const validity = validatePassphrase(normalizedPassphrase);
+    const secretRecoveryPhrase = recoveryPhrase.value;
+    const normalizedRecoveryPhrase = secretRecoveryPhrase.trim();
+    const validity = validateRecoveryPhrase(normalizedRecoveryPhrase);
 
     if (!validity.length) {
       DropDownHolder.closeAlert();
-      onSubmit(normalizedPassphrase, derivationPath);
+      onSubmit(normalizedRecoveryPhrase, derivationPath);
     } else {
       const errors = validity.filter(
         (item) => item.code !== 'INVALID_MNEMONIC' || validity.length === 1
       );
       if (errors.length && errors[0].message && errors[0].message.length) {
-        const errorMessage = errors[0].message.replace(' Please check the passphrase.', '');
+        const errorMessage = errors[0].message.replace(
+          ' Please check the secret recovery phrase.',
+          ''
+        );
         DropDownHolder.error(i18next.t('Error'), errorMessage);
       }
 
-      setPassphrase({
-        passphrase: {
-          value: normalizedPassphrase,
+      setRecoveryPhrase({
+        recoveryPhrase: {
+          value: normalizedRecoveryPhrase,
           validity,
         },
       });
     }
   };
 
-  const onTogglePassphraseReveal = () => setShowPassword((prevState) => !prevState);
+  const onToggleRecoveryPhraseReveal = () => setShowPassword((prevState) => !prevState);
 
   const toggleCamera = () => {
     onScanQrCode();
@@ -97,13 +100,13 @@ export default function SecretRecoveryPhraseForm({
         </View>
 
         <Input
-          testID="signInPassphraseInput"
+          testID="signInRecoveryPhaseInput"
           noTheme
           innerStyles={{
             input: [styles.input, styles.theme.input, showPassword ? styles.inputRevealed : null],
             containerStyle: styles.inputContainer,
           }}
-          value={passphrase.value}
+          value={recoveryPhrase.value}
           onChange={handleInputChange}
           autoCorrect={false}
           multiline
@@ -112,7 +115,7 @@ export default function SecretRecoveryPhraseForm({
           adornments={{
             right: (
               <IconButton
-                onPress={onTogglePassphraseReveal}
+                onPress={onToggleRecoveryPhraseReveal}
                 icon={showPassword ? 'eye-crossed' : 'eye'}
                 iconSize={16}
                 color={colors.light.ultramarineBlue}

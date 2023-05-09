@@ -6,8 +6,8 @@ import { useTheme } from 'contexts/ThemeContext';
 
 import Stepper from 'components/shared/Stepper';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-import { generatePassphrase } from '../../utils';
-import PassphraseQuiz from '../PassphraseQuiz/PassphraseQuiz';
+import { generateRecoveryPhrase } from '../../utils';
+import RecoveryPhraseQuiz from '../RecoveryPhraseQuiz/RecoveryPhraseQuiz';
 import RegisterSafeKeeping from './RegisterSafeKeeping';
 import PasswordSetupForm from '../PasswordSetupForm';
 
@@ -16,9 +16,9 @@ import getRegisterStyles from './Register.styles';
 export default function Register() {
   const route = useRoute();
 
-  const passphrase = useMemo(
-    () => route.params?.passphrase ?? generatePassphrase(),
-    [route.params?.passphrase]
+  const recoveryPhrase = useMemo(
+    () => route.params?.recoveryPhrase ?? generateRecoveryPhrase(),
+    [route.params?.recoveryPhrase]
   );
 
   const { styles } = useTheme({
@@ -50,9 +50,9 @@ export default function Register() {
         customProgressLength={3}
         styles={{ container: { flex: 1, marginTop: 16 } }}
       >
-        <RegisterSafeKeeping showHeader passphrase={passphrase} />
+        <RegisterSafeKeeping showHeader recoveryPhrase={recoveryPhrase} />
 
-        <PassphraseQuiz showHeader />
+        <RecoveryPhraseQuiz showHeader />
 
         <PasswordSetupForm hideNav />
       </Stepper>

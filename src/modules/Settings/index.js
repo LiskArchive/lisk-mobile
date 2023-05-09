@@ -13,10 +13,10 @@ import withTheme from 'components/shared/withTheme';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import Checkbox from 'components/shared/Checkbox';
 import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store/actions';
-import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
+import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/passphrase';
+import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/recoveryPhrase';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -47,8 +47,8 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     setShow(false);
   };
 
-  const backupPassphrase = () =>
-    navigation.navigate('BackupPassphrase', {
+  const backupRecoveryPhrase = () =>
+    navigation.navigate('BackupRecoveryPhrase', {
       account,
     });
 
@@ -75,7 +75,7 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     } else {
       modal.open(() => (
         <Stepper>
-          <DecryptPassphrase
+          <DecryptRecoveryPhrase
             account={account}
             route={{
               params: {
@@ -137,9 +137,9 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               hideDialog={hideDialog}
               setError={setErrorMessage}
               icon="backup"
-              title={t('settings.menu.backupPassphrase')}
+              title={t('settings.menu.backupRecoveryPhrase')}
               iconSize={22}
-              onPress={backupPassphrase}
+              onPress={backupRecoveryPhrase}
             />
           </View>
 
