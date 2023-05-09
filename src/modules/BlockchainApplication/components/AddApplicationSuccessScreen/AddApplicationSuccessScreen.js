@@ -8,9 +8,11 @@ import AddApplicationSuccessSvg from 'assets/svgs/AddApplicationSuccessSvg';
 export default function AddApplicationSuccessScreen() {
   const navigation = useNavigation();
 
+  const handleContinuePress = () => navigation.navigate('Main');
+
   return (
     <ResultScreen
-      onContinue={() => navigation.navigate('Main')}
+      onContinue={handleContinuePress}
       illustration={<AddApplicationSuccessSvg />}
       variant="success"
       title={i18next.t('application.manage.add.successTitle')}

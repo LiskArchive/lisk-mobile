@@ -14,9 +14,11 @@ export default function AddApplicationErrorScreen() {
     ? i18next.t('application.manage.add.errorDescription', { chainName })
     : i18next.t('application.manage.add.errorGenericDescription');
 
+  const handleContinuePress = () => navigation.navigate('AddApplication');
+
   return (
     <ResultScreen
-      onContinue={() => navigation.navigate('AddApplication')}
+      onContinue={handleContinuePress}
       variant={'error'}
       title={i18next.t('application.manage.add.errorTitle')}
       description={description}

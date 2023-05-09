@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { translate } from 'react-i18next';
 import { SafeAreaView } from 'react-native';
 
@@ -21,17 +21,21 @@ const AddApplication = ({ navigation, t }) => {
 
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
 
-  const filteredApplications = applications.data?.reduce((acc, app) => {
-    const isAppAlreadyAdded = !!applicationsStorageData?.data?.find(
-      (addedApp) => addedApp.chainID === app.chainID
-    );
+  const filteredApplications = useMemo(
+    () =>
+      applications.data?.reduce((acc, app) => {
+        const isAppAlreadyAdded = !!applicationsStorageData?.data?.find(
+          (addedApp) => addedApp.chainID === app.chainID
+        );
 
-    if (isAppAlreadyAdded || isMainchainApplication(app.chainID)) {
-      return acc;
-    }
+        if (isAppAlreadyAdded || isMainchainApplication(app.chainID)) {
+          return acc;
+        }
 
-    return [...acc, app];
-  }, []);
+        return [...acc, app];
+      }, []),
+    [applications.data, applicationsStorageData?.data]
+  );
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
