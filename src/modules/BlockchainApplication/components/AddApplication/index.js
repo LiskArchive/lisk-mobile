@@ -7,20 +7,35 @@ import { useTheme } from 'contexts/ThemeContext';
 import ApplicationList from '../ApplicationList/ApplicationList';
 import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
+import { useApplicationsLocalStorage } from '../../hooks/useApplicationsLocalStorage';
 
 import getAddApplicationStyles from './styles';
 
 const AddApplication = ({ navigation, t }) => {
   const applications = useApplicationsExplorer();
 
+  const { data: applicationsStorageData } = useApplicationsLocalStorage();
+
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
+
+  const filteredApplications = applications.data.reduce((acc, app) => {
+    const isAppAlreadyAdded = !!applicationsStorageData?.data?.find(
+      (addedApp) => addedApp.chainID === app.chainID
+    );
+
+    if (isAppAlreadyAdded) {
+      return acc;
+    }
+
+    return [...acc, app];
+  }, []);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
 
       <ApplicationList
-        applications={applications}
+        applications={{ ...applications, data: filteredApplications }}
         Component={ApplicationRow}
         onItemPress={(item) =>
           navigation.navigate('ApplicationDetails', {

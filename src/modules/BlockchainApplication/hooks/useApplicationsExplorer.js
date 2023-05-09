@@ -20,11 +20,7 @@ export function useApplicationsExplorer(mode = 'manage') {
   });
 
   // exclude mainchain applications from the data.
-  let data = applicationsData?.data;
-
-  if (mode === 'explore') {
-    data = applicationsData?.data.filter((app) => !isMainchainApplication(app.chainID));
-  }
+  let data = applicationsData?.data.filter((app) => !isMainchainApplication(app.chainID));
 
   // exclude unregistered apps in manage mode.
   if (mode === 'manage') {
