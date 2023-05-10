@@ -15,8 +15,8 @@ const freeFontFamily = {
 export default {
   family: {
     ...(process.env.useCommercialFonts ? commercialFontFamily : freeFontFamily),
-    passphrase: 'Dots-Regular',
-    passphraseText: 'PTMono-Regular',
+    recoveryPhrase: 'Dots-Regular',
+    recoveryPhraseText: 'PTMono-Regular',
   },
   size: {
     h1: 26,

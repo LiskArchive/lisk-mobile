@@ -6,18 +6,20 @@ import { useTheme } from 'contexts/ThemeContext';
 import { P } from '../toolBox/typography';
 import CopyToClipboard from '../copyToClipboard';
 
-import getCopyPassphraseToClipboardStyles from './CopyPassphraseToClipboard.styles';
+import getCopyRecoveryPhraseToClipboardStyles from './CopyRecoveryPhraseToClipboard.styles';
 
-export default function CopyPassphraseToClipboard({ passphrase }) {
+export default function CopyRecoveryPhraseToClipboard({ recoveryPhrase }) {
   const { styles } = useTheme({
-    styles: getCopyPassphraseToClipboardStyles(),
+    styles: getCopyRecoveryPhraseToClipboardStyles(),
   });
 
   return (
     <View style={[styles.container, styles.theme.container]}>
-      <P style={styles.theme.passphraseTitle}>{i18next.t('settings.backupPhrase.storePhrase')}</P>
+      <P style={styles.theme.recoveryPhraseTitle}>
+        {i18next.t('settings.backupPhrase.storePhrase')}
+      </P>
 
-      <P style={[styles.passphrase, styles.theme.passphrase]}>{passphrase}</P>
+      <P style={[styles.recoveryPhrase, styles.theme.recoveryPhrase]}>{recoveryPhrase}</P>
 
       <CopyToClipboard
         style={styles.copyContainer}
@@ -26,7 +28,7 @@ export default function CopyPassphraseToClipboard({ passphrase }) {
         label={i18next.t('commons.copyToClipboard')}
         showIcon={true}
         iconSize={14}
-        value={passphrase}
+        value={recoveryPhrase}
         type={P}
       />
     </View>

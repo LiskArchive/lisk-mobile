@@ -140,14 +140,11 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     let privateKey;
 
     try {
-      const decryptedAccount = await decryptAccount(
-        currentAccount.encryptedPassphrase,
-        values.userPassword
-      );
+      const decryptedAccount = await decryptAccount(currentAccount.crypto, values.userPassword);
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptPassphraseError'));
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
     }
 
     if (privateKey) {

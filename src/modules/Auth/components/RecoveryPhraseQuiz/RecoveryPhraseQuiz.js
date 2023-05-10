@@ -10,9 +10,9 @@ import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { assembleWordOptions, chooseRandomWords } from 'modules/Auth/utils';
 
-import getPassphraseQuizStyles from './PassphraseQuiz.styles';
+import getRecoveryPhraseQuizStyles from './RecoveryPhraseQuiz.styles';
 
-export default function PassphraseQuiz({
+export default function RecoveryPhraseQuiz({
   nextStep,
   sharedData: data,
   prevStep,
@@ -23,7 +23,7 @@ export default function PassphraseQuiz({
 }) {
   const navigation = useNavigation();
 
-  const { passphrase } = data;
+  const { recoveryPhrase } = data;
 
   const [buttonStatus, setButtonStatus] = useState(true);
   const [missing, setMissing] = useState([]);
@@ -41,16 +41,16 @@ export default function PassphraseQuiz({
   const [visibleOptions, setVisibleOptions] = useState(-1);
 
   const { styles } = useTheme({
-    styles: getPassphraseQuizStyles(),
+    styles: getRecoveryPhraseQuizStyles(),
   });
 
   const generateTest = useCallback(() => {
-    const words = passphrase.match(/\w+/g);
+    const words = recoveryPhrase.match(/\w+/g);
     const _missing = chooseRandomWords(2, words);
 
     setMissing(_missing);
 
-    setOptions(assembleWordOptions(passphrase.split(' '), _missing));
+    setOptions(assembleWordOptions(recoveryPhrase.split(' '), _missing));
 
     setAnswers([
       {
@@ -64,7 +64,7 @@ export default function PassphraseQuiz({
         textStyle: {},
       },
     ]);
-  }, [passphrase]);
+  }, [recoveryPhrase]);
 
   const toggleOptions = (index) => {
     const temp = [...answers];
@@ -75,7 +75,7 @@ export default function PassphraseQuiz({
   };
 
   const checkAnswers = (_answers) => {
-    const phrase = passphrase.split(' ');
+    const phrase = recoveryPhrase.split(' ');
     const start = _answers.filter((item) => item.value).length;
     const result = _answers.filter((item) => phrase.includes(item.value)).length;
     const isCorrect = result === 2;
@@ -112,7 +112,7 @@ export default function PassphraseQuiz({
     return (
       <Button
         noPredefinedStyle
-        testID={`passphrasePlaceholderFor-${value}`}
+        testID={`recoveryPhrasePlaceholderFor-${value}`}
         key={index}
         title={answers[optionIndex].value}
         onClick={() => toggleOptions(optionIndex)}
@@ -122,8 +122,8 @@ export default function PassphraseQuiz({
     );
   };
 
-  const renderPassphrase = () => {
-    const phrase = passphrase.split(' ');
+  const renderRecoveryPhrase = () => {
+    const phrase = recoveryPhrase.split(' ');
     return missing.length > 0
       ? phrase.map((val, index) => {
           const optionIndex = missing.indexOf(index);
@@ -131,7 +131,7 @@ export default function PassphraseQuiz({
             optionIndex >= 0 ? (
               generatePlaceholder(index, optionIndex, val)
             ) : (
-              <P key={index} style={[styles.passphraseText, styles.theme.passphraseText]}>
+              <P key={index} style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}>
                 {val}
               </P>
             );
@@ -174,12 +174,12 @@ export default function PassphraseQuiz({
         </P>
 
         <View style={styles.box}>
-          <View style={[styles.passphraseContainer, styles.horizontalPadding]}>
-            {renderPassphrase()}
+          <View style={[styles.recoveryPhraseContainer, styles.horizontalPadding]}>
+            {renderRecoveryPhrase()}
           </View>
 
           <View
-            testID="passphraseOptionsContainer"
+            testID="recoveryPhraseOptionsContainer"
             style={[styles.optionsContainer, styles.horizontalPadding]}
           >
             {options[visibleOptions] ? (
@@ -187,7 +187,7 @@ export default function PassphraseQuiz({
                 <Button
                   key={idx}
                   onClick={() => fillOption(value)}
-                  testID={`passphraseOptionFor-${value}`}
+                  testID={`recoveryPhraseOptionFor-${value}`}
                   noPredefinedStyle
                   style={[styles.option]}
                   textStyle={[styles.label, styles.theme.label]}
@@ -208,7 +208,7 @@ export default function PassphraseQuiz({
           disabled={buttonStatus}
           noTheme={true}
           style={styles.button}
-          onClick={() => nextStep({ passphrase })}
+          onClick={() => nextStep({ recoveryPhrase })}
         >
           {i18next.t('commons.buttons.confirm')}
         </PrimaryButton>

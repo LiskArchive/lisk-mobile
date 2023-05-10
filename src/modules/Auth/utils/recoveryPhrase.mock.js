@@ -2,8 +2,8 @@
 import testConstants from '../../../../e2e/utils/testConstants';
 
 // eslint-disable-next-line import/extensions
-export * from './passphrase.js';
+export * from './recoveryPhrase.js';
 
-export const generatePassphrase = () => testConstants.secretRecoveryPhrase;
+export const generateRecoveryPhrase = () => testConstants.secretRecoveryPhrase;
 
 export const chooseRandomWords = () => [0, 1];

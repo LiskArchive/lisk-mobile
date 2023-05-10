@@ -8,7 +8,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import {
   bioMetricAuthentication,
   getAccountPasswordFromKeyChain,
-} from 'modules/Auth/utils/passphrase';
+} from 'modules/Auth/utils/recoveryPhrase';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import Input from 'components/shared/toolBox/input';

@@ -12,7 +12,10 @@ import { colors, themes } from 'constants/styleGuide';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 
 import getStyles from './styles';
-import { bioMetricAuthentication, getAccountPasswordFromKeyChain } from '../../utils/passphrase';
+import {
+  bioMetricAuthentication,
+  getAccountPasswordFromKeyChain,
+} from '../../utils/recoveryPhrase';
 
 export default function PasswordForm({ account, onPress, testID, theme, onSubmit }) {
   useScreenshotPrevent();

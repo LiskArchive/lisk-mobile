@@ -4,8 +4,10 @@ import testConstants from '../utils/testConstants';
 
 export const signInUser = async () => {
   await element(by.id('secret-phrase')).atIndex(1).tap();
-  await element(by.id('signInPassphraseInput')).tap();
-  await element(by.id('signInPassphraseInput')).typeText(`${testConstants.secretRecoveryPhrase}`);
+  await element(by.id('signInRecoveryPhaseInput')).tap();
+  await element(by.id('signInRecoveryPhaseInput')).typeText(
+    `${testConstants.secretRecoveryPhrase}`
+  );
   await element(by.id('secret-recovery-screen')).tap();
   await waitFor(element(by.id('continue-button')))
     .toBeVisible()

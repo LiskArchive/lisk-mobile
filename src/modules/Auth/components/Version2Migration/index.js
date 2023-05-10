@@ -8,13 +8,13 @@ import MigrateIllustration from 'assets/svgs/MigrateIllustration';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import getStyles from './styles';
 
-const Version2Migration = ({ passphrase }) => {
+const Version2Migration = ({ recoveryPhrase }) => {
   const navigation = useNavigation();
 
   const { styles } = useTheme({ styles: getStyles() });
 
   const setupPassword = () => {
-    navigation.navigate('PasswordSetupForm', { passphrase });
+    navigation.navigate('PasswordSetupForm', { recoveryPhrase });
   };
 
   return (

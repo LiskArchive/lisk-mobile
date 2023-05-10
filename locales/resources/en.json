@@ -58,7 +58,6 @@
   "The official Lisk mobile wallet.": "The official Lisk mobile wallet.",
   "terms and conditions.": "terms and conditions.",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
-  "You always need to keep your passphrase safe.": "You always need to keep your passphrase safe.",
   "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
   "About Lisk": "About Lisk",
   "Disabled": "Disabled",
@@ -68,7 +67,6 @@
   "Delete": "Delete",
   "Edit": "Edit",
   "Bookmarks": "Bookmarks",
-  "Passphrase backup": "Passphrase backup",
   "Request": "Request",
   "Select your currency": "Select your currency",
   "Settings": "Settings",
@@ -98,7 +96,7 @@
       "advanced": "Advanced"
     },
     "menu": {
-      "backupPassphrase": "Backup your secret recovery phrase",
+      "backupRecoveryPhrase": "Backup your secret recovery phrase",
       "about": "About Lisk",
       "darkMode": "Dark mode",
       "disabled": "Disabled",
@@ -213,9 +211,9 @@
     "setup": {
       "addAccountTitle": "Add account",
       "switchAccount": "Switch account",
-      "decryptPassphrase": "Decrypt your secret recovery phrase",
-      "decryptPassphraseError": "Unable to decrypt account. Please check your password.",
-      "encryptPassphraseError": "Unable to encrypt account.",
+      "decryptRecoveryPhrase": "Decrypt your secret recovery phrase",
+      "decryptRecoveryPhraseError": "Unable to decrypt account. Please check your password.",
+      "encryptRecoveryPhraseError": "Unable to encrypt account.",
       "addAccountDescription": "Enter your secret recovery phrase to manage your account.",
       "passwordSetupTitle": "Set up your account password",
       "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
@@ -231,7 +229,7 @@
       },
       "migration": {
         "title": "Introducing password set up for Lisk V3",
-        "content": "It looks like you already have this account saved on this device. To keep your account secure, we’re introducing passwords. With passwords, you will be able to sign your transactions without your passphrase.",
+        "content": "It looks like you already have this account saved on this device. To keep your account secure, we’re introducing passwords. With passwords, you will be able to sign your transactions without your secret recovery phrase.",
         "button": {
           "continue": "Set up my password"
         }

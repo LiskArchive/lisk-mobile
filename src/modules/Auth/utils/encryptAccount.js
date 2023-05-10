@@ -14,7 +14,7 @@ export const encryptAccount = async ({
   try {
     const { encrypt } = cryptography;
     const options = {
-      passphrase: recoveryPhrase,
+      recoveryPhrase,
       enableCustomDerivationPath: derivationPath && enableCustomDerivationPath,
       derivationPath,
     };
@@ -24,7 +24,7 @@ export const encryptAccount = async ({
     }
     const address = extractAddressFromPublicKey(publicKey);
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
-    const encryptedPassphrase = await encrypt.encryptMessageWithPassword(plainText, password, {
+    const crypto = await encrypt.encryptMessageWithPassword(plainText, password, {
       kdf: 'PBKDF2',
       kdfparams: {
         parallelism: 4,
@@ -33,7 +33,7 @@ export const encryptAccount = async ({
       },
     });
     return {
-      encryptedPassphrase,
+      crypto,
       metadata: {
         name,
         pubkey: publicKey,

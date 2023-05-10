@@ -32,7 +32,7 @@ export default function PasswordSetupForm({
 
   const route = useRoute();
 
-  const passphrase = route.params?.passphrase || data.passphrase;
+  const recoveryPhrase = route.params?.recoveryPhrase || data.recoveryPhrase;
 
   const { derivationPath } = route.params ?? {};
   const { styles } = useTheme({ styles: getStyles() });
@@ -42,7 +42,7 @@ export default function PasswordSetupForm({
   const [
     { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
     { encryptedAccount, isLoading, isSuccess },
-  ] = usePasswordSetupForm(passphrase, derivationPath);
+  ] = usePasswordSetupForm(recoveryPhrase, derivationPath);
 
   const biometricsModal = useModal();
 

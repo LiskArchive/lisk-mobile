@@ -1,9 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
-import {
-  setGenericPassword,
-  getGenericPassword,
-  resetGenericPassword,
-} from 'react-native-keychain';
+import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import { getUniqueId } from 'react-native-device-info';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
@@ -11,7 +7,7 @@ import { Platform } from 'react-native';
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 
 /**
- * Checks validity of passphrase using to mnemonic
+ * Checks validity of recoveryPhrase using to mnemonic
  *
  * detects validity of each word individually
  * the result consist of [multiple] object[s]
@@ -25,57 +21,43 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  * and a message which indicates the issue
  * in a more human readable fashion
  *
- * @param {string} passphrase
+ * @param {string} recoveryPhrase
  * @returns {Array} the validation result containing object[s] with:
  *  {String} code - specified the possible codes in the description above
  *  {String} message - A descriptive message for what went wrong
  */
-export const validatePassphrase = (passphrase) => {
-  if (passphrase.trim().length === 0) {
-    return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
+export const validateRecoveryPhrase = (recoveryPhrase) => {
+  if (recoveryPhrase.trim().length === 0) {
+    return [{ code: 'empty_value', message: 'Invalid secret recovery phrase.' }];
   }
-  const numberOfWords = Math.ceil(passphrase.trim().split(' ').length / 3) * 3;
+  const numberOfWords = Math.ceil(recoveryPhrase.trim().split(' ').length / 3) * 3;
   const validPassLength = Math.max(Math.min(numberOfWords, 24), 12);
   return Lisk.passphrase.validation.getPassphraseValidationErrors(
-    passphrase,
+    recoveryPhrase,
     undefined,
     validPassLength
   );
 };
 
 /**
- * @returns {string} a valid mnemoic passphrase
+ * @returns {string} a valid mnemoic recoveryPhrase
  * Generate a random mnemonic (uses crypto.randomBytes under the hood),
  * defaults to 128-bits of entropy var mnemonic = bip39.generateMnemonic()
  */
-export const generatePassphrase = () => {
+export const generateRecoveryPhrase = () => {
   const { Mnemonic } = Lisk.passphrase;
   return Mnemonic.generateMnemonic();
 };
 
-/**
- * Removes the passphrase and address on the keychain of the device
- */
-export const removePassphraseFromKeyChain = async (
-  successCallback,
-  errorCallback = (err) => err
-) => {
-  try {
-    await resetGenericPassword({ service: 'io.lisk.mobile' });
-    successCallback();
-  } catch (error) {
-    errorCallback(error);
-  }
-};
-
-export const getPassphraseFromKeyChain = () => getGenericPassword({ service: 'io.lisk.mobile' });
+export const getRecoveryPhraseFromKeyChain = () =>
+  getGenericPassword({ service: 'io.lisk.mobile' });
 
 /**
  * Removes the account password and address on the keychain of the device
  */
 export const removeAccountPasswordFromKeychain = async (address) => {
   const uniqueId = getUniqueId();
-  const db = await getPassphraseFromKeyChain();
+  const db = await getRecoveryPhraseFromKeyChain();
   let deviceAccounts = {};
   try {
     const previousAccounts = JSON.parse(db.password);
@@ -103,7 +85,7 @@ export const removeAccountPasswordFromKeychain = async (address) => {
  */
 export const getAccountPasswordFromKeyChain = async (address) => {
   try {
-    const db = await getPassphraseFromKeyChain();
+    const db = await getRecoveryPhraseFromKeyChain();
     const accounts = JSON.parse(db.password);
     if (accounts) {
       return accounts[address];
@@ -116,12 +98,12 @@ export const getAccountPasswordFromKeyChain = async (address) => {
 
 /**
  * @param {string} address
- * @param {string} passphrase
- * Store the passphrase and address on the keychain of the device
+ * @param {string} password
+ * Store the password and address on the keychain of the device
  */
 export const storeAccountPasswordInKeyChain = async (address, password) => {
   const uniqueId = getUniqueId();
-  const db = await getPassphraseFromKeyChain();
+  const db = await getRecoveryPhraseFromKeyChain();
   let deviceAccounts = {};
   try {
     const previousAccounts = JSON.parse(db.password);
@@ -186,16 +168,16 @@ export const bioMetricAuthentication = async ({
 
 /**
  * it generates 2 set of array witch contains some options for filling empty spaces
- * @param {array} passphraseWords - it contains an array of passphrase words
- * @param {array} missingWords - indexes of missing word in passphrase
+ * @param {array} recoveryPhraseWords - it contains an array of recoveryPhrase words
+ * @param {array} missingWords - indexes of missing word in recoveryPhrase
  */
-export const assembleWordOptions = (passphraseWords, missingWords) => {
+export const assembleWordOptions = (recoveryPhraseWords, missingWords) => {
   const getRandomWord = () => {
     let rand;
 
     do {
       rand = Math.floor(Math.random() * 2048);
-    } while (passphraseWords.includes(fullWordsList[rand]));
+    } while (recoveryPhraseWords.includes(fullWordsList[rand]));
 
     return fullWordsList[rand];
   };
@@ -203,7 +185,7 @@ export const assembleWordOptions = (passphraseWords, missingWords) => {
   const mixWithMissingWords = (options) => {
     options.forEach((list, listIndex) => {
       const rand = Math.floor(Math.random() * 0.99 * list.length);
-      list[rand] = passphraseWords[missingWords[listIndex]];
+      list[rand] = recoveryPhraseWords[missingWords[listIndex]];
     });
 
     return options;

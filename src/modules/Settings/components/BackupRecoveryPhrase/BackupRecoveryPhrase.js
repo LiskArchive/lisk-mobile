@@ -5,14 +5,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
-import DecryptPassphrase from 'modules/Auth/components/DecryptPassphrase/DecryptPassphrase';
-import PassphraseQuiz from 'modules/Auth/components/PassphraseQuiz/PassphraseQuiz';
+import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
+import RecoveryPhraseQuiz from 'modules/Auth/components/RecoveryPhraseQuiz/RecoveryPhraseQuiz';
 import Stepper from 'components/shared/Stepper';
 
-import getStyles from './BackupPassphrase.styles';
-import CopyPassphrase from './components/CopyPassphrase';
+import getStyles from './BackupRecoveryPhrase.styles';
+import CopyRecoveryPhrase from './components/CopyRecoveryPhrase';
 
-export default function BackupPassphrase() {
+export default function BackupRecoveryPhrase() {
   const navigation = useNavigation();
 
   const route = useRoute();
@@ -26,7 +26,7 @@ export default function BackupPassphrase() {
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       <Stepper currentIndex={0}>
-        <DecryptPassphrase
+        <DecryptRecoveryPhrase
           account={account}
           route={{
             params: {
@@ -36,8 +36,8 @@ export default function BackupPassphrase() {
           }}
           navigation={navigation}
         />
-        <CopyPassphrase />
-        <PassphraseQuiz customHeader />
+        <CopyRecoveryPhrase />
+        <RecoveryPhraseQuiz customHeader />
         <PasswordSetupSuccess
           route={{
             params: {

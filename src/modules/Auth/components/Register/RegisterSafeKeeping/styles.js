@@ -23,7 +23,7 @@ export default function getRegisterSafeKeepingStyles() {
         textAlign: 'center',
         marginBottom: 24,
       },
-      passphraseContainer: {
+      recoveryPhraseContainer: {
         borderWidth: 1,
         borderColor: colors.light.mystic,
         marginHorizontal: 20,
@@ -33,10 +33,10 @@ export default function getRegisterSafeKeepingStyles() {
         alignItems: 'center',
         height: isSmallScreen ? 290 : 320,
       },
-      passphraseText: {
+      recoveryPhraseText: {
         lineHeight: 33,
         fontSize: isSmallScreen ? 16 : 18,
-        fontFamily: fonts.family.passphraseText,
+        fontFamily: fonts.family.recoveryPhraseText,
         textAlign: 'center',
       },
       copyContainer: {
@@ -75,7 +75,7 @@ export default function getRegisterSafeKeepingStyles() {
       description: {
         color: colors.light.smoothGray,
       },
-      passphraseText: {
+      recoveryPhraseText: {
         color: colors.light.zodiacBlue,
       },
     },
@@ -89,7 +89,7 @@ export default function getRegisterSafeKeepingStyles() {
       description: {
         color: colors.dark.mountainMist,
       },
-      passphraseText: {
+      recoveryPhraseText: {
         color: colors.dark.white,
       },
     },

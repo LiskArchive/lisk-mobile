@@ -57,14 +57,11 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     let privateKey;
 
     try {
-      const decryptedAccount = await decryptAccount(
-        currentAccount.encryptedPassphrase,
-        values.password
-      );
+      const decryptedAccount = await decryptAccount(currentAccount.crypto, values.password);
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptPassphraseError'));
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
     }
 
     if (privateKey) {

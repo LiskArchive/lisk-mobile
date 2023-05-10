@@ -8,10 +8,10 @@ export default () => ({
       padding: boxes.boxPadding,
       borderWidth: 1,
     },
-    passphrase: {
+    recoveryPhrase: {
       marginTop: 30,
       marginBottom: 30,
-      fontFamily: fonts.family.passphraseText,
+      fontFamily: fonts.family.recoveryPhraseText,
       fontSize: 18,
       lineHeight: 32,
       textAlign: 'center',
@@ -28,10 +28,10 @@ export default () => ({
     container: {
       borderColor: colors.light.mystic,
     },
-    passphraseTitle: {
+    recoveryPhraseTitle: {
       color: colors.light.blueGray,
     },
-    passphrase: {
+    recoveryPhrase: {
       color: colors.light.maastrichtBlue,
     },
     copy: {
@@ -43,10 +43,10 @@ export default () => ({
     container: {
       borderColor: setColorOpacity(colors.light.white, 0.15),
     },
-    passphraseTitle: {
+    recoveryPhraseTitle: {
       color: colors.dark.platinum,
     },
-    passphrase: {
+    recoveryPhrase: {
       color: colors.dark.white,
     },
     copy: {
