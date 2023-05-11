@@ -57,16 +57,18 @@ export default function TransactionRow({ transaction, address }) {
       </View>
 
       <View style={[styles.statusContainer, styles.theme.statusContainer]}>
-        <DiscreteModeComponent
-          blurVariant={blurVariant}
-          data={fromBeddowsToLsk(transaction.params.amount ?? 0)}
-        >
-          <TransactionAmount
-            transaction={transaction}
-            address={address}
-            style={{ marginBottom: 4 }}
-          />
-        </DiscreteModeComponent>
+        {transaction.params.amount && (
+          <DiscreteModeComponent
+            blurVariant={blurVariant}
+            data={fromBeddowsToLsk(transaction.params.amount)}
+          >
+            <TransactionAmount
+              transaction={transaction}
+              address={address}
+              style={{ marginBottom: 4 }}
+            />
+          </DiscreteModeComponent>
+        )}
 
         <TransactionStatus transaction={transaction} />
       </View>
