@@ -149,8 +149,8 @@ export function SendTokenAmountField({
       error={isSupportedTokensError}
       renderData={() => (
         <Input
-          value={value && value.toString()}
-          onChange={(newValue) => onChange(newValue && parseFloat(newValue))}
+          value={value}
+          onChange={(newValue) => onChange(newValue)}
           keyboardType="numeric"
           disabled={!selectedToken}
           label={

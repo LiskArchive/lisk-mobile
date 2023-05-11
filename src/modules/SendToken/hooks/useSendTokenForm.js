@@ -50,7 +50,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       recipientAccountAddress: initialValues?.recipientAccountAddress,
       recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
       tokenID: initialValues?.tokenID,
-      amount: initialValues?.amount ? parseFloat(initialValues.amount) : 0,
+      amount: initialValues?.amount || 0,
       message: initialValues?.message || '',
       priority: 'low',
       userPassword: '',
@@ -114,7 +114,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     try {
       if (field === 'params.amount') {
         const amountInBaseDenom = fromDisplayToBaseDenom({
-          amount: (value || 0).toString(),
+          amount: value,
           displayDenom: token.displayDenom,
           denomUnits: token.denomUnits,
         });
