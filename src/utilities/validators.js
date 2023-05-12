@@ -29,7 +29,7 @@ export const validateAddress = (address) => {
  * It may include a decimal point.
  */
 export function isTransactionAmountValid(value) {
-  const regex = /^\d*\.?\d+$/;
+  const regex = /^\d+(\.\d+)?$/;
   if (!regex.test(value)) {
     return false;
   }

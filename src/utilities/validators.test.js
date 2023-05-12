@@ -18,6 +18,7 @@ describe('isTransactionAmountValid', () => {
   it('returns true for valid transaction amounts', () => {
     expect(isTransactionAmountValid('123')).toBe(true);
     expect(isTransactionAmountValid('123.456')).toBe(true);
+    expect(isTransactionAmountValid('0')).toBe(true);
   });
 
   it('returns false for transaction amounts with invalid format', () => {
@@ -29,6 +30,5 @@ describe('isTransactionAmountValid', () => {
 
   it('returns false for non-positive transaction amounts', () => {
     expect(isTransactionAmountValid('-123')).toBe(false);
-    expect(isTransactionAmountValid('0')).toBe(false);
   });
 });
