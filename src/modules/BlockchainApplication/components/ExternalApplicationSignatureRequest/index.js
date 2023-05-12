@@ -136,7 +136,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     <DataRenderer
       data={transaction.data}
       isLoading={transaction.isLoading}
-      error={transaction.isError}
+      error={transaction.error}
       renderData={renderStep}
     />
   );

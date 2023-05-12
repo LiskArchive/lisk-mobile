@@ -18,3 +18,23 @@ export const validateAddress = (address) => {
     return 1;
   }
 };
+
+/**
+ * Validates a transaction amount.
+ *
+ * @param {string} value - The transaction amount to validate.
+ * @returns {boolean} True if the transaction amount is valid; false otherwise.
+ *
+ * A valid transaction amount is a positive number represented as a string.
+ * It may include a decimal point.
+ */
+export function isTransactionAmountValid(value) {
+  const regex = /^\d+(\.\d+)?$/;
+  if (!regex.test(value)) {
+    return false;
+  }
+  if (Number(value) < 0) {
+    return false;
+  }
+  return true;
+}

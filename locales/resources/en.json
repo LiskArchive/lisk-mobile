@@ -429,9 +429,7 @@
       "recipientApplicationChainID": "Application who receives the tokens must be specified",
       "recipientAccountAddress": "Recipient account must be specified",
       "tokenID": "Token to send must be specified",
-      "amountRequired": "Token amount is required",
-      "amountMustBeNumber": "Amount must be a number",
-      "amountMustBePositive": "Token amount must be a positive number",
+      "amountInvalid": "Amount not valid.",
       "priority": "Priority must be specified",
       "insufficientBalance": "Your balance is not sufficient."
     },

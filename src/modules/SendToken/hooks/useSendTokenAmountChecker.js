@@ -1,5 +1,6 @@
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { fromDisplayToBaseDenom } from '../../../utilities/conversions.utils';
+import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
+import { isTransactionAmountValid } from 'utilities/validators';
 
 export function useSendTokenAmountChecker({
   recipientApplication,
@@ -19,18 +20,18 @@ export function useSendTokenAmountChecker({
     return { maxAllowedAmount, isMaxAllowedAmountExceeded: false };
   }
 
-  const isMaxAllowedAmountExceeded =
-    maxAllowedAmount -
-      (selectedToken
-        ? BigInt(
-            fromDisplayToBaseDenom({
-              amount,
-              displayDenom: selectedToken.displayDenom,
-              denomUnits: selectedToken.denomUnits,
-            })
-          )
-        : BigInt(0)) <=
-    0;
+  const validatedAmount =
+    selectedToken && isTransactionAmountValid(amount)
+      ? BigInt(
+          fromDisplayToBaseDenom({
+            amount,
+            displayDenom: selectedToken.displayDenom,
+            denomUnits: selectedToken.denomUnits,
+          })
+        )
+      : BigInt(0);
+
+  const isMaxAllowedAmountExceeded = maxAllowedAmount - validatedAmount <= 0;
 
   return { maxAllowedAmount, isMaxAllowedAmountExceeded };
 }

@@ -139,7 +139,7 @@ export default function SendToken() {
       <DataRenderer
         data={transaction}
         isLoading={transaction.isLoading}
-        error={transaction.isError}
+        error={transaction.error}
         renderData={(data) => (
           <>
             {accountIsMultisignature ? (
@@ -154,11 +154,8 @@ export default function SendToken() {
           </>
         )}
         renderLoading={() => <SendTokenSkeleton />}
-        renderError={() => (
-          <ResultScreen
-            illustration={<ErrorIllustrationSvg />}
-            description={'Error loading transaction data. Please try again.'}
-          />
+        renderError={(error) => (
+          <ResultScreen illustration={<ErrorIllustrationSvg />} description={error.message} />
         )}
       />
     </SafeAreaView>
