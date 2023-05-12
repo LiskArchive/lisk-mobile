@@ -32,28 +32,20 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
 
   const {
     data: networkStatusData,
-    // isLoading: isNetworkStatusLoading,
     isSuccess: isNetworkStatusSuccess,
     isError: isErrorOnNetworkStatus,
   } = useNetworkStatusQuery();
 
-  const {
-    data: authData,
-    // isLoading: isAuthLoading,
-    isSuccess: isAuthSuccess,
-    isError: isErrorOnAuth,
-  } = useAuth(address);
+  const { data: authData, isSuccess: isAuthSuccess, isError: isErrorOnAuth } = useAuth(address);
 
   const {
     data: commandParametersSchemasData,
-    // isLoading: isCommandParametersSchemasLoading,
     isSuccess: isCommandParametersSchemasSuccess,
     isError: isErrorOnCommandParametersSchemas,
   } = useCommandParametersSchemasQuery();
 
   const {
     data: priorityFeeData,
-    //  isLoading: isPriorityFeeLoading,
     isSuccess: isPriorityFeeSuccess,
     isError: isErrorPriorityFee,
   } = usePriorityFee();

@@ -122,7 +122,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
           transaction.update({ params: { amount: amountInBaseDenom } });
         } catch (error) {
-          form.setError(fieldName, { type: 'custom', message: 'Amount format not valid.' });
+          form.setError(fieldName, {
+            type: 'custom',
+            message: i18next.t('sendToken.errors.amountInvalid'),
+          });
         }
       } else {
         transaction.update(fromPathToObject(field, value));

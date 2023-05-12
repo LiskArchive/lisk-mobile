@@ -430,10 +430,8 @@
       "senderApplicationChainID": "Die App, von der gesendet werden soll, muss angegeben werden",
       "recipientApplicationChainID": "Die App, die die Token erhält, muss angegeben werden",
       "recipientAccountAddress": "Empfängerkonto muss angegeben werden",
-      "tokenID": "Zu sendendes Token muss angegeben werden",
-      "amountRequired": "Token-Betrag ist erforderlich",
-      "amountMustBeNumber": "Der Betrag muss eine Zahl sein",
-      "amountMustBePositive": "Tokenbetrag muss eine positive Zahl sein",
+      "tokenID": "Zu sendendes Token muss angegeben werden",      
+      "amountInvalid": "Betrag ungültig.",
       "priority": "Priorität muss angegeben werden",
       "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend."
     },

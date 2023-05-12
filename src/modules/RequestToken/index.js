@@ -191,7 +191,7 @@ export default function RequestToken() {
             tokenID={tokenID}
             recipientApplication={currentApplication.data}
             style={{ container: styles.fieldContainer }}
-            errorMessage={!amount.validity ? 'Amount not valid.' : ''}
+            errorMessage={!amount.validity ? i18next.t('sendToken.errors.amountInvalid') : ''}
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
@@ -200,6 +200,7 @@ export default function RequestToken() {
         <View style={styles.footer} testID="request-token-link-button">
           <PrimaryButton
             onPress={handleCopyToClipboard}
+            disabled={!amount.validity}
             adornments={{
               left: !copiedToClipboard ? (
                 <CopySvg color={colors.light.white} variant="outline" style={{ marginRight: 8 }} />
