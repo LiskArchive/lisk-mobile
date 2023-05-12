@@ -28,6 +28,7 @@ import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
 import Avatar from 'components/shared/avatar';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import { isTransactionAmountValid } from 'utilities/validators';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
 import { deviceWidth } from 'utilities/device';
@@ -51,7 +52,7 @@ export default function RequestToken() {
     currentApplication.data
   );
 
-  const [amount, setAmount] = useState({ value: '', validity: -1 });
+  const [amount, setAmount] = useState({ value: '', validity: true });
   const [message, setMessage] = useState('');
   const [recipientApplicationChainID, setRecipientApplicationChainID] = useState(
     currentApplication.data?.chainID
@@ -108,6 +109,9 @@ export default function RequestToken() {
   );
 
   const openQrCode = () => modal.open(renderFullCode());
+
+  const handleAmountChange = (value) =>
+    setAmount({ value, validity: isTransactionAmountValid(value) });
 
   const defaultTokenID =
     applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
@@ -183,10 +187,11 @@ export default function RequestToken() {
 
           <SendTokenAmountField
             value={amount.value}
-            onChange={(value) => setAmount((prevValue) => ({ ...prevValue, value }))}
+            onChange={handleAmountChange}
             tokenID={tokenID}
             recipientApplication={currentApplication.data}
             style={{ container: styles.fieldContainer }}
+            errorMessage={!amount.validity ? 'Amount not valid.' : ''}
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
