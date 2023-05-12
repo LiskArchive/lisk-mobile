@@ -113,13 +113,17 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
     try {
       if (field === 'params.amount') {
-        const amountInBaseDenom = fromDisplayToBaseDenom({
-          amount: value,
-          displayDenom: token.displayDenom,
-          denomUnits: token.denomUnits,
-        });
+        try {
+          const amountInBaseDenom = fromDisplayToBaseDenom({
+            amount: value,
+            displayDenom: token.displayDenom,
+            denomUnits: token.denomUnits,
+          });
 
-        transaction.update({ params: { amount: amountInBaseDenom } });
+          transaction.update({ params: { amount: amountInBaseDenom } });
+        } catch (error) {
+          DropDownHolder.error(i18next.t('Error'), 'Error updating transaction amount.');
+        }
       } else {
         transaction.update(fromPathToObject(field, value));
       }

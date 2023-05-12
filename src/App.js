@@ -17,6 +17,8 @@ import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
 
+// lisk://wallet?recipientAccountAddress=lsk9twjxynbm5fbgmgw7ykffyw3t2qzr68me5h4ru&amount=1.002&recipientApplicationChainID=04000000&tokenID=0400000000000000
+
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useAuth } from 'modules/Auth/hooks/useAuth';
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
@@ -17,55 +17,54 @@ import { usePriorityFee } from './usePriorityFee';
  * @param {String} params.module - Module of the transaction (optional).
  * @param {String} params.command - Command of the transaction (optional).
  * @param {String} params.encodedTransaction - Encoded transaction to create a transaction object from (optional).
- * @returns {Object} The created transaction data, isLoading, isSuccess and isError states.
+ * @returns {Object} The created transaction data, isLoading and error states.
  */
 export function useCreateTransaction({ module = null, command = null, encodedTransaction = null }) {
   const transactionRef = useRef(new Transaction());
+  const [isSuccess, setIsSuccess] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [currentAccount] = useCurrentAccount();
-  const transaction = transactionRef.current;
   const { address, pubkey } = currentAccount?.metadata ?? {};
+
+  const transaction = transactionRef.current;
 
   const {
     data: networkStatusData,
-    isLoading: isNetworkStatusLoading,
+    // isLoading: isNetworkStatusLoading,
     isSuccess: isNetworkStatusSuccess,
     isError: isErrorOnNetworkStatus,
   } = useNetworkStatusQuery();
 
   const {
     data: authData,
-    isLoading: isAuthLoading,
+    // isLoading: isAuthLoading,
     isSuccess: isAuthSuccess,
     isError: isErrorOnAuth,
   } = useAuth(address);
 
   const {
     data: commandParametersSchemasData,
-    isLoading: isCommandParametersSchemasLoading,
+    // isLoading: isCommandParametersSchemasLoading,
     isSuccess: isCommandParametersSchemasSuccess,
     isError: isErrorOnCommandParametersSchemas,
   } = useCommandParametersSchemasQuery();
 
   const {
     data: priorityFeeData,
-    isLoading: isPriorityFeeLoading,
+    //  isLoading: isPriorityFeeLoading,
     isSuccess: isPriorityFeeSuccess,
     isError: isErrorPriorityFee,
   } = usePriorityFee();
 
-  const isLoading =
-    isNetworkStatusLoading ||
-    isAuthLoading ||
-    isCommandParametersSchemasLoading ||
-    isPriorityFeeLoading;
-
-  const isSuccess =
+  const isInitDataSuccess =
     isNetworkStatusSuccess &&
     isAuthSuccess &&
     isCommandParametersSchemasSuccess &&
     isPriorityFeeSuccess;
 
-  const isError =
+  const isErrorOnInitData =
     isErrorOnNetworkStatus ||
     isErrorOnAuth ||
     isErrorOnCommandParametersSchemas ||
@@ -75,23 +74,40 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
 
   useEffect(
     () => {
-      if (isSuccess && transactionSchema) {
-        transaction.init({
-          pubkey,
-          networkStatus: networkStatusData?.data,
-          auth: authData,
-          priorityFee: priorityFeeData,
-          commandParametersSchemas: commandParametersSchemasData?.data.commands,
-          module,
-          command,
-          encodedTransaction,
-          schema: transactionSchema,
-        });
+      if (isInitDataSuccess && transactionSchema) {
+        try {
+          transaction.init({
+            pubkey,
+            networkStatus: networkStatusData?.data,
+            auth: authData,
+            priorityFee: priorityFeeData,
+            commandParametersSchemas: commandParametersSchemasData?.data.commands,
+            module,
+            command,
+            encodedTransaction,
+            schema: transactionSchema,
+          });
+
+          setIsLoading(false);
+          setIsSuccess(true);
+        } catch (e) {
+          setError(new Error('Error on transaction initialization.'));
+          setIsLoading(false);
+          setIsSuccess(false);
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isSuccess, transaction, encodedTransaction, module, pubkey, command, transactionSchema]
+    [isInitDataSuccess, transaction, encodedTransaction, module, pubkey, command, transactionSchema]
   );
 
-  return { data: transaction, isLoading, isSuccess, isError };
+  useEffect(() => {
+    if (isErrorOnInitData) {
+      setError(new Error('Error during transaction data initialization.'));
+      setIsLoading(false);
+      setIsSuccess(false);
+    }
+  }, [isErrorOnInitData]);
+
+  return { data: transaction, isLoading, isSuccess, error };
 }
