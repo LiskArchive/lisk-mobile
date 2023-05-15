@@ -41,8 +41,8 @@ export default function DataRenderer({
 }) {
   const { styles } = useTheme({ styles: getDataRendererStyles() });
 
-  // TODO: Add Skeleton when component is available
-  // (details on https://github.com/LiskHQ/lisk-mobile/issues/1592).
+  // TODO: Add loading spinner when component is available
+  // (details on https://github.com/LiskHQ/lisk-mobile/issues/1825).
   if (isLoading) {
     return renderLoading ? (
       renderLoading()

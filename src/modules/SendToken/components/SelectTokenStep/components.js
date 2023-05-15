@@ -79,7 +79,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
         </Picker.Item>
       )}
       // TODO: Integrate pagination props.
-      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
+      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1827).
     />
   );
 
