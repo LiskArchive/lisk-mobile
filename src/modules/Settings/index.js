@@ -72,14 +72,20 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     });
   };
 
+  const checkBiometricsFeature = async () => {
+    const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
+    setBiometricsEnabled(Boolean(accountPassword && settings.sensorType));
+  };
+
   const enableBioAuth = async (address, password) => {
     await storeAccountPasswordInKeyChain(address, password);
     modal.close();
+    checkBiometricsFeature();
   };
 
   const toggleBiometrics = () => {
     if (biometricsEnabled) {
-      modal.open(() => <DisableBioAuth />);
+      modal.open(() => <DisableBioAuth onSubmit={checkBiometricsFeature} />);
     } else {
       modal.open(() => (
         <Stepper finalCallback={enableBioAuth}>
@@ -98,11 +104,6 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
         </Stepper>
       ));
     }
-  };
-
-  const checkBiometricsFeature = async () => {
-    const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
-    setBiometricsEnabled(Boolean(accountPassword && settings.sensorType));
   };
 
   useEffect(() => {
