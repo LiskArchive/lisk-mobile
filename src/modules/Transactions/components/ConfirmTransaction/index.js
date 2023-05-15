@@ -25,7 +25,7 @@ export default function ConfirmTransaction({
   submitButtonTitle,
 }) {
   const [currentAccount] = useCurrentAccount();
-  const { sensorType, biometricsEnabled } = useSelector((state) => state.settings);
+  const { sensorType } = useSelector((state) => state.settings);
 
   const { styles } = useTheme({
     styles: getConfirmTransactionStyles(),
@@ -39,21 +39,19 @@ export default function ConfirmTransaction({
   };
 
   const fetchAccountPasswordFromBiometrics = async () => {
-    if (sensorType && biometricsEnabled) {
-      const accountPassword = await fetchAccountPassword();
-      if (accountPassword) {
-        bioMetricAuthentication({
-          successCallback: () => {
-            onUserPasswordChange(accountPassword);
-            onSubmit?.();
-          },
-        });
-      }
+    const accountPassword = await fetchAccountPassword();
+    if (accountPassword) {
+      bioMetricAuthentication({
+        successCallback: () => {
+          onUserPasswordChange(accountPassword);
+          onSubmit?.();
+        },
+      });
     }
   };
 
   useEffect(() => {
-    if (sensorType && biometricsEnabled) {
+    if (sensorType) {
       fetchAccountPasswordFromBiometrics();
     }
   }, [sensorType]);

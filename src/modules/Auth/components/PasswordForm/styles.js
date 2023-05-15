@@ -8,10 +8,12 @@ export default () => ({
     body: {
       flex: 1,
       paddingTop: boxes.boxPadding,
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    fullScreen: {
+      paddingLeft: boxes.boxPadding,
+      paddingRight: boxes.boxPadding,
     },
     avatar: {
       marginBottom: 16,

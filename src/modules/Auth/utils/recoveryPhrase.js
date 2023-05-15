@@ -90,9 +90,9 @@ export const getAccountPasswordFromKeyChain = async (address) => {
     if (accounts) {
       return accounts[address];
     }
-    return { isError: true };
+    return undefined;
   } catch (error) {
-    return { isError: true, error };
+    return undefined;
   }
 };
 

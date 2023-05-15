@@ -119,7 +119,7 @@
     },
     "biometrics": {
       "enableTitle": "Enable {{sensorType}}",
-      "disableTitle": "Enable {{sensorType}}",
+      "disableTitle": "Disable {{sensorType}}",
       "disableDescription": "Disabling your face ID requires you to enter account specific password to sign transaction.",
       "description": "Here’s what you need to know:",
       "title1": "Fast and secure",
