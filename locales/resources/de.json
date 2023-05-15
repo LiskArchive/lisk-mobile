@@ -226,6 +226,8 @@
       "enableDiscreteMode": "",
       "secretPhrase": "Geheime Wiederherstellungsphrase",
       "restoreFromFile": "Aus Datei wiederherstellen",
+      "restoreFromFileSuccessMessage": "Datei erfolgreich hochgeladen.",
+      "restoreFromFileErrorMessage": "Fehler beim Hochladen Ihrer Datei. Bitte versuche es erneut.",
       "downloaded": "Heruntergeladen!",
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",

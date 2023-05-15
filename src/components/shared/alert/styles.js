@@ -3,19 +3,19 @@ import { colors, fonts } from 'constants/styleGuide';
 export default () => ({
   common: {
     titleStyle: {
-      fontSize: 14,
+      fontSize: fonts.size.input,
       textAlign: 'left',
       fontWeight: 'bold',
       color: colors.light.white,
       backgroundColor: 'transparent',
       fontFamily: fonts.family.heading,
+      marginBottom: 4,
     },
     messageStyle: {
-      fontSize: fonts.size.small,
+      fontSize: fonts.size.input,
       textAlign: 'left',
-      color: '#ECF2F9',
+      color: colors.light.white,
       backgroundColor: 'transparent',
-      marginTop: 5,
     },
   },
 });

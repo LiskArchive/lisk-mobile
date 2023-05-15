@@ -14,6 +14,7 @@ import { settingsRetrieved, settingsUpdated } from 'modules/Settings/store/actio
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
+import DropDownHolder from 'utilities/alert';
 import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import CreateAccount from '../CreateAccount';
@@ -88,16 +89,20 @@ export default function AuthMethod({ route }) {
   const selectEncryptedJSON = async () => {
     try {
       const encryptedData = await selectEncryptedFile();
-      /**
-       * TODO: Confirm valid file and show necessary error if any
-       */
+
       navigation.navigate('DecryptRecoveryPhraseScreen', {
         title: 'auth.setup.decryptRecoveryPhrase',
         encryptedData,
         successRoute: 'AccountsManagerScreen',
       });
-    } catch (error) {
-      // TODO: Handle error message
+
+      DropDownHolder.alert(
+        'success',
+        undefined,
+        i18next.t('auth.setup.restoreFromFileSuccessMessage')
+      );
+    } catch {
+      DropDownHolder.error(undefined, i18next.t('auth.setup.restoreFromFileErrorMessage'));
     }
   };
 
