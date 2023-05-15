@@ -11,7 +11,15 @@ import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import PasswordForm from '../PasswordForm';
 import getStyles from './DecryptRecoveryPhrase.styles';
 
-const DecryptRecoveryPhrase = ({ account, showsHeader = true, route, nextStep, t, navigation }) => {
+const DecryptRecoveryPhrase = ({
+  account,
+  finalCallback,
+  showsHeader = true,
+  route,
+  nextStep,
+  t,
+  navigation,
+}) => {
   const { setAccount } = useAccounts();
   const { styles } = useTheme({ styles: getStyles });
   const { title, encryptedData } = route.params;
@@ -21,7 +29,9 @@ const DecryptRecoveryPhrase = ({ account, showsHeader = true, route, nextStep, t
     try {
       const { successRoute } = route.params;
       const { recoveryPhrase } = await decryptAccount(encryptedAccount.crypto, password);
-      if (nextStep && typeof nextStep === 'function') {
+      if (finalCallback) {
+        finalCallback(account.metadata.address, password);
+      } else if (nextStep && typeof nextStep === 'function') {
         nextStep({
           password,
           address: account.metadata.address,
@@ -42,7 +52,7 @@ const DecryptRecoveryPhrase = ({ account, showsHeader = true, route, nextStep, t
   return (
     <Wrapper style={[styles.container, styles.theme.wrapper]}>
       {showsHeader && <HeaderBackButton title={title} onPress={navigation.goBack} />}
-      <PasswordForm account={encryptedAccount} onSubmit={onSubmit} />
+      <PasswordForm account={encryptedAccount} onSubmit={onSubmit} isFullScreen={showsHeader} />
     </Wrapper>
   );
 };

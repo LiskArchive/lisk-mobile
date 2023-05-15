@@ -16,7 +16,10 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store
 import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/recoveryPhrase';
+import {
+  getAccountPasswordFromKeyChain,
+  storeAccountPasswordInKeyChain,
+} from 'modules/Auth/utils/recoveryPhrase';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -69,12 +72,18 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     });
   };
 
+  const enableBioAuth = async (address, password) => {
+    await storeAccountPasswordInKeyChain(address, password);
+    modal.close();
+  };
+
   const toggleBiometrics = () => {
-    if (settings.biometricsEnabled) {
+    if (biometricsEnabled) {
       modal.open(() => <DisableBioAuth />);
     } else {
       modal.open(() => (
-        <Stepper>
+        <Stepper finalCallback={enableBioAuth}>
+          <EnableBioAuth />
           <DecryptRecoveryPhrase
             account={account}
             route={{
@@ -86,7 +95,6 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
             showsHeader={false}
             navigation={navigation}
           />
-          <EnableBioAuth />
         </Stepper>
       ));
     }
@@ -94,12 +102,12 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
 
   const checkBiometricsFeature = async () => {
     const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
-    setBiometricsEnabled(accountPassword && settings.biometricsEnabled);
+    setBiometricsEnabled(Boolean(accountPassword && settings.sensorType));
   };
 
   useEffect(() => {
     checkBiometricsFeature();
-  }, [settings.biometricsEnabled]);
+  }, [settings.sensorType, account.metadata.address]);
 
   const sensorStatus = <SwitchButton value={biometricsEnabled} onChange={toggleBiometrics} />;
 

@@ -17,10 +17,10 @@ import {
   getAccountPasswordFromKeyChain,
 } from '../../utils/recoveryPhrase';
 
-export default function PasswordForm({ account, onPress, testID, theme, onSubmit }) {
+export default function PasswordForm({ account, onPress, testID, theme, onSubmit, isFullScreen }) {
   useScreenshotPrevent();
   const [password, setPassword] = useState('');
-  const { sensorType, biometricsEnabled } = useSelector((state) => state.settings);
+  const { sensorType } = useSelector((state) => state.settings);
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -30,7 +30,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   };
 
   const tryFetchAccontPasswordFromBiometrics = async () => {
-    if (sensorType && biometricsEnabled) {
+    if (sensorType) {
       const accountPassword = await fetchAccountPassword();
       if (accountPassword) {
         bioMetricAuthentication({
@@ -48,7 +48,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
 
   return (
     <View style={[styles.container, styles.theme.container]} onPress={onPress} testID={testID}>
-      <View style={styles.body}>
+      <View style={[styles.body, isFullScreen && styles.fullScreen]}>
         <Avatar address={account.metadata.address} size={45} style={styles.avatar} />
 
         <H3 style={[styles.nameText, styles.theme.nameText]}>{account.metadata.name}</H3>
