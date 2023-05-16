@@ -24,15 +24,12 @@ export default function useAccountManagerModal() {
 
     if (data?.metadata.address === currentAccount?.metadata.address) {
       navigation.navigate('AccountsManagerScreen');
-    } else {
-      navigation.navigate('Main');
     }
   };
 
   const handleOnEditCompleted = () => {
     modal.close();
     setActiveScreen(undefined);
-    navigation.navigate('Main');
   };
 
   const changeSelection = (selection, account) => {
