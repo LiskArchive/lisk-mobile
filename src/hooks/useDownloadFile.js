@@ -53,8 +53,8 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
         ToastAndroid.showWithGravity(
           i18next.t('auth.setup.downloaded'),
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM
         );
       } else {
         await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
@@ -73,7 +73,6 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         onCompleted();
       }
     } catch (_error) {
-      console.log('download____error', _error);
       setIsLoading(false);
       setIsSuccess(false);
       setError(_error);

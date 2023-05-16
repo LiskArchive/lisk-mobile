@@ -2,8 +2,11 @@
 import React, { useEffect } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 import i18next from 'i18next';
 import SwitchButton from 'components/shared/toolBox/switchButton';
+import { settingsUpdated } from 'modules/Settings/store/actions';
 
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
@@ -13,7 +16,6 @@ import Input from 'components/shared/toolBox/input';
 import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { Controller } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { useModal } from 'hooks/useModal';
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
@@ -29,7 +31,7 @@ export default function PasswordSetupForm({
   useScreenshotPrevent();
 
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   const route = useRoute();
 
   const recoveryPhrase = route.params?.recoveryPhrase || data.recoveryPhrase;
@@ -38,6 +40,19 @@ export default function PasswordSetupForm({
   const { styles } = useTheme({ styles: getStyles() });
 
   const { sensorType } = useSelector((state) => state.settings);
+
+  const setBiometricSensorType = async () => {
+    try {
+      const deviceSensorType = await FingerprintScanner.isSensorAvailable();
+      dispatch(settingsUpdated({ sensorType: deviceSensorType }));
+    } catch (error) {
+      dispatch(settingsUpdated({ sensorType: null }));
+    }
+  };
+
+  useEffect(() => {
+    setBiometricSensorType();
+  }, []);
 
   const [
     { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
