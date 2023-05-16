@@ -31,13 +31,13 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
 
   const { styles } = useTheme({ styles: getDeleteAccountFormStyles() });
 
-  function handleDelete() {
+  const handleSubmit = () => {
     deleteAccount(account.metadata.address);
 
     if (onCompleted) {
       onCompleted();
     }
-  }
+  };
 
   return (
     <View style={[styles.container, style?.container]} testID="delete-account-container">
@@ -76,7 +76,7 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
       </View>
 
       <PrimaryButton
-        onPress={handleDelete}
+        onPress={handleSubmit}
         title={i18next.t('accounts.accountsManager.deleteAccountButtonText')}
         disabled={!isSuccessDownloadFile}
         style={[styles.submitButton, style?.submitButton]}

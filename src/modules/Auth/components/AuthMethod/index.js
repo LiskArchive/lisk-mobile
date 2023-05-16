@@ -64,7 +64,7 @@ export default function AuthMethod({ route }) {
     } else {
       navigation.push('Intro');
     }
-  }, [accounts.length, settings.showedIntro]);
+  }, [settings.showedIntro]);
 
   const checkVersion2Migration = async () => {
     const { password: recoveryPhrase } = await getRecoveryPhraseFromKeyChain();
