@@ -1,6 +1,7 @@
 import { useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { removeAccountPasswordFromKeychain } from 'modules/Auth/utils/recoveryPhrase';
 import {
   addAccount as addAccountAction,
   deleteAccount as deleteAccountAction,
@@ -21,7 +22,10 @@ export const useAccounts = () => {
     [dispatch]
   );
   const deleteAccount = useCallback(
-    (address) => dispatch(deleteAccountAction(address)),
+    (address) => {
+      dispatch(deleteAccountAction(address));
+      removeAccountPasswordFromKeychain(address);
+    },
     [dispatch]
   );
   const getAccount = (address) => accountsObject[address];
