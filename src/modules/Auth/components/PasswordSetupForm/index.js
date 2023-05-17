@@ -63,7 +63,6 @@ export default function PasswordSetupForm({
 
   const encryptAccount = () => {
     const isError = Object.keys(formState.errors).length;
-
     if (!isError && sensorType) {
       biometricsModal.open(
         <EnableBioAuth

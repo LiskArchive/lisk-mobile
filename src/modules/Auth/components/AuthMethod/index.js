@@ -64,7 +64,7 @@ export default function AuthMethod({ route }) {
     } else {
       navigation.push('Intro');
     }
-  }, [accounts.length, settings.showedIntro]);
+  }, [settings.showedIntro]);
 
   const checkVersion2Migration = async () => {
     const { password: recoveryPhrase } = await getRecoveryPhraseFromKeyChain();
@@ -91,7 +91,7 @@ export default function AuthMethod({ route }) {
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
-      navigation.navigate('DecryptRecoveryPhrase', {
+      navigation.navigate('DecryptRecoveryPhraseScreen', {
         title: 'auth.setup.decryptRecoveryPhrase',
         encryptedData,
         successRoute: 'AccountsManagerScreen',

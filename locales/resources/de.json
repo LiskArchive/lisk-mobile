@@ -128,7 +128,9 @@
       "title1": "",
       "description1": "",
       "title2": "",
-      "description2": ""
+      "description2": "",
+      "decryptRecoveryPhraseTitle": "Geben Sie Ihr Passwort ein",
+      "decryptRecoveryPhraseDescription": "Bitte geben Sie Ihr Kontopasswort ein, um Face ID zu aktivieren."
     }
   },
   "multisignature": {

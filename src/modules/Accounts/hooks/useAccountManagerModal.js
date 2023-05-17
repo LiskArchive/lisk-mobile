@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useEffect, useState } from 'react';
 
 import { useModal } from 'hooks/useModal';
@@ -6,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import AccountList from '../components/AccountList';
 import EditAccountForm from '../components/EditAccountForm';
 import DeleteAccountForm from '../components/DeleteAccountForm';
+import { useCurrentAccount } from './useCurrentAccount';
 
 export default function useAccountManagerModal() {
   const [data, setData] = useState(undefined);
@@ -14,11 +16,21 @@ export default function useAccountManagerModal() {
 
   const navigation = useNavigation();
 
-  function handleCompleted() {
-    navigation.navigate('Main');
+  const [currentAccount] = useCurrentAccount();
+
+  const handleOnDeleteCompleted = () => {
     modal.close();
     setActiveScreen(undefined);
-  }
+
+    if (data?.metadata.address === currentAccount?.metadata.address) {
+      navigation.navigate('AccountsManagerScreen');
+    }
+  };
+
+  const handleOnEditCompleted = () => {
+    modal.close();
+    setActiveScreen(undefined);
+  };
 
   const changeSelection = (selection, account) => {
     setData(account);
@@ -42,11 +54,15 @@ export default function useAccountManagerModal() {
         break;
 
       case 'EditAccount':
-        children = <EditAccountForm mode="modal" account={data} onCompleted={handleCompleted} />;
+        children = (
+          <EditAccountForm mode="modal" account={data} onCompleted={handleOnEditCompleted} />
+        );
         break;
 
       case 'DeleteAccount':
-        children = <DeleteAccountForm mode="modal" account={data} onCompleted={handleCompleted} />;
+        children = (
+          <DeleteAccountForm mode="modal" account={data} onCompleted={handleOnDeleteCompleted} />
+        );
         break;
 
       default:

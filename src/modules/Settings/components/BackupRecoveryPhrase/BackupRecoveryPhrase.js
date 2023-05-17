@@ -24,7 +24,7 @@ export default function BackupRecoveryPhrase() {
   useScreenshotPrevent();
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
       <Stepper currentIndex={0}>
         <DecryptRecoveryPhrase
           account={account}
@@ -35,6 +35,7 @@ export default function BackupRecoveryPhrase() {
             },
           }}
           navigation={navigation}
+          style={{ form: styles.decryptRecoveryPhrase }}
         />
         <CopyRecoveryPhrase />
         <RecoveryPhraseQuiz customHeader />
