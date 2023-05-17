@@ -1,18 +1,21 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
+    container: {
       flex: 1,
+    },
+    decryptRecoveryPhrase: {
+      padding: boxes.boxPadding,
     },
   },
   [themes.light]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.light.white,
     },
   },
   [themes.dark]: {
-    wrapper: {
+    container: {
       backgroundColor: colors.dark.mainBg,
     },
   },

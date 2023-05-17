@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 
 export default () => ({
   common: {
@@ -7,13 +7,8 @@ export default () => ({
     },
     body: {
       flex: 1,
-      paddingTop: boxes.boxPadding,
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    fullScreen: {
-      paddingLeft: boxes.boxPadding,
-      paddingRight: boxes.boxPadding,
     },
     avatar: {
       marginBottom: 16,
@@ -28,7 +23,7 @@ export default () => ({
       marginBottom: 24,
     },
     footer: {
-      padding: boxes.boxPadding,
+      marginTop: 40,
     },
   },
 

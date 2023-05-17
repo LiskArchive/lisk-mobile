@@ -125,7 +125,9 @@
       "title1": "Fast and secure",
       "description1": "Face ID offers a secure and faster way to decrypt your encrypted secret recovery phrase and sign transactions.",
       "title2": "You can always turn it off",
-      "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password."
+      "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password.",
+      "decryptRecoveryPhraseTitle": "Enter your password",
+      "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID."
     }
   },
   "multisignature": {
