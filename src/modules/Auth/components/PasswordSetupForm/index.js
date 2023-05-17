@@ -55,30 +55,42 @@ export default function PasswordSetupForm({
   }, []);
 
   const [
-    { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
+    {
+      handleSubmit,
+      accountNameField,
+      isAgreedField,
+      isBiometricsEnabled,
+      formState,
+      control,
+      trigger,
+    },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(recoveryPhrase, derivationPath);
 
   const biometricsModal = useModal();
 
   const encryptAccount = () => {
+    trigger();
     const isError = Object.keys(formState.errors).length;
-    if (!isError && sensorType) {
-      biometricsModal.open(
-        <EnableBioAuth
-          onSubmit={() => {
-            isBiometricsEnabled.onChange(true);
-            handleSubmit();
-          }}
-          skip={() => {
-            handleSubmit();
-            biometricsModal.close();
-          }}
-          enableSkip
-        />
-      );
-    } else {
-      handleSubmit();
+    const hasTouchedField = Object.keys(formState.touchedFields).length;
+    if (hasTouchedField) {
+      if (!isError && sensorType) {
+        biometricsModal.open(
+          <EnableBioAuth
+            onSubmit={() => {
+              isBiometricsEnabled.onChange(true);
+              handleSubmit();
+            }}
+            skip={() => {
+              handleSubmit();
+              biometricsModal.close();
+            }}
+            enableSkip
+          />
+        );
+      } else {
+        handleSubmit();
+      }
     }
   };
 
