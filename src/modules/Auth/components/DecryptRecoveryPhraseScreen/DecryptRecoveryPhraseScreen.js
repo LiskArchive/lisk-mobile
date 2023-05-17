@@ -18,11 +18,7 @@ export default function DecryptRecoveryPhraseScreen() {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <DecryptRecoveryPhrase
-        route={route}
-        navigation={navigation}
-        style={{ form: { padding: 20 } }}
-      />
+      <DecryptRecoveryPhrase route={route} navigation={navigation} style={{ form: styles.form }} />
     </SafeAreaView>
   );
 }

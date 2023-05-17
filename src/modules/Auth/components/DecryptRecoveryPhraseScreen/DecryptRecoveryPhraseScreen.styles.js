@@ -5,6 +5,8 @@ export default function getDecryptRecoveryPhraseScreenStyles() {
     common: {
       container: {
         flex: 1,
+      },
+      form: {
         padding: boxes.boxPadding,
       },
     },
