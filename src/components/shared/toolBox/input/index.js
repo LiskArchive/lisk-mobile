@@ -105,6 +105,7 @@ class Input extends React.Component {
 
           <TextInput
             testID={testID}
+            blurOnSubmit
             editable={!disabled}
             selectTextOnFocus={!disabled}
             style={inputStyle}
