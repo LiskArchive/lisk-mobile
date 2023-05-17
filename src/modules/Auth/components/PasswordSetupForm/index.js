@@ -62,13 +62,20 @@ export default function PasswordSetupForm({
   const biometricsModal = useModal();
 
   const encryptAccount = () => {
-    if (formState.isValid && sensorType) {
+    const isError = Object.keys(formState.errors).length;
+
+    if (!isError && sensorType) {
       biometricsModal.open(
         <EnableBioAuth
           onSubmit={() => {
             isBiometricsEnabled.onChange(true);
             handleSubmit();
           }}
+          skip={() => {
+            handleSubmit();
+            biometricsModal.close();
+          }}
+          enableSkip
         />
       );
     } else {
