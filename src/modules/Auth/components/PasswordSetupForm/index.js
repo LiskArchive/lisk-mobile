@@ -73,8 +73,8 @@ export default function PasswordSetupForm({
     trigger();
     const isError = Object.keys(formState.errors).length;
     const hasTouchedField = Object.keys(formState.touchedFields).length;
-    if (hasTouchedField) {
-      if (!isError && sensorType) {
+    if (hasTouchedField && !isError) {
+      if (sensorType) {
         biometricsModal.open(
           <EnableBioAuth
             onSubmit={() => {
