@@ -95,10 +95,11 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
             route={{
               params: {
                 address: account.metadata.address,
-                title: 'settings.backupPhrase.title',
+                title: 'settings.biometrics.decryptRecoveryPhraseTitle',
+                description: 'settings.biometrics.decryptRecoveryPhraseDescription',
               },
             }}
-            showsHeader={false}
+            withNavigationHeader={false}
             navigation={navigation}
           />
         </Stepper>

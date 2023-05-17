@@ -17,7 +17,7 @@ import {
   getAccountPasswordFromKeyChain,
 } from '../../utils/recoveryPhrase';
 
-export default function PasswordForm({ account, onPress, testID, theme, onSubmit, isFullScreen }) {
+export default function PasswordForm({ account, onPress, testID, theme, onSubmit, style }) {
   useScreenshotPrevent();
   const [password, setPassword] = useState('');
   const { sensorType } = useSelector((state) => state.settings);
@@ -47,8 +47,12 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   }, []);
 
   return (
-    <View style={[styles.container, styles.theme.container]} onPress={onPress} testID={testID}>
-      <View style={[styles.body, isFullScreen && styles.fullScreen]}>
+    <View
+      style={[styles.container, styles.theme.container, style]}
+      onPress={onPress}
+      testID={testID}
+    >
+      <View style={[styles.body]}>
         <Avatar address={account.metadata.address} size={45} style={styles.avatar} />
 
         <H3 style={[styles.nameText, styles.theme.nameText]}>{account.metadata.name}</H3>
@@ -77,7 +81,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
           onPress={() => onSubmit(password)}
           testID="decrypt-button-continue"
         >
-          {i18next.t('commons.buttons.continue')}
+          {i18next.t('commons.buttons.confirm')}
         </PrimaryButton>
       </View>
     </View>
