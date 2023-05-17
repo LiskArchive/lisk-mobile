@@ -91,7 +91,7 @@ export default function AuthMethod({ route }) {
       /**
        * TODO: Confirm valid file and show necessary error if any
        */
-      navigation.navigate('DecryptRecoveryPhrase', {
+      navigation.navigate('DecryptRecoveryPhraseScreen', {
         title: 'auth.setup.decryptRecoveryPhrase',
         encryptedData,
         successRoute: 'AccountsManagerScreen',

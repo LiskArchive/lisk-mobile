@@ -21,7 +21,7 @@ import SecretRecoveryPhrase from 'modules/Auth/components/SecretRecoveryPhrase';
 import PasswordSetupForm from 'modules/Auth/components/PasswordSetupForm';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
-import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
+import DecryptRecoveryPhraseScreen from 'modules/Auth/components/DecryptRecoveryPhraseScreen/DecryptRecoveryPhraseScreen';
 import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
 import AddApplicationSuccessScreen from 'modules/BlockchainApplication/components/AddApplicationSuccessScreen/AddApplicationSuccessScreen';
 import AddApplicationErrorScreen from 'modules/BlockchainApplication/components/AddApplicationErrorScreen/AddApplicationErrorScreen';
@@ -63,8 +63,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="DecryptRecoveryPhrase"
-            component={DecryptRecoveryPhrase}
+            name="DecryptRecoveryPhraseScreen"
+            component={DecryptRecoveryPhraseScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
