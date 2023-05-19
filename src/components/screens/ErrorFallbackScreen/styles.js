@@ -55,9 +55,3 @@ export function getErrorFallbackScreenStyles() {
     },
   };
 }
-
-export const errorFallbackSplashStyles = {
-  container: {
-    marginTop: boxes.boxPadding,
-  },
-};

@@ -11,7 +11,8 @@
   },
   "fallbackScreens" : {
     "error" : {
-      "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal und melden Sie den Fehler per E-Mail, wenn Sie immer noch Probleme haben.",
+      "title": "Etwas ist schief gelaufen",
+      "description": "Bitte versuchen Sie es später noch einmal. Wenn weiterhin Probleme auftreten, melden Sie es per E-Mail.",
       "retryButton": "Wiederholen",
       "emailReportLabel": "Bleibt das Problem bestehen?",
       "emailReportButton": "Melden Sie den Fehler per E-Mail"
