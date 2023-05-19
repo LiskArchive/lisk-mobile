@@ -36,7 +36,7 @@ export default function ErrorFallbackScreen(props) {
           <ErrorIllustrationSvg />
         </View>
 
-        <H4 style={[styles.description, styles.theme.description]}>{title}</H4>
+        <H4 style={[styles.title, styles.theme.title]}>{title}</H4>
 
         <P style={[styles.description, styles.theme.description]}>{description}</P>
 
