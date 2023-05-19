@@ -84,11 +84,13 @@ export function useBootstrapCurrentApplication() {
     currentApplication.setStatus(defaultApplicationsDataStatus);
   }, [defaultApplicationsDataStatus, currentApplication]);
   useEffect(() => {
-    currentApplication.setError(errorOnDefaultApplicationsMetaData);
-  }, [errorOnDefaultApplicationsMetaData, currentApplication]);
-  useEffect(() => {
-    currentApplication.setError(errorOnDefaultApplicationsData);
-  }, [errorOnDefaultApplicationsData, currentApplication]);
+    const error = errorOnDefaultApplicationsData || errorOnDefaultApplicationsMetaData;
+
+    if (error) {
+      currentApplication.setError(error);
+      currentApplication.setStatus('error');
+    }
+  }, [errorOnDefaultApplicationsData, errorOnDefaultApplicationsMetaData, currentApplication]);
 
   return retry;
 }
