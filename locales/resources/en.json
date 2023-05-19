@@ -5,7 +5,9 @@
     "buttons": {
       "continue": "Continue",
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "reload": "Reload",
+      "viewAll": "View all"
     },
     "copyToClipboard": "Copy to clipboard"
   },
@@ -508,7 +510,7 @@
       "header2ParamsLabel": "Header 2"
     },
     "transactionList": {
-      "errorText": "Error loading transactions!",
+      "errorText": "Error loading your transactions.",
       "emptyText": "You have no transactions on this account yet.",
       "title": "Transactions",
       "goToTransactionHistoryButtonText": "View all"

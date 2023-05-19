@@ -75,7 +75,7 @@ export default function ExternalApplicationRow({ application }) {
               </P>
             }
             onContinue={() => setActiveAction(undefined)}
-            buttonText="Back to connections"
+            continueButtonTitle="Back to connections"
           />
         );
 
@@ -91,7 +91,7 @@ export default function ExternalApplicationRow({ application }) {
               </P>
             }
             onContinue={() => setActiveAction('disconnect')}
-            buttonText="Try again"
+            continueButtonTitle="Try again"
           />
         );
 

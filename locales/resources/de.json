@@ -5,7 +5,9 @@
     "buttons": {
       "continue": "Weiter",
       "cancel": "Absagen",
-      "confirm": "Bestätigen"
+      "confirm": "Bestätigen",
+      "reload": "Aktualisierung",
+      "viewAll": "Alle ansehen"
     },
     "copyToClipboard": "In die Zwischenablage kopieren"
   },
