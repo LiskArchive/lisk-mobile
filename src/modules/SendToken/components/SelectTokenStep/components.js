@@ -9,6 +9,8 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { usePriorityFee } from 'modules/Transactions/hooks/usePriorityFee';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -37,22 +39,29 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
     isError: isSupportedTokensError,
   } = useApplicationSupportedTokensQuery(recipientApplication);
 
+  const [currentAccount] = useCurrentAccount();
+
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === value);
 
-  const tokenBalance = selectedToken?.availableBalance
-    ? fromBaseToDisplayDenom({
-        amount: selectedToken.availableBalance,
-        displayDenom: selectedToken.displayDenom,
-        denomUnits: selectedToken.denomUnits,
-        symbol: selectedToken.symbol,
-        withSymbol: true,
-        formatAmount: true,
-      })
-    : 0;
+  const { data: tokenBalanceData } = useAccountTokenBalancesQuery(currentAccount.metadata.address, {
+    params: { tokenID: value },
+  });
+
+  const tokenBalance =
+    selectedToken && tokenBalanceData
+      ? fromBaseToDisplayDenom({
+          amount: tokenBalanceData?.data[0]?.availableBalance || 0,
+          displayDenom: selectedToken.displayDenom,
+          denomUnits: selectedToken.denomUnits,
+          symbol: selectedToken.symbol,
+          withSymbol: true,
+          formatAmount: true,
+        })
+      : 0;
 
   const renderOptions = (data = supportedTokensData) => (
     <InfiniteScrollList
