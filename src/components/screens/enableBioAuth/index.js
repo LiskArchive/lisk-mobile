@@ -6,12 +6,12 @@ import { themes, colors } from 'constants/styleGuide';
 import { B, Small } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import Icon from 'components/shared/toolBox/icon';
-import { PrimaryButton } from 'components/shared/toolBox/button';
+import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import i18next from 'i18next';
 import { bioMetricAuthentication } from 'modules/Auth/utils/recoveryPhrase';
 import getStyles from './styles';
 
-const EnableBioAuth = ({ onSubmit, nextStep }) => {
+const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
   const { styles, theme } = useTheme({ styles: getStyles() });
   const modal = useModal();
   const { sensorType } = useSelector((state) => state.settings);
@@ -74,10 +74,11 @@ const EnableBioAuth = ({ onSubmit, nextStep }) => {
         </View>
       </View>
       <PrimaryButton
-        style={styles.button}
+        style={styles.primaryButton}
         onClick={confirm}
         title={i18next.t(`Enable ${sensorType}`)}
       />
+      {enableSkip && <Button onClick={skip} title="Skip" />}
     </View>
   );
 };

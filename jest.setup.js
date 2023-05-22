@@ -27,6 +27,12 @@ jest.mock('react-native-keyboard-aware-scroll-view', () => ({
   KeyboardAwareScrollView: jest.fn().mockImplementation(({ children }) => children),
 }));
 
+jest.mock('react-native-keychain', () => ({
+  setGenericPassword: jest.fn(),
+  getGenericPassword: jest.fn(),
+  resetGenericPassword: jest.fn(),
+}));
+
 if (!global.setImmediate) {
   global.setImmediate = setTimeout;
 }
