@@ -153,17 +153,16 @@ export const bioMetricAuthentication = async ({
     };
   }
 
-  try {
-    await FingerprintScanner.isSensorAvailable();
-    try {
-      await FingerprintScanner.authenticate(authConfig);
+  FingerprintScanner.authenticate(authConfig)
+    .then(() => {
+      if (Platform.OS === 'android') {
+        FingerprintScanner.release();
+      }
       successCallback();
-    } catch (error) {
+    })
+    .catch((error) => {
       errorCallback(error);
-    }
-  } catch (error) {
-    errorCallback(error);
-  }
+    });
 };
 
 /**
