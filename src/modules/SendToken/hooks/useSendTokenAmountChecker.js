@@ -1,4 +1,7 @@
+/* eslint-disable max-statements */
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { isTransactionAmountValid } from 'utilities/validators';
 
@@ -8,11 +11,17 @@ export function useSendTokenAmountChecker({
   amount,
   transactionFee,
 }) {
+  const [currentAccount] = useCurrentAccount();
+
   const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === selectedTokenID);
 
-  const tokenBalance = BigInt(selectedToken?.availableBalance || 0);
+  const { data: tokenBalanceData } = useAccountTokenBalancesQuery(currentAccount.metadata.address, {
+    params: { tokenID: selectedTokenID },
+  });
+
+  const tokenBalance = BigInt(tokenBalanceData?.data[0]?.availableBalance || 0);
 
   const maxAllowedAmount = tokenBalance - transactionFee;
 
