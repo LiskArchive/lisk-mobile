@@ -474,7 +474,7 @@
     "tokens": "",
     "lockedTokens": "",
     "emptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern",
-    "errorOnTokensText": "Fehler beim Laden der Token!",
+    "errorOnTokensText": "Fehler beim Laden deinen Token.",
     "allTokens": "",
     "buttons": {
       "viewAll": "",

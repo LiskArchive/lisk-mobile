@@ -472,7 +472,7 @@
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",
     "emptyTokenMessage": "You have no tokens on this account yet.",
-    "errorOnTokensText": "Error loading tokens!",
+    "errorOnTokensText": "Error loading your tokens.",
     "allTokens": "All Tokens",
     "buttons": {
       "viewAll": "View all",
