@@ -12,6 +12,9 @@ export default {
     container: {
       paddingTop: safeAreaPaddingTop,
     },
+    resultScreenContainer: {
+      paddingBottom: safeAreaPaddingTop,
+    },
     header: {
       height: 230,
       backgroundColor: colors.light.ultramarineBlue,
