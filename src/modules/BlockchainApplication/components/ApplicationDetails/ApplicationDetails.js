@@ -68,8 +68,6 @@ export default function ApplicationDetails({ route }) {
 
   const buttonColor = isBrightBackground ? colors.dark.headerBg : colors.light.white;
 
-  applications.isLoading = true;
-
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <DataRenderer
