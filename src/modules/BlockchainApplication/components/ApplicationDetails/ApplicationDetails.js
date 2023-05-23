@@ -2,13 +2,13 @@
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import { ScrollView, View, ImageBackground, Image, Linking } from 'react-native';
-import { useTheme } from 'contexts/ThemeContext';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -25,6 +25,7 @@ import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 import getStyles from './ApplicationDetails.styles';
+import ApplicationDetailsSkeleton from '../ApplicationDetailsSkeleton/ApplicationDetailsSkeleton';
 
 /**
  *
@@ -67,6 +68,8 @@ export default function ApplicationDetails({ route }) {
 
   const buttonColor = isBrightBackground ? colors.dark.headerBg : colors.light.white;
 
+  applications.isLoading = true;
+
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <DataRenderer
@@ -79,6 +82,7 @@ export default function ApplicationDetails({ route }) {
               <ImageBackground
                 style={[
                   styles.header,
+                  styles.theme.header,
                   styles.container,
                   data.backgroundColor && {
                     backgroundColor: data.backgroundColor,
@@ -95,6 +99,7 @@ export default function ApplicationDetails({ route }) {
               <View
                 style={[
                   styles.header,
+                  styles.theme.header,
                   styles.container,
                   data.backgroundColor && {
                     backgroundColor: data.backgroundColor,
@@ -232,6 +237,15 @@ export default function ApplicationDetails({ route }) {
               )}
             </SafeAreaView>
           </ScrollView>
+        )}
+        renderLoading={() => (
+          <>
+            <View style={[styles.container]} resizeMode="stretch">
+              <HeaderBackButton onPress={navigation.goBack} />
+            </View>
+
+            <ApplicationDetailsSkeleton />
+          </>
         )}
         renderError={() => (
           <>
