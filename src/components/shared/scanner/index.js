@@ -68,7 +68,9 @@ const Scanner = forwardRef(
 
       if (items.length > 0) {
         QRCode.decode(items[0].uri, (error, result) => {
-          onQRCodeRead(result);
+          if (!error) {
+            onQRCodeRead(result);
+          }
         });
       }
     };

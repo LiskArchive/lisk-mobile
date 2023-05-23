@@ -28,18 +28,23 @@ export default () => ({
     photoPreview: {
       zIndex: 100,
     },
-    cameraOverlay: {
-      backgroundColor: '#394451',
-      opacity: 0.85,
+    overlay: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    headerContainer: {
       paddingLeft: 20,
       paddingRight: 20,
       flexDirection: 'row',
       alignItems: 'center',
     },
     galleryButton: {
-      borderRadius: 4,
-      height: 48,
-      width: 48,
+      backgroundColor: colors.light.inkBlue,
+      borderRadius: 40,
+      height: 80,
+      width: 80,
+      bottom: 0,
       alignItems: 'center',
       justifyContent: 'center',
     },
