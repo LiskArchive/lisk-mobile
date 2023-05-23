@@ -273,7 +273,8 @@
       "chainID": "Ketten-ID",
       "lastUpdated": "Zuletzt aktualisiert",
       "status": "Status",
-      "lastCertificateHeight": "Höhe des letzten Zertifikats"
+      "lastCertificateHeight": "Höhe des letzten Zertifikats",
+      "errorDescription": "Leider konnten wir Ihre Bewerbungsdaten nicht abrufen. Bitte versuche es erneut."
     },
     "manage": {
       "add": {

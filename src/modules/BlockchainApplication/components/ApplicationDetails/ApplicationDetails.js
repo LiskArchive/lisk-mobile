@@ -7,20 +7,19 @@ import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { H3, P, A } from 'components/shared/toolBox/typography';
 import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
-import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { H3, P, A } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import wavesPattern from 'assets/images/waves_pattern_large.png';
-import { colors } from 'constants/styleGuide';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
-import { SafeAreaView } from 'react-native-safe-area-context';
-// import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { isColorBright } from 'utilities/colors.utils';
+import { colors } from 'constants/styleGuide';
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
@@ -242,8 +241,8 @@ export default function ApplicationDetails({ route }) {
 
             <ResultScreen
               illustration={<ErrorIllustrationSvg />}
-              title="Something went wrong"
-              description={'Sorry, we were unable to fetch your application data. Please try again'}
+              title={i18next.t('fallbackScreens.error.title')}
+              description={i18next.t('application.details.errorDescription')}
               styles={{ container: styles.resultScreenContainer }}
             />
           </>

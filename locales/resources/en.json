@@ -269,9 +269,10 @@
     "details": {
       "deposited": "Deposited",
       "chainID": "Chain ID",
-      "lastUpdated": "Last Updated",
+      "lastUpdated": "Last updated",
       "status": "Status",
-      "lastCertificateHeight": "Last Certificate Height"
+      "lastCertificateHeight": "Last certificate height",
+      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again."
     },
     "manage": {
       "add": {
