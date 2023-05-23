@@ -28,7 +28,7 @@ export default function TokenRow({ token }) {
       displayDenom: token.displayDenom,
       denomUnits: token.denomUnits,
     }),
-    tokenSymbol: token?.symbol,
+    tokenSymbol: token.symbol,
   });
 
   const { styles } = useTheme({ styles: getTokenRowStyles() });
@@ -44,7 +44,7 @@ export default function TokenRow({ token }) {
       <View style={[styles.balanceContainer]}>
         <DiscreteModeComponent data={balance} blurVariant="balance">
           <H3 style={[styles.theme.title]}>
-            {balance} {token?.symbol}
+            {balance} {token.symbol}
           </H3>
         </DiscreteModeComponent>
 
