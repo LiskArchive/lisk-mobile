@@ -22,7 +22,7 @@ export class Transaction {
 
   _auth = null;
 
-  _schema = null;
+  _baseSchema = null;
 
   _priorityFee = null;
 
@@ -54,9 +54,9 @@ export class Transaction {
     command = null,
     encodedTransaction = null,
     params = {},
-    schema,
+    baseSchema,
   }) {
-    this._schema = schema;
+    this._baseSchema = baseSchema;
     this._networkStatus = networkStatus;
     this._auth = auth;
     this._paramsSchemas = commandParametersSchemas;
@@ -74,7 +74,7 @@ export class Transaction {
     let baseTx = null;
 
     if (encodedTransaction) {
-      baseTx = decodeBaseTransaction(Buffer.from(encodedTransaction, 'hex'));
+      baseTx = decodeBaseTransaction(Buffer.from(encodedTransaction, 'hex'), this._baseSchema);
 
       this.transaction.module = baseTx.module;
       this.transaction.command = baseTx.command;
@@ -270,7 +270,7 @@ export class Transaction {
   encode(transaction) {
     this._validateTransaction(transaction);
 
-    return encodeTransaction(transaction, this._paramsSchema);
+    return encodeTransaction(transaction, this._paramsSchema, this._baseSchema);
   }
 
   /**
@@ -280,7 +280,7 @@ export class Transaction {
   toJSON() {
     this._validateTransaction(this.transaction);
 
-    return toTransactionJSON(this.transaction, this._paramsSchema);
+    return toTransactionJSON(this.transaction, this._paramsSchema, this._baseSchema);
   }
 
   /**
@@ -288,7 +288,7 @@ export class Transaction {
    * @returns transaction in Object format
    */
   fromJSON() {
-    return fromTransactionJSON(this.transaction, this._paramsSchema);
+    return fromTransactionJSON(this.transaction, this._paramsSchema, this._baseSchema);
   }
 
   _computeParamsSchema(module, command) {
@@ -307,7 +307,7 @@ export class Transaction {
 
     const { params, ...rest } = this.transaction;
 
-    Lisk.validator.validator.validate(this._schema, {
+    Lisk.validator.validator.validate(this._baseSchema, {
       ...rest,
       params: Buffer.alloc(0),
     });

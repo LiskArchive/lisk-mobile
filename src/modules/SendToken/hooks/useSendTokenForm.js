@@ -247,6 +247,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       recipientApplicationChainChannelData?.data?.messageFeeTokenID
     ) {
       // TODO: Fix the message fee computation based on bytes of the params
+      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1801)
       const messageFee = BigInt(messageFeeData.data.fee) * BigInt(10 ** 5);
       transaction.update({
         command: 'transferCrossChain',

@@ -22,7 +22,7 @@ describe.skip('Auth module', () => {
     await expect(element(by.id('username-label'))).toBeVisible();
     await expect(element(by.id('address-copy-to-clipboard'))).toBeVisible();
     // TODO: Test tokens are displayed
-    // (details on https://github.com/LiskHQ/lisk-mobile/issues/1605).
+    // (details on https://github.com/LiskHQ/lisk-mobile/issues/1826).
   });
 
   it('should edit account name', async () => {

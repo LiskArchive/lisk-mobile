@@ -62,11 +62,11 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isErrorOnCommandParametersSchemas ||
     isErrorPriorityFee;
 
-  const transactionSchema = commandParametersSchemasData?.data?.transaction?.schema;
+  const baseSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
   useEffect(
     () => {
-      if (isInitDataSuccess && transactionSchema) {
+      if (isInitDataSuccess && baseSchema) {
         try {
           transaction.init({
             pubkey,
@@ -77,7 +77,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
             module,
             command,
             encodedTransaction,
-            schema: transactionSchema,
+            baseSchema,
           });
 
           setIsLoading(false);
@@ -90,7 +90,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isInitDataSuccess, transaction, encodedTransaction, module, pubkey, command, transactionSchema]
+    [isInitDataSuccess, transaction, encodedTransaction, module, pubkey, command, baseSchema]
   );
 
   useEffect(() => {

@@ -2,8 +2,6 @@
 import { device, element, by } from 'detox';
 import { signInUser } from '../commands/auth';
 
-// TODO: Fix settings end to end test
-// (details on https://github.com/LiskHQ/lisk-mobile/issues/1604).
 describe.skip('Settings Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
