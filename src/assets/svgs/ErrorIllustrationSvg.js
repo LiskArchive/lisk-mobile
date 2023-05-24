@@ -1,179 +1,87 @@
 import React from 'react';
-import { Svg, Path, Mask, G } from 'react-native-svg';
+import { Svg, Path, G, Rect, Defs, ClipPath } from 'react-native-svg';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { themes, colors } from 'constants/styleGuide';
 
-export default function ErrorIllustrationSvg({ height = 85, width = 174, style }) {
+export default function ErrorIllustrationSvg({ height = 103, width = 199, style }) {
   const { theme } = useTheme();
 
   const strokeColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.platinumGray;
 
   const fillColor = theme === themes.light ? colors.light.platinumGray : colors.dark.volcanicSand;
 
-  const fillColor2 = theme === themes.light ? colors.light.white : colors.dark.headerBg;
+  const fillColor2 = theme === themes.light ? colors.light.athensWhite : colors.dark.headerBg;
 
   return (
-    <Svg width={width} height={height} viewBox="0 0 174 85" fill="none" style={style}>
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M31.9111 36.7941V83.7653H83.1151V63.2828L47.5688 63.1114V36.7941H31.9111Z"
-        fill={fillColor2}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M31.9102 83.7652H83.1142V63.283L47.5678 63.1113V36.7944H31.9102V83.7652Z"
-        stroke={strokeColor}
-        strokeWidth="0.5"
-      />
-      <Mask
-        id="mask0_3484_3501"
-        style="Mask-type:alpha"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="174"
-        height="84"
-      >
-        <Path fillRule="evenodd" clipRule="evenodd" d="M0 84H174V0H0V84Z" fill={fillColor2} />
-      </Mask>
-      <G Mask="url(#mask0_3484_3501)">
+    <Svg width={width} height={height} viewBox="0 0 199 103" fill="none" style={style}>
+      <G clipPath="url(#clip0_2205_49728)">
         <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M8.83203 83.7652H31.9097V36.7944H8.83203V83.7652Z"
+          d="M41.5162 49.8633H36.1721V53.2009H41.5162V49.8633Z"
+          fill={fillColor}
           stroke={strokeColor}
-          strokeWidth="0.5"
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M162.962 49.8633H157.617V53.2009H162.962V49.8633Z"
+          fill={fillColor}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M149.802 59.612H130.095C125.619 59.612 121.945 56.0073 121.945 51.4681C121.945 46.9956 125.553 43.3242 130.095 43.3242H149.802C154.277 43.3242 157.951 46.9289 157.951 51.4681C157.885 56.0073 154.277 59.612 149.802 59.612Z"
+          fill={strokeColor}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M137.711 59.612H118.004C113.528 59.612 109.854 56.0073 109.854 51.4681C109.854 46.9956 113.462 43.3242 118.004 43.3242H137.711C142.186 43.3242 145.86 46.9289 145.86 51.4681C145.794 56.0073 142.186 59.612 137.711 59.612Z"
+          fill={fillColor2}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path d="M117.403 49.8633H101.37V53.2009H117.403V49.8633Z" fill={strokeColor} />
+        <Path d="M136.508 49.8633H120.476V53.2009H136.508V49.8633Z" fill={strokeColor} />
+        <Path
+          d="M49.5325 59.612H69.239C73.7147 59.612 77.3888 56.0073 77.3888 51.4681C77.3888 46.9956 73.7815 43.3242 69.239 43.3242H49.5325C45.0568 43.3242 41.3827 46.9289 41.3827 51.4681C41.4495 56.0073 45.0568 59.612 49.5325 59.612Z"
+          fill={strokeColor}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M61.6236 59.612H81.33C85.8057 59.612 89.4798 56.0073 89.4798 51.4681C89.4798 46.9956 85.8725 43.3242 81.33 43.3242H61.6236C57.1478 43.3242 53.4738 46.9289 53.4738 51.4681C53.4738 56.0073 57.1478 59.612 61.6236 59.612Z"
+          fill={fillColor2}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M77.3888 53.2048C78.3111 53.2048 79.0588 52.4577 79.0588 51.536C79.0588 50.6143 78.3111 49.8672 77.3888 49.8672C76.4665 49.8672 75.7188 50.6143 75.7188 51.536C75.7188 52.4577 76.4665 53.2048 77.3888 53.2048Z"
+          fill={fillColor2}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M65.5649 53.2048C66.4872 53.2048 67.2349 52.4577 67.2349 51.536C67.2349 50.6143 66.4872 49.8672 65.5649 49.8672C64.6425 49.8672 63.8948 50.6143 63.8948 51.536C63.8948 52.4577 64.6425 53.2048 65.5649 53.2048Z"
+          fill={fillColor2}
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M163.028 51.5352H172.447C178.192 51.5352 182.868 56.2079 182.868 61.9486C182.868 67.6894 178.192 72.3621 172.447 72.3621H94.2895C88.5446 72.3621 83.8685 77.0348 83.8685 82.7756V103.002"
+          stroke={strokeColor}
+          strokeMiterlimit="10"
+        />
+        <Path
+          d="M35.9717 51.5334H26.4859C20.7409 51.5334 16.0648 46.8607 16.0648 41.1199C16.0648 35.3791 20.7409 30.7064 26.4859 30.7064H104.644C110.389 30.7064 115.065 26.0337 115.065 20.2929V0"
+          stroke={strokeColor}
+          strokeMiterlimit="10"
         />
       </G>
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M26.748 29.8927L36.0847 36.7402H18.1688L8.83203 29.8927H26.748Z"
-        fill={fillColor2}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M26.748 29.8927L36.0847 36.7402H18.1688L8.83203 29.8927H26.748Z"
-        stroke={strokeColor}
-        strokeWidth="0.5"
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M31.5791 27.4634L40.9158 36.7401H22.9998L13.6631 27.4634H31.5791Z"
-        fill={fillColor2}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M31.5791 27.4634L40.9158 36.7401H22.9998L13.6631 27.4634H31.5791Z"
-        stroke={strokeColor}
-        strokeWidth="0.5"
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M37.7334 28.7912V70.7385H135.646L115.039 42.0543L135.646 9.64024H58.0468H37.7334V29.2169"
-        fill={fillColor2}
-      />
-      <Path
-        d="M37.7334 28.7912V70.7385H135.646L115.039 42.0543L135.646 9.64024H58.0468H37.7334V29.2169"
-        stroke={strokeColor}
-        strokeWidth="0.5"
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M135.493 70.7385L113.924 42.0543L135.493 9.64024L114.887 42.0543"
-        fill={fillColor}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M37.7334 70.7383H41.3045V9.64014H37.7334V70.7383Z"
-        fill={strokeColor}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M76.3408 28.1518C76.3408 33.6658 80.8397 38.1358 86.3894 38.1358C91.9395 38.1358 96.4383 33.6658 96.4383 28.1518C96.4383 22.6377 91.9395 18.1674 86.3894 18.1674C80.8397 18.1674 76.3408 22.6377 76.3408 28.1518Z"
-        fill={fillColor}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M55.832 70.748C60.884 49.4144 72.8793 42.2433 86.3895 42.2433C99.9001 42.2433 112.669 48.1595 117.721 70.748H55.832Z"
-        fill={fillColor}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M87.415 18.2189C91.005 19.7422 93.5215 23.2804 93.5215 27.4039C93.5215 32.9179 89.0227 37.3879 83.4726 37.3879C83.1265 37.3879 82.7848 37.3705 82.4473 37.3366C83.658 37.85 84.9901 38.136 86.3893 38.136C91.9394 38.136 96.4383 33.6657 96.4383 28.1517C96.4383 22.9815 92.4832 18.7293 87.415 18.2189Z"
-        fill={colors.light.silverGrey}
-      />
-      <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M91.5082 43.3177C91.5082 43.9111 89.0266 44.3921 85.9655 44.3921C82.9045 44.3921 80.4229 43.9111 80.4229 43.3177C80.4229 42.7243 82.9045 42.243 85.9655 42.243C89.0266 42.243 91.5082 42.7243 91.5082 43.3177Z"
-        fill={strokeColor}
-      />
-      <Path
-        d="M37.7334 28.7912V70.7385H135.646L115.039 42.0543L135.646 9.64024H58.0468H37.7334V29.2169"
-        stroke={strokeColor}
-        strokeWidth="0.5"
-      />
-      <Mask
-        id="mask1_3484_3501"
-        style="Mask-type:alpha"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="174"
-        height="84"
-      >
-        <Path fillRule="evenodd" clipRule="evenodd" d="M0 84H174V0H0V84Z" fill={fillColor2} />
-      </Mask>
-      <G Mask="url(#mask1_3484_3501)">
-        <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M137.503 66.0375C127.621 66.0375 119.61 73.997 119.61 83.8159H155.397C155.397 73.997 147.386 66.0375 137.503 66.0375Z"
-          fill={fillColor2}
-        />
-        <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M137.503 66.0375C127.621 66.0375 119.61 73.997 119.61 83.8159H155.397C155.397 73.997 147.386 66.0375 137.503 66.0375Z"
-          stroke={strokeColor}
-          strokeWidth="0.5"
-        />
-        <Path
-          d="M121.718 75.5447H126.332C128.114 75.5447 129.56 74.1088 129.56 72.3378V67.9284"
-          stroke={strokeColor}
-          strokeWidth="0.5"
-        />
-        <Path d="M117.722 45.7875H162.531V83.5822" stroke={strokeColor} strokeWidth="0.5" />
-        <Path d="M154.865 48.2761H159.685" stroke={strokeColor} strokeWidth="0.5" />
-        <Path d="M154.865 49.6315H159.685" stroke={strokeColor} strokeWidth="0.5" />
-        <Path d="M154.865 50.987H159.685" stroke={strokeColor} strokeWidth="0.5" />
-        <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M113.929 28.7956H136.914V5.95772H113.929V28.7956Z"
-          fill="#EC6868"
-        />
-        <Path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M131.947 11.9884C132.231 11.7187 132.231 11.2815 131.947 11.0118C131.662 10.7422 131.201 10.7422 130.916 11.0118L125.23 16.4001L120.058 11.4995C119.774 11.2298 119.312 11.2298 119.028 11.4995C118.743 11.7691 118.743 12.2064 119.028 12.476L124.199 17.3767L119.028 22.2773C118.743 22.547 118.743 22.9842 119.028 23.2539C119.312 23.5235 119.774 23.5235 120.058 23.2539L125.23 18.3532L130.916 23.7415C131.201 24.0112 131.662 24.0112 131.947 23.7415C132.231 23.4718 132.231 23.0346 131.947 22.7649L126.26 17.3767L131.947 11.9884Z"
-          fill={fillColor2}
-        />
-        <Path d="M0 83.8073H174" stroke={strokeColor} strokeWidth="0.5" />
-      </G>
+      <Defs>
+        <ClipPath id="clip0_2205_49728">
+          <Rect width="198" height="103" fill="white" transform="translate(0.5)" />
+        </ClipPath>
+      </Defs>
     </Svg>
   );
 }

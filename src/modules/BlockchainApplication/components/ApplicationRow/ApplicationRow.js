@@ -52,8 +52,10 @@ function ApplicationRow({
         <ResultScreen
           variant="error"
           description={i18next.t('application.manage.deleteDefaultApplicationModal.description')}
-          buttonText={i18next.t('application.manage.deleteDefaultApplicationModal.buttonText')}
-          onContinue={() => modal.close(false)}
+          onContinue={modal.close}
+          continueButtonTitle={i18next.t(
+            'application.manage.deleteDefaultApplicationModal.buttonText'
+          )}
         />
       );
     }

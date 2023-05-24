@@ -39,6 +39,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
     fetchNextPage: fetchNextTokensPage,
     hasNextPage: hasTokensNextPage,
     isFetchingNextPage: isFetchingTokensNextPage,
+    refetch: refetchTokens,
   } = useAccountTokensFullDataQuery(address, {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
@@ -137,13 +138,17 @@ export default function TokenList({ mode = 'overview', address, style }) {
         )}
         renderError={() => (
           <ResultScreen
-            illustration={<ErrorIllustrationSvg />}
+            illustration={<ErrorIllustrationSvg height={72} />}
             description={i18next.t('accounts.errorOnTokensText')}
             styles={{
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,
             }}
-          />
+          >
+            <LabelButton onPress={refetchTokens} textStyle={[styles.labelButtonText]}>
+              {i18next.t('commons.buttons.reload')}
+            </LabelButton>
+          </ResultScreen>
         )}
       />
     </View>

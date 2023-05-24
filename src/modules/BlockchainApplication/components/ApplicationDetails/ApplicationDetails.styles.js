@@ -12,9 +12,11 @@ export default {
     container: {
       paddingTop: safeAreaPaddingTop,
     },
+    resultScreenContainer: {
+      paddingBottom: safeAreaPaddingTop,
+    },
     header: {
       height: 230,
-      backgroundColor: colors.light.ultramarineBlue,
     },
     body: {
       flex: 1,
@@ -115,6 +117,9 @@ export default {
     logoContainer: {
       backgroundColor: colors.dark.whiteSmoke,
     },
+    header: {
+      backgroundColor: colors.light.ultramarineBlue,
+    },
     title: {
       color: colors.light.zodiacBlue,
     },
@@ -134,6 +139,9 @@ export default {
     },
     logoContainer: {
       backgroundColor: colors.dark.mainBg,
+    },
+    header: {
+      backgroundColor: colors.light.ultramarineBlue,
     },
     title: {
       color: colors.dark.white,

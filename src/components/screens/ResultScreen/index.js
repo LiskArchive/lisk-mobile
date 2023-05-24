@@ -14,7 +14,7 @@ export default function ResultScreen({
   title,
   description,
   onContinue,
-  buttonText,
+  continueButtonTitle,
   children,
   disabled,
   variant,
@@ -64,11 +64,12 @@ export default function ResultScreen({
         <View style={[styles.footer]} testID="result-screen-continue">
           <PrimaryButton
             noTheme
-            title={buttonText}
             style={[styles.continueButton]}
             onPress={onContinue}
             disabled={disabled}
-          />
+          >
+            {continueButtonTitle}
+          </PrimaryButton>
         </View>
       )}
     </SafeAreaView>

@@ -5,13 +5,16 @@
     "buttons": {
       "continue": "Continue",
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "reload": "Reload",
+      "viewAll": "View all"
     },
     "copyToClipboard": "Copy to clipboard"
   },
   "fallbackScreens" : {
     "error" : {
-      "description": "Something went wrong. Please try again later and if you are still experiencing problems then report the error via email.",
+      "title": "Something went wrong",
+      "description": "Please try again later and if you’re still experiencing problems, then report via email.",
       "retryButton": "Retry",
       "emailReportLabel": "Is the problem persisting?",
       "emailReportButton": "Report the error via email"
@@ -268,9 +271,10 @@
     "details": {
       "deposited": "Deposited",
       "chainID": "Chain ID",
-      "lastUpdated": "Last Updated",
+      "lastUpdated": "Last updated",
       "status": "Status",
-      "lastCertificateHeight": "Last Certificate Height"
+      "lastCertificateHeight": "Last certificate height",
+      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again."
     },
     "manage": {
       "add": {
@@ -471,7 +475,7 @@
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",
     "emptyTokenMessage": "You have no tokens on this account yet.",
-    "errorOnTokensText": "Error loading tokens!",
+    "errorOnTokensText": "Error loading your tokens.",
     "allTokens": "All Tokens",
     "buttons": {
       "viewAll": "View all",
@@ -509,7 +513,7 @@
       "header2ParamsLabel": "Header 2"
     },
     "transactionList": {
-      "errorText": "Error loading transactions!",
+      "errorText": "Error loading your transactions.",
       "emptyText": "You have no transactions on this account yet.",
       "title": "Transactions",
       "goToTransactionHistoryButtonText": "View all"
