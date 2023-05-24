@@ -27,7 +27,7 @@ export default function ErrorFallbackScreen(props) {
   const title = props.title || i18next.t('fallbackScreens.error.title');
   const description = props.description || i18next.t('fallbackScreens.error.description');
 
-  const emailReport = useEmailReport({ error: props.error, errorMessage: description });
+  const emailReport = useEmailReport({ error: props.error, errorMessage: props.description });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
