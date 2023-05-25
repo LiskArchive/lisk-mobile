@@ -22,10 +22,11 @@ const CameraOverlay = ({ styles, t, close, theme, toggleGallery }) => (
       />
       <P style={[styles.galleryDescription]}>{t('Scan a QR code.')}</P>
     </View>
-    <View>
+    <View style={styles.bottomContent}>
       <TouchableOpacity style={styles.galleryButton} onPress={toggleGallery}>
         <GallerySvg />
       </TouchableOpacity>
+      <P style={styles.gallery}>{t('auth.register.gallery')}</P>
     </View>
   </SafeAreaView>
 );

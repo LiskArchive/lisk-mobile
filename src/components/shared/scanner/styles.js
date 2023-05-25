@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 import {
   deviceHeight,
   deviceWidth,
@@ -27,6 +27,15 @@ export default () => ({
     },
     photoPreview: {
       zIndex: 100,
+    },
+    bottomContent: {
+      alignItems: 'center',
+    },
+    gallery: {
+      color: colors.light.white,
+      fontSize: fonts.size.base,
+      marginVertical: 10,
+      textAlign: 'center',
     },
     overlay: {
       flex: 1,

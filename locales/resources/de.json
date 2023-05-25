@@ -211,7 +211,8 @@
       },
       "error": {
         "invalidDerivationPath": ""
-      }
+      },
+      "gallery": "Gallery"
     },
     "setup": {
       "addAccountTitle": "Konto hinzufügen",
@@ -227,6 +228,7 @@
       "secretPhrase": "Geheime Wiederherstellungsphrase",
       "restoreFromFile": "Aus Datei wiederherstellen",
       "downloaded": "Heruntergeladen!",
+      "qrCodeError": "",
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",
         "saveAccountButton": "Konto speichern"
