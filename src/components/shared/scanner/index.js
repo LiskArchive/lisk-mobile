@@ -58,7 +58,7 @@ const Scanner = forwardRef(
       });
     }, []);
 
-    const imageSelectedError = () =>
+    const handleSelectedImageError = () =>
       DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.qrCodeError'));
 
     const readFromPhotoGallery = (items) => {
@@ -78,11 +78,11 @@ const Scanner = forwardRef(
             const { values } = response;
 
             if (!values.length) {
-              return imageSelectedError();
+              return handleSelectedImageError();
             }
             return onQRCodeRead(values[0]);
           })
-          .catch(() => imageSelectedError());
+          .catch(() => handleSelectedImageError());
       }
     };
 

@@ -209,6 +209,7 @@
       "error": {
         "invalidDerivationPath": "Entered derivation path is Invalid"
       },
+      "scanQR": "Scan QR Code",
       "gallery": "Gallery"
     },
     "setup": {

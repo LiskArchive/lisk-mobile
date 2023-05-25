@@ -212,6 +212,7 @@
       "error": {
         "invalidDerivationPath": ""
       },
+      "scanQR": "",
       "gallery": "Gallery"
     },
     "setup": {

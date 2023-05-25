@@ -31,7 +31,7 @@ export default () => ({
     bottomContent: {
       alignItems: 'center',
     },
-    gallery: {
+    galleryText: {
       color: colors.light.white,
       fontSize: fonts.size.base,
       marginVertical: 10,
@@ -50,9 +50,9 @@ export default () => ({
     },
     galleryButton: {
       backgroundColor: colors.light.inkBlue,
-      borderRadius: 40,
-      height: 80,
-      width: 80,
+      borderRadius: 35,
+      height: 70,
+      width: 70,
       bottom: 0,
       alignItems: 'center',
       justifyContent: 'center',
