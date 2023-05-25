@@ -529,6 +529,11 @@
       "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
     }
   },
+  "notFound": {
+    "title": "",
+    "description": "",
+    "continue": ""
+  },
   "tokens": {
     "errors": {
       "displayDenomNotFoundMessage": "",

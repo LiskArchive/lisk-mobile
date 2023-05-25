@@ -527,6 +527,11 @@
       "signErrorDescription": "Error signing your transaction. Please try again later."
     }   
   },
+  "notFound": {
+    "title": "Deeplink failed",
+    "description": "The page you’re trying to access cannot be found on the Lisk Mobile app. Please verify the link once more, click continue to Home to access the wallet.",
+    "continue": "Continue"
+  },
   "tokens": {
     "errors": {
       "displayDenomNotFoundMessage": "Display denomination not found on units.",

@@ -14,6 +14,7 @@ import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
+import NotFound from 'components/navigation/NotFound';
 
 import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
@@ -55,6 +56,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="Register"
             component={Register}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="NotFound"
+            component={NotFound}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
