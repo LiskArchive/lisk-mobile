@@ -6,7 +6,6 @@ export default function getNotFoundStyles() {
       container: {
         flex: 1,
         paddingTop: boxes.boxPadding,
-        paddingBottom: boxes.boxPadding,
       },
       title: {
         fontSize: fonts.size.h1,
