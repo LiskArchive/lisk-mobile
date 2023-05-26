@@ -7,13 +7,14 @@ import React, {
   useImperativeHandle,
   useCallback,
 } from 'react';
+import i18next from 'i18next';
 import { useModal } from 'hooks/useModal';
 import { AppState, SafeAreaView } from 'react-native';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
-import QRCode from '@remobile/react-native-qrcode-local-image';
+import DropDownHolder from 'utilities/alert';
 import { launchImageLibrary } from 'react-native-image-picker';
-
+import RNQRGenerator from 'rn-qr-generator';
 import CameraAccess from './cameraAccess';
 import CameraOverlay from './cameraOverlay';
 import withTheme from '../withTheme';
@@ -57,6 +58,9 @@ const Scanner = forwardRef(
       });
     }, []);
 
+    const handleSelectedImageError = () =>
+      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.qrCodeError'));
+
     const readFromPhotoGallery = (items) => {
       setCamera((prevState) => ({ ...prevState, visible: false }));
       setPhoto((prevState) => ({ ...prevState, visible: false }));
@@ -67,9 +71,18 @@ const Scanner = forwardRef(
       });
 
       if (items.length > 0) {
-        QRCode.decode(items[0].uri, (error, result) => {
-          onQRCodeRead(result);
-        });
+        RNQRGenerator.detect({
+          uri: items[0].uri,
+        })
+          .then((response) => {
+            const { values } = response;
+
+            if (!values.length) {
+              return handleSelectedImageError();
+            }
+            return onQRCodeRead(values[0]);
+          })
+          .catch(() => handleSelectedImageError());
       }
     };
 

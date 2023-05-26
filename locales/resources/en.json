@@ -211,7 +211,9 @@
       },
       "error": {
         "invalidDerivationPath": "Entered derivation path is Invalid"
-      }
+      },
+      "scanQR": "Scan QR Code",
+      "gallery": "Gallery"
     },
     "setup": {
       "addAccountTitle": "Add account",
@@ -230,6 +232,7 @@
       "restoreFromFileSuccessMessage": "File uploaded successfully.",
       "restoreFromFileErrorMessage": "Error uploading your file. Please try again.",
       "downloaded": "Downloaded!",
+      "qrCodeError": "QR Code not found.",
       "buttons": {
         "passwordSetupContinueButton": "Continue to wallet",
         "saveAccountButton": "Save account"

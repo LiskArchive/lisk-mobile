@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 import {
   deviceHeight,
   deviceWidth,
@@ -28,18 +28,32 @@ export default () => ({
     photoPreview: {
       zIndex: 100,
     },
-    cameraOverlay: {
-      backgroundColor: '#394451',
-      opacity: 0.85,
+    bottomContent: {
+      alignItems: 'center',
+    },
+    galleryText: {
+      color: colors.light.white,
+      fontSize: fonts.size.base,
+      marginVertical: 10,
+      textAlign: 'center',
+    },
+    overlay: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    headerContainer: {
       paddingLeft: 20,
       paddingRight: 20,
       flexDirection: 'row',
       alignItems: 'center',
     },
     galleryButton: {
-      borderRadius: 4,
-      height: 48,
-      width: 48,
+      backgroundColor: colors.light.inkBlue,
+      borderRadius: 35,
+      height: 70,
+      width: 70,
+      bottom: 0,
       alignItems: 'center',
       justifyContent: 'center',
     },
