@@ -359,7 +359,7 @@
         "title": "Disconnect Application",
         "disconnectingFirst": "Disconnecting the ",
         "disconnectingSecond": "application removes your wallet details from the site.",
-        "disconnect": "Disconnect",
+        "disconnect": "Disconnect"
       }
     }
   },
