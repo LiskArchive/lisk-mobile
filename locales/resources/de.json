@@ -529,10 +529,9 @@
       "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
     }
   },
-  "notFound": {
+  "deepLinkNotFound": {
     "title": "",
     "description": "",
-    "continue": ""
   },
   "tokens": {
     "errors": {

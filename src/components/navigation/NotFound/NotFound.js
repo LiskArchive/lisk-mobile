@@ -15,7 +15,7 @@ const NotFound = ({ onContinue }) => {
         {i18next.t('notFound.description')}
       </Text>
       <PrimaryButton style={styles.button} onPress={onContinue}>
-        {i18next.t('notFound.continue')}
+        {i18next.t('commons.buttons.continue')}
       </PrimaryButton>
     </View>
   );
