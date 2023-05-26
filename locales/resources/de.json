@@ -356,6 +356,12 @@
         "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
         "copiedToClipboardButtonText": "Kopiert",
         "errorButtonText": "Weiterleitung zur App-Site"
+      },
+      "disconnect": {
+        "title": "",
+        "disconnectingFirst": "",
+        "disconnectingSecond": "",
+        "disconnect": ""
       }
     }
   },

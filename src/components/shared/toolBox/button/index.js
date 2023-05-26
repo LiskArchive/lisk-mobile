@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { TouchableHighlight, TouchableOpacity, Text } from 'react-native';
+import { TouchableHighlight, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import { colors } from 'constants/styleGuide';
 import getStyles from './styles';
 import Icon from '../icon';
@@ -20,6 +20,8 @@ const BaseButton = (props) => {
     onClick,
     onPress,
     adornments,
+    isLoading,
+    spinnerColor = colors.light.white,
   } = props;
 
   return (
@@ -35,11 +37,15 @@ const BaseButton = (props) => {
     >
       {adornments?.left}
 
-      <Text
-        style={[noPredefinedStyle ? null : styles.buttonText, styles.theme.buttonText, textStyle]}
-      >
-        {children || title}
-      </Text>
+      {isLoading ? (
+        <ActivityIndicator style={styles.spinner} color={spinnerColor} size="small" />
+      ) : (
+        <Text
+          style={[noPredefinedStyle ? null : styles.buttonText, styles.theme.buttonText, textStyle]}
+        >
+          {children || title}
+        </Text>
+      )}
 
       {adornments?.right}
     </TouchableOpacity>

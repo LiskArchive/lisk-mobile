@@ -198,8 +198,9 @@ export default function PasswordSetupForm({
           onPress={encryptAccount}
           disabled={!isAgreedField.value || isLoading}
           testID="save-account"
+          isLoading
         >
-          {isLoading ? 'Loading...' : i18next.t('auth.setup.buttons.saveAccountButton')}
+          {i18next.t('auth.setup.buttons.saveAccountButton')}
         </PrimaryButton>
       </View>
     </SafeAreaView>

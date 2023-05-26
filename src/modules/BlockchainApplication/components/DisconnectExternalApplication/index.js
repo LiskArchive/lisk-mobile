@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import i18next from 'i18next';
 
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
@@ -41,13 +42,16 @@ export default function DisconnectExternalApplication({
   return (
     <View style={[styles.container, styles.theme.container]}>
       <View style={[styles.header]}>
-        <H3 style={[styles.title, styles.theme.title]}>Disconnect application?</H3>
+        <H3 style={[styles.title, styles.theme.title]}>
+          {i18next.t('externalApplicationSignatureRequest.disconnect.title')}
+        </H3>
       </View>
 
       <View style={[styles.body]}>
         <P style={[styles.text, styles.theme.text]}>
-          Disconnecting the <B>“{application.peerMetadata.name}”</B> application removes your wallet
-          details from the site.
+          {i18next.t('externalApplicationSignatureRequest.disconnect.disconnectingFirst')}{' '}
+          <B>“{application.peerMetadata.name}”</B>{' '}
+          {i18next.t('externalApplicationSignatureRequest.disconnect.disconnectingSecond')}
         </P>
       </View>
 
@@ -55,12 +59,13 @@ export default function DisconnectExternalApplication({
         style={{ marginBottom: 16 }}
         onClick={handleDisconnectClick}
         disabled={isLoading}
+        isLoading
       >
-        {!isLoading ? 'Disconnect' : 'Loading...'}
+        {i18next.t('externalApplicationSignatureRequest.disconnect.disconnect')}
       </PrimaryButton>
 
       <Button style={{ marginBottom: 16 }} onClick={onCancel}>
-        Cancel
+        {i18next.t('commons.buttons.cancel')}
       </Button>
     </View>
   );
