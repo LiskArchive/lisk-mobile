@@ -538,6 +538,10 @@
       "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
     }
   },
+  "deepLinkNotFound": {
+    "title": "",
+    "description": ""
+  },
   "tokens": {
     "errors": {
       "displayDenomNotFoundMessage": "",

@@ -1,6 +1,7 @@
 const navigationLinkingConfig = {
   screens: {
     Send: 'wallet',
+    NotFound: '*',
   },
 };
 
