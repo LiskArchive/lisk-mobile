@@ -7,6 +7,9 @@ export default () => ({
       fontFamily: fonts.family.context,
       textAlign: 'center',
     },
+    spinner: {
+      padding: 13,
+    },
     iconButton: {
       minWidth: 40,
       height: 30,

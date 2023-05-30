@@ -68,6 +68,7 @@ export default function SignTransactionError({ onClick, error, title, descriptio
       <LabelButton
         onClick={emailReport.handleSend}
         disabled={emailReport.isLoading || emailReport.error}
+        isLoading={emailReport.isLoading}
       >
         {i18next.t('sendToken.result.error.reportErrorButtonText')}
       </LabelButton>

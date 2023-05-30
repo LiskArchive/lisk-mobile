@@ -49,10 +49,12 @@ export default function BridgeApplicationByQr({ nextStep, uri }) {
         )}
       </View>
 
-      <PrimaryButton disabled={!uri || status.isLoading} onPress={handleSubmit}>
-        {status.isLoading
-          ? 'Loading...'
-          : i18next.t('application.explore.externalApplicationList.addApplication')}
+      <PrimaryButton
+        disabled={!uri || status.isLoading}
+        onPress={handleSubmit}
+        isLoading={status.isLoading}
+      >
+        {i18next.t('application.explore.externalApplicationList.addApplication')}
       </PrimaryButton>
     </View>
   );

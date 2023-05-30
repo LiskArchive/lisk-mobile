@@ -354,6 +354,12 @@
         "copyToClipboardButtonText": "Copy and redirect to application site",
         "copiedToClipboardButtonText": "Copied",
         "errorButtonText": "Redirect to application site"
+      },
+      "disconnect": {
+        "title": "Disconnect Application",
+        "disconnectingFirst": "Disconnecting the ",
+        "disconnectingSecond": "application removes your wallet details from the site.",
+        "disconnect": "Disconnect"
       }
     }
   },
