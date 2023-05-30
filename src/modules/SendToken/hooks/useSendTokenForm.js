@@ -98,8 +98,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     dependencies: [recipientAddress, tokenID, amount],
   });
 
-  // console.log(transaction);
-
   const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
     recipientApplicationChainID,
     { options: { enabled: isCrossChainTransfer } }
