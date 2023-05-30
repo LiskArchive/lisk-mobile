@@ -7,7 +7,6 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
-import { usePriorityFee } from 'modules/Transactions/hooks/usePriorityFee';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
@@ -249,27 +248,21 @@ export function SendTokenMessageField({ value, onChange, style }) {
   );
 }
 
-export function SendTokenPriorityField({ value, onChange, style }) {
-  const {
-    data: priorityFeesData,
-    isLoading: isTransactionFeeEstimateLoading,
-    error: errorOnTransactionFeeEstimate,
-  } = usePriorityFee();
-
+export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, style }) {
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
   });
 
-  const priorities =
-    priorityFeesData &&
-    Object.entries(priorityFeesData).map(([code, fee]) => ({
-      code,
-      fee,
-    }));
+  const priorities = dynamicFeeEstimates
+    ? Object.entries(dynamicFeeEstimates).map(([code, fee]) => ({
+        code,
+        fee,
+      }))
+    : [];
 
-  const shouldRender = priorities?.reduce((acc, priority) => acc && priority.fee > 0, true);
+  const feesAreEqual = priorities?.every((priority) => priority.fee === priorities[0].fee);
 
-  if (!shouldRender) return null;
+  if (feesAreEqual) return null;
 
   return (
     <View style={{ marginBottom: 16 }}>
@@ -284,36 +277,29 @@ export function SendTokenPriorityField({ value, onChange, style }) {
         />
       </View>
 
-      <DataRenderer
-        data={priorities}
-        isLoading={isTransactionFeeEstimateLoading}
-        error={errorOnTransactionFeeEstimate}
-        renderData={(data) => (
-          <View style={[styles.row, { width: '100%' }]}>
-            {data.map((priority) => (
-              <TouchableOpacity
-                key={priority.code}
-                onPress={() => onChange(priority.code)}
-                style={[
-                  styles.priorityButtonBase,
-                  styles[
-                    value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
-                  ],
-                  { marginRight: 8 },
-                ]}
-              >
-                <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
-                  {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
-                </Text>
+      <View style={[styles.row, { width: '100%' }]}>
+        {priorities?.map((priority) => (
+          <TouchableOpacity
+            key={priority.code}
+            onPress={() => onChange(priority.code)}
+            style={[
+              styles.priorityButtonBase,
+              styles[
+                value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
+              ],
+              { marginRight: 8 },
+            ]}
+          >
+            <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
+              {i18next.t(PRIORITY_NAMES_MAP[priority.code])}
+            </Text>
 
-                <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
-                  {priority.fee} LSK
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-      />
+            <Text style={[styles.priorityButtonFeeText, styles.theme.priorityButtonFeeText]}>
+              {fromBeddowsToLsk(priority.fee, true)}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 }
@@ -333,7 +319,7 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
     transaction.data.transaction.params.messageFee &&
     fromBeddowsToLsk(transaction.data.transaction.params.messageFee, true);
 
-  const feesBreakdown = transaction.data.getFeeBreakdown();
+  const feesBreakdown = transaction.data.getFeesBreakdown();
 
   const feesLabels = Object.entries(feesBreakdown).reduce(
     (acc, [feeKey, feeValue]) =>
@@ -352,7 +338,8 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
     {}
   );
 
-  const shouldShowFeeBreakdown = Object.keys(feesLabels).length > 2;
+  const shouldShowFeeBreakdown =
+    feesBreakdown.priorityFee > feesBreakdown.minFee || !!feesBreakdown.extraCommandFee;
 
   return (
     <View>
@@ -398,10 +385,10 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
 
           <View style={[styles.feeBreakdownRow]}>
             <Text style={[styles.secondaryText, styles.iconLabel]}>
-              {i18next.t('sendToken.tokenSelect.bytesFeeLabel')}
+              {i18next.t('sendToken.tokenSelect.minFeeLabel')}
             </Text>
 
-            <Text style={[styles.theme.text]}>{feesLabels.byteFee}</Text>
+            <Text style={[styles.theme.text]}>{feesLabels.minFee}</Text>
           </View>
 
           {feesLabels.priorityFee && (

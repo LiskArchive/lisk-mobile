@@ -409,7 +409,7 @@
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
       "transactionFeeBreakdownText": "Fee breakdown",
-      "bytesFeeLabel": "Minimum fee",      
+      "minFeeLabel": "Minimum fee",      
       "priorityFeeLabel": "Network priority",
       "extraCommandFeeLabel": "Account initialization",
       "messageFeeLabel": "Message fee"

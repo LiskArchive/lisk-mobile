@@ -99,6 +99,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <SendTokenPriorityField
         value={priorityField.value}
         onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
+        dynamicFeeEstimates={transaction?.data?.dynamicFeeEstimates}
       />
 
       {tokenIDField.value && (

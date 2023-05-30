@@ -212,7 +212,10 @@ export class Transaction {
     this.extraCommandFee = BigInt(extraCommandFee);
     this.dynamicFeeEstimates = dynamicFeeEstimates;
 
-    const fee = this.minFee + this.extraCommandFee;
+    const priorityFee = this._getPriorityFee();
+    const baseFee = priorityFee > this.minFee ? priorityFee : this.minFee;
+
+    const fee = baseFee + this.extraCommandFee;
 
     this.transaction = { ...this.transaction, fee };
 
@@ -220,16 +223,16 @@ export class Transaction {
   }
 
   /**
-   * Breakdowns the transaction fee into priorityFee, byteFee and extraCommandFee.
-   * @returns {Object} priorityFee, byteFee and extraCommandFee.
+   * Breakdowns the transaction fee into totalFee, priorityFee, minFee and extraCommandFee.
+   * @returns {Object} totalFee, priorityFee, minFee and extraCommandFee.
    */
-  getFeeBreakdown() {
+  getFeesBreakdown() {
     const totalFee = this.transaction.fee;
     const priorityFee = this._getPriorityFee();
     const extraCommandFee = this.extraCommandFee;
-    const byteFee = this.minFee;
+    const minFee = this.minFee;
 
-    return { totalFee, priorityFee, byteFee, extraCommandFee };
+    return { totalFee, priorityFee, minFee, extraCommandFee };
   }
 
   /**
