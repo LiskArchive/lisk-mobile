@@ -10,7 +10,6 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
-import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
@@ -21,6 +20,7 @@ import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChain
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
+import { useTransactionFees } from '../../Transactions/hooks/useTransactionFees';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -87,20 +87,23 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const tokenID = form.watch('tokenID');
   const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
   const command = form.watch('command');
+  const amount = form.watch('amount');
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
+
+  useTransactionFees({
+    transaction,
+    isTransactionSuccess,
+    isCrossChainTransfer,
+    dependencies: [recipientAddress, tokenID, amount],
+  });
+
+  // console.log(transaction);
 
   const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
     recipientApplicationChainID,
     { options: { enabled: isCrossChainTransfer } }
   );
-
-  const { data: initializationFeeData, refetch: refetchInitializationFee } = useInitializationFee({
-    address: recipientAddress,
-    tokenID,
-    enabled: false,
-    isCrossChainTransfer,
-  });
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -159,6 +162,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         const signedTransaction = await transaction.sign(privateKey);
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
+
+        console.log('on the end: ', transaction);
 
         dryRunTransactionMutation.mutate(
           { transaction: encodedTransaction },
@@ -247,7 +252,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       recipientApplicationChainChannelData?.data?.messageFeeTokenID
     ) {
       // TODO: Fix the message fee computation based on bytes of the params
-      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1801)
       const messageFee = BigInt(messageFeeData.data.fee) * BigInt(10 ** 5);
       transaction.update({
         command: 'transferCrossChain',
@@ -275,31 +279,19 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     isTransactionSuccess,
   ]);
 
-  useEffect(() => {
-    if (!isTransactionSuccess) {
-      return;
-    }
-
-    if (recipientAddress && tokenID) {
-      refetchInitializationFee();
-    }
-
-    if (recipientAddress && tokenID && initializationFeeData !== undefined) {
-      transaction.update({ extraCommandFee: initializationFeeData });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTransactionSuccess, tokenID, recipientAddress, initializationFeeData]);
-
   const isLoading =
     form.formState.isSubmitting ||
     dryRunTransactionMutation.isLoading ||
     broadcastTransactionMutation.isLoading;
+
   const isSuccess = broadcastTransactionMutation.isSuccess;
+
   const error =
     dryRunTransactionMutation.error ||
     (dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
     broadcastTransactionMutation.error;
+
   const isError = !!error;
 
   return {

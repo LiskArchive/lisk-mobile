@@ -8,7 +8,6 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
 
 import { Transaction } from '../utils/Transaction';
-import { usePriorityFee } from './usePriorityFee';
 
 /**
  * Creates a transaction object with all required build-in
@@ -44,23 +43,11 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
     isError: isErrorOnCommandParametersSchemas,
   } = useCommandParametersSchemasQuery();
 
-  const {
-    data: priorityFeeData,
-    isSuccess: isPriorityFeeSuccess,
-    isError: isErrorPriorityFee,
-  } = usePriorityFee();
-
   const isInitDataSuccess =
-    isNetworkStatusSuccess &&
-    isAuthSuccess &&
-    isCommandParametersSchemasSuccess &&
-    isPriorityFeeSuccess;
+    isNetworkStatusSuccess && isAuthSuccess && isCommandParametersSchemasSuccess;
 
   const isErrorOnInitData =
-    isErrorOnNetworkStatus ||
-    isErrorOnAuth ||
-    isErrorOnCommandParametersSchemas ||
-    isErrorPriorityFee;
+    isErrorOnNetworkStatus || isErrorOnAuth || isErrorOnCommandParametersSchemas;
 
   const baseSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
@@ -72,7 +59,6 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
             pubkey,
             networkStatus: networkStatusData?.data,
             auth: authData,
-            priorityFee: priorityFeeData,
             commandParametersSchemas: commandParametersSchemasData?.data.commands,
             module,
             command,
