@@ -10,16 +10,21 @@ export function useTransactionFees({ transaction, isTransactionSuccess, dependen
   });
 
   const estimateFeesMutation = useTransactionEstimateFeesMutation({
-    options: {
-      cacheTime: 0,
-      staleTime: 0,
-    },
     onSuccess: (data) => {
       let updates = {};
 
       if (data.transactionFeeEstimates.accountInitializationFee) {
         updates = {
           extraCommandFee: data.transactionFeeEstimates.accountInitializationFee.amount,
+        };
+      }
+
+      if (data.transactionFeeEstimates.messageFee) {
+        updates = {
+          params: {
+            messageFee: data.transactionFeeEstimates.messageFee.amount,
+            messageFeeTokenID: data.transactionFeeEstimates.messageFee.tokenID,
+          },
         };
       }
 

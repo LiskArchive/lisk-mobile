@@ -12,15 +12,13 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
-import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
+import { useTransactionFees } from 'modules/Transactions/hooks/useTransactionFees';
 import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
-import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
-import { useTransactionFees } from '../../Transactions/hooks/useTransactionFees';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -31,8 +29,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     data: applicationSupportedTokensData,
     isSuccess: isSuccessApplicationSupportedTokensData,
   } = useApplicationSupportedTokensQuery(currentApplication.data);
-
-  const { data: messageFeeData } = useMessageFee();
 
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
@@ -94,14 +90,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   useTransactionFees({
     transaction,
     isTransactionSuccess,
-    isCrossChainTransfer,
     dependencies: [recipientAddress, tokenID, amount],
   });
 
-  const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
-    recipientApplicationChainID,
-    { options: { enabled: isCrossChainTransfer } }
-  );
+  console.log(transaction);
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -161,8 +153,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
         const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
 
-        console.log('on the end: ', transaction);
-
         dryRunTransactionMutation.mutate(
           { transaction: encodedTransaction },
           {
@@ -201,6 +191,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       const defaultTokenID = applicationSupportedTokensData[0]?.tokenID;
 
       if (defaultTokenID) {
+        console.log('reseting token id to: ', defaultTokenID);
+
         transaction.update({
           params: {
             tokenID: defaultTokenID,
@@ -244,18 +236,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       return;
     }
 
-    if (
-      isCrossChainTransfer &&
-      messageFeeData?.data?.fee &&
-      recipientApplicationChainChannelData?.data?.messageFeeTokenID
-    ) {
-      // TODO: Fix the message fee computation based on bytes of the params
-      const messageFee = BigInt(messageFeeData.data.fee) * BigInt(10 ** 5);
+    if (isCrossChainTransfer) {
       transaction.update({
         command: 'transferCrossChain',
         params: {
-          messageFee,
-          messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
           receivingChainID: recipientApplicationChainID,
         },
       });
@@ -268,14 +252,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       form.setValue('command', 'transfer');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    isCrossChainTransfer,
-    recipientApplicationChainChannelData?.data?.messageFeeTokenID,
-    messageFeeData?.data?.fee,
-    recipientApplicationChainID,
-    transaction,
-    isTransactionSuccess,
-  ]);
+  }, [isCrossChainTransfer, recipientApplicationChainID, transaction, isTransactionSuccess]);
 
   const isLoading =
     form.formState.isSubmitting ||
