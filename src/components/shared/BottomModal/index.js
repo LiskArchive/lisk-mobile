@@ -76,7 +76,7 @@ const BottomModal = ({ style }) => {
           same orientation because it can break windowing and other functionality.
           (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
           */}
-              <ScrollView>{component}</ScrollView>
+              <ScrollView style={[style?.children]}>{component}</ScrollView>
             </View>
           </SafeAreaView>
         </Animated.View>
