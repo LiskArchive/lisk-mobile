@@ -228,11 +228,11 @@ export class Transaction {
    */
   getFeesBreakdown() {
     const totalFee = this.transaction.fee;
+    const minFee = this.minFee;
     const priorityFee = this._getPriorityFee();
     const extraCommandFee = this.extraCommandFee;
-    const minFee = this.minFee;
 
-    return { totalFee, priorityFee, minFee, extraCommandFee };
+    return { totalFee, minFee, priorityFee, extraCommandFee };
   }
 
   /**
