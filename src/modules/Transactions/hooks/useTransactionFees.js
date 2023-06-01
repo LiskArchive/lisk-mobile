@@ -1,11 +1,22 @@
+/* eslint-disable max-statements */
 import { useEffect } from 'react';
 import * as Lisk from '@liskhq/lisk-client';
 
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
 import useTransactionEstimateFeesMutation from '../api/useTransactionEstimateFeesMutation';
 
-export function useTransactionFees({ transaction, isTransactionSuccess, dependencies = [] }) {
-  const { data: commandParametersSchemasData } = useCommandParametersSchemasQuery({
+export function useTransactionFees({
+  transaction,
+  isTransactionSuccess,
+  dependencies = [],
+  onSuccess,
+  onError,
+}) {
+  const {
+    data: commandParametersSchemasData,
+    isLoading: isLoadingCommandParametersSchemas,
+    isErrorCommandParametersSchemas,
+  } = useCommandParametersSchemasQuery({
     options: { enabled: isTransactionSuccess },
   });
 
@@ -37,10 +48,12 @@ export function useTransactionFees({ transaction, isTransactionSuccess, dependen
       }
 
       transaction.update(updates);
+
+      if (onSuccess) {
+        onSuccess(data);
+      }
     },
-    onError: (error) => {
-      console.log('mutationError', error);
-    },
+    onError,
   });
 
   const transactionSchema = commandParametersSchemasData?.data?.commands.find(
@@ -65,8 +78,6 @@ export function useTransactionFees({ transaction, isTransactionSuccess, dependen
 
   const areParamsValid = validateParams();
 
-  //   console.log({ areParamsValid, isTransactionSuccess });
-
   useEffect(() => {
     if (isTransactionSuccess && areParamsValid) {
       // eslint-disable-next-line no-unused-vars
@@ -78,4 +89,10 @@ export function useTransactionFees({ transaction, isTransactionSuccess, dependen
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTransactionSuccess, areParamsValid, ...dependencies]);
+
+  return {
+    data: estimateFeesMutation.data,
+    isLoading: isLoadingCommandParametersSchemas || estimateFeesMutation.isLoading,
+    isError: isErrorCommandParametersSchemas || estimateFeesMutation.isError,
+  };
 }

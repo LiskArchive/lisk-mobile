@@ -87,13 +87,12 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
-  useTransactionFees({
-    transaction,
-    isTransactionSuccess,
-    dependencies: [recipientAddress, tokenID, amount],
-  });
-
-  console.log(transaction);
+  const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
+    useTransactionFees({
+      transaction,
+      isTransactionSuccess,
+      dependencies: [recipientAddress, tokenID, amount],
+    });
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -191,8 +190,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       const defaultTokenID = applicationSupportedTokensData[0]?.tokenID;
 
       if (defaultTokenID) {
-        console.log('reseting token id to: ', defaultTokenID);
-
         transaction.update({
           params: {
             tokenID: defaultTokenID,
@@ -241,6 +238,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         command: 'transferCrossChain',
         params: {
           receivingChainID: recipientApplicationChainID,
+          // TODO: Waiting https://github.com/LiskHQ/lisk-service/issues/1669 to be solved
+          // so can be handled by useTransactionFees hook.
+          messageFee: 0,
+          messageFeeTokenID: tokenID,
         },
       });
 
@@ -282,5 +283,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     error,
     isError,
     command,
+    isLoadingTransactionFees,
+    isErrorTransactionFees,
   };
 }

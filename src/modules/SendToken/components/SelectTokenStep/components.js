@@ -304,7 +304,13 @@ export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, s
   );
 }
 
-export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, transaction }) {
+export function SendTokenTransactionFeesLabels({
+  tokenID,
+  recipientApplication,
+  transaction,
+  isLoadingTransactionFees,
+  isErrorTransactionFees,
+}) {
   const [showFeesBreakdown, setShowFeesBreakdown] = useState(false);
 
   const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
@@ -362,6 +368,30 @@ export function SendTokenTransactionFeesLabels({ tokenID, recipientApplication, 
     fromBeddowsToLsk(transaction.data.transaction.params.messageFee, true);
 
   const shouldShowFeeBreakdown = !!priorityFee || !!extraCommandFee;
+
+  if (isLoadingTransactionFees) {
+    return (
+      <View style={[styles.feeContainer]}>
+        <View style={[styles.row]}>
+          <Text style={[styles.theme.text, styles.iconLabel, showFeesBreakdown && styles.boldText]}>
+            {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
+          </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.transactionFee.title')}
+            description={i18next.t('sendToken.info.transactionFee.description1')}
+          />
+        </View>
+
+        <Skeleton height={16} width={80} />
+      </View>
+    );
+  }
+
+  if (isErrorTransactionFees) {
+    // TODO: Add UI when designs are available.
+    return <Text>Error!</Text>;
+  }
 
   return (
     <View>

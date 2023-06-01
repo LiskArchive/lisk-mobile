@@ -107,6 +107,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
           tokenID={tokenIDField.value}
           recipientApplication={recipientApplication}
           transaction={transaction}
+          isLoadingTransactionFees={form.isLoadingTransactionFees}
+          isErrorTransactionFees={form.isErrorTransactionFees}
         />
       )}
       <View style={[styles.footer]}>
