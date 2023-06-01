@@ -65,6 +65,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         fontWeight: '200',
         paddingTop: 6,
         paddingBottom: 6,
+        marginRight: 8,
       },
       notSelectedPriorityButton: {
         borderColor: colors.light.platinumGray,

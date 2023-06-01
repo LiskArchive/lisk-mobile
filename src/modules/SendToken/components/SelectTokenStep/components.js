@@ -260,7 +260,7 @@ export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, s
       }))
     : [];
 
-  const feesAreEqual = priorities?.every((priority) => priority.fee === priorities[0].fee);
+  const feesAreEqual = priorities.every((priority) => priority.fee === priorities[0].fee);
 
   if (feesAreEqual) return null;
 
@@ -278,7 +278,7 @@ export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, s
       </View>
 
       <View style={[styles.row, { width: '100%' }]}>
-        {priorities?.map((priority) => (
+        {priorities.map((priority) => (
           <TouchableOpacity
             key={priority.code}
             onPress={() => onChange(priority.code)}
@@ -287,7 +287,6 @@ export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, s
               styles[
                 value === priority.code ? 'selectedPriorityButton' : 'notSelectedPriorityButton'
               ],
-              { marginRight: 8 },
             ]}
           >
             <Text style={[styles.priorityButtonText, styles.theme.priorityButtonText]}>
