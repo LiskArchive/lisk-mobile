@@ -32,6 +32,7 @@ export function useTransactionFees({
 
       if (data.transactionFeeEstimates.messageFee) {
         updates = {
+          ...updates,
           params: {
             messageFee: data.transactionFeeEstimates.messageFee.amount,
             messageFeeTokenID: data.transactionFeeEstimates.messageFee.tokenID,

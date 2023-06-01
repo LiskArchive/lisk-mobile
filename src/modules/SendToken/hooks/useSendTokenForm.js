@@ -91,7 +91,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     useTransactionFees({
       transaction,
       isTransactionSuccess,
-      dependencies: [recipientAddress, tokenID, amount],
+      dependencies: [recipientAddress, tokenID, amount, isCrossChainTransfer],
     });
 
   const handleChange = (field, value, onChange) => {
@@ -240,8 +240,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
           receivingChainID: recipientApplicationChainID,
           // TODO: Waiting https://github.com/LiskHQ/lisk-service/issues/1669 to be solved
           // so can be handled by useTransactionFees hook.
-          messageFee: 0,
-          messageFeeTokenID: tokenID,
+          messageFee: '10000000',
+          messageFeeTokenID: '0400000000000000',
         },
       });
 
