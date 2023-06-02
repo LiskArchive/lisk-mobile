@@ -5,7 +5,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-import Scanner from 'components/shared/_Scanner/Scanner';
+import Scanner from 'components/shared/Scanner/Scanner';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import { useSelector } from 'react-redux';

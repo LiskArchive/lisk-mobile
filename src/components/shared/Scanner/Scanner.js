@@ -15,8 +15,8 @@ import { RNCamera } from 'react-native-camera';
 import DropDownHolder from 'utilities/alert';
 import { launchImageLibrary } from 'react-native-image-picker';
 import RNQRGenerator from 'rn-qr-generator';
-import CameraAccess from './_CameraAccess';
-import CameraOverlay from './_CameraOverlay';
+import CameraAccess from './CameraAccess';
+import CameraOverlay from './CameraOverlay';
 import withTheme from '../withTheme';
 import getStyles from './Scanner.styles';
 

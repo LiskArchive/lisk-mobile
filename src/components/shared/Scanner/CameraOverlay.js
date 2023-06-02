@@ -10,7 +10,7 @@ import { IconButton } from '../toolBox/button';
 import { P } from '../toolBox/typography';
 import getStyles from './Scanner.styles';
 
-const CameraOverlay = ({ close, toggleGallery }) => {
+export default function CameraOverlay({ close, toggleGallery }) {
   const { styles, theme } = useTheme({ styles: getStyles() });
   return (
     <SafeAreaView style={styles.overlay}>
@@ -32,6 +32,4 @@ const CameraOverlay = ({ close, toggleGallery }) => {
       </View>
     </SafeAreaView>
   );
-};
-
-export default CameraOverlay;
+}

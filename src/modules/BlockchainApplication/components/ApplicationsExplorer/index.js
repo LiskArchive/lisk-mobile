@@ -9,7 +9,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import Scanner from 'components/shared/_Scanner/Scanner';
+import Scanner from 'components/shared/Scanner/Scanner';
 import { IconButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import Tabs from 'components/shared/Tabs';
