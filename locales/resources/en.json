@@ -44,7 +44,6 @@
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
   "Label": "Label",
-  "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
   "New bookmark": "New bookmark",
   "No internet connection!": "No internet connection!",
@@ -555,5 +554,9 @@
       "displayDenomNotFoundMessage": "Display denomination not found on units.",
       "maxDecimalPointExceededMessage": "Maximum allowed decimal point is {{conversionDecimals}}"
     }
+  },
+  "scanner" : {
+    "cameraAccessTitle": "Allow camera access",
+    "cameraAccessDescription": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings."
   }
 }

@@ -22,7 +22,7 @@ export default function CameraAccess({ close, fullScreen }) {
       style={[
         styles.permissionRequestWrapper,
         styles.theme.permissionRequestWrapper,
-        fullScreen ? styles.fillScreen : null,
+        fullScreen && styles.fillScreen,
       ]}
     >
       <>
@@ -37,12 +37,11 @@ export default function CameraAccess({ close, fullScreen }) {
         )}
 
         <H4 style={[styles.permissionTitle, styles.theme.permissionTitle]}>
-          {i18next.t('Allow camera access')}
+          {i18next.t('scanner.cameraAccessTitle')}
         </H4>
+
         <P style={[styles.permissionDescription, styles.theme.permissionDescription]}>
-          {i18next.t(
-            'Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.'
-          )}
+          {i18next.t('scanner.cameraAccessDescription')}
         </P>
       </>
     </TouchableHighlight>

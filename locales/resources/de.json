@@ -45,7 +45,6 @@
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
   "Label": "Bezeichnung",
-  "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk benötigt Zugriff auf deine Kamera, um QR Codes zu scannen. Tippe hier, um zu den Einstellungen zu gelangen.",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
   "New bookmark": "Neues Lesezeichen",
   "No internet connection!": "Keine Internetverbindung!",
@@ -557,5 +556,9 @@
       "displayDenomNotFoundMessage": "",
       "maxDecimalPointExceededMessage": ""
     }
+  },
+  "scanner" : {
+    "cameraAccessTitle": "Erlauben Sie den Kamerazugriff",
+    "cameraAccessDescription": "Lisk muss zum Scannen von QR-Codes auf Ihre Kamera zugreifen. Tippen Sie auf das Symbol oben, um zu den Einstellungen zu gelangen."
   }
 }
