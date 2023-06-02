@@ -17,7 +17,7 @@ import DropDownHolder from 'utilities/alert';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
-import Scanner from 'components/shared/scanner';
+import Scanner from 'components/shared/_Scanner/Scanner';
 import { P, Small } from 'components/shared/toolBox/typography';
 import { selectBookmarkList } from '../store/selectors';
 import { addBookmark, editBookmark } from '../store/actions';

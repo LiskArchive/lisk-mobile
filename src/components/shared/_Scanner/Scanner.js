@@ -15,10 +15,10 @@ import { RNCamera } from 'react-native-camera';
 import DropDownHolder from 'utilities/alert';
 import { launchImageLibrary } from 'react-native-image-picker';
 import RNQRGenerator from 'rn-qr-generator';
-import CameraAccess from './cameraAccess';
-import CameraOverlay from './cameraOverlay';
+import CameraAccess from './_CameraAccess';
+import CameraOverlay from './_CameraOverlay';
 import withTheme from '../withTheme';
-import getStyles from './styles';
+import getStyles from './Scanner.styles';
 
 const Scanner = forwardRef(
   (
