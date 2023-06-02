@@ -37,9 +37,7 @@ export default function AccountDetails({ account }) {
     data: accountCanSendTokensData,
     isLoading: isLoadingAccountCanSendTokens,
     isError: isErrorAccountCanSendTokens,
-  } = useAccountCanSendTokens(
-    !isCurrentAccount ? currentAccount.metadata.address : account.address
-  );
+  } = useAccountCanSendTokens(currentAccount.metadata.address);
 
   const disableSendTokenButton =
     !accountCanSendTokensData || isLoadingAccountCanSendTokens || isErrorAccountCanSendTokens;
