@@ -1,12 +1,13 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import { ScrollView, View, ImageBackground, Image, Linking } from 'react-native';
+import { ScrollView, View, Image, Linking } from 'react-native';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
@@ -15,10 +16,9 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H3, P, A } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
-import wavesPattern from 'assets/images/waves_pattern_large.png';
+import WavesPatternSvg from 'assets/svgs/WavesPatternSvg';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
-import { isColorBright } from 'utilities/colors.utils';
 import { colors } from 'constants/styleGuide';
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
@@ -63,11 +63,6 @@ export default function ApplicationDetails({ route }) {
 
   const handleUrlPress = (url) => Linking.openURL(url);
 
-  const isBrightBackground =
-    application?.backgroundColor && isColorBright(application.backgroundColor);
-
-  const buttonColor = isBrightBackground ? colors.dark.headerBg : colors.light.white;
-
   return (
     <View style={[styles.flex, styles.theme.container]}>
       <DataRenderer
@@ -77,20 +72,20 @@ export default function ApplicationDetails({ route }) {
         renderData={(data) => (
           <ScrollView>
             {variant === 'explore' && (
-              <ImageBackground
-                style={[
-                  styles.header,
-                  styles.theme.header,
-                  styles.container,
-                  data.backgroundColor && {
-                    backgroundColor: data.backgroundColor,
-                  },
-                ]}
-                source={wavesPattern}
-                resizeMode="cover"
+              <LinearGradient
+                colors={[colors.light.ultramarineBlue, colors.light.inkBlue]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={[[styles.header, styles.theme.header]]}
               >
-                <HeaderBackButton color={buttonColor} onPress={navigation.goBack} />
-              </ImageBackground>
+                <WavesPatternSvg
+                  height={280}
+                  width={400}
+                  style={{ position: 'absolute', top: 0, left: 0 }}
+                />
+
+                <HeaderBackButton color={colors.light.white} onPress={navigation.goBack} />
+              </LinearGradient>
             )}
 
             {variant === 'manage' && (

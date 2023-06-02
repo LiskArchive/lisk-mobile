@@ -17,6 +17,9 @@ export default {
     },
     header: {
       height: 230,
+      position: 'relative',
+      overflow: 'hidden',
+      paddingTop: safeAreaPaddingTop,
     },
     body: {
       flex: 1,
