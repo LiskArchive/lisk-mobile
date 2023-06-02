@@ -50,7 +50,6 @@
   "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
-  "Read more on the Lisk website": "Read more on the Lisk website",
   "Show QR code": "Show QR code",
   "Hide QR code": "Hide QR code",
   "Save changes": "Save changes",
@@ -131,6 +130,11 @@
       "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password.",
       "decryptRecoveryPhraseTitle": "Enter your password",
       "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID."
+    },
+    "about": {
+      "versionDescription": "Version {{version}}",
+      "openWebsiteButtonTitle": "Read more on the Lisk website",
+      "errorOnOpenWebsiteDescription": "Error opening link. Please try again later."
     }
   },
   "multisignature": {
