@@ -1,6 +1,6 @@
 import { themes, colors, fonts, boxes } from 'constants/styleGuide';
 
-export default ({ logoSize }) => ({
+export default () => ({
   common: {
     container: {
       flex: 1,
@@ -9,15 +9,10 @@ export default ({ logoSize }) => ({
       padding: boxes.boxPadding,
       paddingTop: 50,
     },
-    logo: {
-      overflow: 'hidden',
-      width: logoSize,
-      height: logoSize,
+    isotypeContainer: {
+      padding: 16,
       borderRadius: 18,
-    },
-    logoImage: {
-      width: logoSize,
-      height: logoSize,
+      backgroundColor: colors.light.ultramarineBlue,
     },
     appTitle: {
       marginTop: 6,

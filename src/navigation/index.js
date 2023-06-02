@@ -8,7 +8,7 @@ import Register from 'modules/Auth/components/Register/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
-import About from 'components/screens/about';
+import AboutScreen from 'components/screens/AboutScreen/AboutScreen';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
@@ -128,7 +128,11 @@ export default function Navigator({ children }) {
             component={AddApplicationErrorScreen}
             options={navigationOptions.SignIn}
           />
-          <StackNavigator.Screen name="About" component={About} options={navigationOptions.About} />
+          <StackNavigator.Screen
+            name="About"
+            component={AboutScreen}
+            options={navigationOptions.About}
+          />
           <StackNavigator.Screen
             name="CurrencySelection"
             component={CurrencySelection}
