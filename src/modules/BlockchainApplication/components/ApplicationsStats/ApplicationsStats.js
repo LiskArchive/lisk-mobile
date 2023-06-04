@@ -74,7 +74,7 @@ export default function ApplicationsStats(props) {
                   <P style={[styles.cardTitle]}>{i18next.t('application.stats.totalSupply')}</P>
 
                   <P style={[styles.amount]}>
-                    {Number(fromBeddowsToLsk(data.totalSupplyLSK)).toLocaleString()} LSK
+                    {Number(fromBeddowsToLsk(data.totalSupplyLSK)).toLocaleString('en-US')} LSK
                   </P>
                 </View>
 
@@ -88,7 +88,7 @@ export default function ApplicationsStats(props) {
                   </P>
 
                   <P style={[styles.amount, styles.blackText]}>
-                    {Number(fromBeddowsToLsk(data.totalStakedLSK)).toLocaleString()} LSK
+                    {Number(fromBeddowsToLsk(data.totalStakedLSK)).toLocaleString('en-US')} LSK
                   </P>
                 </View>
 

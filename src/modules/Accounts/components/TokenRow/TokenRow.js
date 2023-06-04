@@ -18,7 +18,7 @@ export default function TokenRow({ token }) {
       displayDenom: token.displayDenom,
       denomUnits: token.denomUnits,
     })
-  ).toLocaleString();
+  ).toLocaleString('en-US');
 
   const accountSettings = useSelector((state) => state.settings);
 
