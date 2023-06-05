@@ -498,7 +498,7 @@
   "transactions": {
     "transactionDetails": {
       "loadingText": "Loading transaction...",
-      "errorText": "Error loading transaction!",
+      "errorText": "Error loading transaction details.",
       "title": "Transaction details",
       "senderLabel": "Sender",
       "recipientLabel": "Recipient",
