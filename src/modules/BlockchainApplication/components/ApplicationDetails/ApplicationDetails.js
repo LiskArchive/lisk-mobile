@@ -153,7 +153,7 @@ export default function ApplicationDetails({ route }) {
                 renderData={(deposited) => (
                   <View style={[styles.row, styles.depositedContainer]}>
                     <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
-                    <P style={styles.amount}>{`${deposited.toLocaleString()} LSK`}</P>
+                    <P style={styles.amount}>{`${deposited.toLocaleString('en-US')} LSK`}</P>
                   </View>
                 )}
                 hideOnEmpty
