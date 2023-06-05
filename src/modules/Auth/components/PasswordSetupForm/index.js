@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useEffect } from 'react';
-import { View, ScrollView, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
@@ -55,22 +56,13 @@ export default function PasswordSetupForm({
   }, []);
 
   const [
-    {
-      handleSubmit,
-      accountNameField,
-      isAgreedField,
-      isBiometricsEnabled,
-      formState,
-      control,
-      trigger,
-    },
+    { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(recoveryPhrase, derivationPath);
 
   const biometricsModal = useModal();
 
   const encryptAccount = () => {
-    trigger();
     const isError = Object.keys(formState.errors).length;
     const hasTouchedField = Object.keys(formState.touchedFields).length;
     if (hasTouchedField && !isError) {
@@ -117,7 +109,7 @@ export default function PasswordSetupForm({
         <HeaderBackButton title="auth.setup.passwordSetupTitle" onPress={navigation.goBack} />
       )}
 
-      <ScrollView contentContainerStyle={styles.container} testID="password-setup-form">
+      <KeyboardAwareScrollView style={styles.container} testID="password-setup-form">
         <P style={[styles.description, styles.theme.description]}>
           {i18next.t('auth.setup.passwordSetupDescription')}
         </P>
@@ -191,14 +183,14 @@ export default function PasswordSetupForm({
             {i18next.t('auth.form.termsAgreementText')}
           </P>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       <View style={[styles.footer]}>
         <PrimaryButton
           onPress={encryptAccount}
           disabled={!isAgreedField.value || isLoading}
           testID="save-account"
-          isLoading
+          isLoading={isLoading}
         >
           {i18next.t('auth.setup.buttons.saveAccountButton')}
         </PrimaryButton>
