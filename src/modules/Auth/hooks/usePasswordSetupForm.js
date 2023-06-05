@@ -71,7 +71,7 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
       isBiometricsEnabled: false,
     },
     resolver: yupResolver(validationSchema),
-    mode: 'onTouched',
+    mode: 'onChange',
   });
 
   const handleSubmit = baseHandleSubmit(async (values) => {
