@@ -24,9 +24,11 @@ export class Transaction {
 
   _baseSchema = null;
 
-  _priorityFee = null;
+  minFee = BigInt(0);
 
-  extraCommandFee = null;
+  extraCommandFee = BigInt(0);
+
+  dynamicFeeEstimates = null;
 
   transaction = {
     module: null,
@@ -47,8 +49,6 @@ export class Transaction {
     pubkey,
     networkStatus,
     auth,
-    priorityFee,
-    extraCommandFee,
     commandParametersSchemas,
     module = null,
     command = null,
@@ -60,8 +60,6 @@ export class Transaction {
     this._networkStatus = networkStatus;
     this._auth = auth;
     this._paramsSchemas = commandParametersSchemas;
-    this._priorityFee = priorityFee;
-    this.extraCommandFee = BigInt(extraCommandFee || 0);
     this.transaction.senderPublicKey = Buffer.isBuffer(pubkey)
       ? pubkey
       : Buffer.from(pubkey, 'hex');
@@ -91,8 +89,6 @@ export class Transaction {
     if (encodedTransaction) {
       this.transaction.params = Lisk.codec.codec.decode(this._paramsSchema, baseTx.params);
     }
-
-    this.computeFee();
   }
 
   /**
@@ -105,15 +101,20 @@ export class Transaction {
     command = this.transaction.command,
     params = {},
     nonce = null,
-    extraCommandFee = null,
+    minFee,
+    extraCommandFee,
+    dynamicFeeEstimates,
     ...others
   }) {
     if (this.module || !command || !this._paramsSchema) {
       return this.transaction;
     }
 
-    this.extraCommandFee =
-      extraCommandFee !== null ? BigInt(extraCommandFee) : this.extraCommandFee;
+    this._computeFee({
+      minFee,
+      extraCommandFee,
+      dynamicFeeEstimates,
+    });
 
     this._computeParamsSchema(module, command);
 
@@ -131,8 +132,6 @@ export class Transaction {
 
     this.transaction = { ...this.transaction, ...updatedTransaction };
 
-    this.computeFee();
-
     return this.transaction;
   }
 
@@ -145,8 +144,6 @@ export class Transaction {
     params.forEach((param) => {
       delete this.transaction.params[param];
     });
-
-    this.computeFee();
 
     return this.transaction;
   }
@@ -199,38 +196,26 @@ export class Transaction {
 
   /**
    * Compute transaction fee.
-   * @param {number} extraFee - Extra fee to consider in the calculation (optional).
+   * @param {BigInt | undefined} minFee - Calculated minimum fee of the transaction.
+   * @param {BigInt | undefined} extraCommandFee - Extra command fee of the transaction.
+   * @param {Object | undefined} dynamicFeeEstimates - Dynamic fees estimation of the transaction.
+   * @returns {BigInt} Calculated fee.
    */
-  computeFee(extraFee = BigInt(0)) {
+  _computeFee({
+    minFee = this.minFee,
+    extraCommandFee = this.extraCommandFee,
+    dynamicFeeEstimates = this.dynamicFeeEstimates,
+  }) {
     this._validateTransaction();
 
-    const allocateEmptySignaturesWithEmptyBuffer = (signatureCount) =>
-      new Array(signatureCount).fill(Buffer.alloc(64));
-
-    const numberOfSignatures = this._auth.numberOfSignatures || 1;
-
-    const options = {
-      numberOfSignatures,
-      additionalFee: this.extraCommandFee + extraFee,
-    };
-
-    const minFee = Lisk.transactions.computeMinFee(
-      {
-        ...this.transaction,
-        params: {
-          ...this.transaction.params,
-          ...(!this.transaction.params.signatures?.length && {
-            signatures: allocateEmptySignaturesWithEmptyBuffer(numberOfSignatures),
-          }),
-        },
-      },
-      this._paramsSchema,
-      options
-    );
+    this.minFee = BigInt(minFee);
+    this.extraCommandFee = BigInt(extraCommandFee);
+    this.dynamicFeeEstimates = dynamicFeeEstimates;
 
     const priorityFee = this._getPriorityFee();
+    const baseFee = priorityFee > this.minFee ? priorityFee : this.minFee;
 
-    const fee = minFee + priorityFee;
+    const fee = baseFee + this.extraCommandFee;
 
     this.transaction = { ...this.transaction, fee };
 
@@ -238,16 +223,16 @@ export class Transaction {
   }
 
   /**
-   * Breakdowns the transaction fee into priorityFee, byteFee and extraCommandFee.
-   * @returns {Object} priorityFee, byteFee and extraCommandFee.
+   * Breakdowns the transaction fee into totalFee, priorityFee, minFee and extraCommandFee.
+   * @returns {Object} totalFee, priorityFee, minFee and extraCommandFee.
    */
-  getFeeBreakdown() {
+  getFeesBreakdown() {
     const totalFee = this.transaction.fee;
+    const minFee = this.minFee;
     const priorityFee = this._getPriorityFee();
     const extraCommandFee = this.extraCommandFee;
-    const byteFee = totalFee - priorityFee - extraCommandFee;
 
-    return { totalFee, priorityFee, byteFee, extraCommandFee };
+    return { totalFee, minFee, priorityFee, extraCommandFee };
   }
 
   /**
@@ -322,12 +307,11 @@ export class Transaction {
    * @returns {BigInt} Calculated priority fee.
    */
   _getPriorityFee() {
-    const transactionSize = Lisk.transactions.getBytes(this.transaction, this._paramsSchema).length;
+    const priorityFee =
+      this.transaction.priority && this.dynamicFeeEstimates
+        ? this.dynamicFeeEstimates[this.transaction.priority]
+        : 0;
 
-    const basePriorityFee = this.transaction.priority
-      ? this._priorityFee[this.transaction.priority]
-      : 0;
-
-    return BigInt(basePriorityFee * transactionSize);
+    return BigInt(priorityFee);
   }
 }

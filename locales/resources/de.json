@@ -414,7 +414,7 @@
       "highPriorityLabel": "Hoch",
       "transactionFeeLabel": "Transaktionsgebühr",
       "transactionFeeBreakdownText": "Gebührenaufschlüsselung",
-      "bytesFeeLabel": "Bytes",      
+      "minFeeLabel": "Mindestgebühr",      
       "priorityFeeLabel": "Priorität",
       "extraCommandFeeLabel": "Initialisierung",
       "messageFeeLabel": "Nachrichtengebühr"

@@ -23,19 +23,27 @@ export function useTransactionsEventsManager() {
 
   const handleNewTransactionsEvent = useCallback(
     (event) => {
-      queryClient.invalidateQueries([GET_AUTH_QUERY]);
-      queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY]);
+      const currentAccountNewTransactions = event.data.filter(
+        (newTransaction) =>
+          newTransaction.sender.address === currentAccount?.metadata?.address ||
+          Object.values(newTransaction.params).includes(currentAccount?.metadata?.address)
+      );
+
+      if (currentAccountNewTransactions.length === 0) {
+        return null;
+      }
+
+      queryClient.invalidateQueries([GET_AUTH_QUERY, currentAccount?.metadata?.address]);
+      queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY, currentAccount?.metadata?.address]);
 
       queryClient.setQueriesData(
         [GET_ACCOUNT_TRANSACTIONS_QUERY, currentAccount?.metadata?.address],
         (prevQuery) => {
-          const newTransactions = event.data;
-
           const prevTransactions = prevQuery.pages[0].data;
 
           const newPage = {
             ...prevQuery.pages[0],
-            data: [...newTransactions, ...prevTransactions],
+            data: [...currentAccountNewTransactions, ...prevTransactions],
           };
 
           const newPages = spliceArray(prevQuery.pages, 0, 1, newPage);
@@ -43,6 +51,8 @@ export function useTransactionsEventsManager() {
           return { ...prevQuery, pages: newPages };
         }
       );
+
+      return event;
     },
     [queryClient, currentAccount?.metadata?.address]
   );
