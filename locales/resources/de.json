@@ -500,7 +500,7 @@
   "transactions": {
     "transactionDetails": {
       "loadingText": "Transaktion wird geladen...",
-      "errorText": "Fehler beim Laden der Transaktion!",
+      "errorText": "Fehler beim Laden der Transaktionsdetails.",
       "title": "Transaktionsdetails",
       "senderLabel": "Absender",
       "recipientLabel": "Empfänger",

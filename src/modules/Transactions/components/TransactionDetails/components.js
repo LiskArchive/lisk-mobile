@@ -7,6 +7,10 @@ import i18next from 'i18next';
 import { useTheme } from 'contexts/ThemeContext';
 import { useTokenMetaQuery } from 'modules/BlockchainApplication/api/useTokenMetaQuery';
 import { LabelButton } from 'components/shared/toolBox/button';
+import DataRenderer from 'components/shared/DataRenderer';
+import ResultScreen from 'components/screens/ResultScreen';
+import Skeleton from 'components/shared/Skeleton/Skeleton';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
 import CopyToClipboard from 'components/shared/copyToClipboard';
 import Avatar from 'components/shared/avatar';
@@ -19,6 +23,7 @@ import { TRANSACTION_STATUS_NAMES } from '../../constants';
 import TransactionTimestamp from '../TransactionTimestamp';
 
 import getTransactionDetailsStyles from './styles';
+import { useFeesQuery } from '../../api/useFeesQuery';
 
 export function TransactionDetailsBody({ transaction, address }) {
   const scrollViewRef = useRef();
@@ -27,7 +32,22 @@ export function TransactionDetailsBody({ transaction, address }) {
 
   const navigation = useNavigation();
 
-  const { data: tokenMetaData } = useTokenMetaQuery(transaction.params.tokenID);
+  const {
+    data: feesData,
+    isLoading: isLoadingFees,
+    error: errorOnFees,
+    refetch: refetchFees,
+  } = useFeesQuery();
+
+  const tokenID = feesData?.data.feeTokenID;
+
+  const {
+    data: tokenMetaData,
+    isLoading: isLoadingTokenMetadata,
+    error: errorOnTokenMetadata,
+  } = useTokenMetaQuery(tokenID, {
+    enabled: !!tokenID,
+  });
 
   const transactionAssets = useTransactionAssets({ transaction, address });
 
@@ -39,20 +59,23 @@ export function TransactionDetailsBody({ transaction, address }) {
     ? transaction.meta.recipient.address
     : transaction.sender.address;
 
-  const fee = fromBaseToDisplayDenom({
-    amount: transaction.fee,
-    displayDenom: tokenMetaData?.data[0]?.displayDenom,
-    denomUnits: tokenMetaData?.data[0]?.denomUnits,
-    symbol: tokenMetaData?.data[0]?.symbol,
-    withSymbol: true,
-  });
-
   const handleAccountClick = () =>
     navigation.navigate({
       name: 'AccountDetails',
       key: displayedAddress,
       params: { address: displayedAddress },
     });
+
+  if (errorOnFees || errorOnTokenMetadata) {
+    return (
+      <ResultScreen
+        illustration={<ErrorIllustrationSvg />}
+        description={i18next.t('transactions.transactionDetails.errorText')}
+      >
+        <LabelButton onPress={refetchFees}>{i18next.t('commons.buttons.reload')}</LabelButton>
+      </ResultScreen>
+    );
+  }
 
   return (
     <ScrollView
@@ -100,7 +123,22 @@ export function TransactionDetailsBody({ transaction, address }) {
           {i18next.t('transactions.transactionDetails.transactionFeeLabel')}
         </Text>
 
-        <Text style={[styles.text, styles.theme.text]}>{fee}</Text>
+        <DataRenderer
+          data={tokenMetaData}
+          isLoading={isLoadingFees || isLoadingTokenMetadata}
+          renderData={({ data }) => {
+            const fee = fromBaseToDisplayDenom({
+              amount: transaction.fee,
+              displayDenom: data[0]?.displayDenom,
+              denomUnits: data[0]?.denomUnits,
+              symbol: data[0]?.symbol,
+              withSymbol: true,
+            });
+
+            return <Text style={[styles.text, styles.theme.text]}>{fee}</Text>;
+          }}
+          renderLoading={() => <Skeleton width={104} height={24} />}
+        />
       </View>
 
       <View style={[styles.section]}>
