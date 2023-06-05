@@ -46,12 +46,12 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     () => ({
       senderApplicationChainID: currentApplication.data?.chainID,
       recipientApplicationChainID:
-        initialValues?.recipientApplicationChainID || currentApplication.data?.chainID,
-      recipientAccountAddress: initialValues?.recipientAccountAddress,
+        initialValues?.recipientChain || currentApplication.data?.chainID,
+      recipientAccountAddress: initialValues?.recipient,
       recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
-      tokenID: initialValues?.tokenID,
+      tokenID: initialValues?.token,
       amount: initialValues?.amount || 0,
-      message: initialValues?.message || '',
+      message: initialValues?.reference || '',
       priority: 'low',
       userPassword: '',
       command: 'transfer',
