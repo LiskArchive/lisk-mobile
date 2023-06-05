@@ -45,14 +45,12 @@
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
   "Label": "Bezeichnung",
-  "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk benötigt Zugriff auf deine Kamera, um QR Codes zu scannen. Tippe hier, um zu den Einstellungen zu gelangen.",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
   "New bookmark": "Neues Lesezeichen",
   "No internet connection!": "Keine Internetverbindung!",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
-  "Read more on the Lisk website": "Erfahre mehr auf der Lisk® Website",
   "Show QR code": "Zeige QR Code",
   "Hide QR code": "",
   "Save changes": "Änderungen speichern",
@@ -134,6 +132,11 @@
       "description2": "",
       "decryptRecoveryPhraseTitle": "Geben Sie Ihr Passwort ein",
       "decryptRecoveryPhraseDescription": "Bitte geben Sie Ihr Kontopasswort ein, um Face ID zu aktivieren."
+    },
+    "about": {
+      "versionDescription": "Version {{version}}",
+      "openWebsiteButtonTitle": "Lesen Sie mehr auf der Lisk-Website",
+      "errorOnOpenWebsiteDescription": "Fehler beim Öffnen des Links. Bitte versuchen Sie es später noch einmal."
     }
   },
   "multisignature": {
@@ -553,5 +556,9 @@
       "displayDenomNotFoundMessage": "",
       "maxDecimalPointExceededMessage": ""
     }
+  },
+  "scanner" : {
+    "cameraAccessTitle": "Erlauben Sie den Kamerazugriff",
+    "cameraAccessDescription": "Lisk muss zum Scannen von QR-Codes auf Ihre Kamera zugreifen. Tippen Sie auf das Symbol oben, um zu den Einstellungen zu gelangen."
   }
 }
