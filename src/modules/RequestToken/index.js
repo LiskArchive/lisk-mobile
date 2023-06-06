@@ -67,11 +67,11 @@ export default function RequestToken() {
     const amountValidity = validator(amount.value) ? 0 : 1;
 
     const queryString = serializeQueryString({
-      recipientAccountAddress: currentAccount.metadata.address,
+      recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
-      recipientApplicationChainID,
-      tokenID,
-      message,
+      recipientChain: recipientApplicationChainID,
+      token: tokenID,
+      reference: message,
     });
 
     return `lisk://wallet${queryString}`;
