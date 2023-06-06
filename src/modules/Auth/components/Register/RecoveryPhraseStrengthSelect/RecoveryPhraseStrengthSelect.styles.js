@@ -3,7 +3,7 @@ import { themes, colors, boxes } from 'constants/styleGuide';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
-export default function getRecoveryPhraseTypeSelectStyles() {
+export default function getRecoveryPhraseStrengthSelectStyles() {
   return {
     common: {
       container: {

@@ -12,7 +12,7 @@ import PasswordSetupForm from '../PasswordSetupForm';
 import { generateRecoveryPhrase } from '../../utils';
 
 import getRegisterStyles from './Register.styles';
-import RecoveryPhraseTypeSelect from './RecoveryPhraseTypeSelect/RecoveryPhraseTypeSelect';
+import RecoveryPhraseStrengthSelect from './RecoveryPhraseStrengthSelect/RecoveryPhraseStrengthSelect';
 import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../../constants/recoveryPhrase.constants';
 
 export default function Register() {
@@ -20,7 +20,7 @@ export default function Register() {
 
   const [recoveryPhrase, setRecoveryPhrase] = useState();
 
-  const [recoveryPhraseType, setRecoveryPhraseType] = useState(
+  const [recoveryPhraseStrength, setRecoveryPhraseStrength] = useState(
     RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words']
   );
 
@@ -39,11 +39,11 @@ export default function Register() {
     return false;
   }, [route.params?.action]);
 
-  const handleRecoveryPhraseTypeChange = (selectedType) => {
-    if (selectedType !== recoveryPhraseType) {
-      setRecoveryPhraseType(selectedType);
+  const handleRecoveryPhraseStrengthChange = (selectedStrength) => {
+    if (selectedStrength !== recoveryPhraseStrength) {
+      setRecoveryPhraseStrength(selectedStrength);
 
-      const newRecoveryPhrase = generateRecoveryPhrase(selectedType);
+      const newRecoveryPhrase = generateRecoveryPhrase(selectedStrength);
 
       setRecoveryPhrase(newRecoveryPhrase);
     }
@@ -75,9 +75,9 @@ export default function Register() {
         customProgressLength={4}
         styles={{ container: { flex: 1, marginTop: 16 } }}
       >
-        <RecoveryPhraseTypeSelect
-          value={recoveryPhraseType}
-          handleChange={handleRecoveryPhraseTypeChange}
+        <RecoveryPhraseStrengthSelect
+          value={recoveryPhraseStrength}
+          handleChange={handleRecoveryPhraseStrengthChange}
         />
 
         <RegisterSafeKeeping showHeader recoveryPhrase={recoveryPhrase} />

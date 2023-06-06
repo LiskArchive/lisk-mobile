@@ -9,9 +9,9 @@ import { H4, P, B } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 
 import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../../../constants/recoveryPhrase.constants';
-import getRecoveryPhraseTypeSelectStyles from './RecoveryPhraseTypeSelect.styles';
+import getRecoveryPhraseStrengthSelectStyles from './RecoveryPhraseStrengthSelect.styles';
 
-export default function RecoveryPhraseTypeSelect({
+export default function RecoveryPhraseStrengthSelect({
   value,
   handleChange,
   nextStep,
@@ -21,7 +21,7 @@ export default function RecoveryPhraseTypeSelect({
   const navigation = useNavigation();
 
   const { styles } = useTheme({
-    styles: getRecoveryPhraseTypeSelectStyles(),
+    styles: getRecoveryPhraseStrengthSelectStyles(),
   });
 
   return (
