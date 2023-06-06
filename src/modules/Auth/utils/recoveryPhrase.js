@@ -40,13 +40,28 @@ export const validateRecoveryPhrase = (recoveryPhrase) => {
 };
 
 /**
- * @returns {string} a valid mnemoic recoveryPhrase
- * Generate a random mnemonic (uses crypto.randomBytes under the hood),
- * defaults to 128-bits of entropy var mnemonic = bip39.generateMnemonic()
+ * Generate a random mnemonic recovery phrase. Defaults to 128-bits of entropy.
+ * @param {number} noOfWords - Number of words to have the generated recovery phrase
+ * (optional). Default value is 12.
+ * @returns {string} A valid mnemoic recovery phrase.
  */
-export const generateRecoveryPhrase = () => {
+export const generateRecoveryPhrase = (noOfWords = 12) => {
   const { Mnemonic } = Lisk.passphrase;
-  return Mnemonic.generateMnemonic();
+
+  let strength;
+
+  switch (noOfWords) {
+    case 12:
+      strength = 128;
+      break;
+    case 24:
+      strength = 256;
+      break;
+    default:
+      break;
+  }
+
+  return Mnemonic.generateMnemonic(strength);
 };
 
 export const getRecoveryPhraseFromKeyChain = () =>
