@@ -196,7 +196,15 @@
   },
   "auth": {
     "register" : {
-      "title": "Create account",     
+      "title": "Create account",  
+      "recoveryPhraseType": {
+        "title": "Select phrase type",
+        "description": "Pending explanation.",
+        "12wordsOptionTitle": "12 word recovery phrase",
+        "12wordsOptionDescription": "A phrase with 12 words will be generated.",
+        "24wordsOptionTitle": "24 word recovery phrase",
+        "24wordsOptionDescription": "A phrase with 24 words will be generated."
+      },   
       "safeKeeping": {
         "title": "Save your secret recovery phrase",
         "description": "Please write down these 12 words carefully, and store them in a safe place.",

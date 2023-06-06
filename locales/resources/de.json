@@ -199,7 +199,15 @@
   },
   "auth": {
     "register" : {
-      "title": "Konto erstellen",      
+      "title": "Konto erstellen",  
+      "recoveryPhraseType": {
+        "title": "Wählen Sie den Phrasentyp aus",
+        "description": "Ausstehende Erklärung.",
+        "12wordsOptionTitle": "Wiederherstellungssatz mit 12 Wörtern",
+        "12wordsOptionDescription": "Es wird eine Phrase mit 12 Wörtern generiert.",
+        "24wordsOptionTitle": "Wiederherstellungssatz mit 24 Wörtern",
+        "24wordsOptionDescription": "Es wird eine Phrase mit 24 Wörtern generiert."
+      },      
       "safeKeeping": {
         "title": "Speichern Sie Ihre geheime Wiederherstellungsphrase",
         "description": "Bitte schreiben Sie diese 12 Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",

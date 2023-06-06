@@ -13,13 +13,16 @@ import { generateRecoveryPhrase } from '../../utils';
 
 import getRegisterStyles from './Register.styles';
 import RecoveryPhraseTypeSelect from './RecoveryPhraseTypeSelect/RecoveryPhraseTypeSelect';
+import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../../constants/recoveryPhrase.constants';
 
 export default function Register() {
   const route = useRoute();
 
   const [recoveryPhrase, setRecoveryPhrase] = useState();
 
-  const [recoveryPhraseType, setRecoveryPhraseType] = useState(12);
+  const [recoveryPhraseType, setRecoveryPhraseType] = useState(
+    RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words']
+  );
 
   const { styles } = useTheme({
     styles: getRegisterStyles(),
@@ -55,7 +58,9 @@ export default function Register() {
     if (route.params?.recoveryPhrase) {
       setRecoveryPhrase(route.params?.recoveryPhrase);
     } else {
-      const defaultRecoveryPhrase = generateRecoveryPhrase(12);
+      const defaultRecoveryPhrase = generateRecoveryPhrase(
+        RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words']
+      );
 
       setRecoveryPhrase(defaultRecoveryPhrase);
     }
