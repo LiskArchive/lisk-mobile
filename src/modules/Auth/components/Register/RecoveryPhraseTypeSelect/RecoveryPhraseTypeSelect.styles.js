@@ -41,6 +41,7 @@ export default function getRecoveryPhraseTypeSelectStyles() {
       optionTitle: {
         fontSize: 14,
         marginBottom: 4,
+        fontWeight: '500',
       },
       optionDescription: {
         fontSize: 12,
