@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
-import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { H4, B, P } from 'components/shared/toolBox/typography';
@@ -14,13 +13,12 @@ import getRegisterSafeKeepingStyles from './styles';
 
 export default function RegisterSafeKeeping({
   recoveryPhrase,
+  prevStep,
   nextStep,
   showHeader,
   currentIndex,
   length,
 }) {
-  const navigation = useNavigation();
-
   const [confirmed, setConfirmed] = useState(false);
 
   const { styles } = useTheme({
@@ -29,14 +27,14 @@ export default function RegisterSafeKeeping({
 
   const handleConfirm = (status) => setConfirmed(status);
 
-  const onContinue = () => nextStep({ recoveryPhrase });
+  const handleContinuePress = () => nextStep({ recoveryPhrase });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       {showHeader && (
         <HeaderBackButton
           title={'auth.register.title'}
-          onPress={navigation.goBack}
+          onPress={prevStep}
           withProgressBar
           currentIndex={currentIndex}
           length={length}
@@ -91,8 +89,7 @@ export default function RegisterSafeKeeping({
             disabled={!confirmed}
             testID="safeKeepingButton"
             style={styles.button}
-            noTheme={true}
-            onClick={onContinue}
+            onPress={handleContinuePress}
           >
             {i18next.t('auth.register.safeKeeping.continueButtonText')}
           </PrimaryButton>

@@ -1,31 +1,31 @@
 /* eslint-disable max-statements */
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useTheme } from 'contexts/ThemeContext';
 
 import Stepper from 'components/shared/Stepper';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
-import { generateRecoveryPhrase } from '../../utils';
 import RecoveryPhraseQuiz from '../RecoveryPhraseQuiz/RecoveryPhraseQuiz';
 import RegisterSafeKeeping from './RegisterSafeKeeping';
 import PasswordSetupForm from '../PasswordSetupForm';
+import { generateRecoveryPhrase } from '../../utils';
 
 import getRegisterStyles from './Register.styles';
+import RecoveryPhraseTypeSelect from './RecoveryPhraseTypeSelect/RecoveryPhraseTypeSelect';
 
 export default function Register() {
   const route = useRoute();
 
-  const recoveryPhrase = useMemo(
-    () => route.params?.recoveryPhrase ?? generateRecoveryPhrase(),
-    [route.params?.recoveryPhrase]
-  );
+  const [recoveryPhrase, setRecoveryPhrase] = useState();
+
+  const [recoveryPhraseType, setRecoveryPhraseType] = useState(12);
 
   const { styles } = useTheme({
     styles: getRegisterStyles(),
   });
 
-  const onBackButtonPressedAndroid = useCallback(() => {
+  const handleBackButtonAndroidPress = useCallback(() => {
     const action = route.params?.action ?? false;
 
     if (action && typeof action === 'function') {
@@ -36,10 +36,30 @@ export default function Register() {
     return false;
   }, [route.params?.action]);
 
+  const handleRecoveryPhraseTypeChange = (selectedType) => {
+    if (selectedType !== recoveryPhraseType) {
+      setRecoveryPhraseType(selectedType);
+
+      const newRecoveryPhrase = generateRecoveryPhrase(selectedType);
+
+      setRecoveryPhrase(newRecoveryPhrase);
+    }
+  };
+
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', onBackButtonPressedAndroid);
-    return () => BackHandler.removeEventListener('hardwareBackPress', onBackButtonPressedAndroid);
-  }, [onBackButtonPressedAndroid]);
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonAndroidPress);
+    return () => BackHandler.removeEventListener('hardwareBackPress', handleBackButtonAndroidPress);
+  }, [handleBackButtonAndroidPress]);
+
+  useEffect(() => {
+    if (route.params?.recoveryPhrase) {
+      setRecoveryPhrase(route.params?.recoveryPhrase);
+    } else {
+      const defaultRecoveryPhrase = generateRecoveryPhrase(12);
+
+      setRecoveryPhrase(defaultRecoveryPhrase);
+    }
+  }, [route.params?.recoveryPhrase, setRecoveryPhrase]);
 
   useScreenshotPrevent();
 
@@ -47,9 +67,14 @@ export default function Register() {
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       <Stepper
         showProgressBar={false}
-        customProgressLength={3}
+        customProgressLength={4}
         styles={{ container: { flex: 1, marginTop: 16 } }}
       >
+        <RecoveryPhraseTypeSelect
+          value={recoveryPhraseType}
+          handleChange={handleRecoveryPhraseTypeChange}
+        />
+
         <RegisterSafeKeeping showHeader recoveryPhrase={recoveryPhrase} />
 
         <RecoveryPhraseQuiz showHeader />
