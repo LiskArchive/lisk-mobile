@@ -199,7 +199,7 @@
       "title": "Create account",  
       "recoveryPhraseType": {
         "title": "Select phrase type",
-        "description": "Pending explanation.",
+        "description": "Please select the type of recovery phrase you want to create.",
         "12wordsOptionTitle": "12 word recovery phrase",
         "12wordsOptionDescription": "A phrase with 12 words will be generated.",
         "24wordsOptionTitle": "24 word recovery phrase",

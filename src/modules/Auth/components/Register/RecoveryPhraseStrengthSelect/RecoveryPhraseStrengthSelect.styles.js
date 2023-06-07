@@ -1,7 +1,4 @@
-import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
 import { themes, colors, boxes } from 'constants/styleGuide';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default function getRecoveryPhraseStrengthSelectStyles() {
   return {
@@ -16,12 +13,14 @@ export default function getRecoveryPhraseStrengthSelectStyles() {
       },
       title: {
         textAlign: 'center',
-        marginBottom: 8,
+        fontWeight: '600',
+        fontSize: 20,
+        marginBottom: 12,
       },
       description: {
-        fontSize: isSmallScreen ? 14 : 16,
+        fontSize: 14,
         textAlign: 'center',
-        marginBottom: 24,
+        marginBottom: 32,
       },
       optionButton: {
         flexDirection: 'row',
@@ -29,7 +28,7 @@ export default function getRecoveryPhraseStrengthSelectStyles() {
         borderRadius: 8,
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
-        marginBottom: 12,
+        marginBottom: 16,
       },
       activeOptionButton: {
         backgroundColor: colors.light.athensWhite,

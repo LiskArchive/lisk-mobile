@@ -5,6 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import { useTheme } from 'contexts/ThemeContext';
 
 import Stepper from 'components/shared/Stepper';
+import { H4, P } from 'components/shared/toolBox/typography';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import RecoveryPhraseQuiz from '../RecoveryPhraseQuiz/RecoveryPhraseQuiz';
 import RegisterSafeKeeping from './RegisterSafeKeeping';
@@ -70,11 +71,7 @@ export default function Register() {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <Stepper
-        showProgressBar={false}
-        customProgressLength={4}
-        styles={{ container: { flex: 1, marginTop: 16 } }}
-      >
+      <Stepper showProgressBar={false} customProgressLength={4}>
         <RecoveryPhraseStrengthSelect
           value={recoveryPhraseStrength}
           handleChange={handleRecoveryPhraseStrengthChange}
@@ -84,7 +81,17 @@ export default function Register() {
 
         <RecoveryPhraseQuiz showHeader />
 
-        <PasswordSetupForm hideNav />
+        <PasswordSetupForm
+          hideNav
+          title={<H4 style={[styles.title, styles.theme.title]}>Set up your account password</H4>}
+          description={
+            <P style={[styles.description, styles.theme.description]}>
+              This password will be used for decrypting your account every time you initiate any
+              transaction from your wallet, and also during backup or removal of an account from the
+              wallet.
+            </P>
+          }
+        />
       </Stepper>
     </SafeAreaView>
   );

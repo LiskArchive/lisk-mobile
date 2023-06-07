@@ -26,10 +26,12 @@ export default function getRecoveryPhraseQuizStyles() {
       },
       title: {
         textAlign: 'center',
-        marginBottom: 8,
+        fontWeight: '600',
+        fontSize: 20,
+        marginBottom: 12,
       },
       description: {
-        fontSize: isSmallScreen ? 14 : 16,
+        fontSize: 14,
         textAlign: 'center',
         marginBottom: 24,
       },

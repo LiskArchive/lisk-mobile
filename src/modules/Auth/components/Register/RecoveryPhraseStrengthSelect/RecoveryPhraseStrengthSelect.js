@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
@@ -25,7 +25,7 @@ export default function RecoveryPhraseStrengthSelect({
   });
 
   return (
-    <SafeAreaView style={[styles.container, styles.theme.container]}>
+    <View style={[styles.container, styles.theme.container]}>
       <HeaderBackButton
         title={'auth.register.title'}
         onPress={navigation.goBack}
@@ -103,6 +103,6 @@ export default function RecoveryPhraseStrengthSelect({
           {i18next.t('commons.buttons.continue')}
         </PrimaryButton>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

@@ -202,7 +202,7 @@
       "title": "Konto erstellen",  
       "recoveryPhraseType": {
         "title": "Wählen Sie den Phrasentyp aus",
-        "description": "Ausstehende Erklärung.",
+        "description": "Bitte wählen Sie die Art der Wiederherstellungsphrase aus, die Sie erstellen möchten.",
         "12wordsOptionTitle": "Wiederherstellungssatz mit 12 Wörtern",
         "12wordsOptionDescription": "Es wird eine Phrase mit 12 Wörtern generiert.",
         "24wordsOptionTitle": "Wiederherstellungssatz mit 24 Wörtern",
