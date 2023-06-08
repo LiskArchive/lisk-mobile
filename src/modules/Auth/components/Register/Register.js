@@ -71,7 +71,7 @@ export default function Register() {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <Stepper showProgressBar={false} customProgressLength={4}>
+      <Stepper customProgressLength={4}>
         <RecoveryPhraseStrengthSelect
           value={recoveryPhraseStrength}
           handleChange={handleRecoveryPhraseStrengthChange}
