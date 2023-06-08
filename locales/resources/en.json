@@ -232,8 +232,7 @@
       "enableDiscreteMode": "Enable discreet mode (optional)",
       "secretPhrase": "Secret recovery phrase",
       "restoreFromFile": "Restore from file",
-      "restoreFromFileSuccessMessage": "File uploaded successfully.",
-      "restoreFromFileErrorMessage": "Error uploading your file. Please try again.",
+      "restoreFromFileErrorMessage": "Invalid file selected.",
       "downloaded": "Downloaded!",
       "qrCodeError": "QR Code not found.",
       "buttons": {

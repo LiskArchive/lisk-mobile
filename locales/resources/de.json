@@ -234,8 +234,7 @@
       "enableDiscreteMode": "",
       "secretPhrase": "Geheime Wiederherstellungsphrase",
       "restoreFromFile": "Aus Datei wiederherstellen",
-      "restoreFromFileSuccessMessage": "Datei erfolgreich hochgeladen.",
-      "restoreFromFileErrorMessage": "Fehler beim Hochladen Ihrer Datei. Bitte versuche es erneut.",
+      "restoreFromFileErrorMessage": "",
       "downloaded": "Heruntergeladen!",
       "qrCodeError": "",
       "buttons": {
