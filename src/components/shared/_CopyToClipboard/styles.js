@@ -4,8 +4,8 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
     },
-    copyIcon: {
-      paddingHorizontal: 4,
+    icon: {
+      paddingLeft: 8,
     },
   },
 });

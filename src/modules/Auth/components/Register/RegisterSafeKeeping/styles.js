@@ -33,7 +33,6 @@ export default function getRegisterSafeKeepingStyles() {
         borderRadius: 8,
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: isSmallScreen ? 290 : 320,
       },
       recoveryPhraseText: {
         lineHeight: 33,
@@ -43,11 +42,12 @@ export default function getRegisterSafeKeepingStyles() {
       },
       copyContainer: {
         alignItems: 'center',
-        marginTop: 5,
+        marginTop: 32,
       },
-      copy: {
+      copyLabel: {
         color: colors.light.ultramarineBlue,
-        fontSize: isSmallScreen ? 14 : 16,
+        fontSize: fonts.size.input,
+        fontWeight: '600',
       },
       footer: {
         padding: boxes.boxPadding,

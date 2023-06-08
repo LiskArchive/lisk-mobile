@@ -12,7 +12,7 @@ import ResultScreen from 'components/screens/ResultScreen';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import { fromBaseToDisplayDenom } from 'utilities/conversions.utils';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import CopyToClipboard from 'components/shared/_CopyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { P } from 'components/shared/toolBox/typography';
 import ObjectViewer from 'components/shared/ObjectViewer/ObjectViewer';

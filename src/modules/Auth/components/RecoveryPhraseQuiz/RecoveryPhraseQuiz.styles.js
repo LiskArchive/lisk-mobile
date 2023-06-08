@@ -22,7 +22,6 @@ export default function getRecoveryPhraseQuizStyles() {
         borderRadius: 8,
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: isSmallScreen ? 290 : 320,
       },
       title: {
         textAlign: 'center',
@@ -40,6 +39,7 @@ export default function getRecoveryPhraseQuizStyles() {
         width: '100%',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        marginBottom: 32,
       },
       recoveryPhraseText: {
         marginHorizontal: 7,
@@ -82,7 +82,7 @@ export default function getRecoveryPhraseQuizStyles() {
       },
       label: {
         fontFamily: fonts.family.recoveryPhraseText,
-        fontSize: isSmallScreen ? 16 : 18,
+        fontSize: fonts.size.base,
         lineHeight: 33,
       },
       labelUnchecked: {
@@ -95,9 +95,15 @@ export default function getRecoveryPhraseQuizStyles() {
         color: colors.light.burntSieanna,
       },
       option: {
-        lineHeight: 33,
-        fontSize: fonts.size.base,
+        justifyContent: 'space-between',
+        alignItems: 'center',
         textAlign: 'center',
+        borderWidth: 1,
+        borderColor: colors.light.mystic,
+        paddingVertical: 2,
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        minWidth: 56,
       },
       footer: {
         padding: boxes.boxPadding,

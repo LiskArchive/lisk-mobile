@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { H4, B, P } from 'components/shared/toolBox/typography';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import CopyToClipboard from 'components/shared/_CopyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import SwitchButton from 'components/shared/toolBox/switchButton';
@@ -59,11 +59,8 @@ export default function RegisterSafeKeeping({
 
           <CopyToClipboard
             style={styles.copyContainer}
-            labelStyle={styles.copy}
-            iconStyle={styles.copy}
+            labelStyle={styles.copyLabel}
             label={i18next.t('commons.copyToClipboard')}
-            showIcon={true}
-            iconSize={14}
             value={recoveryPhrase}
             type={B}
           />

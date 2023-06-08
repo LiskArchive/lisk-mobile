@@ -3,7 +3,8 @@ import { Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
-import Icon from '../toolBox/icon';
+import CopySvg from 'assets/svgs/CopySvg';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 
 import { useCopyToClipboard } from './hooks';
 import getStyles from './styles';
@@ -12,11 +13,11 @@ export default function CopyToClipBoard({
   value,
   type,
   label,
-  iconSize,
+  iconSize = 18,
+  iconColor = colors.light.ultramarineBlue,
   style,
   iconStyle,
   labelStyle,
-  iconColor,
   testID,
 }) {
   const [copied, handleCopy] = useCopyToClipboard(value);
@@ -27,19 +28,16 @@ export default function CopyToClipBoard({
 
   const text = label || value;
 
-  const color = iconColor || colors.light.blueGray;
-
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={handleCopy} testID={testID}>
-      <Element style={[labelStyle]}>{text}</Element>
+      <Element style={[labelStyle]}>{copied ? 'Copied' : text}</Element>
 
-      <TouchableOpacity onPress={handleCopy}>
-        <Icon
-          name={copied ? 'checkmark' : 'copy'}
-          color={copied ? colors.light.ufoGreen : color}
-          size={iconSize || 16}
-          style={[styles.copyIcon, iconStyle]}
-        />
+      <TouchableOpacity onPress={handleCopy} style={[styles.icon, iconStyle]}>
+        {copied ? (
+          <CircleCheckedSvg variant="fill" color={iconColor} height={iconSize} width={iconSize} />
+        ) : (
+          <CopySvg variant="outline" color={iconColor} height={iconSize} width={iconSize} />
+        )}
       </TouchableOpacity>
     </TouchableOpacity>
   );
