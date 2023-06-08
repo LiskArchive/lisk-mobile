@@ -46,7 +46,7 @@ export default function getRegisterSafeKeepingStyles() {
       },
       copyLabel: {
         color: colors.light.ultramarineBlue,
-        fontSize: fonts.size.input,
+        fontSize: fonts.size.base,
         fontWeight: '600',
       },
       footer: {

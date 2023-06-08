@@ -9,7 +9,7 @@ import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { useCopyToClipboard } from './CopyToClipboard.hooks';
 import getStyles from './CopyToClipboard.styles';
 
-export default function CopyToClipBoard({
+export default function CopyToClipboard({
   value,
   type,
   label,
