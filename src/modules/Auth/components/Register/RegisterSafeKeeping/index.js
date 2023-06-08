@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -50,12 +50,12 @@ export default function RegisterSafeKeeping({
         </P>
 
         <View style={styles.recoveryPhraseContainer}>
-          <Text
+          <P
             style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}
             testID="recoveryPhraseText"
           >
             {recoveryPhrase.replace(/\s+/g, '  ')}
-          </Text>
+          </P>
 
           <CopyToClipboard
             style={styles.copyContainer}

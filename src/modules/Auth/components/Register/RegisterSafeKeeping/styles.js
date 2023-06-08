@@ -1,7 +1,4 @@
-import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
 import { themes, colors, fonts, boxes } from 'constants/styleGuide';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default function getRegisterSafeKeepingStyles() {
   return {
@@ -36,7 +33,7 @@ export default function getRegisterSafeKeepingStyles() {
       },
       recoveryPhraseText: {
         lineHeight: 33,
-        fontSize: isSmallScreen ? 16 : 18,
+        fontSize: fonts.size.base,
         fontFamily: fonts.family.recoveryPhraseText,
         textAlign: 'center',
       },
@@ -64,7 +61,7 @@ export default function getRegisterSafeKeepingStyles() {
         flexWrap: 'wrap',
         marginLeft: 13.5,
         color: colors.light.blueGray,
-        fontSize: isSmallScreen ? 11 : 13,
+        fontSize: fonts.size.input,
       },
     },
     [themes.light]: {

@@ -216,6 +216,10 @@
         "description": "Tap and fill in the blanks.",
         "continueButtonText": "Continue to set password"
       },
+      "passwordSetup": {
+        "title": "Set up your account password",
+        "description": "This password will be used for decrypting your account every time you initiate any transaction from your wallet, and also during backup or removal of an account from the wallet."
+      },
       "success": {
         "title": "Great! Your account is now created",
         "description": "You can now add your account to Lisk Wallet by clicking on 'Continue to add account', to be able to send and request tokens and much more.",
@@ -258,9 +262,9 @@
       }
     },
     "form": {
-      "passwordLabel": "Enter account password",
-      "confirmPasswordLabel": "Confirm account password",
-      "accountNameLabel": "Enter account name (optional)",
+      "passwordLabel": "Enter password",
+      "confirmPasswordLabel": "Confirm your password",
+      "accountNameLabel": "Account name (optional)",
       "passwordSetupContinueButton": "Continue to Dashboard",
       "termsAgreementText": "I agree to store my encrypted secret recovery phrase on this device.",
       "errors": {

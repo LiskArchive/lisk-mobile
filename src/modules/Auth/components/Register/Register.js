@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useTheme } from 'contexts/ThemeContext';
+import i18next from 'i18next';
 
 import Stepper from 'components/shared/Stepper';
 import { H4, P } from 'components/shared/toolBox/typography';
@@ -83,12 +84,14 @@ export default function Register() {
 
         <PasswordSetupForm
           hideNav
-          title={<H4 style={[styles.title, styles.theme.title]}>Set up your account password</H4>}
+          title={
+            <H4 style={[styles.title, styles.theme.title]}>
+              {i18next.t('auth.register.passwordSetup.title')}
+            </H4>
+          }
           description={
             <P style={[styles.description, styles.theme.description]}>
-              This password will be used for decrypting your account every time you initiate any
-              transaction from your wallet, and also during backup or removal of an account from the
-              wallet.
+              {i18next.t('auth.register.passwordSetup.description')}
             </P>
           }
         />

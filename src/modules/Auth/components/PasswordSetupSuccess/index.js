@@ -60,12 +60,14 @@ export default function PasswordSetupSuccess({ route }) {
         isLoading={isLoadingDownloadFile}
         style={{ container: styles.downloadFileContainer }}
       />
+
       <View style={[styles.footer]} testID="result-screen-continue">
         <View style={styles.checkBox}>
           <Checkbox onPress={toggleDiscreteMode} selected={discrete}>
             <P style={[styles.text]}>{i18next.t('auth.setup.enableDiscreteMode')}</P>
           </Checkbox>
         </View>
+
         <PrimaryButton
           noTheme
           title={i18next.t('auth.setup.buttons.passwordSetupContinueButton')}
