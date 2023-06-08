@@ -216,7 +216,8 @@
       },
       "confirm": {
         "title": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
-        "description": "Tippen Sie auf und füllen Sie die Lücken aus."
+        "description": "Tippen Sie auf und füllen Sie die Lücken aus.",
+        "continueButtonText": "Legen Sie weiterhin das Passwort fest"
       },
       "success": {
         "title": "Großartig! Ihr Konto ist jetzt erstellt",

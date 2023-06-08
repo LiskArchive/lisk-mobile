@@ -213,7 +213,8 @@
       },
       "confirm": {
         "title": "Confirm your secret recovery phrase",
-        "description": "Tap and fill in the blanks."
+        "description": "Tap and fill in the blanks.",
+        "continueButtonText": "Continue to set password"
       },
       "success": {
         "title": "Great! Your account is now created",
