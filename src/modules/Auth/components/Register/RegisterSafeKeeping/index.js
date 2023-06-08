@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { H4, B, P } from 'components/shared/toolBox/typography';
-import CopyToClipboard from 'components/shared/_CopyToClipboard';
+import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import SwitchButton from 'components/shared/toolBox/switchButton';
