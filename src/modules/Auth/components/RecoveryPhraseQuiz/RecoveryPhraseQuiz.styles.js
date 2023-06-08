@@ -1,7 +1,4 @@
-import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
 import { themes, colors, fonts, boxes } from 'constants/styleGuide';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default function getRecoveryPhraseQuizStyles() {
   return {
@@ -43,7 +40,7 @@ export default function getRecoveryPhraseQuizStyles() {
       },
       recoveryPhraseText: {
         marginHorizontal: 7,
-        fontSize: isSmallScreen ? 16 : 18,
+        fontSize: fonts.size.base,
         lineHeight: 33,
         fontFamily: fonts.family.recoveryPhraseText,
       },
@@ -56,7 +53,7 @@ export default function getRecoveryPhraseQuizStyles() {
         justifyContent: 'center',
         alignItems: 'center',
         fontFamily: fonts.family.recoveryPhraseText,
-        fontSize: isSmallScreen ? 14 : 16,
+        fontSize: fonts.size.base,
       },
       deActivePlaceholder: {
         borderBottomColor: colors.light.ghost,
@@ -86,13 +83,16 @@ export default function getRecoveryPhraseQuizStyles() {
         lineHeight: 33,
       },
       labelUnchecked: {
-        color: colors.light.slateGray,
+        color: colors.light.ultramarineBlue,
+        fontSize: 16,
       },
       labelCorrect: {
         color: colors.light.ufoGreen,
+        fontSize: fonts.size.base,
       },
       labelIncorrect: {
         color: colors.light.burntSieanna,
+        fontSize: fonts.size.base,
       },
       option: {
         justifyContent: 'space-between',
