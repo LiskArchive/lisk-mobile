@@ -30,10 +30,6 @@ export default function getRecoveryPhraseStrengthSelectStyles() {
         borderColor: colors.light.platinumGray,
         marginBottom: 16,
       },
-      activeOptionButton: {
-        backgroundColor: colors.light.athensWhite,
-        borderColor: colors.light.ultramarineBlue,
-      },
       optionHeader: {
         flex: 1,
       },
@@ -62,7 +58,6 @@ export default function getRecoveryPhraseStrengthSelectStyles() {
         height: 8,
         width: 8,
         borderRadius: 24,
-        backgroundColor: colors.light.white,
       },
       footer: {
         padding: boxes.boxPadding,
@@ -84,6 +79,13 @@ export default function getRecoveryPhraseStrengthSelectStyles() {
       optionDescription: {
         color: colors.light.smoothGray,
       },
+      activeOptionButton: {
+        backgroundColor: colors.light.athensWhite,
+        borderColor: colors.light.ultramarineBlue,
+      },
+      optionInnerCircle: {
+        backgroundColor: colors.light.white,
+      },
     },
     [themes.dark]: {
       container: {
@@ -100,6 +102,13 @@ export default function getRecoveryPhraseStrengthSelectStyles() {
       },
       optionDescription: {
         color: colors.dark.mountainMist,
+      },
+      activeOptionButton: {
+        backgroundColor: colors.dark.maastrichtBlue,
+        borderColor: colors.dark.ultramarineBlue,
+      },
+      optionInnerCircle: {
+        backgroundColor: colors.dark.mainBg,
       },
     },
   };

@@ -47,7 +47,8 @@ export default function RecoveryPhraseStrengthSelect({
           onPress={() => handleChange(RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words'])}
           style={[
             styles.optionButton,
-            value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words'] && styles.activeOptionButton,
+            value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words'] &&
+              styles.theme.activeOptionButton,
           ]}
         >
           <View style={[styles.optionHeader]}>
@@ -66,7 +67,7 @@ export default function RecoveryPhraseStrengthSelect({
               value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words'] && styles.activeOptionCircle,
             ]}
           >
-            <View style={[styles.optionInnerCircle]} />
+            <View style={[styles.optionInnerCircle, styles.theme.optionInnerCircle]} />
           </View>
         </TouchableOpacity>
 
@@ -74,7 +75,8 @@ export default function RecoveryPhraseStrengthSelect({
           onPress={() => handleChange(RECOVERY_PHRASE_STRENGTHS_PER_WORD['24words'])}
           style={[
             styles.optionButton,
-            value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['24words'] && styles.activeOptionButton,
+            value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['24words'] &&
+              styles.theme.activeOptionButton,
           ]}
         >
           <View style={[styles.optionHeader]}>
@@ -93,7 +95,7 @@ export default function RecoveryPhraseStrengthSelect({
               value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['24words'] && styles.activeOptionCircle,
             ]}
           >
-            <View style={[styles.optionInnerCircle]} />
+            <View style={[styles.optionInnerCircle, styles.theme.optionInnerCircle]} />
           </View>
         </TouchableOpacity>
       </View>
