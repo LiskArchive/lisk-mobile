@@ -62,7 +62,7 @@ export default function PasswordSetupSuccess({ route }) {
         />
       </View>
 
-      <View style={[styles.footer]} testID="result-screen-continue">
+      <View style={[styles.footer]}>
         <Checkbox
           onPress={toggleDiscreteMode}
           selected={discrete}
@@ -71,7 +71,11 @@ export default function PasswordSetupSuccess({ route }) {
           <P style={[styles.text]}>{i18next.t('auth.setup.enableDiscreteMode')}</P>
         </Checkbox>
 
-        <PrimaryButton onPress={onContinue} style={[styles.continueButton]}>
+        <PrimaryButton
+          onPress={onContinue}
+          style={[styles.continueButton]}
+          testID="result-screen-continue"
+        >
           {i18next.t('auth.setup.buttons.passwordSetupContinueButton')}
         </PrimaryButton>
       </View>

@@ -1,6 +1,6 @@
 import { device, element, by } from 'detox';
 
-describe.skip('Intro Screen', () => {
+describe('Intro Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
   });

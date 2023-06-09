@@ -26,8 +26,7 @@ export default function getPasswordSetupSuccessStyles() {
         marginBottom: 16,
       },
       footer: {
-        paddingLeft: boxes.boxPadding,
-        paddingRight: boxes.boxPadding,
+        padding: boxes.boxPadding,
       },
       checkBox: {
         marginBottom: 24,
