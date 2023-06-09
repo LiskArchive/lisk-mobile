@@ -1,18 +1,17 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useDownloadFile } from 'hooks/useDownloadFile';
 import { useTheme } from 'contexts/ThemeContext';
 import DownloadFile from 'components/shared/DownloadFile';
-import ResultScreen from 'components/screens/ResultScreen';
-import { P } from 'components/shared/toolBox/typography';
+import { H3, P } from 'components/shared/toolBox/typography';
 import Checkbox from 'components/shared/Checkbox';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import NewAccountSuccessIllustrationSvg from 'assets/svgs/NewAccountSuccessIllustrationSvg';
+import AllSetIllustrationSvg from 'assets/svgs/AllSetIllustrationSvg';
 import { getAccountDownloadableFilename } from '../../utils/downloadAccount';
 
 import getPasswordSetupSuccessStyles from './styles';
@@ -23,13 +22,12 @@ export default function PasswordSetupSuccess({ route }) {
   const discrete = useSelector((state) => state.settings.discrete);
   const dispatch = useDispatch();
 
-  const toggleDiscreteMode = () => {
+  const toggleDiscreteMode = () =>
     dispatch(
       settingsUpdated({
         discrete: !discrete,
       })
     );
-  };
 
   if (!encryptedAccount) {
     throw new Error('An encrypted account is needed to download its backup file.');
@@ -45,36 +43,38 @@ export default function PasswordSetupSuccess({ route }) {
   const { styles } = useTheme({ styles: getPasswordSetupSuccessStyles() });
 
   return (
-    <ResultScreen
-      illustration={
-        <View style={styles.illustration}>
-          <NewAccountSuccessIllustrationSvg />
-        </View>
-      }
-      title={i18next.t('auth.setup.passwordSetupSuccessTitle')}
-      description={i18next.t('auth.setup.passwordSetupSuccessDescription')}
-    >
-      <DownloadFile
-        fileName={accountFilename}
-        downloadFile={downloadFile}
-        isLoading={isLoadingDownloadFile}
-        style={{ container: styles.downloadFileContainer }}
-      />
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <View style={[styles.body]}>
+        <AllSetIllustrationSvg style={[styles.illustration]} />
 
-      <View style={[styles.footer]} testID="result-screen-continue">
-        <View style={styles.checkBox}>
-          <Checkbox onPress={toggleDiscreteMode} selected={discrete}>
-            <P style={[styles.text]}>{i18next.t('auth.setup.enableDiscreteMode')}</P>
-          </Checkbox>
-        </View>
+        <H3 style={[styles.title, styles.theme.title]}>
+          {i18next.t('auth.setup.passwordSetupSuccessTitle')}
+        </H3>
 
-        <PrimaryButton
-          noTheme
-          title={i18next.t('auth.setup.buttons.passwordSetupContinueButton')}
-          style={[styles.continueButton]}
-          onPress={onContinue}
+        <P style={[styles.description, styles.theme.description]}>
+          {i18next.t('auth.setup.passwordSetupSuccessDescription')}
+        </P>
+
+        <DownloadFile
+          fileName={accountFilename}
+          downloadFile={downloadFile}
+          isLoading={isLoadingDownloadFile}
         />
       </View>
-    </ResultScreen>
+
+      <View style={[styles.footer]} testID="result-screen-continue">
+        <Checkbox
+          onPress={toggleDiscreteMode}
+          selected={discrete}
+          style={{ container: styles.checkBox }}
+        >
+          <P style={[styles.text]}>{i18next.t('auth.setup.enableDiscreteMode')}</P>
+        </Checkbox>
+
+        <PrimaryButton onPress={onContinue} style={[styles.continueButton]}>
+          {i18next.t('auth.setup.buttons.passwordSetupContinueButton')}
+        </PrimaryButton>
+      </View>
+    </SafeAreaView>
   );
 }

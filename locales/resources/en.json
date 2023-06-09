@@ -220,11 +220,6 @@
         "title": "Set up your account password",
         "description": "This password will be used for decrypting your account every time you initiate any transaction from your wallet, and also during backup or removal of an account from the wallet."
       },
-      "success": {
-        "title": "Great! Your account is now created",
-        "description": "You can now add your account to Lisk Wallet by clicking on 'Continue to add account', to be able to send and request tokens and much more.",
-        "continueButtonText": "Continue to add account"
-      },
       "error": {
         "invalidDerivationPath": "Entered derivation path is Invalid"
       },

@@ -223,11 +223,6 @@
         "title": "Richten Sie Ihr Kontopasswort ein",
         "description": "Dieses Passwort wird jedes Mal zum Entschlüsseln Ihres Kontos verwendet, wenn Sie eine Transaktion von Ihrem Wallet aus initiieren, und auch beim Sichern oder Entfernen eines Kontos aus dem Wallet."
       },
-      "success": {
-        "title": "Großartig! Ihr Konto ist jetzt erstellt",
-        "description": "Sie können Ihr Konto jetzt zu Lisk Wallet hinzufügen, indem Sie auf „Konto hinzufügen fortsetzen“ klicken, um Tokens senden und anfordern zu können und vieles mehr.",
-        "continueButtonText": "Weiter zu Konto hinzufügen"
-      },
       "error": {
         "invalidDerivationPath": ""
       },
