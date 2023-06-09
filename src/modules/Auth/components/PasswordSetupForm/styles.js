@@ -35,7 +35,7 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: boxes.boxPadding,
+      marginBottom: 24,
     },
     switch: {
       paddingRight: 8,

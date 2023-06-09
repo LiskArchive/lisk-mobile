@@ -176,7 +176,9 @@ export default function PasswordSetupForm({
             input: styles.input,
           }}
         />
+      </KeyboardAwareScrollView>
 
+      <View style={[styles.footer]}>
         <View style={styles.actionContainer}>
           <View style={styles.switch} testID="agree-switch">
             <SwitchButton
@@ -189,9 +191,7 @@ export default function PasswordSetupForm({
             {i18next.t('auth.form.termsAgreementText')}
           </P>
         </View>
-      </KeyboardAwareScrollView>
 
-      <View style={[styles.footer]}>
         <PrimaryButton
           onPress={encryptAccount}
           disabled={!isAgreedField.value || isLoading}
