@@ -88,19 +88,17 @@ export default function AuthMethod({ route }) {
 
   const selectEncryptedJSON = async () => {
     try {
-      const encryptedData = await selectEncryptedFile();
-
-      navigation.navigate('DecryptRecoveryPhraseScreen', {
-        title: 'auth.setup.decryptRecoveryPhrase',
-        encryptedData,
-        successRoute: 'AccountsManagerScreen',
-      });
-
-      DropDownHolder.alert(
-        'success',
-        undefined,
-        i18next.t('auth.setup.restoreFromFileSuccessMessage')
+      const encryptedData = await selectEncryptedFile(() =>
+        DropDownHolder.error(undefined, i18next.t('auth.setup.restoreFromFileErrorMessage'))
       );
+
+      if (encryptedData) {
+        navigation.navigate('DecryptRecoveryPhraseScreen', {
+          title: 'auth.setup.decryptRecoveryPhrase',
+          encryptedData,
+          successRoute: 'AccountsManagerScreen',
+        });
+      }
     } catch {
       DropDownHolder.error(undefined, i18next.t('auth.setup.restoreFromFileErrorMessage'));
     }
