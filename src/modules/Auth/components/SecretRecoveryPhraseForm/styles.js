@@ -6,6 +6,17 @@ export default () => ({
     container: {
       flex: 1,
     },
+    item: {
+      paddingBottom: 15,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 8,
+    },
+    info: {
+      marginLeft: 15,
+    },
     input: {
       fontFamily: fonts.family.recoveryPhrase,
       textAlign: 'justify',
