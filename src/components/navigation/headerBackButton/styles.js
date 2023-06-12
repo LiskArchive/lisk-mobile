@@ -18,7 +18,7 @@ export default () => ({
       flex: 1,
     },
     progressWrapper: {
-      marginTop: 10,
+      marginTop: 16,
     },
     whiteBackground: {
       backgroundColor: colors.light.white,

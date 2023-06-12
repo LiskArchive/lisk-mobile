@@ -13,16 +13,11 @@ import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import DropDownHolder from 'utilities/alert';
 
-import getStyles from './styles';
+import getStyles from './RecoveryPhraseForm.styles';
 
 const devDefaultRecoveryPhrase = process.env.RECOVERY_PHRASE || '';
 
-export default function SecretRecoveryPhraseForm({
-  onSubmit,
-  onScanQrCode,
-  lng,
-  useDerivationPath,
-}) {
+export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDerivationPath }) {
   const [showPassword, setShowPassword] = useState(false);
   const [recoveryPhrase, setRecoveryPhrase] = useState({
     value: devDefaultRecoveryPhrase,

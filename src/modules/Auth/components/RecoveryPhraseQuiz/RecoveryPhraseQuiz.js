@@ -210,7 +210,7 @@ export default function RecoveryPhraseQuiz({
           style={styles.button}
           onClick={() => nextStep({ recoveryPhrase })}
         >
-          {i18next.t('commons.buttons.confirm')}
+          {i18next.t('auth.register.confirm.continueButtonText')}
         </PrimaryButton>
       </View>
     </SafeAreaView>

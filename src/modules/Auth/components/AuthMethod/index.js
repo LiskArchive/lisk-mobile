@@ -132,7 +132,7 @@ export default function AuthMethod({ route }) {
         <AuthTypeItem
           illustration={<RecoveryPhaseSvg />}
           label={i18next.t('auth.setup.secretPhrase')}
-          onPress={() => navigation.navigate('SecretRecoveryPhrase')}
+          onPress={() => navigation.navigate('RecoveryPhrase')}
           testID="secret-phrase"
         />
 

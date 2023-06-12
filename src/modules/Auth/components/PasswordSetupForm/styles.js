@@ -35,7 +35,7 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: boxes.boxPadding,
+      marginBottom: 24,
     },
     switch: {
       paddingRight: 8,
@@ -43,7 +43,8 @@ export default () => ({
     actionText: {
       flex: 1,
       fontFamily: fonts.family.context,
-      fontSize: 14,
+      fontSize: fonts.size.input,
+      color: colors.light.blueGray,
     },
     footer: {
       padding: boxes.boxPadding,

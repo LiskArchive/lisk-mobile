@@ -199,7 +199,15 @@
   },
   "auth": {
     "register" : {
-      "title": "Konto erstellen",      
+      "title": "Konto erstellen",  
+      "recoveryPhraseType": {
+        "title": "Wählen Sie den Phrasentyp aus",
+        "description": "Bitte wählen Sie die Art der Wiederherstellungsphrase aus, die Sie erstellen möchten.",
+        "12wordsOptionTitle": "Wiederherstellungssatz mit 12 Wörtern",
+        "12wordsOptionDescription": "Es wird eine Phrase mit 12 Wörtern generiert.",
+        "24wordsOptionTitle": "Wiederherstellungssatz mit 24 Wörtern",
+        "24wordsOptionDescription": "Es wird eine Phrase mit 24 Wörtern generiert."
+      },      
       "safeKeeping": {
         "title": "Speichern Sie Ihre geheime Wiederherstellungsphrase",
         "description": "Bitte schreiben Sie diese 12 Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
@@ -208,12 +216,12 @@
       },
       "confirm": {
         "title": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
-        "description": "Tippen Sie auf und füllen Sie die Lücken aus."
+        "description": "Tippen Sie auf und füllen Sie die Lücken aus.",
+        "continueButtonText": "Legen Sie weiterhin das Passwort fest"
       },
-      "success": {
-        "title": "Großartig! Ihr Konto ist jetzt erstellt",
-        "description": "Sie können Ihr Konto jetzt zu Lisk Wallet hinzufügen, indem Sie auf „Konto hinzufügen fortsetzen“ klicken, um Tokens senden und anfordern zu können und vieles mehr.",
-        "continueButtonText": "Weiter zu Konto hinzufügen"
+      "passwordSetup": {
+        "title": "Richten Sie Ihr Kontopasswort ein",
+        "description": "Dieses Passwort wird jedes Mal zum Entschlüsseln Ihres Kontos verwendet, wenn Sie eine Transaktion von Ihrem Wallet aus initiieren, und auch beim Sichern oder Entfernen eines Kontos aus dem Wallet."
       },
       "error": {
         "invalidDerivationPath": ""

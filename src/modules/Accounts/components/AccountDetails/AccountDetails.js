@@ -9,7 +9,7 @@ import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import SwitchSvg from 'assets/svgs/SwitchSvg';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
 import TransactionList from 'modules/Transactions/components/TransactionList/TransactionList';
 import TokenList from '../TokenList/TokenList';
 import useAccountManagerModal from '../../hooks/useAccountManagerModal';

@@ -6,7 +6,7 @@ import i18next from 'i18next';
 import { useTheme } from 'contexts/ThemeContext';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { P } from 'components/shared/toolBox/typography';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 

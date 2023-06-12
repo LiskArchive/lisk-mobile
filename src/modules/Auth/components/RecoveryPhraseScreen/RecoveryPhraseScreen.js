@@ -9,11 +9,11 @@ import Scanner from 'components/shared/Scanner/Scanner';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
 import { useSelector } from 'react-redux';
-import SecretRecoveryPhraseForm from '../SecretRecoveryPhraseForm';
+import RecoveryPhraseForm from '../RecoveryPhraseForm/RecoveryPhraseForm';
 
-import getStyles from './styles';
+import getStyles from './RecoveryPhraseScreen.styles';
 
-export default function SecretRecoveryPhrase() {
+export default function RecoveryPhraseScreen() {
   useScreenshotPrevent();
   const navigation = useNavigation();
   const settings = useSelector((state) => state.settings);
@@ -52,7 +52,7 @@ export default function SecretRecoveryPhrase() {
           {i18next.t('auth.setup.addAccountDescription')}
         </P>
 
-        <SecretRecoveryPhraseForm
+        <RecoveryPhraseForm
           useDerivationPath={settings.useDerivationPath}
           onSubmit={handleFormSubmission}
           onScanQrCode={handleScanQrCode}

@@ -4,7 +4,6 @@ export default function getDeleteAccountFormStyles() {
   return {
     common: {
       container: {
-        flex: 1,
         width: '100%',
       },
       row: {
@@ -15,12 +14,14 @@ export default function getDeleteAccountFormStyles() {
       filenameContainer: {
         marginTop: 16,
       },
-
       text: {
         fontFamily: fonts.family.heading,
         fontSize: fonts.size.small,
         marginLeft: 8,
         maxWidth: 320,
+      },
+      downloadFileIcon: {
+        marginLeft: 6,
       },
     },
     [themes.light]: {
