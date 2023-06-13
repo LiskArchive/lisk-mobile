@@ -82,6 +82,10 @@ PODS:
   - lottie-react-native (5.1.5):
     - lottie-ios (~> 3.4.0)
     - React-Core
+  - mobile-protect (22.6.0):
+    - MobileProtect (= 24.1.0)
+    - React-Core
+  - MobileProtect (24.1.0)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -466,6 +470,7 @@ DEPENDENCIES:
   - Interactable (from `../node_modules/react-native-interactable`)
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - mobile-protect (from `../node_modules/mobile-protect`)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -542,6 +547,7 @@ SPEC REPOS:
     - FlipperKit
     - fmt
     - libevent
+    - MobileProtect
     - OpenSSL-Universal
     - SocketRocket
     - YogaKit
@@ -566,6 +572,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/lottie-ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
+  mobile-protect:
+    :path: "../node_modules/mobile-protect"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -705,6 +713,8 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   lottie-ios: 69495122151a378fdc7d1bb4c5930347e37baf1f
   lottie-react-native: 3e722c63015fdb9c27638b0a77969fc412067c18
+  mobile-protect: 3b972b276a5bcb5b65996f52c70fcf138dc5f323
+  MobileProtect: d0b28d4eeb139c3de7247a12bea7da01167d09ff
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a

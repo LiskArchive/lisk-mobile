@@ -1,3 +1,19 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        google()
+        //Mobile Protect Maven Repository
+        maven {
+            credentials {
+                //Leave the username as "MAVEN"
+                username "MAVEN"
+                password "$MOBILEPROTECT_REPO_API_KEY"
+            }
+            url "https://mobile-protect-repos.securetheorem.com/mobileprotect-android"
+        }
+    }
+}
+
 rootProject.name = 'Lisk'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 
