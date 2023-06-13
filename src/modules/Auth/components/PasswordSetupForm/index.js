@@ -28,6 +28,8 @@ export default function PasswordSetupForm({
   move,
   currentIndex,
   length,
+  title,
+  description,
 }) {
   useScreenshotPrevent();
 
@@ -99,7 +101,7 @@ export default function PasswordSetupForm({
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
       {hideNav ? (
         <HeaderBackButton
-          title="auth.setup.passwordSetupTitle"
+          title="auth.register.title"
           onPress={() => move({ moves: -1, data })}
           withProgressBar
           currentIndex={currentIndex}
@@ -110,9 +112,13 @@ export default function PasswordSetupForm({
       )}
 
       <KeyboardAwareScrollView style={styles.container} testID="password-setup-form">
-        <P style={[styles.description, styles.theme.description]}>
-          {i18next.t('auth.setup.passwordSetupDescription')}
-        </P>
+        {title}
+
+        {description || (
+          <P style={[styles.description, styles.theme.description]}>
+            {i18next.t('auth.setup.passwordSetupDescription')}
+          </P>
+        )}
 
         <Controller
           control={control}
@@ -170,7 +176,9 @@ export default function PasswordSetupForm({
             input: styles.input,
           }}
         />
+      </KeyboardAwareScrollView>
 
+      <View style={[styles.footer]}>
         <View style={styles.actionContainer}>
           <View style={styles.switch} testID="agree-switch">
             <SwitchButton
@@ -183,9 +191,7 @@ export default function PasswordSetupForm({
             {i18next.t('auth.form.termsAgreementText')}
           </P>
         </View>
-      </KeyboardAwareScrollView>
 
-      <View style={[styles.footer]}>
         <PrimaryButton
           onPress={encryptAccount}
           disabled={!isAgreedField.value || isLoading}

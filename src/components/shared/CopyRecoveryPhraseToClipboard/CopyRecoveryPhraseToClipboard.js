@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { P } from '../toolBox/typography';
-import CopyToClipboard from '../copyToClipboard';
+import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
 
 import getCopyRecoveryPhraseToClipboardStyles from './CopyRecoveryPhraseToClipboard.styles';
 

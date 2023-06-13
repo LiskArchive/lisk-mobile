@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
-
+import Checkbox from 'components/shared/Checkbox';
+import InfoToggler from 'components/shared/InfoToggler';
 import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
-import Checkbox from 'components/shared/Checkbox';
-import InfoToggler from 'components/shared/InfoToggler';
 import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
@@ -17,16 +16,11 @@ import { colors } from 'constants/styleGuide';
 import DropDownHolder from 'utilities/alert';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 
-import getStyles from './styles';
+import getStyles from './RecoveryPhraseForm.styles';
 
 const devDefaultRecoveryPhrase = process.env.RECOVERY_PHRASE || '';
 
-export default function SecretRecoveryPhraseForm({
-  onSubmit,
-  onScanQrCode,
-  lng,
-  useDerivationPath,
-}) {
+export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDerivationPath }) {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const [showPassword, setShowPassword] = useState(false);
@@ -140,6 +134,7 @@ export default function SecretRecoveryPhraseForm({
 
         {useDerivationPath && (
           <Input
+            testID="derivation-path-input"
             adornments={{
               labelComponent: (
                 <View style={[styles.row]}>
@@ -154,7 +149,6 @@ export default function SecretRecoveryPhraseForm({
                 </View>
               ),
             }}
-            testID="derivation-path-input"
             onChange={setDerivationPath}
             value={derivationPath}
             innerStyles={{ containerStyle: styles.derivationPathContainer }}

@@ -18,7 +18,7 @@ import NotFound from 'components/navigation/NotFound';
 
 import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
-import SecretRecoveryPhrase from 'modules/Auth/components/SecretRecoveryPhrase';
+import RecoveryPhraseScreen from 'modules/Auth/components/RecoveryPhraseScreen/RecoveryPhraseScreen';
 import PasswordSetupForm from 'modules/Auth/components/PasswordSetupForm';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
@@ -79,8 +79,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="SecretRecoveryPhrase"
-            component={SecretRecoveryPhrase}
+            name="RecoveryPhrase"
+            component={RecoveryPhraseScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen

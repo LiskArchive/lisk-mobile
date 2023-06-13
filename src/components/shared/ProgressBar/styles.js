@@ -2,7 +2,7 @@ import { themes, colors, boxes } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    progressContainer: {
+    container: {
       zIndex: 1,
       backgroundColor: 'transparent',
       flexDirection: 'row',
@@ -10,41 +10,53 @@ export default () => ({
       alignItems: 'center',
       paddingHorizontal: boxes.boxPadding,
     },
-    activeStep: {
+    bulletContainer: {
+      height: 24,
+      width: 24,
+      alignItems: 'center',
+      backgroundColor: 'transparent',
+      justifyContent: 'center',
+    },
+    activeRail: {
       backgroundColor: colors.light.ultramarineBlue,
     },
-    progressTitleContainer: {
-      width: 16,
-      height: 16,
-      borderRadius: 15,
+    activeBullet: {
+      backgroundColor: colors.light.ultramarineBlue,
+      width: 24,
+      height: 24,
+    },
+    bullet: {
+      width: 8,
+      height: 8,
+      borderRadius: 16,
       alignItems: 'center',
       justifyContent: 'center',
     },
     progressTitle: {
       color: colors.light.white,
-      fontSize: 10,
+      fontSize: 12,
       fontWeight: '500',
     },
-    progressStepContainer: {
+    rail: {
       flex: 1,
-      height: 2,
+      height: 1,
     },
   },
 
   [themes.light]: {
-    progressStepContainer: {
-      backgroundColor: colors.light.ghost,
+    rail: {
+      backgroundColor: colors.light.silverGrey,
     },
-    progressTitleContainer: {
-      backgroundColor: colors.light.ghost,
+    bullet: {
+      backgroundColor: colors.light.silverGrey,
     },
   },
 
   [themes.dark]: {
-    progressStepContainer: {
+    rail: {
       backgroundColor: colors.dark.slateGray,
     },
-    progressTitleContainer: {
+    bullet: {
       backgroundColor: colors.dark.slateGray,
     },
   },

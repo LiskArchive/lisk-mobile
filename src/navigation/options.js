@@ -34,8 +34,7 @@ const navigationOptions = {
   },
   Register: {
     title: null,
-    headerStyle: navigationNoShadowStyle,
-    headerTitleStyle: navigationGenericTitleStyle,
+    header: () => null,
   },
   TransactionsHistory: {
     header: () => null,

@@ -3,7 +3,7 @@ import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
-describe.skip('Bookmark Screen', () => {
+describe('Bookmark Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');

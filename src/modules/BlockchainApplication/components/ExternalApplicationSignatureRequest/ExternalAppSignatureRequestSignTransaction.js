@@ -3,7 +3,7 @@ import React from 'react';
 import { Linking } from 'react-native';
 import i18next from 'i18next';
 
-import { useCopyToClipboard } from 'components/shared/copyToClipboard/hooks';
+import { useCopyToClipboard } from 'components/shared/CopyToClipboard/CopyToClipboard.hooks';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import SignTransaction from 'modules/Transactions/components/SignTransaction/SignTransaction';
 
