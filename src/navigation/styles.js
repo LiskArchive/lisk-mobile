@@ -25,7 +25,7 @@ export function getNavigationTabBarStyles(modalOpen) {
 export const navigationDarkTabsStyle = {
   ...DarkTheme,
   primary: colors.dark.ultramarineBlue,
-  background: colors.light.white,
+  background: 'transparent',
   card: colors.light.white,
   text: colors.light.tabBarText,
   border: 'transparent',
@@ -34,7 +34,7 @@ export const navigationDarkTabsStyle = {
 export const navigationLightTabsStyle = {
   ...DefaultTheme,
   primary: colors.light.ultramarineBlue,
-  background: colors.dark.white,
+  background: 'transparent',
   card: colors.dark.black,
   text: colors.dark.tabBarText,
   border: 'transparent',

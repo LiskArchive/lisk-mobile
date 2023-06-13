@@ -114,11 +114,15 @@ export default function TokenList({ mode = 'overview', address, style }) {
           <InfiniteScrollList
             data={data}
             keyExtractor={(item) => item.tokenID}
-            renderItem={(item) => <TokenRow token={item} />}
+            renderItem={(item) => (
+              <>
+                <TokenRow token={item} />
+                <TokenRow token={item} />
+              </>
+            )}
             fetchNextPage={fetchNextTokensPage}
             hasNextPage={mode === 'full' && hasTokensNextPage}
             isFetchingNextPage={isFetchingTokensNextPage}
-            ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
           />
         )}
         renderLoading={() => <TokenListSkeleton />}

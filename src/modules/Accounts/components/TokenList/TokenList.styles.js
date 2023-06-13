@@ -8,10 +8,9 @@ export default function getTokenListStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 8,
       },
       headerExtraMargin: {
-        marginBottom: 24,
+        marginBottom: 16,
       },
       tabsContainer: {
         flexDirection: 'row',

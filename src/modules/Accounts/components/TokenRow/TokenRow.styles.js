@@ -7,9 +7,9 @@ export default function getTokenRowStyles() {
       container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 12,
+        borderBottomWidth: 1,
+        paddingTop: 12,
+        paddingBottom: 12,
       },
       flex: {
         flexDirection: 'row',
@@ -61,7 +61,7 @@ export default function getTokenRowStyles() {
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
-        borderColor: colors.light.silverGrey,
+        borderColor: colors.light.platinumGray,
       },
       title: {
         color: colors.light.zodiacBlue,
