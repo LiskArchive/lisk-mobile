@@ -5,7 +5,7 @@ import { colors, fonts } from 'constants/styleGuide';
 
 export function getNavigationTabBarStyles(modalOpen) {
   const deviceWidth = Dimensions.get('window').width;
-  const width = deviceWidth - 44;
+  const width = deviceWidth - 68;
   const left = deviceWidth / 2 - width / 2;
   const paddingTop = Platform.OS === 'android' ? 0 : 28;
 
