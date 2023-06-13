@@ -119,7 +119,11 @@ export default function AccountDetails({ account }) {
         style={{ container: styles.tokenListContainer }}
       />
 
-      <TransactionList mode="overview" address={account.address} />
+      <TransactionList
+        mode="overview"
+        address={account.address}
+        style={{ container: styles.transactionListContainer }}
+      />
     </View>
   );
 }

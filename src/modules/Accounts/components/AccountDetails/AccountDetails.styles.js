@@ -64,10 +64,10 @@ export default function getAccountDetailsStyles() {
         color: colors.light.ultramarineBlue,
       },
       tokenListContainer: {
-        marginVertical: 32,
+        marginTop: 32,
       },
       transactionListContainer: {
-        marginTop: 32,
+        marginTop: 16,
       },
     },
     [themes.light]: {
