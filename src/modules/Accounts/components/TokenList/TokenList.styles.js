@@ -23,7 +23,7 @@ export default function getTokenListStyles() {
         borderRadius: 20,
       },
       tabSingleItemText: {
-        fontWeight: 'bold',
+        fontWeight: '500',
         fontSize: 14,
       },
       tabItemText: {

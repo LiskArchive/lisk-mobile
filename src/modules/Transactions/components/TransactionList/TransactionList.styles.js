@@ -13,7 +13,7 @@ export default function getTransactionListStyles() {
         marginBottom: 24,
       },
       title: {
-        fontWeight: 'bold',
+        fontWeight: '500',
         fontSize: fonts.size.input,
       },
       labelButtonText: {
