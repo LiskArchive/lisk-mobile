@@ -245,6 +245,10 @@
       "restoreFromFileErrorMessage": "",
       "downloaded": "Heruntergeladen!",
       "qrCodeError": "",
+      "enableLegacyAccount": "",
+      "enableLegacyAccountDescription": "",
+      "customDerivationPathDescription": "",
+
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",
         "saveAccountButton": "Konto speichern"

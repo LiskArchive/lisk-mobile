@@ -1,9 +1,11 @@
 /* eslint-disable max-statements */
 import React, { useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
-
+import Checkbox from 'components/shared/Checkbox';
+import InfoToggler from 'components/shared/InfoToggler';
 import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
@@ -12,12 +14,15 @@ import { P } from 'components/shared/toolBox/typography';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import DropDownHolder from 'utilities/alert';
+import { settingsUpdated } from 'modules/Settings/store/actions';
 
 import getStyles from './RecoveryPhraseForm.styles';
 
 const devDefaultRecoveryPhrase = process.env.RECOVERY_PHRASE || '';
 
 export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDerivationPath }) {
+  const dispatch = useDispatch();
+  const settings = useSelector((state) => state.settings);
   const [showPassword, setShowPassword] = useState(false);
   const [recoveryPhrase, setRecoveryPhrase] = useState({
     value: devDefaultRecoveryPhrase,
@@ -75,6 +80,14 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     Keyboard.dismiss();
   };
 
+  const toggleUseDerivationPath = () => {
+    dispatch(settingsUpdated({ useDerivationPath: !settings.useDerivationPath }));
+  };
+
+  const toggleDiscreteMode = () => {
+    dispatch(settingsUpdated({ discrete: !settings.discrete }));
+  };
+
   return (
     <View style={styles.container} testID="secretPhraseForm">
       <ScrollView contentContainerStyle={styles.container}>
@@ -120,18 +133,50 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
         />
 
         {useDerivationPath && (
-          <Input
-            testID="derivation-path-input"
-            label={i18next.t('commons.customDerivationPath')}
-            onChange={setDerivationPath}
-            value={derivationPath}
-            innerStyles={{ containerStyle: styles.derivationPathContainer }}
-            error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
-          />
+          <>
+            <View style={[styles.row]}>
+              <P style={[styles.label, styles.theme.label]}>
+                {i18next.t('commons.customDerivationPath')}
+              </P>
+              <InfoToggler
+                title={i18next.t('commons.customDerivationPath')}
+                style={{ toggleButton: styles.info }}
+                description={i18next.t('auth.setup.customDerivationPathDescription')}
+              />
+            </View>
+            <Input
+              testID="derivation-path-input"
+              onChange={setDerivationPath}
+              value={derivationPath}
+              error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
+            />
+          </>
         )}
       </ScrollView>
-
-      <PrimaryButton testID="continue-button" onPress={onFormSubmission}>
+      <Checkbox
+        onPress={toggleUseDerivationPath}
+        selected={!settings.useDerivationPath}
+        style={{ container: styles.derivationPathContainer }}
+      >
+        <View style={styles.row}>
+          <P>{i18next.t('settings.menu.enableDerivationPath')}</P>
+          <InfoToggler
+            title={i18next.t('auth.setup.enableLegacyAccount')}
+            style={{ toggleButton: styles.info }}
+            description={i18next.t('auth.setup.enableLegacyAccountDescription')}
+          />
+        </View>
+      </Checkbox>
+      <View style={styles.item}>
+        <Checkbox onPress={toggleDiscreteMode} selected={settings.discrete}>
+          <P>{i18next.t('auth.setup.enableDiscreteMode')}</P>
+        </Checkbox>
+      </View>
+      <PrimaryButton
+        testID="continue-button"
+        onPress={onFormSubmission}
+        disabled={!recoveryPhrase.value}
+      >
         {i18next.t('commons.buttons.continue')}
       </PrimaryButton>
     </View>

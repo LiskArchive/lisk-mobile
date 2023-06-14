@@ -12,9 +12,6 @@ export default () => ({
       color: colors.dark.whiteSmoke,
       paddingTop: 15,
     },
-    derivationPathContainer: {
-      marginTop: 20,
-    },
     inputContainer: {
       paddingLeft: 0,
       paddingRight: 0,
@@ -60,6 +57,19 @@ export default () => ({
     label: {
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
+    },
+    item: {
+      paddingBottom: 15,
+    },
+    derivationPathContainer: {
+      marginBottom: 5,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    info: {
+      marginLeft: 15,
     },
   },
   [themes.light]: {

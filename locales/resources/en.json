@@ -243,6 +243,9 @@
       "restoreFromFileErrorMessage": "Invalid file selected.",
       "downloaded": "Downloaded!",
       "qrCodeError": "QR Code not found.",
+      "enableLegacyAccount": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",
+      "customDerivationPathDescription": "The derivation path(m’ / purpose’ / coin_type’ / address_index’) is a way to derive multiple accounts from the same secret recovery phrase.",
       "buttons": {
         "passwordSetupContinueButton": "Continue to wallet",
         "saveAccountButton": "Save account"

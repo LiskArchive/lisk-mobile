@@ -1,12 +1,11 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useRef, useState } from 'react';
-import { LogBox, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { LogBox, View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { useNavigation } from '@react-navigation/native';
 
-import SwitchButton from 'components/shared/toolBox/switchButton';
 import { useTheme } from 'contexts/ThemeContext';
 import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -37,10 +36,6 @@ export default function AuthMethod({ route }) {
   const [v2RecoveryPhrase, setV2RecoveryPhrase] = useState('');
 
   const { accounts } = useAccounts();
-
-  const toggleUseDerivationPath = () => {
-    dispatch(settingsUpdated({ useDerivationPath: !settings.useDerivationPath }));
-  };
 
   const { styles } = useTheme({
     styles: getStyles(),
@@ -142,17 +137,6 @@ export default function AuthMethod({ route }) {
           onPress={selectEncryptedJSON}
           testID="restore-from-file"
         />
-
-        <TouchableOpacity
-          style={styles.row}
-          testID="derivation-switch"
-          onPress={toggleUseDerivationPath}
-        >
-          <SwitchButton value={!settings.useDerivationPath} onChange={toggleUseDerivationPath} />
-          <Text style={[styles.derivationPath, styles.theme.derivationPath]}>
-            {i18next.t('settings.menu.enableDerivationPath')}
-          </Text>
-        </TouchableOpacity>
       </View>
 
       <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} />
