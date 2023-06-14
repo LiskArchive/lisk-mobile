@@ -92,6 +92,10 @@ export default function TransactionList({ mode = 'overview', address, style }) {
     );
   };
 
+  if (mode === 'overview' && transactionsData?.data.length === 0) {
+    return null;
+  }
+
   return (
     <View style={[styles.theme.container, style?.container]}>
       {renderHeader()}

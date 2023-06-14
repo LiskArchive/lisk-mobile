@@ -40,8 +40,14 @@ export default function getTokenListStyles() {
         justifyContent: 'center',
         alignItems: 'center',
       },
-      labelButtonText: {
+      viewAllButtonText: {
         fontSize: 12,
+      },
+      labelButtonText: {
+        fontSize: 14,
+      },
+      requestTokensButton: {
+        marginTop: 8,
       },
       loadingText: {
         fontSize: 14,
@@ -49,8 +55,7 @@ export default function getTokenListStyles() {
         marginBottom: 8,
       },
       resultScreenContainer: {
-        flex: undefined,
-        maxHeight: 150,
+        flex: 1,
       },
     },
     [themes.light]: {

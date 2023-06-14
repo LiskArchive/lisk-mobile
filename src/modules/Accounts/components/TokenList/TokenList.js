@@ -88,7 +88,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
           <LabelButton
             onClick={() => navigation.navigate({ name: 'Tokens', params: { address } })}
             style={[styles.labelButton]}
-            textStyle={styles.labelButtonText}
+            textStyle={styles.viewAllButtonText}
             adornments={{
               right: (
                 <CaretSvg
@@ -126,14 +126,22 @@ export default function TokenList({ mode = 'overview', address, style }) {
             illustration={<EmptyIllustrationSvg />}
             description={
               isCurrentAccount
-                ? i18next.t('accounts.emptyTokenMessage')
-                : 'There are no tokens to display for this account at this time.'
+                ? i18next.t('accounts.currentAccountEmptyTokenMessage')
+                : i18next.t('accounts.emptyTokenMessage')
             }
             styles={{
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,
             }}
-          />
+          >
+            <LabelButton
+              onPress={() => console.log('bla')}
+              style={[styles.requestTokensButton]}
+              textStyle={styles.labelButtonText}
+            >
+              {i18next.t('accounts.buttons.request')}
+            </LabelButton>
+          </ResultScreen>
         )}
         renderError={() => (
           <ResultScreen
@@ -144,7 +152,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
               container: styles.resultScreenContainer,
             }}
           >
-            <LabelButton onPress={refetchTokens} textStyle={[styles.labelButtonText]}>
+            <LabelButton onPress={refetchTokens} textStyle={styles.labelButtonText}>
               {i18next.t('commons.buttons.reload')}
             </LabelButton>
           </ResultScreen>
