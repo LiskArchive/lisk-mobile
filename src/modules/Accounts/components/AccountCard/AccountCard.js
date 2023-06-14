@@ -2,6 +2,7 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { P } from 'components/shared/toolBox/typography';
@@ -48,7 +49,12 @@ export default function AccountCard({ account }) {
     });
 
   return (
-    <View style={[styles.container]}>
+    <LinearGradient
+      colors={[colors.light.ultramarineBlue, colors.light.inkBlue]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={[styles.container]}
+    >
       <View style={[styles.row]}>
         <Avatar address={account.address} size={48} />
 
@@ -105,6 +111,6 @@ export default function AccountCard({ account }) {
           <P style={[styles.buttonText, styles.sendButtonText]}>Send</P>
         </TouchableOpacity>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
