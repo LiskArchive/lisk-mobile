@@ -12,9 +12,6 @@ export default () => ({
       color: colors.dark.whiteSmoke,
       paddingTop: 15,
     },
-    derivationPathContainer: {
-      marginTop: 20,
-    },
     inputContainer: {
       paddingLeft: 0,
       paddingRight: 0,
@@ -64,10 +61,12 @@ export default () => ({
     item: {
       paddingBottom: 15,
     },
+    derivationPathContainer: {
+      marginBottom: 5,
+    },
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 8,
     },
     info: {
       marginLeft: 15,

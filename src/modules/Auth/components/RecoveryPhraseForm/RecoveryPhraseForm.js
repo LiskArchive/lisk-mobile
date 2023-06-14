@@ -133,30 +133,31 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
         />
 
         {useDerivationPath && (
-          <Input
-            testID="derivation-path-input"
-            adornments={{
-              labelComponent: (
-                <View style={[styles.row]}>
-                  <P style={[styles.label, styles.theme.label]}>
-                    {i18next.t('commons.customDerivationPath')}
-                  </P>
-                  <InfoToggler
-                    title={i18next.t('commons.customDerivationPath')}
-                    style={{ toggleButton: styles.info }}
-                    description={i18next.t('auth.setup.customDerivationPathDescription')}
-                  />
-                </View>
-              ),
-            }}
-            onChange={setDerivationPath}
-            value={derivationPath}
-            innerStyles={{ containerStyle: styles.derivationPathContainer }}
-            error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
-          />
+          <>
+            <View style={[styles.row]}>
+              <P style={[styles.label, styles.theme.label]}>
+                {i18next.t('commons.customDerivationPath')}
+              </P>
+              <InfoToggler
+                title={i18next.t('commons.customDerivationPath')}
+                style={{ toggleButton: styles.info }}
+                description={i18next.t('auth.setup.customDerivationPathDescription')}
+              />
+            </View>
+            <Input
+              testID="derivation-path-input"
+              onChange={setDerivationPath}
+              value={derivationPath}
+              error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
+            />
+          </>
         )}
       </ScrollView>
-      <Checkbox onPress={toggleUseDerivationPath} selected={!settings.useDerivationPath}>
+      <Checkbox
+        onPress={toggleUseDerivationPath}
+        selected={!settings.useDerivationPath}
+        style={{ container: styles.derivationPathContainer }}
+      >
         <View style={styles.row}>
           <P>{i18next.t('settings.menu.enableDerivationPath')}</P>
           <InfoToggler
@@ -171,7 +172,11 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
           <P>{i18next.t('auth.setup.enableDiscreteMode')}</P>
         </Checkbox>
       </View>
-      <PrimaryButton testID="continue-button" onPress={onFormSubmission}>
+      <PrimaryButton
+        testID="continue-button"
+        onPress={onFormSubmission}
+        disabled={!recoveryPhrase.value}
+      >
         {i18next.t('commons.buttons.continue')}
       </PrimaryButton>
     </View>
