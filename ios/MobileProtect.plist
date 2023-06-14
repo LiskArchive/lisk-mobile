@@ -25,7 +25,7 @@
 	<key>DataAtRestCheck</key>
 	<dict>
 		<key>Enabled</key>
-		<true/>
+		<false/>
 		<key>Exceptions</key>
 		<array/>
 		<key>Restricted</key>
@@ -86,7 +86,7 @@
 	<key>Pasteboard</key>
 	<dict>
 		<key>Enabled</key>
-		<true/>
+		<false/>
 		<key>Exceptions</key>
 		<array/>
 		<key>Restricted</key>
@@ -122,7 +122,7 @@
 	<key>ThirdPartyKeyboard</key>
 	<dict>
 		<key>Enabled</key>
-		<false/>
+		<true/>
 		<key>Exceptions</key>
 		<array/>
 		<key>Restricted</key>

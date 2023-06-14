@@ -2,7 +2,7 @@
 <root>
     <AUTH_TOKEN>86e854fedf21bc8fcc2f9f38f09e4c322fc33b138cf1f33b468786f6fead57da</AUTH_TOKEN>
     <Camera>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </Camera>
@@ -12,12 +12,12 @@
         </Exceptions>
     </DataAtRestCheck>
     <DebuggerDetection>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </DebuggerDetection>
     <DeviceIdentifiers>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </DeviceIdentifiers>
@@ -32,7 +32,7 @@
         </Exceptions>
     </ExifLocation>
     <Webviews>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </Webviews>
@@ -40,22 +40,22 @@
         <Enabled>false</Enabled>
     </RootDetection>
     <PhotoAccess>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </PhotoAccess>
     <TamperDetection>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </TamperDetection>
     <TapJackingProtection>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </TapJackingProtection>
     <ScreenCastingProtection>
-        <Enabled>false</Enabled>
+        <Enabled>true</Enabled>
         <Exceptions>
         </Exceptions>
     </ScreenCastingProtection>
