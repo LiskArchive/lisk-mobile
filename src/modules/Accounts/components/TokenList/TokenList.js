@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable complexity */
 import React, { useMemo, useState } from 'react';
 import { View } from 'react-native';
@@ -67,6 +68,8 @@ export default function TokenList({ mode = 'overview', address, style }) {
     styles: getTokenListStyles(),
   });
 
+  const handleRequestTokensButtonPress = () => navigation.navigate('Request');
+
   const areMoreOnOverview = tokensData?.meta.count < tokensData?.meta.total;
 
   const showViewAllButton =
@@ -135,7 +138,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
             }}
           >
             <LabelButton
-              onPress={() => console.log('bla')}
+              onPress={handleRequestTokensButtonPress}
               style={[styles.requestTokensButton]}
               textStyle={styles.labelButtonText}
             >
