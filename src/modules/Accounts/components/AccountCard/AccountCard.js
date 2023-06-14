@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useAccountCanSendTokens } from 'modules/SendToken/hooks/useAccountCanSendTokens';
 import { P } from 'components/shared/toolBox/typography';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
@@ -14,7 +15,6 @@ import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
 import useAccountManagerModal from '../../hooks/useAccountManagerModal';
 
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
-import { useAccountCanSendTokens } from '../../../SendToken/hooks/useAccountCanSendTokens';
 
 import getAccountDetailsStyles from './AccountCard.styles';
 
@@ -38,9 +38,9 @@ export default function AccountCard({ account }) {
   const disableSendTokenButton =
     !accountCanSendTokensData || isLoadingAccountCanSendTokens || isErrorAccountCanSendTokens;
 
-  const handleRequestTokensClick = () => navigation.navigate('Request');
+  const handleRequestTokensPress = () => navigation.navigate('Request');
 
-  const handleSendTokensClick = () =>
+  const handleSendTokensPress = () =>
     navigation.navigate({
       name: 'Send',
       params: !isCurrentAccount && {
@@ -91,7 +91,7 @@ export default function AccountCard({ account }) {
         {isCurrentAccount && (
           <TouchableOpacity
             style={[styles.button, styles.requestButton]}
-            onPress={handleRequestTokensClick}
+            onPress={handleRequestTokensPress}
             testID="request-tokens-button"
           >
             <P style={[styles.buttonText]}>Request</P>
@@ -104,7 +104,7 @@ export default function AccountCard({ account }) {
             styles.sendButton,
             disableSendTokenButton && styles.sendButtonDisabled,
           ]}
-          onPress={handleSendTokensClick}
+          onPress={handleSendTokensPress}
           disabled={disableSendTokenButton}
           testID="send-tokens-button"
         >
