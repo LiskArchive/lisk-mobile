@@ -7,9 +7,9 @@ export default {
     },
     container: {
       overflow: 'hidden',
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 50,
-      borderColor: colors.light.silverGrey,
+      borderColor: colors.light.platinumGray,
       padding: 5,
     },
     iconContainer: {
