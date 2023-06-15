@@ -164,7 +164,7 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
-    "emptyText": "You do not have any bookmarks yet.",
+    "emptyText": "No addresses bookmarked yet.",
     "addBookmark": {
       "invalidLabel": "The label must be between 3 to 20 characters",
       "invalidAddress": "Invalid address",

@@ -167,7 +167,7 @@
     "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
-    "emptyText": "Sie haben noch keine Lesezeichen.",
+    "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
       "invalidLabel": "",
       "invalidAddress": "",
