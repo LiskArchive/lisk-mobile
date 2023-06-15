@@ -9,7 +9,7 @@ export default {
       overflow: 'hidden',
       borderWidth: 1,
       borderRadius: 50,
-      padding: 5,
+      paddingVertical: 8,
     },
     iconContainer: {
       marginRight: 10,
