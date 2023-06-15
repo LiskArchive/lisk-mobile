@@ -29,6 +29,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.dtplugin.mobileprotect" version("23.0.3")
+}
+
 allprojects {
     repositories {
         maven {
@@ -38,6 +42,14 @@ allprojects {
         maven {
             // Android JSC is installed from npm
             url("$rootDir/../node_modules/jsc-android/dist")
+        }
+        maven {
+            credentials {
+                //Leave the username as "MAVEN"
+                username "MAVEN"
+                password "$MOBILEPROTECT_REPO_API_KEY"
+            }
+            url "https://mobile-protect-repos.securetheorem.com/mobileprotect-android"
         }
         mavenCentral {
             // We don't want to fetch react-native from Maven Central as there are
