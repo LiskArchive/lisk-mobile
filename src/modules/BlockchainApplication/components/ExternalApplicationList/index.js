@@ -5,7 +5,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyExternalApplicationsIllustrationSvg from 'assets/svgs/EmptyExternalApplicationsIllustrationSvg';
 import { P } from 'components/shared/toolBox/typography';
 import useWalletConnectCPairings from '../../../../../libs/wcm/hooks/usePairings';
 import ExternalApplicationRow from '../ExternalApplicationRow';
@@ -45,7 +45,7 @@ export default function ExternalApplicationList() {
       )}
       renderEmpty={() => (
         <ResultScreen
-          illustration={<EmptyIllustrationSvg />}
+          illustration={<EmptyExternalApplicationsIllustrationSvg />}
           description={i18next.t('application.explore.externalApplicationList.emptyText')}
         />
       )}
