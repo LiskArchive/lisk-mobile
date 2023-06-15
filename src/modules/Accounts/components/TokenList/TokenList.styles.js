@@ -46,9 +46,6 @@ export default function getTokenListStyles() {
       labelButtonText: {
         fontSize: 14,
       },
-      requestTokensButton: {
-        marginTop: 8,
-      },
       loadingText: {
         fontSize: 14,
         marginTop: 8,

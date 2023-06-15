@@ -495,7 +495,7 @@
     },
     "tokens": "",
     "lockedTokens": "",
-    "currentAccountEmptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern, indem Sie auf „Anfordern“ button klicken.",
+    "currentAccountEmptyTokenMessage": "Zurzeit sind keine Tokens zum Anzeigen vorhanden.",
     "emptyTokenMessage": "Für dieses Konto können derzeit keine Token angezeigt werden.",
     "errorOnTokensText": "Fehler beim Laden deinen Token.",
     "allTokens": "",

@@ -13,7 +13,7 @@ import CaretSvg from 'assets/svgs/CaretSvg';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyTokensIllustrationSvg from 'assets/svgs/EmptyTokensIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
@@ -67,8 +67,6 @@ export default function TokenList({ mode = 'overview', address, style }) {
   const { styles } = useTheme({
     styles: getTokenListStyles(),
   });
-
-  const handleRequestTokensButtonPress = () => navigation.navigate('Request');
 
   const areMoreOnOverview = tokensData?.meta.count < tokensData?.meta.total;
 
@@ -126,7 +124,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
         renderLoading={() => <TokenListSkeleton />}
         renderEmpty={() => (
           <ResultScreen
-            illustration={<EmptyIllustrationSvg />}
+            illustration={<EmptyTokensIllustrationSvg />}
             description={
               isCurrentAccount
                 ? i18next.t('accounts.currentAccountEmptyTokenMessage')
@@ -136,15 +134,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,
             }}
-          >
-            <LabelButton
-              onPress={handleRequestTokensButtonPress}
-              style={[styles.requestTokensButton]}
-              textStyle={styles.labelButtonText}
-            >
-              {i18next.t('accounts.buttons.request')}
-            </LabelButton>
-          </ResultScreen>
+          />
         )}
         renderError={() => (
           <ResultScreen
