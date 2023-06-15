@@ -536,7 +536,7 @@
     },
     "transactionList": {
       "errorText": "Fehler beim Laden von Transaktionen!",
-      "emptyText": "Du hast keine kürzlichen Aktivitäten.",
+      "emptyText": "Derzeit können keine Transaktionen angezeigt werden.",
       "title": "Transaktionen",
       "goToTransactionHistoryButtonText": "Alle ansehen"
     },

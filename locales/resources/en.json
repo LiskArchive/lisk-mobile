@@ -534,7 +534,7 @@
     },
     "transactionList": {
       "errorText": "Error loading your transactions.",
-      "emptyText": "You have no transactions on this account yet.",
+      "emptyText": "There are no transactions to display at this time.",
       "title": "Transactions",
       "goToTransactionHistoryButtonText": "View all"
     },

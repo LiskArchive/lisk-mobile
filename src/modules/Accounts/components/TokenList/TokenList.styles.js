@@ -52,7 +52,7 @@ export default function getTokenListStyles() {
         marginBottom: 8,
       },
       resultScreenContainer: {
-        flex: 1,
+        marginBottom: 8,
       },
     },
     [themes.light]: {
