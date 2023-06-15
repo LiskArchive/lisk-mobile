@@ -7,7 +7,6 @@ export default function getTransactionListStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: -8,
       },
       headerExtraMargin: {
         marginBottom: 24,
