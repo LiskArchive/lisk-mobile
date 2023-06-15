@@ -164,7 +164,7 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
-    "emptyText": "You do not have any bookmarks yet.",
+    "emptyText": "No addresses bookmarked yet.",
     "addBookmark": {
       "invalidLabel": "The label must be between 3 to 20 characters",
       "invalidAddress": "Invalid address",
@@ -324,17 +324,17 @@
       "statsButtonText": "Stats",
       "applicationList": {
         "title": "All applications",
-        "errorText": "Error loading your applications.",
-        "emptyText": "You have no applications yet.",
+        "emptyText": "No active or registered blockchain applications found.",
+        "errorText": "Error loading blockchain applications. Please try again later.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Delete"
       },
       "externalApplicationList": {
-        "title": "External connections",
+        "title": "Wallet connections",
         "loadingText": "Loading external connections...",
-        "errorText": "Error loading your external connections.",
-        "emptyText": "You do not have external connections yet.",
+        "emptyText": "You haven't paired with any application yet.",
+        "errorText": "Error loading your wallet connections.",
         "detailsText": "Info",
         "disconnectText": "Disconnect",
         "chainIDLabel": "Chain ID",
@@ -496,7 +496,8 @@
     },
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",
-    "emptyTokenMessage": "You have no tokens on this account yet.",
+    "currentAccountEmptyTokenMessage": "There are no tokens to display at this time.",
+    "emptyTokenMessage": "There are no tokens to display for this account at this time.",
     "errorOnTokensText": "Error loading your tokens.",
     "allTokens": "All Tokens",
     "buttons": {
@@ -536,7 +537,7 @@
     },
     "transactionList": {
       "errorText": "Error loading your transactions.",
-      "emptyText": "You have no transactions on this account yet.",
+      "emptyText": "There are no transactions to display at this time.",
       "title": "Transactions",
       "goToTransactionHistoryButtonText": "View all"
     },

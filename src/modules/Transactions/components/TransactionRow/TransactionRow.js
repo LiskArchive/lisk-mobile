@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { stringShortener } from 'utilities/helpers';
 import { fromBeddowsToLsk } from 'utilities/conversions.utils';
+import { H4 } from 'components/shared/toolBox/typography';
 import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import { useTransactionAssets } from '../../hooks/useTransactionAssets';
 import TransactionTimestamp from '../TransactionTimestamp';
@@ -44,9 +45,9 @@ export default function TransactionRow({ transaction, address }) {
         {transactionAssets.icon}
 
         <View style={[styles.titleContainer, styles.theme.titleContainer]}>
-          <Text style={[styles.addressText, styles.theme.addressText]}>
+          <H4 style={[styles.addressText, styles.theme.addressText]}>
             {stringShortener(shownAddress, 5, 5)}
-          </Text>
+          </H4>
 
           <TransactionTimestamp
             timestamp={transaction.block.timestamp}

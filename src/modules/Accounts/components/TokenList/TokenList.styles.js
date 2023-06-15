@@ -8,10 +8,9 @@ export default function getTokenListStyles() {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 8,
       },
       headerExtraMargin: {
-        marginBottom: 24,
+        marginBottom: 16,
       },
       tabsContainer: {
         flexDirection: 'row',
@@ -23,7 +22,7 @@ export default function getTokenListStyles() {
         borderRadius: 20,
       },
       tabSingleItemText: {
-        fontWeight: 'bold',
+        fontWeight: '500',
         fontSize: 14,
       },
       tabItemText: {
@@ -41,8 +40,11 @@ export default function getTokenListStyles() {
         justifyContent: 'center',
         alignItems: 'center',
       },
-      labelButtonText: {
+      viewAllButtonText: {
         fontSize: 12,
+      },
+      labelButtonText: {
+        fontSize: 14,
       },
       loadingText: {
         fontSize: 14,
@@ -50,8 +52,7 @@ export default function getTokenListStyles() {
         marginBottom: 8,
       },
       resultScreenContainer: {
-        flex: undefined,
-        maxHeight: 150,
+        marginBottom: 8,
       },
     },
     [themes.light]: {

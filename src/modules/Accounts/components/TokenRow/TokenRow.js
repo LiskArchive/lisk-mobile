@@ -43,7 +43,7 @@ export default function TokenRow({ token }) {
 
       <View style={[styles.balanceContainer]}>
         <DiscreteModeComponent data={balance} blurVariant="balance">
-          <H3 style={[styles.theme.title]}>
+          <H3 style={[styles.balanceText, styles.theme.balanceText]}>
             {balance} {token.symbol}
           </H3>
         </DiscreteModeComponent>
@@ -51,10 +51,10 @@ export default function TokenRow({ token }) {
         {tokenAmountInCurrency.amount && (
           <DiscreteModeComponent data={balance} blurVariant="balance">
             <P
-              style={[styles.theme.currency]}
+              style={[styles.currencyText, styles.theme.currencyText]}
               testID={`token-currency-${accountSettings.currency}`}
             >
-              {tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
+              ~{tokenAmountInCurrency.amount} {tokenAmountInCurrency.currency}
             </P>
           </DiscreteModeComponent>
         )}

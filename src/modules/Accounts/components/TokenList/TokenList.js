@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable complexity */
 import React, { useMemo, useState } from 'react';
 import { View } from 'react-native';
@@ -12,7 +13,7 @@ import CaretSvg from 'assets/svgs/CaretSvg';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyTokensIllustrationSvg from 'assets/svgs/EmptyTokensIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import DataRenderer from 'components/shared/DataRenderer';
 import { LIMIT } from 'utilities/api/constants';
@@ -88,7 +89,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
           <LabelButton
             onClick={() => navigation.navigate({ name: 'Tokens', params: { address } })}
             style={[styles.labelButton]}
-            textStyle={styles.labelButtonText}
+            textStyle={styles.viewAllButtonText}
             adornments={{
               right: (
                 <CaretSvg
@@ -118,17 +119,16 @@ export default function TokenList({ mode = 'overview', address, style }) {
             fetchNextPage={fetchNextTokensPage}
             hasNextPage={mode === 'full' && hasTokensNextPage}
             isFetchingNextPage={isFetchingTokensNextPage}
-            ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
           />
         )}
         renderLoading={() => <TokenListSkeleton />}
         renderEmpty={() => (
           <ResultScreen
-            illustration={<EmptyIllustrationSvg />}
+            illustration={<EmptyTokensIllustrationSvg />}
             description={
               isCurrentAccount
-                ? i18next.t('accounts.emptyTokenMessage')
-                : 'There are no tokens to display for this account at this time.'
+                ? i18next.t('accounts.currentAccountEmptyTokenMessage')
+                : i18next.t('accounts.emptyTokenMessage')
             }
             styles={{
               wrapper: styles.resultScreenContainer,
@@ -145,7 +145,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
               container: styles.resultScreenContainer,
             }}
           >
-            <LabelButton onPress={refetchTokens} textStyle={[styles.labelButtonText]}>
+            <LabelButton onPress={refetchTokens} textStyle={styles.labelButtonText}>
               {i18next.t('commons.buttons.reload')}
             </LabelButton>
           </ResultScreen>

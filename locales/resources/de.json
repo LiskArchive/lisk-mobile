@@ -167,7 +167,7 @@
     "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
-    "emptyText": "Sie haben noch keine Lesezeichen.",
+    "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
       "invalidLabel": "",
       "invalidAddress": "",
@@ -327,17 +327,17 @@
       "statsButtonText": "Statistiken",
       "applicationList": {
         "title": "Alle Apps",
-        "errorText": "Fehler beim Laden Ihrer Anwendungen.",
-        "emptyText": "Sie haben noch keine Bewerbungen.",
+        "emptyText": "Keine aktiven oder registrierten Blockchain-Anwendungen gefunden.",
+        "errorText": "Fehler beim Laden der Blockchain-Anwendungen. Bitte versuchen Sie es später noch einmal.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Löschen"
       },
       "externalApplicationList": {
-        "title": "Externe Verbindungen",
+        "title": "Wallet-Verbindungen",
         "loadingText": "Externe Verbindungen laden...",
-        "errorText": "Fehler beim Laden Ihrer externen Verbindungen.",
-        "emptyText": "Sie haben noch keine externen Verbindungen.",
+        "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
+        "emptyText": "Sie haben noch keine Kopplung mit einer Anwendung durchgeführt.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
         "chainIDLabel": "",
@@ -499,7 +499,8 @@
     },
     "tokens": "",
     "lockedTokens": "",
-    "emptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern",
+    "currentAccountEmptyTokenMessage": "Zurzeit sind keine Tokens zum Anzeigen vorhanden.",
+    "emptyTokenMessage": "Für dieses Konto können derzeit keine Token angezeigt werden.",
     "errorOnTokensText": "Fehler beim Laden deinen Token.",
     "allTokens": "",
     "buttons": {
@@ -539,7 +540,7 @@
     },
     "transactionList": {
       "errorText": "Fehler beim Laden von Transaktionen!",
-      "emptyText": "Du hast keine kürzlichen Aktivitäten.",
+      "emptyText": "Derzeit können keine Transaktionen angezeigt werden.",
       "title": "Transaktionen",
       "goToTransactionHistoryButtonText": "Alle ansehen"
     },
