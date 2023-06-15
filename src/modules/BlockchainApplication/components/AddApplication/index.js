@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'contexts/ThemeContext';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyApplicationsIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
 import ApplicationList from '../ApplicationList/ApplicationList';
 import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
@@ -53,7 +53,7 @@ const AddApplication = ({ navigation, t }) => {
         showCaret
         renderEmpty={() => (
           <ResultScreen
-            illustration={<EmptyIllustrationSvg />}
+            illustration={<EmptyApplicationsIllustrationSvg />}
             description="All applications are now added to the application management list."
           />
         )}

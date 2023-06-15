@@ -321,8 +321,8 @@
       "statsButtonText": "Stats",
       "applicationList": {
         "title": "All applications",
-        "errorText": "Error loading your applications.",
-        "emptyText": "You have no applications yet.",
+        "emptyText": "No active or registered blockchain applications found.",
+        "errorText": "Error loading blockchain applications. Please try again later.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Delete"

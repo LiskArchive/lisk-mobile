@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
+import i18next from 'i18next';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import DataRenderer from 'components/shared/DataRenderer';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyApplicationsIllustrationSvg from 'assets/svgs/EmptyApplicationsIllustrationSvg';
 import ResultScreen from 'components/screens/ResultScreen';
 
 import ApplicationListSkeleton from './components/ApplicationListSkeleton';
@@ -23,8 +24,8 @@ export default function ApplicationList({
     renderEmpty ||
     (() => (
       <ResultScreen
-        illustration={<EmptyIllustrationSvg />}
-        description="No applications available for now. Please try again later."
+        illustration={<EmptyApplicationsIllustrationSvg />}
+        description={i18next.t('application.explore.applicationList.emptyText')}
       />
     ));
 
@@ -33,7 +34,7 @@ export default function ApplicationList({
     (() => (
       <ResultScreen
         illustration={<ErrorIllustrationSvg />}
-        description="Error loading applications. Please try again later."
+        description={i18next.t('application.explore.applicationList.errorText')}
       />
     ));
 
