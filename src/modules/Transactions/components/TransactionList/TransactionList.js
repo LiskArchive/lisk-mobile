@@ -14,7 +14,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import { H3 } from 'components/shared/toolBox/typography';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyTransactionsIllustrationSvg from 'assets/svgs/EmptyTransactionsIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import TransactionRow from '../TransactionRow/TransactionRow';
@@ -115,7 +115,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
         renderLoading={() => <TransactionListSkeleton />}
         renderEmpty={() => (
           <ResultScreen
-            illustration={<EmptyIllustrationSvg />}
+            illustration={<EmptyTransactionsIllustrationSvg />}
             description={
               isCurrentAccount
                 ? i18next.t('transactions.transactionList.emptyText')
