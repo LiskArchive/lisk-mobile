@@ -330,10 +330,10 @@
         "deleteText": "Löschen"
       },
       "externalApplicationList": {
-        "title": "Externe Verbindungen",
+        "title": "Wallet-Verbindungen",
         "loadingText": "Externe Verbindungen laden...",
-        "errorText": "Fehler beim Laden Ihrer externen Verbindungen.",
-        "emptyText": "Sie haben noch keine externen Verbindungen.",
+        "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
+        "emptyText": "Sie haben noch keine Kopplung mit einer Anwendung durchgeführt.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
         "chainIDLabel": "",

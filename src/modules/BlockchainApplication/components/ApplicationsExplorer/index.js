@@ -168,10 +168,12 @@ export default function ApplicationsExplorer() {
             <Tabs.Tab value="internalApplications">
               {i18next.t('application.explore.applicationList.title')}
             </Tabs.Tab>
+
             <Tabs.Tab value="externalApplications">
               {i18next.t('application.explore.externalApplicationList.title')}
             </Tabs.Tab>
           </Tabs>
+
           <Tabs.Panel index="internalApplications" value={activeTab}>
             <ApplicationList
               applications={applications}

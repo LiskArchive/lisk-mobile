@@ -328,10 +328,10 @@
         "deleteText": "Delete"
       },
       "externalApplicationList": {
-        "title": "External connections",
+        "title": "Wallet connections",
         "loadingText": "Loading external connections...",
-        "errorText": "Error loading your external connections.",
-        "emptyText": "You do not have external connections yet.",
+        "emptyText": "You haven't paired with any application yet.",
+        "errorText": "Error loading your wallet connections.",
         "detailsText": "Info",
         "disconnectText": "Disconnect",
         "chainIDLabel": "Chain ID",
