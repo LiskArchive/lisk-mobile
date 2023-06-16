@@ -18,7 +18,7 @@ export function useTransactionFees({
     isLoading: isLoadingCommandParametersSchemas,
     isErrorCommandParametersSchemas,
   } = useCommandParametersSchemasQuery({
-    options: { enabled: isTransactionSuccess },
+    options: { enabled: isTransactionSuccess, onError },
   });
 
   const estimateFeesMutation = useTransactionEstimateFeesMutation({

@@ -99,6 +99,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       isTransactionSuccess,
       dependencies: [recipientAddress, tokenID, amount, isCrossChainTransfer],
       enabled: recipientAddress && tokenID && amount,
+      onError: () =>
+        DropDownHolder.error(i18next.t('Error'), i18next.t('sendToken.errors.estimateFees')),
     });
 
   const handleChange = (field, value, onChange) => {
