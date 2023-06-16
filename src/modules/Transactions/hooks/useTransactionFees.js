@@ -11,6 +11,7 @@ export function useTransactionFees({
   dependencies = [],
   onSuccess,
   onError,
+  enabled,
 }) {
   const {
     data: commandParametersSchemasData,
@@ -80,7 +81,7 @@ export function useTransactionFees({
   const areParamsValid = validateParams();
 
   useEffect(() => {
-    if (isTransactionSuccess && areParamsValid) {
+    if (isTransactionSuccess && areParamsValid && enabled) {
       // eslint-disable-next-line no-unused-vars
       const { signatures, ...transactionJSON } = transaction.toJSON();
 
@@ -89,7 +90,7 @@ export function useTransactionFees({
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTransactionSuccess, areParamsValid, ...dependencies]);
+  }, [isTransactionSuccess, areParamsValid, enabled, ...dependencies]);
 
   return {
     data: estimateFeesMutation.data,
