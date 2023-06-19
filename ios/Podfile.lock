@@ -1,6 +1,6 @@
 PODS:
   - boost (1.76.0)
-  - BVLinearGradient (2.6.2):
+  - BVLinearGradient (2.7.2):
     - React-Core
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -79,7 +79,7 @@ PODS:
     - React
   - libevent (2.1.12)
   - lottie-ios (3.4.0)
-  - lottie-react-native (5.1.5):
+  - lottie-react-native (5.1.6):
     - lottie-ios (~> 3.4.0)
     - React-Core
   - mobile-protect (22.6.0):
@@ -306,13 +306,13 @@ PODS:
     - React-Core
   - react-native-camera/RN (3.43.0):
     - React-Core
-  - react-native-cameraroll (5.3.1):
+  - react-native-cameraroll (5.6.0):
     - React-Core
-  - react-native-document-picker (8.2.0):
+  - react-native-document-picker (8.2.1):
     - React-Core
   - react-native-fingerprint-scanner (6.0.0):
     - React
-  - react-native-get-random-values (1.8.0):
+  - react-native-get-random-values (1.9.0):
     - React-Core
   - react-native-image-picker (4.10.3):
     - React-Core
@@ -400,7 +400,7 @@ PODS:
     - React
   - ReactNativeKeyboardTrackingView (5.7.0):
     - React
-  - RNCAsyncStorage (1.18.1):
+  - RNCAsyncStorage (1.18.2):
     - React-Core
   - RNDeviceInfo (8.0.2):
     - React-Core
@@ -693,7 +693,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  BVLinearGradient: 34a999fda29036898a09c6a6b728b0b4189e1a44
+  BVLinearGradient: 252e4a39d23d69d2d89b55b165c8900f7caf93fc
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 48289402952f4f7a4e235de70a9a590aa0b79ef4
@@ -712,7 +712,7 @@ SPEC CHECKSUMS:
   Interactable: 411887c89fa16ac41f8e7898aca06dcad55e5f22
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   lottie-ios: 69495122151a378fdc7d1bb4c5930347e37baf1f
-  lottie-react-native: 3e722c63015fdb9c27638b0a77969fc412067c18
+  lottie-react-native: 8f9d4be452e23f6e5ca0fdc11669dc99ab52be81
   mobile-protect: 3b972b276a5bcb5b65996f52c70fcf138dc5f323
   MobileProtect: d0b28d4eeb139c3de7247a12bea7da01167d09ff
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
@@ -732,10 +732,10 @@ SPEC CHECKSUMS:
   React-logger: 1623c216abaa88974afce404dc8f479406bbc3a0
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-camera: f432fcf1b32b528bbf7c3543d3e3b1deb0c5b72a
-  react-native-cameraroll: f3050460fe1708378698c16686bfaa5f34099be2
-  react-native-document-picker: 495c444c0c773c6e83a5d91165890ecb1c0a399a
+  react-native-cameraroll: 755bcc628148a90a7c9cf3f817a252be3a601bc5
+  react-native-document-picker: 69ca2094d8780cfc1e7e613894d15290fdc54bba
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
-  react-native-get-random-values: a6ea6a8a65dc93e96e24a11105b1a9c8cfe1d72a
+  react-native-get-random-values: dee677497c6a740b71e5612e8dbd83e7539ed5bb
   react-native-image-picker: 60f4246eb5bb7187fc15638a8c1f13abd3820695
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
@@ -758,7 +758,7 @@ SPEC CHECKSUMS:
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
   ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
   ReactNativeKeyboardTrackingView: 02137fac3b2ebd330d74fa54ead48b14750a2306
-  RNCAsyncStorage: b90b71f45b8b97be43bc4284e71a6af48ac9f547
+  RNCAsyncStorage: ddc4ee162bfd41b0d2c68bf2d95acd81dd7f1f93
   RNDeviceInfo: a9601119924a67d2479d3facf04cec7b658f44ed
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39

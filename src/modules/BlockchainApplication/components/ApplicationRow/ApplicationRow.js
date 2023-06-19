@@ -9,14 +9,15 @@ import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
 import ResultScreen from 'components/screens/ResultScreen';
-import PinSvg from 'assets/svgs/PinSvg';
+import WarningSvg from 'assets/svgs/WarningSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import CheckSvg from 'assets/svgs/CheckSvg';
 
 import { useApplicationRowActions } from './ApplicationRow.hooks';
 import getApplicationRowStyles from './ApplicationRow.styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
-import { usePinApplications } from '../../hooks/usePinApplications';
+import { APPLICATION_STATUSES } from '../../constants';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -40,11 +41,7 @@ function ApplicationRow({
 
   const [currentApplication] = useCurrentApplication();
 
-  const { checkPin } = usePinApplications();
-
   const { theme, styles } = useTheme({ styles: getApplicationRowStyles() });
-
-  const applicationPinned = checkPin(application.chainID);
 
   const toggleDeleteDefaultApplicationModal = (bool) => {
     if (bool) {
@@ -60,6 +57,24 @@ function ApplicationRow({
       );
     }
     return modal.close();
+  };
+
+  const renderStatus = (status) => {
+    const baseProps = { height: 14, width: 16, style: { marginRight: 12 } };
+
+    switch (status) {
+      case APPLICATION_STATUSES.active:
+        return <CheckSvg color={colors.light.ufoGreen} {...baseProps} />;
+
+      case APPLICATION_STATUSES.registered:
+        return <CheckSvg color={colors.light.ultramarineBlue} {...baseProps} />;
+
+      case APPLICATION_STATUSES.terminated:
+        return <WarningSvg {...baseProps} />;
+
+      default:
+        return null;
+    }
   };
 
   const { leftActions, rightActions } = useApplicationRowActions({
@@ -89,13 +104,7 @@ function ApplicationRow({
           </View>
 
           <View style={styles.applicationNameContainer}>
-            {applicationPinned && (
-              <PinSvg
-                color={colors.light.ultramarineBlue}
-                style={{ marginRight: 12 }}
-                variant="fill"
-              />
-            )}
+            {renderStatus(application.status)}
 
             {showActive && currentApplication.data?.chainID === application.chainID && (
               <View style={{ marginRight: 12 }}>
@@ -106,7 +115,7 @@ function ApplicationRow({
             {showCaret && (
               <CaretSvg
                 direction="right"
-                color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
+                color={theme === themes.light ? colors.light.blueGray : colors.dark.mountainMist}
               />
             )}
           </View>
