@@ -86,42 +86,50 @@ function ApplicationRow({
   });
 
   return (
-    <>
-      <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
-        <TouchableOpacity
-          style={[styles.applicationContainer, styles.theme.applicationContainer]}
-          onPress={onPress}
-        >
-          <View style={styles.applicationNameContainer}>
-            <Image
-              source={{ uri: application.logo.png }}
-              style={{ ...styles.applicationLogoImage }}
+    <Swipeable
+      key={application.chainID}
+      enabled={application.status !== APPLICATION_STATUSES.terminated}
+      leftActions={leftActions}
+      rightActions={rightActions}
+    >
+      <TouchableOpacity
+        style={[
+          styles.applicationContainer,
+          styles.theme.applicationContainer,
+          application.status === APPLICATION_STATUSES.terminated &&
+            styles.disabledApplicationContainer,
+        ]}
+        onPress={onPress}
+      >
+        <View style={styles.applicationNameContainer}>
+          <Image
+            source={{ uri: application.logo.png }}
+            style={{ ...styles.applicationLogoImage }}
+          />
+
+          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
+            {application.chainName}
+          </P>
+        </View>
+
+        <View style={styles.applicationNameContainer}>
+          {renderStatus(application.status)}
+
+          {showActive && currentApplication.data?.chainID === application.chainID && (
+            <View style={{ marginRight: 12 }}>
+              <CircleCheckedSvg variant="fill" />
+            </View>
+          )}
+
+          {showCaret && (
+            <CaretSvg
+              direction="right"
+              color={theme === themes.light ? colors.light.blueGray : colors.dark.mountainMist}
             />
-
-            <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-              {application.chainName}
-            </P>
-          </View>
-
-          <View style={styles.applicationNameContainer}>
-            {renderStatus(application.status)}
-
-            {showActive && currentApplication.data?.chainID === application.chainID && (
-              <View style={{ marginRight: 12 }}>
-                <CircleCheckedSvg variant="fill" />
-              </View>
-            )}
-
-            {showCaret && (
-              <CaretSvg
-                direction="right"
-                color={theme === themes.light ? colors.light.blueGray : colors.dark.mountainMist}
-              />
-            )}
-          </View>
-        </TouchableOpacity>
-      </Swipeable>
-    </>
+          )}
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 }
 

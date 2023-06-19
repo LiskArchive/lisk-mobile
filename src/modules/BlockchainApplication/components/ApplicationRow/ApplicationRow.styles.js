@@ -15,6 +15,9 @@ export default function getBlockchainApplicationRowStyles() {
         paddingBottom: 16,
         borderBottomWidth: 1,
       },
+      disabledApplicationContainer: {
+        opacity: 0.5,
+      },
       applicationNameContainer: {
         flexDirection: 'row',
         alignItems: 'center',
