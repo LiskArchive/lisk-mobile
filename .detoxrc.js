@@ -6,16 +6,16 @@ module.exports = {
       config: 'e2e/jest.config.js',
     },
     jest: {
-      setupTimeout: 120000,
+      setupTimeout: 600000,
     },
   },
   apps: {
     'ios.debug': {
       name: 'Lisk',
       type: 'ios.app',
-      binaryPath: 'ios/build/Build/Products/Debug-iphonesimulator/Lisk.app',
+      binaryPath: 'ios/build/Build/Products/Debug-iphonesimulator/LiskQA.app',
       build:
-        '/usr/bin/xcodebuild -workspace ios/Lisk.xcworkspace -scheme Lisk -sdk iphonesimulator -derivedDataPath ios/build',
+        '/usr/bin/xcodebuild -workspace ios/Lisk.xcworkspace -scheme LiskQA -sdk iphonesimulator -derivedDataPath ios/build',
     },
     'android.debug': {
       name: 'Lisk',

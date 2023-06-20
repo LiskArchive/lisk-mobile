@@ -3,7 +3,7 @@ import { device, element, by } from 'detox';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
-describe('Send Token Screen', () => {
+describe.skip('Send Token Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');

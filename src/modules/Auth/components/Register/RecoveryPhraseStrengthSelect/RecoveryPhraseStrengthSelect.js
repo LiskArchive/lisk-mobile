@@ -50,6 +50,7 @@ export default function RecoveryPhraseStrengthSelect({
             value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words'] &&
               styles.theme.activeOptionButton,
           ]}
+          testID="12-word-srp"
         >
           <View style={[styles.optionHeader]}>
             <B style={[styles.optionTitle, styles.theme.optionTitle]}>
@@ -78,6 +79,7 @@ export default function RecoveryPhraseStrengthSelect({
             value === RECOVERY_PHRASE_STRENGTHS_PER_WORD['24words'] &&
               styles.theme.activeOptionButton,
           ]}
+          testID="24-word-srp"
         >
           <View style={[styles.optionHeader]}>
             <B style={[styles.optionTitle, styles.theme.optionTitle]}>
@@ -101,7 +103,12 @@ export default function RecoveryPhraseStrengthSelect({
       </View>
 
       <View style={[styles.footer]}>
-        <PrimaryButton onPress={nextStep} disabled={!value} style={styles.button}>
+        <PrimaryButton
+          onPress={nextStep}
+          disabled={!value}
+          style={styles.button}
+          testID="continue-to-srp"
+        >
           {i18next.t('commons.buttons.continue')}
         </PrimaryButton>
       </View>

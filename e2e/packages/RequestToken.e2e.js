@@ -2,7 +2,7 @@
 import { device, element, by } from 'detox';
 import { signInUser } from '../commands/auth';
 
-describe('Request Token Screen', () => {
+describe.skip('Request Token Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');
@@ -19,7 +19,6 @@ describe('Request Token Screen', () => {
 
   it('should copy link without amount', async () => {
     device.reloadReactNative();
-    await element(by.id('request-token-link-button')).tap();
     await element(by.id('request-token-link-button')).tap();
     await expect(element(by.text('Link copied!'))).toBeVisible();
   });

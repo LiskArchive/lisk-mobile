@@ -1,10 +1,11 @@
+ENV['SWIFT_VERSION'] = '5'
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'Lisk' do
+abstract_target 'LiskApp' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -47,10 +48,18 @@ target 'Lisk' do
     end
   end
 
-  target 'LiskTests' do
+  target 'Lisk' do
     inherit! :complete
-    # Pods for testing
+    
+    target 'LiskTests' do
+      inherit! :complete
+      # Pods for testing
+    end
   end
+  
+  target 'LiskQA' do
+  end
+
 end
 
 target 'Lisk-tvOS' do

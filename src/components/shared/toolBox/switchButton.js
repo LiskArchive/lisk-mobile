@@ -5,7 +5,7 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useTheme } from 'contexts/ThemeContext';
 import { themes, colors } from 'constants/styleGuide';
 
-const SwitchButton = ({ value, height, onChange, style }) => {
+const SwitchButton = ({ value, height, onChange, style, testID }) => {
   const { theme } = useTheme();
 
   const handlePress = (...params) => {
@@ -18,6 +18,7 @@ const SwitchButton = ({ value, height, onChange, style }) => {
 
   return (
     <Switch
+      testID={testID}
       value={value}
       height={height || 26}
       style={style}
