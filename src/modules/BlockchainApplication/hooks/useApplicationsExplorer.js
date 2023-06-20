@@ -36,7 +36,7 @@ export function useApplicationsExplorer(mode = 'manage') {
   }
 
   // sort by pinned applications
-  data = data.sort((appI, appJ) => {
+  data = data?.sort((appI, appJ) => {
     const isIPinned = checkPin(appI.chainID);
     const isJPinned = checkPin(appJ.chainID);
 
