@@ -9,15 +9,17 @@ import { P } from 'components/shared/toolBox/typography';
 import { colors, themes } from 'constants/styleGuide';
 import Swipeable from 'components/shared/Swipeable';
 import ResultScreen from 'components/screens/ResultScreen';
-import WarningSvg from 'assets/svgs/WarningSvg';
+import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
+import WarningSvg from 'assets/svgs/WarningSvg';
 
 import { useApplicationRowActions } from './ApplicationRow.hooks';
 import getApplicationRowStyles from './ApplicationRow.styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
 import { APPLICATION_STATUSES } from '../../constants';
+import { usePinApplications } from '../../hooks/usePinApplications';
 
 /**
  * Renders a Blockchain Application row for the Blockchain Applications component.
@@ -40,6 +42,8 @@ function ApplicationRow({
   const modal = useModal();
 
   const [currentApplication] = useCurrentApplication();
+
+  const { checkPin } = usePinApplications();
 
   const { theme, styles } = useTheme({ styles: getApplicationRowStyles() });
 
@@ -85,6 +89,8 @@ function ApplicationRow({
     deleteApplication,
   });
 
+  const isPinned = checkPin(application.chainID);
+
   return (
     <Swipeable
       key={application.chainID}
@@ -94,25 +100,27 @@ function ApplicationRow({
     >
       <TouchableOpacity
         style={[
-          styles.applicationContainer,
-          styles.theme.applicationContainer,
-          application.status === APPLICATION_STATUSES.terminated &&
-            styles.disabledApplicationContainer,
+          styles.container,
+          styles.theme.container,
+          application.status === APPLICATION_STATUSES.terminated && styles.disabledContainer,
         ]}
         onPress={onPress}
       >
-        <View style={styles.applicationNameContainer}>
-          <Image
-            source={{ uri: application.logo.png }}
-            style={{ ...styles.applicationLogoImage }}
-          />
+        <View style={styles.nameContainer}>
+          {isPinned && (
+            <PinSvg
+              variant="fill"
+              color={colors.light.ultramarineBlue}
+              style={{ marginRight: 8 }}
+            />
+          )}
 
-          <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-            {application.chainName}
-          </P>
+          <Image source={{ uri: application.logo.png }} style={{ ...styles.logoImage }} />
+
+          <P style={[styles.nameLabel, styles.theme.nameLabel]}>{application.chainName}</P>
         </View>
 
-        <View style={styles.applicationNameContainer}>
+        <View style={styles.nameContainer}>
           {renderStatus(application.status)}
 
           {showActive && currentApplication.data?.chainID === application.chainID && (

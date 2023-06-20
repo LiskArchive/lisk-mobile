@@ -13,7 +13,9 @@ export function useApplicationRowActions({
   toggleDeleteDefaultApplicationModal,
   deleteApplication,
 }) {
-  const { togglePin } = usePinApplications();
+  const { checkPin, togglePin } = usePinApplications();
+
+  const isPinned = checkPin(application.chainID);
 
   let leftActions;
   let rightActions;
@@ -22,15 +24,12 @@ export function useApplicationRowActions({
     case 'explore':
       leftActions = [
         {
-          title: !application.isPinned
-            ? i18next.t('application.explore.applicationList.pinText')
-            : i18next.t('application.explore.applicationList.unpinText'),
-          color: colors.light.ufoGreen,
+          title: isPinned
+            ? i18next.t('application.explore.applicationList.unpinText')
+            : i18next.t('application.explore.applicationList.pinText'),
+          color: isPinned ? colors.light.furyRed : colors.light.ufoGreen,
           icon: () => (
-            <PinSvg
-              color={colors.light.white}
-              variant={!application.isPinned ? 'outline' : 'closed'}
-            />
+            <PinSvg variant={!isPinned ? 'outline' : 'closed'} color={colors.light.white} />
           ),
           onPress: () => togglePin(application.chainID),
         },
