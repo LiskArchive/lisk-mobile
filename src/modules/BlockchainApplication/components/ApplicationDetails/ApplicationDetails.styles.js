@@ -26,8 +26,11 @@ export default {
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
+    footer: {
+      padding: boxes.boxPadding,
+    },
     logoContainer: {
-      marginTop: -32,
+      marginTop: -35,
       marginBottom: Platform.select({ ios: -32, android: 10 }),
       height: 70,
       width: 70,

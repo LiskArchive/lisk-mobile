@@ -29,12 +29,8 @@ import getStyles from './ApplicationDetails.styles';
 import ApplicationDetailsSkeleton from '../ApplicationDetailsSkeleton/ApplicationDetailsSkeleton';
 
 /**
- *
- * @param {Object} props
- * @param {'manage' | 'explore'} variant
- * 'manage' -> uses plain app background header and application name by the top
- * 'explore' -> uses app background with patterns
- *
+ * Renders the details of a given application in exploring or manage mode.
+ * @param {RouteProp} route - Navigation route (optional).
  */
 export default function ApplicationDetails({ route }) {
   const navigation = useNavigation();
@@ -71,8 +67,8 @@ export default function ApplicationDetails({ route }) {
         isLoading={applications.isLoading}
         error={applications.isError}
         renderData={(data) => (
-          <ScrollView>
-            {variant === 'explore' && (
+          <>
+            <ScrollView>
               <LinearGradient
                 colors={[colors.light.ultramarineBlue, colors.light.inkBlue]}
                 start={{ x: 0, y: 0 }}
@@ -87,164 +83,152 @@ export default function ApplicationDetails({ route }) {
 
                 <HeaderBackButton color={colors.light.white} onPress={navigation.goBack} />
               </LinearGradient>
-            )}
-
-            {variant === 'manage' && (
-              <View
-                style={[
-                  styles.header,
-                  styles.theme.header,
-                  styles.container,
-                  data.backgroundColor && {
-                    backgroundColor: data.backgroundColor,
-                  },
-                ]}
-                resizeMode="stretch"
-              >
-                <HeaderBackButton title={data.chainName} onPress={navigation.goBack} />
-              </View>
-            )}
-
-            <DataRenderer
-              data={data.logo}
-              renderData={(logo) => (
-                <Image
-                  style={[styles.logoContainer, styles.theme.logoContainer]}
-                  source={{ uri: logo.png }}
-                />
-              )}
-              hideOnEmpty
-            />
-
-            <SafeAreaView style={[styles.flex, styles.body]}>
-              <View style={styles.titleRow}>
-                <DataRenderer
-                  data={data.chainName}
-                  renderData={(chainName) => (
-                    <>
-                      <H3 style={[styles.title, styles.theme.title]}>{chainName}</H3>
-                      <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-                        <PinSvg variant={isPinned ? 'fill' : 'outline'} width={22} height={22} />
-                      </TouchableOpacity>
-                    </>
-                  )}
-                  hideOnEmpty
-                />
-              </View>
-
-              <View style={[styles.row, styles.projectPageContainer]}>
-                <DataRenderer
-                  data={data.projectPage}
-                  renderData={(projectPage) => (
-                    <>
-                      <UrlSvg size={1} />
-
-                      <A onPress={() => handleUrlPress(projectPage)} style={[styles.url]}>
-                        {projectPage}
-                      </A>
-                    </>
-                  )}
-                  hideOnEmpty
-                  style={{ empty: styles.url }}
-                />
-              </View>
 
               <DataRenderer
-                data={data.deposited}
-                renderData={(deposited) => (
-                  <View style={[styles.row, styles.depositedContainer]}>
-                    <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
-                    <P style={styles.amount}>{`${deposited.toLocaleString('en-US')} LSK`}</P>
-                  </View>
+                data={data.logo}
+                renderData={(logo) => (
+                  <Image
+                    style={[styles.logoContainer, styles.theme.logoContainer]}
+                    source={{ uri: logo.png }}
+                  />
                 )}
                 hideOnEmpty
-                style={{ empty: styles.amount }}
               />
 
-              <View style={[styles.divider]} />
+              <SafeAreaView style={[styles.flex, styles.body]}>
+                <View style={styles.titleRow}>
+                  <DataRenderer
+                    data={data.chainName}
+                    renderData={(chainName) => (
+                      <>
+                        <H3 style={[styles.title, styles.theme.title]}>{chainName}</H3>
+                        <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
+                          <PinSvg variant={isPinned ? 'fill' : 'outline'} width={22} height={22} />
+                        </TouchableOpacity>
+                      </>
+                    )}
+                    hideOnEmpty
+                  />
+                </View>
 
-              <View style={styles.stats}>
-                <View style={styles.flex}>
-                  <View style={styles.item}>
-                    <View style={[styles.labelContainer]}>
-                      <P style={styles.label}>{i18next.t('application.details.chainID')}</P>
+                <View style={[styles.row, styles.projectPageContainer]}>
+                  <DataRenderer
+                    data={data.projectPage}
+                    renderData={(projectPage) => (
+                      <>
+                        <UrlSvg size={1} />
 
-                      <InfoToggler
-                        title={i18next.t('application.details.chainID')}
-                        description={i18next.t('application.details.chainIDDescription')}
-                        style={{ toggleButtonIcon: { width: 16, marginLeft: 4 } }}
+                        <A onPress={() => handleUrlPress(projectPage)} style={[styles.url]}>
+                          {projectPage}
+                        </A>
+                      </>
+                    )}
+                    hideOnEmpty
+                    style={{ empty: styles.url }}
+                  />
+                </View>
+
+                <DataRenderer
+                  data={data.deposited}
+                  renderData={(deposited) => (
+                    <View style={[styles.row, styles.depositedContainer]}>
+                      <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
+                      <P style={styles.amount}>{`${deposited.toLocaleString('en-US')} LSK`}</P>
+                    </View>
+                  )}
+                  hideOnEmpty
+                  style={{ empty: styles.amount }}
+                />
+
+                <View style={[styles.divider]} />
+
+                <View style={styles.stats}>
+                  <View style={styles.flex}>
+                    <View style={styles.item}>
+                      <View style={[styles.labelContainer]}>
+                        <P style={styles.label}>{i18next.t('application.details.chainID')}</P>
+
+                        <InfoToggler
+                          title={i18next.t('application.details.chainID')}
+                          description={i18next.t('application.details.chainIDDescription')}
+                          style={{ toggleButtonIcon: { width: 16, marginLeft: 4 } }}
+                        />
+                      </View>
+
+                      <P style={[styles.value, styles.theme.value]}>{chainID}</P>
+                    </View>
+
+                    <View style={styles.item}>
+                      <View style={[styles.labelContainer]}>
+                        <P style={styles.label}>{i18next.t('application.details.status')}</P>
+                      </View>
+
+                      <DataRenderer
+                        data={data.status}
+                        renderData={(status) => (
+                          <View style={[styles.stateContainer, styles[`${status}Container`]]}>
+                            <P style={[styles.value, styles[status], styles.theme[status]]}>
+                              {status}
+                            </P>
+                          </View>
+                        )}
+                        hideOnEmpty
+                        style={{
+                          empty: [styles.value, styles[data.status], styles.theme[data.status]],
+                        }}
                       />
                     </View>
-
-                    <P style={[styles.value, styles.theme.value]}>{chainID}</P>
                   </View>
 
-                  <View style={styles.item}>
-                    <View style={[styles.labelContainer]}>
-                      <P style={styles.label}>{i18next.t('application.details.status')}</P>
-                    </View>
-
+                  <View style={styles.flex}>
                     <DataRenderer
-                      data={data.status}
-                      renderData={(status) => (
-                        <View style={[styles.stateContainer, styles[`${status}Container`]]}>
-                          <P style={[styles.value, styles[status], styles.theme[status]]}>
-                            {status}
+                      data={data.lastUpdated}
+                      renderData={(lastUpdated) => (
+                        <View style={styles.item}>
+                          <View style={[styles.labelContainer]}>
+                            <P style={styles.label}>
+                              {i18next.t('application.details.lastUpdated')}
+                            </P>
+                          </View>
+
+                          <P style={[styles.value, styles.theme.value]}>
+                            {moment(lastUpdated * 1000).format('D MMM YYYY')}
                           </P>
                         </View>
                       )}
                       hideOnEmpty
-                      style={{
-                        empty: [styles.value, styles[data.status], styles.theme[data.status]],
-                      }}
+                      style={{ empty: [styles.value, styles.theme.value] }}
+                    />
+
+                    <DataRenderer
+                      data={data.lastCertificateHeight}
+                      renderData={(lastCertificateHeight) => (
+                        <View style={styles.item}>
+                          <View style={[styles.labelContainer]}>
+                            <P style={styles.label}>
+                              {i18next.t('application.details.lastCertificateHeight')}
+                            </P>
+                          </View>
+
+                          <P style={[styles.value, styles.theme.value]}>{lastCertificateHeight}</P>
+                        </View>
+                      )}
+                      hideOnEmpty
+                      style={{ empty: [styles.value, styles.theme.value] }}
                     />
                   </View>
                 </View>
+              </SafeAreaView>
+            </ScrollView>
 
-                <View style={styles.flex}>
-                  <DataRenderer
-                    data={data.lastUpdated}
-                    renderData={(lastUpdated) => (
-                      <View style={styles.item}>
-                        <View style={[styles.labelContainer]}>
-                          <P style={styles.label}>{i18next.t('application.details.lastUpdated')}</P>
-                        </View>
-
-                        <P style={[styles.value, styles.theme.value]}>
-                          {moment(lastUpdated * 1000).format('D MMM YYYY')}
-                        </P>
-                      </View>
-                    )}
-                    hideOnEmpty
-                    style={{ empty: [styles.value, styles.theme.value] }}
-                  />
-
-                  <DataRenderer
-                    data={data.lastCertificateHeight}
-                    renderData={(lastCertificateHeight) => (
-                      <View style={styles.item}>
-                        <View style={[styles.labelContainer]}>
-                          <P style={styles.label}>
-                            {i18next.t('application.details.lastCertificateHeight')}
-                          </P>
-                        </View>
-
-                        <P style={[styles.value, styles.theme.value]}>{lastCertificateHeight}</P>
-                      </View>
-                    )}
-                    hideOnEmpty
-                    style={{ empty: [styles.value, styles.theme.value] }}
-                  />
-                </View>
-              </View>
-
-              {variant === 'manage' && (
-                <PrimaryButton onClick={handleAddApplicationClick} noTheme>
+            {variant === 'manage' && (
+              <SafeAreaView style={[styles.footer]}>
+                <PrimaryButton onPress={handleAddApplicationClick}>
                   {i18next.t('application.manage.add.confirmButtonText')}
                 </PrimaryButton>
-              )}
-            </SafeAreaView>
-          </ScrollView>
+              </SafeAreaView>
+            )}
+          </>
         )}
         renderLoading={() => (
           <>
