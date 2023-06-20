@@ -16,7 +16,7 @@ export default {
       paddingBottom: safeAreaPaddingTop,
     },
     header: {
-      height: 230,
+      height: 200,
       position: 'relative',
       overflow: 'hidden',
       paddingTop: safeAreaPaddingTop,
@@ -33,6 +33,8 @@ export default {
       width: 70,
       borderRadius: 35,
       alignSelf: 'center',
+      borderWidth: 1,
+      borderColor: colors.light.platinumGray,
     },
     titleRow: {
       flexDirection: 'row',
@@ -77,13 +79,17 @@ export default {
     },
     url: {
       fontSize: fonts.size.input,
-      marginLeft: 4,
+      marginLeft: 8,
       color: colors.light.ultramarineBlue,
     },
     stats: {
       flex: 1,
       flexDirection: 'row',
-      marginTop: 32,
+    },
+    divider: {
+      marginVertical: 24,
+      borderTopWidth: 1,
+      borderColor: colors.light.platinumGray,
     },
     item: {
       marginBottom: 20,

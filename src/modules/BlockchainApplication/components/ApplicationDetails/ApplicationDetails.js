@@ -123,7 +123,7 @@ export default function ApplicationDetails({ route }) {
                     <>
                       <H3 style={[styles.title, styles.theme.title]}>{chainName}</H3>
                       <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-                        <PinSvg variant={isPinned ? 'fill' : 'outline'} width={24} height={24} />
+                        <PinSvg variant={isPinned ? 'fill' : 'outline'} width={22} height={22} />
                       </TouchableOpacity>
                     </>
                   )}
@@ -159,6 +159,8 @@ export default function ApplicationDetails({ route }) {
                 hideOnEmpty
                 style={{ empty: styles.amount }}
               />
+
+              <View style={[styles.divider]} />
 
               <View style={styles.stats}>
                 <View style={styles.flex}>
