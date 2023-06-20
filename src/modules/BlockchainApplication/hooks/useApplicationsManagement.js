@@ -15,7 +15,7 @@ import { isMainchainApplication } from '../utils';
 export function useApplicationsManagement() {
   const { applications } = useApplications();
 
-  const { checkPin } = usePinApplications();
+  const { checkPin, togglePin } = usePinApplications();
 
   const {
     addApplication: addApplicationToStorage,
@@ -43,6 +43,8 @@ export function useApplicationsManagement() {
         await deleteApplicationFromStorage(chainID);
 
         applications.dispatchData({ type: 'delete', chainID });
+
+        togglePin(chainID);
       } catch (_error) {
         DropDownHolder.error(
           i18next.t('Error'),
@@ -50,7 +52,7 @@ export function useApplicationsManagement() {
         );
       }
     },
-    [deleteApplicationFromStorage, applications]
+    [deleteApplicationFromStorage, applications, togglePin]
   );
 
   // sort by mainchain and pinned applications
