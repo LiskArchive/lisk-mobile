@@ -1,4 +1,4 @@
-import { themes, colors, boxes, fonts } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getDeleteBlockchainApplicationStyles() {
   return {
@@ -12,6 +12,9 @@ export default function getDeleteBlockchainApplicationStyles() {
       },
       title: {
         textAlign: 'center',
+        fontWeight: '600',
+        fontSize: fonts.size.h2,
+        marginBottom: 8,
       },
       descriptionText: {
         textAlign: 'center',
@@ -19,7 +22,7 @@ export default function getDeleteBlockchainApplicationStyles() {
       },
       applicationNameContainer: {
         alignItems: 'center',
-        marginBottom: 16,
+        marginBottom: 24,
       },
       applicationLogoImage: {
         borderRadius: 50,
@@ -28,16 +31,15 @@ export default function getDeleteBlockchainApplicationStyles() {
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
         marginTop: 16,
-        marginBottom: 8,
+        marginBottom: 12,
       },
       applicationNameLabel: {
-        fontSize: fonts.size.h3,
+        fontSize: fonts.size.h4,
         maxWidth: '90%',
         fontWeight: '600',
       },
       submitButton: {
-        marginTop: boxes.boxPadding,
-        marginBottom: boxes.boxPadding,
+        marginTop: 32,
       },
     },
     [themes.light]: {
@@ -51,7 +53,7 @@ export default function getDeleteBlockchainApplicationStyles() {
         color: colors.light.zodiacBlue,
       },
       descriptionText: {
-        color: colors.light.zodiacBlue,
+        color: colors.light.smoothGray,
       },
     },
 
@@ -66,7 +68,7 @@ export default function getDeleteBlockchainApplicationStyles() {
         color: colors.dark.white,
       },
       descriptionText: {
-        color: colors.dark.white,
+        color: colors.dark.mountainMist,
       },
     },
   };
