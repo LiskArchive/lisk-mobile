@@ -1,6 +1,8 @@
+/* eslint-disable max-statements */
 import { useApplicationsMetaQuery } from '../api/useApplicationsMetaQuery';
 import { APPLICATION_STATUSES } from '../constants';
 import { isMainchainApplication, transformApplicationsMetaQueryResult } from '../utils';
+import { usePinApplications } from './usePinApplications';
 
 /**
  * Hook that handle all the logic related to blockchain applications explorer.
@@ -8,6 +10,8 @@ import { isMainchainApplication, transformApplicationsMetaQueryResult } from '..
  * @returns {QueryResult<Array<Application>>} Available blockchain applications for users exploring.
  */
 export function useApplicationsExplorer(mode = 'manage') {
+  const { checkPin } = usePinApplications();
+
   let config = {};
 
   // include on-chain data on the query result on exploring mode.
@@ -30,6 +34,14 @@ export function useApplicationsExplorer(mode = 'manage') {
   if (mode === 'manage') {
     data = data?.filter((app) => app.status !== APPLICATION_STATUSES.unregistered);
   }
+
+  // sort by pinned applications
+  data = data.sort((appI, appJ) => {
+    const isIPinned = checkPin(appI.chainID);
+    const isJPinned = checkPin(appJ.chainID);
+
+    return isJPinned - isIPinned;
+  });
 
   return { data, ...applicationsFullDataQuery };
 }
