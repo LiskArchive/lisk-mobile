@@ -57,6 +57,7 @@ function ApplicationRow({
           continueButtonTitle={i18next.t(
             'application.manage.deleteDefaultApplicationModal.buttonText'
           )}
+          styles={{ footer: styles.deleteDefaultApplicationModalFooter }}
         />
       );
     }

@@ -3,7 +3,9 @@ import i18next from 'i18next';
 
 import DropDownHolder from 'utilities/alert';
 import { useApplications } from '../context/ApplicationsContext';
+import { usePinApplications } from './usePinApplications';
 import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
+import { isMainchainApplication } from '../utils';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
@@ -12,6 +14,8 @@ import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
  */
 export function useApplicationsManagement() {
   const { applications } = useApplications();
+
+  const { checkPin } = usePinApplications();
 
   const {
     addApplication: addApplicationToStorage,
@@ -49,8 +53,18 @@ export function useApplicationsManagement() {
     [deleteApplicationFromStorage, applications]
   );
 
+  // sort by mainchain and pinned applications
+  const data = applications?.data?.sort((appI, appJ) => {
+    const isIMainchain = isMainchainApplication(appI.chainID);
+    const isJMainchain = isMainchainApplication(appJ.chainID);
+    const isIPinned = checkPin(appI.chainID);
+    const isJPinned = checkPin(appJ.chainID);
+
+    return isJMainchain - isIMainchain || isJPinned - isIPinned;
+  });
+
   return {
-    applications,
+    applications: { ...applications, data },
     addApplication,
     deleteApplication,
   };

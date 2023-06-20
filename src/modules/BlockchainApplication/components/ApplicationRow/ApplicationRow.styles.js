@@ -32,6 +32,10 @@ export default function getBlockchainApplicationRowStyles() {
         marginRight: 15,
         fontWeight: '600',
       },
+      deleteDefaultApplicationModalFooter: {
+        padding: 0,
+        marginTop: 24,
+      },
     },
     [themes.light]: {
       container: {

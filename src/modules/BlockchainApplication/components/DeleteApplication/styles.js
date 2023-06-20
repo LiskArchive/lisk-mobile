@@ -12,13 +12,11 @@ export default function getDeleteBlockchainApplicationStyles() {
       },
       title: {
         textAlign: 'center',
-        fontWeight: '600',
-        fontSize: fonts.size.h2,
         marginBottom: 8,
       },
       descriptionText: {
         textAlign: 'center',
-        fontSize: fonts.size.base,
+        fontSize: fonts.size.input,
       },
       applicationNameContainer: {
         alignItems: 'center',
