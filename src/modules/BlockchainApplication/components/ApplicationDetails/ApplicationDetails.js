@@ -14,6 +14,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H3, P, A } from 'components/shared/toolBox/typography';
+import InfoToggler from 'components/shared/InfoToggler';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import WavesPatternSvg from 'assets/svgs/WavesPatternSvg';
@@ -165,13 +166,23 @@ export default function ApplicationDetails({ route }) {
               <View style={styles.stats}>
                 <View style={styles.flex}>
                   <View style={styles.item}>
-                    <P style={styles.smallTitle}>{i18next.t('application.details.chainID')}</P>
+                    <View style={[styles.labelContainer]}>
+                      <P style={styles.label}>{i18next.t('application.details.chainID')}</P>
+
+                      <InfoToggler
+                        title={i18next.t('application.details.chainID')}
+                        description={i18next.t('application.details.chainIDDescription')}
+                        style={{ toggleButtonIcon: { width: 16, marginLeft: 4 } }}
+                      />
+                    </View>
 
                     <P style={[styles.value, styles.theme.value]}>{chainID}</P>
                   </View>
 
                   <View style={styles.item}>
-                    <P style={styles.smallTitle}>{i18next.t('application.details.status')}</P>
+                    <View style={[styles.labelContainer]}>
+                      <P style={styles.label}>{i18next.t('application.details.status')}</P>
+                    </View>
 
                     <DataRenderer
                       data={data.status}
@@ -195,9 +206,9 @@ export default function ApplicationDetails({ route }) {
                     data={data.lastUpdated}
                     renderData={(lastUpdated) => (
                       <View style={styles.item}>
-                        <P style={styles.smallTitle}>
-                          {i18next.t('application.details.lastUpdated')}
-                        </P>
+                        <View style={[styles.labelContainer]}>
+                          <P style={styles.label}>{i18next.t('application.details.lastUpdated')}</P>
+                        </View>
 
                         <P style={[styles.value, styles.theme.value]}>
                           {moment(lastUpdated * 1000).format('D MMM YYYY')}
@@ -212,9 +223,11 @@ export default function ApplicationDetails({ route }) {
                     data={data.lastCertificateHeight}
                     renderData={(lastCertificateHeight) => (
                       <View style={styles.item}>
-                        <P style={styles.smallTitle}>
-                          {i18next.t('application.details.lastCertificateHeight')}
-                        </P>
+                        <View style={[styles.labelContainer]}>
+                          <P style={styles.label}>
+                            {i18next.t('application.details.lastCertificateHeight')}
+                          </P>
+                        </View>
 
                         <P style={[styles.value, styles.theme.value]}>{lastCertificateHeight}</P>
                       </View>

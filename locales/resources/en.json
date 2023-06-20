@@ -290,7 +290,8 @@
       "lastUpdated": "Last updated",
       "status": "Status",
       "lastCertificateHeight": "Last certificate height",
-      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again."
+      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again.",
+      "chainIDDescription": "Unique identifier of a chain account. It is used when sending tokens to a specific chain and is also prepended for signing to protect against replay attacks."
     },
     "manage": {
       "add": {

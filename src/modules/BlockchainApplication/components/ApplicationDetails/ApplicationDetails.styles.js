@@ -67,10 +67,14 @@ export default {
       color: colors.light.blueGray,
       marginRight: 4,
     },
-    smallTitle: {
+    labelContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 8,
+    },
+    label: {
       fontSize: fonts.size.input,
       color: colors.light.blueGray,
-      marginBottom: 8,
     },
     amount: {
       color: colors.light.ultramarineBlue,
