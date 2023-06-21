@@ -13,9 +13,9 @@ import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsLocalStorage } from '../../hooks/useApplicationsLocalStorage';
 import { isMainchainApplication } from '../../utils';
 
-import getAddApplicationStyles from './styles';
+import getAddApplicationStyles from './AddApplicationScreen.styles';
 
-export default function AddApplication() {
+export default function AddApplicationScreen() {
   const navigation = useNavigation();
 
   const applications = useApplicationsExplorer();
