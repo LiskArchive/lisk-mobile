@@ -27,7 +27,7 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  *  {String} code - specified the possible codes in the description above
  *  {String} message - A descriptive message for what went wrong
  */
-export const validateRecoveryPhrase = (recoveryPhrase) => {
+export const validateRecoveryPhrase = (recoveryPhrase = '') => {
   if (recoveryPhrase.trim().length === 0) {
     return [{ code: 'empty_value', message: 'Invalid secret recovery phrase.' }];
   }

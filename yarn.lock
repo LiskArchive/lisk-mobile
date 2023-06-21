@@ -7552,7 +7552,7 @@ internal-slot@^1.0.3, internal-slot@^1.0.5:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-invariant@*, invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.4, invariant@^2.2.x:
+invariant@*, invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -11319,12 +11319,10 @@ react-native-screenshot-prevent@^1.0.5:
   resolved "https://registry.yarnpkg.com/react-native-screenshot-prevent/-/react-native-screenshot-prevent-1.1.1.tgz#033c26096c0c2c10f185658c7c51e396051df88e"
   integrity sha512-XMjpQFnxsqTVjS17Wd7JHHj+HvUTDk31y6/NmgmBwxFTuRnp2VuFSA7vxAG0DUpfrZrtSac/AS3CBgevNLVziQ==
 
-react-native-shake@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-shake/-/react-native-shake-3.5.0.tgz#6eb1c6bfa59065b2b6b7aa7250532aa6558b41bc"
-  integrity sha512-Sf3xFybq6Ps0eq4K5auGgSHQihKn+ixLhikIerhYbB3HhVeB38Un6vei7k3ugMWxcUCUG7kbVEIn3a2g9afkpA==
-  dependencies:
-    invariant "^2.2.x"
+react-native-shake@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-shake/-/react-native-shake-5.3.2.tgz#ea20baab1b17d848f53663b19161d566c30ec197"
+  integrity sha512-UpcYKagxtfyQjKAiiltpip3cq/HGNTWQOHJ1BtuoNzbxh+wrGeACH1mnvIC8mONCwPGObZrY062H/yxdA3lAAA==
 
 react-native-share@^7.5.0:
   version "7.9.1"

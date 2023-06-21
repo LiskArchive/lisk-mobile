@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import RNShake from 'react-native-shake';
 
 import Register from 'modules/Auth/components/Register/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
@@ -33,21 +34,41 @@ import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
+
+import { settingsUpdated } from 'modules/Settings/store/actions';
+
 import AppNavigator from './components/AppNavigator';
 
 import navigationOptions from './options';
 import navigationLinking from './linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
+import { useAccounts } from '../modules/Accounts/hooks/useAccounts';
 
 const StackNavigator = createStackNavigator();
 
 export default function Navigator({ children }) {
   const { theme } = useSelector((state) => state.settings);
+  const discrete = useSelector((state) => state.settings.discrete);
+  const dispatch = useDispatch();
+  const { accounts } = useAccounts();
 
   const themeColors = {
     dark: theme === 'light',
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
+
+  useEffect(() => {
+    RNShake.addListener(() => {
+      if (accounts?.length) {
+        dispatch(
+          settingsUpdated({
+            discrete: !discrete,
+          })
+        );
+      }
+    });
+    return () => RNShake.removeAllListeners();
+  }, [discrete]);
 
   return (
     <SafeAreaProvider>
