@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useForm } from 'react-hook-form';
+import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { H2 } from 'components/shared/toolBox/typography';
@@ -22,7 +23,9 @@ export default function EditAccountForm({ account, mode, onCompleted, style }) {
   return (
     <View style={[styles.container, style?.container]}>
       {mode === 'modal' && (
-        <H2 style={[styles.title, styles.theme.title, style?.title]}>Edit account name</H2>
+        <H2 style={[styles.title, styles.theme.title, style?.title]} testID="edit-account">
+          {i18next.t('accounts.editAccount.title')}
+        </H2>
       )}
 
       <Stepper currentIndex={0}>

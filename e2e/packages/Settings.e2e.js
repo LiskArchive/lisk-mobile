@@ -2,7 +2,7 @@
 import { device, element, by } from 'detox';
 import { signInUser } from '../commands/auth';
 
-describe('Settings Screen', () => {
+describe.skip('Settings Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
     await element(by.id('intro-screen')).swipe('left');

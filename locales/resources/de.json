@@ -494,6 +494,7 @@
       "backButtonText": "Zurück"
     },
     "editAccount": {
+      "title": "",
       "editAccountSuccess": "",
       "continue": ""
     },

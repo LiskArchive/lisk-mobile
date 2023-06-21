@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
-import { BackHandler, SafeAreaView, View } from 'react-native';
+import { BackHandler, SafeAreaView, View, ScrollView } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -155,7 +155,7 @@ export default function AddBookmark({ route }) {
         permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
 
-      <View style={styles.body}>
+      <ScrollView style={styles.body} testID="add-bookmark-screen">
         {!incomingData ? (
           <View style={styles.addressContainer}>
             <Input
@@ -208,7 +208,7 @@ export default function AddBookmark({ route }) {
           error={setError(label.validity, 'label')}
           value={label.value}
         />
-      </View>
+      </ScrollView>
 
       <View style={[styles.footer]}>
         <PrimaryButton onClick={handleSubmit} noTheme testID="add-bookmark-button">

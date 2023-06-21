@@ -491,6 +491,7 @@
       "backButtonText": "Back"
     },
     "editAccount": {
+      "title": "Edit account name",
       "editAccountSuccess": "You can now download encrypted secret recovery phrase to this effect.",
       "continue": "Continue to wallet"
     },
