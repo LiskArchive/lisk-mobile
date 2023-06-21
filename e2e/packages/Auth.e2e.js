@@ -62,7 +62,7 @@ describe.skip('Auth module', () => {
   });
 
   it('should add account by file upload', async () => {
-    // device.reloadReactNative();
+    device.reloadReactNative();
     await element(by.id('restore-from-file')).tap();
     await element(by.id('decrypt-password-input')).tap();
     await element(by.id('decrypt-password-input')).replaceText('Password1!');
