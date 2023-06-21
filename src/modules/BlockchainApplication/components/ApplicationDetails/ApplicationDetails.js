@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
 import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -27,6 +28,8 @@ import { useApplicationsManagement } from '../../hooks/useApplicationsManagement
 
 import getStyles from './ApplicationDetails.styles';
 import ApplicationDetailsSkeleton from '../ApplicationDetailsSkeleton/ApplicationDetailsSkeleton';
+import AddApplicationSuccessModal from '../AddApplicationSuccessModal/AddApplicationSuccessModal';
+import AddApplicationErrorModal from '../AddApplicationErrorModal/AddApplicationErrorModal';
 
 /**
  * Renders the details of a given application in exploring or manage mode.
@@ -36,6 +39,8 @@ export default function ApplicationDetails({ route }) {
   const navigation = useNavigation();
 
   const { chainID, variant } = route.params;
+
+  const resultModal = useModal();
 
   const { styles } = useTheme({ styles: getStyles });
 
@@ -52,9 +57,11 @@ export default function ApplicationDetails({ route }) {
 
   const handleAddApplicationClick = () => {
     addApplication(application, {
-      onSuccess: () => navigation.navigate('AddApplicationSuccessScreen'),
+      onSuccess: () => resultModal.open(<AddApplicationSuccessModal navigation={navigation} />),
       onError: () =>
-        navigation.navigate('AddApplicationErrorScreen', { chainName: application?.chainName }),
+        resultModal.open(
+          <AddApplicationErrorModal navigation={navigation} chainName={application?.chainName} />
+        ),
     });
   };
 

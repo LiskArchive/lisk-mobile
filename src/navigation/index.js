@@ -24,8 +24,6 @@ import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
 import DecryptRecoveryPhraseScreen from 'modules/Auth/components/DecryptRecoveryPhraseScreen/DecryptRecoveryPhraseScreen';
 import AddApplicationScreen from 'modules/BlockchainApplication/components/AddApplicationScreen/AddApplicationScreen';
-import AddApplicationSuccessScreen from 'modules/BlockchainApplication/components/AddApplicationSuccessScreen/AddApplicationSuccessScreen';
-import AddApplicationErrorScreen from 'modules/BlockchainApplication/components/AddApplicationErrorScreen/AddApplicationErrorScreen';
 import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
 import SendToken from 'modules/SendToken/SendToken';
 import RequestToken from 'modules/RequestToken';
@@ -116,16 +114,6 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="ApplicationDetails"
             component={ApplicationDetails}
-            options={navigationOptions.SignIn}
-          />
-          <StackNavigator.Screen
-            name="AddApplicationSuccessScreen"
-            component={AddApplicationSuccessScreen}
-            options={navigationOptions.SignIn}
-          />
-          <StackNavigator.Screen
-            name="AddApplicationErrorScreen"
-            component={AddApplicationErrorScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
