@@ -59,7 +59,7 @@ export default function Navigator({ children }) {
 
   useEffect(() => {
     RNShake.addListener(() => {
-      if (accounts?.length) {
+      if (accounts.length) {
         dispatch(
           settingsUpdated({
             discrete: !discrete,
