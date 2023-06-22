@@ -147,7 +147,7 @@ export default function ApplicationDetails({ route }) {
                   style={{ empty: styles.amount }}
                 />
 
-                <View style={[styles.divider]} />
+                <View style={[styles.divider, styles.theme.divider]} />
 
                 <View style={styles.stats}>
                   <View style={styles.flex}>

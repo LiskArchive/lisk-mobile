@@ -96,7 +96,6 @@ export default {
     divider: {
       marginVertical: 24,
       borderTopWidth: 1,
-      borderColor: colors.light.platinumGray,
     },
     item: {
       marginBottom: 20,
@@ -148,6 +147,9 @@ export default {
     unregistered: {
       color: colors.light.zodiacBlue,
     },
+    divider: {
+      borderColor: colors.light.platinumGray,
+    },
   },
   [themes.dark]: {
     container: {
@@ -170,6 +172,9 @@ export default {
     },
     unregistered: {
       color: colors.light.white,
+    },
+    divider: {
+      borderColor: colors.dark.volcanicSand,
     },
   },
 };
