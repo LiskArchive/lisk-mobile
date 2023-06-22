@@ -3,7 +3,7 @@ import * as Lisk from '@liskhq/lisk-client';
 import i18next from 'i18next';
 
 import { findMaxBigInt } from 'utilities/helpers';
-import { BASE_TRANSACTION_SCHEMA, TRANSACTION_VERIFY_RESULT } from './constants';
+import { TRANSACTION_VERIFY_RESULT } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema = []) => {
   const moduleCommand = module.concat(':', command);
@@ -17,8 +17,8 @@ export const getCommandParamsSchema = (module, command, schema = []) => {
   return commandSchema.schema;
 };
 
-export const decodeBaseTransaction = (encodedTransaction) =>
-  Lisk.codec.codec.decode(BASE_TRANSACTION_SCHEMA, encodedTransaction);
+export const decodeBaseTransaction = (encodedTransaction, baseTransactionSchema) =>
+  Lisk.codec.codec.decode(baseTransactionSchema, encodedTransaction);
 
 export const decodeTransaction = (encodedTransaction, paramsSchema) => {
   const transaction = decodeBaseTransaction(encodedTransaction);
@@ -31,7 +31,7 @@ export const decodeTransaction = (encodedTransaction, paramsSchema) => {
   };
 };
 
-export const encodeTransaction = (transaction, paramsSchema) => {
+export const encodeTransaction = (transaction, paramsSchema, baseTransactionSchema) => {
   let encodedParams;
 
   if (!Buffer.isBuffer(transaction.params)) {
@@ -42,7 +42,7 @@ export const encodeTransaction = (transaction, paramsSchema) => {
     encodedParams = transaction.params;
   }
 
-  const decodedTransaction = Lisk.codec.codec.encode(BASE_TRANSACTION_SCHEMA, {
+  const decodedTransaction = Lisk.codec.codec.encode(baseTransactionSchema, {
     ...transaction,
     params: encodedParams,
   });
@@ -50,8 +50,8 @@ export const encodeTransaction = (transaction, paramsSchema) => {
   return decodedTransaction;
 };
 
-export const fromTransactionJSON = (transaction, paramsSchema) => {
-  const tx = Lisk.codec.codec.fromJSON(BASE_TRANSACTION_SCHEMA, {
+export const fromTransactionJSON = (transaction, paramsSchema, baseTransactionSchema) => {
+  const tx = Lisk.codec.codec.fromJSON(baseTransactionSchema, {
     ...transaction,
     params: '',
   });
@@ -73,16 +73,16 @@ export const fromTransactionJSON = (transaction, paramsSchema) => {
   };
 };
 
-export const toTransactionJSON = (transaction, paramsSchema) => {
+export const toTransactionJSON = (transaction, paramsSchema, baseTransactionSchema) => {
   if (Buffer.isBuffer(transaction.params)) {
     return {
-      ...Lisk.codec.codec.toJSON(BASE_TRANSACTION_SCHEMA, transaction),
+      ...Lisk.codec.codec.toJSON(baseTransactionSchema, transaction),
       params: paramsSchema ? Lisk.codec.codec.decodeJSON(paramsSchema, transaction.params) : {},
       id: transaction.id.toString('hex'),
     };
   }
   return {
-    ...Lisk.codec.codec.toJSON(BASE_TRANSACTION_SCHEMA, {
+    ...Lisk.codec.codec.toJSON(baseTransactionSchema, {
       ...transaction,
       params: Buffer.alloc(0),
     }),

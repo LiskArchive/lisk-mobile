@@ -12,7 +12,7 @@ export default function DeleteApplicationSuccess({ finalCallback, sharedData: { 
         applicationName: application.chainName,
       })}
       onContinue={finalCallback}
-      buttonText={i18next.t('application.manage.continueToWalletButtonText')}
+      continueButtonTitle={i18next.t('application.manage.continueToWalletButtonText')}
     />
   );
 }

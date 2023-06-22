@@ -3,6 +3,7 @@ import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import { getUniqueId } from 'react-native-device-info';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
+import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../constants/recoveryPhrase.constants';
 
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 
@@ -40,14 +41,13 @@ export const validateRecoveryPhrase = (recoveryPhrase) => {
 };
 
 /**
- * @returns {string} a valid mnemoic recoveryPhrase
- * Generate a random mnemonic (uses crypto.randomBytes under the hood),
- * defaults to 128-bits of entropy var mnemonic = bip39.generateMnemonic()
+ * Generate a random mnemonic recovery phrase. Defaults to 128-bits of entropy.
+ * @param {number} strength - Strength parameter to generate the recovery phrase.
+ * (optional). Default value is 128 (which will generate a 12 words recovery phrase).
+ * @returns {string} A valid mnemoic recovery phrase.
  */
-export const generateRecoveryPhrase = () => {
-  const { Mnemonic } = Lisk.passphrase;
-  return Mnemonic.generateMnemonic();
-};
+export const generateRecoveryPhrase = (strength = RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words']) =>
+  Lisk.passphrase.Mnemonic.generateMnemonic(strength);
 
 export const getRecoveryPhraseFromKeyChain = () =>
   getGenericPassword({ service: 'io.lisk.mobile' });

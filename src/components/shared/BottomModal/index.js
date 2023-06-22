@@ -1,13 +1,13 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import {
   TouchableOpacity,
   View,
-  ScrollView,
+  KeyboardAvoidingView,
   Animated,
-  Dimensions,
-  Keyboard,
   SafeAreaView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import { useModal } from 'hooks/useModal';
 
@@ -19,70 +19,26 @@ import getStyles from './styles';
 
 const BottomModal = ({ style }) => {
   const { toggle: toggleModalContext, close, isOpen, component, showClose } = useModal();
-  const panY = useRef(new Animated.Value(Dimensions.get('screen').height)).current;
-  const bottom = useRef(new Animated.Value(0));
 
   const { styles } = useTheme({ styles: getStyles() });
-
-  const resetPositionAnimation = Animated.timing(panY, {
-    toValue: 0,
-    duration: 300,
-    useNativeDriver: false,
-  });
-
-  const closeAnimation = Animated.timing(panY, {
-    toValue: Dimensions.get('screen').height,
-    duration: 300,
-    useNativeDriver: false,
-  });
-
-  const handleClose = () => {
-    closeAnimation.start(() => close());
-  };
-
-  const top = panY.interpolate({
-    inputRange: [-1, 0, 1],
-    outputRange: [0, 0, 1],
-  });
 
   useEffect(() => {
     if (isOpen) {
       toggleModalContext(isOpen);
-      resetPositionAnimation.start();
     }
-  }, [isOpen, resetPositionAnimation, toggleModalContext]);
-
-  const keyboardDidShow = (e) => {
-    const keyboardHeight = e.endCoordinates.height;
-    bottom.current.setValue(keyboardHeight);
-  };
-
-  const keyboardDidHide = () => bottom.current.setValue(0);
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
-    const hideSubscription = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, []);
+  }, [isOpen, toggleModalContext]);
 
   if (!isOpen || !component) {
     return null;
   }
 
   return (
-    <Animated.View style={styles.content} onPress={handleClose}>
-      <Animated.View
-        style={[
-          styles.overlay,
-          styles.theme.overlay,
-          style?.overlay,
-          { paddingBottom: bottom.current },
-        ]}
+    <Animated.View style={styles.content} onPress={close}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : ''}
+        style={[styles.overlay, styles.theme.overlay, style?.overlay]}
       >
-        <Animated.View style={[{ top }]}>
+        <Animated.View>
           <SafeAreaView style={[styles.safeArea, styles.container, styles.theme.container]}>
             <View style={[styles.container, style?.container]}>
               <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
@@ -90,7 +46,7 @@ const BottomModal = ({ style }) => {
               {showClose && (
                 <TouchableOpacity
                   style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
-                  onPress={handleClose}
+                  onPress={close}
                 >
                   <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
                 </TouchableOpacity>
@@ -105,7 +61,7 @@ const BottomModal = ({ style }) => {
             </View>
           </SafeAreaView>
         </Animated.View>
-      </Animated.View>
+      </KeyboardAvoidingView>
     </Animated.View>
   );
 };

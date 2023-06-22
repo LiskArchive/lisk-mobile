@@ -11,10 +11,10 @@ import { useTheme } from 'contexts/ThemeContext';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import ApplicationSwitcher from 'modules/BlockchainApplication/components/ApplicationSwitcher';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import { NO_OF_TOKENS_ON_OVERVIEW } from '../TokenList/TokenList.constants';
 import { useAccountTokensFullDataQuery } from '../../api/useAccountTokensFullDataQuery';
-import ApplicationSwitcher from '../../../BlockchainApplication/components/ApplicationSwitcher';
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
 
 import getStyles from './AccountHome.styles';

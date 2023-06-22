@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 
 export const Element = ({ children, type, ...rest }) => {
@@ -5,7 +6,6 @@ export const Element = ({ children, type, ...rest }) => {
     return <div {...rest}>{children}</div>;
   }
   try {
-    // eslint-disable-next-line import/no-unresolved
     const { View } = require('react-native');
     const Type = type || View;
     return <Type {...rest}>{children}</Type>;

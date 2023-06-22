@@ -22,7 +22,7 @@ export default function AddApplicationErrorScreen() {
       variant={'error'}
       title={i18next.t('application.manage.add.errorTitle')}
       description={description}
-      buttonText={i18next.t('application.manage.add.errorOnContinueButtonText')}
+      continueButtonTitle={i18next.t('application.manage.add.errorOnContinueButtonText')}
     />
   );
 }

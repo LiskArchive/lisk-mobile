@@ -12,8 +12,6 @@ export async function createSignClient(icon) {
       name: pkg.name,
       description: pkg.description,
       url: pkg.homepage,
-      // TODO: Replace this with Lisk Service provided assets.
-      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1594).
       icons: [icon],
     },
   });

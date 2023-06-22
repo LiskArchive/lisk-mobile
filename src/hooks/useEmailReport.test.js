@@ -27,12 +27,9 @@ describe('useEmailReport hook', () => {
   it('should insert correctly the network data on body', async () => {
     const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
 
-    const expectedNetworkVersionPattern = encodeURIComponent(
-      `Lisk Core Version: ${mockNetworkStatus.data.networkVersion}`
-    );
-    const expectedNetworkIdentifierPattern = encodeURIComponent(
-      `NetworkIdentifier: ${mockNetworkStatus.data.networkIdentifier}`
-    );
+    const expectedCoreVersionPattern = `- Lisk Core Version: ${mockNetworkStatus.data.version}`;
+    const expectedNetworkVersionPattern = `- Lisk Network Version: ${mockNetworkStatus.data.networkVersion}`;
+    const expectedChainIDPattern = `- Chain ID: ${mockNetworkStatus.data.chainID}`;
 
     expect(result.current.isLoading).toBeTruthy();
 
@@ -41,14 +38,15 @@ describe('useEmailReport hook', () => {
     expect(result.current.isLoading).toBeFalsy();
     expect(result.current.isFetching).toBeFalsy();
 
+    expect(result.current.url).toMatch(new RegExp(expectedCoreVersionPattern));
     expect(result.current.url).toMatch(new RegExp(expectedNetworkVersionPattern));
-    expect(result.current.url).toMatch(new RegExp(expectedNetworkIdentifierPattern));
+    expect(result.current.url).toMatch(new RegExp(expectedChainIDPattern));
   });
 
   it('should insert correctly the current application data on body', async () => {
     const { result, waitFor } = renderHook(() => useEmailReport(), { wrapper });
 
-    const expectedAppsApisPattern = encodeURIComponent(mockApplicationsMeta[0].serviceURLs[0].http);
+    const expectedAppsApisPattern = mockApplicationsMeta[0].serviceURLs[0].http;
 
     await waitFor(() => !result.current.isLoading);
 
@@ -63,8 +61,8 @@ describe('useEmailReport hook', () => {
 
     const { result, waitFor } = renderHook(() => useEmailReport(props), { wrapper });
 
-    const expectedErrorMessagePattern = encodeURIComponent(props.errorMessage);
-    const expectedErrorPattern = encodeURIComponent(props.error.message);
+    const expectedErrorMessagePattern = props.errorMessage;
+    const expectedErrorPattern = props.error.message;
 
     await waitFor(() => !result.current.isLoading);
 

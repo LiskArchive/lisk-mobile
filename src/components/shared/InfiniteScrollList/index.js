@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
+import colors from 'constants/styleGuide/colors';
 
 /**
  * Infinite scroll list component for rendering API fetched paginated data.
@@ -42,7 +43,9 @@ export default function InfiniteScrollList({
 
   const renderItem = ({ item }) => baseRenderItem(item);
 
-  const renderSpinner = withDefaultSpinner ? () => <Text>Loading...</Text> : baseRenderSpinner;
+  const renderSpinner = withDefaultSpinner
+    ? () => <ActivityIndicator color={colors.light.white} />
+    : baseRenderSpinner;
 
   return (
     <FlatList

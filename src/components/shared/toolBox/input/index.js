@@ -151,7 +151,7 @@ class Input extends React.Component {
 }
 
 Input.defaultProps = {
-  reference: () => {},
+  reference: () => null,
   innerStyles: {},
   keyboardType: 'default',
   placeholder: '',

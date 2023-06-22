@@ -5,29 +5,30 @@ import { useTheme } from 'contexts/ThemeContext';
 
 import getStyles from './styles';
 
-const StepItem = ({ step, styles, baseStyles, current, isLast }) => (
-  <>
-    <View
-      style={[
-        styles.progressTitleContainer,
-        styles.theme.progressTitleContainer,
-        current >= step && styles.activeStep,
-      ]}
-    >
-      <Text style={[styles.progressTitle]}>{step + 1}</Text>
-    </View>
-    {!isLast && (
-      <View
-        style={[
-          styles.progressStepContainer,
-          styles.theme.progressStepContainer,
-          current > step && styles.activeStep,
-          baseStyles?.stepContainer,
-        ]}
-      />
-    )}
-  </>
-);
+function StepItem({ step, styles, baseStyles, current, isLast }) {
+  const isActive = current >= step;
+
+  return (
+    <>
+      <View style={[styles.bulletContainer]}>
+        <View style={[styles.bullet, styles.theme.bullet, isActive && styles.activeBullet]}>
+          {isActive && <Text style={[styles.progressTitle]}>{step + 1}</Text>}
+        </View>
+      </View>
+
+      {!isLast && (
+        <View
+          style={[
+            styles.rail,
+            styles.theme.rail,
+            current > step && styles.activeRail,
+            baseStyles?.stepContainer,
+          ]}
+        />
+      )}
+    </>
+  );
+}
 
 export default function ProgressBar({ styles: baseStyles, current, length }) {
   const { styles } = useTheme({
@@ -43,7 +44,7 @@ export default function ProgressBar({ styles: baseStyles, current, length }) {
   }, [length]);
 
   return (
-    <View style={[styles.progressContainer, styles.theme.progressContainer, baseStyles?.wrapper]}>
+    <View style={[styles.container, styles.theme.container, baseStyles?.wrapper]}>
       {steps.map((_, i) => (
         <StepItem
           key={i}

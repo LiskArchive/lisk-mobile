@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, fonts, colors, boxes } from 'constants/styleGuide';
 import { Platform } from 'react-native';
 
 export default function getSendTokenSelectTokenStepStyles() {
@@ -63,8 +63,9 @@ export default function getSendTokenSelectTokenStepStyles() {
         borderWidth: 1,
         borderRadius: 60,
         fontWeight: '200',
-        paddingTop: 8,
-        paddingBottom: 8,
+        paddingTop: 6,
+        paddingBottom: 6,
+        marginRight: 8,
       },
       notSelectedPriorityButton: {
         borderColor: colors.light.platinumGray,
@@ -84,6 +85,7 @@ export default function getSendTokenSelectTokenStepStyles() {
         fontWeight: '300',
       },
       priorityButtonFeeText: {
+        fontSize: fonts.size.small,
         color: colors.light.zodiacBlue,
         fontWeight: '600',
       },

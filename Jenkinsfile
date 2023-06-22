@@ -1,41 +1,54 @@
 @Library('lisk-jenkins') _
 pipeline {
-  agent { node { label 'lisk-mobile' } }
+  agent { node { label 'darwin' } }
   stages {
-    stage ('Build dependencies') {
+    stage('Build dependencies') {
       steps {
-        script{
+        script {
           nvm(getNodejsVersion()) {
             sh '''
+            echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
+            source ~/.bash_profile
             npm install -g yarn
-            yarn install
-            yarn run link
+            yarn remove mobile-protect
+            yarn && yarn run link
+            export LANG=en_US.UTF-8 && export GEM_HOME=$HOME/.gem && export PATH=$GEM_HOME/bin:$PATH
+            gem install cocoapods --user-install && npx pod-install
             '''
           }
         }
       }
     }
-    stage ('Run ESLint') {
+    stage('Create Detox build and run end to end tests') {
+        steps {
+          script {
+            nvm(getNodejsVersion()) {
+              sh '''
+              cp env.test.json env.json
+              npx react-native start &
+              
+              yarn detox build --configuration ios.debug
+              yarn detox test --configuration ios.debug --cleanup --headless --record-logs all
+              kill -9 %1
+              '''
+            }
+          }
+        }
+      }
+    stage('Run ESLint') {
       steps {
         nvm(getNodejsVersion()) {
           sh 'yarn run lint'
         }
       }
     }
-    stage ('Run unit tests') {
+    stage('Run unit tests') {
       steps {
         nvm(getNodejsVersion()) {
           sh 'yarn run test'
         }
       }
     }
-    // stage ('Run End to end tests') {
-    //   steps {
-    //     nvm(getNodejsVersion()) {
-    //       sh 'yarn run e2e:ios'
-    //     }
-    //   }
-    // }
   }
   post {
     always {
@@ -61,7 +74,7 @@ pipeline {
               sh 'cat coverage/jest/lcov.info |./node_modules/.bin/coveralls'
             }
           }
-        } catch(err) {
+        } catch (err) {
           println "Could not report coverage statistics:\n${err}"
         }
       }

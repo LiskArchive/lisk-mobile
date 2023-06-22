@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -10,10 +11,10 @@ import { colors } from 'constants/styleGuide';
 import { LIMIT } from 'utilities/api/constants';
 import { LabelButton } from 'components/shared/toolBox/button';
 import DataRenderer from 'components/shared/DataRenderer';
-import { P } from 'components/shared/toolBox/typography';
+import { H3 } from 'components/shared/toolBox/typography';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyTransactionsIllustrationSvg from 'assets/svgs/EmptyTransactionsIllustrationSvg';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import TransactionRow from '../TransactionRow/TransactionRow';
@@ -36,6 +37,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
     fetchNextPage: fetchNextTransactionsPage,
     hasNextPage: hasTransactionsNextPage,
     isFetchingNextPage: isFetchingTransactionsNextPage,
+    refetch: refetchTransactions,
   } = useAccountTransactionsQuery(address, {
     config: {
       params: { limit: noOfItemsToRender },
@@ -53,7 +55,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
   const isCurrentAccount = currentAccount.metadata.address === address;
 
-  function renderHeader() {
+  const renderHeader = () => {
     if (mode === 'full') return null;
 
     return (
@@ -61,13 +63,13 @@ export default function TransactionList({ mode = 'overview', address, style }) {
         style={[styles.header, !showViewAllButton && styles.headerExtraMargin, style?.header]}
         testID="transaction-list"
       >
-        <P style={[styles.title, styles.theme.title, style?.title]}>
+        <H3 style={[styles.title, styles.theme.title, style?.title]}>
           {i18next.t('transactions.transactionList.title')}
-        </P>
+        </H3>
 
         {showViewAllButton && (
           <LabelButton
-            onClick={() =>
+            onPress={() =>
               navigation.navigate({ name: 'TransactionsHistory', params: { address } })
             }
             textStyle={styles.labelButtonText}
@@ -83,12 +85,12 @@ export default function TransactionList({ mode = 'overview', address, style }) {
               ),
             }}
           >
-            View all
+            {i18next.t('commons.buttons.viewAll')}
           </LabelButton>
         )}
       </View>
     );
-  }
+  };
 
   return (
     <View style={[styles.theme.container, style?.container]}>
@@ -100,7 +102,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
         error={errorOnTransactions}
         renderData={(data) => (
           <InfiniteScrollList
-            data={data}
+            data={mode === 'full' ? data : data.slice(0, noOfItemsToRender)}
             keyExtractor={(item) => item.id}
             renderItem={(item) => <TransactionRow transaction={item} address={address} />}
             fetchNextPage={fetchNextTransactionsPage}
@@ -113,7 +115,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
         renderLoading={() => <TransactionListSkeleton />}
         renderEmpty={() => (
           <ResultScreen
-            illustration={<EmptyIllustrationSvg />}
+            illustration={<EmptyTransactionsIllustrationSvg />}
             description={
               isCurrentAccount
                 ? i18next.t('transactions.transactionList.emptyText')
@@ -127,13 +129,17 @@ export default function TransactionList({ mode = 'overview', address, style }) {
         )}
         renderError={() => (
           <ResultScreen
-            illustration={<ErrorIllustrationSvg />}
+            illustration={<ErrorIllustrationSvg height={72} />}
             description={i18next.t('transactions.transactionList.errorText')}
             styles={{
               wrapper: styles.resultScreenContainer,
               container: styles.resultScreenContainer,
             }}
-          />
+          >
+            <LabelButton onPress={refetchTransactions} textStyle={[styles.labelButtonText]}>
+              {i18next.t('commons.buttons.reload')}
+            </LabelButton>
+          </ResultScreen>
         )}
       />
     </View>

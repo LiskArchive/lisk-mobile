@@ -17,7 +17,7 @@ export default function AddApplicationSuccessScreen() {
       variant="success"
       title={i18next.t('application.manage.add.successTitle')}
       description={i18next.t('application.manage.add.successDescription')}
-      buttonText={i18next.t('application.manage.continueToWalletButtonText')}
+      continueButtonTitle={i18next.t('application.manage.continueToWalletButtonText')}
     />
   );
 }

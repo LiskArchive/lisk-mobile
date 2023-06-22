@@ -110,10 +110,9 @@ export default function ConfirmTransaction({
           onClick={onSubmit}
           disabled={submitDisabled}
           testID="confirm-send-token-button"
+          isLoading={isLoading}
         >
-          {isLoading
-            ? i18next.t('sendToken.confirmAndSign.loadingText')
-            : submitButtonTitle || i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText')}
+          {submitButtonTitle || i18next.t('sendToken.confirmAndSign.sendTokenSubmitButtonText')}
         </PrimaryButton>
       </View>
     </View>

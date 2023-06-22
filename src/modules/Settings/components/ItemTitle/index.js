@@ -43,7 +43,7 @@ const ItemTitle = ({
         hideDialog();
         cb();
       },
-      errorCallback: () => {},
+      errorCallback: () => null,
       androidError: (error) => setError(error),
     });
 

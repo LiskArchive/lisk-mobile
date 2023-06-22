@@ -1,7 +1,4 @@
-import { SCREEN_HEIGHTS, deviceHeight } from 'utilities/device';
 import { themes, colors, fonts, boxes } from 'constants/styleGuide';
-
-const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default function getRegisterSafeKeepingStyles() {
   return {
@@ -16,12 +13,14 @@ export default function getRegisterSafeKeepingStyles() {
       },
       title: {
         textAlign: 'center',
-        marginBottom: 8,
+        fontWeight: '600',
+        fontSize: 20,
+        marginBottom: 12,
       },
       description: {
-        fontSize: isSmallScreen ? 14 : 16,
+        fontSize: 14,
         textAlign: 'center',
-        marginBottom: 24,
+        marginBottom: 32,
       },
       recoveryPhraseContainer: {
         borderWidth: 1,
@@ -31,21 +30,21 @@ export default function getRegisterSafeKeepingStyles() {
         borderRadius: 8,
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: isSmallScreen ? 290 : 320,
       },
       recoveryPhraseText: {
         lineHeight: 33,
-        fontSize: isSmallScreen ? 16 : 18,
+        fontSize: fonts.size.base,
         fontFamily: fonts.family.recoveryPhraseText,
         textAlign: 'center',
       },
       copyContainer: {
         alignItems: 'center',
-        marginTop: 5,
+        marginTop: 32,
       },
-      copy: {
+      copyLabel: {
         color: colors.light.ultramarineBlue,
-        fontSize: isSmallScreen ? 14 : 16,
+        fontSize: fonts.size.base,
+        fontWeight: '600',
       },
       footer: {
         padding: boxes.boxPadding,
@@ -62,7 +61,7 @@ export default function getRegisterSafeKeepingStyles() {
         flexWrap: 'wrap',
         marginLeft: 13.5,
         color: colors.light.blueGray,
-        fontSize: isSmallScreen ? 11 : 13,
+        fontSize: fonts.size.input,
       },
     },
     [themes.light]: {

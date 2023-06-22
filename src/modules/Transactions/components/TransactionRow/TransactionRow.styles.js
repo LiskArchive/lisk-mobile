@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, fonts, colors } from 'constants/styleGuide';
 
 export default function getTransactionRowStyles() {
   return {
@@ -7,7 +7,9 @@ export default function getTransactionRowStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: 24,
+        paddingTop: 16,
+        paddingBottom: 16,
+        borderBottomWidth: 1,
       },
       titleContainer: {
         flexDirection: 'column',
@@ -26,8 +28,7 @@ export default function getTransactionRowStyles() {
       },
       addressText: {
         fontWeight: '500',
-        fontSize: 16,
-        lineHeight: 19,
+        fontSize: fonts.size.input,
         marginBottom: 8,
       },
       date: {
@@ -42,16 +43,17 @@ export default function getTransactionRowStyles() {
       },
       incomingAmount: {
         fontWeight: '500',
-        fontSize: 16,
+        fontSize: fonts.size.input,
       },
       outgoingAmount: {
         fontWeight: '500',
-        fontSize: 16,
+        fontSize: fonts.size.input,
       },
     },
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
+        borderColor: colors.light.platinumGray,
       },
       title: {
         color: colors.light.zodiacBlue,
@@ -72,6 +74,7 @@ export default function getTransactionRowStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+        borderColor: colors.dark.volcanicSand,
       },
       title: {
         color: colors.dark.white,

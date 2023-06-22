@@ -14,8 +14,11 @@ export function getErrorFallbackScreenStyles() {
         justifyContent: 'center',
       },
       illustration: {
-        paddingVertical: 16,
         marginBottom: 16,
+      },
+      title: {
+        fontSize: fonts.size.base,
+        marginBottom: 8,
       },
       description: {
         fontFamily: fonts.family.context,
@@ -40,8 +43,11 @@ export function getErrorFallbackScreenStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
-      description: {
+      title: {
         color: colors.light.zodiacBlue,
+      },
+      description: {
+        color: colors.light.smoothGray,
       },
     },
 
@@ -49,15 +55,12 @@ export function getErrorFallbackScreenStyles() {
       container: {
         backgroundColor: colors.dark.mainBg,
       },
+      title: {
+        color: colors.dark.white,
+      },
       description: {
-        color: colors.dark.ghost,
+        color: colors.dark.mountainMist,
       },
     },
   };
 }
-
-export const errorFallbackSplashStyles = {
-  container: {
-    marginTop: boxes.boxPadding,
-  },
-};

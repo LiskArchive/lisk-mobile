@@ -8,16 +8,17 @@ import Register from 'modules/Auth/components/Register/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
-import About from 'components/screens/about';
+import AboutScreen from 'components/screens/AboutScreen/AboutScreen';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
+import NotFound from 'components/navigation/NotFound';
 
 import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
-import SecretRecoveryPhrase from 'modules/Auth/components/SecretRecoveryPhrase';
+import RecoveryPhraseScreen from 'modules/Auth/components/RecoveryPhraseScreen/RecoveryPhraseScreen';
 import PasswordSetupForm from 'modules/Auth/components/PasswordSetupForm';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
@@ -58,6 +59,11 @@ export default function Navigator({ children }) {
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
+            name="NotFound"
+            component={NotFound}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
             name="AuthMethod"
             component={AuthMethod}
             options={navigationOptions.SignIn}
@@ -73,8 +79,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="SecretRecoveryPhrase"
-            component={SecretRecoveryPhrase}
+            name="RecoveryPhrase"
+            component={RecoveryPhraseScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
@@ -122,7 +128,11 @@ export default function Navigator({ children }) {
             component={AddApplicationErrorScreen}
             options={navigationOptions.SignIn}
           />
-          <StackNavigator.Screen name="About" component={About} options={navigationOptions.About} />
+          <StackNavigator.Screen
+            name="About"
+            component={AboutScreen}
+            options={navigationOptions.About}
+          />
           <StackNavigator.Screen
             name="CurrencySelection"
             component={CurrencySelection}

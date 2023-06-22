@@ -1,4 +1,3 @@
-// import { useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { METHOD, API_URL } from 'utilities/api/constants';

@@ -3,6 +3,7 @@ import nacl from 'tweetnacl';
 import createHmac from 'create-hmac';
 
 if (global._bitcore) delete global._bitcore;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const mnemonic = require('bitcore-mnemonic');
 
 const ED25519_CURVE = 'ed25519 seed';
