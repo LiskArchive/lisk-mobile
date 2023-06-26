@@ -231,6 +231,7 @@
       "gallery": "Gallery"
     },
     "setup": {
+      "authMethodTitle": "Konto hinzufügen",
       "addAccountTitle": "Fügen Sie Ihr Konto hinzu",
       "switchAccount": "Benutzer wechseln",
       "decryptRecoveryPhrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",

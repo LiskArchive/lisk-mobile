@@ -228,6 +228,7 @@
       "gallery": "Gallery"
     },
     "setup": {
+      "authMethodTitle": "Add account",
       "addAccountTitle": "Add your account",
       "switchAccount": "Switch account",
       "decryptRecoveryPhrase": "Decrypt your secret recovery phrase",
