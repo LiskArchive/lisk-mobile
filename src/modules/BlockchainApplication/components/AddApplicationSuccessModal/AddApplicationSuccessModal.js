@@ -1,14 +1,18 @@
 import React from 'react';
 import i18next from 'i18next';
-import { useNavigation } from '@react-navigation/native';
 
 import ResultScreen from 'components/screens/ResultScreen';
+import { useModal } from 'hooks/useModal';
 import AddApplicationSuccessSvg from 'assets/svgs/AddApplicationSuccessSvg';
 
-export default function AddApplicationSuccessScreen() {
-  const navigation = useNavigation();
+export default function AddApplicationSuccessModal({ navigation }) {
+  const modal = useModal();
 
-  const handleContinuePress = () => navigation.navigate('Main');
+  const handleContinuePress = () => {
+    modal.toggle(false);
+
+    navigation.navigate('Main');
+  };
 
   return (
     <ResultScreen
@@ -18,6 +22,12 @@ export default function AddApplicationSuccessScreen() {
       title={i18next.t('application.manage.add.successTitle')}
       description={i18next.t('application.manage.add.successDescription')}
       continueButtonTitle={i18next.t('application.manage.continueToWalletButtonText')}
+      styles={{
+        footer: {
+          padding: 0,
+          marginTop: 24,
+        },
+      }}
     />
   );
 }

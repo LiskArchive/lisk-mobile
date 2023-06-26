@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import { useEffect } from 'react';
 
 import { joinArraysWithoutDuplicates } from 'utilities/helpers';
@@ -40,7 +41,7 @@ export function useBootstrapApplications() {
         type: 'init',
         applications: joinArraysWithoutDuplicates(
           defaultApplicationsFullData?.data || [],
-          applicationsStorageData?.data || [],
+          applicationsStorageData || [],
           'chainID'
         ),
       });

@@ -159,9 +159,10 @@ export function useApplicationsLocalStorage() {
   const isLoading = isLoadingLocalStorageData || isLoadingApplicationsData;
   const isSuccess = isSuccessLocalStorageData && (queryEnabled ? isSuccessApplicationsData : true);
   const error = errorOnLocalStorageData || errorOnApplicationsData;
+  const data = applicationsData?.data?.filter((app) => localStorageData?.includes(app.chainID));
 
   return {
-    data: applicationsData,
+    data,
     isLoading,
     isSuccess,
     error,

@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
-import { translate } from 'react-i18next';
+import React from 'react';
 import { SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'contexts/ThemeContext';
@@ -12,34 +13,35 @@ import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsLocalStorage } from '../../hooks/useApplicationsLocalStorage';
 import { isMainchainApplication } from '../../utils';
 
-import getAddApplicationStyles from './styles';
+import getAddApplicationStyles from './AddApplicationScreen.styles';
 
-const AddApplication = ({ navigation, t }) => {
+export default function AddApplicationScreen() {
+  const navigation = useNavigation();
+
   const applications = useApplicationsExplorer();
 
   const { data: applicationsStorageData } = useApplicationsLocalStorage();
 
   const { styles } = useTheme({ styles: getAddApplicationStyles() });
 
-  const filteredApplications = useMemo(
-    () =>
-      applications.data?.reduce((acc, app) => {
-        const isAppAlreadyAdded = !!applicationsStorageData?.data?.find(
-          (addedApp) => addedApp.chainID === app.chainID
-        );
+  const filteredApplications = applications.data?.reduce((acc, app) => {
+    const isAppAlreadyAdded = !!applicationsStorageData?.find(
+      (addedApp) => addedApp.chainID === app.chainID
+    );
 
-        if (isAppAlreadyAdded || isMainchainApplication(app.chainID)) {
-          return acc;
-        }
+    if (isAppAlreadyAdded || isMainchainApplication(app.chainID)) {
+      return acc;
+    }
 
-        return [...acc, app];
-      }, []),
-    [applications.data, applicationsStorageData?.data]
-  );
+    return [...acc, app];
+  }, []);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderBackButton title={t('application.explore.title')} onPress={navigation.goBack} />
+      <HeaderBackButton
+        title={i18next.t('application.explore.title')}
+        onPress={navigation.goBack}
+      />
 
       <ApplicationList
         applications={{ ...applications, data: filteredApplications }}
@@ -61,6 +63,4 @@ const AddApplication = ({ navigation, t }) => {
       />
     </SafeAreaView>
   );
-};
-
-export default translate()(AddApplication);
+}

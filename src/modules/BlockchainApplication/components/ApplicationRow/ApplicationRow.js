@@ -12,10 +12,13 @@ import ResultScreen from 'components/screens/ResultScreen';
 import PinSvg from 'assets/svgs/PinSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import CheckSvg from 'assets/svgs/CheckSvg';
+import WarningSvg from 'assets/svgs/WarningSvg';
 
 import { useApplicationRowActions } from './ApplicationRow.hooks';
 import getApplicationRowStyles from './ApplicationRow.styles';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
+import { APPLICATION_STATUSES } from '../../constants';
 import { usePinApplications } from '../../hooks/usePinApplications';
 
 /**
@@ -44,8 +47,6 @@ function ApplicationRow({
 
   const { theme, styles } = useTheme({ styles: getApplicationRowStyles() });
 
-  const applicationPinned = checkPin(application.chainID);
-
   const toggleDeleteDefaultApplicationModal = (bool) => {
     if (bool) {
       return modal.open(
@@ -56,10 +57,29 @@ function ApplicationRow({
           continueButtonTitle={i18next.t(
             'application.manage.deleteDefaultApplicationModal.buttonText'
           )}
+          styles={{ footer: styles.deleteDefaultApplicationModalFooter }}
         />
       );
     }
     return modal.close();
+  };
+
+  const renderStatus = (status) => {
+    const baseProps = { height: 14, width: 16, style: { marginRight: 12 } };
+
+    switch (status) {
+      case APPLICATION_STATUSES.active:
+        return <CheckSvg color={colors.light.ufoGreen} {...baseProps} />;
+
+      case APPLICATION_STATUSES.registered:
+        return <CheckSvg color={colors.light.ultramarineBlue} {...baseProps} />;
+
+      case APPLICATION_STATUSES.terminated:
+        return <WarningSvg {...baseProps} />;
+
+      default:
+        return null;
+    }
   };
 
   const { leftActions, rightActions } = useApplicationRowActions({
@@ -70,49 +90,55 @@ function ApplicationRow({
     deleteApplication,
   });
 
+  const isPinned = checkPin(application.chainID);
+
   return (
-    <>
-      <Swipeable key={application.chainID} leftActions={leftActions} rightActions={rightActions}>
-        <TouchableOpacity
-          style={[styles.applicationContainer, styles.theme.applicationContainer]}
-          onPress={onPress}
-        >
-          <View style={styles.applicationNameContainer}>
-            <Image
-              source={{ uri: application.logo.png }}
-              style={{ ...styles.applicationLogoImage }}
+    <Swipeable
+      key={application.chainID}
+      enabled={application.status !== APPLICATION_STATUSES.terminated}
+      leftActions={leftActions}
+      rightActions={rightActions}
+    >
+      <TouchableOpacity
+        style={[
+          styles.container,
+          styles.theme.container,
+          application.status === APPLICATION_STATUSES.terminated && styles.disabledContainer,
+        ]}
+        onPress={onPress}
+      >
+        <View style={styles.nameContainer}>
+          <Image source={{ uri: application.logo.png }} style={{ ...styles.logoImage }} />
+
+          <P style={[styles.nameLabel, styles.theme.nameLabel]}>{application.chainName}</P>
+        </View>
+
+        <View style={styles.nameContainer}>
+          {renderStatus(application.status)}
+
+          {isPinned && (
+            <PinSvg
+              variant="fill"
+              color={colors.light.ultramarineBlue}
+              style={{ marginRight: 8 }}
             />
+          )}
 
-            <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-              {application.chainName}
-            </P>
-          </View>
+          {showActive && currentApplication.data?.chainID === application.chainID && (
+            <View style={{ marginRight: 12 }}>
+              <CircleCheckedSvg variant="fill" />
+            </View>
+          )}
 
-          <View style={styles.applicationNameContainer}>
-            {applicationPinned && (
-              <PinSvg
-                color={colors.light.ultramarineBlue}
-                style={{ marginRight: 12 }}
-                variant="fill"
-              />
-            )}
-
-            {showActive && currentApplication.data?.chainID === application.chainID && (
-              <View style={{ marginRight: 12 }}>
-                <CircleCheckedSvg variant="fill" />
-              </View>
-            )}
-
-            {showCaret && (
-              <CaretSvg
-                direction="right"
-                color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.white}
-              />
-            )}
-          </View>
-        </TouchableOpacity>
-      </Swipeable>
-    </>
+          {showCaret && (
+            <CaretSvg
+              direction="right"
+              color={theme === themes.light ? colors.light.blueGray : colors.dark.mountainMist}
+            />
+          )}
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 }
 

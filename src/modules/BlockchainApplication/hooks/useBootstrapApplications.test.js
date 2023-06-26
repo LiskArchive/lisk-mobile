@@ -59,7 +59,7 @@ describe('useBootstrapApplications', () => {
     });
 
     useApplicationsLocalStorage.mockReturnValue({
-      data: { data: storageApps },
+      data: storageApps,
       isSuccess: true,
     });
 

@@ -3,6 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { useApplicationsManagement } from './useApplicationsManagement';
 import * as useApplications from '../context/ApplicationsContext';
 import * as useApplicationsLocalStorage from './useApplicationsLocalStorage';
+import * as usePinApplications from './usePinApplications';
 
 const dispatchApplicationsDataMock = jest.fn();
 const addApplicationToStorageMock = jest.fn(() => Promise.resolve());
@@ -21,8 +22,13 @@ jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
   },
 }));
 
+jest.spyOn(usePinApplications, 'usePinApplications').mockImplementation(() => ({
+  togglePin: jest.fn(),
+  checkPin: jest.fn(),
+}));
+
 jest.spyOn(useApplicationsLocalStorage, 'useApplicationsLocalStorage').mockImplementation(() => ({
-  data: { data: [{ chainID: '456' }] },
+  data: [{ chainID: '456' }],
   isLoading: false,
   isSuccess: true,
   addApplication: addApplicationToStorageMock,

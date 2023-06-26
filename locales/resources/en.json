@@ -291,7 +291,8 @@
       "lastUpdated": "Last updated",
       "status": "Status",
       "lastCertificateHeight": "Last certificate height",
-      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again."
+      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again.",
+      "chainIDDescription": "Unique identifier of a chain account. It is used when sending tokens to a specific chain and is also prepended for signing to protect against replay attacks."
     },
     "manage": {
       "add": {
@@ -300,7 +301,7 @@
         "successDescription": "You can see a list of your applications on the application dropdown.",
         "errorTitle": "Error adding application",
         "errorGenericDescription": "We’re unable to add your application to your Lisk Mobile. Please try again.",
-        "errorDescription": "We’re unable to add {{appName}} application to your Lisk Mobile. Please try again.",
+        "errorDescription": "We’re unable to add {{chainName}} application to your Lisk Mobile. Please try again.",
         "errorOnContinueButtonText": "Try again",
         "confirmButtonText": "Add application",
         "errorConnecting": "Error connecting application. Please try again."
@@ -315,8 +316,8 @@
         }        
       },
       "deleteDefaultApplicationModal": {
-        "description": "A default application can not be removed",
-        "buttonText": "Continue to Applications"
+        "description": "The default application can not be removed.",
+        "buttonText": "Continue to applications"
       },
       "continueToWalletButtonText": "Continue to wallet"   
     },
