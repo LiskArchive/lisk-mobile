@@ -44,15 +44,11 @@ export default function ErrorFallbackScreen(props) {
           {i18next.t('fallbackScreens.error.retryButton')}
         </PrimaryButton>
 
-        {!emailReport.error && (
+        {!emailReport.isLoading && !emailReport.error && (
           <>
             <P style={[styles.label]}>{i18next.t('fallbackScreens.error.emailReportLabel')}</P>
 
-            <LabelButton
-              onClick={emailReport.handleSend}
-              disabled={emailReport.isLoading}
-              isLoading={emailReport.isLoading}
-            >
+            <LabelButton onClick={emailReport.handleSend}>
               {i18next.t('fallbackScreens.error.emailReportButton')}
             </LabelButton>
           </>

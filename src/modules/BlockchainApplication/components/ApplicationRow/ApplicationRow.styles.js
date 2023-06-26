@@ -4,10 +4,6 @@ export default function getBlockchainApplicationRowStyles() {
   return {
     common: {
       container: {
-        flexDirection: 'column',
-        flex: 1,
-      },
-      applicationContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -15,11 +11,14 @@ export default function getBlockchainApplicationRowStyles() {
         paddingBottom: 16,
         borderBottomWidth: 1,
       },
-      applicationNameContainer: {
+      disabledContainer: {
+        opacity: 0.5,
+      },
+      nameContainer: {
         flexDirection: 'row',
         alignItems: 'center',
       },
-      applicationLogoImage: {
+      logoImage: {
         borderRadius: 50,
         width: 40,
         height: 40,
@@ -27,21 +26,26 @@ export default function getBlockchainApplicationRowStyles() {
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
       },
-      applicationNameLabel: {
+      nameLabel: {
         fontSize: fonts.size.base,
         maxWidth: '90%',
         marginRight: 15,
         fontWeight: '600',
       },
+      deleteDefaultApplicationModalFooter: {
+        padding: 0,
+        marginTop: 24,
+      },
     },
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
-      },
-      applicationContainer: {
         borderBottomColor: colors.light.platinumGray,
       },
-      applicationNameLabel: {
+      pinnedContainer: {
+        backgroundColor: colors.light.platinumGray,
+      },
+      nameLabel: {
         color: colors.light.zodiacBlue,
       },
     },
@@ -49,11 +53,12 @@ export default function getBlockchainApplicationRowStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
-      },
-      applicationContainer: {
         borderBottomColor: colors.dark.volcanicSand,
       },
-      applicationNameLabel: {
+      pinnedContainer: {
+        backgroundColor: colors.light.volcanicSand,
+      },
+      nameLabel: {
         color: colors.light.platinum,
       },
     },

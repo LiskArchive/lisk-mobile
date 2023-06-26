@@ -46,7 +46,11 @@ export default function InfoToggler({ title, description, style }) {
   return (
     <>
       <TouchableOpacity onPress={openModal} style={[style?.toggleButton]}>
-        <InfoSvg />
+        <InfoSvg
+          height={style?.toggleButtonIcon?.height}
+          width={style?.toggleButtonIcon?.width}
+          style={[style?.toggleButtonIcon]}
+        />
       </TouchableOpacity>
     </>
   );

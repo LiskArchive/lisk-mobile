@@ -1,19 +1,20 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import i18next from 'i18next';
 
-import { P, H3 } from 'components/shared/toolBox/typography';
+import { H3 } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import { useModal } from 'hooks/useModal';
-import AddSvg from 'assets/svgs/AddSvg';
-import getStyles from './styles';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import ApplicationList from '../ApplicationList/ApplicationList';
 import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import SelectNode from '../SelectNode';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 import { useCurrentApplication } from '../../hooks/useCurrentApplication';
+
+import getStyles from './styles';
 
 const ManageApplication = ({ nextStep, style, navigation }) => {
   const [selectedApplication, setSelectedApplication] = useState({});
@@ -81,15 +82,9 @@ const ManageApplication = ({ nextStep, style, navigation }) => {
       />
 
       <View style={styles.footer}>
-        <TouchableOpacity
-          style={[styles.button, styles.outline, styles.theme.outline]}
-          onPress={addApplication}
-        >
-          <View style={styles.icon}>
-            <AddSvg />
-          </View>
-          <P style={styles.buttonText}>{i18next.t('application.manage.add.buttonText')}</P>
-        </TouchableOpacity>
+        <PrimaryButton onPress={addApplication}>
+          {i18next.t('application.manage.add.buttonText')}
+        </PrimaryButton>
       </View>
     </View>
   );
