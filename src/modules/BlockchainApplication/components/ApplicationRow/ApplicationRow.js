@@ -108,14 +108,6 @@ function ApplicationRow({
         onPress={onPress}
       >
         <View style={styles.nameContainer}>
-          {isPinned && (
-            <PinSvg
-              variant="fill"
-              color={colors.light.ultramarineBlue}
-              style={{ marginRight: 8 }}
-            />
-          )}
-
           <Image source={{ uri: application.logo.png }} style={{ ...styles.logoImage }} />
 
           <P style={[styles.nameLabel, styles.theme.nameLabel]}>{application.chainName}</P>
@@ -123,6 +115,14 @@ function ApplicationRow({
 
         <View style={styles.nameContainer}>
           {renderStatus(application.status)}
+
+          {isPinned && (
+            <PinSvg
+              variant="fill"
+              color={colors.light.ultramarineBlue}
+              style={{ marginRight: 8 }}
+            />
+          )}
 
           {showActive && currentApplication.data?.chainID === application.chainID && (
             <View style={{ marginRight: 12 }}>
