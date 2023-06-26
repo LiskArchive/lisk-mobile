@@ -15,7 +15,7 @@ export default () => ({
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
       marginTop: 8,
-      marginBottom: 24,
+      marginBottom: 16,
     },
   },
   [themes.light]: {
