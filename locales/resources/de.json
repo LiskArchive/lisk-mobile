@@ -293,7 +293,8 @@
       "lastUpdated": "Zuletzt aktualisiert",
       "status": "Status",
       "lastCertificateHeight": "Höhe des letzten Zertifikats",
-      "errorDescription": "Leider konnten wir Ihre Bewerbungsdaten nicht abrufen. Bitte versuche es erneut."
+      "errorDescription": "Leider konnten wir Ihre Bewerbungsdaten nicht abrufen. Bitte versuche es erneut.",
+      "chainIDDescription": "Eindeutige Kennung eines Kettenkontos. Es wird beim Senden von Token an eine bestimmte Kette verwendet und wird auch beim Signieren vorangestellt, um sich vor Replay-Angriffen zu schützen."
     },
     "manage": {
       "add": {
@@ -302,7 +303,7 @@
         "successDescription": "Sie können eine Liste Ihrer Anwendungen in der Anwendungs-Dropdown-Liste sehen.",
         "errorTitle": "Fehler beim Hinzufügen der Anwendung",
         "errorGenericDescription": "Wir können Ihre Anwendung nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
-        "errorDescription": "Wir können die Anwendung {{appName}} nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
+        "errorDescription": "Wir können die Anwendung {{chainName}} nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
         "errorOnContinueButtonText": "Versuchen Sie es erneut",
         "confirmButtonText": "App jetzt hinzufügen",
         "errorConnecting": "Fehler beim Verbinden der Anwendung. Bitte versuche es erneut."

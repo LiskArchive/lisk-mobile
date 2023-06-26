@@ -40,11 +40,9 @@ export default function DeleteApplication({ sharedData: { application }, nextSte
         </P>
       </View>
 
-      <PrimaryButton
-        onClick={handleDeleteApplicationClick}
-        title={i18next.t('application.manage.delete.confirmButtonText')}
-        style={[styles.submitButton]}
-      />
+      <PrimaryButton onPress={handleDeleteApplicationClick} style={[styles.submitButton]}>
+        {i18next.t('application.manage.delete.confirmButtonText')}
+      </PrimaryButton>
     </View>
   );
 }

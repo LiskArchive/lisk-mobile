@@ -13,7 +13,7 @@ export default function getApplicationDetailsSkeletonStyles() {
         justifyContent: 'flex-end',
         borderBottomColor: colors.light.whiteSmoke,
         borderBottomWidth: 1,
-        height: 148,
+        height: 114,
       },
       body: {
         flex: 1,

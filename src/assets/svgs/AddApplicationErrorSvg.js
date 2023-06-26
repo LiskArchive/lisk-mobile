@@ -5,7 +5,7 @@ import { Svg, Path } from 'react-native-svg';
 import { useTheme } from 'contexts/ThemeContext';
 import { themes, colors } from 'constants/styleGuide';
 
-export default function AddApplicationSuccessSvg({ height = 107, width = 139, style }) {
+export default function AddApplicationErrorSvg({ height = 107, width = 139, style }) {
   const { theme } = useTheme();
 
   const fillColorLevel1 = theme === themes.light ? colors.light.white : colors.dark.white;
@@ -40,13 +40,18 @@ export default function AddApplicationSuccessSvg({ height = 107, width = 139, st
         stroke={fillColorLevel3}
         strokeMiterlimit="10"
       />
-      <Path d="M108.462 90.2598H69.1846V106.13H108.462V90.2598Z" fill={fillColorLevel1} />
-      <Path d="M138.296 10.5H105.37V43.4259H138.296V10.5Z" fill={colors.light.ufoGreen} />
+      <Path d="M139.166 10.9258H106.722V43.3702H139.166V10.9258Z" fill={colors.light.furyRed} />
       <Path
-        d="M118.092 35.5923L111.259 28.0738L111.388 27.9071L118.092 35.259L132.296 18.3516L132.425 18.4997L118.092 35.5923Z"
-        fill={fillColorLevel1}
+        d="M113.314 17.5176L132.574 36.7583"
         stroke="white"
-        strokeWidth="0.75"
+        strokeWidth="2.4421"
+        strokeMiterlimit="10"
+      />
+
+      <Path
+        d="M132.574 17.5176L113.314 36.7583"
+        stroke="white"
+        strokeWidth="2.4421"
         strokeMiterlimit="10"
       />
       <Path
