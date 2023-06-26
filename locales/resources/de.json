@@ -231,7 +231,7 @@
       "gallery": "Gallery"
     },
     "setup": {
-      "addAccountTitle": "Konto hinzufügen",
+      "addAccountTitle": "Fügen Sie Ihr Konto hinzu",
       "switchAccount": "Benutzer wechseln",
       "decryptRecoveryPhrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
       "decryptRecoveryPhraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
