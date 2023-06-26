@@ -123,8 +123,8 @@
 		7952173E25FF508D00CCF7F8 /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD0C532A3750FB00E2DC9D /* LiskQA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiskQA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD0C552A37515700E2DC9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-LiskQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MobileProtect.plist; sourceTree = "<group>"; };
+		7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-LiskQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD27ED9391CCE388379420A /* Pods-Lisk-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOS/Pods-Lisk-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7D3C7D452F8CAAED9408693D /* Pods-LiskApp-LiskQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskQA.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskQA/Pods-LiskApp-LiskQA.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Lisk/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -895,12 +895,14 @@
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-Glog/glog.framework/glog",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MobileProtect/MobileProtect.framework/MobileProtect",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/double-conversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileProtect.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

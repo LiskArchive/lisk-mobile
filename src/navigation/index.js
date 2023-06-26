@@ -47,7 +47,7 @@ import { useAccounts } from '../modules/Accounts/hooks/useAccounts';
 const StackNavigator = createStackNavigator();
 
 export default function Navigator({ children }) {
-  const { theme } = useSelector((state) => state.settings);
+  const { theme, enableShakePhone } = useSelector((state) => state.settings);
   const discrete = useSelector((state) => state.settings.discrete);
   const dispatch = useDispatch();
   const { accounts } = useAccounts();
@@ -58,17 +58,19 @@ export default function Navigator({ children }) {
   };
 
   useEffect(() => {
-    RNShake.addListener(() => {
-      if (accounts.length) {
-        dispatch(
-          settingsUpdated({
-            discrete: !discrete,
-          })
-        );
-      }
-    });
+    if (enableShakePhone) {
+      RNShake.addListener(() => {
+        if (accounts.length) {
+          dispatch(
+            settingsUpdated({
+              discrete: !discrete,
+            })
+          );
+        }
+      });
+    }
     return () => RNShake.removeAllListeners();
-  }, [discrete]);
+  }, [discrete, enableShakePhone]);
 
   return (
     <SafeAreaProvider>

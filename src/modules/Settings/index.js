@@ -72,6 +72,12 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
     });
   };
 
+  const toggleShakePhone = () => {
+    settingsUpdated({
+      enableShakePhone: !settings.enableShakePhone,
+    });
+  };
+
   const checkBiometricsFeature = async () => {
     const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
     setBiometricsEnabled(Boolean(accountPassword && settings.sensorType));
@@ -162,6 +168,16 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               }
               title={t('settings.menu.discreetMode')}
               description={t('settings.descriptions.discreetMode')}
+            />
+          </View>
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              testID="dark-mode"
+              icon="dark-mode"
+              targetStateLabel={
+                <SwitchButton value={settings.enableShakePhone} onChange={toggleShakePhone} />
+              }
+              title={t('settings.menu.shakePhone')}
             />
           </View>
         </View>
