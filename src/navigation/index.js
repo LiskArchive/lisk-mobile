@@ -34,13 +34,13 @@ import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
 
 import { settingsUpdated } from 'modules/Settings/store/actions';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 
 import AppNavigator from './components/AppNavigator';
 
 import navigationOptions from './options';
 import navigationLinking from './linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
-import { useAccounts } from '../modules/Accounts/hooks/useAccounts';
 
 const StackNavigator = createStackNavigator();
 
