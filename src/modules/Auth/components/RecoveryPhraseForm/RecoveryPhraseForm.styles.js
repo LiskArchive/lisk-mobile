@@ -7,11 +7,11 @@ export default () => ({
       flex: 1,
     },
     input: {
-      textAlign: 'justify',
       color: colors.dark.whiteSmoke,
       paddingTop: 15,
       fontFamily: fonts.family.recoveryPhraseText,
       fontWeight: '700',
+      lineHeight: 20,
     },
     inputContainer: {
       paddingLeft: 0,
