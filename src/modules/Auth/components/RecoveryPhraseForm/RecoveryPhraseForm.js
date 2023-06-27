@@ -5,6 +5,7 @@ import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
+import { usePasteFromClipboard } from 'hooks/usePasteFromClipboard';
 import Checkbox from 'components/shared/Checkbox';
 import InfoToggler from 'components/shared/InfoToggler';
 import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
@@ -12,7 +13,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';
-import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
+import { IconButton, PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import DropDownHolder from 'utilities/alert';
 import { settingsUpdated } from 'modules/Settings/store/actions';
@@ -38,6 +39,14 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     () => validateDerivationPath(derivationPath),
     [derivationPath]
   );
+
+  const [fetchClipboardValue, { isLoading: isLoadingClipboardValue }] = usePasteFromClipboard({
+    onSuccess: (value) =>
+      setRecoveryPhrase({
+        value,
+        validity: [],
+      }),
+  });
 
   const handleInputChange = (value, showing) => {
     if (!showing) {
@@ -139,6 +148,10 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
             containerStyle: styles.inputContainer,
           }}
         />
+
+        <LabelButton onPress={fetchClipboardValue} disabled={isLoadingClipboardValue}>
+          Paste from clipboard
+        </LabelButton>
 
         {useDerivationPath && (
           <>

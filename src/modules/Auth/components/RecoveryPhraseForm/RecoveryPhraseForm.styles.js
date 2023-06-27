@@ -12,6 +12,7 @@ export default () => ({
       fontFamily: fonts.family.recoveryPhraseText,
       fontWeight: '700',
       lineHeight: 20,
+      minHeight: 88,
     },
     inputContainer: {
       paddingLeft: 0,
