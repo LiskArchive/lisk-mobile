@@ -135,7 +135,7 @@ class Input extends React.Component {
               onPress={this.toggleSecureTextEntry}
               style={styles.secureTextEntryIcon}
             >
-              {this.state.secureTextEntry ? <EyeSvg /> : <EyeClosedSvg />}
+              {this.state.secureTextEntry ? <EyeSvg variant="outline" /> : <EyeClosedSvg />}
             </TouchableOpacity>
           )}
         </View>

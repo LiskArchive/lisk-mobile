@@ -16,9 +16,9 @@ export default () => ({
     },
     description: {
       fontFamily: fonts.family.context,
-      fontSize: fonts.size.base,
+      fontSize: fonts.size.input,
       marginTop: 16,
-      marginBottom: 8,
+      marginBottom: 16,
     },
     formContainer: {
       paddingTop: 8,
@@ -55,7 +55,7 @@ export default () => ({
       backgroundColor: colors.dark.white,
     },
     description: {
-      color: colors.light.zodiacBlue,
+      color: colors.light.smoothGray,
     },
   },
 
@@ -64,7 +64,7 @@ export default () => ({
       backgroundColor: colors.dark.black,
     },
     description: {
-      color: colors.dark.ghost,
+      color: colors.dark.mountainMist,
     },
   },
 });
