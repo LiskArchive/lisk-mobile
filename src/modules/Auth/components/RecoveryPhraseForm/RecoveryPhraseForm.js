@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,7 +9,7 @@ import InfoToggler from 'components/shared/InfoToggler';
 import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
 import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
-import { validateRecoveryPhrase, maskWords } from 'modules/Auth/utils';
+import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
@@ -24,9 +24,6 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const [showPassword, setShowPassword] = useState(false);
-  const [blurred, setBlurred] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [mask, setMask] = useState('');
   const [recoveryPhrase, setRecoveryPhrase] = useState({
     value: devDefaultRecoveryPhrase,
     validity: [],
@@ -40,21 +37,12 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     [derivationPath]
   );
 
-  const shouldShowMask = useMemo(
-    () => blurred && !showPassword && !focused,
-    [focused, blurred, showPassword]
-  );
-
   const handleInputChange = (value) => {
     setRecoveryPhrase({
       value,
       validity: [],
     });
   };
-
-  useEffect(() => {
-    setMask(maskWords(recoveryPhrase.value));
-  }, [recoveryPhrase.value]);
 
   const onFormSubmission = () => {
     const secretRecoveryPhrase = recoveryPhrase.value;
@@ -100,15 +88,6 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     dispatch(settingsUpdated({ discrete: !settings.discrete }));
   };
 
-  const onBlur = () => {
-    setBlurred(true);
-    setFocused(false);
-  };
-  const onFocus = () => {
-    setFocused(true);
-    setBlurred(false);
-  };
-
   return (
     <View style={styles.container} testID="secretPhraseForm">
       <ScrollView contentContainerStyle={styles.container}>
@@ -135,11 +114,9 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
             input: [styles.input, styles.theme.input, showPassword ? styles.inputRevealed : null],
             containerStyle: styles.inputContainer,
           }}
-          value={shouldShowMask ? mask : recoveryPhrase.value}
+          value={recoveryPhrase.value}
           onChange={handleInputChange}
           autoCorrect={false}
-          onBlur={onBlur}
-          onFocus={onFocus}
           multiline
           keyboardAppearance="light"
           autoFocus
