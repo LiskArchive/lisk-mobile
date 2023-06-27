@@ -229,3 +229,31 @@ export const chooseRandomWords = (qty, words) => {
 
   return missing;
 };
+
+/**
+ * Masks each word in a string to contain the same number of letters.
+ * @param {string} str - The input string.
+ * @param {number} length - The desired length for each masked word.
+ * @returns {string} The masked string.
+ */
+export function maskWords(str = '', length = 4) {
+  // If the length of the string is 0, return an empty string
+  if (str.length === 0) {
+    return '';
+  }
+
+  // Split the input string into an array of words
+  const words = str.split(' ');
+
+  // Map over each word in the array and mask it
+  const maskedWords = words.map(() => {
+    // Calculate the number of asterisks needed to mask the word
+    const mask = '*'.repeat(length);
+
+    // Return the masked word
+    return mask;
+  });
+
+  // Join the masked words with spaces and return the final masked string
+  return maskedWords.join(' ');
+}

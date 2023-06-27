@@ -38,7 +38,8 @@ export default function RecoveryPhraseQuiz({
       style: {},
     },
   ]);
-  const [visibleOptions, setVisibleOptions] = useState(-1);
+
+  const [visibleOptions, setVisibleOptions] = useState(null);
 
   const { styles } = useTheme({
     styles: getRecoveryPhraseQuizStyles(),
@@ -49,6 +50,7 @@ export default function RecoveryPhraseQuiz({
     const _missing = chooseRandomWords(2, words);
 
     setMissing(_missing);
+    setVisibleOptions(0);
 
     setOptions(assembleWordOptions(recoveryPhrase.split(' '), _missing));
 
@@ -103,7 +105,11 @@ export default function RecoveryPhraseQuiz({
       textStyle: styles.labelUnchecked,
     };
     setAnswers(temp);
-    setVisibleOptions(false);
+    if (visibleOptions === 0) {
+      setVisibleOptions(1);
+    } else {
+      setVisibleOptions(null);
+    }
     checkAnswers(temp);
   };
 
