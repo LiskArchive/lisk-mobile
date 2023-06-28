@@ -9,7 +9,9 @@
       "reload": "Reload",
       "viewAll": "View all"
     },
-    "copyToClipboard": "Copy to clipboard"
+    "copyToClipboard": "Copy to clipboard",
+    "pasteFromClipboard": "Paste from clipboard",
+    "pastedFromClipboard": "Pasted"
   },
   "fallbackScreens" : {
     "error" : {

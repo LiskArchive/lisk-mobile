@@ -17,6 +17,7 @@ export default () => ({
     inputContainer: {
       paddingLeft: 0,
       paddingRight: 0,
+      marginBottom: 8,
     },
     scanButtonTitle: {
       fontSize: fonts.size.small,
@@ -69,6 +70,11 @@ export default () => ({
     },
     info: {
       marginLeft: 8,
+    },
+    labelButtonText: {
+      fontSize: fonts.size.input,
+      fontWeight: '400',
+      marginRight: 4,
     },
   },
   [themes.light]: {

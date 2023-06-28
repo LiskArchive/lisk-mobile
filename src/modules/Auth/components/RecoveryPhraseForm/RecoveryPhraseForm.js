@@ -14,6 +14,8 @@ import Input from 'components/shared/toolBox/input';
 import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';
 import { IconButton, PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
+import CopySvg from 'assets/svgs/CopySvg';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { colors } from 'constants/styleGuide';
 import DropDownHolder from 'utilities/alert';
 import { settingsUpdated } from 'modules/Settings/store/actions';
@@ -40,13 +42,14 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     [derivationPath]
   );
 
-  const [fetchClipboardValue, { isLoading: isLoadingClipboardValue }] = usePasteFromClipboard({
-    onSuccess: (value) =>
-      setRecoveryPhrase({
-        value,
-        validity: [],
-      }),
-  });
+  const [fetchClipboardValue, { isLoading: isLoadingClipboardValue, pasted }] =
+    usePasteFromClipboard({
+      onSuccess: (value) =>
+        setRecoveryPhrase({
+          value,
+          validity: [],
+        }),
+    });
 
   const handleInputChange = (value, showing) => {
     if (!showing) {
@@ -149,8 +152,21 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
           }}
         />
 
-        <LabelButton onPress={fetchClipboardValue} disabled={isLoadingClipboardValue}>
-          Paste from clipboard
+        <LabelButton
+          onPress={fetchClipboardValue}
+          disabled={isLoadingClipboardValue}
+          textStyle={styles.labelButtonText}
+          adornments={{
+            right: pasted ? (
+              <CircleCheckedSvg variant="fill" height={16} />
+            ) : (
+              <CopySvg height={16} />
+            ),
+          }}
+        >
+          {pasted
+            ? i18next.t('commons.pastedFromClipboard')
+            : i18next.t('commons.pasteFromClipboard')}
         </LabelButton>
 
         {useDerivationPath && (
