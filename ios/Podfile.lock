@@ -367,7 +367,8 @@ PODS:
     - React-Core
   - react-native-safe-area-context (3.4.1):
     - React-Core
-  - react-native-shake (3.5.0):
+  - react-native-shake (5.4.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - react-native-splash-screen (3.2.0):
     - React
@@ -486,7 +487,7 @@ PODS:
     - React-Core
   - RNScreens (2.18.1):
     - React-Core
-  - RNScreenshotPrevent (1.0.5):
+  - RNScreenshotPrevent (1.1.6):
     - React
   - RNShare (7.9.1):
     - React-Core
@@ -811,7 +812,7 @@ SPEC CHECKSUMS:
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
-  react-native-shake: 41a1ea8ec541fccf3f01566edef8d3cb722b00e3
+  react-native-shake: fbe07901fe6664cfa1e58c33079f88176a458c27
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-wasm: 6bb5d9915e8d4b9b7d080247d3fbf7354a582695
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
@@ -841,7 +842,7 @@ SPEC CHECKSUMS:
   RNQrGenerator: 90461ba3ca88c1d38ef73da50fade35d9648215d
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
-  RNScreenshotPrevent: 0526b14371b2d0545957070cf30bc0a29a5c4bf5
+  RNScreenshotPrevent: 71e3b8b2ae32842fc058b6f8c5ba7ead0d4c9044
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4

@@ -9,8 +9,9 @@ pipeline {
             sh '''
             echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
             source ~/.bash_profile
-            npm uninstall mobile-protect  --legacy-peer-deps
-            npm install --legacy-peer-deps && npm run link
+            npm install -g yarn
+            yarn remove mobile-protect
+            yarn && yarn run link
             export LANG=en_US.UTF-8 && export GEM_HOME=$HOME/.gem && export PATH=$GEM_HOME/bin:$PATH
             gem install cocoapods --user-install && npx pod-install
             '''
@@ -26,8 +27,8 @@ pipeline {
               cp env.test.json env.json
               npx react-native start &
               
-              npx detox build --configuration ios.debug
-              npx detox test --configuration ios.debug --cleanup --headless --record-logs all
+              yarn detox build --configuration ios.debug
+              yarn detox test --configuration ios.debug --cleanup --headless --record-logs all
               kill -9 %1
               '''
             }
@@ -37,14 +38,14 @@ pipeline {
     stage('Run ESLint') {
       steps {
         nvm(getNodejsVersion()) {
-          sh 'npm run lint'
+          sh 'yarn run lint'
         }
       }
     }
     stage('Run unit tests') {
       steps {
         nvm(getNodejsVersion()) {
-          sh 'npm run test'
+          sh 'yarn run test'
         }
       }
     }
