@@ -9,8 +9,8 @@ pipeline {
             sh '''
             echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
             source ~/.bash_profile
-            npm uninstall mobile-protect
-            npm install && npm run link
+            npm uninstall mobile-protect  --legacy-peer-deps
+            npm install --legacy-peer-deps && npm run link
             export LANG=en_US.UTF-8 && export GEM_HOME=$HOME/.gem && export PATH=$GEM_HOME/bin:$PATH
             gem install cocoapods --user-install && npx pod-install
             '''
