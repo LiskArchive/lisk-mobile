@@ -25,6 +25,7 @@ import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
+import PhoneShakeSvg from 'assets/svgs/PhoneShakeSvg';
 import { ItemTitle } from './components';
 import getStyles from './styles';
 import { useModal } from '../../hooks/useModal';
@@ -69,6 +70,12 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
   const toggleIncognito = () => {
     settingsUpdated({
       discrete: !settings.discrete,
+    });
+  };
+
+  const toggleShakePhone = () => {
+    settingsUpdated({
+      enableShakePhone: !settings.enableShakePhone,
     });
   };
 
@@ -162,6 +169,16 @@ const Settings = ({ styles, theme, navigation, settings, t, settingsUpdated }) =
               }
               title={t('settings.menu.discreetMode')}
               description={t('settings.descriptions.discreetMode')}
+            />
+          </View>
+          <View style={[styles.item, styles.theme.item]}>
+            <ItemTitle
+              testID="dark-mode"
+              icon={<PhoneShakeSvg width={20} height={20} />}
+              targetStateLabel={
+                <SwitchButton value={settings.enableShakePhone} onChange={toggleShakePhone} />
+              }
+              title={t('settings.menu.shakePhone')}
             />
           </View>
         </View>

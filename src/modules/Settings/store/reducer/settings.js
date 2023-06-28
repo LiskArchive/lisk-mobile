@@ -13,6 +13,7 @@ export const INITIAL_STATE = {
   language: languageKeys[0],
   useDerivationPath: false,
   showedIntro: false,
+  enableShakePhone: true,
   token: {
     active: tokenKeys[0],
     list: tokenKeys.reduce((acc, key) => {

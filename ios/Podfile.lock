@@ -322,8 +322,8 @@ PODS:
     - React-Core
   - react-native-safe-area-context (3.4.1):
     - React-Core
-  - react-native-shake (3.5.0):
-    - React-Core
+  - react-native-shake (5.3.2):
+    - React
   - react-native-splash-screen (3.2.0):
     - React
   - react-native-wasm (0.1.3):
@@ -692,7 +692,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost: a7c83b31436843459a1961bfd74b96033dc77234
+  boost: 57d2868c099736d80fcd648bf211b4431e51a558
   BVLinearGradient: 252e4a39d23d69d2d89b55b165c8900f7caf93fc
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -716,7 +716,7 @@ SPEC CHECKSUMS:
   mobile-protect: 3b972b276a5bcb5b65996f52c70fcf138dc5f323
   MobileProtect: d0b28d4eeb139c3de7247a12bea7da01167d09ff
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
+  RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
   RCTTypeSafety: 27c2ac1b00609a432ced1ae701247593f07f901e
   React: bb3e06418d2cc48a84f9666a576c7b38e89cd7db
@@ -740,7 +740,7 @@ SPEC CHECKSUMS:
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
-  react-native-shake: 41a1ea8ec541fccf3f01566edef8d3cb722b00e3
+  react-native-shake: 62aa5681863203090a087842da70183c442b97f8
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-wasm: 6bb5d9915e8d4b9b7d080247d3fbf7354a582695
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
@@ -780,4 +780,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0cf9df99eb7629cb3e2619edb9a6c517a0748341
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

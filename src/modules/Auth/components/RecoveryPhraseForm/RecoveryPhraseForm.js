@@ -45,7 +45,7 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
   };
 
   const onFormSubmission = () => {
-    const secretRecoveryPhrase = recoveryPhrase.value;
+    const secretRecoveryPhrase = recoveryPhrase.value || '';
     const normalizedRecoveryPhrase = secretRecoveryPhrase.trim();
     const validity = validateRecoveryPhrase(normalizedRecoveryPhrase);
 
