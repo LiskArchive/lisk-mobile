@@ -23,12 +23,6 @@ describe('useCopyToClipboard', () => {
 
     expect(Clipboard.setString).toHaveBeenCalledWith(mockValue);
     expect(result.current[0]).toBe(true);
-
-    // act(() => {
-    //   jest.runAllTimers();
-    // });
-
-    // expect(result.current[0]).toBe(false);
   });
 
   it('should clear timeout on unmount', () => {
