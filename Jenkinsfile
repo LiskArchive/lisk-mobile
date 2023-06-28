@@ -26,8 +26,8 @@ pipeline {
               cp env.test.json env.json
               npx react-native start &
               
-              npm detox build --configuration ios.debug
-              npm detox test --configuration ios.debug --cleanup --headless --record-logs all
+              npx detox build --configuration ios.debug
+              npx detox test --configuration ios.debug --cleanup --headless --record-logs all
               kill -9 %1
               '''
             }
