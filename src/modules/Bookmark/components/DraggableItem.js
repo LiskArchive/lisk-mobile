@@ -60,7 +60,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
               name: 'AddBookmark',
               params: {
                 account: data,
-                title: t('Edit bookmark'),
+                title: t('bookmarks.editBookmark.title'),
               },
             }),
         },

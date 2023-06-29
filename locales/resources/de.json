@@ -34,17 +34,14 @@
   },
   "Activity": "Aktivitäten",
   "Add to bookmarks": "Zu Lesezeichen hinzufügen",  
-  "Address": "Adresse",
   "Allow camera access": "Kamerazugriff erlauben",
   "Amount": "Betrag",
   "Status": "",  
   "Cancel": "Abbrechen",
-  "Edit bookmark": "Lesezeichen bearbeiten",  
   "I have read and agreed with the": "Ich akzeptiere die",
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
-  "Label": "Bezeichnung",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
   "New bookmark": "Neues Lesezeichen",
   "No internet connection!": "Keine Internetverbindung!",
@@ -53,7 +50,6 @@
   "Private use only": "Nur für private Nutzung",
   "Show QR code": "Zeige QR Code",
   "Hide QR code": "",
-  "Save changes": "Änderungen speichern",
   "Scan": "scannen",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
@@ -84,7 +80,6 @@
   "Disable bioAuth": "{{sensorType}} deaktivieren",
   "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
   "Error": "Fehler",
-  "Unparsed Address": "Unbekannte Adresse",  
   "You will be able to add it again anytime.": "Du kannst es jederzeit wieder hinzufügen.",
   "We’ve got good news!": "Gute Neuigkeiten für dich!",
   "Info": "Info",
@@ -170,9 +165,16 @@
   "bookmarks": {
     "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
-      "invalidLabel": "",
-      "invalidAddress": "",
-      "required": ""
+      "addressLabel": "Wallet-Adresse",
+      "labelLabel": "Bezeichnung",
+      "invalidLabel": "Die Bezeichnung muss zwischen 3 und 20 Zeichen lang sein",
+      "invalidAddress": "Ungültige Adresse",
+      "required": "Dieses Feld ist erforderlich",
+      "saveButtonText": "Änderungen speichern",
+      "addButtonText": "Zu den Lesezeichen hinzufügen"
+    },
+    "editBookmark": {
+      "title": "Lesezeichen bearbeiten"
     },
     "deleteBookmark": {
       "title": "Lesezeichen löschen",

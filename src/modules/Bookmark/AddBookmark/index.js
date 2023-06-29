@@ -133,7 +133,9 @@ export default function AddBookmark({ route }) {
       if (editMode) {
         navigation.setOptions({
           title: null,
-          headerLeft: (props) => <HeaderBackButton {...props} title="Edit bookmark" />,
+          headerLeft: (props) => (
+            <HeaderBackButton {...props} title={i18next.t('bookmarks.editBookmark.title')} />
+          ),
         });
       }
     }
@@ -159,7 +161,7 @@ export default function AddBookmark({ route }) {
         {!incomingData ? (
           <View style={styles.addressContainer}>
             <Input
-              label={i18next.t('Address')}
+              label={i18next.t('bookmarks.addBookmark.addressLabel')}
               autoCorrect={false}
               autoCapitalize="none"
               innerStyles={{
@@ -199,7 +201,7 @@ export default function AddBookmark({ route }) {
 
         <Input
           testID="bookmark-label-input"
-          label={i18next.t('Label')}
+          label={i18next.t('bookmarks.addBookmark.labelLabel')}
           autoCorrect={false}
           autoCapitalize="none"
           innerStyles={{ inputLabel: styles.input }}
@@ -212,7 +214,9 @@ export default function AddBookmark({ route }) {
 
       <View style={[styles.footer]}>
         <PrimaryButton onClick={handleSubmit} noTheme testID="add-bookmark-button">
-          {editMode ? i18next.t('Save changes') : i18next.t('Add to bookmarks')}
+          {editMode
+            ? i18next.t('bookmarks.addBookmark.saveButtonText')
+            : i18next.t('bookmarks.addBookmark.addButtonText')}
         </PrimaryButton>
       </View>
     </SafeAreaView>
