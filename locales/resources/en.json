@@ -170,7 +170,7 @@
       "invalidAddress": "Invalid address",
       "required": "This field is required",
       "saveButtonText": "Save changes",
-      "addButtonText": "Add to bookmarks"
+      "addButtonText": "Add bookmark"
     },
     "editBookmark": {
       "title": "Edit bookmark"

@@ -171,7 +171,7 @@
       "invalidAddress": "Ungültige Adresse",
       "required": "Dieses Feld ist erforderlich",
       "saveButtonText": "Änderungen speichern",
-      "addButtonText": "Zu den Lesezeichen hinzufügen"
+      "addButtonText": "Lesezeiche hinzufügen"
     },
     "editBookmark": {
       "title": "Lesezeichen bearbeiten"

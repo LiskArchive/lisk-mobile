@@ -161,20 +161,12 @@ export default function AddBookmark({ route }) {
         {!incomingData ? (
           <View style={styles.addressContainer}>
             <Input
-              label={i18next.t('bookmarks.addBookmark.addressLabel')}
-              autoCorrect={false}
-              autoCapitalize="none"
-              innerStyles={{
-                errorMessage: styles.errorMessage,
-                rightAdornment: styles.rightAdornment,
-              }}
-              testID="bookmark-address-input"
-              onChange={(value) => setAddress({ value })}
-              value={address.value}
-              error={setError(address.validity, 'address')}
-              adornments={{
-                left: <Avatar address={address.value} size={24} />,
-                right: (
+              label={
+                <View style={styles.labelContainer}>
+                  <P style={[styles.label, styles.theme.label]}>
+                    {i18next.t('bookmarks.addBookmark.addressLabel')}
+                  </P>
+
                   <IconButton
                     onPress={() => scanner.current?.toggleCamera?.()}
                     titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
@@ -183,7 +175,19 @@ export default function AddBookmark({ route }) {
                     iconSize={18}
                     color={colors.light.ultramarineBlue}
                   />
-                ),
+                </View>
+              }
+              autoCorrect={false}
+              autoCapitalize="none"
+              innerStyles={{
+                errorMessage: styles.errorMessage,
+              }}
+              testID="bookmark-address-input"
+              onChange={(value) => setAddress({ value })}
+              value={address.value}
+              error={setError(address.validity, 'address')}
+              adornments={{
+                left: <Avatar address={address.value} size={24} />,
               }}
             />
           </View>
