@@ -51,8 +51,8 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
         }),
     });
 
-  const handleInputChange = (value, showing) => {
-    if (!showing) {
+  const handleInputChange = (value) => {
+    if (!showRecoveryPhrase) {
       return false;
     }
 
@@ -140,7 +140,7 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
               ? recoveryPhrase.value
               : toSecureRecoveryPhraseString(recoveryPhrase.value)
           }
-          onChange={(value) => handleInputChange(value, showRecoveryPhrase)}
+          onChange={handleInputChange}
           disabled={!showRecoveryPhrase}
           autoCorrect={false}
           multiline
