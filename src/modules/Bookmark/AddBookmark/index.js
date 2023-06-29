@@ -18,7 +18,7 @@ import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
 import Scanner from 'components/shared/Scanner/Scanner';
-import { P, Small } from 'components/shared/toolBox/typography';
+import { P } from 'components/shared/toolBox/typography';
 import { selectBookmarkList } from '../store/selectors';
 import { addBookmark, editBookmark } from '../store/actions';
 
@@ -193,12 +193,16 @@ export default function AddBookmark({ route }) {
           </View>
         ) : (
           <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Address</P>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t('bookmarks.addBookmark.addressLabel')}
+            </P>
+
             <View style={styles.staticAddressContainer}>
               <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35} />
-              <Small style={[styles.address, styles.theme.address]}>
+
+              <P style={[styles.address, styles.theme.address]}>
                 {stringShortener(incomingData.address, 6, 5)}
-              </Small>
+              </P>
             </View>
           </View>
         )}

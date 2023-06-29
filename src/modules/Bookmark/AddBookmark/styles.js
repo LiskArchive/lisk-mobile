@@ -36,8 +36,9 @@ export default () => ({
       top: 63,
     },
     address: {
-      fontWeight: 'bold',
+      fontWeight: '500',
       flex: 1,
+      marginLeft: 4,
     },
     staticAddressContainer: {
       flexDirection: 'row',
@@ -47,10 +48,7 @@ export default () => ({
       marginRight: 8,
     },
     row: {
-      marginTop: 24,
       marginBottom: 4,
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
     },
     label: {
       fontFamily: fonts.family.context,
