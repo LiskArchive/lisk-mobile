@@ -65,7 +65,6 @@
   "Security": "Security",
   "Delete": "Delete",
   "Edit": "Edit",
-  "Bookmarks": "Bookmarks",
   "Request": "Request",
   "Select your currency": "Select your currency",
   "Settings": "Settings",
@@ -162,6 +161,7 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
+    "title": "Bookmarks",
     "emptyText": "No addresses bookmarked yet.",
     "addBookmark": {
       "addressLabel": "Wallet address",

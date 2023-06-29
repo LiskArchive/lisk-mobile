@@ -7,7 +7,7 @@ import { stringShortener } from 'utilities/helpers';
 import { useModal } from 'hooks/useModal';
 import WarningSvg from 'assets/svgs/WarningSvg';
 import Avatar from 'components/shared/avatar';
-import { B, Small, P } from 'components/shared/toolBox/typography';
+import { B, P } from 'components/shared/toolBox/typography';
 import Icon from 'components/shared/toolBox/icon';
 import SwipeableRow from 'components/shared/Swipeable';
 import { useNavigation } from '@react-navigation/native';
@@ -89,7 +89,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
         {showAvatar && (
           <Avatar
             address={data.address}
-            size={40}
+            size={48}
             style={[
               styles.theme.avatar,
               styles.avatarContainer,
@@ -100,9 +100,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
 
         <View style={[styles.column, isInvalidAddress && styles.lightOpacity]}>
           <B style={[styles.address, styles.theme.address]}>{data.label}</B>
-          <Small style={[styles.label, styles.theme.label]}>
-            {stringShortener(data.address, 6, 5)}
-          </Small>
+          <P style={[styles.label, styles.theme.label]}>{stringShortener(data.address, 6, 5)}</P>
         </View>
 
         {isInvalidAddress && (

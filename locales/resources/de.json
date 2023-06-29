@@ -65,7 +65,6 @@
   "Security": "Sicherheit",
   "Delete": "Löschen",
   "Edit": "Bearbeiten",
-  "Bookmarks": "Lesezeichen",
   "Request": "Anfrage",
   "Select your currency": "Wähle deine Währung",
   "Settings": "Einstellungen",
@@ -163,6 +162,7 @@
     "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
+    "title": "Lesezeichen",
     "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
       "addressLabel": "Wallet-Adresse",

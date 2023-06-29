@@ -13,8 +13,8 @@ export default () => ({
     },
     titleContainer: {
       backgroundColor: colors.light.ultramarineBlue,
-      width: 54,
-      height: 54,
+      width: 48,
+      height: 48,
       borderRadius: 26,
       alignItems: 'center',
       justifyContent: 'center',
@@ -23,6 +23,7 @@ export default () => ({
       bottom: Platform.select({ android: 30, ios: 0 }),
       right: 16,
       margin: 10,
+      marginBottom: 24,
     },
     headerButton: {
       transform: [{ rotate: '45deg' }],
@@ -68,8 +69,8 @@ export default () => ({
     addButton: {
       width: '100%',
       borderBottomWidth: 1,
-      paddingBottom: 20,
-      height: 55,
+      paddingBottom: 16,
+      height: 40,
     },
     addButtonIcon: {
       transform: [{ rotate: '45deg' }],
