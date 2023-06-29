@@ -13,9 +13,9 @@ export default () => ({
     },
     description: {
       fontFamily: fonts.family.context,
-      fontSize: fonts.size.base,
-      paddingTop: 8,
-      paddingBottom: 8,
+      fontSize: fonts.size.input,
+      marginTop: 8,
+      marginBottom: 16,
     },
   },
   [themes.light]: {
@@ -23,7 +23,7 @@ export default () => ({
       backgroundColor: colors.dark.white,
     },
     description: {
-      color: colors.light.zodiacBlue,
+      color: colors.light.smoothGray,
     },
   },
 
@@ -32,7 +32,7 @@ export default () => ({
       backgroundColor: colors.dark.black,
     },
     description: {
-      color: colors.dark.ghost,
+      color: colors.dark.mountainMist,
     },
   },
 });

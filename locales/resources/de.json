@@ -231,13 +231,14 @@
       "gallery": "Gallery"
     },
     "setup": {
-      "addAccountTitle": "Konto hinzufügen",
+      "authMethodTitle": "Konto hinzufügen",
+      "addAccountTitle": "Fügen Sie Ihr Konto hinzu",
       "switchAccount": "Benutzer wechseln",
       "decryptRecoveryPhrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
       "decryptRecoveryPhraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
       "addAccountDescription": "Geben Sie Ihre geheime Wiederherstellungsphrase ein, um Ihr Konto zu verwalten",
       "passwordSetupTitle": "Gerätekennwort einrichten",
-      "passwordSetupDescription": "Dieses Passwort wird verwendet, um Ihre geheime Wiederherstellungsphrase zu verschlüsseln, die für die Verwaltung Ihres Kontos verwendet wird.",
+      "passwordSetupDescription": "Dieses Passwort wird jedes Mal zum Entschlüsseln Ihres Kontos verwendet, wenn Sie eine Transaktion von Ihrem Wallet aus initiieren, und auch beim Sichern oder Entfernen eines Kontos aus dem Wallet.",
       "passwordSetupSuccessTitle": "Perfekt!",
       "passwordSetupSuccessDescription": "Sie können jetzt verschlüsselte geheime Wiederherstellungsphrasen herunterladen.",
       "enableDiscreteMode": "",

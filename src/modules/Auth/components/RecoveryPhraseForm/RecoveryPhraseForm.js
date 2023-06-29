@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+
+import { usePasteFromClipboard } from 'hooks/usePasteFromClipboard';
 import Checkbox from 'components/shared/Checkbox';
 import InfoToggler from 'components/shared/InfoToggler';
 import { validateDerivationPath } from 'modules/Accounts/utils/accounts.utils';
@@ -11,10 +13,13 @@ import { useTheme } from 'contexts/ThemeContext';
 import Input from 'components/shared/toolBox/input';
 import { validateRecoveryPhrase } from 'modules/Auth/utils';
 import { P } from 'components/shared/toolBox/typography';
-import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
+import { IconButton, PrimaryButton, LabelButton } from 'components/shared/toolBox/button';
+import CopySvg from 'assets/svgs/CopySvg';
+import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { colors } from 'constants/styleGuide';
 import DropDownHolder from 'utilities/alert';
 import { settingsUpdated } from 'modules/Settings/store/actions';
+import { toSecureRecoveryPhraseString } from '../../utils/recoveryPhrase';
 
 import getStyles from './RecoveryPhraseForm.styles';
 
@@ -23,7 +28,7 @@ const devDefaultRecoveryPhrase = process.env.RECOVERY_PHRASE || '';
 export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDerivationPath }) {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showRecoveryPhrase, setShowRecoveryPhrase] = useState(false);
   const [recoveryPhrase, setRecoveryPhrase] = useState({
     value: devDefaultRecoveryPhrase,
     validity: [],
@@ -37,14 +42,29 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     [derivationPath]
   );
 
+  const [fetchClipboardValue, { isLoading: isLoadingClipboardValue, pasted }] =
+    usePasteFromClipboard({
+      onSuccess: (value) =>
+        setRecoveryPhrase({
+          value,
+          validity: [],
+        }),
+    });
+
   const handleInputChange = (value) => {
+    if (!showRecoveryPhrase) {
+      return false;
+    }
+
     setRecoveryPhrase({
       value,
       validity: [],
     });
+
+    return true;
   };
 
-  const onFormSubmission = () => {
+  const handleSubmit = () => {
     const secretRecoveryPhrase = recoveryPhrase.value || '';
     const normalizedRecoveryPhrase = secretRecoveryPhrase.trim();
     const validity = validateRecoveryPhrase(normalizedRecoveryPhrase);
@@ -73,28 +93,34 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     }
   };
 
-  const onToggleRecoveryPhraseReveal = () => setShowPassword((prevState) => !prevState);
+  const onToggleRecoveryPhraseReveal = () => setShowRecoveryPhrase((prevState) => !prevState);
 
   const toggleCamera = () => {
     onScanQrCode();
     Keyboard.dismiss();
   };
 
-  const toggleUseDerivationPath = () => {
+  const toggleUseDerivationPath = () =>
     dispatch(settingsUpdated({ useDerivationPath: !settings.useDerivationPath }));
-  };
 
-  const toggleDiscreteMode = () => {
-    dispatch(settingsUpdated({ discrete: !settings.discrete }));
-  };
+  const toggleDiscreteMode = () => dispatch(settingsUpdated({ discrete: !settings.discrete }));
 
   return (
     <View style={styles.container} testID="secretPhraseForm">
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={[styles.labelContainer, styles.theme.labelContainer]}>
-          <P style={[styles.label, styles.theme.label]}>
-            {i18next.t('commons.secretRecoveryPhrase')}
-          </P>
+        <View style={[styles.labelContainer, styles.spaceBetween, styles.theme.labelContainer]}>
+          <View style={[styles.row]}>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t('commons.secretRecoveryPhrase')}
+            </P>
+
+            <IconButton
+              onPress={onToggleRecoveryPhraseReveal}
+              icon={showRecoveryPhrase ? 'eye' : 'eye-crossed'}
+              iconSize={16}
+              color={colors.light.ultramarineBlue}
+            />
+          </View>
 
           <IconButton
             onPress={toggleCamera}
@@ -109,72 +135,95 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
 
         <Input
           testID="signInRecoveryPhaseInput"
-          noTheme
-          innerStyles={{
-            input: [styles.input, styles.theme.input, showPassword ? styles.inputRevealed : null],
-            containerStyle: styles.inputContainer,
-          }}
-          value={recoveryPhrase.value}
+          value={
+            showRecoveryPhrase
+              ? recoveryPhrase.value
+              : toSecureRecoveryPhraseString(recoveryPhrase.value)
+          }
           onChange={handleInputChange}
+          disabled={!showRecoveryPhrase}
           autoCorrect={false}
           multiline
           keyboardAppearance="light"
           autoFocus
-          adornments={{
-            right: (
-              <IconButton
-                onPress={onToggleRecoveryPhraseReveal}
-                icon={showPassword ? 'eye-crossed' : 'eye'}
-                iconSize={16}
-                color={colors.light.ultramarineBlue}
-              />
-            ),
+          innerStyles={{
+            input: [styles.input, styles.theme.input],
+            containerStyle: styles.inputContainer,
           }}
         />
 
+        <LabelButton
+          onPress={fetchClipboardValue}
+          disabled={isLoadingClipboardValue}
+          textStyle={styles.labelButtonText}
+          adornments={{
+            right: pasted ? (
+              <CircleCheckedSvg variant="fill" height={16} />
+            ) : (
+              <CopySvg height={16} />
+            ),
+          }}
+        >
+          {pasted
+            ? i18next.t('commons.pastedFromClipboard')
+            : i18next.t('commons.pasteFromClipboard')}
+        </LabelButton>
+
         {useDerivationPath && (
           <>
-            <View style={[styles.row]}>
+            <View style={[styles.labelContainer]}>
               <P style={[styles.label, styles.theme.label]}>
                 {i18next.t('commons.customDerivationPath')}
               </P>
+
               <InfoToggler
                 title={i18next.t('commons.customDerivationPath')}
                 style={{ toggleButton: styles.info }}
                 description={i18next.t('auth.setup.customDerivationPathDescription')}
               />
             </View>
+
             <Input
               testID="derivation-path-input"
-              onChange={setDerivationPath}
               value={derivationPath}
+              onChange={setDerivationPath}
               error={derivationPathError && i18next.t('auth.register.error.invalidDerivationPath')}
             />
           </>
         )}
       </ScrollView>
-      <Checkbox
-        onPress={toggleUseDerivationPath}
-        selected={!settings.useDerivationPath}
-        style={{ container: styles.derivationPathContainer }}
-      >
-        <View style={styles.row}>
-          <P>{i18next.t('settings.menu.enableDerivationPath')}</P>
+
+      <View style={[styles.derivationPathContainer]}>
+        <Checkbox
+          onPress={toggleUseDerivationPath}
+          selected={!settings.useDerivationPath}
+          style={{ container: styles.derivationPathContainer, children: styles.row }}
+        >
+          <P style={[styles.label, styles.theme.label]}>
+            {i18next.t('settings.menu.enableDerivationPath')}
+          </P>
+
           <InfoToggler
             title={i18next.t('auth.setup.enableLegacyAccount')}
             style={{ toggleButton: styles.info }}
             description={i18next.t('auth.setup.enableLegacyAccountDescription')}
           />
-        </View>
-      </Checkbox>
-      <View style={styles.item}>
-        <Checkbox onPress={toggleDiscreteMode} selected={settings.discrete}>
-          <P>{i18next.t('auth.setup.enableDiscreteMode')}</P>
+        </Checkbox>
+
+        <Checkbox
+          onPress={toggleDiscreteMode}
+          selected={settings.discrete}
+          style={{ container: styles.derivationPathContainer }}
+        >
+          <P style={[styles.label, styles.theme.label]}>
+            {i18next.t('auth.setup.enableDiscreteMode')}
+          </P>
         </Checkbox>
       </View>
+
       <PrimaryButton
         testID="continue-button"
-        onPress={onFormSubmission}
+        onPress={handleSubmit}
         disabled={!recoveryPhrase.value}
       >
         {i18next.t('commons.buttons.continue')}

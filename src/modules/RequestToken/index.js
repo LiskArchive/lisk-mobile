@@ -24,7 +24,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import Share from 'components/shared/share';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, B } from 'components/shared/toolBox/typography';
-import { useCopyToClipboard } from 'components/shared/CopyToClipboard/CopyToClipboard.hooks';
+import { useCopyToClipboard } from 'hooks/useCopyToClipboard';
 import Avatar from 'components/shared/avatar';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { PrimaryButton } from 'components/shared/toolBox/button';

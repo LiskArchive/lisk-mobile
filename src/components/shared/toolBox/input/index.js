@@ -49,6 +49,7 @@ class Input extends React.Component {
       theme,
       value,
       onChange,
+      onSelectionChange,
       error,
       multiline,
       autoFocus,
@@ -118,6 +119,7 @@ class Input extends React.Component {
             keyboardAppearance={keyboardAppearance}
             autoFocus={autoFocus}
             onChangeText={onChange}
+            onSelectionChange={onSelectionChange}
             autoCorrect={autoCorrect}
             onFocus={this.onFocus}
             allowFontScaling={false}
@@ -135,7 +137,7 @@ class Input extends React.Component {
               onPress={this.toggleSecureTextEntry}
               style={styles.secureTextEntryIcon}
             >
-              {this.state.secureTextEntry ? <EyeSvg /> : <EyeClosedSvg />}
+              {this.state.secureTextEntry ? <EyeSvg variant="outline" /> : <EyeClosedSvg />}
             </TouchableOpacity>
           )}
         </View>

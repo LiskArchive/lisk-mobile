@@ -229,3 +229,26 @@ export const chooseRandomWords = (qty, words) => {
 
   return missing;
 };
+
+/**
+ * Returns a secured recovery phrase made up of fixed length word "******".
+ *
+ * @param {string} phrase - The recovery phrase consisting of N random words.
+ * @returns {string} The secured recovery phrase.
+ */
+export function toSecureRecoveryPhraseString(phrase) {
+  if (!phrase) {
+    return '';
+  }
+
+  // Split the phrase into words
+  const words = phrase.split(' ');
+
+  // Replace each word with '******'
+  const securedWords = words.map(() => '******');
+
+  // Join the words back together into a single string with spaces
+  const securedPhrase = securedWords.join(' ');
+
+  return securedPhrase;
+}

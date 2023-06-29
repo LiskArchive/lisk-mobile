@@ -121,7 +121,7 @@ export default function AuthMethod({ route }) {
         <HeaderLogo style={{ container: { marginTop: 40 } }} />
 
         <H2 style={[styles.title, styles.theme.title]} testID="add-account-title">
-          {i18next.t('auth.setup.addAccountTitle')}
+          {i18next.t('auth.setup.authMethodTitle')}
         </H2>
 
         <AuthTypeItem

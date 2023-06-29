@@ -7,17 +7,17 @@ export default () => ({
       flex: 1,
     },
     input: {
-      fontFamily: fonts.family.recoveryPhrase,
-      textAlign: 'justify',
       color: colors.dark.whiteSmoke,
       paddingTop: 15,
+      fontFamily: fonts.family.recoveryPhraseText,
+      fontWeight: '700',
+      lineHeight: 20,
+      minHeight: 88,
     },
     inputContainer: {
       paddingLeft: 0,
       paddingRight: 0,
-    },
-    inputRevealed: {
-      fontFamily: fonts.family.recoveryPhraseText,
+      marginBottom: 8,
     },
     scanButtonTitle: {
       fontSize: fonts.size.small,
@@ -45,13 +45,10 @@ export default () => ({
     backButtonTitle: {
       color: colors.light.ultramarineBlue,
     },
-    createAccountWrapper: {
-      marginBottom: deviceType() === 'iOSx' ? 35 : 10,
-    },
     labelContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      marginTop: 16,
       marginBottom: 8,
     },
     label: {
@@ -59,17 +56,25 @@ export default () => ({
       fontSize: fonts.size.input,
     },
     item: {
-      paddingBottom: 15,
+      paddingBottom: 16,
     },
     derivationPathContainer: {
-      marginBottom: 5,
+      marginBottom: 12,
     },
     row: {
       flexDirection: 'row',
       alignItems: 'center',
     },
+    spaceBetween: {
+      justifyContent: 'space-between',
+    },
     info: {
-      marginLeft: 15,
+      marginLeft: 8,
+    },
+    labelButtonText: {
+      fontSize: fonts.size.input,
+      fontWeight: '400',
+      marginRight: 4,
     },
   },
   [themes.light]: {

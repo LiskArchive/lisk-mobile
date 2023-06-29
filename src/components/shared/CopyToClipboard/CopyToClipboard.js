@@ -5,8 +5,8 @@ import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 import CopySvg from 'assets/svgs/CopySvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
+import { useCopyToClipboard } from 'hooks/useCopyToClipboard';
 
-import { useCopyToClipboard } from './CopyToClipboard.hooks';
 import getStyles from './CopyToClipboard.styles';
 
 export default function CopyToClipboard({

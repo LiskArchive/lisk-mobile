@@ -9,7 +9,9 @@
       "reload": "Reload",
       "viewAll": "View all"
     },
-    "copyToClipboard": "Copy to clipboard"
+    "copyToClipboard": "Copy to clipboard",
+    "pasteFromClipboard": "Paste from clipboard",
+    "pastedFromClipboard": "Pasted"
   },
   "fallbackScreens" : {
     "error" : {
@@ -228,14 +230,15 @@
       "gallery": "Gallery"
     },
     "setup": {
-      "addAccountTitle": "Add account",
+      "authMethodTitle": "Add account",
+      "addAccountTitle": "Add your account",
       "switchAccount": "Switch account",
       "decryptRecoveryPhrase": "Decrypt your secret recovery phrase",
       "decryptRecoveryPhraseError": "Unable to decrypt account. Please check your password.",
       "encryptRecoveryPhraseError": "Unable to encrypt account.",
-      "addAccountDescription": "Enter your secret recovery phrase to manage your account.",
+      "addAccountDescription": "Enter your valid secret recovery phrase to be added to Lisk wallet.",
       "passwordSetupTitle": "Set up your account password",
-      "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
+      "passwordSetupDescription": "This password will be used for decrypting your account every time you initiate any transaction from your wallet, and also during backup or removal of an account from the wallet.",
       "passwordSetupSuccessTitle": "Perfect! You're all set",
       "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase and use it to add your account on other devices.",
       "enableDiscreteMode": "Enable discreet mode (optional)",
