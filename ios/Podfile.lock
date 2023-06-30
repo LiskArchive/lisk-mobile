@@ -487,7 +487,7 @@ PODS:
     - React-Core
   - RNScreens (2.18.1):
     - React-Core
-  - RNScreenshotPrevent (1.1.6):
+  - RNScreenshotPrevent (1.0.5):
     - React
   - RNShare (7.9.1):
     - React-Core
@@ -842,7 +842,7 @@ SPEC CHECKSUMS:
   RNQrGenerator: 90461ba3ca88c1d38ef73da50fade35d9648215d
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
-  RNScreenshotPrevent: 71e3b8b2ae32842fc058b6f8c5ba7ead0d4c9044
+  RNScreenshotPrevent: 0526b14371b2d0545957070cf30bc0a29a5c4bf5
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
