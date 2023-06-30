@@ -156,9 +156,6 @@ export default function SettingsScreen() {
                 icon={settings.sensorType === app.faceId ? 'face-id-small' : 'touch-id-small'}
                 iconSize={settings.sensorType === app.faceId ? 18 : 20}
                 title={settings.sensorType}
-                description={i18next.t('settings.descriptions.biometrics', {
-                  sensorType: settings.sensorType,
-                })}
               />
             </View>
           )}
@@ -175,7 +172,7 @@ export default function SettingsScreen() {
             />
           </View>
 
-          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+          <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               testID="enable-incognito"
               icon="enable-incognito"
@@ -183,7 +180,7 @@ export default function SettingsScreen() {
                 <SwitchButton value={settings.discrete} onChange={toggleIncognito} />
               }
               title={i18next.t('settings.menu.discreetMode')}
-              description={i18next.t('settings.descriptions.discreetMode')}
+              description="(hide all balances)"
             />
           </View>
           <View style={[styles.item, styles.theme.item]}>
@@ -268,7 +265,9 @@ export default function SettingsScreen() {
 
           <View style={[styles.item, styles.theme.item]}>
             <Checkbox selected={!settings.useDerivationPath} onPress={toggleUseDerivationPath}>
-              <P>{i18next.t('settings.menu.enableDerivationPath')}</P>
+              <P style={[styles.itemTitle, styles.theme.itemTitle]}>
+                {i18next.t('settings.menu.enableDerivationPath')}
+              </P>
             </Checkbox>
           </View>
         </View>

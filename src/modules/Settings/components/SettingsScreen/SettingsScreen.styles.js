@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
@@ -10,6 +10,9 @@ export default () => ({
     },
     group: {
       marginBottom: 20,
+    },
+    itemTitle: {
+      fontSize: fonts.size.input,
     },
     subtitle: {
       fontSize: 18,
@@ -31,6 +34,9 @@ export default () => ({
   },
 
   [themes.light]: {
+    itemTitle: {
+      color: colors.light.maastrichtBlue,
+    },
     subtitle: {
       color: colors.light.zodiacBlue,
     },
@@ -43,6 +49,9 @@ export default () => ({
   },
 
   [themes.dark]: {
+    itemTitle: {
+      color: colors.dark.platinum,
+    },
     subtitle: {
       color: colors.dark.white,
     },
