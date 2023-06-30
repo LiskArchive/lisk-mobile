@@ -30,11 +30,11 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import DisableBioAuth from 'components/screens/disableBioAuth';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import PhoneShakeSvg from 'assets/svgs/PhoneShakeSvg';
-import { ItemTitle } from './components';
+import ItemTitle from '../ItemTitle';
 
-import getStyles from './styles';
+import getStyles from './SettingsScreen.styles';
 
-export default function Settings() {
+export default function SettingsScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
