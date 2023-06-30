@@ -107,6 +107,7 @@
       "disabled": "Deaktiviert",
       "enabled": "Ermöglicht",
       "discreetMode": "Diskreter Modus",
+      "discreetModeDescription": "(alle Guthaben ausblenden)",
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",

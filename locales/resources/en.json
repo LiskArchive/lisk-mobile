@@ -106,6 +106,7 @@
       "disabled": "Disabled",
       "enabled": "Enabled",
       "discreetMode": "Discreet mode",
+      "discreetModeDescription": "(hide all balances)",
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",

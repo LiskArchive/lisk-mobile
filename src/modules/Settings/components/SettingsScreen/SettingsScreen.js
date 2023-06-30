@@ -10,12 +10,13 @@ import i18next from 'i18next';
 
 import { H4, P } from 'components/shared/toolBox/typography';
 import FingerprintOverlay from 'components/shared/fingerprintOverlay';
-import { themes } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import Stepper from 'components/shared/Stepper';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import Checkbox from 'components/shared/Checkbox';
+import Icon from 'components/shared/toolBox/icon';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
 import app from 'constants/app';
@@ -169,6 +170,14 @@ export default function SettingsScreen() {
               title={i18next.t('settings.menu.backupRecoveryPhrase')}
               iconSize={22}
               onPress={backupRecoveryPhrase}
+              targetStateLabel={
+                <Icon
+                  name="forward"
+                  size={16}
+                  style={styles.arrowIcon}
+                  color={theme === themes.light ? colors.light.blueGray : colors.dark.white}
+                />
+              }
             />
           </View>
 
@@ -180,7 +189,7 @@ export default function SettingsScreen() {
                 <SwitchButton value={settings.discrete} onChange={toggleIncognito} />
               }
               title={i18next.t('settings.menu.discreetMode')}
-              description="(hide all balances)"
+              description={i18next.t('settings.menu.discreetModeDescription')}
             />
           </View>
           <View style={[styles.item, styles.theme.item]}>
@@ -217,7 +226,9 @@ export default function SettingsScreen() {
               testID="currency"
               title={i18next.t('settings.menu.currency')}
               target="CurrencySelection"
-              targetStateLabel={<P style={styles.theme.targetStateLabel}>{settings.currency}</P>}
+              targetStateLabel={
+                <P style={[styles.itemTitle, styles.theme.targetStateLabel]}>{settings.currency}</P>
+              }
             />
           </View>
         </View>
