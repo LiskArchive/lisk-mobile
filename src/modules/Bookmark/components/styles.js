@@ -58,6 +58,7 @@ export default () => ({
     },
     address: {
       marginBottom: 4,
+      fontWeight: '500',
     },
     avatarContainer: {
       marginRight: 12,

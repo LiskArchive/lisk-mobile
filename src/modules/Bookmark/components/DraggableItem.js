@@ -89,7 +89,7 @@ const DraggableItem = ({ styles, data, theme, onPress, showAvatar, isInvalidAddr
         {showAvatar && (
           <Avatar
             address={data.address}
-            size={48}
+            size={44}
             style={[
               styles.theme.avatar,
               styles.avatarContainer,
