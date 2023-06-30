@@ -2,7 +2,9 @@ import { renderHook, act } from '@testing-library/react-hooks';
 
 import { useDebounce } from './useDebounce';
 
-jest.useFakeTimers('legacy');
+jest.useFakeTimers({
+  legacyFakeTimers: true,
+});
 
 describe('useDebounce hook', () => {
   it('should be defined', () => {
@@ -13,7 +15,7 @@ describe('useDebounce hook', () => {
     const { result } = renderHook(() => useDebounce('value1', 1000));
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      jest.advanceTimersToNextTimer();
     });
 
     expect(result.current).toBe('value1');
@@ -26,7 +28,7 @@ describe('useDebounce hook', () => {
     const { result, rerender } = renderHook(() => useDebounce(initialValue, initialDelay));
 
     act(() => {
-      jest.runOnlyPendingTimers();
+      jest.advanceTimersToNextTimer();
     });
 
     initialValue = 'value2';
