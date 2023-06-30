@@ -12,14 +12,13 @@ export default () => ({
       marginLeft: 5,
       marginRight: 5,
     },
-    title: {},
     subtitle: {
       paddingTop: 4,
       paddingBottom: 2,
       fontSize: fonts.size.small,
     },
     icon: {
-      marginRight: 16,
+      marginRight: 8,
     },
     arrow: {
       flexDirection: 'row',

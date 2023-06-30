@@ -59,9 +59,7 @@ export default function SettingsScreen() {
     setError(null);
   };
 
-  const hideDialog = () => {
-    setShow(false);
-  };
+  const hideDialog = () => setShow(false);
 
   const backupRecoveryPhrase = () =>
     navigation.navigate('BackupRecoveryPhrase', {
@@ -143,7 +141,7 @@ export default function SettingsScreen() {
 
       <ScrollView style={styles.innerContainer} testID={`${theme}-mode`}>
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          <H4 style={[styles.subtitle, styles.theme.subtitle]}>
             {i18next.t('settings.headers.security')}
           </H4>
           {settings.sensorType && (
@@ -201,7 +199,7 @@ export default function SettingsScreen() {
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          <H4 style={[styles.subtitle, styles.theme.subtitle]}>
             {i18next.t('settings.headers.general')}
           </H4>
           <View style={[styles.item, styles.theme.item]}>
@@ -228,7 +226,7 @@ export default function SettingsScreen() {
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          <H4 style={[styles.subtitle, styles.theme.subtitle]}>
             {i18next.t('settings.headers.info')}
           </H4>
 
@@ -264,15 +262,13 @@ export default function SettingsScreen() {
         </View>
 
         <View style={styles.group}>
-          <H4 style={[styles.subHeader, styles.theme.subHeader]}>
+          <H4 style={[styles.subtitle, styles.theme.subtitle]}>
             {i18next.t('settings.headers.advanced')}
           </H4>
 
           <View style={[styles.item, styles.theme.item]}>
             <Checkbox selected={!settings.useDerivationPath} onPress={toggleUseDerivationPath}>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>
-                {i18next.t('settings.menu.enableDerivationPath')}
-              </P>
+              <P>{i18next.t('settings.menu.enableDerivationPath')}</P>
             </Checkbox>
           </View>
         </View>

@@ -101,7 +101,7 @@ const ItemTitle = ({
         )}
 
         <View style={styles.titleContainer}>
-          <P style={[styles.title, styles.theme.title]}>{title}</P>
+          <P style={[styles.theme.title]}>{title}</P>
           {description && <P style={[styles.subtitle, styles.theme.subtitle]}>{description}</P>}
         </View>
 
