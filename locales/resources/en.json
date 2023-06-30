@@ -100,15 +100,12 @@
       "disabled": "Disabled",
       "enabled": "Enabled",
       "discreetMode": "Discreet mode",
+      "discreetModeDescription": "(hide all balances)",
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
       "enableDerivationPath": "Enable access to legacy Lisk accounts"
-    },
-    "descriptions": {
-      "discreetMode": "Hide balance and transaction amounts.",
-      "biometrics": "Use {{sensorType}} to encrypt and use account password."
-    },
+    }, 
     "backupPhrase": {
       "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",

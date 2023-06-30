@@ -101,15 +101,12 @@
       "disabled": "Deaktiviert",
       "enabled": "Ermöglicht",
       "discreetMode": "Diskreter Modus",
+      "discreetModeDescription": "(alle Guthaben ausblenden)",
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
       "enableDerivationPath": ""
-    },
-    "descriptions": {
-      "discreetMode": "Guthaben und Transaktionsbeträge ausblenden.",
-      "biometrics": "Verwenden Sie {{sensorType}}, um das Kontopasswort zu verschlüsseln und zu verwenden."
-    },
+    }, 
     "backupPhrase": {
       "title": "Sichern Sie die geheime Wiederherstellungsphrase",
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",

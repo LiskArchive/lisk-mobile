@@ -11,7 +11,12 @@ export default () => ({
     group: {
       marginBottom: 20,
     },
-    subHeader: {
+    itemTitle: {
+      fontSize: fonts.size.input,
+    },
+    subtitle: {
+      fontSize: 18,
+      fontWeight: '600',
       marginBottom: 8,
     },
     item: {
@@ -26,17 +31,14 @@ export default () => ({
     signOut: {
       marginBottom: 40,
     },
-    subtitle: {
-      fontSize: fonts.size.base,
-    },
   },
 
   [themes.light]: {
+    itemTitle: {
+      color: colors.light.maastrichtBlue,
+    },
     subtitle: {
       color: colors.light.zodiacBlue,
-    },
-    subHeader: {
-      color: colors.light.maastrichtBlue,
     },
     item: {
       borderBottomColor: colors.light.mystic,
@@ -47,10 +49,10 @@ export default () => ({
   },
 
   [themes.dark]: {
-    subtitle: {
-      color: colors.dark.white,
+    itemTitle: {
+      color: colors.dark.platinum,
     },
-    subHeader: {
+    subtitle: {
       color: colors.dark.white,
     },
     item: {

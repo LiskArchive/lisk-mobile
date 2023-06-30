@@ -73,11 +73,8 @@ const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
           </Small>
         </View>
       </View>
-      <PrimaryButton
-        style={styles.primaryButton}
-        onClick={confirm}
-        title={i18next.t(`Enable ${sensorType}`)}
-      />
+      <PrimaryButton onPress={confirm}>{i18next.t(`Enable ${sensorType}`)}</PrimaryButton>
+
       {enableSkip && <Button onClick={skip} title="Skip" />}
     </View>
   );
