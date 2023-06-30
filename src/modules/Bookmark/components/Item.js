@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { themes, colors } from 'constants/styleGuide';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';
-import { B, Small } from 'components/shared/toolBox/typography';
+import { P, B } from 'components/shared/toolBox/typography';
 import withTheme from 'components/shared/withTheme';
 import Icon from 'components/shared/toolBox/icon';
 import DraggableItem from './DraggableItem';
@@ -36,9 +36,9 @@ class Item extends React.Component {
 
           <View style={styles.column}>
             <B style={[styles.address, styles.theme.address]}>{data.label}</B>
-            <Small style={[styles.label, styles.theme.label]} numberOfLines={1}>
+            <P style={[styles.label, styles.theme.label]} numberOfLines={1}>
               {stringShortener(data.address, 6, 5)}
-            </Small>
+            </P>
           </View>
         </View>
 

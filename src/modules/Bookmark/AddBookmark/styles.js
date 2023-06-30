@@ -14,15 +14,17 @@ export default () => ({
       paddingRight: boxes.boxPadding,
       marginBottom: boxes.boxPadding,
     },
-    rightAdornment: {
-      paddingRight: 80,
-    },
     input: {
-      marginTop: 8,
+      marginTop: 24,
     },
     scanButtonTitle: {
       fontSize: 14,
-      paddingLeft: 8,
+      marginLeft: 8,
+    },
+    labelContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     addressContainer: {
       width: '100%',
@@ -34,8 +36,9 @@ export default () => ({
       top: 63,
     },
     address: {
-      fontWeight: 'bold',
+      fontWeight: '500',
       flex: 1,
+      marginLeft: 4,
     },
     staticAddressContainer: {
       flexDirection: 'row',
@@ -45,17 +48,12 @@ export default () => ({
       marginRight: 8,
     },
     row: {
-      marginTop: 24,
       marginBottom: 4,
-      marginRight: boxes.boxPadding,
-      marginLeft: boxes.boxPadding,
     },
     label: {
-      marginTop: 4,
-      marginBottom: 8,
       fontFamily: fonts.family.context,
       fontSize: fonts.size.input,
-      fontWeight: '400',
+      marginBottom: 8,
     },
   },
   [themes.light]: {
@@ -66,7 +64,7 @@ export default () => ({
       color: colors.light.maastrichtBlue,
     },
     label: {
-      color: colors.light.slateGray,
+      color: colors.light.maastrichtBlue,
     },
     address: {
       color: colors.light.black,

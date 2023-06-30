@@ -36,16 +36,13 @@
   },
   "Activity": "Activity",
   "Add to bookmarks": "Add to bookmarks",
-  "Address": "Address",
   "Allow camera access": "Allow camera access",
   "Amount": "Amount",
   "Status": "Status",  
   "Cancel": "Cancel",
-  "Edit bookmark": "Edit bookmark",  
   "I have read and agreed with the": "I have read and agreed with the",
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
-  "Label": "Label",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
   "New bookmark": "New bookmark",
   "No internet connection!": "No internet connection!",
@@ -53,7 +50,6 @@
   "Permission to use camera": "Permission to use camera",
   "Show QR code": "Show QR code",
   "Hide QR code": "Hide QR code",
-  "Save changes": "Save changes",
   "Scan": "Scan",
   "Search": "Search",
   "Search for a bookmark": "Search for a bookmark",
@@ -69,7 +65,6 @@
   "Security": "Security",
   "Delete": "Delete",
   "Edit": "Edit",
-  "Bookmarks": "Bookmarks",
   "Request": "Request",
   "Select your currency": "Select your currency",
   "Settings": "Settings",
@@ -84,7 +79,6 @@
   "Disable bioAuth": "Disable {{sensorType}}",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
-  "Unparsed Address": "Unparsed Address",
   "We’ve got good news!": "We’ve got good news!",
   "Info": "Info",
   "Locked balance details": "Locked balance details",
@@ -167,11 +161,19 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
+    "title": "Bookmarks",
     "emptyText": "No addresses bookmarked yet.",
     "addBookmark": {
+      "addressLabel": "Wallet address",
+      "labelLabel": "Label",
       "invalidLabel": "The label must be between 3 to 20 characters",
       "invalidAddress": "Invalid address",
-      "required": "This field is required"
+      "required": "This field is required",
+      "saveButtonText": "Save changes",
+      "addButtonText": "Add bookmark"
+    },
+    "editBookmark": {
+      "title": "Edit bookmark"
     },
     "deleteBookmark": {
       "title": "Delete bookmark",

@@ -57,11 +57,11 @@ export default () => ({
       borderTopWidth: 0,
     },
     address: {
-      marginTop: -2,
-      paddingBottom: 4,
+      marginBottom: 4,
+      fontWeight: '500',
     },
     avatarContainer: {
-      marginRight: 16,
+      marginRight: 12,
     },
     avatar: {
       borderWidth: 1,
@@ -98,6 +98,7 @@ export default () => ({
     },
     label: {
       flex: 1,
+      fontSize: fonts.small,
     },
     noResult: {
       marginTop: 11,
@@ -141,7 +142,7 @@ export default () => ({
       left: 0,
       right: 0,
       width: '100%',
-      paddingVertical: 10,
+      paddingVertical: 16,
     },
   },
   [themes.light]: {
