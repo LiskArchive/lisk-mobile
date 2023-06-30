@@ -1,12 +1,26 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base", "plugin:react/recommended", "prettier"],
   "env": {
     "browser": true,
+    "es2021": true,
     "jest": true,
-    "es2020": true
+    "node": true
   },
-  "plugins": ["react", "react-hooks", "import", "babel", "jest", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jest/style",
+    "plugin:jest/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "react", "jest"],
   "globals": {
     "PRODUCTION": true,
     "TEST": true
@@ -14,13 +28,12 @@
   "rules": {
     "no-unused-vars": ["error", { "varsIgnorePattern": "connect|[A|a]ction" }],
     "jest/no-disabled-tests": "warn",
+		"jest/import-default": "off",
     "jest/no-identical-title": "error",
     "jest/valid-expect": "error",
     "jest/consistent-test-it": "error",
     "jest/expect-expect": "error",
     "jest/no-test-prefixes": "error",
-    "jest/prefer-to-be-null": "error",
-    "jest/prefer-to-be-undefined": "error",
     "jest/prefer-to-have-length": "error",
     "arrow-body-style": "off",
     "no-mixed-operators": "off",
@@ -30,6 +43,7 @@
     "key-spacing": ["error", { "beforeColon": false }],
     "import/named": "off",
     "import/prefer-default-export": "off",
+    "import/prefer-default-import": "off",
     "jsx-a11y/alt-text": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
@@ -58,8 +72,6 @@
     "react/require-default-props": "off",
     "react/sort-comp": "off",
     "react/display-name": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "implicit-arrow-linebreak": "off",
     "react/jsx-closing-tag-location": "off",
     "jest/no-focused-tests": "error",
@@ -77,18 +89,6 @@
     "react/prop-types": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": [
-          "./src/**/*.test.js",
-          "./test/**/*.js",
-          "./src/**/*.stories.js",
-          "./src/tests.js",
-          "./src/i18n-scanner.js"
-        ]
-      }
-    ],
     "linebreak-style": 0,
     "no-param-reassign": "off",
     "complexity": ["error", 10],
@@ -97,14 +97,12 @@
     "max-statements": ["error", 10],
     "max-lines": ["error", 300]
   },
+  "ignorePatterns": ["*.config.js", "locales/*", "scripts/*", "*test.js"],
   "overrides": [
     {
-      "files": ["*.test.js", "*.spec.js"],
-      "rules": {
-        "max-depth": ["error", 2],
-        "max-nested-callbacks": ["error", 4],
-        "max-statements": ["error", 30],
-        "max-lines": ["error", 500]
+      "files": ["*.test.js"],
+      "env": {
+        "jest": true
       }
     }
   ],
@@ -113,7 +111,9 @@
       "version": "detect"
     },
     "mocha/additionalTestFunctions": ["describeModule"],
+		"import/ignore": ["react"],
     "import/resolver": {
+      "typescript": true,
       "alias": {
         "map": [
           ["contexts", "./src/contexts"],

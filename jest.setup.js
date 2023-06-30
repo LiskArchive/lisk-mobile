@@ -1,5 +1,9 @@
 import { NativeModules } from 'react-native';
 
+jest.useFakeTimers({
+  legacyFakeTimers: true,
+});
+
 NativeModules.RNCNetInfo = {
   getCurrentState: jest.fn(() => Promise.resolve()),
   addListener: jest.fn(),

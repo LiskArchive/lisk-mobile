@@ -48,7 +48,9 @@ module.exports = {
     // src: https://github.com/react-native-community/react-native-netinfo#errors-while-running-jest-tests
     './jest.setup.js',
   ],
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   globals: {
     PRODUCTION: true,
     TEST: true,
