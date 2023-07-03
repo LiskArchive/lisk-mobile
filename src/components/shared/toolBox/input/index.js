@@ -63,6 +63,9 @@ class Input extends React.Component {
       placeholderTextColor,
       disabled,
       adornments,
+      textContentType,
+      passwordRules,
+      blurOnSubmit = true,
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -106,7 +109,7 @@ class Input extends React.Component {
 
           <TextInput
             testID={testID}
-            blurOnSubmit
+            blurOnSubmit={blurOnSubmit}
             editable={!disabled}
             selectTextOnFocus={!disabled}
             style={inputStyle}
@@ -128,6 +131,8 @@ class Input extends React.Component {
             placeholder={placeholder}
             placeholderTextColor={placeholderColor}
             accessibilityLabel={accessibilityLabel}
+            textContentType={textContentType}
+            passwordRules={passwordRules}
           />
 
           {adornments?.right && <View style={styles.rightAdornment}>{adornments?.right}</View>}
