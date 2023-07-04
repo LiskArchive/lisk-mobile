@@ -70,6 +70,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
           onChange={setPassword}
           value={password}
           returnKeyType="done"
+          textContentType="password"
           testID="decrypt-password-input"
         />
       </View>
