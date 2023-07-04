@@ -12,10 +12,7 @@ import { colors, themes } from 'constants/styleGuide';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 
 import getStyles from './styles';
-import {
-  bioMetricAuthentication,
-  getAccountPasswordFromKeyChain,
-} from '../../utils/recoveryPhrase';
+import { getAccountPasswordFromKeyChain } from '../../utils/recoveryPhrase';
 
 export default function PasswordForm({ account, onPress, testID, theme, onSubmit, style }) {
   useScreenshotPrevent();
@@ -32,13 +29,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   const tryFetchAccontPasswordFromBiometrics = async () => {
     if (sensorType) {
       const accountPassword = await fetchAccountPassword();
-      if (accountPassword) {
-        bioMetricAuthentication({
-          successCallback: () => {
-            onSubmit(accountPassword);
-          },
-        });
-      }
+      onSubmit(accountPassword);
     }
   };
 
