@@ -54,7 +54,7 @@ class Input extends React.Component {
       multiline,
       autoFocus,
       autoCorrect,
-      keyboardType,
+      keyboardType = 'default',
       secureTextEntry,
       placeholder,
       testID,
