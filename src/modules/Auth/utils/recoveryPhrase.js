@@ -1,5 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
-import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
+import { setGenericPassword, getGenericPassword, ACCESSIBLE } from 'react-native-keychain';
 import { getUniqueId } from 'react-native-device-info';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
@@ -75,6 +75,7 @@ export const removeAccountPasswordFromKeychain = async (address) => {
   await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
+    accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   });
 };
 
@@ -121,6 +122,7 @@ export const storeAccountPasswordInKeyChain = async (address, password) => {
   await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
+    accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   });
 };
 
