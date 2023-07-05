@@ -1,4 +1,5 @@
 import React from 'react';
+import { NativeModules } from 'react-native';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { I18nextProvider } from 'react-i18next';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -16,6 +17,12 @@ import store, { persistedStore } from 'store/index';
 import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
+
+const { AppOpsManagerModule } = NativeModules;
+
+console.log({ AppOpsManagerModule });
+
+AppOpsManagerModule.startWatching();
 
 export default function App() {
   return (
