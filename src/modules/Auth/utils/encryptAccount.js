@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import { cryptography } from '@liskhq/lisk-client';
 
-import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
+import { defaultDerivationPath } from '../constants/recoveryPhrase.constants';
 import { extractKeyPair, extractAddressFromPublicKey } from './accountKeys';
 
 export const encryptAccount = async ({

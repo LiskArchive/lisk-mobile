@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import { device, element, by, waitFor } from 'detox';
-import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
+import { defaultDerivationPath } from 'modules/Auth/constants/recoveryPhrase.constants';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
