@@ -1,5 +1,4 @@
 import React from 'react';
-import { NativeModules } from 'react-native';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { I18nextProvider } from 'react-i18next';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -17,14 +16,11 @@ import store, { persistedStore } from 'store/index';
 import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
-
-const { AppOpsManagerModule } = NativeModules;
-
-console.log({ AppOpsManagerModule });
-
-AppOpsManagerModule.startWatching();
+import { useDataAudit } from './hooks/useDataAudit';
 
 export default function App() {
+  useDataAudit();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <I18nextProvider i18n={i18n}>
