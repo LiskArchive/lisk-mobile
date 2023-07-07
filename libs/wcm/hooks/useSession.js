@@ -1,10 +1,11 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useContext, useEffect, useCallback, useMemo } from 'react';
 
 import { signClient } from '../utils/connectionCreator';
 import ConnectionContext from '../context/connectionContext';
 import { onApprove, onReject } from '../utils/sessionHandlers';
 import usePairings from './usePairings';
 import { EVENTS, STATUS } from '../constants/lifeCycle';
+import { useApplicationsQuery } from '../../../src/modules/BlockchainApplication/api/useApplicationsQuery';
 
 const formatJsonRpcResult = (id, result) => ({
   id,
@@ -15,6 +16,24 @@ const formatJsonRpcResult = (id, result) => ({
 const useSession = () => {
   const { events, removeEvent, session, setSession } = useContext(ConnectionContext);
   const { refreshPairings } = usePairings();
+
+  const event = useMemo(() => events.find((e) => e.name === EVENTS.SESSION_REQUEST), [events]);
+
+  const {
+    data: applicationsData,
+    error: errorOnApplicationsData,
+    isSuccess: isApplicationsDataSuccess,
+    isLoading: isApplicationsDataLoading,
+  } = useApplicationsQuery({
+    options: {
+      enabled: !!event,
+    },
+    config: {
+      params: {
+        chainID: event?.meta.params.request.params.recipientChainID,
+      },
+    },
+  });
 
   const approve = useCallback(async (selectedAccounts) => {
     const proposalEvents = events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
@@ -84,6 +103,40 @@ const useSession = () => {
     }
   }, []);
 
+  const validate = useCallback(() => {
+    if (isApplicationsDataSuccess) {
+      const appExists = applicationsData?.data.find(
+        (app) => app.chainID === event?.meta.params.request.params.recipientChainID
+      );
+
+      return {
+        isValid: !!appExists,
+        isLoading: false,
+        error: null,
+      };
+    }
+
+    if (errorOnApplicationsData) {
+      return {
+        isValid: undefined,
+        isLoading: false,
+        error: errorOnApplicationsData,
+      };
+    }
+
+    return {
+      isValid: undefined,
+      isLoading: isApplicationsDataLoading,
+      error: null,
+    };
+  }, [
+    isApplicationsDataLoading,
+    isApplicationsDataSuccess,
+    errorOnApplicationsData,
+    applicationsData,
+    event?.meta.params.request.params.recipientChainID,
+  ]);
+
   useEffect(() => {
     if (signClient?.session && !session.loaded) {
       const lastKeyIndex = signClient.session.keys.length - 1;
@@ -97,6 +150,7 @@ const useSession = () => {
     reject,
     approve,
     respond,
+    validate,
     session,
     setSession,
   };

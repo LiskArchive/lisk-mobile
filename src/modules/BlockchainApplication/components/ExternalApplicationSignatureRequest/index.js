@@ -24,7 +24,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
   const [currentAccount] = useCurrentAccount();
 
-  const { respond } = useWalletConnectSession();
+  const { respond, validate } = useWalletConnectSession();
 
   const { events } = useContext(WalletConnectContext);
 
@@ -40,6 +40,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
   const transaction = useCreateTransaction(createTransactionOptions);
 
   const senderAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
+
+  const sessionValidation = validate();
+
+  console.log('sessionValidation', sessionValidation);
 
   const handleRespond = async (payload) => {
     setStatus({ ...session, isLoading: true });
@@ -97,6 +101,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             senderAccountAddress={senderAccountAddress}
             onCancel={onCancel}
             onSubmit={() => setActiveStep('summary')}
+            sessionValidation={sessionValidation}
           />
         );
 
