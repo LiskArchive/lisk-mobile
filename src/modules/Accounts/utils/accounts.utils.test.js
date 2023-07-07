@@ -1,7 +1,7 @@
 import apiClient from 'utilities/api/APIClient';
 import { mockTokens, mockTokensMeta, mockTokensFullData } from 'modules/Transactions/__fixtures__';
 
-import { defaultDerivationPath } from 'utilities/explicitBipKeyDerivation';
+import { defaultDerivationPath } from 'modules/Auth/constants/recoveryPhrase.constants';
 import { addTokensMetaData, validateDerivationPath } from './accounts.utils';
 
 jest.spyOn(apiClient, 'call').mockImplementation(() => Promise.resolve({ data: mockTokensMeta }));

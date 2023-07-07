@@ -24,7 +24,6 @@ module.exports = {
     'src/utilities/networks.js',
     'src/modules/Auth/utils/recoveryPhrase.js',
     'src/utilities/api/account.js',
-    'utilities/explicitBipKeyDerivation.js',
     'utilities/tests/mock-react-i18next.js',
     'src/assets',
     'src/modules',
