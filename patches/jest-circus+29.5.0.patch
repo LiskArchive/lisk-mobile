@@ -1,0 +1,19 @@
+diff --git a/node_modules/jest-circus/build/utils.js b/node_modules/jest-circus/build/utils.js
+index 755741b..2022adb 100644
+--- a/node_modules/jest-circus/build/utils.js
++++ b/node_modules/jest-circus/build/utils.js
+@@ -320,12 +320,12 @@ const callAsyncCircusFn = (testOrHook, testContext, {isHook, timeout}) => {
+       completed = true;
+       // If timeout is not cleared/unrefed the node process won't exit until
+       // it's resolved.
+-      timeoutID.unref?.();
++      timeoutID?.unref?.();
+       clearTimeout(timeoutID);
+     })
+     .catch(error => {
+       completed = true;
+-      timeoutID.unref?.();
++      timeoutID?.unref?.();
+       clearTimeout(timeoutID);
+       throw error;
+     });

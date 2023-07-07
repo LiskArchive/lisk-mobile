@@ -24,7 +24,6 @@ module.exports = {
     'src/utilities/networks.js',
     'src/modules/Auth/utils/recoveryPhrase.js',
     'src/utilities/api/account.js',
-    'utilities/explicitBipKeyDerivation.js',
     'utilities/tests/mock-react-i18next.js',
     'src/assets',
     'src/modules',
@@ -48,7 +47,9 @@ module.exports = {
     // src: https://github.com/react-native-community/react-native-netinfo#errors-while-running-jest-tests
     './jest.setup.js',
   ],
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   globals: {
     PRODUCTION: true,
     TEST: true,

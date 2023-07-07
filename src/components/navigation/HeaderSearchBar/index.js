@@ -31,6 +31,8 @@ export default function HeaderSearchBar({
   if (!color) {
     color = theme === themes.light ? colors.light.black : colors.dark.white;
   }
+
+  const iconColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.white;
   const width = useRef(new Animated.Value(0)).current;
   const { width: windowWidth } = useWindowDimensions();
 
@@ -113,7 +115,7 @@ export default function HeaderSearchBar({
             </H3>
           </View>
           <TouchableOpacity onPress={openSearchBar} style={styles.iconButton}>
-            <Icon name={'search'} color={colors.light.blueGray} size={18} />
+            <Icon name="search" color={iconColor} size={22} />
           </TouchableOpacity>
         </View>
       )}

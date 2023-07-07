@@ -4,8 +4,9 @@ import { Linking } from 'react-native';
 
 import { useNetworkStatusQuery } from 'modules/Network/api/useNetworkStatusQuery';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
+import liskAPIClient from 'utilities/api/LiskAPIClient';
 import { API_VERSION } from 'utilities/api/constants';
+import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
 
 /**
  * Allows to send an email report based on provided error.
@@ -24,7 +25,7 @@ export function useEmailReport({ error, errorMessage } = {}) {
     data: networkStatusData,
     isLoading: isLoadingNetworkStatusData,
     error: errorOnNetworkStatusData,
-  } = useNetworkStatusQuery();
+  } = useNetworkStatusQuery({ client: liskAPIClient });
 
   const url = useMemo(() => {
     let value;
@@ -33,9 +34,11 @@ export function useEmailReport({ error, errorMessage } = {}) {
     if (networkStatusData?.data) {
       baseBody = `
         \r
-        Lisk Core Version: ${networkStatusData.data.networkVersion}
+        - Lisk Core Version: ${networkStatusData.data.version}
         \r
-        NetworkIdentifier: ${networkStatusData.data.networkIdentifier}
+        - Lisk Network Version: ${networkStatusData.data.networkVersion}
+        \r
+        - Chain ID: ${networkStatusData.data.chainID}
       `;
     }
 
@@ -47,21 +50,23 @@ export function useEmailReport({ error, errorMessage } = {}) {
 
       baseBody += `
         \r
-        ServiceURL: ${stringifiedAppApis}
+        - Service URL: ${stringifiedAppApis}
       `;
     }
 
     if (errorMessage) {
       baseBody += `
         \r
-        Error Message: ${errorMessage}
+        - Error Message: "${errorMessage}".
       `;
     }
 
     if (error) {
+      const stringifiedError = JSON.stringify({ message: error?.message, stack: error?.stack });
+
       baseBody += `
         \r
-        Transaction: ${JSON.stringify(error)}
+        - Error: "${stringifiedError}".
       `;
     }
 
@@ -70,7 +75,7 @@ export function useEmailReport({ error, errorMessage } = {}) {
 
       const receiver = SUPPORT_EMAIL_ADDRESS;
       const subject = `User Reported Error - Lisk - ${API_VERSION}`;
-      const body = encodeURIComponent(baseBody);
+      const body = baseBody.replace(/&/g, '%26').replace(/\?/g, '%3F');
 
       value = `mailto:${receiver}?subject=${subject}&body=${body}`;
     }

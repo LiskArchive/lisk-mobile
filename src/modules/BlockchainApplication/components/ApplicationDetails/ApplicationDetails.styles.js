@@ -12,22 +12,32 @@ export default {
     container: {
       paddingTop: safeAreaPaddingTop,
     },
+    resultScreenContainer: {
+      paddingBottom: safeAreaPaddingTop,
+    },
     header: {
-      height: 230,
-      backgroundColor: colors.light.ultramarineBlue,
+      height: 200,
+      position: 'relative',
+      overflow: 'hidden',
+      paddingTop: safeAreaPaddingTop,
     },
     body: {
       flex: 1,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
+    footer: {
+      padding: boxes.boxPadding,
+    },
     logoContainer: {
-      marginTop: -32,
+      marginTop: -35,
       marginBottom: Platform.select({ ios: -32, android: 10 }),
       height: 70,
       width: 70,
       borderRadius: 35,
       alignSelf: 'center',
+      borderWidth: 1,
+      borderColor: colors.light.platinumGray,
     },
     titleRow: {
       flexDirection: 'row',
@@ -60,10 +70,14 @@ export default {
       color: colors.light.blueGray,
       marginRight: 4,
     },
-    smallTitle: {
+    labelContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 8,
+    },
+    label: {
       fontSize: fonts.size.input,
       color: colors.light.blueGray,
-      marginBottom: 8,
     },
     amount: {
       color: colors.light.ultramarineBlue,
@@ -72,13 +86,16 @@ export default {
     },
     url: {
       fontSize: fonts.size.input,
-      marginLeft: 4,
+      marginLeft: 8,
       color: colors.light.ultramarineBlue,
     },
     stats: {
       flex: 1,
       flexDirection: 'row',
-      marginTop: 32,
+    },
+    divider: {
+      marginVertical: 24,
+      borderTopWidth: 1,
     },
     item: {
       marginBottom: 20,
@@ -115,6 +132,9 @@ export default {
     logoContainer: {
       backgroundColor: colors.dark.whiteSmoke,
     },
+    header: {
+      backgroundColor: colors.light.ultramarineBlue,
+    },
     title: {
       color: colors.light.zodiacBlue,
     },
@@ -126,6 +146,9 @@ export default {
     },
     unregistered: {
       color: colors.light.zodiacBlue,
+    },
+    divider: {
+      borderColor: colors.light.platinumGray,
     },
   },
   [themes.dark]: {
@@ -135,6 +158,9 @@ export default {
     logoContainer: {
       backgroundColor: colors.dark.mainBg,
     },
+    header: {
+      backgroundColor: colors.light.ultramarineBlue,
+    },
     title: {
       color: colors.dark.white,
     },
@@ -146,6 +172,9 @@ export default {
     },
     unregistered: {
       color: colors.light.white,
+    },
+    divider: {
+      borderColor: colors.dark.volcanicSand,
     },
   },
 };

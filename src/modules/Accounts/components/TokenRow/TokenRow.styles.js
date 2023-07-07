@@ -1,4 +1,4 @@
-import { colors, themes } from 'constants/styleGuide';
+import { fonts, colors, themes } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default function getTokenRowStyles() {
@@ -7,10 +7,9 @@ export default function getTokenRowStyles() {
       container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 12,
-        borderColor: colors.light.platinumGray,
+        borderBottomWidth: 1,
+        paddingTop: 12,
+        paddingBottom: 12,
       },
       flex: {
         flexDirection: 'row',
@@ -22,6 +21,17 @@ export default function getTokenRowStyles() {
       },
       title: {
         marginLeft: 8,
+        fontWeight: '500',
+        fontSize: fonts.size.base,
+      },
+      balanceText: {
+        marginBottom: 4,
+        fontWeight: '500',
+        fontSize: fonts.size.base,
+      },
+      currencyText: {
+        fontWeight: '400',
+        fontSize: 12,
       },
       row: {
         flexDirection: 'row',
@@ -51,22 +61,30 @@ export default function getTokenRowStyles() {
     [themes.light]: {
       container: {
         backgroundColor: colors.light.white,
+        borderColor: colors.light.platinumGray,
       },
       title: {
         color: colors.light.zodiacBlue,
       },
-      currency: {
+      balanceText: {
+        color: colors.light.zodiacBlue,
+      },
+      currencyText: {
         color: setColorOpacity(colors.light.zodiacBlue, 0.7),
       },
     },
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+        borderColor: colors.dark.volcanicSand,
       },
       title: {
         color: colors.dark.white,
       },
-      currency: {
+      balanceText: {
+        color: colors.dark.white,
+      },
+      currencyText: {
         color: setColorOpacity(colors.light.white, 0.7),
       },
     },

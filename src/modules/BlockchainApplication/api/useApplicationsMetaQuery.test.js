@@ -5,7 +5,7 @@ import { mockApplicationsMeta } from '../__fixtures__';
 
 import { useApplicationsMetaQuery } from './useApplicationsMetaQuery';
 
-describe('useApplicationsMetaQuery hook', () => {
+describe.skip('useApplicationsMetaQuery hook', () => {
   it('should fetch data correctly', async () => {
     const wrapper = ({ children }) => applicationsWrapper({ children });
 

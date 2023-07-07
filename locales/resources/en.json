@@ -5,13 +5,18 @@
     "buttons": {
       "continue": "Continue",
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "reload": "Reload",
+      "viewAll": "View all"
     },
-    "copyToClipboard": "Copy to clipboard"
+    "copyToClipboard": "Copy to clipboard",
+    "pasteFromClipboard": "Paste from clipboard",
+    "pastedFromClipboard": "Pasted"
   },
   "fallbackScreens" : {
     "error" : {
-      "description": "Something went wrong. Please try again later and if you are still experiencing problems then report the error via email.",
+      "title": "Something went wrong",
+      "description": "Please try again later and if you’re still experiencing problems, then report via email.",
       "retryButton": "Retry",
       "emailReportLabel": "Is the problem persisting?",
       "emailReportButton": "Report the error via email"
@@ -31,26 +36,20 @@
   },
   "Activity": "Activity",
   "Add to bookmarks": "Add to bookmarks",
-  "Address": "Address",
   "Allow camera access": "Allow camera access",
   "Amount": "Amount",
   "Status": "Status",  
   "Cancel": "Cancel",
-  "Edit bookmark": "Edit bookmark",  
   "I have read and agreed with the": "I have read and agreed with the",
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
-  "Label": "Label",
-  "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
   "New bookmark": "New bookmark",
   "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
-  "Read more on the Lisk website": "Read more on the Lisk website",
   "Show QR code": "Show QR code",
   "Hide QR code": "Hide QR code",
-  "Save changes": "Save changes",
   "Scan": "Scan",
   "Search": "Search",
   "Search for a bookmark": "Search for a bookmark",
@@ -66,7 +65,6 @@
   "Security": "Security",
   "Delete": "Delete",
   "Edit": "Edit",
-  "Bookmarks": "Bookmarks",
   "Request": "Request",
   "Select your currency": "Select your currency",
   "Settings": "Settings",
@@ -81,7 +79,6 @@
   "Disable bioAuth": "Disable {{sensorType}}",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
-  "Unparsed Address": "Unparsed Address",
   "We’ve got good news!": "We’ve got good news!",
   "Info": "Info",
   "Locked balance details": "Locked balance details",
@@ -99,18 +96,16 @@
       "backupRecoveryPhrase": "Backup your secret recovery phrase",
       "about": "About Lisk",
       "darkMode": "Dark mode",
+      "shakePhone": "Discreet mode with phone shaking",
       "disabled": "Disabled",
       "enabled": "Enabled",
       "discreetMode": "Discreet mode",
+      "discreetModeDescription": "(hide all balances)",
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
       "enableDerivationPath": "Enable access to legacy Lisk accounts"
-    },
-    "descriptions": {
-      "discreetMode": "Hide balance and transaction amounts.",
-      "biometrics": "Use {{sensorType}} to encrypt and use account password."
-    },
+    }, 
     "backupPhrase": {
       "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",
@@ -128,6 +123,11 @@
       "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password.",
       "decryptRecoveryPhraseTitle": "Enter your password",
       "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID."
+    },
+    "about": {
+      "versionDescription": "Version {{version}}",
+      "openWebsiteButtonTitle": "Read more on the Lisk website",
+      "errorOnOpenWebsiteDescription": "Error opening link. Please try again later."
     }
   },
   "multisignature": {
@@ -158,11 +158,19 @@
     "touchId": "Place your finger over the touch sensor to authenticate"
   },
   "bookmarks": {
-    "emptyText": "You do not have any bookmarks yet.",
+    "title": "Bookmarks",
+    "emptyText": "No addresses bookmarked yet.",
     "addBookmark": {
+      "addressLabel": "Wallet address",
+      "labelLabel": "Label",
       "invalidLabel": "The label must be between 3 to 20 characters",
       "invalidAddress": "Invalid address",
-      "required": "This field is required"
+      "required": "This field is required",
+      "saveButtonText": "Save changes",
+      "addButtonText": "Add bookmark"
+    },
+    "editBookmark": {
+      "title": "Edit bookmark"
     },
     "deleteBookmark": {
       "title": "Delete bookmark",
@@ -190,7 +198,15 @@
   },
   "auth": {
     "register" : {
-      "title": "Create account",     
+      "title": "Create account",  
+      "recoveryPhraseType": {
+        "title": "Select phrase type",
+        "description": "Please select the type of recovery phrase you want to create.",
+        "12wordsOptionTitle": "12 word recovery phrase",
+        "12wordsOptionDescription": "A phrase with 12 words will be generated.",
+        "24wordsOptionTitle": "24 word recovery phrase",
+        "24wordsOptionDescription": "A phrase with 24 words will be generated."
+      },   
       "safeKeeping": {
         "title": "Save your secret recovery phrase",
         "description": "Please write down these 12 words carefully, and store them in a safe place.",
@@ -199,32 +215,40 @@
       },
       "confirm": {
         "title": "Confirm your secret recovery phrase",
-        "description": "Tap and fill in the blanks."
+        "description": "Tap and fill in the blanks.",
+        "continueButtonText": "Continue to set password"
       },
-      "success": {
-        "title": "Great! Your account is now created",
-        "description": "You can now add your account to Lisk Wallet by clicking on 'Continue to add account', to be able to send and request tokens and much more.",
-        "continueButtonText": "Continue to add account"
+      "passwordSetup": {
+        "title": "Set up your account password",
+        "description": "This password will be used for decrypting your account every time you initiate any transaction from your wallet, and also during backup or removal of an account from the wallet."
       },
       "error": {
         "invalidDerivationPath": "Entered derivation path is Invalid"
-      }
+      },
+      "scanQR": "Scan QR Code",
+      "gallery": "Gallery"
     },
     "setup": {
-      "addAccountTitle": "Add account",
+      "authMethodTitle": "Add account",
+      "addAccountTitle": "Add your account",
       "switchAccount": "Switch account",
       "decryptRecoveryPhrase": "Decrypt your secret recovery phrase",
       "decryptRecoveryPhraseError": "Unable to decrypt account. Please check your password.",
       "encryptRecoveryPhraseError": "Unable to encrypt account.",
-      "addAccountDescription": "Enter your secret recovery phrase to manage your account.",
+      "addAccountDescription": "Enter your valid secret recovery phrase to be added to Lisk wallet.",
       "passwordSetupTitle": "Set up your account password",
-      "passwordSetupDescription": "This password is used to encrypt your secret recovery phrase, which will be used for managing your account.",
+      "passwordSetupDescription": "This password will be used for decrypting your account every time you initiate any transaction from your wallet, and also during backup or removal of an account from the wallet.",
       "passwordSetupSuccessTitle": "Perfect! You're all set",
       "passwordSetupSuccessDescription": "You can now download your encrypted secret recovery phrase and use it to add your account on other devices.",
       "enableDiscreteMode": "Enable discreet mode (optional)",
       "secretPhrase": "Secret recovery phrase",
       "restoreFromFile": "Restore from file",
+      "restoreFromFileErrorMessage": "Invalid file selected.",
       "downloaded": "Downloaded!",
+      "qrCodeError": "QR Code not found.",
+      "enableLegacyAccount": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",
+      "customDerivationPathDescription": "The derivation path(m’ / purpose’ / coin_type’ / address_index’) is a way to derive multiple accounts from the same secret recovery phrase.",
       "buttons": {
         "passwordSetupContinueButton": "Continue to wallet",
         "saveAccountButton": "Save account"
@@ -238,9 +262,9 @@
       }
     },
     "form": {
-      "passwordLabel": "Enter account password",
-      "confirmPasswordLabel": "Confirm account password",
-      "accountNameLabel": "Enter account name (optional)",
+      "passwordLabel": "Enter password",
+      "confirmPasswordLabel": "Confirm your password",
+      "accountNameLabel": "Account name (optional)",
       "passwordSetupContinueButton": "Continue to Dashboard",
       "termsAgreementText": "I agree to store my encrypted secret recovery phrase on this device.",
       "errors": {
@@ -266,9 +290,11 @@
     "details": {
       "deposited": "Deposited",
       "chainID": "Chain ID",
-      "lastUpdated": "Last Updated",
+      "lastUpdated": "Last updated",
       "status": "Status",
-      "lastCertificateHeight": "Last Certificate Height"
+      "lastCertificateHeight": "Last certificate height",
+      "errorDescription": "Sorry, we were unable to fetch your application data. Please try again.",
+      "chainIDDescription": "Unique identifier of a chain account. It is used when sending tokens to a specific chain and is also prepended for signing to protect against replay attacks."
     },
     "manage": {
       "add": {
@@ -277,7 +303,7 @@
         "successDescription": "You can see a list of your applications on the application dropdown.",
         "errorTitle": "Error adding application",
         "errorGenericDescription": "We’re unable to add your application to your Lisk Mobile. Please try again.",
-        "errorDescription": "We’re unable to add {{appName}} application to your Lisk Mobile. Please try again.",
+        "errorDescription": "We’re unable to add {{chainName}} application to your Lisk Mobile. Please try again.",
         "errorOnContinueButtonText": "Try again",
         "confirmButtonText": "Add application",
         "errorConnecting": "Error connecting application. Please try again."
@@ -292,8 +318,8 @@
         }        
       },
       "deleteDefaultApplicationModal": {
-        "description": "A default application can not be removed",
-        "buttonText": "Continue to Applications"
+        "description": "The default application can not be removed.",
+        "buttonText": "Continue to applications"
       },
       "continueToWalletButtonText": "Continue to wallet"   
     },
@@ -302,17 +328,17 @@
       "statsButtonText": "Stats",
       "applicationList": {
         "title": "All applications",
-        "errorText": "Error loading your applications.",
-        "emptyText": "You have no applications yet.",
+        "emptyText": "No active or registered blockchain applications found.",
+        "errorText": "Error loading blockchain applications. Please try again later.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Delete"
       },
       "externalApplicationList": {
-        "title": "External connections",
+        "title": "Wallet connections",
         "loadingText": "Loading external connections...",
-        "errorText": "Error loading your external connections.",
-        "emptyText": "You do not have external connections yet.",
+        "emptyText": "You haven't paired with any application yet.",
+        "errorText": "Error loading your wallet connections.",
         "detailsText": "Info",
         "disconnectText": "Disconnect",
         "chainIDLabel": "Chain ID",
@@ -345,6 +371,12 @@
         "copyToClipboardButtonText": "Copy and redirect to application site",
         "copiedToClipboardButtonText": "Copied",
         "errorButtonText": "Redirect to application site"
+      },
+      "disconnect": {
+        "title": "Disconnect Application",
+        "disconnectingFirst": "Disconnecting the ",
+        "disconnectingSecond": "application removes your wallet details from the site.",
+        "disconnect": "Disconnect"
       }
     }
   },
@@ -394,7 +426,7 @@
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
       "transactionFeeBreakdownText": "Fee breakdown",
-      "bytesFeeLabel": "Minimum fee",      
+      "minFeeLabel": "Minimum fee",      
       "priorityFeeLabel": "Network priority",
       "extraCommandFeeLabel": "Account initialization",
       "messageFeeLabel": "Message fee"
@@ -463,13 +495,15 @@
       "backButtonText": "Back"
     },
     "editAccount": {
+      "title": "Edit account name",
       "editAccountSuccess": "You can now download encrypted secret recovery phrase to this effect.",
       "continue": "Continue to wallet"
     },
     "tokens": "Tokens",
     "lockedTokens": "Locked tokens",
-    "emptyTokenMessage": "You have no tokens on this account yet.",
-    "errorOnTokensText": "Error loading tokens!",
+    "currentAccountEmptyTokenMessage": "There are no tokens to display at this time.",
+    "emptyTokenMessage": "There are no tokens to display for this account at this time.",
+    "errorOnTokensText": "Error loading your tokens.",
     "allTokens": "All Tokens",
     "buttons": {
       "viewAll": "View all",
@@ -480,7 +514,7 @@
   "transactions": {
     "transactionDetails": {
       "loadingText": "Loading transaction...",
-      "errorText": "Error loading transaction!",
+      "errorText": "Error loading transaction details.",
       "title": "Transaction details",
       "senderLabel": "Sender",
       "recipientLabel": "Recipient",
@@ -507,8 +541,8 @@
       "header2ParamsLabel": "Header 2"
     },
     "transactionList": {
-      "errorText": "Error loading transactions!",
-      "emptyText": "You have no transactions on this account yet.",
+      "errorText": "Error loading your transactions.",
+      "emptyText": "There are no transactions to display at this time.",
       "title": "Transactions",
       "goToTransactionHistoryButtonText": "View all"
     },
@@ -527,10 +561,18 @@
       "signErrorDescription": "Error signing your transaction. Please try again later."
     }   
   },
+  "deepLinkNotFound": {
+    "title": "Deeplink failed",
+    "description": "The page you’re trying to access cannot be found on the Lisk Mobile app. Please verify the link once more, click continue to Home to access the wallet."
+  },
   "tokens": {
     "errors": {
       "displayDenomNotFoundMessage": "Display denomination not found on units.",
       "maxDecimalPointExceededMessage": "Maximum allowed decimal point is {{conversionDecimals}}"
     }
+  },
+  "scanner" : {
+    "cameraAccessTitle": "Allow camera access",
+    "cameraAccessDescription": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings."
   }
 }

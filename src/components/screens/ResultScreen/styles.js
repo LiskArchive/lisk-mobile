@@ -13,7 +13,7 @@ export default () => ({
       justifyContent: 'center',
     },
     illustration: {
-      paddingVertical: 12,
+      marginBottom: 16,
     },
     title: {
       fontFamily: fonts.family.heading,

@@ -82,8 +82,6 @@ export default function AccountList({
           />
         )}
         withDefaultSpinner
-        // TODO: Integrate pagination props.
-        // (details on https://github.com/LiskHQ/lisk-mobile/issues/1611).
       />
 
       <View style={[styles.footer, style?.footer]}>

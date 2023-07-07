@@ -16,9 +16,9 @@ export default () => ({
     },
     description: {
       fontFamily: fonts.family.context,
-      fontSize: fonts.size.base,
+      fontSize: fonts.size.input,
       marginTop: 16,
-      marginBottom: 8,
+      marginBottom: 16,
     },
     formContainer: {
       paddingTop: 8,
@@ -35,7 +35,7 @@ export default () => ({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: boxes.boxPadding,
+      marginBottom: 24,
     },
     switch: {
       paddingRight: 8,
@@ -43,7 +43,8 @@ export default () => ({
     actionText: {
       flex: 1,
       fontFamily: fonts.family.context,
-      fontSize: 14,
+      fontSize: fonts.size.input,
+      color: colors.light.blueGray,
     },
     footer: {
       padding: boxes.boxPadding,
@@ -54,7 +55,7 @@ export default () => ({
       backgroundColor: colors.dark.white,
     },
     description: {
-      color: colors.light.zodiacBlue,
+      color: colors.light.smoothGray,
     },
   },
 
@@ -63,7 +64,7 @@ export default () => ({
       backgroundColor: colors.dark.black,
     },
     description: {
-      color: colors.dark.ghost,
+      color: colors.dark.mountainMist,
     },
   },
 });

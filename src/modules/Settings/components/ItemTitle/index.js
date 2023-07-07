@@ -43,7 +43,7 @@ const ItemTitle = ({
         hideDialog();
         cb();
       },
-      errorCallback: () => {},
+      errorCallback: () => null,
       androidError: (error) => setError(error),
     });
 
@@ -113,7 +113,7 @@ const ItemTitle = ({
                 name="forward"
                 size={16}
                 style={styles.arrowIcon}
-                color={theme === themes.light ? colors.light.maastrichtBlue : colors.dark.white}
+                color={theme === themes.light ? colors.light.blueGray : colors.dark.white}
               />
             </Fragment>
           ) : (

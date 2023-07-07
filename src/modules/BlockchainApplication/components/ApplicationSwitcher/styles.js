@@ -7,10 +7,9 @@ export default {
     },
     container: {
       overflow: 'hidden',
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 50,
-      borderColor: colors.light.silverGrey,
-      padding: 5,
+      paddingVertical: 8,
     },
     iconContainer: {
       marginRight: 10,
@@ -35,6 +34,7 @@ export default {
   [themes.light]: {
     container: {
       backgroundColor: colors.light.white,
+      borderColor: colors.light.platinumGray,
     },
     appName: {
       color: colors.light.zodiacBlue,
@@ -43,6 +43,7 @@ export default {
   [themes.dark]: {
     container: {
       backgroundColor: colors.dark.mainBg,
+      borderColor: colors.dark.volcanicSand,
     },
     appName: {
       color: colors.dark.white,

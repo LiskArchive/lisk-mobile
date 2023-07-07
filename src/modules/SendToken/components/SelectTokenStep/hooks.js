@@ -23,12 +23,9 @@ export function useTokenAmountInCurrency({ tokenAmount, tokenSymbol }) {
   }
 
   function localizeAmount(amount) {
-    return Number(amount).toLocaleString(
-      `${accountSettings.language}-${accountSettings.language?.toUpperCase()}`,
-      {
-        maximumFractionDigits: 20,
-      }
-    );
+    return Number(amount).toLocaleString('en-US', {
+      maximumFractionDigits: 20,
+    });
   }
 
   const tokenAmountInCurrency = rawAmountInCurrency && localizeAmount(rawAmountInCurrency);

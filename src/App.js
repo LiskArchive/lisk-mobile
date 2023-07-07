@@ -16,8 +16,11 @@ import store, { persistedStore } from 'store/index';
 import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
+import { useDataAudit } from './hooks/useDataAudit';
 
 export default function App() {
+  useDataAudit();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <I18nextProvider i18n={i18n}>

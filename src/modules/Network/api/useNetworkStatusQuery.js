@@ -13,7 +13,7 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
  *
  * @returns the query object
  */
-export function useNetworkStatusQuery({ config: customConfig = {}, options = {} } = {}) {
+export function useNetworkStatusQuery({ config: customConfig = {}, options = {}, client } = {}) {
   const config = {
     url: `${API_URL}/network/status`,
     method: 'get',
@@ -27,5 +27,6 @@ export function useNetworkStatusQuery({ config: customConfig = {}, options = {} 
     keys,
     config,
     options,
+    client,
   });
 }

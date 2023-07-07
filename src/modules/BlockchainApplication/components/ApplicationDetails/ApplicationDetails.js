@@ -1,42 +1,46 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useMemo } from 'react';
-import { ScrollView, View, ImageBackground, Image, Linking } from 'react-native';
-import { useTheme } from 'contexts/ThemeContext';
+import { ScrollView, View, Image, Linking } from 'react-native';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import LinearGradient from 'react-native-linear-gradient';
 
-import { H3, P, A } from 'components/shared/toolBox/typography';
+import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
 import DataRenderer from 'components/shared/DataRenderer';
+import ResultScreen from 'components/screens/ResultScreen';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import { H3, P, A } from 'components/shared/toolBox/typography';
+import InfoToggler from 'components/shared/InfoToggler';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import wavesPattern from 'assets/images/waves_pattern_large.png';
-import { colors } from 'constants/styleGuide';
+import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
+import WavesPatternSvg from 'assets/svgs/WavesPatternSvg';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Skeleton from 'components/shared/Skeleton/Skeleton';
-import { isColorBright } from 'utilities/colors.utils';
+import { colors } from 'constants/styleGuide';
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
 
 import getStyles from './ApplicationDetails.styles';
+import ApplicationDetailsSkeleton from '../ApplicationDetailsSkeleton/ApplicationDetailsSkeleton';
+import AddApplicationSuccessModal from '../AddApplicationSuccessModal/AddApplicationSuccessModal';
+import AddApplicationErrorModal from '../AddApplicationErrorModal/AddApplicationErrorModal';
 
 /**
- *
- * @param {Object} props
- * @param {'manage' | 'explore'} variant
- * 'manage' -> uses plain app background header and application name by the top
- * 'explore' -> uses app background with patterns
- *
+ * Renders the details of a given application in exploring or manage mode.
+ * @param {RouteProp} route - Navigation route (optional).
  */
 export default function ApplicationDetails({ route }) {
   const navigation = useNavigation();
 
   const { chainID, variant } = route.params;
+
+  const resultModal = useModal();
 
   const { styles } = useTheme({ styles: getStyles });
 
@@ -53,255 +57,210 @@ export default function ApplicationDetails({ route }) {
 
   const handleAddApplicationClick = () => {
     addApplication(application, {
-      onSuccess: () => navigation.navigate('AddApplicationSuccessScreen'),
+      onSuccess: () => resultModal.open(<AddApplicationSuccessModal navigation={navigation} />),
       onError: () =>
-        navigation.navigate('AddApplicationErrorScreen', { chainName: application?.chainName }),
+        resultModal.open(
+          <AddApplicationErrorModal navigation={navigation} chainName={application?.chainName} />
+        ),
     });
   };
 
   const handleUrlPress = (url) => Linking.openURL(url);
 
-  const isBrightBackground =
-    application?.backgroundColor && isColorBright(application.backgroundColor);
-
-  const buttonColor = isBrightBackground ? colors.dark.headerBg : colors.light.white;
-
   return (
     <View style={[styles.flex, styles.theme.container]}>
-      <ScrollView>
-        {variant === 'explore' && (
-          <ImageBackground
-            style={[
-              styles.header,
-              styles.container,
-              application?.backgroundColor && {
-                backgroundColor: application.backgroundColor,
-              },
-            ]}
-            source={wavesPattern}
-            resizeMode="cover"
-          >
-            <HeaderBackButton color={buttonColor} onPress={navigation.goBack} />
-          </ImageBackground>
-        )}
-
-        {variant === 'manage' && (
-          <View
-            style={[
-              styles.header,
-              styles.container,
-              application?.backgroundColor && {
-                backgroundColor: application.backgroundColor,
-              },
-            ]}
-            resizeMode="stretch"
-          >
-            <DataRenderer
-              isLoading={applications.isLoading}
-              error={applications.isError}
-              data={application?.chainName}
-              renderData={(data) => <HeaderBackButton title={data} onPress={navigation.goBack} />}
-            />
-          </View>
-        )}
-
-        <DataRenderer
-          data={application?.logo}
-          isLoading={applications.isLoading}
-          error={applications.isError}
-          renderData={(data) => (
-            <Image
-              style={[styles.logoContainer, styles.theme.logoContainer]}
-              source={{ uri: data.png }}
-            />
-          )}
-          renderLoading={() => (
-            <Skeleton
-              variant="circle"
-              width={70}
-              style={{ container: { marginTop: -32, marginBottom: -32, alignSelf: 'center' } }}
-            />
-          )}
-        />
-
-        <SafeAreaView style={[styles.flex, styles.body]}>
-          <View style={styles.titleRow}>
-            <DataRenderer
-              data={application?.chainName}
-              isLoading={applications.isLoading}
-              error={applications.isError}
-              renderData={(data) => (
-                <>
-                  <H3 style={[styles.title, styles.theme.title]}>{data}</H3>
-                  <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-                    <PinSvg variant={isPinned ? 'fill' : 'outline'} width={24} height={24} />
-                  </TouchableOpacity>
-                </>
-              )}
-              renderLoading={() => (
-                <Skeleton
-                  width={96}
-                  height={24}
-                  style={{ container: [styles.title, styles.theme.title] }}
+      <DataRenderer
+        data={application}
+        isLoading={applications.isLoading}
+        error={applications.isError}
+        renderData={(data) => (
+          <>
+            <ScrollView>
+              <LinearGradient
+                colors={[colors.light.ultramarineBlue, colors.light.inkBlue]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={[[styles.header, styles.theme.header]]}
+              >
+                <WavesPatternSvg
+                  height={280}
+                  width={400}
+                  style={{ position: 'absolute', top: 0, left: 0 }}
                 />
-              )}
-            />
-          </View>
 
-          <View style={[styles.row, styles.projectPageContainer]}>
-            <DataRenderer
-              data={application?.projectPage}
-              isLoading={applications.isLoading}
-              error={applications.isError}
-              renderData={(data) => (
-                <>
-                  <UrlSvg size={1} />
+                <HeaderBackButton color={colors.light.white} onPress={navigation.goBack} />
+              </LinearGradient>
 
-                  <A onPress={() => handleUrlPress(data)} style={[styles.url]}>
-                    {data}
-                  </A>
-                </>
-              )}
-              renderLoading={() => (
-                <Skeleton
-                  width={180}
-                  height={16}
-                  style={{
-                    container: [styles.url, { alignSelf: 'center' }],
-                  }}
-                />
-              )}
-              style={{ empty: styles.url }}
-            />
-          </View>
-
-          <DataRenderer
-            data={application?.deposited}
-            isLoading={applications.isLoading}
-            error={applications.isError}
-            hideOnEmpty
-            renderData={(data) => (
-              <View style={[styles.row, styles.depositedContainer]}>
-                <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
-                <P style={styles.amount}>{`${data.toLocaleString()} LSK`}</P>
-              </View>
-            )}
-            renderLoading={() => (
-              <Skeleton
-                width={144}
-                height={16}
-                style={{
-                  container: [styles.amount, { alignSelf: 'center' }],
-                }}
+              <DataRenderer
+                data={data.logo}
+                renderData={(logo) => (
+                  <Image
+                    style={[styles.logoContainer, styles.theme.logoContainer]}
+                    source={{ uri: logo.png }}
+                  />
+                )}
+                hideOnEmpty
               />
-            )}
-            style={{ empty: styles.amount }}
-          />
 
-          <View style={styles.stats}>
-            <View style={styles.flex}>
-              <View style={styles.item}>
-                <P style={styles.smallTitle}>{i18next.t('application.details.chainID')}</P>
+              <SafeAreaView style={[styles.flex, styles.body]}>
+                <View style={styles.titleRow}>
+                  <DataRenderer
+                    data={data.chainName}
+                    renderData={(chainName) => (
+                      <>
+                        <H3 style={[styles.title, styles.theme.title]}>{chainName}</H3>
+                        <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
+                          <PinSvg variant={isPinned ? 'fill' : 'outline'} width={22} height={22} />
+                        </TouchableOpacity>
+                      </>
+                    )}
+                    hideOnEmpty
+                  />
+                </View>
 
-                <P style={[styles.value, styles.theme.value]}>{chainID}</P>
-              </View>
+                <View style={[styles.row, styles.projectPageContainer]}>
+                  <DataRenderer
+                    data={data.projectPage}
+                    renderData={(projectPage) => (
+                      <>
+                        <UrlSvg size={1} />
 
-              <View style={styles.item}>
-                <P style={styles.smallTitle}>{i18next.t('application.details.status')}</P>
+                        <A onPress={() => handleUrlPress(projectPage)} style={[styles.url]}>
+                          {projectPage}
+                        </A>
+                      </>
+                    )}
+                    hideOnEmpty
+                    style={{ empty: styles.url }}
+                  />
+                </View>
 
                 <DataRenderer
-                  data={application?.status}
-                  isLoading={applications.isLoading}
-                  error={applications.isError}
-                  renderData={(data) => (
-                    <View
-                      style={[styles.stateContainer, styles[`${application?.status}Container`]]}
-                    >
-                      <P style={[styles.value, styles[data], styles.theme[data]]}>{data}</P>
+                  data={data.deposited}
+                  renderData={(deposited) => (
+                    <View style={[styles.row, styles.depositedContainer]}>
+                      <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
+                      <P style={styles.amount}>{`${deposited.toLocaleString('en-US')} LSK`}</P>
                     </View>
                   )}
-                  renderLoading={() => (
-                    <Skeleton
-                      width={78}
-                      height={28}
-                      style={{
-                        container: [styles.value, { borderRadius: 16 }],
-                      }}
-                    />
-                  )}
-                  style={{
-                    empty: [
-                      styles.value,
-                      styles[application?.state],
-                      styles.theme[application?.state],
-                    ],
-                  }}
+                  hideOnEmpty
+                  style={{ empty: styles.amount }}
                 />
-              </View>
+
+                <View style={[styles.divider, styles.theme.divider]} />
+
+                <View style={styles.stats}>
+                  <View style={styles.flex}>
+                    <View style={styles.item}>
+                      <View style={[styles.labelContainer]}>
+                        <P style={styles.label}>{i18next.t('application.details.chainID')}</P>
+
+                        <InfoToggler
+                          title={i18next.t('application.details.chainID')}
+                          description={i18next.t('application.details.chainIDDescription')}
+                          style={{ toggleButtonIcon: { width: 16, marginLeft: 4 } }}
+                        />
+                      </View>
+
+                      <P style={[styles.value, styles.theme.value]}>{chainID}</P>
+                    </View>
+
+                    <View style={styles.item}>
+                      <View style={[styles.labelContainer]}>
+                        <P style={styles.label}>{i18next.t('application.details.status')}</P>
+                      </View>
+
+                      <DataRenderer
+                        data={data.status}
+                        renderData={(status) => (
+                          <View style={[styles.stateContainer, styles[`${status}Container`]]}>
+                            <P style={[styles.value, styles[status], styles.theme[status]]}>
+                              {status}
+                            </P>
+                          </View>
+                        )}
+                        hideOnEmpty
+                        style={{
+                          empty: [styles.value, styles[data.status], styles.theme[data.status]],
+                        }}
+                      />
+                    </View>
+                  </View>
+
+                  <View style={styles.flex}>
+                    <DataRenderer
+                      data={data.lastUpdated}
+                      renderData={(lastUpdated) => (
+                        <View style={styles.item}>
+                          <View style={[styles.labelContainer]}>
+                            <P style={styles.label}>
+                              {i18next.t('application.details.lastUpdated')}
+                            </P>
+                          </View>
+
+                          <P style={[styles.value, styles.theme.value]}>
+                            {moment(lastUpdated * 1000).format('D MMM YYYY')}
+                          </P>
+                        </View>
+                      )}
+                      hideOnEmpty
+                      style={{ empty: [styles.value, styles.theme.value] }}
+                    />
+
+                    <DataRenderer
+                      data={data.lastCertificateHeight}
+                      renderData={(lastCertificateHeight) => (
+                        <View style={styles.item}>
+                          <View style={[styles.labelContainer]}>
+                            <P style={styles.label}>
+                              {i18next.t('application.details.lastCertificateHeight')}
+                            </P>
+                          </View>
+
+                          <P style={[styles.value, styles.theme.value]}>{lastCertificateHeight}</P>
+                        </View>
+                      )}
+                      hideOnEmpty
+                      style={{ empty: [styles.value, styles.theme.value] }}
+                    />
+                  </View>
+                </View>
+              </SafeAreaView>
+            </ScrollView>
+
+            {variant === 'manage' && (
+              <SafeAreaView style={[styles.footer]}>
+                <PrimaryButton onPress={handleAddApplicationClick}>
+                  {i18next.t('application.manage.add.confirmButtonText')}
+                </PrimaryButton>
+              </SafeAreaView>
+            )}
+          </>
+        )}
+        renderLoading={() => (
+          <>
+            <View style={[styles.container]} resizeMode="stretch">
+              <HeaderBackButton onPress={navigation.goBack} />
             </View>
 
-            <View style={styles.flex}>
-              <DataRenderer
-                data={application?.lastUpdated}
-                isLoading={applications.isLoading}
-                error={applications.isError}
-                hideOnEmpty
-                renderData={(data) => (
-                  <View style={styles.item}>
-                    <P style={styles.smallTitle}>{i18next.t('application.details.lastUpdated')}</P>
-
-                    <P style={[styles.value, styles.theme.value]}>
-                      {moment(data * 1000).format('D MMM YYYY')}
-                    </P>
-                  </View>
-                )}
-                renderLoading={() => (
-                  <Skeleton
-                    width={80}
-                    height={16}
-                    style={{
-                      container: [styles.value],
-                    }}
-                  />
-                )}
-                style={{ empty: [styles.value, styles.theme.value] }}
-              />
-
-              <DataRenderer
-                data={application?.lastCertificateHeight}
-                isLoading={applications.isLoading}
-                error={applications.isError}
-                hideOnEmpty
-                renderData={(data) => (
-                  <View style={styles.item}>
-                    <P style={styles.smallTitle}>
-                      {i18next.t('application.details.lastCertificateHeight')}
-                    </P>
-
-                    <P style={[styles.value, styles.theme.value]}>{data}</P>
-                  </View>
-                )}
-                renderLoading={() => (
-                  <Skeleton
-                    width={48}
-                    height={16}
-                    style={{
-                      container: [styles.value],
-                    }}
-                  />
-                )}
-                style={{ empty: [styles.value, styles.theme.value] }}
-              />
+            <ApplicationDetailsSkeleton />
+          </>
+        )}
+        renderError={() => (
+          <>
+            <View style={[styles.container]} resizeMode="stretch">
+              <HeaderBackButton onPress={navigation.goBack} />
             </View>
-          </View>
 
-          {variant === 'manage' && (
-            <PrimaryButton onClick={handleAddApplicationClick} noTheme>
-              {i18next.t('application.manage.add.confirmButtonText')}
-            </PrimaryButton>
-          )}
-        </SafeAreaView>
-      </ScrollView>
+            <ResultScreen
+              illustration={<ErrorIllustrationSvg />}
+              title={i18next.t('fallbackScreens.error.title')}
+              description={i18next.t('application.details.errorDescription')}
+              styles={{ container: styles.resultScreenContainer }}
+            />
+          </>
+        )}
+      />
     </View>
   );
 }

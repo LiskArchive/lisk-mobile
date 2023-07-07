@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
-import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { H4, B, P } from 'components/shared/toolBox/typography';
-import CopyToClipboard from 'components/shared/copyToClipboard';
+import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import SwitchButton from 'components/shared/toolBox/switchButton';
@@ -14,13 +13,12 @@ import getRegisterSafeKeepingStyles from './styles';
 
 export default function RegisterSafeKeeping({
   recoveryPhrase,
+  prevStep,
   nextStep,
   showHeader,
   currentIndex,
   length,
 }) {
-  const navigation = useNavigation();
-
   const [confirmed, setConfirmed] = useState(false);
 
   const { styles } = useTheme({
@@ -29,14 +27,14 @@ export default function RegisterSafeKeeping({
 
   const handleConfirm = (status) => setConfirmed(status);
 
-  const onContinue = () => nextStep({ recoveryPhrase });
+  const handleContinuePress = () => nextStep({ recoveryPhrase });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
       {showHeader && (
         <HeaderBackButton
           title={'auth.register.title'}
-          onPress={navigation.goBack}
+          onPress={prevStep}
           withProgressBar
           currentIndex={currentIndex}
           length={length}
@@ -52,20 +50,17 @@ export default function RegisterSafeKeeping({
         </P>
 
         <View style={styles.recoveryPhraseContainer}>
-          <Text
+          <P
             style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}
             testID="recoveryPhraseText"
           >
             {recoveryPhrase.replace(/\s+/g, '  ')}
-          </Text>
+          </P>
 
           <CopyToClipboard
             style={styles.copyContainer}
-            labelStyle={styles.copy}
-            iconStyle={styles.copy}
+            labelStyle={styles.copyLabel}
             label={i18next.t('commons.copyToClipboard')}
-            showIcon={true}
-            iconSize={14}
             value={recoveryPhrase}
             type={B}
           />
@@ -91,8 +86,7 @@ export default function RegisterSafeKeeping({
             disabled={!confirmed}
             testID="safeKeepingButton"
             style={styles.button}
-            noTheme={true}
-            onClick={onContinue}
+            onPress={handleContinuePress}
           >
             {i18next.t('auth.register.safeKeeping.continueButtonText')}
           </PrimaryButton>

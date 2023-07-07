@@ -9,17 +9,20 @@ export default () => ({
     },
     titleContainer: {
       flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
       marginLeft: 5,
       marginRight: 5,
     },
-    title: {},
+    title: {
+      fontSize: fonts.size.input,
+    },
     subtitle: {
-      paddingTop: 4,
-      paddingBottom: 2,
+      marginLeft: 4,
       fontSize: fonts.size.small,
     },
     icon: {
-      marginRight: 16,
+      marginRight: 8,
     },
     arrow: {
       flexDirection: 'row',

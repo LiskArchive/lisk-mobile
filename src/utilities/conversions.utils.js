@@ -37,7 +37,7 @@ export function fromBaseToDisplayDenom({
   let convertedAmount = bigAmount.dividedBy(conversionFactor).toFixed();
 
   if (formatAmount) {
-    convertedAmount = Number(convertedAmount).toLocaleString();
+    convertedAmount = Number(convertedAmount).toLocaleString('en-US');
   }
 
   if (withSymbol) {

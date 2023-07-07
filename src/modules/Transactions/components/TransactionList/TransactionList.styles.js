@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getTransactionListStyles() {
   return {
@@ -7,25 +7,24 @@ export default function getTransactionListStyles() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 8,
       },
       headerExtraMargin: {
         marginBottom: 24,
       },
       title: {
-        fontWeight: 'bold',
-        fontSize: 14,
+        fontWeight: '500',
+        fontSize: fonts.size.input,
       },
       labelButtonText: {
         fontSize: 12,
       },
       transactionAddressText: {
         fontWeight: '500',
-        fontSize: 16,
+        fontSize: fonts.size.base,
         lineHeight: 19,
       },
       loadingText: {
-        fontSize: 14,
+        fontSize: fonts.size.input,
         marginTop: 8,
         marginBottom: 8,
       },

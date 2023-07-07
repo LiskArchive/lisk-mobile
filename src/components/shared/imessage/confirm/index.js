@@ -34,16 +34,6 @@ class Confirm extends Component {
     try {
       this.setState({ busy: false });
 
-      // TODO: Consume transactions hooks instead when they are created.
-      // const data = {
-      //   recipientAddress: address,
-      //   amount: toRawLsk(amount),
-      //   recoveryPhrase,
-      // };
-      // const tx = await transactionsAPI.create(data);
-      // const { id } = await transactionsAPI.broadcast(tx);
-      // Recap when https://github.com/LiskHQ/lisk-mobile/issues/1463 is solved.
-
       composeMessage({
         id: '',
         address: { value: extractAddress(recoveryPhrase), validity: 0 },

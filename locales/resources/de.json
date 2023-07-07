@@ -5,13 +5,16 @@
     "buttons": {
       "continue": "Weiter",
       "cancel": "Absagen",
-      "confirm": "Bestätigen"
+      "confirm": "Bestätigen",
+      "reload": "Aktualisierung",
+      "viewAll": "Alle ansehen"
     },
     "copyToClipboard": "In die Zwischenablage kopieren"
   },
   "fallbackScreens" : {
     "error" : {
-      "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal und melden Sie den Fehler per E-Mail, wenn Sie immer noch Probleme haben.",
+      "title": "Etwas ist schief gelaufen",
+      "description": "Bitte versuchen Sie es später noch einmal. Wenn weiterhin Probleme auftreten, melden Sie es per E-Mail.",
       "retryButton": "Wiederholen",
       "emailReportLabel": "Bleibt das Problem bestehen?",
       "emailReportButton": "Melden Sie den Fehler per E-Mail"
@@ -31,28 +34,22 @@
   },
   "Activity": "Aktivitäten",
   "Add to bookmarks": "Zu Lesezeichen hinzufügen",  
-  "Address": "Adresse",
   "Allow camera access": "Kamerazugriff erlauben",
   "Amount": "Betrag",
   "Status": "",  
   "Cancel": "Abbrechen",
-  "Edit bookmark": "Lesezeichen bearbeiten",  
   "I have read and agreed with the": "Ich akzeptiere die",
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
-  "Label": "Bezeichnung",
-  "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings.": "Lisk benötigt Zugriff auf deine Kamera, um QR Codes zu scannen. Tippe hier, um zu den Einstellungen zu gelangen.",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
   "New bookmark": "Neues Lesezeichen",
   "No internet connection!": "Keine Internetverbindung!",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
-  "Read more on the Lisk website": "Erfahre mehr auf der Lisk® Website",
   "Show QR code": "Zeige QR Code",
   "Hide QR code": "",
-  "Save changes": "Änderungen speichern",
   "Scan": "scannen",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
@@ -68,7 +65,6 @@
   "Security": "Sicherheit",
   "Delete": "Löschen",
   "Edit": "Bearbeiten",
-  "Bookmarks": "Lesezeichen",
   "Request": "Anfrage",
   "Select your currency": "Wähle deine Währung",
   "Settings": "Einstellungen",
@@ -83,7 +79,6 @@
   "Disable bioAuth": "{{sensorType}} deaktivieren",
   "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
   "Error": "Fehler",
-  "Unparsed Address": "Unbekannte Adresse",  
   "You will be able to add it again anytime.": "Du kannst es jederzeit wieder hinzufügen.",
   "We’ve got good news!": "Gute Neuigkeiten für dich!",
   "Info": "Info",
@@ -102,18 +97,16 @@
       "backupRecoveryPhrase": "Sichern Sie Ihre Secret Recovery Phrase",
       "about": "Über Lisk",
       "darkMode": "Dunkler Modus",
+      "shakePhone": "",
       "disabled": "Deaktiviert",
       "enabled": "Ermöglicht",
       "discreetMode": "Diskreter Modus",
+      "discreetModeDescription": "(alle Guthaben ausblenden)",
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
       "enableDerivationPath": ""
-    },
-    "descriptions": {
-      "discreetMode": "Guthaben und Transaktionsbeträge ausblenden.",
-      "biometrics": "Verwenden Sie {{sensorType}}, um das Kontopasswort zu verschlüsseln und zu verwenden."
-    },
+    }, 
     "backupPhrase": {
       "title": "Sichern Sie die geheime Wiederherstellungsphrase",
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
@@ -131,6 +124,11 @@
       "description2": "",
       "decryptRecoveryPhraseTitle": "Geben Sie Ihr Passwort ein",
       "decryptRecoveryPhraseDescription": "Bitte geben Sie Ihr Kontopasswort ein, um Face ID zu aktivieren."
+    },
+    "about": {
+      "versionDescription": "Version {{version}}",
+      "openWebsiteButtonTitle": "Lesen Sie mehr auf der Lisk-Website",
+      "errorOnOpenWebsiteDescription": "Fehler beim Öffnen des Links. Bitte versuchen Sie es später noch einmal."
     }
   },
   "multisignature": {
@@ -161,11 +159,19 @@
     "faceId": "Schau bitte in die Kamera, um dich anzumelden"
   },
   "bookmarks": {
-    "emptyText": "Sie haben noch keine Lesezeichen.",
+    "title": "Lesezeichen",
+    "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
-      "invalidLabel": "",
-      "invalidAddress": "",
-      "required": ""
+      "addressLabel": "Wallet-Adresse",
+      "labelLabel": "Bezeichnung",
+      "invalidLabel": "Die Bezeichnung muss zwischen 3 und 20 Zeichen lang sein",
+      "invalidAddress": "Ungültige Adresse",
+      "required": "Dieses Feld ist erforderlich",
+      "saveButtonText": "Änderungen speichern",
+      "addButtonText": "Lesezeiche hinzufügen"
+    },
+    "editBookmark": {
+      "title": "Lesezeichen bearbeiten"
     },
     "deleteBookmark": {
       "title": "Lesezeichen löschen",
@@ -193,7 +199,15 @@
   },
   "auth": {
     "register" : {
-      "title": "Konto erstellen",      
+      "title": "Konto erstellen",  
+      "recoveryPhraseType": {
+        "title": "Wählen Sie den Phrasentyp aus",
+        "description": "Bitte wählen Sie die Art der Wiederherstellungsphrase aus, die Sie erstellen möchten.",
+        "12wordsOptionTitle": "Wiederherstellungssatz mit 12 Wörtern",
+        "12wordsOptionDescription": "Es wird eine Phrase mit 12 Wörtern generiert.",
+        "24wordsOptionTitle": "Wiederherstellungssatz mit 24 Wörtern",
+        "24wordsOptionDescription": "Es wird eine Phrase mit 24 Wörtern generiert."
+      },      
       "safeKeeping": {
         "title": "Speichern Sie Ihre geheime Wiederherstellungsphrase",
         "description": "Bitte schreiben Sie diese 12 Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
@@ -202,31 +216,40 @@
       },
       "confirm": {
         "title": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
-        "description": "Tippen Sie auf und füllen Sie die Lücken aus."
+        "description": "Tippen Sie auf und füllen Sie die Lücken aus.",
+        "continueButtonText": "Legen Sie weiterhin das Passwort fest"
       },
-      "success": {
-        "title": "Großartig! Ihr Konto ist jetzt erstellt",
-        "description": "Sie können Ihr Konto jetzt zu Lisk Wallet hinzufügen, indem Sie auf „Konto hinzufügen fortsetzen“ klicken, um Tokens senden und anfordern zu können und vieles mehr.",
-        "continueButtonText": "Weiter zu Konto hinzufügen"
+      "passwordSetup": {
+        "title": "Richten Sie Ihr Kontopasswort ein",
+        "description": "Dieses Passwort wird jedes Mal zum Entschlüsseln Ihres Kontos verwendet, wenn Sie eine Transaktion von Ihrem Wallet aus initiieren, und auch beim Sichern oder Entfernen eines Kontos aus dem Wallet."
       },
       "error": {
         "invalidDerivationPath": ""
-      }
+      },
+      "scanQR": "",
+      "gallery": "Gallery"
     },
     "setup": {
-      "addAccountTitle": "Konto hinzufügen",
+      "authMethodTitle": "Konto hinzufügen",
+      "addAccountTitle": "Fügen Sie Ihr Konto hinzu",
       "switchAccount": "Benutzer wechseln",
       "decryptRecoveryPhrase": "Entschlüsseln Sie Ihre geheime Wiederherstellungsphrase",
       "decryptRecoveryPhraseError": "Konto kann nicht entschlüsselt werden. Bitte überprüfen Sie Ihr Passwort",
       "addAccountDescription": "Geben Sie Ihre geheime Wiederherstellungsphrase ein, um Ihr Konto zu verwalten",
       "passwordSetupTitle": "Gerätekennwort einrichten",
-      "passwordSetupDescription": "Dieses Passwort wird verwendet, um Ihre geheime Wiederherstellungsphrase zu verschlüsseln, die für die Verwaltung Ihres Kontos verwendet wird.",
+      "passwordSetupDescription": "Dieses Passwort wird jedes Mal zum Entschlüsseln Ihres Kontos verwendet, wenn Sie eine Transaktion von Ihrem Wallet aus initiieren, und auch beim Sichern oder Entfernen eines Kontos aus dem Wallet.",
       "passwordSetupSuccessTitle": "Perfekt!",
       "passwordSetupSuccessDescription": "Sie können jetzt verschlüsselte geheime Wiederherstellungsphrasen herunterladen.",
       "enableDiscreteMode": "",
       "secretPhrase": "Geheime Wiederherstellungsphrase",
       "restoreFromFile": "Aus Datei wiederherstellen",
+      "restoreFromFileErrorMessage": "",
       "downloaded": "Heruntergeladen!",
+      "qrCodeError": "",
+      "enableLegacyAccount": "",
+      "enableLegacyAccountDescription": "",
+      "customDerivationPathDescription": "",
+
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",
         "saveAccountButton": "Konto speichern"
@@ -270,7 +293,9 @@
       "chainID": "Ketten-ID",
       "lastUpdated": "Zuletzt aktualisiert",
       "status": "Status",
-      "lastCertificateHeight": "Höhe des letzten Zertifikats"
+      "lastCertificateHeight": "Höhe des letzten Zertifikats",
+      "errorDescription": "Leider konnten wir Ihre Bewerbungsdaten nicht abrufen. Bitte versuche es erneut.",
+      "chainIDDescription": "Eindeutige Kennung eines Kettenkontos. Es wird beim Senden von Token an eine bestimmte Kette verwendet und wird auch beim Signieren vorangestellt, um sich vor Replay-Angriffen zu schützen."
     },
     "manage": {
       "add": {
@@ -279,7 +304,7 @@
         "successDescription": "Sie können eine Liste Ihrer Anwendungen in der Anwendungs-Dropdown-Liste sehen.",
         "errorTitle": "Fehler beim Hinzufügen der Anwendung",
         "errorGenericDescription": "Wir können Ihre Anwendung nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
-        "errorDescription": "Wir können die Anwendung {{appName}} nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
+        "errorDescription": "Wir können die Anwendung {{chainName}} nicht zu Ihrem Lisk Mobile hinzufügen. Bitte versuche es erneut.",
         "errorOnContinueButtonText": "Versuchen Sie es erneut",
         "confirmButtonText": "App jetzt hinzufügen",
         "errorConnecting": "Fehler beim Verbinden der Anwendung. Bitte versuche es erneut."
@@ -304,17 +329,17 @@
       "statsButtonText": "Statistiken",
       "applicationList": {
         "title": "Alle Apps",
-        "errorText": "Fehler beim Laden Ihrer Anwendungen.",
-        "emptyText": "Sie haben noch keine Bewerbungen.",
+        "emptyText": "Keine aktiven oder registrierten Blockchain-Anwendungen gefunden.",
+        "errorText": "Fehler beim Laden der Blockchain-Anwendungen. Bitte versuchen Sie es später noch einmal.",
         "pinText": "Pin",
         "unpinText": "Unpin",
         "deleteText": "Löschen"
       },
       "externalApplicationList": {
-        "title": "Externe Verbindungen",
+        "title": "Wallet-Verbindungen",
         "loadingText": "Externe Verbindungen laden...",
-        "errorText": "Fehler beim Laden Ihrer externen Verbindungen.",
-        "emptyText": "Sie haben noch keine externen Verbindungen.",
+        "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
+        "emptyText": "Sie haben noch keine Kopplung mit einer Anwendung durchgeführt.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
         "chainIDLabel": "",
@@ -347,6 +372,12 @@
         "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
         "copiedToClipboardButtonText": "Kopiert",
         "errorButtonText": "Weiterleitung zur App-Site"
+      },
+      "disconnect": {
+        "title": "",
+        "disconnectingFirst": "",
+        "disconnectingSecond": "",
+        "disconnect": ""
       }
     }
   },
@@ -396,7 +427,7 @@
       "highPriorityLabel": "Hoch",
       "transactionFeeLabel": "Transaktionsgebühr",
       "transactionFeeBreakdownText": "Gebührenaufschlüsselung",
-      "bytesFeeLabel": "Bytes",      
+      "minFeeLabel": "Mindestgebühr",      
       "priorityFeeLabel": "Priorität",
       "extraCommandFeeLabel": "Initialisierung",
       "messageFeeLabel": "Nachrichtengebühr"
@@ -465,13 +496,15 @@
       "backButtonText": "Zurück"
     },
     "editAccount": {
+      "title": "",
       "editAccountSuccess": "",
       "continue": ""
     },
     "tokens": "",
     "lockedTokens": "",
-    "emptyTokenMessage": "Sie haben kein Token auf diesem Konto. Sie können Token anfordern",
-    "errorOnTokensText": "Fehler beim Laden der Token!",
+    "currentAccountEmptyTokenMessage": "Zurzeit sind keine Tokens zum Anzeigen vorhanden.",
+    "emptyTokenMessage": "Für dieses Konto können derzeit keine Token angezeigt werden.",
+    "errorOnTokensText": "Fehler beim Laden deinen Token.",
     "allTokens": "",
     "buttons": {
       "viewAll": "",
@@ -482,7 +515,7 @@
   "transactions": {
     "transactionDetails": {
       "loadingText": "Transaktion wird geladen...",
-      "errorText": "Fehler beim Laden der Transaktion!",
+      "errorText": "Fehler beim Laden der Transaktionsdetails.",
       "title": "Transaktionsdetails",
       "senderLabel": "Absender",
       "recipientLabel": "Empfänger",
@@ -510,7 +543,7 @@
     },
     "transactionList": {
       "errorText": "Fehler beim Laden von Transaktionen!",
-      "emptyText": "Du hast keine kürzlichen Aktivitäten.",
+      "emptyText": "Derzeit können keine Transaktionen angezeigt werden.",
       "title": "Transaktionen",
       "goToTransactionHistoryButtonText": "Alle ansehen"
     },
@@ -529,10 +562,18 @@
       "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
     }
   },
+  "deepLinkNotFound": {
+    "title": "",
+    "description": ""
+  },
   "tokens": {
     "errors": {
       "displayDenomNotFoundMessage": "",
       "maxDecimalPointExceededMessage": ""
     }
+  },
+  "scanner" : {
+    "cameraAccessTitle": "Erlauben Sie den Kamerazugriff",
+    "cameraAccessDescription": "Lisk muss zum Scannen von QR-Codes auf Ihre Kamera zugreifen. Tippen Sie auf das Symbol oben, um zu den Einstellungen zu gelangen."
   }
 }

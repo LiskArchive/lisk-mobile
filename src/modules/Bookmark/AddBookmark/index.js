@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
-import { BackHandler, SafeAreaView, View } from 'react-native';
+import { BackHandler, SafeAreaView, View, ScrollView } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,8 +17,8 @@ import DropDownHolder from 'utilities/alert';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
-import Scanner from 'components/shared/scanner';
-import { P, Small } from 'components/shared/toolBox/typography';
+import Scanner from 'components/shared/Scanner/Scanner';
+import { P } from 'components/shared/toolBox/typography';
 import { selectBookmarkList } from '../store/selectors';
 import { addBookmark, editBookmark } from '../store/actions';
 
@@ -133,7 +133,9 @@ export default function AddBookmark({ route }) {
       if (editMode) {
         navigation.setOptions({
           title: null,
-          headerLeft: (props) => <HeaderBackButton {...props} title="Edit bookmark" />,
+          headerLeft: (props) => (
+            <HeaderBackButton {...props} title={i18next.t('bookmarks.editBookmark.title')} />
+          ),
         });
       }
     }
@@ -155,24 +157,16 @@ export default function AddBookmark({ route }) {
         permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
 
-      <View style={styles.body}>
+      <ScrollView style={styles.body} testID="add-bookmark-screen">
         {!incomingData ? (
           <View style={styles.addressContainer}>
             <Input
-              label={i18next.t('Address')}
-              autoCorrect={false}
-              autoCapitalize="none"
-              innerStyles={{
-                errorMessage: styles.errorMessage,
-                rightAdornment: styles.rightAdornment,
-              }}
-              testID="bookmark-address-input"
-              onChange={(value) => setAddress({ value })}
-              value={address.value}
-              error={setError(address.validity, 'address')}
-              adornments={{
-                left: <Avatar address={address.value} size={24} />,
-                right: (
+              label={
+                <View style={styles.labelContainer}>
+                  <P style={[styles.label, styles.theme.label]}>
+                    {i18next.t('bookmarks.addBookmark.addressLabel')}
+                  </P>
+
                   <IconButton
                     onPress={() => scanner.current?.toggleCamera?.()}
                     titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
@@ -181,25 +175,41 @@ export default function AddBookmark({ route }) {
                     iconSize={18}
                     color={colors.light.ultramarineBlue}
                   />
-                ),
+                </View>
+              }
+              autoCorrect={false}
+              autoCapitalize="none"
+              innerStyles={{
+                errorMessage: styles.errorMessage,
+              }}
+              testID="bookmark-address-input"
+              onChange={(value) => setAddress({ value })}
+              value={address.value}
+              error={setError(address.validity, 'address')}
+              adornments={{
+                left: <Avatar address={address.value} size={24} />,
               }}
             />
           </View>
         ) : (
           <View style={styles.row}>
-            <P style={[styles.label, styles.theme.label]}>Address</P>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t('bookmarks.addBookmark.addressLabel')}
+            </P>
+
             <View style={styles.staticAddressContainer}>
               <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35} />
-              <Small style={[styles.address, styles.theme.address]}>
+
+              <P style={[styles.address, styles.theme.address]}>
                 {stringShortener(incomingData.address, 6, 5)}
-              </Small>
+              </P>
             </View>
           </View>
         )}
 
         <Input
           testID="bookmark-label-input"
-          label={i18next.t('Label')}
+          label={i18next.t('bookmarks.addBookmark.labelLabel')}
           autoCorrect={false}
           autoCapitalize="none"
           innerStyles={{ inputLabel: styles.input }}
@@ -208,11 +218,13 @@ export default function AddBookmark({ route }) {
           error={setError(label.validity, 'label')}
           value={label.value}
         />
-      </View>
+      </ScrollView>
 
       <View style={[styles.footer]}>
         <PrimaryButton onClick={handleSubmit} noTheme testID="add-bookmark-button">
-          {editMode ? i18next.t('Save changes') : i18next.t('Add to bookmarks')}
+          {editMode
+            ? i18next.t('bookmarks.addBookmark.saveButtonText')
+            : i18next.t('bookmarks.addBookmark.addButtonText')}
         </PrimaryButton>
       </View>
     </SafeAreaView>

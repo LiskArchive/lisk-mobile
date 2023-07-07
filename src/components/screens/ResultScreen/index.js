@@ -14,7 +14,7 @@ export default function ResultScreen({
   title,
   description,
   onContinue,
-  buttonText,
+  continueButtonTitle,
   children,
   disabled,
   variant,
@@ -27,10 +27,10 @@ export default function ResultScreen({
   if (!illustration) {
     switch (variant) {
       case 'success':
-        illustration = <CircleCheckedSvg height={80} width={80} color={colors.light.ufoGreen} />;
+        illustration = <CircleCheckedSvg height={80} width={64} color={colors.light.ufoGreen} />;
         break;
       case 'error':
-        illustration = <CircleCrossedSvg height={80} width={80} color={colors.light.furyRed} />;
+        illustration = <CircleCrossedSvg height={80} width={64} color={colors.light.furyRed} />;
         break;
 
       default:
@@ -61,14 +61,15 @@ export default function ResultScreen({
       </View>
 
       {onContinue && (
-        <View style={[styles.footer]} testID="result-screen-continue">
+        <View style={[styles.footer, baseStyles?.footer]} testID="result-screen-continue">
           <PrimaryButton
             noTheme
-            title={buttonText}
             style={[styles.continueButton]}
             onPress={onContinue}
             disabled={disabled}
-          />
+          >
+            {continueButtonTitle}
+          </PrimaryButton>
         </View>
       )}
     </SafeAreaView>

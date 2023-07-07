@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ModalContext } from 'contexts/ModalContext';
 import { useExternalApplicationSignatureRequest } from 'modules/BlockchainApplication/hooks/useExternalApplicationSignatureRequest';
-import Settings from 'modules/Settings';
-import AccountHome from 'modules/Accounts/components/AccountHome/AccountHome';
-import Bookmarks from 'modules/Bookmark';
+import AccountHomeScreen from 'modules/Accounts/components/AccountHome/AccountHome';
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
+import BookmarksScreen from 'modules/Bookmark';
+import SettingsScreen from 'modules/Settings/components/SettingsScreen/SettingsScreen';
 import { getTabBarIcon } from '../../helpers';
 import { getNavigationTabBarStyles } from '../../styles';
 
@@ -28,14 +28,14 @@ export default function Tabs() {
           style: getNavigationTabBarStyles(modalOpen),
         }}
       >
-        <Tab.Screen name="AccountHome" component={AccountHome} options={getTabBarIcon} />
+        <Tab.Screen name="AccountHome" component={AccountHomeScreen} options={getTabBarIcon} />
         <Tab.Screen
           name="Applications"
           component={BlockchainApplicationsExplorer}
           options={getTabBarIcon}
         />
-        <Tab.Screen name="Bookmarks" component={Bookmarks} options={getTabBarIcon} />
-        <Tab.Screen name="Settings" component={Settings} options={getTabBarIcon} />
+        <Tab.Screen name="Bookmarks" component={BookmarksScreen} options={getTabBarIcon} />
+        <Tab.Screen name="Settings" component={SettingsScreen} options={getTabBarIcon} />
       </Tab.Navigator>
     </>
   );

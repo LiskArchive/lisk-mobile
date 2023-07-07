@@ -10,14 +10,12 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
-import { useInitializationFee } from 'modules/Transactions/hooks/useInitializationFee';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
-import { useMessageFee } from 'modules/Transactions/hooks/useMessageFee';
+import { useTransactionFees } from 'modules/Transactions/hooks/useTransactionFees';
 import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
-import { useChainChannelQuery } from 'modules/BlockchainApplication/api/useChainChannelQuery';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
@@ -32,8 +30,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     isSuccess: isSuccessApplicationSupportedTokensData,
   } = useApplicationSupportedTokensQuery(currentApplication.data);
 
-  const { data: messageFeeData } = useMessageFee();
-
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
   });
@@ -46,12 +42,12 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     () => ({
       senderApplicationChainID: currentApplication.data?.chainID,
       recipientApplicationChainID:
-        initialValues?.recipientApplicationChainID || currentApplication.data?.chainID,
-      recipientAccountAddress: initialValues?.recipientAccountAddress,
+        initialValues?.recipientChain || currentApplication.data?.chainID,
+      recipientAccountAddress: initialValues?.recipient,
       recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
-      tokenID: initialValues?.tokenID,
+      tokenID: initialValues?.token,
       amount: initialValues?.amount || 0,
-      message: initialValues?.message || '',
+      message: initialValues?.reference || '',
       priority: 'low',
       userPassword: '',
       command: 'transfer',
@@ -87,20 +83,16 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const tokenID = form.watch('tokenID');
   const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
   const command = form.watch('command');
+  const amount = form.watch('amount');
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
-  const { data: recipientApplicationChainChannelData } = useChainChannelQuery(
-    recipientApplicationChainID,
-    { options: { enabled: isCrossChainTransfer } }
-  );
-
-  const { data: initializationFeeData, refetch: refetchInitializationFee } = useInitializationFee({
-    address: recipientAddress,
-    tokenID,
-    enabled: false,
-    isCrossChainTransfer,
-  });
+  const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
+    useTransactionFees({
+      transaction,
+      isTransactionSuccess,
+      dependencies: [recipientAddress, tokenID, amount, isCrossChainTransfer],
+    });
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -241,19 +233,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       return;
     }
 
-    if (
-      isCrossChainTransfer &&
-      messageFeeData?.data?.fee &&
-      recipientApplicationChainChannelData?.data?.messageFeeTokenID
-    ) {
-      // TODO: Fix the message fee computation based on bytes of the params
-      const messageFee = BigInt(messageFeeData.data.fee) * BigInt(10 ** 5);
+    if (isCrossChainTransfer) {
       transaction.update({
         command: 'transferCrossChain',
         params: {
-          messageFee,
-          messageFeeTokenID: recipientApplicationChainChannelData.data.messageFeeTokenID,
           receivingChainID: recipientApplicationChainID,
+          // TODO: Waiting https://github.com/LiskHQ/lisk-service/issues/1669 to be solved
+          // so can be handled by useTransactionFees hook.
+          messageFee: '10000000',
+          messageFeeTokenID: '0400000000000000',
         },
       });
 
@@ -265,40 +253,21 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       form.setValue('command', 'transfer');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    isCrossChainTransfer,
-    recipientApplicationChainChannelData?.data?.messageFeeTokenID,
-    messageFeeData?.data?.fee,
-    recipientApplicationChainID,
-    transaction,
-    isTransactionSuccess,
-  ]);
-
-  useEffect(() => {
-    if (!isTransactionSuccess) {
-      return;
-    }
-
-    if (recipientAddress && tokenID) {
-      refetchInitializationFee();
-    }
-
-    if (recipientAddress && tokenID && initializationFeeData !== undefined) {
-      transaction.update({ extraCommandFee: initializationFeeData });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTransactionSuccess, tokenID, recipientAddress, initializationFeeData]);
+  }, [isCrossChainTransfer, recipientApplicationChainID, transaction, isTransactionSuccess]);
 
   const isLoading =
     form.formState.isSubmitting ||
     dryRunTransactionMutation.isLoading ||
     broadcastTransactionMutation.isLoading;
+
   const isSuccess = broadcastTransactionMutation.isSuccess;
+
   const error =
     dryRunTransactionMutation.error ||
     (dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
     broadcastTransactionMutation.error;
+
   const isError = !!error;
 
   return {
@@ -314,5 +283,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     error,
     isError,
     command,
+    isLoadingTransactionFees,
+    isErrorTransactionFees,
   };
 }

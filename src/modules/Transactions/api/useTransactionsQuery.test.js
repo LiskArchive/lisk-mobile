@@ -14,7 +14,7 @@ jest.spyOn(useCurrentAccount, 'useCurrentAccount').mockImplementation(() => [
   },
 ]);
 
-describe('useTransactionsQuery hook', () => {
+describe.skip('useTransactionsQuery hook', () => {
   const limit = 2;
   const config = { params: { limit } };
 

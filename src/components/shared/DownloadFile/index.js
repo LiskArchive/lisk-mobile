@@ -40,9 +40,10 @@ export default function DownloadFile({
         onPress={baseDownloadFile || downloadFile}
         style={[styles.row, style?.submitButton]}
         adornments={{
-          right: <DownloadSvg style={[styles.downloadFileIcon]} />,
+          right: <DownloadSvg height={18} width={18} style={[styles.downloadFileIcon]} />,
         }}
         disabled={baseIsLoading || isLoading}
+        isLoading={isLoading}
         testID="download-file-button"
       >
         Download

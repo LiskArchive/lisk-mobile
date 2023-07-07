@@ -1,7 +1,8 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useMemo } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { useController } from 'react-hook-form';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
@@ -62,7 +63,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
   });
 
   return (
-    <ScrollView style={[styles.theme.wrapper]}>
+    <KeyboardAwareScrollView style={[styles.theme.wrapper]}>
       <DataRenderer
         data={applications.data}
         isLoading={applications.isLoading}
@@ -109,6 +110,6 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
           />
         )}
       />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }

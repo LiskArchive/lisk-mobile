@@ -59,7 +59,7 @@ describe('useBootstrapCurrentApplication hook', () => {
     expect(apiClient.create).toHaveBeenCalledWith(currentApplicationDataMock.serviceURLs[0]);
     expect(setCurrentApplicationDataMock).toHaveBeenCalledWith(currentApplicationDataMock);
     expect(setCurrentApplicationStatusMock).toHaveBeenCalledWith('success');
-    expect(setCurrentApplicationErrorMock).toHaveBeenCalledWith(null);
+    expect(setCurrentApplicationErrorMock).not.toHaveBeenCalled();
   });
 
   it('should retry the bootstrap process', async () => {

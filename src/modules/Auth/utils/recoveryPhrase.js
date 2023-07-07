@@ -1,8 +1,9 @@
 import * as Lisk from '@liskhq/lisk-client';
-import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
+import { setGenericPassword, getGenericPassword, ACCESSIBLE } from 'react-native-keychain';
 import { getUniqueId } from 'react-native-device-info';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
+import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../constants/recoveryPhrase.constants';
 
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 
@@ -26,7 +27,7 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  *  {String} code - specified the possible codes in the description above
  *  {String} message - A descriptive message for what went wrong
  */
-export const validateRecoveryPhrase = (recoveryPhrase) => {
+export const validateRecoveryPhrase = (recoveryPhrase = '') => {
   if (recoveryPhrase.trim().length === 0) {
     return [{ code: 'empty_value', message: 'Invalid secret recovery phrase.' }];
   }
@@ -40,14 +41,13 @@ export const validateRecoveryPhrase = (recoveryPhrase) => {
 };
 
 /**
- * @returns {string} a valid mnemoic recoveryPhrase
- * Generate a random mnemonic (uses crypto.randomBytes under the hood),
- * defaults to 128-bits of entropy var mnemonic = bip39.generateMnemonic()
+ * Generate a random mnemonic recovery phrase. Defaults to 128-bits of entropy.
+ * @param {number} strength - Strength parameter to generate the recovery phrase.
+ * (optional). Default value is 128 (which will generate a 12 words recovery phrase).
+ * @returns {string} A valid mnemoic recovery phrase.
  */
-export const generateRecoveryPhrase = () => {
-  const { Mnemonic } = Lisk.passphrase;
-  return Mnemonic.generateMnemonic();
-};
+export const generateRecoveryPhrase = (strength = RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words']) =>
+  Lisk.passphrase.Mnemonic.generateMnemonic(strength);
 
 export const getRecoveryPhraseFromKeyChain = () =>
   getGenericPassword({ service: 'io.lisk.mobile' });
@@ -75,6 +75,7 @@ export const removeAccountPasswordFromKeychain = async (address) => {
   await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
+    accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   });
 };
 
@@ -121,6 +122,7 @@ export const storeAccountPasswordInKeyChain = async (address, password) => {
   await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
+    accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   });
 };
 
@@ -229,3 +231,26 @@ export const chooseRandomWords = (qty, words) => {
 
   return missing;
 };
+
+/**
+ * Returns a secured recovery phrase made up of fixed length word "******".
+ *
+ * @param {string} phrase - The recovery phrase consisting of N random words.
+ * @returns {string} The secured recovery phrase.
+ */
+export function toSecureRecoveryPhraseString(phrase) {
+  if (!phrase) {
+    return '';
+  }
+
+  // Split the phrase into words
+  const words = phrase.split(' ');
+
+  // Replace each word with '******'
+  const securedWords = words.map(() => '******');
+
+  // Join the words back together into a single string with spaces
+  const securedPhrase = securedWords.join(' ');
+
+  return securedPhrase;
+}

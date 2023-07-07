@@ -17,9 +17,6 @@ export default () => ({
       justifyContent: 'space-between',
       paddingBottom: 20,
     },
-    primaryButton: {
-      marginBottom: 10,
-    },
     header: {
       textAlign: 'center',
       fontSize: fonts.size.h3,
@@ -40,6 +37,7 @@ export default () => ({
     },
     rowTitle: {
       marginTop: 5,
+      fontWeight: '500',
     },
     iconWrapper: {
       height: 36,

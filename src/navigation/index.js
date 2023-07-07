@@ -1,30 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import RNShake from 'react-native-shake';
 
 import Register from 'modules/Auth/components/Register/Register';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
-import About from 'components/screens/about';
+import AboutScreen from 'components/screens/AboutScreen/AboutScreen';
 import CurrencySelection from 'components/screens/currencySelection';
 import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
+import NotFound from 'components/navigation/NotFound';
 
 import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
-import SecretRecoveryPhrase from 'modules/Auth/components/SecretRecoveryPhrase';
+import RecoveryPhraseScreen from 'modules/Auth/components/RecoveryPhraseScreen/RecoveryPhraseScreen';
 import PasswordSetupForm from 'modules/Auth/components/PasswordSetupForm';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen';
 import DecryptRecoveryPhraseScreen from 'modules/Auth/components/DecryptRecoveryPhraseScreen/DecryptRecoveryPhraseScreen';
-import AddApplication from 'modules/BlockchainApplication/components/AddApplication';
-import AddApplicationSuccessScreen from 'modules/BlockchainApplication/components/AddApplicationSuccessScreen/AddApplicationSuccessScreen';
-import AddApplicationErrorScreen from 'modules/BlockchainApplication/components/AddApplicationErrorScreen/AddApplicationErrorScreen';
+import AddApplicationScreen from 'modules/BlockchainApplication/components/AddApplicationScreen/AddApplicationScreen';
 import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
 import SendToken from 'modules/SendToken/SendToken';
 import RequestToken from 'modules/RequestToken';
@@ -32,6 +32,10 @@ import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
+
+import { settingsUpdated } from 'modules/Settings/store/actions';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+
 import AppNavigator from './components/AppNavigator';
 
 import navigationOptions from './options';
@@ -41,12 +45,30 @@ import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
 const StackNavigator = createStackNavigator();
 
 export default function Navigator({ children }) {
-  const { theme } = useSelector((state) => state.settings);
+  const { theme, enableShakePhone } = useSelector((state) => state.settings);
+  const discrete = useSelector((state) => state.settings.discrete);
+  const dispatch = useDispatch();
+  const { accounts } = useAccounts();
 
   const themeColors = {
     dark: theme === 'light',
     colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
   };
+
+  useEffect(() => {
+    if (enableShakePhone) {
+      RNShake.addListener(() => {
+        if (accounts.length) {
+          dispatch(
+            settingsUpdated({
+              discrete: !discrete,
+            })
+          );
+        }
+      });
+    }
+    return () => RNShake.removeAllListeners();
+  }, [discrete, enableShakePhone]);
 
   return (
     <SafeAreaProvider>
@@ -55,6 +77,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="Register"
             component={Register}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="NotFound"
+            component={NotFound}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
@@ -73,8 +100,8 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="SecretRecoveryPhrase"
-            component={SecretRecoveryPhrase}
+            name="RecoveryPhrase"
+            component={RecoveryPhraseScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
@@ -104,7 +131,7 @@ export default function Navigator({ children }) {
           />
           <StackNavigator.Screen
             name="AddApplication"
-            component={AddApplication}
+            component={AddApplicationScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
@@ -113,16 +140,10 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
-            name="AddApplicationSuccessScreen"
-            component={AddApplicationSuccessScreen}
-            options={navigationOptions.SignIn}
+            name="About"
+            component={AboutScreen}
+            options={navigationOptions.About}
           />
-          <StackNavigator.Screen
-            name="AddApplicationErrorScreen"
-            component={AddApplicationErrorScreen}
-            options={navigationOptions.SignIn}
-          />
-          <StackNavigator.Screen name="About" component={About} options={navigationOptions.About} />
           <StackNavigator.Screen
             name="CurrencySelection"
             component={CurrencySelection}

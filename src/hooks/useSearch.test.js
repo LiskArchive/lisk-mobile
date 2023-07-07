@@ -2,7 +2,9 @@ import { renderHook, act } from '@testing-library/react-hooks';
 
 import { useSearch } from './useSearch';
 
-jest.useFakeTimers('legacy');
+jest.useFakeTimers({
+  legacyFakeTimers: true,
+});
 
 describe('useSearch hook', () => {
   const defaultProps = {

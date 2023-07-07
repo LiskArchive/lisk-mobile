@@ -49,11 +49,12 @@ class Input extends React.Component {
       theme,
       value,
       onChange,
+      onSelectionChange,
       error,
       multiline,
       autoFocus,
       autoCorrect,
-      keyboardType,
+      keyboardType = 'default',
       secureTextEntry,
       placeholder,
       testID,
@@ -62,6 +63,9 @@ class Input extends React.Component {
       placeholderTextColor,
       disabled,
       adornments,
+      textContentType,
+      passwordRules,
+      blurOnSubmit = true,
     } = this.props;
 
     let { keyboardAppearance } = this.props;
@@ -105,7 +109,7 @@ class Input extends React.Component {
 
           <TextInput
             testID={testID}
-            blurOnSubmit
+            blurOnSubmit={blurOnSubmit}
             editable={!disabled}
             selectTextOnFocus={!disabled}
             style={inputStyle}
@@ -118,6 +122,7 @@ class Input extends React.Component {
             keyboardAppearance={keyboardAppearance}
             autoFocus={autoFocus}
             onChangeText={onChange}
+            onSelectionChange={onSelectionChange}
             autoCorrect={autoCorrect}
             onFocus={this.onFocus}
             allowFontScaling={false}
@@ -126,6 +131,8 @@ class Input extends React.Component {
             placeholder={placeholder}
             placeholderTextColor={placeholderColor}
             accessibilityLabel={accessibilityLabel}
+            textContentType={textContentType}
+            passwordRules={passwordRules}
           />
 
           {adornments?.right && <View style={styles.rightAdornment}>{adornments?.right}</View>}
@@ -135,7 +142,7 @@ class Input extends React.Component {
               onPress={this.toggleSecureTextEntry}
               style={styles.secureTextEntryIcon}
             >
-              {this.state.secureTextEntry ? <EyeSvg /> : <EyeClosedSvg />}
+              {this.state.secureTextEntry ? <EyeSvg variant="outline" /> : <EyeClosedSvg />}
             </TouchableOpacity>
           )}
         </View>
@@ -151,7 +158,7 @@ class Input extends React.Component {
 }
 
 Input.defaultProps = {
-  reference: () => {},
+  reference: () => null,
   innerStyles: {},
   keyboardType: 'default',
   placeholder: '',

@@ -31,7 +31,7 @@ export default function Bookmarks() {
   return (
     <NavigationSafeAreaView>
       <HeaderSearchBar
-        title={'Bookmarks'}
+        title={i18next.t('bookmarks.title')}
         noIcon
         onChange={handleSearchTermChange}
         value={search.term}
@@ -52,7 +52,7 @@ export default function Bookmarks() {
             })
           }
         >
-          <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={30} />
+          <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={20} />
         </TouchableOpacity>
       </View>
     </NavigationSafeAreaView>

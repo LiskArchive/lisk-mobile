@@ -99,6 +99,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <SendTokenPriorityField
         value={priorityField.value}
         onChange={(value) => form.handleChange('priority', value, priorityField.onChange)}
+        dynamicFeeEstimates={transaction?.data?.dynamicFeeEstimates}
       />
 
       {tokenIDField.value && (
@@ -106,6 +107,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
           tokenID={tokenIDField.value}
           recipientApplication={recipientApplication}
           transaction={transaction}
+          isLoadingTransactionFees={form.isLoadingTransactionFees}
+          isErrorTransactionFees={form.isErrorTransactionFees}
         />
       )}
       <View style={[styles.footer]}>
