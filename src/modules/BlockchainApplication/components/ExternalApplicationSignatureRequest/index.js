@@ -7,6 +7,7 @@ import DataRenderer from 'components/shared/DataRenderer';
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
+import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
 import DropDownHolder from 'utilities/alert';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
@@ -15,7 +16,6 @@ import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
-import { usePasswordForm } from '../../../Auth/hooks/usePasswordForm';
 
 export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
@@ -43,9 +43,11 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
   const sessionValidation = validate();
 
-  console.log('sessionValidation', sessionValidation);
-
   const handleRespond = async (payload) => {
+    if (!sessionValidation.isValid) {
+      return;
+    }
+
     setStatus({ ...session, isLoading: true });
 
     const response = await respond({ payload });
@@ -58,6 +60,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
   };
 
   const handleSubmit = passwordForm.handleSubmit(async (values) => {
+    if (!sessionValidation.isValid) {
+      return;
+    }
+
     let privateKey;
 
     try {

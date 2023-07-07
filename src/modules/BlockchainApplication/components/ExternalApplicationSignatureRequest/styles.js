@@ -7,6 +7,7 @@ export default {
     },
     imageContainer: {
       alignItems: 'center',
+      marginBottom: 8,
     },
     applicationLogoImage: {
       borderRadius: 50,
@@ -14,7 +15,6 @@ export default {
       height: 40,
       borderWidth: 1,
       borderColor: colors.light.platinumGray,
-      marginBottom: 8,
     },
     applicationTitle: {
       fontSize: fonts.size.base,
@@ -68,10 +68,9 @@ export default {
       marginTop: boxes.boxPadding,
       marginBottom: boxes.boxPadding,
     },
-    buttonContainer: {
+    footer: {
       flexDirection: 'row',
       paddingTop: boxes.boxPadding,
-      paddingBottom: boxes.boxPadding,
     },
     button: {
       flex: 1,

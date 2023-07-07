@@ -9,6 +9,8 @@ import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';
+import WarningSvg from 'assets/svgs/WarningSvg';
+import { colors } from 'constants/styleGuide';
 
 import getExternalApplicationSignatureRequestStyles from './styles';
 
@@ -18,8 +20,47 @@ export default function ExternalAppSignatureRequestNotification({
   senderAccountAddress,
   onCancel,
   onSubmit,
+  sessionValidation,
 }) {
   const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
+
+  if (sessionValidation.isLoading) {
+    return (
+      <View>
+        <P>Loading session validation...</P>
+      </View>
+    );
+  }
+
+  if (sessionValidation.isError) {
+    return (
+      <View>
+        <P>Error validating external connection!</P>
+      </View>
+    );
+  }
+
+  if (!sessionValidation.isValid) {
+    return (
+      <View>
+        <View style={styles.imageContainer}>
+          <WarningSvg color={colors.light.furyRed} height={40} width={40} />
+        </View>
+
+        <P style={[styles.description, styles.theme.text]}>
+          An external connection named &quot;{session.peer.metadata.name}&quot;, with chain ID:{' '}
+          {recipientApplicationChainID} tried to connect, but was blocked since has a non valid
+          chain ID.
+        </P>
+
+        <View style={[styles.footer]}>
+          <Button style={[styles.button]} onPress={onCancel}>
+            Close
+          </Button>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -84,7 +125,7 @@ export default function ExternalAppSignatureRequestNotification({
 
       <View style={styles.horizontalLine} />
 
-      <View style={[styles.buttonContainer]}>
+      <View style={[styles.footer]}>
         <Button style={[styles.button]} onPress={onCancel}>
           {i18next.t('commons.buttons.cancel')}
         </Button>

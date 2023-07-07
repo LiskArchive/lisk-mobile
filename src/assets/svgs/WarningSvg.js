@@ -16,7 +16,7 @@ export default function WarningSvg({
   let children;
 
   const color =
-    baseColor || theme === themes.light ? colors.light.zodiacBlue : colors.dark.platinumGray;
+    baseColor || (theme === themes.light ? colors.light.zodiacBlue : colors.dark.platinumGray);
 
   switch (variant) {
     case 'fill':

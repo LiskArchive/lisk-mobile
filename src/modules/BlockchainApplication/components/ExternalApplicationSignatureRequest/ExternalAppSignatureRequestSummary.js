@@ -38,7 +38,7 @@ export default function ExternalAppSignatureRequestSummary({
         }}
       />
 
-      <View style={[styles.buttonContainer]}>
+      <View style={[styles.footer]}>
         <Button style={[styles.button]} onPress={onCancel}>
           {i18next.t('application.externalApplicationSignatureRequest.summary.cancelButtonText')}
         </Button>

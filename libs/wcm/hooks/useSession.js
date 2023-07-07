@@ -112,7 +112,7 @@ const useSession = () => {
       return {
         isValid: !!appExists,
         isLoading: false,
-        error: null,
+        isError: false,
       };
     }
 
@@ -120,14 +120,14 @@ const useSession = () => {
       return {
         isValid: undefined,
         isLoading: false,
-        error: errorOnApplicationsData,
+        isError: true,
       };
     }
 
     return {
       isValid: undefined,
       isLoading: isApplicationsDataLoading,
-      error: null,
+      isError: null,
     };
   }, [
     isApplicationsDataLoading,
