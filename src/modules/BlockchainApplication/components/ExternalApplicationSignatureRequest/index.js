@@ -16,16 +16,15 @@ import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
+import ExternalAppSignatureRequestValidator from './ExternalAppSignatureRequestValidator';
 
 export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
+
   const [passwordForm, passwordFormController] = usePasswordForm();
-
   const [currentAccount] = useCurrentAccount();
-
   const { respond, validate } = useWalletConnectSession();
-
   const { events } = useContext(WalletConnectContext);
 
   const event = useMemo(() => events.find((e) => e.name === EVENTS.SESSION_REQUEST), []);
@@ -98,21 +97,23 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
   });
 
   const renderStep = (_transaction) => {
+    let children;
+
     switch (activeStep) {
       case 'notification':
-        return (
+        children = (
           <ExternalAppSignatureRequestNotification
             session={session}
             recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
             senderAccountAddress={senderAccountAddress}
             onCancel={onCancel}
             onSubmit={() => setActiveStep('summary')}
-            sessionValidation={sessionValidation}
           />
         );
+        break;
 
       case 'summary':
-        return (
+        children = (
           <ExternalAppSignatureRequestSummary
             session={session}
             transaction={_transaction.transaction}
@@ -121,9 +122,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             onSubmit={() => setActiveStep('sign')}
           />
         );
+        break;
 
       case 'sign':
-        return (
+        children = (
           <ExternalAppSignatureRequestSignTransaction
             session={session}
             transaction={_transaction}
@@ -137,10 +139,22 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             error={status.error}
           />
         );
+        break;
 
       default:
-        return null;
+        children = null;
     }
+
+    return (
+      <ExternalAppSignatureRequestValidator
+        session={session}
+        recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
+        onSubmit={onCancel}
+        sessionValidation={sessionValidation}
+      >
+        {children}
+      </ExternalAppSignatureRequestValidator>
+    );
   };
 
   return (
