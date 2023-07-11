@@ -1,15 +1,10 @@
 /* eslint-disable max-statements */
-/* eslint-disable no-shadow */
-/* eslint-disable complexity */
-/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Platform } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 
-import { H4 } from 'components/shared/toolBox/typography';
-import FingerprintOverlay from 'components/shared/fingerprintOverlay';
 import { themes, colors } from 'constants/styleGuide';
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
@@ -37,8 +32,6 @@ export default function SecurityScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const [error, setError] = useState(null);
-  const [show, setShow] = useState(false);
   const [biometricsEnabled, setBiometricsEnabled] = useState(false);
 
   const settings = useSelector((state) => state.settings);
@@ -48,17 +41,6 @@ export default function SecurityScreen() {
   const modal = useModal();
 
   const { styles, theme } = useTheme({ styles: getStyles() });
-
-  const setErrorMessage = (error) => {
-    setError(error.message);
-  };
-
-  const showDialog = () => {
-    setShow(true);
-    setError(null);
-  };
-
-  const hideDialog = () => setShow(false);
 
   const backupRecoveryPhrase = () =>
     navigation.navigate('BackupRecoveryPhrase', {
@@ -122,21 +104,14 @@ export default function SecurityScreen() {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <HeaderBackButton title={i18next.t('Settings')} onPress={navigation.goBack} />
+      <HeaderBackButton title={i18next.t('settings.menu.security')} onPress={navigation.goBack} />
 
       <ScrollView style={styles.innerContainer} testID={`${theme}-mode`}>
         <View style={styles.group}>
-          <H4 style={[styles.subtitle, styles.theme.subtitle]}>
-            {i18next.t('settings.menu.security')}
-          </H4>
           {settings.sensorType && (
             <View style={[styles.item, styles.theme.item]}>
               <ItemTitle
                 navigation={navigation}
-                showDialog={showDialog}
-                hideDialog={hideDialog}
-                setError={setErrorMessage}
-                authenticate
                 targetStateLabel={sensorStatus}
                 icon={settings.sensorType === app.faceId ? 'face-id-small' : 'touch-id-small'}
                 iconSize={settings.sensorType === app.faceId ? 18 : 20}
@@ -147,9 +122,6 @@ export default function SecurityScreen() {
 
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
-              showDialog={showDialog}
-              hideDialog={hideDialog}
-              setError={setErrorMessage}
               icon="backup"
               title={i18next.t('settings.menu.backupRecoveryPhrase')}
               iconSize={22}
@@ -188,9 +160,6 @@ export default function SecurityScreen() {
           </View>
         </View>
       </ScrollView>
-      {Platform.OS === 'android' && Platform.Version < 23 ? (
-        <FingerprintOverlay onModalClosed={hideDialog} error={error} show={show} />
-      ) : null}
     </SafeAreaView>
   );
 }

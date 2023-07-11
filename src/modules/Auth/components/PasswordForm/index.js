@@ -29,7 +29,7 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   const tryFetchAccontPasswordFromBiometrics = async () => {
     if (sensorType) {
       const accountPassword = await fetchAccountPassword();
-      onSubmit(accountPassword);
+      accountPassword && onSubmit(accountPassword);
     }
   };
 

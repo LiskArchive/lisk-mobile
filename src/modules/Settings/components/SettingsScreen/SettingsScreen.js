@@ -1,7 +1,4 @@
 /* eslint-disable max-statements */
-/* eslint-disable no-shadow */
-/* eslint-disable complexity */
-/* eslint-disable max-len */
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +16,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
+import KeySvg from 'assets/svgs/KeySvg';
 import ItemTitle from '../ItemTitle';
 
 import getStyles from './SettingsScreen.styles';
@@ -63,7 +61,7 @@ export default function SettingsScreen() {
           </H4>
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
-              icon="backup"
+              icon={<KeySvg />}
               title={i18next.t('settings.menu.security')}
               iconSize={22}
               onPress={navigateToSecurity}
