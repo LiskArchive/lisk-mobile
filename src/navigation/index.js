@@ -32,6 +32,7 @@ import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
+import SecurityScreen from 'modules/Settings/components/SecurityScreen/SecurityScreen';
 
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -198,6 +199,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="DeleteAccount"
             component={DeleteAccountScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="SecurityScreen"
+            component={SecurityScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>

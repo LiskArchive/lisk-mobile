@@ -71,10 +71,10 @@ export default function AuthMethod({ route }) {
   };
 
   useEffect(() => {
-    if (settings.showedIntro) {
+    if (!accounts?.length && settings.showedIntro) {
       checkVersion2Migration();
     }
-  }, [settings.showedIntro]);
+  }, [settings.showedIntro, accounts]);
 
   useEffect(() => {
     timeout.current = setTimeout(() => setScreenReady(true), 500);
