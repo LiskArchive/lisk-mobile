@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useMemo } from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
@@ -34,30 +35,31 @@ const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }
     return null;
   }
 
+  const chainID = event.meta.params.requiredNamespaces.lisk.chains[0].replace('lisk:', '');
+  const iconUri = event.meta.params.proposer.metadata.icons[0];
+  const name = event.meta.params.proposer.metadata.name;
+  const url = event.meta.params.proposer.metadata.url;
+  const pairingTopic = event.meta.params.pairingTopic;
+
   return (
     <>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: event.meta.params.proposer.metadata.icons[0] }}
-            style={styles.image}
-          />
+          <Image source={{ uri: iconUri }} style={styles.image} />
         </View>
 
-        <H3 style={[styles.title, styles.theme.title]}>
-          {event.meta.params.proposer.metadata.name}
-        </H3>
+        <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
 
         <View style={styles.urlContainer}>
           <UrlSvg />
-          <P style={styles.url}>{event.meta.params.proposer.metadata.url}</P>
+          <P style={styles.url}>{url}</P>
         </View>
 
         <View style={styles.urlContainer}>
           <P style={styles.label}>
             {i18next.t('application.explore.externalApplicationList.chainIDLabel')}:
           </P>
-          <P style={[styles.theme.description]}>{event.meta.id}</P>
+          <P style={[styles.theme.description]}>{chainID}</P>
         </View>
       </View>
 
@@ -68,7 +70,7 @@ const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }
           {i18next.t('application.explore.externalApplicationList.connectionID')}:
         </P>
 
-        <P style={[styles.theme.description]}>{event.meta.params.pairingTopic}</P>
+        <P style={[styles.theme.description]}>{pairingTopic}</P>
       </View>
 
       <View style={styles.horizontalLine} />
@@ -91,7 +93,7 @@ const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }
 
       <View style={styles.horizontalLine} />
 
-      <View style={[styles.container, styles.buttonContainer]}>
+      <View style={[styles.footer, styles.buttonContainer]}>
         <Button style={[styles.button]} onPress={rejectHandler}>
           Reject
         </Button>

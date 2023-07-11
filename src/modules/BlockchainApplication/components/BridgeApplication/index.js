@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable max-statements */
+import React, { useEffect, useState, useContext } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 
@@ -8,35 +9,73 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
 import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
 import { STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
+import { validateConnectionNameSpace } from '../../../../../libs/wcm/utils/eventValidators';
+import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
 
 import getStyles from './styles';
 
 export default function BridgeApplication({ nextStep }) {
+  const [eventTopic, setEventTopic] = useState('');
+
   const [status, setStatus] = useState({ isLoading: false });
 
   const [inputUri, setInputUri] = useState('');
 
+  const { events } = useContext(ConnectionContext);
   const { setUri } = useWalletConnectPairings();
 
   const { styles } = useTheme({ styles: getStyles });
 
+  const proposalEvent = events.find((event) => event?.meta.params.pairingTopic === eventTopic);
+
+  const handleInputChange = (value) => {
+    setStatus({ isLoading: false });
+    setEventTopic('');
+
+    setInputUri(value);
+  };
+
   const handleSubmit = async () => {
-    setStatus({ ...status, isLoading: true });
+    setStatus({ isLoading: true });
 
     const response = await setUri(inputUri);
 
     if (response.status === STATUS.FAILURE) {
-      setStatus({ ...response, isError: true });
-    } else if (response.status === STATUS.SUCCESS) {
-      setStatus({ ...response, isSuccess: true });
+      return setStatus({
+        ...response,
+        isLoading: false,
+        isError: true,
+        errorMessage: 'Error connecting application. Please try again.',
+      });
+    }
+
+    if (response.status === STATUS.SUCCESS) {
+      setEventTopic(response.data.topic);
     }
   };
+
+  useEffect(() => {
+    if (proposalEvent && status.isLoading) {
+      const isEventNameSpaceValid = validateConnectionNameSpace(proposalEvent);
+
+      if (isEventNameSpaceValid) {
+        setStatus({ isLoading: false, isSuccess: true });
+      } else {
+        setStatus({
+          isLoading: false,
+          isError: true,
+          errorMessage:
+            'You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.',
+        });
+      }
+    }
+  }, [status.isLoading, proposalEvent]);
 
   useEffect(() => {
     if (status.isSuccess) {
       nextStep();
     }
-  }, [status, nextStep]);
+  }, [status.isSuccess, nextStep]);
 
   return (
     <View style={styles.container}>
@@ -53,20 +92,18 @@ export default function BridgeApplication({ nextStep }) {
           placeholder={i18next.t('application.explore.externalApplicationList.enterConnectionUri')}
           autoCorrect={false}
           autoFocus
-          onChange={setInputUri}
+          onChange={handleInputChange}
           value={inputUri}
           returnKeyType="done"
         />
 
         {status.isError && (
-          <P style={[styles.errorMessage, styles.theme.errorMessage]}>
-            Error connecting application. Please try again.
-          </P>
+          <P style={[styles.errorMessage, styles.theme.errorMessage]}>{status.errorMessage}</P>
         )}
       </View>
 
       <PrimaryButton
-        disabled={!inputUri || status.isLoading}
+        disabled={!inputUri || status.isLoading || status.isError}
         onPress={handleSubmit}
         isLoading={status.isLoading}
       >

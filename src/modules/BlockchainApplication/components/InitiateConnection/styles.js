@@ -67,6 +67,9 @@ export default {
       color: colors.light.smoothGray,
       fontSize: fonts.size.input,
     },
+    footer: {
+      paddingTop: boxes.boxPadding,
+    },
   },
   [themes.light]: {
     title: {

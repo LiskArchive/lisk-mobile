@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
+
 import { H3, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import Checkbox from 'components/shared/Checkbox';
@@ -10,12 +11,14 @@ import { stringShortener } from 'utilities/helpers';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import Avatar from 'components/shared/avatar';
+
 import getConnectionStyles from './styles';
 
-const InitiateConnection = ({ event, nextStep, onFinish }) => {
-  const { styles } = useTheme({ styles: getConnectionStyles });
-  const { accounts } = useAccounts();
+export default function InitiateConnection({ event, nextStep, onFinish }) {
   const [selectedAccounts, setSelectedAccounts] = useState([]);
+  const { accounts } = useAccounts();
+
+  const { styles } = useTheme({ styles: getConnectionStyles });
 
   const onSelectAccount = (account) => {
     const isExist = selectedAccounts.includes(account.metadata.pubkey);
@@ -43,43 +46,53 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
     return null;
   }
 
+  const chainID = event.meta.params.requiredNamespaces.lisk.chains[0].replace('lisk:', '');
+  const iconUri = event.meta.params.proposer.metadata.icons[0];
+  const name = event.meta.params.proposer.metadata.name;
+  const url = event.meta.params.proposer.metadata.url;
+
   return (
-    <View style={styles.content}>
+    <View>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: event.meta.params.proposer.metadata.icons[0] }}
-            style={styles.image}
-          />
+          <Image source={{ uri: iconUri }} style={styles.image} />
         </View>
-        <H3 style={[styles.title, styles.theme.title]}>
-          {event.meta.params.proposer.metadata.name}
-        </H3>
+
+        <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
+
         <View style={styles.urlContainer}>
           <UrlSvg />
-          <P style={styles.url}>{event.meta.params.proposer.metadata.url}</P>
+          <P style={styles.url}>{url}</P>
         </View>
+
         <View style={styles.urlContainer}>
           <P style={styles.label}>
             {i18next.t('application.explore.externalApplicationList.chainIDLabel')}:
           </P>
-          <P style={[styles.theme.description]}>{event.meta.id}</P>
+
+          <P style={[styles.theme.description]}>{chainID}</P>
         </View>
       </View>
+
       <View style={styles.horizontalLine} />
+
       <View style={styles.container}>
         <P style={[styles.theme.description]}>
           {i18next.t('application.explore.externalApplicationList.connectionDescription')}
         </P>
       </View>
+
       <View style={styles.horizontalLine} />
+
       <View style={styles.container}>
         <P style={[styles.label, styles.accountsLabel]}>
           {i18next.t('application.explore.externalApplicationList.accountsTitle')}:
         </P>
+
         <Checkbox onPress={onSelectAll} selected={selectAll}>
           <P style={[styles.theme.description]}>Select All</P>
         </Checkbox>
+
         {accounts.map((account) => (
           <Checkbox
             key={account.metadata.address}
@@ -88,6 +101,7 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
           >
             <View style={styles.accountItem}>
               <Avatar address={account.metadata.address} size={35} />
+
               <View style={styles.accountContent}>
                 {account.metadata.name ? (
                   <P style={[styles.theme.description]}>{account.metadata.name}</P>
@@ -98,8 +112,10 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
           </Checkbox>
         ))}
       </View>
+
       <View style={styles.horizontalLine} />
-      <View style={styles.container}>
+
+      <View style={styles.footer}>
         <View style={styles.buttonContainer}>
           <Button style={[styles.button]} onPress={onFinish}>
             {i18next.t('commons.buttons.cancel')}
@@ -116,6 +132,4 @@ const InitiateConnection = ({ event, nextStep, onFinish }) => {
       </View>
     </View>
   );
-};
-
-export default InitiateConnection;
+}

@@ -86,7 +86,7 @@ export default function ApplicationsExplorer() {
   const newConnectionModal = useModal(
     (modal) => (
       <Stepper>
-        <BridgeApplication />
+        <BridgeApplication event={connectionEvent} />
         <InitiateConnection event={connectionEvent} onFinish={modal.close} />
         <ApproveConnection event={connectionEvent} onFinish={modal.close} />
       </Stepper>

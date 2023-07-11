@@ -337,22 +337,22 @@
       },
       "externalApplicationList": {
         "title": "Wallet-Verbindungen",
-        "loadingText": "Externe Verbindungen laden...",
+        "loadingText": "Externe Verbindungen werden geladen...",
+        "emptyText": "Sie haben sich noch mit keiner Anwendung verknüpft.",
         "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
-        "emptyText": "Sie haben noch keine Kopplung mit einer Anwendung durchgeführt.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
-        "chainIDLabel": "",
-        "connectionID": "",
-        "connectionDescription": "",
-        "accountsTitle": "",
-        "sitePermissions": "",
-        "methods": "",
-        "bridgeApplication": "",
-        "bridgeApplicationDescription": "",
-        "addApplication": "",
-        "enterConnectionUri": ""
-      }
+        "chainIDLabel": "Chain-ID",
+        "connectionID": "Verbindungs-ID",
+        "connectionDescription": "Diese Website versucht, sich mit Ihrer Lisk-Wallet zu verbinden",
+        "accountsTitle": "Zu verwendende Konto/Konten auf dieser Seite",
+        "sitePermissions": "Seitenberechtigungen",
+        "methods": "Methoden",
+        "bridgeApplication": "Wallet verbinden",
+        "bridgeApplicationDescription": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
+        "addApplication": "Verbinden",
+        "enterConnectionUri": "Verbindungs-URI eingeben"
+        }
     },
     "externalApplicationSignatureRequest": {
       "errorOnSignTransactionText": "Ihre Transaktion kann nicht signiert werden. Bitte versuche es erneut.",

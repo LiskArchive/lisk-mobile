@@ -16,7 +16,6 @@ import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
-import ExternalAppSignatureRequestValidator from './ExternalAppSignatureRequestValidator';
 
 export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
@@ -24,10 +23,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
   const [passwordForm, passwordFormController] = usePasswordForm();
   const [currentAccount] = useCurrentAccount();
-  const { respond, validate } = useWalletConnectSession();
+  const { respond } = useWalletConnectSession();
   const { events } = useContext(WalletConnectContext);
 
-  const event = useMemo(() => events.find((e) => e.name === EVENTS.SESSION_REQUEST), []);
+  const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
 
   const createTransactionOptions = useMemo(
     () => ({
@@ -40,13 +39,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
   const senderAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
 
-  const sessionValidation = validate();
-
   const handleRespond = async (payload) => {
-    if (!sessionValidation.isValid) {
-      return;
-    }
-
     setStatus({ ...session, isLoading: true });
 
     const response = await respond({ payload });
@@ -59,10 +52,6 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
   };
 
   const handleSubmit = passwordForm.handleSubmit(async (values) => {
-    if (!sessionValidation.isValid) {
-      return;
-    }
-
     let privateKey;
 
     try {
@@ -97,11 +86,9 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
   });
 
   const renderStep = (_transaction) => {
-    let children;
-
     switch (activeStep) {
       case 'notification':
-        children = (
+        return (
           <ExternalAppSignatureRequestNotification
             session={session}
             recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
@@ -110,10 +97,9 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             onSubmit={() => setActiveStep('summary')}
           />
         );
-        break;
 
       case 'summary':
-        children = (
+        return (
           <ExternalAppSignatureRequestSummary
             session={session}
             transaction={_transaction.transaction}
@@ -122,10 +108,9 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             onSubmit={() => setActiveStep('sign')}
           />
         );
-        break;
 
       case 'sign':
-        children = (
+        return (
           <ExternalAppSignatureRequestSignTransaction
             session={session}
             transaction={_transaction}
@@ -139,22 +124,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             error={status.error}
           />
         );
-        break;
 
       default:
-        children = null;
+        return;
     }
-
-    return (
-      <ExternalAppSignatureRequestValidator
-        session={session}
-        recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
-        onSubmit={onCancel}
-        sessionValidation={sessionValidation}
-      >
-        {children}
-      </ExternalAppSignatureRequestValidator>
-    );
   };
 
   return (

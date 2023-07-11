@@ -14,28 +14,12 @@ export default function ExternalAppSignatureRequestValidator({
   session,
   recipientApplicationChainID,
   onSubmit,
-  sessionValidation,
+  isEventValidSchema,
   children,
 }) {
   const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
 
-  if (sessionValidation.isLoading) {
-    return (
-      <View>
-        <P>Loading session validation...</P>
-      </View>
-    );
-  }
-
-  if (sessionValidation.isError) {
-    return (
-      <View>
-        <P>Error validating external connection!</P>
-      </View>
-    );
-  }
-
-  if (!sessionValidation.isValid) {
+  if (!isEventValidSchema) {
     return (
       <View>
         <View style={styles.imageContainer}>

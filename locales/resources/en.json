@@ -347,9 +347,9 @@
         "accountsTitle": "Account(s) to use on this site",
         "sitePermissions": "Site Permissions",
         "methods": "Methods",
-        "bridgeApplication": "Bridge Application",
-        "bridgeApplicationDescription": "Paste WalletConnect URI to connection the bridge server",
-        "addApplication": "Add Application",
+        "bridgeApplication": "Connect wallet",
+        "bridgeApplicationDescription": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
+        "addApplication": "Connect",
         "enterConnectionUri": "Enter connection URI"
       }
     },

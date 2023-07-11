@@ -53,6 +53,9 @@ export default {
       flex: 1,
       marginHorizontal: 4,
     },
+    footer: {
+      paddingTop: boxes.boxPadding,
+    },
   },
   [themes.light]: {
     title: {
