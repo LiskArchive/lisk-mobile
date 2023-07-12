@@ -102,7 +102,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
         return (
           <ExternalAppSignatureRequestNotification
             session={session}
-            recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
+            senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
             senderAccountAddress={senderAccountAddress}
             onCancel={onCancel}
             onSubmit={() => setActiveStep('summary')}
@@ -115,6 +115,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             session={session}
             transaction={_transaction.transaction}
             recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
+            senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
             onCancel={() => setActiveStep('notification')}
             onSubmit={() => setActiveStep('sign')}
           />

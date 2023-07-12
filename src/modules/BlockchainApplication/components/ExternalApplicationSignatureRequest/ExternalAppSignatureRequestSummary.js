@@ -13,6 +13,7 @@ export default function ExternalAppSignatureRequestSummary({
   session,
   transaction,
   recipientApplicationChainID,
+  senderApplicationChainID,
   onSubmit,
   onCancel,
 }) {
@@ -34,6 +35,7 @@ export default function ExternalAppSignatureRequestSummary({
         {...summary}
         senderApplication={{
           chainName: session.peer.metadata.name,
+          chainID: senderApplicationChainID,
           logo: { png: session.peer.metadata.icons[0] },
         }}
       />

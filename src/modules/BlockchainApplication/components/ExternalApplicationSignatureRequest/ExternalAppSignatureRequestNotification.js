@@ -14,7 +14,7 @@ import getExternalApplicationSignatureRequestStyles from './styles';
 
 export default function ExternalAppSignatureRequestNotification({
   session,
-  recipientApplicationChainID,
+  senderApplicationChainID,
   senderAccountAddress,
   onCancel,
   onSubmit,
@@ -44,9 +44,7 @@ export default function ExternalAppSignatureRequestNotification({
             :
           </P>
 
-          <P style={[styles.description, styles.theme.text]}>
-            {stringShortener(recipientApplicationChainID, 20, 4)}
-          </P>
+          <P style={[styles.description, styles.theme.text]}>{senderApplicationChainID}</P>
         </View>
       </View>
 
