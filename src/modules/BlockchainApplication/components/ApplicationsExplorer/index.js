@@ -28,7 +28,6 @@ import getApplicationsExplorerStyles from './styles';
 import BridgeApplication from '../BridgeApplication';
 import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
-import { BridgeApplicationByQr } from '../BridgeApplicationByQr';
 
 const actions = [
   {
@@ -45,16 +44,18 @@ const actions = [
  * view blockchain applications.
  */
 export default function ApplicationsExplorer() {
-  const applicationStatsModal = useModal();
+  const [activeTab, setActiveTab] = useState('internalApplications');
+  const [cameraIsOpen, setCameraIsOpen] = useState(false);
+
   const scannerRef = useRef();
 
   const navigation = useNavigation();
-  const [activeTab, setActiveTab] = useState('internalApplications');
-  const [cameraIsOpen, setCameraIsOpen] = useState(false);
-  const [scannedUri, setScannedUri] = useState('');
   const tabBarHeight = useBottomTabBarHeight();
-
   const applications = useApplicationsExplorer('explore');
+
+  const applicationStatsModal = useModal();
+  const newConnectionModal = useModal();
+  const qrCodeConnectionModal = useModal();
 
   const { theme, styles } = useTheme({
     styles: getApplicationsExplorerStyles(),
@@ -72,19 +73,6 @@ export default function ApplicationsExplorer() {
       />
     );
 
-  const newConnectionModal = useModal();
-
-  const qrCodeConnectionModal = useModal(
-    (modal) => (
-      <Stepper>
-        <BridgeApplicationByQr uri={scannedUri} />
-        <InitiateConnection onFinish={modal.close} />
-        <ApproveConnection onFinish={modal.close} />
-      </Stepper>
-    ),
-    [scannedUri]
-  );
-
   const showNewConnectionModal = () =>
     newConnectionModal.open(
       <Stepper>
@@ -94,9 +82,16 @@ export default function ApplicationsExplorer() {
       </Stepper>
     );
 
-  const showFab = activeTab === 'externalApplications' && !cameraIsOpen;
+  const handleQRCodeRead = (value) =>
+    qrCodeConnectionModal.open(
+      <Stepper>
+        <BridgeApplication uri={value} />
+        <InitiateConnection onFinish={qrCodeConnectionModal.close} />
+        <ApproveConnection onFinish={qrCodeConnectionModal.close} />
+      </Stepper>
+    );
 
-  const onFabItemPress = (item) => {
+  const handleFabItemPress = (item) => {
     if (item.key === 'paste') {
       showNewConnectionModal();
     }
@@ -105,14 +100,9 @@ export default function ApplicationsExplorer() {
     }
   };
 
-  const handleQRCodeRead = (value) => {
-    setScannedUri(value);
-    qrCodeConnectionModal.open();
-  };
+  const closeCamera = () => scannerRef.current.closeCamera();
 
-  const closeCamera = () => {
-    scannerRef.current.closeCamera();
-  };
+  const showFab = activeTab === 'externalApplications' && !cameraIsOpen;
 
   return (
     <>
@@ -186,7 +176,7 @@ export default function ApplicationsExplorer() {
         <Fab
           actions={actions}
           bottom={tabBarHeight}
-          onPressItem={onFabItemPress}
+          onPressItem={handleFabItemPress}
           onPressMain={closeCamera}
         />
       )}

@@ -14,11 +14,11 @@ import ConnectionContext from '../../../../../libs/wcm/context/connectionContext
 
 import getStyles from './styles';
 
-export default function BridgeApplication({ nextStep }) {
+export default function BridgeApplication({ nextStep, uri = '' }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
   const [error, setError] = useState();
-  const [inputUri, setInputUri] = useState('');
+  const [inputUri, setInputUri] = useState(uri);
   const [eventTopic, setEventTopic] = useState('');
 
   const { events } = useContext(ConnectionContext);
@@ -26,7 +26,7 @@ export default function BridgeApplication({ nextStep }) {
 
   const { styles } = useTheme({ styles: getStyles });
 
-  const proposalEvent = events.find((event) => event?.meta.params.pairingTopic === eventTopic);
+  const proposalEvent = events.find((event) => event?.meta?.params?.pairingTopic === eventTopic);
 
   const handleStateCleanup = () => {
     if (eventTopic) {
