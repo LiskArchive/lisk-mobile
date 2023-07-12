@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
 
@@ -11,14 +11,22 @@ import { stringShortener } from 'utilities/helpers';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import Avatar from 'components/shared/avatar';
+import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
+import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
 import getConnectionStyles from './styles';
 
-export default function InitiateConnection({ event, nextStep, onFinish }) {
+export default function InitiateConnection({ nextStep, onFinish }) {
   const [selectedAccounts, setSelectedAccounts] = useState([]);
   const { accounts } = useAccounts();
+  const { events } = useContext(WalletConnectContext);
 
   const { styles } = useTheme({ styles: getConnectionStyles });
+
+  const connectionEvent =
+    events.length &&
+    events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
+    events[events.length - 1];
 
   const onSelectAccount = (account) => {
     const isExist = selectedAccounts.includes(account.metadata.pubkey);
@@ -42,14 +50,17 @@ export default function InitiateConnection({ event, nextStep, onFinish }) {
     nextStep({ selectedAccounts });
   };
 
-  if (!event) {
+  if (!connectionEvent) {
     return null;
   }
 
-  const chainID = event.meta.params.requiredNamespaces.lisk.chains[0].replace('lisk:', '');
-  const iconUri = event.meta.params.proposer.metadata.icons[0];
-  const name = event.meta.params.proposer.metadata.name;
-  const url = event.meta.params.proposer.metadata.url;
+  const chainID = connectionEvent.meta.params.requiredNamespaces.lisk.chains[0].replace(
+    'lisk:',
+    ''
+  );
+  const iconUri = connectionEvent.meta.params.proposer.metadata.icons[0];
+  const name = connectionEvent.meta.params.proposer.metadata.name;
+  const url = connectionEvent.meta.params.proposer.metadata.url;
 
   return (
     <View>

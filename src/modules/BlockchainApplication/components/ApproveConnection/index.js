@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
 import { H3, P } from 'components/shared/toolBox/typography';
@@ -8,10 +8,19 @@ import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import getConnectionStyles from './styles';
 import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
+import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
+import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
-const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }) => {
-  const { styles } = useTheme({ styles: getConnectionStyles });
+const ApproveConnection = ({ onFinish, sharedData: { selectedAccounts } }) => {
   const { approve, reject } = useWalletConnectSession();
+  const { events } = useContext(WalletConnectContext);
+
+  const { styles } = useTheme({ styles: getConnectionStyles });
+
+  const connectionEvent =
+    events.length &&
+    events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
+    events[events.length - 1];
 
   const connectHandler = async () => {
     await approve(selectedAccounts);
@@ -25,21 +34,24 @@ const ApproveConnection = ({ event, onFinish, sharedData: { selectedAccounts } }
 
   const requiredMethods = useMemo(() => {
     const methods = [];
-    Object.values(event?.meta?.params?.requiredNamespaces ?? {}).forEach((method) =>
+    Object.values(connectionEvent?.meta?.params?.requiredNamespaces ?? {}).forEach((method) =>
       methods.push(...method.methods)
     );
     return methods;
-  }, [event?.meta?.params?.requiredNamespaces]);
+  }, [connectionEvent?.meta?.params?.requiredNamespaces]);
 
-  if (!event) {
+  if (!connectionEvent) {
     return null;
   }
 
-  const chainID = event.meta.params.requiredNamespaces.lisk.chains[0].replace('lisk:', '');
-  const iconUri = event.meta.params.proposer.metadata.icons[0];
-  const name = event.meta.params.proposer.metadata.name;
-  const url = event.meta.params.proposer.metadata.url;
-  const pairingTopic = event.meta.params.pairingTopic;
+  const chainID = connectionEvent.meta.params.requiredNamespaces.lisk.chains[0].replace(
+    'lisk:',
+    ''
+  );
+  const iconUri = connectionEvent.meta.params.proposer.metadata.icons[0];
+  const name = connectionEvent.meta.params.proposer.metadata.name;
+  const url = connectionEvent.meta.params.proposer.metadata.url;
+  const pairingTopic = connectionEvent.meta.params.pairingTopic;
 
   return (
     <>

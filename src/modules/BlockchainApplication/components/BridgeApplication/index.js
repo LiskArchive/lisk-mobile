@@ -15,11 +15,11 @@ import ConnectionContext from '../../../../../libs/wcm/context/connectionContext
 import getStyles from './styles';
 
 export default function BridgeApplication({ nextStep }) {
-  const [eventTopic, setEventTopic] = useState('');
-
-  const [status, setStatus] = useState({ isLoading: false });
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState();
+  const [error, setError] = useState();
   const [inputUri, setInputUri] = useState('');
+  const [eventTopic, setEventTopic] = useState('');
 
   const { events } = useContext(ConnectionContext);
   const { setUri } = useWalletConnectPairings();
@@ -28,54 +28,69 @@ export default function BridgeApplication({ nextStep }) {
 
   const proposalEvent = events.find((event) => event?.meta.params.pairingTopic === eventTopic);
 
+  const handleStateCleanup = () => {
+    if (eventTopic) {
+      setEventTopic('');
+    }
+
+    if (error) {
+      setError(undefined);
+    }
+
+    if (isSuccess) {
+      setIsSuccess(undefined);
+    }
+  };
+
   const handleInputChange = (value) => {
-    setStatus({ isLoading: false });
-    setEventTopic('');
+    handleStateCleanup();
 
     setInputUri(value);
   };
 
   const handleSubmit = async () => {
-    setStatus({ isLoading: true });
+    handleStateCleanup();
+
+    setIsLoading(true);
 
     const response = await setUri(inputUri);
 
     if (response.status === STATUS.FAILURE) {
-      return setStatus({
-        ...response,
-        isLoading: false,
-        isError: true,
-        errorMessage: 'Error connecting application. Please try again.',
-      });
-    }
-
-    if (response.status === STATUS.SUCCESS) {
+      setError(new Error('Error connecting application. Please try again.'));
+      setIsLoading(false);
+    } else if (response.status === STATUS.SUCCESS) {
       setEventTopic(response.data.topic);
     }
   };
 
   useEffect(() => {
-    if (proposalEvent && status.isLoading) {
-      const isEventNameSpaceValid = validateConnectionNameSpace(proposalEvent);
+    if (proposalEvent && isLoading) {
+      try {
+        const isEventNameSpaceValid = validateConnectionNameSpace(proposalEvent);
 
-      if (isEventNameSpaceValid) {
-        setStatus({ isLoading: false, isSuccess: true });
-      } else {
-        setStatus({
-          isLoading: false,
-          isError: true,
-          errorMessage:
-            'You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.',
-        });
+        if (isEventNameSpaceValid) {
+          setIsLoading(false);
+          setIsSuccess(true);
+        } else {
+          setError(
+            new Error(
+              'You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.'
+            )
+          );
+          setIsLoading(false);
+        }
+      } catch {
+        setError(new Error('Error validating connection. Please try again.'));
+        setIsLoading(false);
       }
     }
-  }, [status.isLoading, proposalEvent]);
+  }, [proposalEvent, isLoading]);
 
   useEffect(() => {
-    if (status.isSuccess) {
+    if (isSuccess) {
       nextStep();
     }
-  }, [status.isSuccess, nextStep]);
+  }, [isSuccess, nextStep]);
 
   return (
     <View style={styles.container}>
@@ -97,15 +112,13 @@ export default function BridgeApplication({ nextStep }) {
           returnKeyType="done"
         />
 
-        {status.isError && (
-          <P style={[styles.errorMessage, styles.theme.errorMessage]}>{status.errorMessage}</P>
-        )}
+        {!!error && <P style={[styles.errorMessage, styles.theme.errorMessage]}>{error.message}</P>}
       </View>
 
       <PrimaryButton
-        disabled={!inputUri || status.isLoading || status.isError}
+        disabled={!inputUri || isLoading || !!error}
         onPress={handleSubmit}
-        isLoading={status.isLoading}
+        isLoading={isLoading}
       >
         {i18next.t('application.explore.externalApplicationList.addApplication')}
       </PrimaryButton>

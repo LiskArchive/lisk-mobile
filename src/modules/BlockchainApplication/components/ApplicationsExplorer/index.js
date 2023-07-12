@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState, useContext, useMemo, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
@@ -28,8 +28,6 @@ import getApplicationsExplorerStyles from './styles';
 import BridgeApplication from '../BridgeApplication';
 import InitiateConnection from '../InitiateConnection';
 import ApproveConnection from '../ApproveConnection';
-import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
-import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 import { BridgeApplicationByQr } from '../BridgeApplicationByQr';
 
 const actions = [
@@ -51,7 +49,6 @@ export default function ApplicationsExplorer() {
   const scannerRef = useRef();
 
   const navigation = useNavigation();
-  const { events } = useContext(WalletConnectContext);
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [cameraIsOpen, setCameraIsOpen] = useState(false);
   const [scannedUri, setScannedUri] = useState('');
@@ -75,37 +72,27 @@ export default function ApplicationsExplorer() {
       />
     );
 
-  const connectionEvent = useMemo(() => {
-    if (events.length && events[events.length - 1].name === EVENTS.SESSION_PROPOSAL) {
-      return events[events.length - 1];
-    }
-
-    return undefined;
-  }, [events]);
-
-  const newConnectionModal = useModal(
-    (modal) => (
-      <Stepper>
-        <BridgeApplication event={connectionEvent} />
-        <InitiateConnection event={connectionEvent} onFinish={modal.close} />
-        <ApproveConnection event={connectionEvent} onFinish={modal.close} />
-      </Stepper>
-    ),
-    [connectionEvent?.name]
-  );
+  const newConnectionModal = useModal();
 
   const qrCodeConnectionModal = useModal(
     (modal) => (
       <Stepper>
         <BridgeApplicationByQr uri={scannedUri} />
-        <InitiateConnection event={connectionEvent} onFinish={modal.close} />
-        <ApproveConnection event={connectionEvent} onFinish={modal.close} />
+        <InitiateConnection onFinish={modal.close} />
+        <ApproveConnection onFinish={modal.close} />
       </Stepper>
     ),
-    [connectionEvent?.name, scannedUri]
+    [scannedUri]
   );
 
-  const showNewConnectionModal = () => newConnectionModal.open();
+  const showNewConnectionModal = () =>
+    newConnectionModal.open(
+      <Stepper>
+        <BridgeApplication />
+        <InitiateConnection onFinish={newConnectionModal.close} />
+        <ApproveConnection onFinish={newConnectionModal.close} />
+      </Stepper>
+    );
 
   const showFab = activeTab === 'externalApplications' && !cameraIsOpen;
 
