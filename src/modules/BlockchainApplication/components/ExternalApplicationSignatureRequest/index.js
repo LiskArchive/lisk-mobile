@@ -1,13 +1,16 @@
 /* eslint-disable max-statements */
 import React, { useContext, useMemo, useState } from 'react';
+import { View } from 'react-native';
 import i18next from 'i18next';
 
 import { extractAddressFromPublicKey } from 'modules/Auth/utils/accountKeys';
-import DataRenderer from 'components/shared/DataRenderer';
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
+import { useTheme } from 'contexts/ThemeContext';
+import DataRenderer from 'components/shared/DataRenderer';
+import { H2, P } from 'components/shared/toolBox/typography';
 import DropDownHolder from 'utilities/alert';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
@@ -16,6 +19,10 @@ import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
+import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventValidators';
+import CircleCrossedSvg from '../../../../assets/svgs/CircleCrossedSvg';
+
+import getStyles from './styles';
 
 export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
   const [status, setStatus] = useState({});
@@ -26,7 +33,11 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
   const { respond } = useWalletConnectSession();
   const { events } = useContext(WalletConnectContext);
 
+  const { styles } = useTheme({ styles: getStyles });
+
   const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
+
+  const isEventSchemaValid = validateConnectionSchema(event);
 
   const createTransactionOptions = useMemo(
     () => ({
@@ -134,8 +145,22 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     <DataRenderer
       data={transaction.data}
       isLoading={transaction.isLoading}
-      error={transaction.error}
+      error={transaction.error || !isEventSchemaValid}
       renderData={renderStep}
+      renderError={() => (
+        <View>
+          <View style={styles.imageContainer}>
+            <CircleCrossedSvg height={56} width={56} />
+          </View>
+
+          <H2 style={[styles.title, styles.theme.title]}>Connection failed</H2>
+
+          <P style={[styles.description, styles.theme.text]}>
+            Connection from the &quot;{session.peer.metadata.name}&quot; has been blocked due to
+            invalid parameters.
+          </P>
+        </View>
+      )}
     />
   );
 }

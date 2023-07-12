@@ -9,6 +9,7 @@ export default {
     title: {
       textAlign: 'center',
       marginBottom: 8,
+      fontSize: fonts.size.h2,
     },
     description: {
       textAlign: 'center',

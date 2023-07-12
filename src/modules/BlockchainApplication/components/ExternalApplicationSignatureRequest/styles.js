@@ -16,6 +16,10 @@ export default {
       borderWidth: 1,
       borderColor: colors.light.platinumGray,
     },
+    title: {
+      textAlign: 'center',
+      marginBottom: 16,
+    },
     applicationTitle: {
       fontSize: fonts.size.base,
       textAlign: 'center',
@@ -54,7 +58,8 @@ export default {
     },
     description: {
       fontFamily: fonts.family.regular,
-      marginVertical: 4,
+      fontSize: fonts.size.input,
+      textAlign: 'center',
     },
     value: {
       fontSize: fonts.size.input,
@@ -83,16 +88,20 @@ export default {
     },
   },
   [themes.light]: {
+    title: {
+      color: colors.light.zodiacBlue,
+    },
     text: {
       color: colors.light.zodiacBlue,
     },
-
     errorMessage: {
       color: colors.light.burntSieanna,
     },
   },
-
   [themes.dark]: {
+    title: {
+      color: colors.dark.white,
+    },
     text: {
       color: colors.dark.white,
     },
