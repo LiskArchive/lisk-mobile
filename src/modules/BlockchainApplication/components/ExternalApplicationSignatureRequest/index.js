@@ -12,6 +12,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
 import DropDownHolder from 'utilities/alert';
+import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
 import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
@@ -20,7 +21,6 @@ import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSum
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
 import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRequestSignTransaction';
 import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventValidators';
-import CircleCrossedSvg from '../../../../assets/svgs/CircleCrossedSvg';
 
 import getStyles from './styles';
 
@@ -154,11 +154,17 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
             <CircleCrossedSvg height={56} width={56} />
           </View>
 
-          <H2 style={[styles.title, styles.theme.title]}>Connection failed</H2>
+          <H2 style={[styles.title, styles.theme.title]}>
+            {i18next.t(
+              'application.externalApplicationSignatureRequest.sign.invalidConnectionTitle'
+            )}
+          </H2>
 
           <P style={[styles.description, styles.theme.text]}>
-            Connection from the &quot;{session.peer.metadata.name}&quot; has been blocked due to
-            invalid parameters.
+            {i18next.t(
+              'application.externalApplicationSignatureRequest.sign.invalidConnectionTitle',
+              { appName: session.peer.metadata.name }
+            )}
           </P>
         </View>
       )}

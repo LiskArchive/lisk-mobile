@@ -7,7 +7,8 @@
       "cancel": "Cancel",
       "confirm": "Confirm",
       "reload": "Reload",
-      "viewAll": "View all"
+      "viewAll": "View all",
+      "selectAll": "Select all"
     },
     "copyToClipboard": "Copy to clipboard",
     "pasteFromClipboard": "Paste from clipboard",
@@ -370,7 +371,9 @@
         "submitButtonTitle": "Confirm and sign",
         "copyToClipboardButtonText": "Copy and redirect to application site",
         "copiedToClipboardButtonText": "Copied",
-        "errorButtonText": "Redirect to application site"
+        "errorButtonText": "Redirect to application site",
+        "invalidConnectionTitle": "Connection failed",
+        "invalidConnectionDescription": "Connection from the '{{appName}}' has been blocked due to invalid parameters."
       },
       "disconnect": {
         "title": "Disconnect Application",

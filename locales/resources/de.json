@@ -7,7 +7,8 @@
       "cancel": "Absagen",
       "confirm": "Bestätigen",
       "reload": "Aktualisierung",
-      "viewAll": "Alle ansehen"
+      "viewAll": "Alle ansehen",
+      "selectAll": "Alle auswählen"
     },
     "copyToClipboard": "In die Zwischenablage kopieren"
   },
@@ -371,7 +372,9 @@
         "submitButtonTitle": "Bestätigen und unterschreiben",
         "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
         "copiedToClipboardButtonText": "Kopiert",
-        "errorButtonText": "Weiterleitung zur App-Site"
+        "errorButtonText": "Weiterleitung zur App-Site",
+        "invalidConnectionTitle": "Verbindung fehlgeschlagen",
+        "invalidConnectionDescription": "Die Verbindung von '{{appName}}' wurde aufgrund ungültiger Parameter blockiert."
       },
       "disconnect": {
         "title": "",

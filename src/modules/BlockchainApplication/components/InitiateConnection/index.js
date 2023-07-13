@@ -101,7 +101,7 @@ export default function InitiateConnection({ nextStep, onFinish }) {
         </P>
 
         <Checkbox onPress={onSelectAll} selected={selectAll}>
-          <P style={[styles.theme.description]}>Select All</P>
+          <P style={[styles.theme.description]}>{i18next.t('commons.buttons.selectAll')}</P>
         </Checkbox>
 
         {accounts.map((account) => (
