@@ -87,12 +87,12 @@
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "settings": {
     "headers": {
-      "security": "Security",
       "general": "General",
       "info": "Info",
       "advanced": "Advanced"
     },
     "menu": {
+      "security": "Security",
       "backupRecoveryPhrase": "Backup your secret recovery phrase",
       "about": "About Lisk",
       "darkMode": "Dark mode",

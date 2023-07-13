@@ -124,6 +124,7 @@
 		79DD0C532A3750FB00E2DC9D /* LiskQA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiskQA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD0C552A37515700E2DC9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MobileProtect.plist; sourceTree = "<group>"; };
+		79F5AC012A55A29C0039705D /* Lisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lisk.entitlements; path = Lisk/Lisk.entitlements; sourceTree = "<group>"; };
 		7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-LiskQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD27ED9391CCE388379420A /* Pods-Lisk-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOS/Pods-Lisk-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7D3C7D452F8CAAED9408693D /* Pods-LiskApp-LiskQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskQA.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskQA/Pods-LiskApp-LiskQA.release.xcconfig"; sourceTree = "<group>"; };
@@ -225,6 +226,7 @@
 		13B07FAE1A68108700A75B9A /* Lisk */ = {
 			isa = PBXGroup;
 			children = (
+				79F5AC012A55A29C0039705D /* Lisk.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -1118,6 +1120,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				ENABLE_BITCODE = NO;
@@ -1147,6 +1150,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				EXCLUDED_ARCHS = arm64;

@@ -5,10 +5,7 @@ import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import {
-  bioMetricAuthentication,
-  getAccountPasswordFromKeyChain,
-} from 'modules/Auth/utils/recoveryPhrase';
+import { getAccountPasswordFromKeyChain } from 'modules/Auth/utils/recoveryPhrase';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Avatar from 'components/shared/avatar';
 import Input from 'components/shared/toolBox/input';
@@ -41,12 +38,7 @@ export default function ConfirmTransaction({
   const fetchAccountPasswordFromBiometrics = async () => {
     const accountPassword = await fetchAccountPassword();
     if (accountPassword) {
-      bioMetricAuthentication({
-        successCallback: () => {
-          onUserPasswordChange(accountPassword);
-          onSubmit?.();
-        },
-      });
+      onUserPasswordChange(accountPassword);
     }
   };
 

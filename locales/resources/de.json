@@ -88,12 +88,12 @@
   "available to unlock (only on desktop)": "",
   "settings": {
     "headers": {
-      "security": "",
       "general": "",
       "info": "",
       "advanced": ""
     },
     "menu": {
+      "security": "",
       "backupRecoveryPhrase": "Sichern Sie Ihre Secret Recovery Phrase",
       "about": "Über Lisk",
       "darkMode": "Dunkler Modus",
