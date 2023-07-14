@@ -2,16 +2,18 @@
 import React, { useContext, useMemo } from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
+
 import { H3, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
-import getConnectionStyles from './styles';
 import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
-const ApproveConnection = ({ onFinish, sharedData: { selectedAccounts } }) => {
+import getConnectionStyles from './styles';
+
+export default function ApproveConnection({ onFinish, sharedData: { selectedAccounts } }) {
   const { approve, reject } = useWalletConnectSession();
   const { events } = useContext(WalletConnectContext);
 
@@ -22,12 +24,12 @@ const ApproveConnection = ({ onFinish, sharedData: { selectedAccounts } }) => {
     events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
     events[events.length - 1];
 
-  const connectHandler = async () => {
+  const handleApprove = async () => {
     await approve(selectedAccounts);
     onFinish();
   };
 
-  const rejectHandler = async () => {
+  const handleReject = async () => {
     await reject();
     onFinish();
   };
@@ -106,16 +108,14 @@ const ApproveConnection = ({ onFinish, sharedData: { selectedAccounts } }) => {
       <View style={styles.horizontalLine} />
 
       <View style={[styles.footer, styles.buttonContainer]}>
-        <Button style={[styles.button]} onPress={rejectHandler}>
+        <Button onPress={handleReject} style={[styles.button]}>
           Reject
         </Button>
 
-        <PrimaryButton style={styles.button} onPress={connectHandler}>
+        <PrimaryButton onPress={handleApprove} style={styles.button}>
           Approve
         </PrimaryButton>
       </View>
     </>
   );
-};
-
-export default ApproveConnection;
+}

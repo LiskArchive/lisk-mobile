@@ -345,7 +345,7 @@
         "disconnectText": "Trennen",
         "chainIDLabel": "Chain-ID",
         "connectionID": "Verbindungs-ID",
-        "connectionDescription": "Diese Website versucht, sich mit Ihrer Lisk-Wallet zu verbinden",
+        "connectionDescription": "Dies ist eine Anfrage von Wallet Connect, eine Sitzung mit Lisk Mobile einzurichten. Bitte lesen Sie die folgenden Informationen sorgfältig durch, bevor Sie sie genehmigen.",
         "accountsTitle": "Zu verwendende Konto/Konten auf dieser Seite",
         "sitePermissions": "Seitenberechtigungen",
         "methods": "Methoden",
