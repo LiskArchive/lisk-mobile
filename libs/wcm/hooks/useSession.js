@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback, useMemo } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 
 import { signClient } from '../utils/connectionCreator';
 import ConnectionContext from '../context/connectionContext';
