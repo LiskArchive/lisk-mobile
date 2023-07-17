@@ -36,6 +36,10 @@ export default function InitiateConnection({ nextStep, onFinish }) {
     (chain) => chain.replace('lisk:', '')
   );
 
+  const selectedAccountsPubKeys = selectedAccounts.map(
+    (selectedAccount) => selectedAccount.metadata.pubkey
+  );
+
   const {
     data: connectingAppsMetadata,
     isLoading: isLoadingConnectingAppsMetadata,
@@ -58,11 +62,16 @@ export default function InitiateConnection({ nextStep, onFinish }) {
   });
 
   const handleSelectAccount = (account) => {
-    const isExist = selectedAccounts.includes(account.metadata.pubkey);
+    const isExist = selectedAccountsPubKeys.includes(account.metadata.pubkey);
+
     if (isExist) {
-      setSelectedAccounts(selectedAccounts.filter((pubkey) => pubkey !== account.metadata.pubkey));
+      setSelectedAccounts(
+        selectedAccounts.filter(
+          (selectedAccount) => selectedAccount.metadata.pubkey !== account.metadata.pubkey
+        )
+      );
     } else {
-      setSelectedAccounts([...selectedAccounts, account.metadata.pubkey]);
+      setSelectedAccounts([...selectedAccounts, account]);
     }
   };
 
@@ -71,10 +80,10 @@ export default function InitiateConnection({ nextStep, onFinish }) {
       return setSelectedAccounts([]);
     }
 
-    return setSelectedAccounts(accounts.map((acc) => acc.metadata.pubkey));
+    return setSelectedAccounts(accounts);
   };
 
-  const handleSubmit = () => nextStep({ selectedAccounts, chains });
+  const handleSubmit = () => nextStep({ accounts: selectedAccounts, chains });
 
   if (!connectionEvent) {
     return null;
@@ -87,7 +96,7 @@ export default function InitiateConnection({ nextStep, onFinish }) {
   const url = connectionEvent.meta.params.proposer.metadata.url;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={[styles.container]}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: iconUri }} style={styles.image} />
       </View>
@@ -146,7 +155,7 @@ export default function InitiateConnection({ nextStep, onFinish }) {
         {accounts.map((account) => (
           <Checkbox
             key={account.metadata.address}
-            selected={selectedAccounts.includes(account.metadata.pubkey)}
+            selected={selectedAccountsPubKeys.includes(account.metadata.pubkey)}
             onPress={() => handleSelectAccount(account)}
             style={{ children: styles.itemContainer }}
           >

@@ -2,6 +2,9 @@ import { themes, boxes, colors, fonts } from 'constants/styleGuide';
 
 export default {
   common: {
+    container: {
+      flex: 1,
+    },
     title: {
       fontSize: 16,
       textAlign: 'center',

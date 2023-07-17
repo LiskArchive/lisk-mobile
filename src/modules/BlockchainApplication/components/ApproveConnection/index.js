@@ -7,13 +7,15 @@ import { H3, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
+import { stringShortener } from 'utilities/helpers';
+import Avatar from 'components/shared/avatar';
 import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
 import getConnectionStyles from './styles';
 
-export default function ApproveConnection({ onFinish, sharedData: { selectedAccounts } }) {
+export default function ApproveConnection({ onFinish, sharedData: { accounts, chains } }) {
   const { approve, reject } = useWalletConnectSession();
   const { events } = useContext(WalletConnectContext);
 
@@ -24,8 +26,10 @@ export default function ApproveConnection({ onFinish, sharedData: { selectedAcco
     events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
     events[events.length - 1];
 
+  const accountsPubKeys = accounts.map((account) => account.metadata.pubkey);
+
   const handleApprove = async () => {
-    await approve(selectedAccounts);
+    await approve(accountsPubKeys);
     onFinish();
   };
 
@@ -46,10 +50,6 @@ export default function ApproveConnection({ onFinish, sharedData: { selectedAcco
     return null;
   }
 
-  const chainID = connectionEvent.meta.params.requiredNamespaces.lisk.chains[0].replace(
-    'lisk:',
-    ''
-  );
   const iconUri = connectionEvent.meta.params.proposer.metadata.icons[0];
   const name = connectionEvent.meta.params.proposer.metadata.name;
   const url = connectionEvent.meta.params.proposer.metadata.url;
@@ -68,51 +68,82 @@ export default function ApproveConnection({ onFinish, sharedData: { selectedAcco
           <UrlSvg />
           <P style={styles.url}>{url}</P>
         </View>
-
-        <View style={styles.urlContainer}>
-          <P style={styles.label}>
-            {i18next.t('application.explore.externalApplicationList.chainIDLabel')}:
-          </P>
-          <P style={[styles.theme.description]}>{chainID}</P>
-        </View>
       </View>
 
       <View style={styles.horizontalLine} />
 
-      <View style={styles.container}>
-        <P style={styles.label}>
-          {i18next.t('application.explore.externalApplicationList.connectionID')}:
-        </P>
+      <P style={[styles.label, styles.theme.label]}>Connected chains</P>
 
-        <P style={[styles.theme.description]}>{pairingTopic}</P>
-      </View>
+      <View style={[styles.itemsContainer]}>
+        {chains.map((chain, index) => (
+          <View key={index} style={[styles.itemContainer]}>
+            <Image style={[styles.itemImage]} source={{ uri: chain.logo.png }} />
 
-      <View style={styles.horizontalLine} />
+            <View style={[styles.itemBody]}>
+              <P style={[styles.itemTitle, styles.theme.itemTitle]}>{chain.chainName}</P>
 
-      <View style={styles.container}>
-        <P style={styles.label}>
-          {i18next.t('application.explore.externalApplicationList.sitePermissions')}:
-        </P>
-
-        <P style={[styles.subTitle, styles.theme.subTitle]}>
-          {i18next.t('application.explore.externalApplicationList.methods')}
-        </P>
-
-        {requiredMethods.map((method) => (
-          <P key={method} style={[styles.value, styles.permissions]}>
-            {method}
-          </P>
+              <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
+                Chain ID: {chain.chainID}
+              </P>
+            </View>
+          </View>
         ))}
       </View>
 
       <View style={styles.horizontalLine} />
 
-      <View style={[styles.footer, styles.buttonContainer]}>
-        <Button onPress={handleReject} style={[styles.button]}>
+      <P style={[styles.description, styles.descriptionLabel]}>Connected accounts</P>
+
+      <View style={[styles.itemsContainer]}>
+        {accounts.map((account) => (
+          <View key={account.metadata.address} style={[styles.itemContainer]}>
+            <Avatar address={account.metadata.address} size={24} />
+
+            <View style={[styles.itemBody]}>
+              {account.metadata.name && (
+                <P style={[styles.itemTitle, styles.theme.itemTitle]}>{account.metadata.name}</P>
+              )}
+
+              <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
+                {stringShortener(account.metadata.address, 7, 4)}
+              </P>
+            </View>
+          </View>
+        ))}
+      </View>
+
+      <View style={styles.horizontalLine} />
+
+      <P style={styles.label}>
+        {i18next.t('application.explore.externalApplicationList.connectionID')}:
+      </P>
+
+      <P style={[styles.description, styles.theme.description]}>{pairingTopic}</P>
+
+      <View style={styles.horizontalLine} />
+
+      <P style={[styles.description, styles.descriptionLabel]}>
+        {i18next.t('application.explore.externalApplicationList.sitePermissions')}:
+      </P>
+
+      <P style={[styles.itemTitle, styles.theme.itemTitle, { marginBottom: 4 }]}>
+        {i18next.t('application.explore.externalApplicationList.methods')}
+      </P>
+
+      {requiredMethods.map((method) => (
+        <P key={method} style={[styles.label, styles.theme.label, { marginBottom: 2 }]}>
+          {method}
+        </P>
+      ))}
+
+      <View style={styles.horizontalLine} />
+
+      <View style={[styles.footer]}>
+        <Button onPress={handleReject} style={[styles.buttonLeft]}>
           Reject
         </Button>
 
-        <PrimaryButton onPress={handleApprove} style={styles.button}>
+        <PrimaryButton onPress={handleApprove} style={[styles.buttonRight]}>
           Approve
         </PrimaryButton>
       </View>
