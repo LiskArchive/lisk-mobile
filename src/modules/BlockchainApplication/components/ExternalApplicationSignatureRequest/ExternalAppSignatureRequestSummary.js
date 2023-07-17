@@ -30,10 +30,12 @@ export default function ExternalAppSignatureRequestSummary({
 
   return (
     <>
-      <H3 style={[styles.title, styles.theme.title]}>Transaction summary</H3>
+      <H3 style={[styles.title, styles.theme.title]}>
+        {i18next.t('application.externalApplicationSignatureRequest.summary.title')}
+      </H3>
 
       <P style={[styles.description, styles.theme.description]}>
-        Please review and verify the transaction details before signing.
+        {i18next.t('application.externalApplicationSignatureRequest.summary.description')}
       </P>
 
       <View style={[styles.chainIDContainer, styles.theme.chainIDContainer]}>
@@ -51,11 +53,11 @@ export default function ExternalAppSignatureRequestSummary({
       />
 
       <View style={[styles.footer]}>
-        <Button style={[styles.button]} onPress={onCancel}>
+        <Button style={[styles.buttonLeft]} onPress={onCancel}>
           {i18next.t('application.externalApplicationSignatureRequest.summary.cancelButtonText')}
         </Button>
 
-        <PrimaryButton style={[styles.button]} onPress={onSubmit}>
+        <PrimaryButton style={[styles.buttonRight]} onPress={onSubmit}>
           {i18next.t('application.externalApplicationSignatureRequest.summary.continueButtonText')}
         </PrimaryButton>
       </View>

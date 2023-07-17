@@ -6,6 +6,7 @@
       "continue": "Continue",
       "cancel": "Cancel",
       "confirm": "Confirm",
+      "reject": "Reject",
       "reload": "Reload",
       "viewAll": "View all",
       "selectAll": "Select all"
@@ -364,6 +365,8 @@
         "accountLabel": "Selected account"
       },
       "summary": {
+        "title": "Transaction summary",
+        "description": "Please review and verify the transaction details before signing.",
         "cancelButtonText": "Back",
         "continueButtonText": "Approve"
       },

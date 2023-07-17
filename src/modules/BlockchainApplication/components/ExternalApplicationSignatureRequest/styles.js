@@ -101,11 +101,15 @@ export default {
     },
     footer: {
       flexDirection: 'row',
-      paddingTop: boxes.boxPadding,
+      marginTop: boxes.boxPadding,
     },
-    button: {
+    buttonLeft: {
       flex: 1,
-      marginHorizontal: 4,
+      marginRight: 8,
+    },
+    buttonRight: {
+      flex: 1,
+      marginLeft: 8,
     },
     outlineButton: {
       backgroundColor: 'transparent',

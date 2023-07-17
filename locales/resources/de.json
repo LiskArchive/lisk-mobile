@@ -6,6 +6,7 @@
       "continue": "Weiter",
       "cancel": "Absagen",
       "confirm": "Bestätigen",
+      "reject": "Ablehnen",
       "reload": "Aktualisierung",
       "viewAll": "Alle ansehen",
       "selectAll": "Alle auswählen"
@@ -365,6 +366,8 @@
         "accountLabel": "Ausgewähltes Konto"
       },
       "summary": {
+        "title": "Transaktions zusammenfassung",
+        "description": "Bitte überprüfen und bestätigen Sie die Transaktionsdetails, bevor Sie unterschreiben.",
         "cancelButtonText": "Zurück",
         "continueButtonText": "Zustimmen"
       },

@@ -26,10 +26,6 @@ export default function ExternalAppSignatureRequestNotification({
     (account) => account.metadata.address === senderAccountAddress
   );
 
-  console.log('senderAccount', senderAccount);
-  console.log('senderAccountAddress', senderAccountAddress);
-  console.log('accounts', JSON.stringify(accounts));
-
   const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
 
   return (
@@ -94,11 +90,11 @@ export default function ExternalAppSignatureRequestNotification({
       <View style={styles.horizontalLine} />
 
       <View style={[styles.footer]}>
-        <Button style={[styles.button]} onPress={onCancel}>
-          {i18next.t('commons.buttons.cancel')}
+        <Button style={[styles.buttonLeft]} onPress={onCancel}>
+          {i18next.t('commons.buttons.reject')}
         </Button>
 
-        <PrimaryButton style={[styles.button]} onPress={onSubmit}>
+        <PrimaryButton style={[styles.buttonRight]} onPress={onSubmit}>
           {i18next.t('commons.buttons.continue')}
         </PrimaryButton>
       </View>
