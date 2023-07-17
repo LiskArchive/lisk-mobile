@@ -361,7 +361,7 @@
       "notification": {
         "chainIDLabel" : "Chain ID",
         "descriptionLabel": "Information",
-        "description": "Die {{appName}}-App fordert eine Signatur von Ihrem Lisk-Wallet an.",
+        "description": "Diese Transaktion wurde von einer anderen Anwendung zur Signaturanforderung initiiert.",
         "accountLabel": "Ausgewähltes Konto"
       },
       "summary": {

@@ -360,7 +360,7 @@
       "notification": {
         "chainIDLabel" : "Chain ID",
         "descriptionLabel": "Information",
-        "description": "{{appName}} application requesting signature from your Lisk wallet.",
+        "description": "This transaction was initiated from another application for signature request.",
         "accountLabel": "Selected account"
       },
       "summary": {

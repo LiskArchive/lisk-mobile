@@ -114,7 +114,6 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
           <ExternalAppSignatureRequestSummary
             session={session}
             transaction={_transaction.transaction}
-            recipientApplicationChainID={event.meta.params.request.params.recipientChainID}
             senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
             onCancel={() => setActiveStep('notification')}
             onSubmit={() => setActiveStep('sign')}

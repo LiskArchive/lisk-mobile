@@ -5,6 +5,7 @@ import i18next from 'i18next';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
+import { H3, P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 
 import getExternalApplicationSignatureRequestStyles from './styles';
@@ -12,13 +13,11 @@ import getExternalApplicationSignatureRequestStyles from './styles';
 export default function ExternalAppSignatureRequestSummary({
   session,
   transaction,
-  recipientApplicationChainID,
   senderApplicationChainID,
   onSubmit,
   onCancel,
 }) {
   const summary = useTransactionSummary({
-    recipientApplicationChainID,
     recipientAccountAddress: transaction.params.recipientAddress.toString('hex'),
     tokenID: transaction.params.tokenID.toString('hex'),
     amount: Number(transaction.params.amount),
@@ -31,11 +30,22 @@ export default function ExternalAppSignatureRequestSummary({
 
   return (
     <>
+      <H3 style={[styles.title, styles.theme.title]}>Transaction summary</H3>
+
+      <P style={[styles.description, styles.theme.description]}>
+        Please review and verify the transaction details before signing.
+      </P>
+
+      <View style={[styles.chainIDContainer, styles.theme.chainIDContainer]}>
+        <P style={[styles.description, styles.theme.description]}>Chain ID</P>
+
+        <P style={[styles.chainIDValue, styles.theme.chainIDValue]}>{senderApplicationChainID}</P>
+      </View>
+
       <TransactionSummary
         {...summary}
         senderApplication={{
           chainName: session.peer.metadata.name,
-          chainID: senderApplicationChainID,
           logo: { png: session.peer.metadata.icons[0] },
         }}
       />
