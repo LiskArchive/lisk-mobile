@@ -1,7 +1,10 @@
 import React from 'react';
 
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import { navigationGenericTitleStyle, navigationNoShadowStyle } from './styles';
+import {
+  navigationGenericTitleStyle,
+  navigationNoShadowStyle,
+} from './components/Navigator/Navigator.styles';
 
 const navigationOptions = {
   Main: {},
@@ -82,7 +85,7 @@ const navigationOptions = {
     title: null,
     header: () => null,
   },
-  ErrorFallback: {
+  Error: {
     title: null,
     header: () => null,
   },

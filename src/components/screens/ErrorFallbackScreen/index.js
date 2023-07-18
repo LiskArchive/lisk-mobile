@@ -10,6 +10,7 @@ import { H4, P } from 'components/shared/toolBox/typography';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 
 import { getErrorFallbackScreenStyles } from './styles';
+import { useRoute } from '@react-navigation/native';
 
 /**
  * Renders an Error UI as fallback screen when a provided error occurs.
@@ -22,10 +23,15 @@ import { getErrorFallbackScreenStyles } from './styles';
  * not provided, a default description will be rendered.
  */
 export default function ErrorFallbackScreen(props) {
+  const route = useRoute();
+
   const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
-  const title = props.title || i18next.t('fallbackScreens.error.title');
-  const description = props.description || i18next.t('fallbackScreens.error.description');
+  const title = route.params?.title || props.title || i18next.t('fallbackScreens.error.title');
+  const description =
+    route.params?.description ||
+    props.description ||
+    i18next.t('fallbackScreens.error.description');
 
   const emailReport = useEmailReport({ error: props.error, errorMessage: props.description });
 

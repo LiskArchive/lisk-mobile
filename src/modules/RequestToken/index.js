@@ -28,7 +28,7 @@ import { useCopyToClipboard } from 'hooks/useCopyToClipboard';
 import Avatar from 'components/shared/avatar';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { isTransactionAmountValid } from 'utilities/validators';
+import { validateTransactionAmount } from 'utilities/validators';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
 import { deviceWidth } from 'utilities/device';
@@ -111,7 +111,7 @@ export default function RequestToken() {
   const openQrCode = () => modal.open(renderFullCode());
 
   const handleAmountChange = (value) =>
-    setAmount({ value, validity: isTransactionAmountValid(value) });
+    setAmount({ value, validity: validateTransactionAmount(value) });
 
   const defaultTokenID =
     applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;

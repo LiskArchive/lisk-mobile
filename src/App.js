@@ -5,10 +5,11 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import Navigator from 'navigation/components/Navigator/Navigator';
 import { ApplicationsProvider } from 'modules/BlockchainApplication/context/ApplicationsContext';
 import { ThemeProvider } from 'contexts/ThemeContext';
 import { ModalProvider } from 'contexts/ModalContext';
-import Navigator from 'navigation';
+
 import Alert from 'components/shared/alert';
 import StatusBar from 'components/shared/StatusBar';
 import reactQueryClient from 'utilities/api/reactQueryClient';

@@ -1,4 +1,4 @@
-import { cryptography } from '@liskhq/lisk-client';
+import * as Lisk from '@liskhq/lisk-client';
 
 /**
  * Validates the given address with respect to the tokenType
@@ -12,7 +12,7 @@ export const validateAddress = (address) => {
     return -1;
   }
   try {
-    cryptography.address.validateLisk32Address(address);
+    Lisk.cryptography.address.validateLisk32Address(address);
     return 0;
   } catch (error) {
     return 1;
@@ -28,7 +28,7 @@ export const validateAddress = (address) => {
  * A valid transaction amount is a positive number represented as a string.
  * It may include a decimal point.
  */
-export function isTransactionAmountValid(value) {
+export function validateTransactionAmount(value) {
   const regex = /^\d+(\.\d+)?$/;
   if (!regex.test(value)) {
     return false;
