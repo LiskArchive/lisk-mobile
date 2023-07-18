@@ -46,6 +46,7 @@ export default function ConfirmTransaction({
     if (sensorType) {
       fetchAccountPasswordFromBiometrics();
     }
+    return () => onUserPasswordChange('');
   }, [sensorType]);
 
   return (
