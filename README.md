@@ -222,7 +222,7 @@ Please check out [iMessage extension docs](ios/LiskMessageExtension/README.md) f
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more information.
+Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for more information.
 
 ## Contributors
 

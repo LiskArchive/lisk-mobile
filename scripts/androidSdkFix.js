@@ -10,8 +10,7 @@ finder.on('file', (file) => {
   if (file.match(/.build.gradle/)) {
     fs.readFile(file, 'utf8', (err, data) => {
       if (err) throw err;
-      let newData = '';
-      newData = data.replace(/compile\s/g, 'implementation ');
+      let newData = data.replace(/compile\s/g, 'implementation ');
       if (data.match(/compileSdkVersion\s\d+/) && !data.match(/safeExtGet*/)) {
         newData = newData
           .replace(/compileSdkVersion\s\d*/, sdkVersion)

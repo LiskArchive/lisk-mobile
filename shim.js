@@ -1,6 +1,4 @@
 // If using the crypto shim, uncomment the following line to ensure
-// crypto is loaded first, so it can populate global.crypto
-require('crypto');
 import BackgroundTimer from 'react-native-background-timer';
 import { Buffer } from '@craftzdog/react-native-buffer';
 const env = require('./env.json');

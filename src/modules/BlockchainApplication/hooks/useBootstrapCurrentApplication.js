@@ -41,7 +41,7 @@ export function useBootstrapCurrentApplication() {
     },
     config: {
       params: {
-        chainID: defaultApplicationsMetaData?.data[0].chainID,
+        chainID: defaultApplicationsMetaData?.data[0]?.chainID,
       },
     },
   });
@@ -53,7 +53,7 @@ export function useBootstrapCurrentApplication() {
 
   // Create Client API with first element of default apps
   useEffect(() => {
-    if (defaultApplicationsMetaData?.data[0].serviceURLs) {
+    if (defaultApplicationsMetaData?.data[0]?.serviceURLs) {
       apiClient.create(defaultApplicationsMetaData?.data[0].serviceURLs[0]);
     }
   }, [defaultApplicationsMetaData?.data]);
