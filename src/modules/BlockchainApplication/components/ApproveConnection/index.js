@@ -50,16 +50,14 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
     return null;
   }
 
-  const iconUri = connectionEvent.meta.params.proposer.metadata.icons[0];
-  const name = connectionEvent.meta.params.proposer.metadata.name;
-  const url = connectionEvent.meta.params.proposer.metadata.url;
+  const { name, url, icons } = connectionEvent.meta.params.proposer.metadata;
   const pairingTopic = connectionEvent.meta.params.pairingTopic;
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: iconUri }} style={styles.image} />
+          <Image source={{ uri: icons[0] }} style={styles.image} />
         </View>
 
         <H3 style={[styles.title, styles.theme.title]}>{name}</H3>
@@ -72,7 +70,9 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
 
       <View style={styles.horizontalLine} />
 
-      <P style={[styles.label, styles.theme.label]}>Connected chains</P>
+      <P style={[styles.label, styles.theme.label]}>
+        {i18next.t('application.explore.externalApplicationList.approveConnectionChainsTitle')}
+      </P>
 
       <View style={[styles.itemsContainer]}>
         {chains.map((chain, index) => (
@@ -92,7 +92,9 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
 
       <View style={styles.horizontalLine} />
 
-      <P style={[styles.description, styles.descriptionLabel]}>Connected accounts</P>
+      <P style={[styles.description, styles.descriptionLabel]}>
+        {i18next.t('application.explore.externalApplicationList.approveConnectionChainsTitle')}
+      </P>
 
       <View style={[styles.itemsContainer]}>
         {accounts.map((account) => (

@@ -90,7 +90,8 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
     if (isSuccess) {
       nextStep();
     }
-  }, [isSuccess, nextStep]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <View style={styles.container}>

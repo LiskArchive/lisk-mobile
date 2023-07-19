@@ -346,13 +346,16 @@
         "chainIDLabel": "Chain ID",
         "connectionID": "Connection ID",
         "connectionDescription": "This is a request from wallet connect to establish session with Lisk Mobile, please review the following information carefully before approving.",
+        "chainsTitle": "Chains connecting",
         "accountsTitle": "Account(s) to use on this site",
         "sitePermissions": "Site Permissions",
         "methods": "Methods",
         "bridgeApplication": "Connect wallet",
         "bridgeApplicationDescription": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
         "addApplication": "Connect",
-        "enterConnectionUri": "Enter connection URI"
+        "enterConnectionUri": "Enter connection URI",
+        "approveConnectionChainsTitle": "Connected chains",
+        "approveConnectionAccountsTitle": "Connected accounts"
       }
     },
     "externalApplicationSignatureRequest": {
@@ -383,6 +386,12 @@
         "disconnectingFirst": "Disconnecting the ",
         "disconnectingSecond": "application removes your wallet details from the site.",
         "disconnect": "Disconnect"
+      }
+    },
+    "externalConnectionValidation": {
+      "errors": {
+        "namespaceErrorDescription": "Name space validation is only available for session_proposal events.",
+        "schemaErrorDescription": "Connection event has no schema on params."
       }
     }
   },

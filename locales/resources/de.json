@@ -347,13 +347,16 @@
         "chainIDLabel": "Chain-ID",
         "connectionID": "Verbindungs-ID",
         "connectionDescription": "Dies ist eine Anfrage von Wallet Connect, eine Sitzung mit Lisk Mobile einzurichten. Bitte lesen Sie die folgenden Informationen sorgfältig durch, bevor Sie sie genehmigen.",
+        "chainsTitle": "Ketten verbinden",
         "accountsTitle": "Zu verwendende Konto/Konten auf dieser Seite",
         "sitePermissions": "Seitenberechtigungen",
         "methods": "Methoden",
         "bridgeApplication": "Wallet verbinden",
         "bridgeApplicationDescription": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
         "addApplication": "Verbinden",
-        "enterConnectionUri": "Verbindungs-URI eingeben"
+        "enterConnectionUri": "Verbindungs-URI eingeben",
+        "approveConnectionChainsTitle": "Verbundene Ketten",
+        "approveConnectionAccountsTitle": "Verbundene Konten"
         }
     },
     "externalApplicationSignatureRequest": {

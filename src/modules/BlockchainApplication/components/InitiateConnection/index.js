@@ -116,7 +116,9 @@ export default function InitiateConnection({ nextStep, onFinish }) {
 
       <View style={styles.horizontalLine} />
 
-      <P style={[styles.description, styles.descriptionLabel]}>Chains connecting</P>
+      <P style={[styles.description, styles.descriptionLabel]}>
+        {i18next.t('application.explore.externalApplicationList.chainsTitle')}
+      </P>
 
       <DataRenderer
         data={connectingAppsMetadata?.data}

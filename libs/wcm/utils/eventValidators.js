@@ -1,4 +1,5 @@
 import * as Lisk from '@liskhq/lisk-client';
+import i18next from 'i18next';
 
 import { EVENTS } from '../constants/lifeCycle';
 
@@ -6,7 +7,9 @@ export function validateConnectionNameSpace(event) {
   const isSessionProposal = event?.name === EVENTS.SESSION_PROPOSAL;
 
   if (!isSessionProposal) {
-    throw new Error('Name space validation is only available for session_proposal events.');
+    throw new Error(
+      i18next.t('application.externalConnectionValidation.errors.namespaceErrorDescription')
+    );
   }
 
   const requiredNamespaces = event?.meta?.params?.requiredNamespaces;
@@ -23,7 +26,9 @@ export function validateConnectionSchema(event) {
   const isSchemaInEvent = event?.meta?.params?.request?.params?.schema;
 
   if (!isSchemaInEvent) {
-    throw new Error('Connection event has no schema on params.');
+    throw new Error(
+      i18next.t('application.externalConnectionValidation.errors.schemaErrorDescription')
+    );
   }
 
   try {
