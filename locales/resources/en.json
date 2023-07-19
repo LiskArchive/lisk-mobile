@@ -22,6 +22,11 @@
       "emailReportButton": "Report the error via email"
     }
   },
+  "navigation": {
+    "errors": {
+      "invalidDeepLinkDescription": "The link you provided is invalid. Please check it and try again."
+    }
+  },
   "intro" : {
     "sendAndRequestTokensTitle": "Send and request tokens",
     "sendAndRequestTokensDescription": "Creating an account is your first step in benefiting from blockchain technology. With your account, you can securely send and request tokens within and across blockchain applications.",

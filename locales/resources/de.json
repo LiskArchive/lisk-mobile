@@ -20,6 +20,11 @@
       "emailReportButton": "Melden Sie den Fehler per E-Mail"
     }
   },
+  "navigation": {
+    "errors": {
+      "invalidDeepLinkDescription": "Der von Ihnen angegebene Link ist ungültig. Bitte überprüfen Sie es und versuchen Sie es erneut."
+    }
+  },
   "intro": {
     "sendAndRequestTokensTitle": "Senden und Token anfordern",
     "sendAndRequestTokensDescription": "Ein Konto zu erstellen ist der erste Schritt, um von der Blockchain-Technologie zu profitieren. Mit Ihrem Konto können Sie sicher Tokens innerhalb und über Blockchain-Anwendungen senden und anfordern.",

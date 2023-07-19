@@ -5,6 +5,7 @@ import { getStateFromPath } from '@react-navigation/core';
 import { View } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
 import Url from 'url-parse';
+import i18next from 'i18next';
 
 import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './navigation.options';
@@ -62,7 +63,7 @@ export function getNavigationStateFromPath(path, options) {
         {
           name: 'Error',
           params: {
-            description: 'The link you provided is invalid. Please check it and try again.',
+            description: i18next.t('navigation.errors.invalidDeepLinkDescription'),
           },
         },
       ],

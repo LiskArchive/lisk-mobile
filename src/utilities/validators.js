@@ -1,4 +1,4 @@
-import * as Lisk from '@liskhq/lisk-client';
+import { cryptography } from '@liskhq/lisk-client';
 
 /**
  * Validates the given address with respect to the tokenType
@@ -12,7 +12,7 @@ export const validateAddress = (address) => {
     return -1;
   }
   try {
-    Lisk.cryptography.address.validateLisk32Address(address);
+    cryptography.address.validateLisk32Address(address);
     return 0;
   } catch (error) {
     return 1;

@@ -27,13 +27,13 @@ export default function ErrorFallbackScreen(props) {
 
   const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
-  const title = route.params?.title || props.title || i18next.t('fallbackScreens.error.title');
+  const title = props.title || route.params?.title || i18next.t('fallbackScreens.error.title');
   const description =
-    route.params?.description ||
     props.description ||
+    route.params?.description ||
     i18next.t('fallbackScreens.error.description');
 
-  const emailReport = useEmailReport({ error: props.error, errorMessage: props.description });
+  const emailReport = useEmailReport({ error: props.error, errorMessage: description });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>

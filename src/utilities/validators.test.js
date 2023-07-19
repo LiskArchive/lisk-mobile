@@ -31,4 +31,8 @@ describe('validateTransactionAmount', () => {
   it('returns false for non-positive transaction amounts', () => {
     expect(validateTransactionAmount('-123')).toBe(false);
   });
+
+  it('returns false for empty string value', () => {
+    expect(validateTransactionAmount('')).toBe(false);
+  });
 });
