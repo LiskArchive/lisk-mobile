@@ -95,8 +95,6 @@ export default function InitiateConnection({ nextStep, onFinish }) {
   const name = connectionEvent.meta.params.proposer.metadata.name;
   const url = connectionEvent.meta.params.proposer.metadata.url;
 
-  console.log(JSON.stringify(chains));
-
   return (
     <View style={[styles.container]}>
       <View style={styles.imageContainer}>

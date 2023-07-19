@@ -55,8 +55,6 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
 
     const response = await setUri(inputUri);
 
-    console.log(JSON.stringify(response));
-
     if (response.status === STATUS.FAILURE) {
       setError(new Error('Error connecting application. Please try again.'));
       setIsLoading(false);
