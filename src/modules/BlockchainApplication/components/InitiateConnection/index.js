@@ -95,6 +95,8 @@ export default function InitiateConnection({ nextStep, onFinish }) {
   const name = connectionEvent.meta.params.proposer.metadata.name;
   const url = connectionEvent.meta.params.proposer.metadata.url;
 
+  console.log(JSON.stringify(chains));
+
   return (
     <View style={[styles.container]}>
       <View style={styles.imageContainer}>
@@ -126,19 +128,20 @@ export default function InitiateConnection({ nextStep, onFinish }) {
         error={isErrorConnectingAppsMetadata}
         renderData={() => (
           <View style={[styles.itemsContainer]}>
-            {chains.map((chain, index) => (
-              <View key={index} style={[styles.itemContainer]}>
-                <Image style={[styles.itemImage]} source={{ uri: chain.logo.png }} />
+            {chains.length > 0 &&
+              chains.map((chain, index) => (
+                <View key={index} style={[styles.itemContainer]}>
+                  <Image style={[styles.itemImage]} source={{ uri: chain.logo?.png }} />
 
-                <View style={[styles.itemBody]}>
-                  <P style={[styles.itemTitle, styles.theme.itemTitle]}>{chain.chainName}</P>
+                  <View style={[styles.itemBody]}>
+                    <P style={[styles.itemTitle, styles.theme.itemTitle]}>{chain.chainName}</P>
 
-                  <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
-                    Chain ID: {chain.chainID}
-                  </P>
+                    <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
+                      Chain ID: {chain.chainID}
+                    </P>
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
           </View>
         )}
       />

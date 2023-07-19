@@ -77,7 +77,7 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
       <View style={[styles.itemsContainer]}>
         {chains.map((chain, index) => (
           <View key={index} style={[styles.itemContainer]}>
-            <Image style={[styles.itemImage]} source={{ uri: chain.logo.png }} />
+            <Image style={[styles.itemImage]} source={{ uri: chain.logo?.png }} />
 
             <View style={[styles.itemBody]}>
               <P style={[styles.itemTitle, styles.theme.itemTitle]}>{chain.chainName}</P>
