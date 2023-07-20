@@ -49,6 +49,9 @@ export default function getTransactionSummaryStyles() {
         borderWidth: 1,
         borderColor: colors.light.platinumGray,
       },
+      applicationNameContainer: {
+        alignItems: 'flex-end',
+      },
       avatar: {
         marginRight: 8,
       },

@@ -5,7 +5,6 @@ export default function getDisconnectExternalBlockchainApplicationStyles() {
     common: {
       container: {
         flex: 1,
-        width: '100%',
       },
       header: {
         flexDirection: 'row',

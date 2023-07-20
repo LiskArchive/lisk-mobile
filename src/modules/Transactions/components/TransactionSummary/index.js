@@ -25,9 +25,17 @@ export default function TransactionSummary(transaction) {
         </Text>
 
         <View style={[styles.row]}>
-          <Text style={[styles.valueText, styles.theme.valueText]}>
-            {transaction.senderApplication?.chainName}
-          </Text>
+          <View style={[styles.applicationNameContainer]}>
+            <Text style={[styles.valueText, styles.theme.valueText]}>
+              {transaction.senderApplication?.chainName}
+            </Text>
+
+            {transaction.senderApplication?.chainID && (
+              <Text style={[styles.label, styles.theme.label]}>
+                Chain ID: {transaction.senderApplication?.chainID}
+              </Text>
+            )}
+          </View>
 
           <Image
             source={{ uri: transaction.senderApplication?.logo.png }}
@@ -42,9 +50,17 @@ export default function TransactionSummary(transaction) {
         </Text>
 
         <View style={[styles.row]}>
-          <Text style={[styles.valueText, styles.theme.valueText]}>
-            {transaction.recipientApplication?.chainName}
-          </Text>
+          <View style={[styles.applicationNameContainer]}>
+            <Text style={[styles.valueText, styles.theme.valueText]}>
+              {transaction.recipientApplication?.chainName}
+            </Text>
+
+            {transaction.recipientApplication?.chainID && (
+              <Text style={[styles.label, styles.theme.label]}>
+                Chain ID: {transaction.recipientApplication?.chainID}
+              </Text>
+            )}
+          </View>
 
           <Image
             source={{ uri: transaction.recipientApplication?.logo.png }}
