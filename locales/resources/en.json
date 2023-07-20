@@ -24,6 +24,13 @@
       "emailReportButton": "Report the error via email"
     }
   },
+  "navigation": {
+    "notFound": {
+      "title": "Deeplink failed",
+      "description": "The link you entered is invalid. Please verify the link once more, click continue to Home to access the wallet.",
+      "continueButtonText": "Continue to home"
+    }
+  },
   "intro" : {
     "sendAndRequestTokensTitle": "Send and request tokens",
     "sendAndRequestTokensDescription": "Creating an account is your first step in benefiting from blockchain technology. With your account, you can securely send and request tokens within and across blockchain applications.",

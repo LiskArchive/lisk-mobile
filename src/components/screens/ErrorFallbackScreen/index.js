@@ -10,6 +10,7 @@ import { H4, P } from 'components/shared/toolBox/typography';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 
 import { getErrorFallbackScreenStyles } from './styles';
+import { useRoute } from '@react-navigation/native';
 
 /**
  * Renders an Error UI as fallback screen when a provided error occurs.
@@ -22,12 +23,19 @@ import { getErrorFallbackScreenStyles } from './styles';
  * not provided, a default description will be rendered.
  */
 export default function ErrorFallbackScreen(props) {
+  const route = useRoute();
+
   const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
-  const title = props.title || i18next.t('fallbackScreens.error.title');
-  const description = props.description || i18next.t('fallbackScreens.error.description');
+  const title = props.title || route.params?.title || i18next.t('fallbackScreens.error.title');
+  const description =
+    props.description ||
+    route.params?.description ||
+    i18next.t('fallbackScreens.error.description');
 
-  const emailReport = useEmailReport({ error: props.error, errorMessage: props.description });
+  const handleRetryClick = props.onRetry || route.params?.onRetry;
+
+  const emailReport = useEmailReport({ error: props.error, errorMessage: description });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -40,9 +48,11 @@ export default function ErrorFallbackScreen(props) {
 
         <P style={[styles.description, styles.theme.description]}>{description}</P>
 
-        <PrimaryButton noTheme style={[styles.submitButton]} onClick={props.onRetry}>
-          {i18next.t('fallbackScreens.error.retryButton')}
-        </PrimaryButton>
+        {handleRetryClick && (
+          <PrimaryButton noTheme style={[styles.submitButton]} onClick={handleRetryClick}>
+            {i18next.t('fallbackScreens.error.retryButton')}
+          </PrimaryButton>
+        )}
 
         {!emailReport.isLoading && !emailReport.error && (
           <>

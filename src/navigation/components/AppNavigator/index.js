@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import MultiSignature from 'components/screens/multiSignature';
 
-import { getNavigationHeaderOptions } from '../../helpers';
+import { getNavigationHeaderOptions } from '../../navigation.utils';
 import Tabs from '../Tabs';
 
 const config = {

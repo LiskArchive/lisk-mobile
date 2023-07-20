@@ -1,12 +1,13 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
+import Url from 'url-parse';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useModal } from 'hooks/useModal';
@@ -28,11 +29,11 @@ import { useCopyToClipboard } from 'hooks/useCopyToClipboard';
 import Avatar from 'components/shared/avatar';
 import Skeleton from 'components/shared/Skeleton/Skeleton';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { isTransactionAmountValid } from 'utilities/validators';
+import { validateTransactionAmount } from 'utilities/validators';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
 import { deviceWidth } from 'utilities/device';
-import { stringShortener, serializeQueryString } from 'utilities/helpers';
+import { stringShortener } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
@@ -61,27 +62,27 @@ export default function RequestToken() {
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
-  const qrCodeUrl = useMemo(() => {
+  const getQRCodeUrl = () => {
     const validator = (str) => reg.amount.test(str);
 
     const amountValidity = validator(amount.value) ? 0 : 1;
 
-    const queryString = serializeQueryString({
+    const url = new Url('lisk://wallet');
+
+    const urlParams = {
       recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
       recipientChain: recipientApplicationChainID,
       token: tokenID,
       reference: message,
-    });
+    };
 
-    return `lisk://wallet${queryString}`;
-  }, [
-    currentAccount.metadata.address,
-    amount.value,
-    recipientApplicationChainID,
-    tokenID,
-    message,
-  ]);
+    url.set('query', urlParams);
+
+    return url.toString();
+  };
+
+  const qrCodeUrl = getQRCodeUrl();
 
   const [copiedToClipboard, handleCopyToClipboard] = useCopyToClipboard(qrCodeUrl);
 
@@ -111,7 +112,7 @@ export default function RequestToken() {
   const openQrCode = () => modal.open(renderFullCode());
 
   const handleAmountChange = (value) =>
-    setAmount({ value, validity: isTransactionAmountValid(value) });
+    setAmount({ value, validity: validateTransactionAmount(value) });
 
   const defaultTokenID =
     applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;

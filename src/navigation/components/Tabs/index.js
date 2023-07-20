@@ -7,8 +7,8 @@ import AccountHomeScreen from 'modules/Accounts/components/AccountHome/AccountHo
 import BlockchainApplicationsExplorer from 'modules/BlockchainApplication/components/ApplicationsExplorer';
 import BookmarksScreen from 'modules/Bookmark';
 import SettingsScreen from 'modules/Settings/components/SettingsScreen/SettingsScreen';
-import { getTabBarIcon } from '../../helpers';
-import { getNavigationTabBarStyles } from '../../styles';
+import { getTabBarIcon } from '../../navigation.utils';
+import { getNavigationTabBarStyles } from '../Navigator/Navigator.styles';
 
 const Tab = createBottomTabNavigator();
 
