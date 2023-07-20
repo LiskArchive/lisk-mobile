@@ -1,4 +1,4 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
 import { colors, fonts } from 'constants/styleGuide';
@@ -7,7 +7,6 @@ export function getNavigationTabBarStyles(modalOpen) {
   const deviceWidth = Dimensions.get('window').width;
   const width = deviceWidth - 68;
   const left = deviceWidth / 2 - width / 2;
-  const paddingTop = Platform.OS === 'android' ? 0 : 28;
 
   return {
     display: modalOpen ? 'none' : 'flex',
@@ -18,7 +17,7 @@ export function getNavigationTabBarStyles(modalOpen) {
     bottom: 24,
     borderRadius: 64,
     height: 64,
-    paddingTop,
+    paddingBottom: 5,
   };
 }
 
