@@ -16,8 +16,8 @@ import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
-import NotFound from 'components/navigation/NotFound';
 import ErrorScreen from 'components/screens/ErrorFallbackScreen';
+import NotFoundScreen from 'components/screens/NotFoundScreen/NotFoundScreen';
 
 import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
@@ -84,7 +84,7 @@ export default function Navigator({ children }) {
           />
           <StackNavigator.Screen
             name="NotFound"
-            component={NotFound}
+            component={NotFoundScreen}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen

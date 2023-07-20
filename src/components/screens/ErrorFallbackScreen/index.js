@@ -33,6 +33,8 @@ export default function ErrorFallbackScreen(props) {
     route.params?.description ||
     i18next.t('fallbackScreens.error.description');
 
+  const handleRetryClick = props.onRetry || route.params?.onRetry;
+
   const emailReport = useEmailReport({ error: props.error, errorMessage: description });
 
   return (
@@ -46,9 +48,11 @@ export default function ErrorFallbackScreen(props) {
 
         <P style={[styles.description, styles.theme.description]}>{description}</P>
 
-        <PrimaryButton noTheme style={[styles.submitButton]} onClick={props.onRetry}>
-          {i18next.t('fallbackScreens.error.retryButton')}
-        </PrimaryButton>
+        {handleRetryClick && (
+          <PrimaryButton noTheme style={[styles.submitButton]} onClick={handleRetryClick}>
+            {i18next.t('fallbackScreens.error.retryButton')}
+          </PrimaryButton>
+        )}
 
         {!emailReport.isLoading && !emailReport.error && (
           <>

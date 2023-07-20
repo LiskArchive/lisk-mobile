@@ -21,9 +21,11 @@
     }
   },
   "navigation": {
-    "errors": {
-      "invalidDeepLinkDescription": "Der von Ihnen angegebene Link ist ungültig. Bitte überprüfen Sie es und versuchen Sie es erneut."
-    }
+    "notFound": {
+      "title": "Deeplink fehlgeschlagen",
+      "description": "Der eingegebene Link ist ungültig. Bitte überprüfen Sie den Link noch einmal, klicken Sie auf Weiter zur Startseite, um auf das Wallet zuzugreifen.",
+      "continueButtonText": "Weiter zur Startseite"
+    }  
   },
   "intro": {
     "sendAndRequestTokensTitle": "Senden und Token anfordern",

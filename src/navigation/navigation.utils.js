@@ -5,7 +5,6 @@ import { getStateFromPath } from '@react-navigation/core';
 import { View } from 'react-native';
 import * as Lisk from '@liskhq/lisk-client';
 import Url from 'url-parse';
-import i18next from 'i18next';
 
 import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './navigation.options';
@@ -30,7 +29,6 @@ export function getTabBarIcon({ route }) {
 
 export function validateDeepLink(url) {
   const parsedUrl = new Url(url, true);
-  if (parsedUrl.protocol !== 'lisk:') return false;
 
   const pathname = parsedUrl.href.match(/(?<=(lisk:))(\/\/[\w|/]+)/g)?.[0];
 
@@ -44,8 +42,14 @@ export function validateDeepLink(url) {
 
   if (!isSearchParamsValid) return false;
 
+  let queryParams = parsedUrl.query;
+
+  if (foundLink.paramsTransformer) {
+    queryParams = foundLink.paramsTransformer(parsedUrl.query);
+  }
+
   try {
-    Lisk.validator.validator.validate(foundLink.validationSchema, parsedUrl.query);
+    Lisk.validator.validator.validate(foundLink.validationSchema, queryParams);
   } catch {
     return false;
   }
@@ -61,10 +65,7 @@ export function getNavigationStateFromPath(path, options) {
     return {
       routes: [
         {
-          name: 'Error',
-          params: {
-            description: i18next.t('navigation.errors.invalidDeepLinkDescription'),
-          },
+          name: 'NotFound',
         },
       ],
     };
