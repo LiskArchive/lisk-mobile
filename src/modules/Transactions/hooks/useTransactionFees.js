@@ -91,12 +91,9 @@ export function useTransactionFees({
 
   const areParamsValid = validateParams();
 
-  console.log({ areParamsValid });
-
   useEffect(() => {
     if (isTransactionSuccess && areParamsValid && enabled) {
-      // eslint-disable-next-line no-unused-vars
-      const { signatures, ...transactionJSON } = transaction.toJSON();
+      const transactionJSON = transaction.toJSON();
 
       estimateFeesMutation.mutate({
         transaction: transactionJSON,
