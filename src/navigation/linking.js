@@ -6,7 +6,7 @@ const navigationLinkingConfig = {
 };
 
 const navigationLinking = {
-  prefixes: ['lisk://', 'https://lisk.com'],
+  prefixes: ['https://lisk.com'],
   config: navigationLinkingConfig,
 };
 
