@@ -487,7 +487,8 @@
       "tokenID": "Token to send must be specified",
       "amountInvalid": "Amount not valid.",
       "priority": "Priority must be specified",
-      "insufficientBalance": "Your balance is not sufficient."
+      "insufficientBalance": "Your balance is not sufficient.",
+      "estimateFees": "Error estimating fees for this transaction. Please try with different parameters."
     },
     "info": {
       "priority": {

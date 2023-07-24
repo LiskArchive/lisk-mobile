@@ -388,8 +388,22 @@ export function SendTokenTransactionFeesLabels({
   }
 
   if (isErrorTransactionFees) {
-    // TODO: Add UI when designs are available.
-    return <Text>Error!</Text>;
+    return (
+      <View style={[styles.feeContainer]}>
+        <View style={[styles.row]}>
+          <Text style={[styles.theme.text, styles.iconLabel, showFeesBreakdown && styles.boldText]}>
+            {i18next.t('sendToken.tokenSelect.transactionFeeLabel')}
+          </Text>
+
+          <InfoToggler
+            title={i18next.t('sendToken.info.transactionFee.title')}
+            description={i18next.t('sendToken.info.transactionFee.description1')}
+          />
+        </View>
+
+        <Text style={[styles.theme.text, showFeesBreakdown && styles.boldText]}>-</Text>
+      </View>
+    );
   }
 
   return (

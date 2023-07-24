@@ -482,7 +482,8 @@
       "tokenID": "Zu sendendes Token muss angegeben werden",      
       "amountInvalid": "Betrag ungültig.",
       "priority": "Priorität muss angegeben werden",
-      "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend."
+      "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend.",
+      "estimateFees": "Fehler bei der Schätzung der Gebühren für diese Transaktion. Bitte versuchen Sie es mit anderen Parametern."
     },
     "info": {
       "priority": {
