@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { io } from 'socket.io-client';
+import { fetch } from 'react-native-ssl-pinning';
 
 import { METHOD } from './constants';
 
@@ -7,6 +8,8 @@ export class APIClient {
   http = null;
 
   ws = null;
+
+  certs = null;
 
   axiosConfig = {
     timeout: 10000,
@@ -30,11 +33,26 @@ export class APIClient {
   }
 
   rest(config) {
+    if (this.certs) {
+      return fetch(this.http, {
+        ...this.axiosConfig,
+        ...config,
+        sslPinning: {
+          certs: this.certs,
+        },
+      });
+    }
     return this.http?.request({ ...this.http.defaults, ...config });
   }
 
-  create({ http, ws } = {}) {
+  create({ http, ws, apiCertificatePublicKey } = {}) {
+    console.log({ apiCertificatePublicKey });
+
     this.ws = io(`${ws}/blockchain`);
+
+    if (apiCertificatePublicKey) {
+      // TODO: Import certificate and assign to this.certs
+    }
 
     const request = axios.create({
       ...this.axiosConfig,
