@@ -18,6 +18,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* LiskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LiskTests.m */; };
 		3969B9765AFC237D4D353721 /* libPods-LiskApp-LiskQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */; };
 		41A689921EFA36A8D32F0086 /* libPods-Lisk-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C9CBE86C2F2D2BF3BA78C /* libPods-Lisk-tvOS.a */; };
+		6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */; };
 		6FD893360F595FFBC56983CF /* libPods-LiskApp-Lisk-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F47CFD96B49A8A432C2DC73 /* libPods-LiskApp-Lisk-LiskTests.a */; };
 		7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
 		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
@@ -56,7 +57,7 @@
 		79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */; };
 		7E342449C772440C0543475E /* libPods-LiskApp-LiskDev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Lisk/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lisk/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lisk/main.m; sourceTree = "<group>"; };
+		206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAC6F56CBCD3FA40FA7F011 /* Pods-LiskApp-LiskDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskDev.debug.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Lisk-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lisk-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lisk-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +189,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */,
+				A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */,
+				6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +301,7 @@
 				3F47CFD96B49A8A432C2DC73 /* libPods-LiskApp-Lisk-LiskTests.a */,
 				7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */,
 				ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */,
+				206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
