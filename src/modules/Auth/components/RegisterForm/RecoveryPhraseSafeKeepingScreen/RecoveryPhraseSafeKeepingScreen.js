@@ -7,9 +7,9 @@ import { H4, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import SwitchButton from 'components/shared/toolBox/switchButton';
+import CopyRecoveryPhraseToClipboard from 'components/shared/CopyRecoveryPhraseToClipboard/CopyRecoveryPhraseToClipboard';
 
 import getRegisterSafeKeepingStyles from './RecoveryPhraseSafeKeepingScreen.styles';
-import CopyRecoveryPhraseToClipboard from '../../CopyRecoveryPhraseToClipboard/CopyRecoveryPhraseToClipboard';
 
 export default function RecoveryPhraseSafeKeepingScreen({
   recoveryPhrase,

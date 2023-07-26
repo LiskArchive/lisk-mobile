@@ -120,7 +120,7 @@
       "title": "Sichern Sie die geheime Wiederherstellungsphrase",
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
       "continue": "Weiter",
-      "storePhrase": ""
+      "storePhrase": "Bewahren Sie Ihre geheime Wiederherstellungsphrase sorgfältig auf:"
     },
     "biometrics": {
       "enableTitle": "",

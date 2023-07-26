@@ -119,7 +119,7 @@
       "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",
       "continue": "Continue",
-      "storePhrase": "Store your secret recovery phrase:"
+      "storePhrase": "Store your secret recovery phrase carefully:"
     },
     "biometrics": {
       "enableTitle": "Enable {{sensorType}}",

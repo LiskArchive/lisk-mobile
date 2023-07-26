@@ -42,10 +42,18 @@ export default function CopyRecoveryPhrase({ sharedData: data, nextStep }) {
       />
 
       <ScrollView style={styles.body}>
-        <CopyRecoveryPhraseToClipboard recoveryPhrase={data.recoveryPhrase} />
+        <P style={[styles.recoveryPhraseTitle, styles.theme.recoveryPhraseTitle]}>
+          {i18next.t('settings.backupPhrase.storePhrase')}
+        </P>
+
+        <View style={[styles.recoveryPhraseContainer, styles.theme.recoveryPhraseContainer]}>
+          <P style={[styles.recoveryPhrase, styles.theme.recoveryPhrase]}>{data.recoveryPhrase}</P>
+
+          <CopyRecoveryPhraseToClipboard recoveryPhrase={data.recoveryPhrase} />
+        </View>
 
         <View style={styles.row}>
-          <P style={[styles.qrText, styles.theme.text]}>{i18next.t('Private use only')}</P>
+          <P style={[styles.qrText, styles.theme.text]}>{i18next.t('Private use only')}:</P>
 
           <A style={styles.button} onPress={toggleQRCode}>
             {recoveryPhraseRevealed ? i18next.t('Hide QR code') : i18next.t('Show QR code')}
