@@ -1,4 +1,5 @@
 import { NativeModules } from 'react-native';
+import mockClipboard from '@react-native-clipboard/clipboard/jest/clipboard-mock.js';
 
 jest.useFakeTimers({
   legacyFakeTimers: true,
@@ -36,6 +37,8 @@ jest.mock('react-native-keychain', () => ({
   getGenericPassword: jest.fn(),
   resetGenericPassword: jest.fn(),
 }));
+
+jest.mock('@react-native-clipboard/clipboard', () => mockClipboard);
 
 if (!global.setImmediate) {
   global.setImmediate = setTimeout;

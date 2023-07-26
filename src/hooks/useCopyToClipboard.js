@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Clipboard } from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 export function useCopyToClipboard(value) {
   const [copied, setCopied] = useState(false);
