@@ -1,41 +1,57 @@
-import { themes, colors, fonts } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
+import { setColorOpacity } from 'utilities/helpers';
 
 export default function getCopyRecoveryPhraseToClipboardStyles() {
   return {
     common: {
       container: {
-        flex: 1,
+        padding: 8,
+        alignItems: 'center',
+        borderRadius: 5,
+        width: '100%',
       },
       description: {
-        fontSize: 14,
+        fontSize: 12,
         textAlign: 'center',
-        marginBottom: 32,
+        marginBottom: 8,
       },
       copyTextContainer: {
+        flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 32,
       },
       copyText: {
         color: colors.light.ultramarineBlue,
-        fontSize: fonts.size.base,
+        fontSize: 12,
         fontWeight: '600',
+      },
+      icon: {
+        paddingLeft: 8,
+      },
+      link: {
+        fontSize: 12,
+        textDecorationLine: 'underline',
       },
     },
     [themes.light]: {
       container: {
-        backgroundColor: colors.light.white,
+        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
       },
       description: {
-        color: colors.light.smoothGray,
+        color: colors.light.zodiacBlue,
+      },
+      link: {
+        color: colors.light.ultramarineBlue,
       },
     },
     [themes.dark]: {
       container: {
-        backgroundColor: colors.dark.mainBg,
+        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.2),
       },
-
       description: {
         color: colors.dark.mountainMist,
+      },
+      link: {
+        color: colors.dark.ultramarineBlue,
       },
     },
   };
