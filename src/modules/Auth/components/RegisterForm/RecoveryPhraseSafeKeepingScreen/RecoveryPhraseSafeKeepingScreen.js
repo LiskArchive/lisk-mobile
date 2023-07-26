@@ -3,13 +3,13 @@ import { View, SafeAreaView } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { H4, B, P } from 'components/shared/toolBox/typography';
-import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
+import { H4, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 
 import getRegisterSafeKeepingStyles from './RecoveryPhraseSafeKeepingScreen.styles';
+import CopyRecoveryPhraseToClipboard from '../../CopyRecoveryPhraseToClipboard/CopyRecoveryPhraseToClipboard';
 
 export default function RecoveryPhraseSafeKeepingScreen({
   recoveryPhrase,
@@ -57,13 +57,7 @@ export default function RecoveryPhraseSafeKeepingScreen({
             {recoveryPhrase.replace(/\s+/g, '  ')}
           </P>
 
-          <CopyToClipboard
-            style={styles.copyContainer}
-            labelStyle={styles.copyLabel}
-            label={i18next.t('commons.copyToClipboard')}
-            value={recoveryPhrase}
-            type={B}
-          />
+          <CopyRecoveryPhraseToClipboard recoveryPhrase={recoveryPhrase} />
         </View>
       </View>
 
