@@ -9,9 +9,9 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 
-import getRegisterSafeKeepingStyles from './styles';
+import getRegisterSafeKeepingStyles from './RecoveryPhraseSafeKeepingScreen.styles';
 
-export default function RegisterSafeKeeping({
+export default function RecoveryPhraseSafeKeepingScreen({
   recoveryPhrase,
   prevStep,
   nextStep,

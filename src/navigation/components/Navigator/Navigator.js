@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 import RNShake from 'react-native-shake';
 
-import Register from 'modules/Auth/components/Register/Register';
+import RegisterForm from 'modules/Auth/components/RegisterForm/RegisterForm';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
@@ -79,7 +79,7 @@ export default function Navigator({ children }) {
         <StackNavigator.Navigator initialRouteName="AuthMethod">
           <StackNavigator.Screen
             name="Register"
-            component={Register}
+            component={RegisterForm}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen

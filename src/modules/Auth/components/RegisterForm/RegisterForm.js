@@ -9,15 +9,15 @@ import Stepper from 'components/shared/Stepper';
 import { H4, P } from 'components/shared/toolBox/typography';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import RecoveryPhraseQuiz from '../RecoveryPhraseQuiz/RecoveryPhraseQuiz';
-import RegisterSafeKeeping from './RegisterSafeKeeping';
+import RecoveryPhraseSafeKeepingScreen from './RecoveryPhraseSafeKeepingScreen/RecoveryPhraseSafeKeepingScreen';
 import PasswordSetupForm from '../PasswordSetupForm';
 import { generateRecoveryPhrase } from '../../utils';
 
-import getRegisterStyles from './Register.styles';
+import getRegisterStyles from './RegisterForm.styles';
 import RecoveryPhraseStrengthSelect from './RecoveryPhraseStrengthSelect/RecoveryPhraseStrengthSelect';
 import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../../constants/recoveryPhrase.constants';
 
-export default function Register() {
+export default function RegisterForm() {
   const route = useRoute();
 
   const [recoveryPhrase, setRecoveryPhrase] = useState();
@@ -78,7 +78,7 @@ export default function Register() {
           handleChange={handleRecoveryPhraseStrengthChange}
         />
 
-        <RegisterSafeKeeping showHeader recoveryPhrase={recoveryPhrase} />
+        <RecoveryPhraseSafeKeepingScreen showHeader recoveryPhrase={recoveryPhrase} />
 
         <RecoveryPhraseQuiz showHeader />
 
