@@ -1,18 +1,27 @@
 {
   "commons": {
     "secretRecoveryPhrase": "Geheime Wiederherstellungsphrase",
-    "customDerivationPath": "",
+    "customDerivationPath": "Benutzerdefinierter Ableitungspfad",
     "buttons": {
       "continue": "Weiter",
-      "cancel": "Absagen",
+      "cancel": "Abbrechen",
       "confirm": "Bestätigen",
       "reject": "Ablehnen",
-      "reload": "Aktualisierung",
+      "reload": "Neu laden",
       "viewAll": "Alle ansehen",
       "selectAll": "Alle auswählen"
     },
-    "copyToClipboard": "In die Zwischenablage kopieren"
-  },
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "copyToClipboard": "In die Zwischenablage kopieren",
+    "pasteFromClipboard": "Aus der Zwischenablage einfügen",
+    "pastedFromClipboard": "Eingefügt",
+    "recoveryPhrase": {
+      "writeDownInstructions1": "Es niederzuschreiben ist mehr",
+      "writeDownInstructions2": "als zu kopieren.",
+      "writeDownInstructionsLink": "sicher"
+    }
+  },  
   "fallbackScreens" : {
     "error" : {
       "title": "Etwas ist schief gelaufen",
@@ -57,8 +66,6 @@
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
-  "Show QR code": "Zeige QR Code",
-  "Hide QR code": "",
   "Scan": "scannen",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
@@ -115,12 +122,15 @@
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
       "enableDerivationPath": ""
-    }, 
+    },
     "backupPhrase": {
-      "title": "Sichern Sie die geheime Wiederherstellungsphrase",
+      "title": "Sichern Sie Ihre geheime Wiederherstellungsphrase",
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
       "continue": "Weiter",
-      "storePhrase": ""
+      "storePhrase": "Bewahren Sie Ihre geheime Wiederherstellungsphrase sorgfältig auf:",
+      "qrLabel": "Nur zur privaten Verwendung:",
+      "showQrButton": "QR-Code anzeigen",
+      "hideQrButton": "QR-Code ausblenden"
     },
     "biometrics": {
       "enableTitle": "",

@@ -1,56 +1,58 @@
-import { themes, colors, boxes, fonts } from 'constants/styleGuide';
+import { themes, colors } from 'constants/styleGuide';
 import { setColorOpacity } from 'utilities/helpers';
 
-export default () => ({
-  common: {
-    container: {
-      alignItems: 'center',
-      padding: boxes.boxPadding,
-      borderWidth: 1,
+export default function getCopyRecoveryPhraseToClipboardStyles() {
+  return {
+    common: {
+      container: {
+        padding: 8,
+        alignItems: 'center',
+        borderRadius: 5,
+        width: '100%',
+      },
+      description: {
+        fontSize: 12,
+        textAlign: 'center',
+        marginBottom: 8,
+      },
+      copyTextContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      copyText: {
+        color: colors.light.ultramarineBlue,
+        fontSize: 12,
+        fontWeight: '600',
+      },
+      icon: {
+        paddingLeft: 8,
+      },
+      link: {
+        fontSize: 12,
+        textDecorationLine: 'underline',
+      },
     },
-    recoveryPhrase: {
-      marginTop: 30,
-      marginBottom: 30,
-      fontFamily: fonts.family.recoveryPhraseText,
-      fontSize: 18,
-      lineHeight: 32,
-      textAlign: 'center',
+    [themes.light]: {
+      container: {
+        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
+      },
+      description: {
+        color: colors.light.zodiacBlue,
+      },
+      link: {
+        color: colors.light.ultramarineBlue,
+      },
     },
-    copyContainer: {
-      alignItems: 'center',
+    [themes.dark]: {
+      container: {
+        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.2),
+      },
+      description: {
+        color: colors.dark.mountainMist,
+      },
+      link: {
+        color: colors.dark.ultramarineBlue,
+      },
     },
-    copy: {
-      fontFamily: fonts.family.contextBold,
-    },
-  },
-
-  [themes.light]: {
-    container: {
-      borderColor: colors.light.mystic,
-    },
-    recoveryPhraseTitle: {
-      color: colors.light.blueGray,
-    },
-    recoveryPhrase: {
-      color: colors.light.maastrichtBlue,
-    },
-    copy: {
-      color: colors.light.ultramarineBlue,
-    },
-  },
-
-  [themes.dark]: {
-    container: {
-      borderColor: setColorOpacity(colors.light.white, 0.15),
-    },
-    recoveryPhraseTitle: {
-      color: colors.dark.platinum,
-    },
-    recoveryPhrase: {
-      color: colors.dark.white,
-    },
-    copy: {
-      color: colors.dark.ultramarineBlue,
-    },
-  },
-});
+  };
+}

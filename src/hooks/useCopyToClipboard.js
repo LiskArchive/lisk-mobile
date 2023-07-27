@@ -1,19 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
-import { Clipboard } from 'react-native';
 
-export function useCopyToClipboard(value) {
+import { setValueToClipboard } from 'utilities/clipboard.utils';
+
+export function useCopyToClipboard(value, { autoCleanup = false } = {}) {
   const [copied, setCopied] = useState(false);
 
   const timeout = useRef();
 
   const handleCopy = () => {
-    setCopied((prevState) => !prevState);
+    setValueToClipboard(value);
 
-    Clipboard.setString(value);
+    setCopied(true);
 
     timeout.current = setTimeout(() => {
-      setCopied((prevState) => !prevState);
-    }, 4000);
+      setCopied(false);
+
+      if (autoCleanup) {
+        setValueToClipboard('');
+      }
+    }, 10000);
   };
 
   useEffect(() => () => clearTimeout(timeout.current), []);

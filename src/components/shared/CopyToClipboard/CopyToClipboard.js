@@ -19,8 +19,9 @@ export default function CopyToClipboard({
   iconStyle,
   labelStyle,
   testID,
+  autoCleanup,
 }) {
-  const [copied, handleCopy] = useCopyToClipboard(value);
+  const [copied, handleCopy] = useCopyToClipboard(value, { autoCleanup });
 
   const { styles } = useTheme({ styles: getStyles() });
 
