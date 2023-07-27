@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Linking } from 'react-native';
-// import i18next from 'i18next';
+import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { P, B, A } from 'components/shared/toolBox/typography';
@@ -26,15 +26,17 @@ export default function CopyRecoveryPhraseToClipboard({ recoveryPhrase }) {
   return (
     <View style={[styles.container, styles.theme.container]}>
       <P style={[styles.description, styles.theme.description]}>
-        Writing it down is more{' '}
+        {i18next.t('commons.recoveryPhrase.writeDownInstructions1')}{' '}
         <A onPress={handleOpenSecurityLink} style={[styles.link, styles.theme.link]}>
-          secure
+          {i18next.t('commons.recoveryPhrase.writeDownInstructionsLink')}
         </A>{' '}
-        than copying.
+        {i18next.t('commons.recoveryPhrase.writeDownInstructions2')}
       </P>
 
       <TouchableOpacity style={[styles.copyTextContainer]} onPress={handleCopy}>
-        <B style={[styles.copyText]}>{copied ? 'Copied' : 'Copy'}</B>
+        <B style={[styles.copyText]}>
+          {copied ? i18next.t('commons.copied') : i18next.t('commons.copy')}
+        </B>
 
         <TouchableOpacity onPress={handleCopy} style={[styles.icon]}>
           {copied ? (

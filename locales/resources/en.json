@@ -11,9 +11,16 @@
       "viewAll": "View all",
       "selectAll": "Select all"
     },
+    "copy": "Copy",
+    "copied": "Copied",
     "copyToClipboard": "Copy to clipboard",
     "pasteFromClipboard": "Paste from clipboard",
-    "pastedFromClipboard": "Pasted"
+    "pastedFromClipboard": "Pasted",
+    "recoveryPhrase": {
+      "writeDownInstructions1": "Writing it down is more",
+      "writeDownInstructions2": "than copying.",
+      "writeDownInstructionsLink": "secure"
+    }
   },
   "fallbackScreens" : {
     "error" : {

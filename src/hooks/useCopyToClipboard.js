@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { setValueToClipboard } from 'utilities/clipboard.utils';
 
-export function useCopyToClipboard(value, { autoCleanup = false }) {
+export function useCopyToClipboard(value, { autoCleanup = false } = {}) {
   const [copied, setCopied] = useState(false);
 
   const timeout = useRef();

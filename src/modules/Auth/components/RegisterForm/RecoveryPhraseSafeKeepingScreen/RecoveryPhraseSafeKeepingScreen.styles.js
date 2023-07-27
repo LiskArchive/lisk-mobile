@@ -36,6 +36,7 @@ export default function getRegisterSafeKeepingStyles() {
         fontSize: fonts.size.base,
         fontFamily: fonts.family.recoveryPhraseText,
         textAlign: 'center',
+        marginBottom: 24,
       },
       copyContainer: {
         alignItems: 'center',
