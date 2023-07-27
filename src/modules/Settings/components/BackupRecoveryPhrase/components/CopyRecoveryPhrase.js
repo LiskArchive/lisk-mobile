@@ -53,10 +53,14 @@ export default function CopyRecoveryPhrase({ sharedData: data, nextStep }) {
         </View>
 
         <View style={styles.row}>
-          <P style={[styles.qrText, styles.theme.text]}>{i18next.t('Private use only')}:</P>
+          <P style={[styles.qrText, styles.theme.text]}>
+            {i18next.t('settings.backupPhrase.qrLabel')}
+          </P>
 
           <A style={styles.button} onPress={toggleQRCode}>
-            {recoveryPhraseRevealed ? i18next.t('Hide QR code') : i18next.t('Show QR code')}
+            {recoveryPhraseRevealed
+              ? i18next.t('settings.backupPhrase.hideQrButton')
+              : i18next.t('settings.backupPhrase.showQrButton')}
           </A>
         </View>
 

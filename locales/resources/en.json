@@ -64,8 +64,6 @@
   "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
-  "Show QR code": "Show QR code",
-  "Hide QR code": "Hide QR code",
   "Scan": "Scan",
   "Search": "Search",
   "Search for a bookmark": "Search for a bookmark",
@@ -126,7 +124,10 @@
       "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",
       "continue": "Continue",
-      "storePhrase": "Store your secret recovery phrase carefully:"
+      "storePhrase": "Store your secret recovery phrase carefully:",
+      "qrLabel": "Private use only:",
+      "showQrButton": "Show QR code",
+      "hideQrButton": "Hide QR code"
     },
     "biometrics": {
       "enableTitle": "Enable {{sensorType}}",

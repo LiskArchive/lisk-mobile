@@ -66,8 +66,6 @@
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
-  "Show QR code": "Zeige QR Code",
-  "Hide QR code": "",
   "Scan": "scannen",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
@@ -124,12 +122,15 @@
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
       "enableDerivationPath": ""
-    }, 
+    },
     "backupPhrase": {
-      "title": "Sichern Sie die geheime Wiederherstellungsphrase",
+      "title": "Sichern Sie Ihre geheime Wiederherstellungsphrase",
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
       "continue": "Weiter",
-      "storePhrase": "Bewahren Sie Ihre geheime Wiederherstellungsphrase sorgfältig auf:"
+      "storePhrase": "Bewahren Sie Ihre geheime Wiederherstellungsphrase sorgfältig auf:",
+      "qrLabel": "Nur zur privaten Verwendung:",
+      "showQrButton": "QR-Code anzeigen",
+      "hideQrButton": "QR-Code ausblenden"
     },
     "biometrics": {
       "enableTitle": "",
