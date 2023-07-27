@@ -18,6 +18,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* LiskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LiskTests.m */; };
 		3969B9765AFC237D4D353721 /* libPods-LiskApp-LiskQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */; };
 		41A689921EFA36A8D32F0086 /* libPods-Lisk-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C9CBE86C2F2D2BF3BA78C /* libPods-Lisk-tvOS.a */; };
+		6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */; };
 		6FD893360F595FFBC56983CF /* libPods-LiskApp-Lisk-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F47CFD96B49A8A432C2DC73 /* libPods-LiskApp-Lisk-LiskTests.a */; };
 		7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
 		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
@@ -29,6 +30,22 @@
 		7952114425F7660F00CCF7F8 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114125F7660F00CCF7F8 /* OpenSans-Bold.ttf */; };
 		7952114B25F7661900CCF7F8 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114925F7661900CCF7F8 /* Dots-Regular.ttf */; };
 		7952114C25F7661900CCF7F8 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */; };
+		79D723092A6FF5040086AEF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		79D7230A2A6FF5040086AEF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		79D7230B2A6FF5040086AEF9 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
+		79D7230F2A6FF5040086AEF9 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */; };
+		79D723102A6FF5040086AEF9 /* MobileProtect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */; };
+		79D723112A6FF5040086AEF9 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113925F7660200CCF7F8 /* icomoon.ttf */; };
+		79D723122A6FF5040086AEF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		79D723132A6FF5040086AEF9 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114025F7660F00CCF7F8 /* OpenSans-Semibold.ttf */; };
+		79D723142A6FF5040086AEF9 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
+		79D723152A6FF5040086AEF9 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113325F765F800CCF7F8 /* Gilroy-Bold.ttf */; };
+		79D723162A6FF5040086AEF9 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
+		79D723172A6FF5040086AEF9 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952113F25F7660F00CCF7F8 /* OpenSans-Regular.ttf */; };
+		79D723182A6FF5040086AEF9 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114125F7660F00CCF7F8 /* OpenSans-Bold.ttf */; };
+		79D723192A6FF5040086AEF9 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114925F7661900CCF7F8 /* Dots-Regular.ttf */; };
+		79D7231A2A6FF5040086AEF9 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */; };
+		79D7231B2A6FF5040086AEF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		79DD0C3A2A3750FB00E2DC9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		79DD0C3B2A3750FB00E2DC9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		79DD0C3C2A3750FB00E2DC9D /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
@@ -38,8 +55,9 @@
 		79DD0C4A2A3750FB00E2DC9D /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */; };
 		79DD0C4B2A3750FB00E2DC9D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */; };
+		7E342449C772440C0543475E /* libPods-LiskApp-LiskDev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A23A1AEDA1EFDCFFD8819768 /* libPods-LiskApp-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87935DE970915F3368161DEE /* libPods-LiskApp-Lisk.a */; };
+		A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +80,16 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		795216AB25FF3CA200CCF7F8 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79D7231D2A6FF5040086AEF9 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -95,6 +123,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Lisk/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lisk/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lisk/main.m; sourceTree = "<group>"; };
+		206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BAC6F56CBCD3FA40FA7F011 /* Pods-LiskApp-LiskDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskDev.debug.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Lisk-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lisk-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lisk-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		334B395EE8FC7A372A7340F1 /* Pods-LiskApp-LiskQA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskQA.debug.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskQA/Pods-LiskApp-LiskQA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +151,8 @@
 		7952173A25FF508D00CCF7F8 /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7952173C25FF508D00CCF7F8 /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7952173E25FF508D00CCF7F8 /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79D723232A6FF5040086AEF9 /* LiskDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiskDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79D723242A6FF5040086AEF9 /* LiskDev/Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = LiskDev/Info.plist; path = "/Users/balanced02/Documents/Lightcurve/lisk-mobile/ios/LiskDev/Info.plist"; sourceTree = "<absolute>"; };
 		79DD0C532A3750FB00E2DC9D /* LiskQA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiskQA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD0C552A37515700E2DC9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MobileProtect.plist; sourceTree = "<group>"; };
@@ -129,16 +161,17 @@
 		7CD27ED9391CCE388379420A /* Pods-Lisk-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOS/Pods-Lisk-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7D3C7D452F8CAAED9408693D /* Pods-LiskApp-LiskQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskQA.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskQA/Pods-LiskApp-LiskQA.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Lisk/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		87935DE970915F3368161DEE /* libPods-LiskApp-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91CDA88AD29799D66BFB0856 /* Pods-Lisk-LiskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-LiskTests.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A28CCAA9A1C355C538C0F137 /* Pods-Lisk-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-LiskTests/Pods-Lisk-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
 		A79964B52A628AF048F736B7 /* libPods-Lisk-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA82A2E09394A9AAB9AE56B8 /* Pods-Lisk-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-LiskDev.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC88364E9EC48DA3B52412DA /* Pods-LiskApp-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk/Pods-LiskApp-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
 		CB9BAE4A26FF857E00EE1F48 /* Lisk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lisk-Bridging-Header.h"; sourceTree = "<group>"; };
 		CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		D1FBD00EBB5BF68B90C6ACFF /* Pods-Lisk-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D62835011F787A4FF10BFE9B /* Pods-LiskApp-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk/Pods-LiskApp-Lisk.release.xcconfig"; sourceTree = "<group>"; };
+		E01BE00324F84FB5D6186030 /* Pods-LiskApp-LiskDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskDev.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -156,7 +189,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23A1AEDA1EFDCFFD8819768 /* libPods-LiskApp-Lisk.a in Frameworks */,
+				A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */,
+				6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +207,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				14BD98174AA25209C5AF94DE /* libPods-Lisk-tvOSTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79D7230C2A6FF5040086AEF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E342449C772440C0543475E /* libPods-LiskApp-LiskDev.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +261,8 @@
 				5A22464A5DC1100C0EB84D2E /* Pods-LiskApp-Lisk-LiskTests.release.xcconfig */,
 				334B395EE8FC7A372A7340F1 /* Pods-LiskApp-LiskQA.debug.xcconfig */,
 				7D3C7D452F8CAAED9408693D /* Pods-LiskApp-LiskQA.release.xcconfig */,
+				2BAC6F56CBCD3FA40FA7F011 /* Pods-LiskApp-LiskDev.debug.xcconfig */,
+				E01BE00324F84FB5D6186030 /* Pods-LiskApp-LiskDev.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -254,9 +298,10 @@
 				041C9CBE86C2F2D2BF3BA78C /* libPods-Lisk-tvOS.a */,
 				A79964B52A628AF048F736B7 /* libPods-Lisk-tvOSTests.a */,
 				5C22DE960F73D44CBF1D680D /* libPods-Lisk.a */,
-				87935DE970915F3368161DEE /* libPods-LiskApp-Lisk.a */,
 				3F47CFD96B49A8A432C2DC73 /* libPods-LiskApp-Lisk-LiskTests.a */,
 				7B89057005F057FD28D3A74E /* libPods-LiskApp-LiskQA.a */,
+				ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */,
+				206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -307,6 +352,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				04C51C328E79D6B0A7C0986E /* Pods */,
 				CB9BAE4A26FF857E00EE1F48 /* Lisk-Bridging-Header.h */,
+				79D723242A6FF5040086AEF9 /* LiskDev/Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -321,6 +367,7 @@
 				2D02E47B1E0B4A5D006451C7 /* Lisk-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */,
 				79DD0C532A3750FB00E2DC9D /* LiskQA.app */,
+				79D723232A6FF5040086AEF9 /* LiskDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -412,6 +459,29 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* Lisk-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		79D723052A6FF5040086AEF9 /* LiskDev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79D723202A6FF5040086AEF9 /* Build configuration list for PBXNativeTarget "LiskDev" */;
+			buildPhases = (
+				79D723062A6FF5040086AEF9 /* [CP] Check Pods Manifest.lock */,
+				79D723072A6FF5040086AEF9 /* Start Packager */,
+				79D723082A6FF5040086AEF9 /* Sources */,
+				79D7230C2A6FF5040086AEF9 /* Frameworks */,
+				79D7230E2A6FF5040086AEF9 /* Resources */,
+				79D7231C2A6FF5040086AEF9 /* Bundle React Native code and images */,
+				79D7231D2A6FF5040086AEF9 /* Embed App Extensions */,
+				79D7231E2A6FF5040086AEF9 /* [CP] Embed Pods Frameworks */,
+				79D7231F2A6FF5040086AEF9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiskDev;
+			productName = Lisk;
+			productReference = 79D723232A6FF5040086AEF9 /* LiskDev.app */;
+			productType = "com.apple.product-type.application";
+		};
 		79DD0C362A3750FB00E2DC9D /* LiskQA */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79DD0C502A3750FB00E2DC9D /* Build configuration list for PBXNativeTarget "LiskQA" */;
@@ -461,6 +531,9 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
+					79D723052A6FF5040086AEF9 = {
+						DevelopmentTeam = 58UK9RE9TP;
+					};
 					79DD0C362A3750FB00E2DC9D = {
 						ProvisioningStyle = Manual;
 					};
@@ -484,6 +557,7 @@
 				2D02E47A1E0B4A5D006451C7 /* Lisk-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* Lisk-tvOSTests */,
 				79DD0C362A3750FB00E2DC9D /* LiskQA */,
+				79D723052A6FF5040086AEF9 /* LiskDev */,
 			);
 		};
 /* End PBXProject section */
@@ -528,6 +602,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79D7230E2A6FF5040086AEF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79D7230F2A6FF5040086AEF9 /* BasierCircle-SemiBold.otf in Resources */,
+				79D723102A6FF5040086AEF9 /* MobileProtect.plist in Resources */,
+				79D723112A6FF5040086AEF9 /* icomoon.ttf in Resources */,
+				79D723122A6FF5040086AEF9 /* LaunchScreen.storyboard in Resources */,
+				79D723132A6FF5040086AEF9 /* OpenSans-Semibold.ttf in Resources */,
+				79D723142A6FF5040086AEF9 /* BasierCircle-Bold.otf in Resources */,
+				79D723152A6FF5040086AEF9 /* Gilroy-Bold.ttf in Resources */,
+				79D723162A6FF5040086AEF9 /* BasierCircle-Regular.otf in Resources */,
+				79D723172A6FF5040086AEF9 /* OpenSans-Regular.ttf in Resources */,
+				79D723182A6FF5040086AEF9 /* OpenSans-Bold.ttf in Resources */,
+				79D723192A6FF5040086AEF9 /* Dots-Regular.ttf in Resources */,
+				79D7231A2A6FF5040086AEF9 /* PTMono-Regular.ttf in Resources */,
+				79D7231B2A6FF5040086AEF9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +782,137 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79D723062A6FF5040086AEF9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiskApp-LiskDev-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79D723072A6FF5040086AEF9 /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		79D7231C2A6FF5040086AEF9 /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		79D7231E2A6FF5040086AEF9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-Glog/glog.framework/glog",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MobileProtect/MobileProtect.framework/MobileProtect",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/double-conversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileProtect.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79D7231F2A6FF5040086AEF9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		79DD0C382A3750FB00E2DC9D /* Start Packager */ = {
@@ -1043,6 +1268,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		79D723082A6FF5040086AEF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79D723092A6FF5040086AEF9 /* AppDelegate.m in Sources */,
+				79D7230A2A6FF5040086AEF9 /* main.m in Sources */,
+				79D7230B2A6FF5040086AEF9 /* Bridge.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		79DD0C392A3750FB00E2DC9D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1282,6 +1517,64 @@
 			};
 			name = Release;
 		};
+		79D723212A6FF5040086AEF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BAC6F56CBCD3FA40FA7F011 /* Pods-LiskApp-LiskDev.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
+				CURRENT_PROJECT_VERSION = 13;
+				DEVELOPMENT_TEAM = 58UK9RE9TP;
+				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				INFOPLIST_FILE = LiskDev/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.0.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		79D723222A6FF5040086AEF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E01BE00324F84FB5D6186030 /* Pods-LiskApp-LiskDev.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
+				CURRENT_PROJECT_VERSION = 13;
+				DEVELOPMENT_TEAM = 58UK9RE9TP;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				INFOPLIST_FILE = LiskDev/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.0.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.lisk.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Lisk-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
 		79DD0C512A3750FB00E2DC9D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 334B395EE8FC7A372A7340F1 /* Pods-LiskApp-LiskQA.debug.xcconfig */;
@@ -1494,6 +1787,15 @@
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79D723202A6FF5040086AEF9 /* Build configuration list for PBXNativeTarget "LiskDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79D723212A6FF5040086AEF9 /* Debug */,
+				79D723222A6FF5040086AEF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

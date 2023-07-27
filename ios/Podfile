@@ -75,6 +75,9 @@ abstract_target 'LiskApp' do
   
   target 'LiskQA' do
   end
+  
+  target 'LiskDev' do
+  end
 
 end
 
