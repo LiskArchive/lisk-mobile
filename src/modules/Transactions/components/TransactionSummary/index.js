@@ -27,7 +27,7 @@ export default function TransactionSummary(transaction) {
         <View style={[styles.row]}>
           <View style={[styles.applicationNameContainer]}>
             <Text style={[styles.valueText, styles.theme.valueText]}>
-              {transaction.senderApplication?.chainName}
+              {transaction.senderApplication?.displayName}
             </Text>
 
             {transaction.senderApplication?.chainID && (
@@ -52,7 +52,7 @@ export default function TransactionSummary(transaction) {
         <View style={[styles.row]}>
           <View style={[styles.applicationNameContainer]}>
             <Text style={[styles.valueText, styles.theme.valueText]}>
-              {transaction.recipientApplication?.chainName}
+              {transaction.recipientApplication?.displayName}
             </Text>
 
             {transaction.recipientApplication?.chainID && (

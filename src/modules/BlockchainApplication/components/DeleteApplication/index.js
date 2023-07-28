@@ -31,7 +31,7 @@ export default function DeleteApplication({ sharedData: { application }, nextSte
           <Image source={{ uri: application.logo.png }} style={[styles.applicationLogoImage]} />
 
           <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
-            {application.chainName}
+            {application.displayName}
           </P>
         </View>
 
