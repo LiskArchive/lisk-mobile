@@ -47,7 +47,7 @@ export function SendTokenSenderApplicationField({
       >
         {senderApplication && (
           <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>{senderApplication.chainName}</Text>
+            <Text style={[styles.text, styles.theme.text]}>{senderApplication.displayName}</Text>
 
             <Image
               source={{ uri: senderApplication.logo.png }}
@@ -82,9 +82,9 @@ export function SendTokenRecipientApplicationField({
           key={item.chainID}
           value={item.chainID}
           onChange={onChange}
-          testID={`application-list-${item.chainName}`}
+          testID={`application-list-${item.displayName}`}
         >
-          <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
+          <Text style={[styles.text, styles.theme.text]}>{item.displayName}</Text>
 
           <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
         </Picker.Item>
@@ -112,7 +112,7 @@ export function SendTokenRecipientApplicationField({
       >
         {recipientApplication && (
           <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>{recipientApplication.chainName}</Text>
+            <Text style={[styles.text, styles.theme.text]}>{recipientApplication.displayName}</Text>
 
             <Image
               source={{ uri: recipientApplication.logo.png }}

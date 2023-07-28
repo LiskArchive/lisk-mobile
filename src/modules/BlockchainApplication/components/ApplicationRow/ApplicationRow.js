@@ -110,7 +110,7 @@ function ApplicationRow({
         <View style={styles.nameContainer}>
           <Image source={{ uri: application.logo.png }} style={{ ...styles.logoImage }} />
 
-          <P style={[styles.nameLabel, styles.theme.nameLabel]}>{application.chainName}</P>
+          <P style={[styles.nameLabel, styles.theme.nameLabel]}>{application.displayName}</P>
         </View>
 
         <View style={styles.nameContainer}>

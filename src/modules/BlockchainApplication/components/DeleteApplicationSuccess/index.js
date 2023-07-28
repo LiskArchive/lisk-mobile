@@ -14,7 +14,7 @@ export default function DeleteApplicationSuccess({ finalCallback, sharedData: { 
       variant="success"
       title={i18next.t('application.manage.delete.success.title')}
       description={i18next.t('application.manage.delete.success.description', {
-        applicationName: application.chainName,
+        applicationName: application.displayName,
       })}
       onContinue={finalCallback}
       continueButtonTitle={i18next.t('application.manage.continueToWalletButtonText')}

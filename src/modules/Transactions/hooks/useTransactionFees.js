@@ -27,7 +27,7 @@ export function useTransactionFees({
 
       const accountInitializationFee =
         res.meta.breakdown.fee.minimum.additionalFees?.userAccountInitializationFee ||
-        res.meta.breakdown.params.messageFee.additionalFees?.userAccountInitializationFee;
+        res.meta.breakdown.params?.messageFee.additionalFees?.userAccountInitializationFee;
 
       const messageFee = res.data.transaction.params?.messageFee.amount;
       const messageFeeTokenID = res.data.transaction.params?.messageFee.tokenID;
