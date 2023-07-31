@@ -44,7 +44,7 @@ export default function AccountCard({ account }) {
     navigation.navigate({
       name: 'Send',
       params: !isCurrentAccount && {
-        recipientAccountAddress: account.address,
+        recipient: account.address,
       },
     });
 
