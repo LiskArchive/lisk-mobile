@@ -21,7 +21,7 @@ import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
 import { selectEncryptedFile } from '../../utils/documentPicker';
-import { getRecoveryPhraseFromKeyChain } from '../../utils/recoveryPhrase';
+import { retrieveAccountsPasswordMapFromKeychain } from '../../utils/recoveryPhrase';
 import Version2Migration from '../Version2Migration';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
@@ -63,7 +63,7 @@ export default function AuthMethod({ route }) {
   }, [settings.showedIntro]);
 
   const checkVersion2Migration = async () => {
-    const { password: recoveryPhrase } = await getRecoveryPhraseFromKeyChain();
+    const { password: recoveryPhrase } = await retrieveAccountsPasswordMapFromKeychain();
     const validity = validateRecoveryPhrase(recoveryPhrase);
     if (!validity.length && !accounts.length) {
       setV2RecoveryPhrase(recoveryPhrase);
