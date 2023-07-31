@@ -82,7 +82,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
               value={recipientApplicationChainIDField.value}
               onChange={recipientApplicationChainIDField.onChange}
               errorMessage={form.formState.errors.recipientApplicationChainID?.message}
-              applications={data}
+              applications={applications}
               style={{ toggle: { container: { marginBottom: 16 } } }}
             />
 

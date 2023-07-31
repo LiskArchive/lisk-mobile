@@ -162,11 +162,11 @@ export default function RequestToken() {
             data={applications.data}
             isLoading={applications.isLoading}
             error={applications.error}
-            renderData={(data) => (
+            renderData={() => (
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainID}
                 onChange={setRecipientApplicationChainID}
-                applications={data}
+                applications={applications}
                 style={{ toggle: { container: styles.fieldContainer } }}
               />
             )}
