@@ -58,9 +58,10 @@ export default function ApplicationList({
                 onPress={() => onItemPress(item)}
                 {...props}
               />
-              // TODO: Integrate pagination props.
-              // (details on https://github.com/LiskHQ/lisk-mobile/issues/1827).
             )}
+            fetchNextPage={applications.fetchNextPage}
+            hasNextPage={applications.fetchNextPage}
+            isFetchingNextPage={applications.isFetchingNextPage}
           />
         </View>
       )}
