@@ -1,4 +1,4 @@
-import { useCustomInfiniteQuery } from 'utilities/api/hooks/useCustomInfiniteQuery';
+import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import { GET_SUPPORTED_TOKENS_QUERY } from 'utilities/api/queries';
 import { API_URL } from 'utilities/api/constants';
 import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
@@ -22,7 +22,7 @@ export function useSupportedTokensQuery({ config: customConfig = {}, options, cl
 
   const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config]);
 
-  return useCustomInfiniteQuery({
+  return useCustomQuery({
     keys,
     config,
     options,

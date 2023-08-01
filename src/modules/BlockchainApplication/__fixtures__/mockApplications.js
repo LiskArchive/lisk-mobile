@@ -2,36 +2,18 @@ import { mockDefaultApplication } from './mockDefaultApplication';
 
 export const mockApplications = [
   mockDefaultApplication,
-  {
-    name: 'Coleti',
-    chainID: '00000002',
-    state: 'active',
-    address: 'col123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    lastCertificateHeight: 800,
-    lastUpdated: 123456788,
-  },
-  {
-    name: 'DoEdu',
-    chainID: '00000003',
-    state: 'active',
-    address: 'doe123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    lastCertificateHeight: 700,
-    lastUpdated: 123456787,
-  },
-  {
-    name: 'Enevti',
-    chainID: '00000004',
-    state: 'active',
-    address: 'env123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    lastCertificateHeight: 600,
-    lastUpdated: 123456786,
-  },
-  {
-    name: 'Kalipo',
-    chainID: '00000005',
-    state: 'active',
-    address: 'tkn123bhithjdq8szo3poyqe5dsxwrnazyqnzqhsy',
-    lastCertificateHeight: 500,
-    lastUpdated: 123456785,
-  },
+  ...[...new Array(100)].map((_, index) => ({
+    chainName: `app_mainchain_${index}`,
+    chainID: index.toString(16).padStart(8, '0'), // 8-digit hex representation
+    status: 'active',
+    address: 'lskguo9kqnea2zsfo3a6qppozsxsg92nuuma3p7ad',
+    lastCertificateHeight: 1460,
+    lastUpdated: 1689782730,
+    escrow: [
+      {
+        tokenID: '0400000000000000',
+        amount: '100010000000',
+      },
+    ],
+  })),
 ];

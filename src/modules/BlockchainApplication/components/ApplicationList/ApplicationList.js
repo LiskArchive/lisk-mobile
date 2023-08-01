@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import i18next from 'i18next';
 
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
@@ -58,9 +58,12 @@ export default function ApplicationList({
                 onPress={() => onItemPress(item)}
                 {...props}
               />
-              // TODO: Integrate pagination props.
-              // (details on https://github.com/LiskHQ/lisk-mobile/issues/1827).
             )}
+            fetchNextPage={applications.fetchNextPage}
+            hasNextPage={applications.fetchNextPage}
+            isFetchingNextPage={applications.isFetchingNextPage}
+            ListFooterComponent={<View style={{ height: 120 }} />}
+            Spinner={<ActivityIndicator style={{ marginTop: 20, marginBottom: 100 }} />}
           />
         </View>
       )}

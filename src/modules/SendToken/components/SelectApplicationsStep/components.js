@@ -67,7 +67,9 @@ export function SendTokenRecipientApplicationField({
   applications,
   style,
 }) {
-  const recipientApplication = applications.find((application) => application.chainID === value);
+  const recipientApplication = applications.data.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -75,7 +77,7 @@ export function SendTokenRecipientApplicationField({
 
   const renderMenuItems = () => (
     <InfiniteScrollList
-      data={applications}
+      data={applications.data}
       keyExtractor={(item) => item.chainID}
       renderItem={(item) => (
         <Picker.Item
@@ -90,8 +92,9 @@ export function SendTokenRecipientApplicationField({
         </Picker.Item>
       )}
       withDefaultSpinner
-      // TODO: Integrate pagination props.
-      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1827).
+      fetchNextPage={applications.fetchNextPage}
+      hasNextPage={applications.fetchNextPage}
+      isFetchingNextPage={applications.isFetchingNextPage}
     />
   );
 
@@ -104,7 +107,7 @@ export function SendTokenRecipientApplicationField({
       </Picker.Label>
 
       <Picker.Toggle
-        disabled={applications.loading}
+        disabled={applications.isLoading}
         placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
         openMenu={showOptions}

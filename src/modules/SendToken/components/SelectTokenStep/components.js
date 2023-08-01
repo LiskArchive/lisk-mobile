@@ -77,8 +77,6 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           <Image source={{ uri: item.logo.png }} style={styles.logo} />
         </Picker.Item>
       )}
-      // TODO: Integrate pagination props.
-      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1827).
     />
   );
 
