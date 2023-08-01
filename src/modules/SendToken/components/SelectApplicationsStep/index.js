@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { useController } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -37,10 +37,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
     control: form.control,
   });
 
-  const isValidAddress = useMemo(
-    () => validateAddress(recipientAccountAddressField.value) === 0,
-    [recipientAccountAddressField.value]
-  );
+  const isValidAddress = validateAddress(recipientAccountAddressField.value) === 0;
 
   useEffect(() => {
     if (isValidAddress) {
@@ -51,7 +48,7 @@ export default function SendTokenSelectApplicationsStep({ nextStep, form, transa
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isValidAddress]);
+  }, [recipientAccountAddressField.value, isValidAddress]);
 
   const { field: addressFormatField } = useController({
     name: 'recipientAccountAddressFormat',
