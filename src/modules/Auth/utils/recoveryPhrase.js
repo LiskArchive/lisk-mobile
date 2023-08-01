@@ -54,7 +54,7 @@ export const validateRecoveryPhrase = (recoveryPhrase = '') => {
 export const generateRecoveryPhrase = (strength = RECOVERY_PHRASE_STRENGTHS_PER_WORD['12words']) =>
   Lisk.passphrase.Mnemonic.generateMnemonic(strength);
 
-export const getRecoveryPhraseFromKeyChain = () =>
+export const retrieveAccountsPasswordMapFromKeychain = () =>
   getGenericPassword({ service: 'io.lisk.mobile' });
 
 /**
@@ -62,7 +62,7 @@ export const getRecoveryPhraseFromKeyChain = () =>
  */
 export const removeAccountPasswordFromKeychain = async (address) => {
   const uniqueId = getUniqueId();
-  const db = await getRecoveryPhraseFromKeyChain();
+  const db = await retrieveAccountsPasswordMapFromKeychain();
   let deviceAccounts = {};
   try {
     const previousAccounts = JSON.parse(db.password);
@@ -92,7 +92,7 @@ export const removeAccountPasswordFromKeychain = async (address) => {
  */
 export const getAccountPasswordFromKeyChain = async (address) => {
   try {
-    const db = await getRecoveryPhraseFromKeyChain();
+    const db = await retrieveAccountsPasswordMapFromKeychain();
     const accounts = JSON.parse(db.password);
     if (accounts) {
       return accounts[address];
@@ -110,7 +110,7 @@ export const getAccountPasswordFromKeyChain = async (address) => {
  */
 export const storeAccountPasswordInKeyChain = async (address, password) => {
   const uniqueId = getUniqueId();
-  const db = await getRecoveryPhraseFromKeyChain();
+  const db = await retrieveAccountsPasswordMapFromKeychain();
   let deviceAccounts = {};
   try {
     const previousAccounts = JSON.parse(db.password);
