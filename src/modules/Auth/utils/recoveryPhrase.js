@@ -11,7 +11,7 @@ import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../constants/recoveryPhrase.
 
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
 
-const storageKey = 'io.lisk.mobile-security';
+const storageKey = 'io.lisk-security';
 
 /**
  * Checks validity of recoveryPhrase using to mnemonic
