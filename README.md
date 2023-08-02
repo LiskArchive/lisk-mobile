@@ -67,8 +67,8 @@ Please install the required prerequisites to run Lisk Mobile from source.
   - Performance (Intel ® HAXM)
   - Android Virtual Device
 - Install the Android SDK. Consider these configurations:
-  - compileSdkVersion: 30
-  - buildToolsVersion: 30.0.2
+  - compileSdkVersion: 33
+  - buildToolsVersion: 33.0.0
 
 ## Installation
 
