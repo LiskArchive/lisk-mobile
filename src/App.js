@@ -17,10 +17,10 @@ import store, { persistedStore } from 'store/index';
 import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
-import { useDataAudit } from './hooks/useDataAudit';
+import { useRegisterAndroidModules } from './hooks/useRegisterAndroidModules';
 
 export default function App() {
-  useDataAudit();
+  useRegisterAndroidModules();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
