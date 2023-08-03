@@ -5,12 +5,13 @@ import {
   ACCESSIBLE,
   ACCESS_CONTROL,
 } from 'react-native-keychain';
-import { getUniqueId } from 'react-native-device-info';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Platform } from 'react-native';
 import { RECOVERY_PHRASE_STRENGTHS_PER_WORD } from '../constants/recoveryPhrase.constants';
 
 const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
+
+const storageKey = 'io.lisk-security';
 
 /**
  * Checks validity of recoveryPhrase using to mnemonic
@@ -61,7 +62,6 @@ export const retrieveAccountsPasswordMapFromKeychain = () =>
  * Removes the account password and address on the keychain of the device
  */
 export const removeAccountPasswordFromKeychain = async (address) => {
-  const uniqueId = getUniqueId();
   const db = await retrieveAccountsPasswordMapFromKeychain();
   let deviceAccounts = {};
   try {
@@ -77,7 +77,7 @@ export const removeAccountPasswordFromKeychain = async (address) => {
     deviceAccounts = {};
   }
   delete deviceAccounts[address];
-  await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
+  await setGenericPassword(storageKey, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
     accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
@@ -109,7 +109,6 @@ export const getAccountPasswordFromKeyChain = async (address) => {
  * Store the password and address on the keychain of the device
  */
 export const storeAccountPasswordInKeyChain = async (address, password) => {
-  const uniqueId = getUniqueId();
   const db = await retrieveAccountsPasswordMapFromKeychain();
   let deviceAccounts = {};
   try {
@@ -125,7 +124,7 @@ export const storeAccountPasswordInKeyChain = async (address, password) => {
     deviceAccounts = {};
   }
   deviceAccounts[address] = password;
-  await setGenericPassword(uniqueId, JSON.stringify(deviceAccounts), {
+  await setGenericPassword(storageKey, JSON.stringify(deviceAccounts), {
     accessGroup: '58UK9RE9TP.io.lisk.mobile',
     service: 'io.lisk.mobile',
     accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
