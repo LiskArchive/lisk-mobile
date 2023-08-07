@@ -21,13 +21,15 @@ import { getErrorFallbackScreenStyles } from './styles';
  * @param {String} props.description - Optional text to display as description. If it's
  * not provided, a default description will be rendered.
  */
-export default function ErrorFallbackScreen(props) {
+export default function ErrorScreen(props) {
   const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
   const title = props.title || i18next.t('fallbackScreens.error.title');
   const description = props.description || i18next.t('fallbackScreens.error.description');
 
-  const emailReport = useEmailReport({ error: props.error, errorMessage: props.description });
+  const handleRetryClick = props.onRetry;
+
+  const emailReport = useEmailReport({ error: props.error, errorMessage: description });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -40,9 +42,11 @@ export default function ErrorFallbackScreen(props) {
 
         <P style={[styles.description, styles.theme.description]}>{description}</P>
 
-        <PrimaryButton noTheme style={[styles.submitButton]} onClick={props.onRetry}>
-          {i18next.t('fallbackScreens.error.retryButton')}
-        </PrimaryButton>
+        {handleRetryClick && (
+          <PrimaryButton noTheme style={[styles.submitButton]} onClick={handleRetryClick}>
+            {i18next.t('fallbackScreens.error.retryButton')}
+          </PrimaryButton>
+        )}
 
         {!emailReport.isLoading && !emailReport.error && (
           <>

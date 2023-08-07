@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import i18next from 'i18next';
 
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { H3, P } from 'components/shared/toolBox/typography';
 import { Button, PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
@@ -14,16 +15,24 @@ import getExternalApplicationSignatureRequestStyles from './styles';
 
 export default function ExternalAppSignatureRequestNotification({
   session,
-  recipientApplicationChainID,
+  senderApplicationChainID,
   senderAccountAddress,
   onCancel,
   onSubmit,
 }) {
+  const { accounts } = useAccounts();
+
+  const senderAccount = accounts.find(
+    (account) => account.metadata.address === senderAccountAddress
+  );
+
   const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
 
   return (
     <>
       <View>
+        <H3 style={[styles.title, styles.theme.title]}>Signature request</H3>
+
         <View style={styles.imageContainer}>
           <Image
             source={{ uri: session.peer.metadata.icons[0] }}
@@ -33,50 +42,46 @@ export default function ExternalAppSignatureRequestNotification({
 
         <H3 style={[styles.applicationTitle, styles.theme.text]}>{session.peer.metadata.name}</H3>
 
-        <View style={styles.applicationUrlContainer}>
+        <View style={styles.urlContainer}>
           <UrlSvg />
-          <P style={styles.applicationUrl}>{session.peer.metadata.url}</P>
+          <P style={styles.url}>{session.peer.metadata.url}</P>
         </View>
 
         <View style={styles.applicationChainIDContainer}>
-          <P style={styles.label}>
+          <P style={[styles.chainIDLabel, styles.theme.chainIDLabel]}>
             {i18next.t('application.externalApplicationSignatureRequest.notification.chainIDLabel')}
             :
           </P>
 
-          <P style={[styles.description, styles.theme.text]}>
-            {stringShortener(recipientApplicationChainID, 20, 4)}
-          </P>
+          <P style={[styles.description, styles.theme.description]}>{senderApplicationChainID}</P>
         </View>
       </View>
 
       <View style={styles.horizontalLine} />
 
-      <View>
-        <P style={[styles.labelContainer, styles.label]}>
-          {i18next.t(
-            'application.externalApplicationSignatureRequest.notification.descriptionLabel'
-          )}
-        </P>
+      <P style={[styles.label, styles.theme.label]}>
+        {i18next.t('application.externalApplicationSignatureRequest.notification.descriptionLabel')}
+      </P>
 
-        <P style={[styles.description, styles.theme.text]}>
-          {i18next.t('application.externalApplicationSignatureRequest.notification.description', {
-            appName: session.peer.metadata.name,
-          })}
-        </P>
-      </View>
+      <P style={[styles.description, styles.theme.description]}>
+        {i18next.t('application.externalApplicationSignatureRequest.notification.description')}
+      </P>
 
       <View style={styles.horizontalLine} />
 
-      <P style={[styles.labelContainer, styles.label]}>
+      <P style={[styles.label, styles.theme.label]}>
         {i18next.t('application.externalApplicationSignatureRequest.notification.accountLabel')}
       </P>
 
-      <View style={styles.accountItem}>
-        <Avatar address={senderAccountAddress} size={35} />
+      <View style={[styles.itemContainer]}>
+        <Avatar address={senderAccountAddress} size={24} />
 
-        <View style={styles.accountContent}>
-          <P style={[styles.address, styles.theme.text]}>
+        <View style={[styles.itemBody]}>
+          {senderAccount?.metadata.name && (
+            <P style={[styles.itemTitle, styles.theme.itemTitle]}>{senderAccount.metadata.name}</P>
+          )}
+
+          <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
             {stringShortener(senderAccountAddress, 7, 4)}
           </P>
         </View>
@@ -84,12 +89,12 @@ export default function ExternalAppSignatureRequestNotification({
 
       <View style={styles.horizontalLine} />
 
-      <View style={[styles.buttonContainer]}>
-        <Button style={[styles.button]} onPress={onCancel}>
-          {i18next.t('commons.buttons.cancel')}
+      <View style={[styles.footer]}>
+        <Button style={[styles.buttonLeft]} onPress={onCancel}>
+          {i18next.t('commons.buttons.reject')}
         </Button>
 
-        <PrimaryButton style={[styles.button]} onPress={onSubmit}>
+        <PrimaryButton style={[styles.buttonRight]} onPress={onSubmit}>
           {i18next.t('commons.buttons.continue')}
         </PrimaryButton>
       </View>

@@ -65,7 +65,7 @@ class Avatar extends React.Component {
 
     const addressHashChunks = getHashChunks(address);
     const gradientScheme =
-      gradientSchemes[addressHashChunks[0].substr(1, 2) % gradientSchemes.length];
+      gradientSchemes[addressHashChunks[0].substring(1, 3) % gradientSchemes.length];
 
     const gradientsSchemesUrlsHashed = {
       primary: gradientScheme.primary.map((...rest) =>

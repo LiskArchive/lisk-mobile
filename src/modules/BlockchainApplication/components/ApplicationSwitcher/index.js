@@ -28,7 +28,7 @@ const ApplicationSwitcher = () => {
           <Animated.View style={[styles.switch]}>
             <Image source={{ uri: currentApplication.data?.logo.png }} style={[styles.avatar]} />
             <P style={[styles.appName, styles.theme.appName]}>
-              {currentApplication.data?.chainName}
+              {currentApplication.data?.displayName}
             </P>
             <View style={styles.iconContainer}>
               <ChangeSvg />

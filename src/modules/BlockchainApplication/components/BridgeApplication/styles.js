@@ -5,12 +5,11 @@ export default {
   common: {
     container: {
       flex: 1,
-      paddingTop: boxes.boxPadding,
-      paddingBottom: boxes.boxPadding,
     },
     title: {
       textAlign: 'center',
       marginBottom: 8,
+      fontSize: fonts.size.h2,
     },
     description: {
       textAlign: 'center',

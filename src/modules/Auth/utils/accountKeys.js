@@ -51,28 +51,6 @@ export const extractKeyPair = async ({
 };
 
 /**
- * Extracts Lisk PublicKey from a given valid Mnemonic recoveryPhrase
- *
- * @param {String} recoveryPhrase - Valid Mnemonic recoveryPhrase
- * @param {boolean} enableCustomDerivationPath - enable custom derivation for HW
- * @param {String} derivationPath - custom derivation path for HW
- * @returns {String?} - Extracted publicKey for a given valid recoveryPhrase
- */
-export const extractPublicKey = (
-  recoveryPhrase,
-  enableCustomDerivationPath = false,
-  derivationPath
-) => {
-  const keyPair = extractKeyPair({ recoveryPhrase, enableCustomDerivationPath, derivationPath });
-
-  if (keyPair.isValid) {
-    return keyPair.publicKey;
-  }
-
-  throw Error('Invalid secret recovery phrase');
-};
-
-/**
  * Extracts address from publicKey
  *
  * @param {String} data PublicKey in Hex

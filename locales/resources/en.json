@@ -6,12 +6,21 @@
       "continue": "Continue",
       "cancel": "Cancel",
       "confirm": "Confirm",
+      "reject": "Reject",
       "reload": "Reload",
-      "viewAll": "View all"
+      "viewAll": "View all",
+      "selectAll": "Select all"
     },
+    "copy": "Copy",
+    "copied": "Copied",
     "copyToClipboard": "Copy to clipboard",
     "pasteFromClipboard": "Paste from clipboard",
-    "pastedFromClipboard": "Pasted"
+    "pastedFromClipboard": "Pasted",
+    "recoveryPhrase": {
+      "writeDownInstructions1": "Writing it down is more",
+      "writeDownInstructions2": "than copying.",
+      "writeDownInstructionsLink": "secure"
+    }
   },
   "fallbackScreens" : {
     "error" : {
@@ -20,6 +29,13 @@
       "retryButton": "Retry",
       "emailReportLabel": "Is the problem persisting?",
       "emailReportButton": "Report the error via email"
+    }
+  },
+  "navigation": {
+    "notFound": {
+      "title": "Deeplink failed",
+      "description": "The link you entered is invalid. Please verify the link once more, click continue to Home to access the wallet.",
+      "continueButtonText": "Continue to home"
     }
   },
   "intro" : {
@@ -48,8 +64,6 @@
   "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
-  "Show QR code": "Show QR code",
-  "Hide QR code": "Hide QR code",
   "Scan": "Scan",
   "Search": "Search",
   "Search for a bookmark": "Search for a bookmark",
@@ -110,7 +124,10 @@
       "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",
       "continue": "Continue",
-      "storePhrase": "Store your secret recovery phrase:"
+      "storePhrase": "Store your secret recovery phrase carefully:",
+      "qrLabel": "Private use only:",
+      "showQrButton": "Show QR code",
+      "hideQrButton": "Hide QR code"
     },
     "biometrics": {
       "enableTitle": "Enable {{sensorType}}",
@@ -343,14 +360,17 @@
         "disconnectText": "Disconnect",
         "chainIDLabel": "Chain ID",
         "connectionID": "Connection ID",
-        "connectionDescription": "This website is trying to connect with your lisk wallet",
+        "connectionDescription": "This is a request from wallet connect to establish session with Lisk Mobile, please review the following information carefully before approving.",
+        "chainsTitle": "Chains connecting",
         "accountsTitle": "Account(s) to use on this site",
         "sitePermissions": "Site Permissions",
         "methods": "Methods",
-        "bridgeApplication": "Bridge Application",
-        "bridgeApplicationDescription": "Paste WalletConnect URI to connection the bridge server",
-        "addApplication": "Add Application",
-        "enterConnectionUri": "Enter connection URI"
+        "bridgeApplication": "Connect wallet",
+        "bridgeApplicationDescription": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
+        "addApplication": "Connect",
+        "enterConnectionUri": "Enter connection URI",
+        "approveConnectionChainsTitle": "Connected chains",
+        "approveConnectionAccountsTitle": "Connected accounts"
       }
     },
     "externalApplicationSignatureRequest": {
@@ -359,10 +379,12 @@
       "notification": {
         "chainIDLabel" : "Chain ID",
         "descriptionLabel": "Information",
-        "description": "{{appName}} application requesting signature from your Lisk wallet.",
+        "description": "This transaction was initiated from another application for signature request.",
         "accountLabel": "Selected account"
       },
       "summary": {
+        "title": "Transaction summary",
+        "description": "Please review and verify the transaction details before signing.",
         "cancelButtonText": "Back",
         "continueButtonText": "Approve"
       },
@@ -370,13 +392,21 @@
         "submitButtonTitle": "Confirm and sign",
         "copyToClipboardButtonText": "Copy and redirect to application site",
         "copiedToClipboardButtonText": "Copied",
-        "errorButtonText": "Redirect to application site"
+        "errorButtonText": "Redirect to application site",
+        "invalidConnectionTitle": "Connection failed",
+        "invalidConnectionDescription": "Connection from the '{{appName}}' has been blocked due to invalid parameters."
       },
       "disconnect": {
         "title": "Disconnect Application",
         "disconnectingFirst": "Disconnecting the ",
         "disconnectingSecond": "application removes your wallet details from the site.",
         "disconnect": "Disconnect"
+      }
+    },
+    "externalConnectionValidation": {
+      "errors": {
+        "namespaceErrorDescription": "Name space validation is only available for session_proposal events.",
+        "schemaErrorDescription": "Connection event has no schema on params."
       }
     }
   },
@@ -465,7 +495,8 @@
       "tokenID": "Token to send must be specified",
       "amountInvalid": "Amount not valid.",
       "priority": "Priority must be specified",
-      "insufficientBalance": "Your balance is not sufficient."
+      "insufficientBalance": "Your balance is not sufficient.",
+      "estimateFees": "Error estimating fees for this transaction. Please try with different parameters."
     },
     "info": {
       "priority": {

@@ -3,7 +3,7 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
-import { isTransactionAmountValid } from 'utilities/validators';
+import { validateTransactionAmount } from 'utilities/validators';
 
 export function useSendTokenAmountChecker({
   recipientApplication,
@@ -30,7 +30,7 @@ export function useSendTokenAmountChecker({
   }
 
   const validatedAmount =
-    selectedToken && isTransactionAmountValid(amount)
+    selectedToken && validateTransactionAmount(amount)
       ? BigInt(
           fromDisplayToBaseDenom({
             amount,

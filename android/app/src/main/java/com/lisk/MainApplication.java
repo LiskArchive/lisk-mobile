@@ -9,6 +9,8 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import io.lisk.mobile.AppOpsManagerModulePackage;
+import io.lisk.mobile.ProviderInstallerPackage;
+import io.lisk.mobile.SensitiveClipboardPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
       // Packages that cannot be autolinked yet can be added manually here, for example:
       // packages.add(new MyReactNativePackage());
       packages.add(new AppOpsManagerModulePackage());
+      packages.add(new SensitiveClipboardPackage());
+      packages.add(new ProviderInstallerPackage());
       return packages;
     }
 

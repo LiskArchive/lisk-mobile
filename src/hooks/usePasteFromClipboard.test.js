@@ -1,9 +1,9 @@
-import { Clipboard } from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import { usePasteFromClipboard } from './usePasteFromClipboard'; // update with correct path
 
-jest.mock('react-native/Libraries/Components/Clipboard/Clipboard', () => ({
+jest.mock('@react-native-clipboard/clipboard', () => ({
   getString: jest.fn(),
 }));
 

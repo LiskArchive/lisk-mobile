@@ -60,7 +60,7 @@ export default function ApplicationDetails({ route }) {
       onSuccess: () => resultModal.open(<AddApplicationSuccessModal navigation={navigation} />),
       onError: () =>
         resultModal.open(
-          <AddApplicationErrorModal navigation={navigation} chainName={application?.chainName} />
+          <AddApplicationErrorModal navigation={navigation} chainName={application?.displayName} />
         ),
     });
   };
@@ -105,10 +105,10 @@ export default function ApplicationDetails({ route }) {
               <SafeAreaView style={[styles.flex, styles.body]}>
                 <View style={styles.titleRow}>
                   <DataRenderer
-                    data={data.chainName}
-                    renderData={(chainName) => (
+                    data={data.displayName}
+                    renderData={(displayName) => (
                       <>
-                        <H3 style={[styles.title, styles.theme.title]}>{chainName}</H3>
+                        <H3 style={[styles.title, styles.theme.title]}>{displayName}</H3>
                         <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
                           <PinSvg variant={isPinned ? 'fill' : 'outline'} width={22} height={22} />
                         </TouchableOpacity>

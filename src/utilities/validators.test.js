@@ -1,4 +1,4 @@
-import { validateAddress, isTransactionAmountValid } from './validators';
+import { validateAddress, validateTransactionAmount } from './validators';
 
 describe('Address validator', () => {
   it('returns -1 if no address is passed', () => {
@@ -14,21 +14,25 @@ describe('Address validator', () => {
   });
 });
 
-describe('isTransactionAmountValid', () => {
+describe('validateTransactionAmount', () => {
   it('returns true for valid transaction amounts', () => {
-    expect(isTransactionAmountValid('123')).toBe(true);
-    expect(isTransactionAmountValid('123.456')).toBe(true);
-    expect(isTransactionAmountValid('0')).toBe(true);
+    expect(validateTransactionAmount('123')).toBe(true);
+    expect(validateTransactionAmount('123.456')).toBe(true);
+    expect(validateTransactionAmount('0')).toBe(true);
   });
 
   it('returns false for transaction amounts with invalid format', () => {
-    expect(isTransactionAmountValid('123.')).toBe(false);
-    expect(isTransactionAmountValid('.456')).toBe(false);
-    expect(isTransactionAmountValid('123.456.789')).toBe(false);
-    expect(isTransactionAmountValid('abc')).toBe(false);
+    expect(validateTransactionAmount('123.')).toBe(false);
+    expect(validateTransactionAmount('.456')).toBe(false);
+    expect(validateTransactionAmount('123.456.789')).toBe(false);
+    expect(validateTransactionAmount('abc')).toBe(false);
   });
 
   it('returns false for non-positive transaction amounts', () => {
-    expect(isTransactionAmountValid('-123')).toBe(false);
+    expect(validateTransactionAmount('-123')).toBe(false);
+  });
+
+  it('returns false for empty string value', () => {
+    expect(validateTransactionAmount('')).toBe(false);
   });
 });

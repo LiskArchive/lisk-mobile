@@ -4,8 +4,8 @@ import React from 'react';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { useTransactionsEventsManager } from 'modules/Transactions/hooks/useTransactionsEventsManager';
 import { useBootstrapCurrentApplication } from 'modules/BlockchainApplication/hooks/useBootstrapCurrentApplication';
-import ErrorFallbackScreen from 'components/screens/ErrorFallbackScreen';
-import LoadingFallbackScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
+import ErrorScreen from 'components/screens/ErrorFallbackScreen';
+import LoadingScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
 import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
 import { useBootstrapApplications } from './modules/BlockchainApplication/hooks/useBootstrapApplications';
 
@@ -35,11 +35,11 @@ export default function BootstrapApp({ children }) {
   const handleRetry = () => retryBootstrapCurrentApplication();
 
   if (isLoading) {
-    return <LoadingFallbackScreen />;
+    return <LoadingScreen />;
   }
 
   if (isError) {
-    return <ErrorFallbackScreen onRetry={handleRetry} error={error} />;
+    return <ErrorScreen onRetry={handleRetry} error={error} />;
   }
 
   return children;

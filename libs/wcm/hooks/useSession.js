@@ -1,12 +1,16 @@
-/* eslint-disable max-statements */
 import { useContext, useEffect, useCallback } from 'react';
-import { formatJsonRpcResult } from '@json-rpc-tools/utils';
 
 import { signClient } from '../utils/connectionCreator';
 import ConnectionContext from '../context/connectionContext';
 import { onApprove, onReject } from '../utils/sessionHandlers';
 import usePairings from './usePairings';
 import { EVENTS, STATUS } from '../constants/lifeCycle';
+
+const formatJsonRpcResult = (id, result) => ({
+  id,
+  jsonrpc: '2.0',
+  result,
+});
 
 const useSession = () => {
   const { events, removeEvent, session, setSession } = useContext(ConnectionContext);

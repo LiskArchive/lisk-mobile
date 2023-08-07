@@ -1,16 +1,27 @@
 {
   "commons": {
     "secretRecoveryPhrase": "Geheime Wiederherstellungsphrase",
-    "customDerivationPath": "",
+    "customDerivationPath": "Benutzerdefinierter Ableitungspfad",
     "buttons": {
       "continue": "Weiter",
-      "cancel": "Absagen",
+      "cancel": "Abbrechen",
       "confirm": "Bestätigen",
-      "reload": "Aktualisierung",
-      "viewAll": "Alle ansehen"
+      "reject": "Ablehnen",
+      "reload": "Neu laden",
+      "viewAll": "Alle ansehen",
+      "selectAll": "Alle auswählen"
     },
-    "copyToClipboard": "In die Zwischenablage kopieren"
-  },
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "copyToClipboard": "In die Zwischenablage kopieren",
+    "pasteFromClipboard": "Aus der Zwischenablage einfügen",
+    "pastedFromClipboard": "Eingefügt",
+    "recoveryPhrase": {
+      "writeDownInstructions1": "Es niederzuschreiben ist mehr",
+      "writeDownInstructions2": "als zu kopieren.",
+      "writeDownInstructionsLink": "sicher"
+    }
+  },  
   "fallbackScreens" : {
     "error" : {
       "title": "Etwas ist schief gelaufen",
@@ -19,6 +30,13 @@
       "emailReportLabel": "Bleibt das Problem bestehen?",
       "emailReportButton": "Melden Sie den Fehler per E-Mail"
     }
+  },
+  "navigation": {
+    "notFound": {
+      "title": "Deeplink fehlgeschlagen",
+      "description": "Der eingegebene Link ist ungültig. Bitte überprüfen Sie den Link noch einmal, klicken Sie auf Weiter zur Startseite, um auf das Wallet zuzugreifen.",
+      "continueButtonText": "Weiter zur Startseite"
+    }  
   },
   "intro": {
     "sendAndRequestTokensTitle": "Senden und Token anfordern",
@@ -48,8 +66,6 @@
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
-  "Show QR code": "Zeige QR Code",
-  "Hide QR code": "",
   "Scan": "scannen",
   "Search": "Suchen",
   "Search for a bookmark": "Lesezeichen suchen",
@@ -106,12 +122,15 @@
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
       "enableDerivationPath": ""
-    }, 
+    },
     "backupPhrase": {
-      "title": "Sichern Sie die geheime Wiederherstellungsphrase",
+      "title": "Sichern Sie Ihre geheime Wiederherstellungsphrase",
       "confirmPhrase": "Bestätigen Sie Ihre geheime Wiederherstellungsphrase",
       "continue": "Weiter",
-      "storePhrase": ""
+      "storePhrase": "Bewahren Sie Ihre geheime Wiederherstellungsphrase sorgfältig auf:",
+      "qrLabel": "Nur zur privaten Verwendung:",
+      "showQrButton": "QR-Code anzeigen",
+      "hideQrButton": "QR-Code ausblenden"
     },
     "biometrics": {
       "enableTitle": "",
@@ -337,22 +356,25 @@
       },
       "externalApplicationList": {
         "title": "Wallet-Verbindungen",
-        "loadingText": "Externe Verbindungen laden...",
+        "loadingText": "Externe Verbindungen werden geladen...",
+        "emptyText": "Sie haben sich noch mit keiner Anwendung verknüpft.",
         "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
-        "emptyText": "Sie haben noch keine Kopplung mit einer Anwendung durchgeführt.",
         "detailsText": "Info",
         "disconnectText": "Trennen",
-        "chainIDLabel": "",
-        "connectionID": "",
-        "connectionDescription": "",
-        "accountsTitle": "",
-        "sitePermissions": "",
-        "methods": "",
-        "bridgeApplication": "",
-        "bridgeApplicationDescription": "",
-        "addApplication": "",
-        "enterConnectionUri": ""
-      }
+        "chainIDLabel": "Chain-ID",
+        "connectionID": "Verbindungs-ID",
+        "connectionDescription": "Dies ist eine Anfrage von Wallet Connect, eine Sitzung mit Lisk Mobile einzurichten. Bitte lesen Sie die folgenden Informationen sorgfältig durch, bevor Sie sie genehmigen.",
+        "chainsTitle": "Ketten verbinden",
+        "accountsTitle": "Zu verwendende Konto/Konten auf dieser Seite",
+        "sitePermissions": "Seitenberechtigungen",
+        "methods": "Methoden",
+        "bridgeApplication": "Wallet verbinden",
+        "bridgeApplicationDescription": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
+        "addApplication": "Verbinden",
+        "enterConnectionUri": "Verbindungs-URI eingeben",
+        "approveConnectionChainsTitle": "Verbundene Ketten",
+        "approveConnectionAccountsTitle": "Verbundene Konten"
+        }
     },
     "externalApplicationSignatureRequest": {
       "errorOnSignTransactionText": "Ihre Transaktion kann nicht signiert werden. Bitte versuche es erneut.",
@@ -360,10 +382,12 @@
       "notification": {
         "chainIDLabel" : "Chain ID",
         "descriptionLabel": "Information",
-        "description": "Die {{appName}}-App fordert eine Signatur von Ihrem Lisk-Wallet an.",
+        "description": "Diese Transaktion wurde von einer anderen Anwendung zur Signaturanforderung initiiert.",
         "accountLabel": "Ausgewähltes Konto"
       },
       "summary": {
+        "title": "Transaktions zusammenfassung",
+        "description": "Bitte überprüfen und bestätigen Sie die Transaktionsdetails, bevor Sie unterschreiben.",
         "cancelButtonText": "Zurück",
         "continueButtonText": "Zustimmen"
       },
@@ -371,7 +395,9 @@
         "submitButtonTitle": "Bestätigen und unterschreiben",
         "copyToClipboardButtonText": "Kopieren und zur App-Site weiterleiten",
         "copiedToClipboardButtonText": "Kopiert",
-        "errorButtonText": "Weiterleitung zur App-Site"
+        "errorButtonText": "Weiterleitung zur App-Site",
+        "invalidConnectionTitle": "Verbindung fehlgeschlagen",
+        "invalidConnectionDescription": "Die Verbindung von '{{appName}}' wurde aufgrund ungültiger Parameter blockiert."
       },
       "disconnect": {
         "title": "",
@@ -466,7 +492,8 @@
       "tokenID": "Zu sendendes Token muss angegeben werden",      
       "amountInvalid": "Betrag ungültig.",
       "priority": "Priorität muss angegeben werden",
-      "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend."
+      "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend.",
+      "estimateFees": "Fehler bei der Schätzung der Gebühren für diese Transaktion. Bitte versuchen Sie es mit anderen Parametern."
     },
     "info": {
       "priority": {
