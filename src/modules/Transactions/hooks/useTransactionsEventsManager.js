@@ -23,6 +23,8 @@ export function useTransactionsEventsManager() {
 
   const handleNewTransactionsEvent = useCallback(
     (event) => {
+      console.log('event is: ', event);
+
       const currentAccountNewTransactions = event.data.filter(
         (newTransaction) =>
           newTransaction.sender.address === currentAccount?.metadata?.address ||
@@ -59,6 +61,8 @@ export function useTransactionsEventsManager() {
 
   useEffect(() => {
     if (currentApplication.data && apiClient?.ws) {
+      console.log('apiClient?.ws', apiClient?.ws);
+
       apiClient.ws.on(TRANSACTION_EVENTS.newTransactions, handleNewTransactionsEvent);
     }
 

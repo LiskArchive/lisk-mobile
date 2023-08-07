@@ -1,5 +1,5 @@
 import axios from 'axios';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 import { METHOD } from './constants';
 
@@ -34,7 +34,14 @@ export class APIClient {
   }
 
   create({ http, ws } = {}) {
-    this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
+    console.log('INITIALIZING API CLIENT...', 'params: ', { http, ws });
+
+    this.ws = io('wss://betanet-service.lisk.com', { transports: ['websocket'] });
+
+    this.ws.on('connect_error', (error) => {
+      console.log('Connection Error: ', error);
+      console.log('Error msg: ', error.message);
+    });
 
     const request = axios.create({
       ...this.axiosConfig,
