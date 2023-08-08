@@ -19,16 +19,12 @@ import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import TransactionRow from '../TransactionRow/TransactionRow';
 
-import apiClient from 'utilities/api/APIClient';
-
 import getTransactionListStyles from './TransactionList.styles';
 import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from './TransactionList.constants';
 import TransactionListSkeleton from './components/TransactionListSkeleton';
 
 export default function TransactionList({ mode = 'overview', address, style }) {
   const navigation = useNavigation();
-
-  console.log('TransactionList', apiClient.ws);
 
   const [currentAccount] = useCurrentAccount();
 

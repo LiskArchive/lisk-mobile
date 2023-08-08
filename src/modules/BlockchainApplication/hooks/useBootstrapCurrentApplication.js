@@ -54,10 +54,6 @@ export function useBootstrapCurrentApplication() {
   // Create Client API with first element of default apps
   useEffect(() => {
     if (defaultApplicationsMetaData?.data[0]?.serviceURLs) {
-      // console.log(
-      //   'defaultApplicationsMetaData?.data[0].serviceURLs[0].ws',
-      //   defaultApplicationsMetaData?.data[0].serviceURLs[0].ws
-      // );
       apiClient.create(defaultApplicationsMetaData?.data[0].serviceURLs[0]);
     }
   }, [defaultApplicationsMetaData?.data]);
