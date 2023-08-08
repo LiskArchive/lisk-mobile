@@ -89,7 +89,6 @@ export default function ConfirmTransaction({
           }}
           placeholder={i18next.t('sendToken.confirmAndSign.passwordInputPlaceholder')}
           secureTextEntry
-          textContentType="password"
           testID="decrypt-password-input"
         />
       </View>
