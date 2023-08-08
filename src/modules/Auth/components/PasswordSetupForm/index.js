@@ -175,7 +175,6 @@ export default function PasswordSetupForm({
             containerStyle: styles.inputContainer,
             input: styles.input,
           }}
-          textContentType="username"
         />
       </KeyboardAwareScrollView>
 
