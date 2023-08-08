@@ -59,15 +59,13 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     });
 
   const handleInputChange = (value) => {
-    if (value === toSecureRecoveryPhraseString(value)) {
+    if (value && value === toSecureRecoveryPhraseString(value)) {
       return;
     }
     setRecoveryPhrase({
       value,
       validity: [],
     });
-
-    return true;
   };
 
   const handleSubmit = () => {

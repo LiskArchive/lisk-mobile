@@ -139,8 +139,6 @@ export default function PasswordSetupForm({
                 formState.errors?.password?.message &&
                 i18next.t(formState.errors?.password?.message)
               }
-              textContentType="newPassword"
-              passwordRules="minlength: 8; required: lower; required: upper; required: digit;"
             />
           )}
         />
@@ -164,8 +162,6 @@ export default function PasswordSetupForm({
                 formState.errors?.confirmPassword?.message &&
                 i18next.t(formState.errors?.confirmPassword?.message)
               }
-              textContentType="newPassword"
-              passwordRules="minlength: 8; required: lower; required: upper; required: digit;"
             />
           )}
         />
