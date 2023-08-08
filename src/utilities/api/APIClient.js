@@ -34,14 +34,7 @@ export class APIClient {
   }
 
   create({ http, ws } = {}) {
-    console.log('INITIALIZING API CLIENT...', 'params: ', { http, ws });
-
-    this.ws = io('wss://betanet-service.lisk.com', { transports: ['websocket'] });
-
-    this.ws.on('connect_error', (error) => {
-      console.log('Connection Error: ', error);
-      console.log('Error msg: ', error.message);
-    });
+    this.ws = io(`${ws}/blockchain`);
 
     const request = axios.create({
       ...this.axiosConfig,
