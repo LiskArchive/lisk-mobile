@@ -217,7 +217,7 @@ export class Transaction {
 
     const fee = baseFee + this.extraCommandFee;
 
-    this.transaction = { ...this.transaction, fee: BigInt('10000000') };
+    this.transaction = { ...this.transaction, fee };
 
     return fee;
   }
