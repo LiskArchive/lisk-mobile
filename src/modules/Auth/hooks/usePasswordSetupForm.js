@@ -26,7 +26,7 @@ const validationSchema = yup
       .required('auth.form.errors.noEmptyConfirmPasswordError')
       .matches(passwordValidationRegex, 'auth.form.errors.passwordRequirementsError')
       .oneOf([yup.ref('password'), null], 'auth.form.errors.passwordsDontMatchError'),
-    accountName: yup.string().nullable().notRequired(),
+    accountName: yup.string().notRequired(),
   })
   .required();
 
