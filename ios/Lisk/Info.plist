@@ -34,6 +34,8 @@
 		<key>NSFaceIDUsageDescription</key>
 		<string>$(PRODUCT_NAME) Authentication</string>
 		<key>NSMotionUsageDescription</key>
+		<key>NSAppleMusicUsageDescription</key>
+		<string>App requires access to your media library to store and retrieve encrypted recovery phrases</string>
 		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
 		<string>Lisk uses your photo library to access your stored QR codes.</string>
