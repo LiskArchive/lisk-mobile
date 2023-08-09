@@ -63,7 +63,6 @@ class Input extends React.Component {
       placeholderTextColor,
       disabled,
       adornments,
-      textContentType,
       passwordRules,
       blurOnSubmit = true,
     } = this.props;
@@ -131,7 +130,6 @@ class Input extends React.Component {
             placeholder={placeholder}
             placeholderTextColor={placeholderColor}
             accessibilityLabel={accessibilityLabel}
-            textContentType={textContentType}
             passwordRules={passwordRules}
           />
 
