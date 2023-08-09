@@ -213,9 +213,7 @@ export class Transaction {
     this.dynamicFeeEstimates = dynamicFeeEstimates;
 
     const priorityFee = this._getPriorityFee();
-    const baseFee = priorityFee > this.minFee ? priorityFee : this.minFee;
-
-    const fee = baseFee + this.extraCommandFee;
+    const fee = priorityFee > this.minFee ? priorityFee : this.minFee;
 
     this.transaction = { ...this.transaction, fee };
 
