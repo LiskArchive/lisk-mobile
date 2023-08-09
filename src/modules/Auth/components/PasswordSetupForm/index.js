@@ -194,7 +194,7 @@ export default function PasswordSetupForm({
 
         <PrimaryButton
           onPress={encryptAccount}
-          disabled={!isAgreedField.value || isLoading}
+          disabled={!isAgreedField.value || isLoading || !formState.isValid}
           testID="save-account"
           isLoading={isLoading}
         >
