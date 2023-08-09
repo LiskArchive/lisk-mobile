@@ -10,6 +10,7 @@ import { stringShortener } from 'utilities/helpers';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import RefreshSvg from 'assets/svgs/RefreshSvg';
 import { colors } from 'constants/styleGuide';
+import { useModal } from 'hooks/useModal';
 
 import getAccountItemStyles from './styles';
 
@@ -23,7 +24,7 @@ export default function AccountItem({
   navigation,
 }) {
   const { styles, theme } = useTheme({ styles: getAccountItemStyles() });
-
+  const modal = useModal();
   const { name: username, address } = account.metadata;
 
   return (
@@ -34,7 +35,10 @@ export default function AccountItem({
           color: colors.dark.blueGray,
           icon: () => <RefreshSvg />,
           testID: 'backup-account',
-          onPress: () => navigation.navigate('BackupRecoveryPhrase', { account }),
+          onPress: () => {
+            navigation.navigate('BackupRecoveryPhrase', { account });
+            modal.close();
+          },
         },
       ]}
       rightActions={[
