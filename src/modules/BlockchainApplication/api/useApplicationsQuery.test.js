@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { applicationsWrapper } from '../../../tests/applicationsWrapper';
+import { LIMIT } from 'utilities/api/constants';
 
 import { mockApplications } from '../__fixtures__';
 
@@ -13,16 +14,21 @@ describe('useApplicationsQuery hook', () => {
   it('should fetch data correctly', async () => {
     const { result, waitFor } = renderHook(() => useApplicationsQuery(), { wrapper });
 
+    const limit = LIMIT;
+    const offset = 0;
+
     expect(result.current.isLoading).toBeTruthy();
 
     await waitFor(() => result.current.isFetched);
 
     expect(result.current.isSuccess).toBeTruthy();
 
+    const data = mockApplications.slice(offset, offset + limit);
+
     const expectedResponse = {
-      data: mockApplications,
+      data,
       meta: {
-        count: mockApplications.length,
+        count: data.length,
         offset: 0,
       },
     };

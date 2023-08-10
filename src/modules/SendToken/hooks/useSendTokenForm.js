@@ -13,12 +13,14 @@ import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useTransactionFees } from 'modules/Transactions/hooks/useTransactionFees';
+import { useFeesQuery } from 'modules/Transactions/api/useFeesQuery';
 import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
+import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -29,6 +31,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     data: applicationSupportedTokensData,
     isSuccess: isSuccessApplicationSupportedTokensData,
   } = useApplicationSupportedTokensQuery(currentApplication.data);
+
+  const { data: feesData } = useFeesQuery();
 
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
@@ -87,11 +91,16 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
+  const defaultTokenID = feesData?.data.feeTokenID;
+
   const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
     useTransactionFees({
       transaction,
       isTransactionSuccess,
       dependencies: [recipientAddress, tokenID, amount, isCrossChainTransfer],
+      enabled: recipientAddress && tokenID && amount,
+      onError: () =>
+        DropDownHolder.error(i18next.t('Error'), i18next.t('sendToken.errors.estimateFees')),
     });
 
   const handleChange = (field, value, onChange) => {
@@ -187,8 +196,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
 
     if (applicationSupportedTokensData && !form.getValues('tokenID')) {
-      const defaultTokenID = applicationSupportedTokensData[0]?.tokenID;
-
       if (defaultTokenID) {
         transaction.update({
           params: {
@@ -202,7 +209,14 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         });
       }
     }
-  }, [form, defaultValues, isTransactionSuccess, applicationSupportedTokensData, transaction]);
+  }, [
+    form,
+    defaultValues,
+    defaultTokenID,
+    isTransactionSuccess,
+    applicationSupportedTokensData,
+    transaction,
+  ]);
 
   useEffect(() => {
     if (isTransactionSuccess && isSuccessApplicationSupportedTokensData) {
@@ -238,10 +252,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         command: 'transferCrossChain',
         params: {
           receivingChainID: recipientApplicationChainID,
-          // TODO: Waiting https://github.com/LiskHQ/lisk-service/issues/1669 to be solved
-          // so can be handled by useTransactionFees hook.
-          messageFee: '10000000',
-          messageFeeTokenID: '0400000000000000',
+          messageFee: BASE_TRANSACTION_MESSAGE_FEE,
+          messageFeeTokenID: defaultTokenID,
         },
       });
 
@@ -253,7 +265,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       form.setValue('command', 'transfer');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCrossChainTransfer, recipientApplicationChainID, transaction, isTransactionSuccess]);
+  }, [
+    isCrossChainTransfer,
+    recipientApplicationChainID,
+    transaction,
+    defaultTokenID,
+    isTransactionSuccess,
+  ]);
 
   const isLoading =
     form.formState.isSubmitting ||

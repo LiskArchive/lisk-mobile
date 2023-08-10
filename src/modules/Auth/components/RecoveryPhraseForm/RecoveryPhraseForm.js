@@ -29,11 +29,18 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const [showRecoveryPhrase, setShowRecoveryPhrase] = useState(false);
+  const [focused, setFocused] = useState(false);
   const [recoveryPhrase, setRecoveryPhrase] = useState({
     value: devDefaultRecoveryPhrase,
     validity: [],
   });
   const [derivationPath, setDerivationPath] = useState(`m/44'/134'/0'`);
+
+  const shouldShowMask = !(focused || showRecoveryPhrase);
+
+  const passphraseValue = !shouldShowMask
+    ? recoveryPhrase.value
+    : toSecureRecoveryPhraseString(recoveryPhrase.value);
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -52,16 +59,13 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     });
 
   const handleInputChange = (value) => {
-    if (!showRecoveryPhrase) {
-      return false;
+    if (value && value === toSecureRecoveryPhraseString(value)) {
+      return;
     }
-
     setRecoveryPhrase({
       value,
       validity: [],
     });
-
-    return true;
   };
 
   const handleSubmit = () => {
@@ -135,13 +139,10 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
 
         <Input
           testID="signInRecoveryPhaseInput"
-          value={
-            showRecoveryPhrase
-              ? recoveryPhrase.value
-              : toSecureRecoveryPhraseString(recoveryPhrase.value)
-          }
+          value={passphraseValue}
           onChange={handleInputChange}
-          disabled={!showRecoveryPhrase}
+          onBlur={() => setFocused(false)}
+          onFocus={() => setFocused(true)}
           autoCorrect={false}
           multiline
           keyboardAppearance="light"

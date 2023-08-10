@@ -4,36 +4,50 @@ export default {
   common: {
     container: {
       flex: 1,
-      paddingTop: boxes.boxPadding,
-      paddingBottom: boxes.boxPadding,
+    },
+    title: {
+      fontSize: 16,
+      textAlign: 'center',
+      marginBottom: 8,
+    },
+    description: {
+      fontSize: 14,
+    },
+    itemsContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
     },
     imageContainer: {
       alignItems: 'center',
     },
     image: {
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       marginBottom: 8,
       borderRadius: 25,
-    },
-    title: {
-      textAlign: 'center',
-      marginBottom: 8,
+      borderColor: colors.light.platinumGray,
+      borderWidth: 1,
     },
     urlContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: 4,
     },
     url: {
       marginLeft: 4,
       color: colors.light.ultramarineBlue,
       fontFamily: fonts.family.contextSemiBold,
+      fontSize: 14,
     },
     label: {
-      color: colors.light.blueGray,
+      fontSize: 14,
       marginRight: 4,
+      marginBottom: 8,
+    },
+    descriptionLabel: {
+      marginBottom: 12,
     },
     subTitle: {
       fontFamily: fonts.family.contextSemiBold,
@@ -45,24 +59,58 @@ export default {
     horizontalLine: {
       borderBottomColor: colors.light.platinumGray,
       borderBottomWidth: 1,
+      marginTop: boxes.boxPadding,
+      marginBottom: boxes.boxPadding,
     },
-    buttonContainer: {
-      flexDirection: 'row',
-    },
-    button: {
+    buttonLeft: {
       flex: 1,
-      marginHorizontal: 4,
+      marginRight: 8,
+    },
+    buttonRight: {
+      flex: 1,
+      marginLeft: 8,
+    },
+    itemContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 8,
+    },
+    itemBody: {
+      marginLeft: 8,
+    },
+    itemTitle: {
+      fontSize: 14,
+      fontWeight: '600',
+    },
+    itemSubtitle: {
+      fontSize: 10,
+    },
+    itemImage: {
+      height: 24,
+      width: 24,
+      borderRadius: 25,
+      borderColor: colors.light.platinumGray,
+      borderWidth: 1,
+    },
+    footer: {
+      flexDirection: 'row',
     },
   },
   [themes.light]: {
     title: {
       color: colors.light.zodiacBlue,
     },
-    subTitle: {
-      color: colors.light.zodiacBlue,
-    },
     description: {
       color: colors.light.zodiacBlue,
+    },
+    label: {
+      color: colors.light.smoothGray,
+    },
+    itemTitle: {
+      color: colors.light.zodiacBlue,
+    },
+    itemSubtitle: {
+      color: colors.light.smoothGray,
     },
   },
 
@@ -70,11 +118,17 @@ export default {
     title: {
       color: colors.dark.white,
     },
-    subTitle: {
-      color: colors.dark.white,
-    },
     description: {
       color: colors.dark.white,
+    },
+    label: {
+      color: colors.dark.smoothGray,
+    },
+    itemTitle: {
+      color: colors.dark.white,
+    },
+    itemSubtitle: {
+      color: colors.dark.smoothGray,
     },
   },
 };

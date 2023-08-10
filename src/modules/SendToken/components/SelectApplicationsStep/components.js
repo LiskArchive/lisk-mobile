@@ -47,7 +47,7 @@ export function SendTokenSenderApplicationField({
       >
         {senderApplication && (
           <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>{senderApplication.chainName}</Text>
+            <Text style={[styles.text, styles.theme.text]}>{senderApplication.displayName}</Text>
 
             <Image
               source={{ uri: senderApplication.logo.png }}
@@ -67,7 +67,9 @@ export function SendTokenRecipientApplicationField({
   applications,
   style,
 }) {
-  const recipientApplication = applications.find((application) => application.chainID === value);
+  const recipientApplication = applications.data.find(
+    (application) => application.chainID === value
+  );
 
   const { styles } = useTheme({
     styles: getSendTokenSelectApplicationsStepStyles(),
@@ -75,23 +77,24 @@ export function SendTokenRecipientApplicationField({
 
   const renderMenuItems = () => (
     <InfiniteScrollList
-      data={applications}
+      data={applications.data}
       keyExtractor={(item) => item.chainID}
       renderItem={(item) => (
         <Picker.Item
           key={item.chainID}
           value={item.chainID}
           onChange={onChange}
-          testID={`application-list-${item.chainName}`}
+          testID={`application-list-${item.displayName}`}
         >
-          <Text style={[styles.text, styles.theme.text]}>{item.chainName}</Text>
+          <Text style={[styles.text, styles.theme.text]}>{item.displayName}</Text>
 
           <Image source={{ uri: item.logo.png }} style={[styles.applicationLogoImage]} />
         </Picker.Item>
       )}
       withDefaultSpinner
-      // TODO: Integrate pagination props.
-      // (details on https://github.com/LiskHQ/lisk-mobile/issues/1827).
+      fetchNextPage={applications.fetchNextPage}
+      hasNextPage={applications.fetchNextPage}
+      isFetchingNextPage={applications.isFetchingNextPage}
     />
   );
 
@@ -104,7 +107,7 @@ export function SendTokenRecipientApplicationField({
       </Picker.Label>
 
       <Picker.Toggle
-        disabled={applications.loading}
+        disabled={applications.isLoading}
         placeholder={i18next.t('sendToken.applicationsSelect.recipientApplicationFieldPlaceholder')}
         style={style?.toggle}
         openMenu={showOptions}
@@ -112,7 +115,7 @@ export function SendTokenRecipientApplicationField({
       >
         {recipientApplication && (
           <View style={[styles.row]}>
-            <Text style={[styles.text, styles.theme.text]}>{recipientApplication.chainName}</Text>
+            <Text style={[styles.text, styles.theme.text]}>{recipientApplication.displayName}</Text>
 
             <Image
               source={{ uri: recipientApplication.logo.png }}

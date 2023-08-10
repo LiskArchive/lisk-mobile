@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import { useEffect, useState, useRef } from 'react';
-import { Clipboard } from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 export function usePasteFromClipboard({ onSuccess, onError } = {}) {
   const [data, setData] = useState('');

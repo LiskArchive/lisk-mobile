@@ -39,9 +39,8 @@ export default function getRecoveryPhraseQuizStyles() {
         marginBottom: 32,
       },
       recoveryPhraseText: {
-        marginHorizontal: 7,
         fontSize: fonts.size.base,
-        lineHeight: 33,
+        margin: 8,
         fontFamily: fonts.family.recoveryPhraseText,
       },
       placeholder: {

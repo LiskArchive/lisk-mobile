@@ -1,3 +1,149 @@
+diff --git a/node_modules/react-native-wasm/android/.project b/node_modules/react-native-wasm/android/.project
+index 0e0a1ba..fcf0266 100644
+--- a/node_modules/react-native-wasm/android/.project
++++ b/node_modules/react-native-wasm/android/.project
+@@ -14,4 +14,15 @@
+ 	<natures>
+ 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+ 	</natures>
++	<filteredResources>
++		<filter>
++			<id>1690459648248</id>
++			<name></name>
++			<type>30</type>
++			<matcher>
++				<id>org.eclipse.core.resources.regexFilterMatcher</id>
++				<arguments>node_modules|\.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>
++			</matcher>
++		</filter>
++	</filteredResources>
+ </projectDescription>
+diff --git a/node_modules/react-native-wasm/android/build.gradle b/node_modules/react-native-wasm/android/build.gradle
+index 6ba940e..7eae2e5 100644
+--- a/node_modules/react-native-wasm/android/build.gradle
++++ b/node_modules/react-native-wasm/android/build.gradle
+@@ -29,7 +29,7 @@ android {
+   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
+   buildToolsVersion getExtOrDefault('buildToolsVersion')
+   defaultConfig {
+-    minSdkVersion 16
++    minSdkVersion 33
+     targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
+     versionCode 1
+     versionName "1.0"
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/75f731bbd774841fa8b7cc6a806374ce/results.bin b/node_modules/react-native-wasm/android/build/.transforms/75f731bbd774841fa8b7cc6a806374ce/results.bin
+new file mode 100644
+index 0000000..1ed65e0
+--- /dev/null
++++ b/node_modules/react-native-wasm/android/build/.transforms/75f731bbd774841fa8b7cc6a806374ce/results.bin
+@@ -0,0 +1 @@
++i/
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/results.bin b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/results.bin
+new file mode 100644
+index 0000000..5ff383e
+--- /dev/null
++++ b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/results.bin
+@@ -0,0 +1 @@
++o/debug
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/BuildConfig.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/BuildConfig.dex
+new file mode 100644
+index 0000000..ea69d4b
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/BuildConfig.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$1.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$1.dex
+new file mode 100644
+index 0000000..1619462
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$1.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$JSHandler.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$JSHandler.dex
+new file mode 100644
+index 0000000..481b73b
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$JSHandler.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.dex
+new file mode 100644
+index 0000000..48800d0
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$callSync$1.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$callSync$1.dex
+new file mode 100644
+index 0000000..6636d52
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$callSync$1.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.dex
+new file mode 100644
+index 0000000..298db15
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$instantiate$1.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$instantiate$1.dex
+new file mode 100644
+index 0000000..0fc5dc2
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule$instantiate$1.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule.dex
+new file mode 100644
+index 0000000..0e46356
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModule.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModuleKt.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModuleKt.dex
+new file mode 100644
+index 0000000..2eba9a2
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmModuleKt.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmPackage.dex b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmPackage.dex
+new file mode 100644
+index 0000000..7c3b086
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/debug/com/reactnativewasm/WasmPackage.dex differ
+diff --git a/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/desugar_graph.bin b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/desugar_graph.bin
+new file mode 100644
+index 0000000..601f245
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/.transforms/f5dd19524f4622a94593c47c69f5ee4a/transformed/desugar_graph.bin differ
+diff --git a/node_modules/react-native-wasm/android/build/aop.log b/node_modules/react-native-wasm/android/build/aop.log
+new file mode 100644
+index 0000000..1641244
+--- /dev/null
++++ b/node_modules/react-native-wasm/android/build/aop.log
+@@ -0,0 +1,49 @@
++Wed Aug 02 11:37:37 CEST 2023
++/Users/Clemente/Desktop/lisk/lisk-mobile/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1.class [warning] can't determine modifiers of missing type com.android.volley.Request
++when processing type mungers com.reactnativewasm.WasmModule$instantiate$1
++when processing type mungers 
++when weaving 
++when batch building BuildConfig[null] #Files=0 AopXmls=#0
++ [Xlint:cantFindType]
++(no source information available)
++	[Xlint:cantFindType]
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Camera.class:64 [warning] advice defined in MobileProtectCamera has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Camera.class:95 [warning] advice defined in MobileProtectCamera has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Camera.class:127 [warning] advice defined in MobileProtectCamera has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Camera.class:133 [warning] advice defined in MobileProtectCamera has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Camera.class:139 [warning] advice defined in MobileProtectCamera has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Camera.class:145 [warning] advice defined in MobileProtectCamera has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/MobileProtectWebview.class [warning] advice defined in com.datatheorem.hooks.MobileProtectWebview has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/MediaStore.class:21 [warning] advice defined in MobileProtectMediaStore has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/LocationHook.class [warning] advice defined in com.datatheorem.hooks.LocationHook has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Logging.class:8 [warning] advice defined in MobileProtectLogging has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Logging.class:15 [warning] advice defined in MobileProtectLogging has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Logging.class:22 [warning] advice defined in MobileProtectLogging has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Logging.class:29 [warning] advice defined in MobileProtectLogging has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!/Logging.class:36 [warning] advice defined in MobileProtectLogging has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/HttpUrlConnectionHooks.class [warning] advice defined in com.datatheorem.hooks.HttpUrlConnectionHooks has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/ContentResolverHook.class [warning] advice defined in com.datatheorem.hooks.ContentResolverHook has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/AdvertisingIdHook.class [warning] advice defined in com.datatheorem.hooks.AdvertisingIdHook has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/HealthDataHook.class [warning] advice defined in com.datatheorem.hooks.HealthDataHook has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/OkHttpHooks.class [warning] advice defined in com.datatheorem.hooks.OkHttpHooks has not been applied [Xlint:adviceDidNotMatch]
++	
++/Users/Clemente/.gradle/caches/transforms-3/a599a014c48bde21d6730e1391e3c290/transformed/jetified-mobileprotect-transformations-23.0.3.jar!com/datatheorem/hooks/VolleyHooks.class [warning] advice defined in com.datatheorem.hooks.VolleyHooks has not been applied [Xlint:adviceDidNotMatch]
++	
 diff --git a/node_modules/react-native-wasm/android/build/generated/source/buildConfig/debug/com/reactnativewasm/BuildConfig.java b/node_modules/react-native-wasm/android/build/generated/source/buildConfig/debug/com/reactnativewasm/BuildConfig.java
 new file mode 100644
 index 0000000..690e5fd
@@ -65,10 +211,21 @@ index 0000000..8c9c699
 +aarMetadataVersion=1.0
 +minCompileSdk=1
 +minAndroidGradlePluginVersion=1.0.0
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json b/node_modules/react-native-wasm/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+new file mode 100644
+index 0000000..9e26dfe
+--- /dev/null
++++ b/node_modules/react-native-wasm/android/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/compile_library_classes_jar/debug/classes.jar b/node_modules/react-native-wasm/android/build/intermediates/compile_library_classes_jar/debug/classes.jar
+new file mode 100644
+index 0000000..ffe9f68
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/compile_library_classes_jar/debug/classes.jar differ
 diff --git a/node_modules/react-native-wasm/android/build/intermediates/compile_r_class_jar/debug/R.jar b/node_modules/react-native-wasm/android/build/intermediates/compile_r_class_jar/debug/R.jar
 new file mode 100644
-index 0000000..e10cb4c
-Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/compile_r_class_jar/debug/R.jar differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-wasm/android/build/intermediates/compile_symbol_list/debug/R.txt b/node_modules/react-native-wasm/android/build/intermediates/compile_symbol_list/debug/R.txt
 new file mode 100644
 index 0000000..611979d
@@ -2049,6 +2206,15 @@ index 0000000..8856e31
 +<?xml version="1.0" encoding="utf-8"?>
 +<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/res"/><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/build/generated/res/rs/debug"/><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/res"/><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/build/generated/res/rs/debug"/><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/debug/res"/></dataSet><mergedItems/></merger>
 \ No newline at end of file
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml b/node_modules/react-native-wasm/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+new file mode 100644
+index 0000000..6b1f443
+--- /dev/null
++++ b/node_modules/react-native-wasm/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/Clemente/Desktop/lisk/lisk-mobile/node_modules/react-native-wasm/android/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/Clemente/Desktop/lisk/lisk-mobile/node_modules/react-native-wasm/android/src/debug/jniLibs"/></dataSet></merger>
+\ No newline at end of file
 diff --git a/node_modules/react-native-wasm/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/react-native-wasm/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
 new file mode 100644
 index 0000000..0e0f76d
@@ -2067,6 +2233,10 @@ index 0000000..263efd3
 +<?xml version="1.0" encoding="utf-8"?>
 +<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/assets"/><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/build/intermediates/shader_assets/debug/out"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/debug/assets"/></dataSet></merger>
 \ No newline at end of file
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/library_java_res/debug/res.jar b/node_modules/react-native-wasm/android/build/intermediates/library_java_res/debug/res.jar
+new file mode 100644
+index 0000000..c7468fa
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/library_java_res/debug/res.jar differ
 diff --git a/node_modules/react-native-wasm/android/build/intermediates/local_only_symbol_list/debug/R-def.txt b/node_modules/react-native-wasm/android/build/intermediates/local_only_symbol_list/debug/R-def.txt
 new file mode 100644
 index 0000000..78ac5b8
@@ -2141,6 +2311,50 @@ index 0000000..2a5ced3
 +  "elementType": "File"
 +}
 \ No newline at end of file
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/META-INF/react-native-wasm_debug.kotlin_module b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/META-INF/react-native-wasm_debug.kotlin_module
+new file mode 100644
+index 0000000..b3ab103
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/META-INF/react-native-wasm_debug.kotlin_module differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/BuildConfig.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/BuildConfig.class
+new file mode 100644
+index 0000000..40057ef
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/BuildConfig.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$1.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$1.class
+new file mode 100644
+index 0000000..413d2dc
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$JSHandler.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$JSHandler.class
+new file mode 100644
+index 0000000..9596d47
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$JSHandler.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class
+new file mode 100644
+index 0000000..9196dd5
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$callSync$1.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$callSync$1.class
+new file mode 100644
+index 0000000..ce11143
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$callSync$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class
+new file mode 100644
+index 0000000..c2903dd
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$instantiate$1.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$instantiate$1.class
+new file mode 100644
+index 0000000..004b346
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule$instantiate$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule.class
+new file mode 100644
+index 0000000..055eeff
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModule.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModuleKt.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModuleKt.class
+new file mode 100644
+index 0000000..c558d1e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmModuleKt.class differ
+diff --git a/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmPackage.class b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmPackage.class
+new file mode 100644
+index 0000000..a4d20c8
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/intermediates/runtime_library_classes_dir/debug/com/reactnativewasm/WasmPackage.class differ
 diff --git a/node_modules/react-native-wasm/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt b/node_modules/react-native-wasm/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
 new file mode 100644
 index 0000000..95bb78f
@@ -3600,8 +3814,384 @@ index 0000000..95bb78f
 +xml rn_dev_preferences
 diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/build-history.bin b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/build-history.bin
 new file mode 100644
-index 0000000..0383d2c
-Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/build-history.bin differ
+index 0000000..e69de29
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab
+new file mode 100644
+index 0000000..e0db67e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream
+new file mode 100644
+index 0000000..1c33dbe
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len
+new file mode 100644
+index 0000000..9c4d226
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len
+new file mode 100644
+index 0000000..01bdaa1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at
+new file mode 100644
+index 0000000..611df8f
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i
+new file mode 100644
+index 0000000..62a35be
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
+new file mode 100644
+index 0000000..3e69509
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream
+new file mode 100644
+index 0000000..a46610b
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len
+new file mode 100644
+index 0000000..bcd95fb
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at
+new file mode 100644
+index 0000000..fe23964
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i
+new file mode 100644
+index 0000000..2858a71
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab
+new file mode 100644
+index 0000000..eaf4911
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream
+new file mode 100644
+index 0000000..a46610b
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len
+new file mode 100644
+index 0000000..bcd95fb
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at
+new file mode 100644
+index 0000000..69bee4b
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i
+new file mode 100644
+index 0000000..2858a71
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab
+new file mode 100644
+index 0000000..ce95448
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream
+new file mode 100644
+index 0000000..1de74e8
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream.len
+new file mode 100644
+index 0000000..71989fa
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.len
+new file mode 100644
+index 0000000..2a17e6e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.values.at
+new file mode 100644
+index 0000000..7f5343e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i
+new file mode 100644
+index 0000000..56fa4c7
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab
+new file mode 100644
+index 0000000..d41b8b9
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream
+new file mode 100644
+index 0000000..3476909
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len
+new file mode 100644
+index 0000000..fa43224
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len
+new file mode 100644
+index 0000000..eb0b8a0
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at
+new file mode 100644
+index 0000000..8481816
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i
+new file mode 100644
+index 0000000..57bca39
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab
+new file mode 100644
+index 0000000..bdf584a
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.keystream
+new file mode 100644
+index 0000000..1de74e8
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len
+new file mode 100644
+index 0000000..71989fa
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.len
+new file mode 100644
+index 0000000..2a17e6e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.values.at
+new file mode 100644
+index 0000000..46d6744
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab_i
+new file mode 100644
+index 0000000..56fa4c7
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/package-parts.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab
+new file mode 100644
+index 0000000..729431e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream
+new file mode 100644
+index 0000000..3e122d4
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len
+new file mode 100644
+index 0000000..ec8f944
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at
+new file mode 100644
+index 0000000..01949b3
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i
+new file mode 100644
+index 0000000..a75a2f6
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab
+new file mode 100644
+index 0000000..64938d8
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream
+new file mode 100644
+index 0000000..1c33dbe
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len
+new file mode 100644
+index 0000000..9c4d226
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len
+new file mode 100644
+index 0000000..01bdaa1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at
+new file mode 100644
+index 0000000..7e4dade
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i
+new file mode 100644
+index 0000000..62a35be
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab
+new file mode 100644
+index 0000000..b9bc9be
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream
+new file mode 100644
+index 0000000..b425921
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len
+new file mode 100644
+index 0000000..1cf91b4
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.len
+new file mode 100644
+index 0000000..01bdaa1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at
+new file mode 100644
+index 0000000..aa8d9ae
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i
+new file mode 100644
+index 0000000..13aca7b
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab
+new file mode 100644
+index 0000000..1c7b088
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream
+new file mode 100644
+index 0000000..9caf7e0
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len
+new file mode 100644
+index 0000000..2ea7305
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.len
+new file mode 100644
+index 0000000..01bdaa1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at
+new file mode 100644
+index 0000000..fdc18fe
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i
+new file mode 100644
+index 0000000..93e1b77
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+new file mode 100644
+index 0000000..2ceb12b
+--- /dev/null
++++ b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+@@ -0,0 +1,2 @@
++2
++0
+\ No newline at end of file
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab
+new file mode 100644
+index 0000000..37202e1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream
+new file mode 100644
+index 0000000..1c33dbe
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len
+new file mode 100644
+index 0000000..9c4d226
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len
+new file mode 100644
+index 0000000..01bdaa1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at
+new file mode 100644
+index 0000000..7d30a43
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i
+new file mode 100644
+index 0000000..3fffa10
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab
+new file mode 100644
+index 0000000..457f7b4
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream
+new file mode 100644
+index 0000000..100d205
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len
+new file mode 100644
+index 0000000..ccfcbf4
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len
+new file mode 100644
+index 0000000..01bdaa1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at
+new file mode 100644
+index 0000000..58df4c6
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i
+new file mode 100644
+index 0000000..f768a77
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab
+new file mode 100644
+index 0000000..c575ece
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream
+new file mode 100644
+index 0000000..601178d
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len
+new file mode 100644
+index 0000000..42eec0c
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len
+new file mode 100644
+index 0000000..58657b1
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at
+new file mode 100644
+index 0000000..a48a3f6
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i
+new file mode 100644
+index 0000000..a803c89
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len differ
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin
+new file mode 100644
+index 0000000..d56d71d
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin differ
 diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/dirty-sources.txt b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/dirty-sources.txt
 new file mode 100644
 index 0000000..14e184a
@@ -3611,6 +4201,10 @@ index 0000000..14e184a
 +/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/java/com/reactnativewasm/WasmModule.kt
 +/Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/java/com/reactnativewasm/WasmPackage.kt
 \ No newline at end of file
+diff --git a/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/local-state/build-history.bin b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/local-state/build-history.bin
+new file mode 100644
+index 0000000..c9b046d
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/kotlin/compileDebugKotlin/local-state/build-history.bin differ
 diff --git a/node_modules/react-native-wasm/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/react-native-wasm/android/build/outputs/logs/manifest-merger-debug-report.txt
 new file mode 100644
 index 0000000..fe236ad
@@ -3642,13 +4236,108 @@ index 0000000..fe236ad
 +		INJECTED from /Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/AndroidManifest.xml
 +		ADDED from /Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/AndroidManifest.xml
 +		INJECTED from /Users/balanced02/Documents/Lightcurve/lisk-mobile/node_modules/react-native-wasm/android/src/main/AndroidManifest.xml
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/META-INF/react-native-wasm_debug.kotlin_module b/node_modules/react-native-wasm/android/build/postWeave/debug/META-INF/react-native-wasm_debug.kotlin_module
+new file mode 100644
+index 0000000..b3ab103
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/META-INF/react-native-wasm_debug.kotlin_module differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/BuildConfig.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/BuildConfig.class
+new file mode 100644
+index 0000000..40057ef
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/BuildConfig.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$1.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$1.class
+new file mode 100644
+index 0000000..413d2dc
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$JSHandler.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$JSHandler.class
+new file mode 100644
+index 0000000..9596d47
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$JSHandler.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class
+new file mode 100644
+index 0000000..9196dd5
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$callSync$1.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$callSync$1.class
+new file mode 100644
+index 0000000..ce11143
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$callSync$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class
+new file mode 100644
+index 0000000..c2903dd
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$instantiate$1.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$instantiate$1.class
+new file mode 100644
+index 0000000..004b346
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule$instantiate$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule.class
+new file mode 100644
+index 0000000..055eeff
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModule.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModuleKt.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModuleKt.class
+new file mode 100644
+index 0000000..c558d1e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmModuleKt.class differ
+diff --git a/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmPackage.class b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmPackage.class
+new file mode 100644
+index 0000000..a4d20c8
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/postWeave/debug/com/reactnativewasm/WasmPackage.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/java/com/reactnativewasm/BuildConfig.class b/node_modules/react-native-wasm/android/build/preWeave/debug/java/com/reactnativewasm/BuildConfig.class
+new file mode 100644
+index 0000000..40057ef
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/java/com/reactnativewasm/BuildConfig.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/META-INF/react-native-wasm_debug.kotlin_module b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/META-INF/react-native-wasm_debug.kotlin_module
+new file mode 100644
+index 0000000..b3ab103
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/META-INF/react-native-wasm_debug.kotlin_module differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$1.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$1.class
+new file mode 100644
+index 0000000..413d2dc
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$JSHandler.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$JSHandler.class
+new file mode 100644
+index 0000000..9596d47
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$JSHandler.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class
+new file mode 100644
+index 0000000..9196dd5
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$callSync$1$run$1$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$callSync$1.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$callSync$1.class
+new file mode 100644
+index 0000000..ce11143
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$callSync$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class
+new file mode 100644
+index 0000000..c2903dd
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1$run$1$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1.class
+new file mode 100644
+index 0000000..004b346
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule$instantiate$1.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule.class
+new file mode 100644
+index 0000000..055eeff
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModule.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModuleKt.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModuleKt.class
+new file mode 100644
+index 0000000..c558d1e
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmModuleKt.class differ
+diff --git a/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmPackage.class b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmPackage.class
+new file mode 100644
+index 0000000..a4d20c8
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/preWeave/debug/kotlin/com/reactnativewasm/WasmPackage.class differ
+diff --git a/node_modules/react-native-wasm/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/react-native-wasm/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+new file mode 100644
+index 0000000..080ec98
+Binary files /dev/null and b/node_modules/react-native-wasm/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
 diff --git a/node_modules/react-native-wasm/android/gradle.properties b/node_modules/react-native-wasm/android/gradle.properties
-index 3e6c69a..6b5c57c 100644
+index 3e6c69a..f06123b 100644
 --- a/node_modules/react-native-wasm/android/gradle.properties
 +++ b/node_modules/react-native-wasm/android/gradle.properties
 @@ -1,4 +1,4 @@
 -Wasm_kotlinVersion=1.3.50
+-Wasm_compileSdkVersion=28
+-Wasm_buildToolsVersion=28.0.3
+-Wasm_targetSdkVersion=28
 +Wasm_kotlinVersion=1.6.0
- Wasm_compileSdkVersion=28
- Wasm_buildToolsVersion=28.0.3
- Wasm_targetSdkVersion=28
++Wasm_compileSdkVersion=33
++Wasm_buildToolsVersion=33.0.0
++Wasm_targetSdkVersion=33

@@ -25,9 +25,9 @@ export default function useTransactionEstimateFeesMutation({
       return apiClient[METHOD](config);
     },
     {
-      onSuccess: ({ data }) => {
+      onSuccess: (res) => {
         if (onSuccess) {
-          onSuccess(data);
+          onSuccess(res);
         }
       },
       onError: (error) => {

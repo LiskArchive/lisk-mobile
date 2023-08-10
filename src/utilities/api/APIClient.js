@@ -1,5 +1,5 @@
 import axios from 'axios';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 import { METHOD } from './constants';
 
@@ -34,7 +34,7 @@ export class APIClient {
   }
 
   create({ http, ws } = {}) {
-    this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
+    this.ws = io(`${ws}/blockchain`);
 
     const request = axios.create({
       ...this.axiosConfig,

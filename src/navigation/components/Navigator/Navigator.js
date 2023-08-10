@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -5,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 import RNShake from 'react-native-shake';
 
-import Register from 'modules/Auth/components/Register/Register';
+import RegisterForm from 'modules/Auth/components/RegisterForm/RegisterForm';
 import AddBookmark from 'modules/Bookmark/AddBookmark';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import AccountDetailsScreen from 'modules/Accounts/components/AccountDetailsScreen/AccountDetailsScreen';
@@ -15,7 +16,8 @@ import Terms from 'components/screens/terms';
 import PrivacyPolicy from 'components/screens/PrivacyPolicy';
 import IntroScreen from 'components/screens/IntroScreen/IntroScreen';
 import BottomModal from 'components/shared/BottomModal';
-import NotFound from 'components/navigation/NotFound';
+import ErrorScreen from 'components/screens/ErrorFallbackScreen';
+import NotFoundScreen from 'components/screens/NotFoundScreen/NotFoundScreen';
 
 import BackupRecoveryPhrase from 'modules/Settings/components/BackupRecoveryPhrase/BackupRecoveryPhrase';
 import AuthMethod from 'modules/Auth/components/AuthMethod';
@@ -32,15 +34,16 @@ import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
+import SecurityScreen from 'modules/Settings/components/SecurityScreen/SecurityScreen';
 
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 
-import AppNavigator from './components/AppNavigator';
+import AppNavigator from '../AppNavigator';
 
-import navigationOptions from './options';
-import navigationLinking from './linking';
-import { navigationDarkTabsStyle, navigationLightTabsStyle } from './styles';
+import navigationOptions from '../../navigation.options';
+import navigationLinking from '../../navigation.linking';
+import { navigationDarkTabsStyle, navigationLightTabsStyle } from './Navigator.styles';
 
 const StackNavigator = createStackNavigator();
 
@@ -49,11 +52,6 @@ export default function Navigator({ children }) {
   const discrete = useSelector((state) => state.settings.discrete);
   const dispatch = useDispatch();
   const { accounts } = useAccounts();
-
-  const themeColors = {
-    dark: theme === 'light',
-    colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
-  };
 
   useEffect(() => {
     if (enableShakePhone) {
@@ -70,18 +68,28 @@ export default function Navigator({ children }) {
     return () => RNShake.removeAllListeners();
   }, [discrete, enableShakePhone]);
 
+  const themeColors = {
+    dark: theme === 'light',
+    colors: theme === 'light' ? navigationDarkTabsStyle : navigationLightTabsStyle,
+  };
+
   return (
     <SafeAreaProvider>
       <NavigationContainer linking={navigationLinking} theme={themeColors}>
         <StackNavigator.Navigator initialRouteName="AuthMethod">
           <StackNavigator.Screen
             name="Register"
-            component={Register}
+            component={RegisterForm}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
             name="NotFound"
-            component={NotFound}
+            component={NotFoundScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="Error"
+            component={ErrorScreen}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
@@ -198,6 +206,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="DeleteAccount"
             component={DeleteAccountScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="SecurityScreen"
+            component={SecurityScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>

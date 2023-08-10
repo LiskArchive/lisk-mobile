@@ -24,7 +24,7 @@ const ConnectionProvider = ({ children }) => {
   };
 
   const { data: liskApplication } = useApplicationsMetaQuery({
-    config: { params: { chainName: 'Lisk' } },
+    config: { params: { chainName: 'lisk_mainchain' } },
   });
 
   const icon = liskApplication?.data[0]?.logo.svg;

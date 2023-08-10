@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, NativeModules, NativeEventEmitter } from 'react-native';
 
-import { getRecoveryPhraseFromKeyChain } from 'modules/Auth/utils';
+import { retrieveAccountsPasswordMapFromKeychain } from 'modules/Auth/utils';
 import { languageMap } from 'constants/languages';
 import TransactionDetails from 'modules/Transactions/components/TransactionDetails';
 import { ThemeContext } from '../../../contexts/ThemeContext';
@@ -31,7 +31,7 @@ class LiskMessageExtension extends Component {
   };
 
   setAccount = () => {
-    getRecoveryPhraseFromKeyChain().then((account) => {
+    retrieveAccountsPasswordMapFromKeychain().then((account) => {
       if (account) {
         this.userData = {
           recoveryPhrase: account.password,

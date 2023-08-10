@@ -11,47 +11,59 @@ export function useTransactionFees({
   dependencies = [],
   onSuccess,
   onError,
+  enabled,
 }) {
   const {
     data: commandParametersSchemasData,
     isLoading: isLoadingCommandParametersSchemas,
     isErrorCommandParametersSchemas,
   } = useCommandParametersSchemasQuery({
-    options: { enabled: isTransactionSuccess },
+    options: { enabled: isTransactionSuccess, onError },
   });
 
   const estimateFeesMutation = useTransactionEstimateFeesMutation({
-    onSuccess: (data) => {
+    onSuccess: (res) => {
       let updates = {};
 
-      if (data.transactionFeeEstimates.accountInitializationFee) {
+      const accountInitializationFee =
+        res.meta.breakdown.fee.minimum.additionalFees?.userAccountInitializationFee ||
+        res.meta.breakdown.params?.messageFee.additionalFees?.userAccountInitializationFee;
+
+      const messageFee = res.data.transaction.params?.messageFee.amount;
+      const messageFeeTokenID = res.data.transaction.params?.messageFee.tokenID;
+
+      const minFee = res.data.transaction.fee.minimum;
+
+      const dynamicFeeEstimates = res.data.transaction.fee.priority;
+
+      if (accountInitializationFee) {
         updates = {
-          extraCommandFee: data.transactionFeeEstimates.accountInitializationFee.amount,
+          extraCommandFee: accountInitializationFee,
         };
       }
 
-      if (data.transactionFeeEstimates.messageFee) {
+      if (messageFee && messageFeeTokenID) {
         updates = {
           ...updates,
           params: {
-            messageFee: data.transactionFeeEstimates.messageFee.amount,
-            messageFeeTokenID: data.transactionFeeEstimates.messageFee.tokenID,
+            messageFee,
+            messageFeeTokenID,
           },
         };
       }
 
-      if (data.transactionFeeEstimates.minFee) {
-        updates = { ...updates, minFee: data.transactionFeeEstimates.minFee };
+      if (minFee) {
+        updates = { ...updates, minFee };
       }
 
-      if (data.dynamicFeeEstimates) {
-        updates = { ...updates, dynamicFeeEstimates: data.dynamicFeeEstimates };
+      if (dynamicFeeEstimates) {
+        updates = { ...updates, dynamicFeeEstimates };
       }
 
       transaction.update(updates);
 
       if (onSuccess) {
-        onSuccess(data);
+        onSuccess(res);
       }
     },
     onError,
@@ -80,16 +92,18 @@ export function useTransactionFees({
   const areParamsValid = validateParams();
 
   useEffect(() => {
-    if (isTransactionSuccess && areParamsValid) {
-      // eslint-disable-next-line no-unused-vars
-      const { signatures, ...transactionJSON } = transaction.toJSON();
+    if (isTransactionSuccess && areParamsValid && enabled) {
+      const transactionJSON = transaction.toJSON();
+
+      delete transactionJSON.id;
+      delete transactionJSON.signatures;
 
       estimateFeesMutation.mutate({
         transaction: transactionJSON,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTransactionSuccess, areParamsValid, ...dependencies]);
+  }, [isTransactionSuccess, areParamsValid, enabled, ...dependencies]);
 
   return {
     data: estimateFeesMutation.data,

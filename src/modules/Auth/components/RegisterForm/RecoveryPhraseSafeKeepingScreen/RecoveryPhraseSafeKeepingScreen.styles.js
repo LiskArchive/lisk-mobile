@@ -36,6 +36,7 @@ export default function getRegisterSafeKeepingStyles() {
         fontSize: fonts.size.base,
         fontFamily: fonts.family.recoveryPhraseText,
         textAlign: 'center',
+        marginBottom: 24,
       },
       copyContainer: {
         alignItems: 'center',
@@ -50,11 +51,9 @@ export default function getRegisterSafeKeepingStyles() {
         padding: boxes.boxPadding,
       },
       switchContainer: {
-        position: 'absolute',
-        bottom: 88,
-        left: 20,
         flexDirection: 'row',
         alignItems: 'center',
+        paddingBottom: 10,
       },
       confirmText: {
         flex: 1,

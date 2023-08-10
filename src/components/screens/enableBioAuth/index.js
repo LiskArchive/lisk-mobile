@@ -8,7 +8,6 @@ import { useTheme } from 'contexts/ThemeContext';
 import Icon from 'components/shared/toolBox/icon';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 import i18next from 'i18next';
-import { bioMetricAuthentication } from 'modules/Auth/utils/recoveryPhrase';
 import getStyles from './styles';
 
 const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
@@ -17,17 +16,13 @@ const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
   const { sensorType } = useSelector((state) => state.settings);
 
   const confirm = () => {
-    bioMetricAuthentication({
-      successCallback: async () => {
-        if (onSubmit) {
-          onSubmit();
-          modal.close();
-        }
-        if (nextStep) {
-          nextStep({});
-        }
-      },
-    });
+    if (onSubmit) {
+      onSubmit();
+      modal.close();
+    }
+    if (nextStep) {
+      nextStep({});
+    }
   };
 
   return (

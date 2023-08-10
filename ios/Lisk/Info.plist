@@ -28,41 +28,19 @@
 		<dict>
 			<key>NSAllowsArbitraryLoads</key>
 			<true/>
-			<key>NSExceptionDomains</key>
-			<dict>
-				<key>localhost</key>
-				<dict>
-					<key>NSExceptionAllowsInsecureHTTPLoads</key>
-					<true/>
-				</dict>
-			</dict>
 		</dict>
-		<key>NSAppleMusicUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-		<key>NSBluetoothAlwaysUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-		<key>NSBluetoothPeripheralUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-		<key>NSCalendarsUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Lisk uses your camera to scan QR codes</string>
-		<key>NSContactsUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 		<key>NSFaceIDUsageDescription</key>
 		<string>$(PRODUCT_NAME) Authentication</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
+		<key>NSAppleMusicUsageDescription</key>
+		<string>App requires access to your media library to store and retrieve encrypted recovery phrases</string>
 		<key>NSMotionUsageDescription</key>
 		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
 		<string>Lisk uses your photo library to access your stored QR codes.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Lisk uses your photo library to access your stored QR codes.</string>
-		<key>NSSpeechRecognitionUsageDescription</key>
-		<string>This is a standard App Store requirement. Lisk Does not access this feature.</string>
 		<key>UIAppFonts</key>
 		<array>
 			<string>Dots-Regular.ttf</string>

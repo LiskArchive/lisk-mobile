@@ -1,7 +1,6 @@
 import { Circle, Polygon, Rect } from 'react-native-svg';
 import BigNumber from 'bignumber.js';
-import crypto from 'crypto';
-
+import { cryptography } from '@liskhq/lisk-client';
 /*
  * Account Visual
  *
@@ -160,9 +159,9 @@ export const pickTwo = (chunk, options) => [
 ];
 
 export const getHashChunks = (address) => {
-  const hash = crypto.createHash('sha256');
-  const addressHash = new BigNumber(`0x${hash.update(address).digest('hex')}`).toString().substr(3);
-  return addressHash.match(/\d{5}/g);
+  const addressHashHex = cryptography.utils.hash(Buffer.from(address, 'utf-8')).toString('hex');
+  const addressHashChunks = new BigNumber(`0x${addressHashHex}`).toString().substring(3);
+  return addressHashChunks.match(/\d{5}/g);
 };
 
 export const randomId = () => `avatar-${[1, 2, 3, 4].map(() => Math.random() * 100).join('')}`;

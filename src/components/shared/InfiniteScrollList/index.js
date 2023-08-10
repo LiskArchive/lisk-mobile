@@ -1,6 +1,8 @@
 import React from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
-import colors from 'constants/styleGuide/colors';
+
+import { useTheme } from 'contexts/ThemeContext';
+import { themes, colors } from 'constants/styleGuide';
 
 /**
  * Infinite scroll list component for rendering API fetched paginated data.
@@ -16,7 +18,7 @@ import colors from 'constants/styleGuide/colors';
  * @param {Function} fetchNextPage - Function to fetch the data of the next page.
  * @param {boolean} isFetchingNextPage - Flag that indicates if the api data fetcher is
  * requesting data.
- * @param {Function?} renderSpinner - Function to render a loader spinner during fetching
+ * @param {Component?} Spinner - Spinner component to render during fetching.
  * next page state.
  * @param {number?} onEndReachedThreshold - How far from the end (in units of visible
  * length of the list) the bottom edge of the list must be from the end of the content to
@@ -28,13 +30,16 @@ export default function InfiniteScrollList({
   fetchNextPage,
   renderItem: baseRenderItem,
   withDefaultSpinner,
-  renderSpinner: baseRenderSpinner,
+  ListFooterComponent,
+  Spinner: BaseSpinner,
   data,
   isFetchingNextPage,
   onEndReachedThreshold = 0.2,
   keyExtractor,
   ...props
 }) {
+  const { theme } = useTheme();
+
   const fetchMore = () => {
     if (hasNextPage) {
       fetchNextPage();
@@ -43,9 +48,13 @@ export default function InfiniteScrollList({
 
   const renderItem = ({ item }) => baseRenderItem(item);
 
-  const renderSpinner = withDefaultSpinner
-    ? () => <ActivityIndicator color={colors.light.white} />
-    : baseRenderSpinner;
+  const Spinner = withDefaultSpinner ? (
+    <ActivityIndicator
+      color={theme === themes.light ? colors.light.zodiacBlue : colors.dark.volcanicSand}
+    />
+  ) : (
+    BaseSpinner
+  );
 
   return (
     <FlatList
@@ -54,7 +63,7 @@ export default function InfiniteScrollList({
       renderItem={renderItem}
       onEndReached={fetchMore}
       onEndReachedThreshold={onEndReachedThreshold}
-      ListFooterComponent={isFetchingNextPage ? renderSpinner : props.ListFooterComponent}
+      ListFooterComponent={isFetchingNextPage ? Spinner : ListFooterComponent}
       showsVerticalScrollIndicator={showVerticalScrollIndicator}
       {...props}
     />

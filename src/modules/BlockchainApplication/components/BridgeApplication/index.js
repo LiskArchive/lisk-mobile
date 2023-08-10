@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable max-statements */
+import React, { useEffect, useState, useContext } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 
@@ -8,35 +9,89 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
 import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
 import { STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
+import { validateConnectionNameSpace } from '../../../../../libs/wcm/utils/eventValidators';
+import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
 
 import getStyles from './styles';
 
-export default function BridgeApplication({ nextStep }) {
-  const [status, setStatus] = useState({ isLoading: false });
+export default function BridgeApplication({ nextStep, uri = '' }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState();
+  const [error, setError] = useState();
+  const [inputUri, setInputUri] = useState(uri);
+  const [eventTopic, setEventTopic] = useState('');
 
-  const [inputUri, setInputUri] = useState('');
-
+  const { events } = useContext(ConnectionContext);
   const { setUri } = useWalletConnectPairings();
 
   const { styles } = useTheme({ styles: getStyles });
 
+  const proposalEvent = events.find((event) => event?.meta?.params?.pairingTopic === eventTopic);
+
+  const handleStateCleanup = () => {
+    if (eventTopic) {
+      setEventTopic('');
+    }
+
+    if (error) {
+      setError(undefined);
+    }
+
+    if (isSuccess) {
+      setIsSuccess(undefined);
+    }
+  };
+
+  const handleInputChange = (value) => {
+    handleStateCleanup();
+
+    setInputUri(value);
+  };
+
   const handleSubmit = async () => {
-    setStatus({ ...status, isLoading: true });
+    handleStateCleanup();
+
+    setIsLoading(true);
 
     const response = await setUri(inputUri);
 
     if (response.status === STATUS.FAILURE) {
-      setStatus({ ...response, isError: true });
+      setError(new Error('Error connecting application. Please try again.'));
+      setIsLoading(false);
     } else if (response.status === STATUS.SUCCESS) {
-      setStatus({ ...response, isSuccess: true });
+      setEventTopic(response.data.topic);
     }
   };
 
   useEffect(() => {
-    if (status.isSuccess) {
+    if (proposalEvent && isLoading) {
+      try {
+        const isEventNameSpaceValid = validateConnectionNameSpace(proposalEvent);
+
+        if (isEventNameSpaceValid) {
+          setIsLoading(false);
+          setIsSuccess(true);
+        } else {
+          setError(
+            new Error(
+              'You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.'
+            )
+          );
+          setIsLoading(false);
+        }
+      } catch {
+        setError(new Error('Error validating connection. Please try again.'));
+        setIsLoading(false);
+      }
+    }
+  }, [proposalEvent, isLoading]);
+
+  useEffect(() => {
+    if (isSuccess) {
       nextStep();
     }
-  }, [status, nextStep]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <View style={styles.container}>
@@ -53,22 +108,18 @@ export default function BridgeApplication({ nextStep }) {
           placeholder={i18next.t('application.explore.externalApplicationList.enterConnectionUri')}
           autoCorrect={false}
           autoFocus
-          onChange={setInputUri}
+          onChange={handleInputChange}
           value={inputUri}
           returnKeyType="done"
         />
 
-        {status.isError && (
-          <P style={[styles.errorMessage, styles.theme.errorMessage]}>
-            Error connecting application. Please try again.
-          </P>
-        )}
+        {!!error && <P style={[styles.errorMessage, styles.theme.errorMessage]}>{error.message}</P>}
       </View>
 
       <PrimaryButton
-        disabled={!inputUri || status.isLoading}
+        disabled={!inputUri || isLoading || !!error}
         onPress={handleSubmit}
-        isLoading={status.isLoading}
+        isLoading={isLoading}
       >
         {i18next.t('application.explore.externalApplicationList.addApplication')}
       </PrimaryButton>
