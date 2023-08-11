@@ -49,12 +49,11 @@ export class APIClient {
       ...otherConfig,
       method: method || 'GET',
       headers: finalHeaders,
-      pkPinning: true,
     };
 
     if (this.enableCertPinning) {
       fetchOptions.sslPinning = {
-        certs: ['exp-cert'],
+        certs: ['server-cert'],
       };
     } else {
       fetchOptions.disableAllSecurity = true;
