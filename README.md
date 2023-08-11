@@ -115,13 +115,50 @@ The process is:
 
 More details can be found [here](https://armen-mkrtchian.medium.com/run-cocoapods-on-apple-silicon-and-macos-big-sur-developer-transition-kit-b62acffc1387).
 
-### Build on iOS
+### Build
+
+Before building the app, make sure to have a valid and non-expired SSL certificate from Lisk Service.
+
+All API calls to Lisk Service pass through a Certificate Pinning process, for which a valid `server-cert.cer` file should be added to the source code before any build. Devnet is excluded from this.
+
+For creating the certificates:
+
+1. Fetch them from Lisk Service server:
+    ```bash
+    openssl s_client -showcerts -servername <LISK SERVICE NETWORK DOMAIN> -connect <LISK SERVICE NETWORK DOMAIN>:443 </dev/null
+    ```
+    `LISK SERVICE NETWORK DOMAIN` could be for example, `betanet-service.lisk.com`.
+2. The previous command will print on the terminal all the certificates available on that server. Copy the root certificate (from `BEGIN` to `END`), create the file `server-cert.pem` on the root folder of the project and paste the certificate content on it.
+
+3. Convert the certificate from `.pem` to `.cer`:
+    ```bash
+    openssl x509 -in server-cert.pem -outform der -out server-cert.cer
+    ```
+
+The certificate location varies based on the platform which the app is being build. See the "Build on iOS" and "Build on Android" sections for details.
+
+More details of the certificate generation can be found on [the docs of the Certificate Pinning library that we use](https://github.com/MaxToyberman/react-native-ssl-pinning).
+#### Build on iOS
+
+Before building on iOS, make sure that Lisk Service's SSL certificate is added to the "_Bundle Resources_" of the app:
+1. Open the app on Xcode.
+2. Go to _Build Phases_/ _Copy Bundle Resources_/ _Add button_.
+3. Add the `server-cert.cer` file.
+
+After this, you can build normally the app.
+
+To build the app on iOS run:
 
 ```bash
 $ npm run build:ios
 ```
 
-### Build on Android
+#### Build on Android
+Before building on Android, make sure that Lisk Service's SSL certificate (`server-cert.cer`) is added to the `android/app/src/main/assets` folder.
+
+After this, you can build normally the app.
+
+To build the app on Android run:
 
 ```bash
 $ npm run build:android
