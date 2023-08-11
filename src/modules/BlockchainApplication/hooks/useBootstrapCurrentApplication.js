@@ -54,7 +54,10 @@ export function useBootstrapCurrentApplication() {
   // Create Client API with first element of default apps
   useEffect(() => {
     if (defaultApplicationsMetaData?.data[0]?.serviceURLs) {
-      apiClient.create(defaultApplicationsMetaData?.data[0].serviceURLs[0]);
+      apiClient.create({
+        ...defaultApplicationsMetaData?.data[0].serviceURLs[0],
+        enableCertPinning: defaultApplicationsMetaData?.data[0].chainName === 'lisk_mainchain',
+      });
     }
   }, [defaultApplicationsMetaData?.data]);
 

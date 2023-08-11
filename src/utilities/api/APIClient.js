@@ -1,19 +1,79 @@
-import axios from 'axios';
-import { io } from 'socket.io-client';
+/* eslint-disable max-statements */
 import { fetch } from 'react-native-ssl-pinning';
+import { io } from 'socket.io-client';
 
 import { METHOD } from './constants';
 
 export class APIClient {
   http = null;
-
   ws = null;
-
-  certs = null;
-
-  axiosConfig = {
-    timeout: 10000,
+  enableCertPinning = false;
+  baseUrl = '';
+  fetchConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    timeoutInterval: 10000,
   };
+
+  create({ http, ws, enableCertPinning = false } = {}) {
+    this.ws = io(`${ws}/blockchain`);
+    this.baseUrl = http;
+    this.enableCertPinning = enableCertPinning;
+  }
+
+  async call({ transformResult = async (data) => data, ...args }) {
+    return this[METHOD](args).then(transformResult);
+  }
+
+  async rest(config) {
+    const { url, params, method, data, headers, ...otherConfig } = config;
+
+    // Constructing the URL with parameters
+    let finalUrl = this.baseUrl + url;
+
+    if (params && Object.keys(params).length) {
+      const queryString = new URLSearchParams(params).toString();
+      finalUrl = `${finalUrl}?${queryString}`;
+    }
+
+    // Setting up request headers
+    const finalHeaders = {
+      ...this.fetchConfig.headers,
+      ...headers,
+    };
+
+    // Request configuration for pinned fetch
+    const fetchOptions = {
+      ...this.fetchConfig,
+      ...otherConfig,
+      method: method || 'GET',
+      headers: finalHeaders,
+      pkPinning: true,
+    };
+
+    if (this.enableCertPinning) {
+      fetchOptions.sslPinning = {
+        certs: ['exp-cert'],
+      };
+    } else {
+      fetchOptions.disableAllSecurity = true;
+    }
+
+    // Adding the request body
+    if (['POST', 'PUT', 'PATCH'].includes(method?.toUpperCase()) && data) {
+      fetchOptions.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(finalUrl, fetchOptions);
+    const responseData = await response.json();
+
+    if (response.status !== 200) {
+      throw new Error(responseData.message || 'Request failed');
+    }
+
+    return responseData;
+  }
 
   rpc({ event, params, data }) {
     return new Promise((resolve, reject) => {
@@ -30,42 +90,6 @@ export class APIClient {
         return resolve(response);
       });
     });
-  }
-
-  rest(config) {
-    if (this.certs) {
-      return fetch(this.http, {
-        ...this.axiosConfig,
-        ...config,
-        sslPinning: {
-          certs: this.certs,
-        },
-      });
-    }
-    return this.http?.request({ ...this.http.defaults, ...config });
-  }
-
-  create({ http, ws, apiCertificatePublicKey } = {}) {
-    console.log({ apiCertificatePublicKey });
-
-    this.ws = io(`${ws}/blockchain`);
-
-    if (apiCertificatePublicKey) {
-      // TODO: Import certificate and assign to this.certs
-    }
-
-    const request = axios.create({
-      ...this.axiosConfig,
-      baseURL: http,
-    });
-
-    request.interceptors.response.use((res) => res.data);
-
-    this.http = request;
-  }
-
-  call({ transformResult = async (data) => data, ...args }) {
-    return this[METHOD](args).then(transformResult);
   }
 }
 

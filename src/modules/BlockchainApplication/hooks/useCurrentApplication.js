@@ -40,7 +40,10 @@ export function useCurrentApplication() {
   const { currentApplication } = useApplications();
 
   const handleSetData = (selectedApplication) => {
-    apiClient.create(selectedApplication.serviceURL);
+    apiClient.create({
+      ...selectedApplication.serviceURL,
+      enableCertPinning: selectedApplication.chainName === 'lisk_mainchain',
+    });
 
     currentApplication.setData(selectedApplication);
 
