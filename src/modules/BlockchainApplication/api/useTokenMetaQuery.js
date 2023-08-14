@@ -15,7 +15,7 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
 export function useTokenMetaQuery(tokenID, { config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/blockchain/apps/meta/tokens`,
-    method: 'get',
+    method: 'GET',
     event: 'get.blockchain.apps.meta.tokens',
     ...customConfig,
     params: {

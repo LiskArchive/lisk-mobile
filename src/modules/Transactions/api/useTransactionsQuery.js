@@ -6,7 +6,7 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 export function useTransactionsQueryParams({ config: customConfig = {} } = {}) {
   const config = {
     url: `${API_URL}/transactions`,
-    method: 'get',
+    method: 'GET',
     event: 'get.transactions',
     ...customConfig,
     params: {

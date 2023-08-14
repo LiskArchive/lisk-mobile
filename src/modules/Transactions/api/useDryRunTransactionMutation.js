@@ -14,7 +14,7 @@ export default function useDryRunTransactionMutation({ onSuccess, onError, ...op
     ({ transaction }) => {
       const config = {
         url: `${API_URL}/transactions/dryrun`,
-        method: 'post',
+        method: 'POST',
         event: 'post.transactions.dryrun',
         data: { transaction },
       };

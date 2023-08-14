@@ -39,6 +39,7 @@ yarn-error.log
 
 *.keystore
 *.pem
+*.cer
 pepk.jar
 !debug.keystore
 
