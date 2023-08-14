@@ -51,7 +51,7 @@ export class APIClient {
       headers: finalHeaders,
     };
 
-    if (this.enableCertPinning) {
+    if (this.enableCertPinning && process.env.NETWORK !== 'devnet') {
       fetchOptions.sslPinning = {
         certs: ['server-cert'],
       };
@@ -65,6 +65,7 @@ export class APIClient {
     }
 
     const response = await fetch(finalUrl, fetchOptions);
+
     const responseData = await response.json();
 
     if (response.status !== 200) {

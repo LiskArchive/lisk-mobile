@@ -58,8 +58,8 @@
 		7E342449C772440C0543475E /* libPods-LiskApp-LiskDev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		CB0756202A863AED00508875 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CB07561F2A863AED00508875 /* server-cert.cer */; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
+		CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CBD727A12A8A52DA00D33815 /* server-cert.cer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,10 +168,9 @@
 		AA82A2E09394A9AAB9AE56B8 /* Pods-Lisk-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-LiskDev.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC88364E9EC48DA3B52412DA /* Pods-LiskApp-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk/Pods-LiskApp-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
-		CB07561D2A8635DA00508875 /* exp-cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = "exp-cert.cer"; path = "../exp-cert.cer"; sourceTree = "<group>"; };
-		CB07561F2A863AED00508875 /* server-cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = "server-cert.cer"; path = "../server-cert.cer"; sourceTree = "<group>"; };
 		CB9BAE4A26FF857E00EE1F48 /* Lisk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lisk-Bridging-Header.h"; sourceTree = "<group>"; };
 		CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
+		CBD727A12A8A52DA00D33815 /* server-cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = "server-cert.cer"; path = "../server-cert.cer"; sourceTree = "<group>"; };
 		D1FBD00EBB5BF68B90C6ACFF /* Pods-Lisk-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D62835011F787A4FF10BFE9B /* Pods-LiskApp-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk/Pods-LiskApp-Lisk.release.xcconfig"; sourceTree = "<group>"; };
 		E01BE00324F84FB5D6186030 /* Pods-LiskApp-LiskDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskDev.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -344,8 +343,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				CB07561F2A863AED00508875 /* server-cert.cer */,
-				CB07561D2A8635DA00508875 /* exp-cert.cer */,
+				CBD727A12A8A52DA00D33815 /* server-cert.cer */,
 				79DD0C352A3750F500E2DC9D /* LiskQA */,
 				79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */,
 				CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */,
@@ -579,7 +577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB0756202A863AED00508875 /* server-cert.cer in Resources */,
+				CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */,
 				7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */,
 				79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */,
 				7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */,
