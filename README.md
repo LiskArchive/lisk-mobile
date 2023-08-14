@@ -145,8 +145,6 @@ Before building on iOS, make sure that Lisk Service's SSL certificate is added t
 2. Go to _Build Phases_/ _Copy Bundle Resources_/ _Add button_.
 3. Add the `server-cert.cer` file.
 
-After this, you can build normally the app.
-
 To build the app on iOS run:
 
 ```bash
@@ -155,8 +153,6 @@ $ npm run build:ios
 
 #### Build on Android
 Before building on Android, make sure that Lisk Service's SSL certificate (`server-cert.cer`) is added to the `android/app/src/main/assets` folder.
-
-After this, you can build normally the app.
 
 To build the app on Android run:
 
