@@ -159,6 +159,17 @@ android {
         }
     }
 
+    flavorDimensions ("default")
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationId "io.lisk.dev"
+        }
+        prod {
+            dimension "default"
+        }
+    }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
