@@ -58,7 +58,15 @@ export default function PasswordSetupForm({
   }, []);
 
   const [
-    { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
+    {
+      handleSubmit,
+      accountNameField,
+      isAgreedField,
+      isBiometricsEnabled,
+      formState,
+      control,
+      trigger,
+    },
     { encryptedAccount, isLoading, isSuccess },
   ] = usePasswordSetupForm(recoveryPhrase, derivationPath);
 
@@ -96,6 +104,12 @@ export default function PasswordSetupForm({
       });
     }
   }, [navigation, isSuccess, encryptedAccount]);
+
+  useEffect(() => {
+    // We need to re-trigger this as useForm don't re-validate after this change
+    // Cause validation method is set to onBlur, but the component isn't an input
+    trigger('isAgreed');
+  }, [isAgreedField.value]);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
