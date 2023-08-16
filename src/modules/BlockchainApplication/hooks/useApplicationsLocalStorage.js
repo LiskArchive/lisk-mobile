@@ -25,7 +25,7 @@ export function useApplicationsLocalStorage() {
 
   const queryConfig = {
     url: `${API_URL}/blockchain/apps/meta`,
-    method: 'get',
+    method: 'GET',
     event: 'get.blockchain.apps.meta',
     transformResult: transformApplicationsMetaQueryResult,
     params: {

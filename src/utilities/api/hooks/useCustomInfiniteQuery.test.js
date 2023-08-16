@@ -11,7 +11,7 @@ describe('useCustomInfiniteQuery hook', () => {
   const config = {
     baseURL: API_BASE_URL,
     url: `${API_URL}/mock/custom-infinite-query`,
-    method: 'get',
+    method: 'GET',
     params: {
       limit: LIMIT,
     },

@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
   - boost (1.76.0)
   - BVLinearGradient (2.8.1):
     - React-Core
@@ -457,6 +472,9 @@ PODS:
     - React
   - RNShare (7.9.1):
     - React-Core
+  - RNSslPinning (1.5.7):
+    - AFNetworking (~> 4.0)
+    - React
   - RNSVG (12.5.1):
     - React-Core
   - RNVectorIcons (8.1.0):
@@ -561,12 +579,14 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNScreenshotPrevent (from `../node_modules/react-native-screenshot-prevent`)
   - RNShare (from `../node_modules/react-native-share`)
+  - RNSslPinning (from `../node_modules/react-native-ssl-pinning`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - AFNetworking
     - CocoaAsyncSocket
     - Flipper
     - Flipper-Boost-iOSX
@@ -720,6 +740,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screenshot-prevent"
   RNShare:
     :path: "../node_modules/react-native-share"
+  RNSslPinning:
+    :path: "../node_modules/react-native-ssl-pinning"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -728,6 +750,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   BVLinearGradient: 421743791a59d259aec53f4c58793aad031da2ca
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -809,6 +832,7 @@ SPEC CHECKSUMS:
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNScreenshotPrevent: 0526b14371b2d0545957070cf30bc0a29a5c4bf5
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
+  RNSslPinning: 373fddf38420bec9c591376f3e4a24df1051b39a
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17

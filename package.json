@@ -1,12 +1,13 @@
 {
   "name": "Lisk",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "description": "The Lisk official mobile wallet",
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "scripts": {
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
+    "ios-dev": "npx react-native run-ios --scheme LiskDev",
     "start": "npx react-native start",
     "release:android": "cd android && ./gradlew bundleRelease",
     "test": "cp env.test.json env.json && jest --config ./jest.config.js --env=jsdom",
@@ -90,6 +91,7 @@
     "react-native-share": "^7.5.0",
     "react-native-snap-carousel": "3.9.1",
     "react-native-splash-screen": "3.2.0",
+    "react-native-ssl-pinning": "^1.5.7",
     "react-native-svg": "^12.5.0",
     "react-native-tcp": "^4.0.0",
     "react-native-udp": "^4.1.5",

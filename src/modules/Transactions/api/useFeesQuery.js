@@ -12,7 +12,7 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 export function useFeesQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/fees`,
-    method: 'get',
+    method: 'GET',
     event: 'get.fees',
     ...customConfig,
   };
