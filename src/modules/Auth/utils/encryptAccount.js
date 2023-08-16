@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 /* eslint-disable max-statements */
 import { cryptography } from '@liskhq/lisk-client';
 
@@ -25,9 +26,11 @@ export const encryptAccount = async ({
     }
     const address = extractAddressFromPublicKey(publicKey);
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
-    const crypto = await encrypt.encryptMessageWithPassword(plainText, password, {
-      getKey: getKeyFromPasswordWithArgon2,
-    });
+    const encryptOptions = {};
+    if (Platform.OS === 'android') {
+      options.getKey = getKeyFromPasswordWithArgon2;
+    }
+    const crypto = await encrypt.encryptMessageWithPassword(plainText, password, encryptOptions);
     return {
       crypto,
       metadata: {
