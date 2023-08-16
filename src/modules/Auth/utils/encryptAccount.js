@@ -3,6 +3,7 @@ import { cryptography } from '@liskhq/lisk-client';
 
 import { defaultDerivationPath } from '../constants/recoveryPhrase.constants';
 import { extractKeyPair, extractAddressFromPublicKey } from './accountKeys';
+import { getKeyFromPasswordWithArgon2 } from './getKeyFromArgon';
 
 export const encryptAccount = async ({
   recoveryPhrase,
@@ -24,7 +25,9 @@ export const encryptAccount = async ({
     }
     const address = extractAddressFromPublicKey(publicKey);
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
-    const crypto = await encrypt.encryptMessageWithPassword(plainText, password);
+    const crypto = await encrypt.encryptMessageWithPassword(plainText, password, {
+      getKey: getKeyFromPasswordWithArgon2,
+    });
     return {
       crypto,
       metadata: {
