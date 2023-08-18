@@ -41,5 +41,14 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name=".DataAccessRationaleActivity"
+      android:permission="android.permission.START_VIEW_PERMISSION_USAGE"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+        <action android:name="android.intent.action.VIEW_PERMISSION_USAGE_FOR_PERIOD" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
   </application>
 </manifest>
