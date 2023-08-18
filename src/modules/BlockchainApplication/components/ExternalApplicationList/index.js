@@ -19,8 +19,6 @@ export default function ExternalApplicationList() {
     styles: getExternalApplicationListStyles(),
   });
 
-  console.log('sessions: ', JSON.stringify(sessions));
-
   return (
     <DataRenderer
       data={sessions}

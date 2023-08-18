@@ -48,9 +48,10 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
-  console.log(transaction.error);
-
   const senderAccountAddress = extractAddressFromPublicKey(sessionRequest.peer.publicKey);
+
+  const senderApplicationChainID = event.meta.params.chainId.replace('lisk:', '');
+  const recipientApplicationChainID = event.meta.params.request.params.recipientChainID;
 
   const handleRespond = async (payload) => {
     setStatus({ ...sessionRequest, isLoading: true });
@@ -104,7 +105,7 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
         return (
           <ExternalAppSignatureRequestNotification
             session={sessionRequest}
-            senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
+            senderApplicationChainID={senderApplicationChainID}
             senderAccountAddress={senderAccountAddress}
             onCancel={onCancel}
             onSubmit={() => setActiveStep('summary')}
@@ -116,7 +117,8 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
           <ExternalAppSignatureRequestSummary
             session={sessionRequest}
             transaction={_transaction.transaction}
-            senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
+            senderApplicationChainID={senderApplicationChainID}
+            recipientApplicationChainID={recipientApplicationChainID}
             onCancel={() => setActiveStep('notification')}
             onSubmit={() => setActiveStep('sign')}
           />

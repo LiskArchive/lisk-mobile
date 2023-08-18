@@ -67,8 +67,6 @@ export class APIClient {
       fetchOptions.body = JSON.stringify(data);
     }
 
-    console.log({ finalUrl });
-
     const response = await fetch(finalUrl, fetchOptions);
 
     const responseData = await response.json();

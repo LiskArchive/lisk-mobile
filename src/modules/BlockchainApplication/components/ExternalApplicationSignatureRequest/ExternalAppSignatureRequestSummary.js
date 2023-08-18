@@ -18,6 +18,7 @@ export default function ExternalAppSignatureRequestSummary({
   onCancel,
 }) {
   const summary = useTransactionSummary({
+    recipientApplicationChainID: senderApplicationChainID,
     recipientAccountAddress: transaction.params.recipientAddress.toString('hex'),
     tokenID: transaction.params.tokenID.toString('hex'),
     amount: Number(transaction.params.amount),
@@ -47,7 +48,7 @@ export default function ExternalAppSignatureRequestSummary({
       <TransactionSummary
         {...summary}
         senderApplication={{
-          chainName: session.peer.metadata.name,
+          displayName: session.peer.metadata.name,
           logo: { png: session.peer.metadata.icons[0] },
         }}
       />
