@@ -7,7 +7,7 @@ import { H2, P } from 'components/shared/toolBox/typography';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
-import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
+import { usePairings } from '../../../../../libs/wcm/hooks/usePairings';
 import { STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
 import { validateConnectionNameSpace } from '../../../../../libs/wcm/utils/eventValidators';
 import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
@@ -22,7 +22,7 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
   const [eventTopic, setEventTopic] = useState('');
 
   const { events } = useContext(ConnectionContext);
-  const { setUri } = useWalletConnectPairings();
+  const { setUri } = usePairings();
 
   const { styles } = useTheme({ styles: getStyles });
 

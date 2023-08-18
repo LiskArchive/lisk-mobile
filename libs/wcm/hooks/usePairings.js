@@ -1,24 +1,19 @@
-import { useEffect, useContext, useCallback } from 'react';
-import { getSdkError } from '@walletconnect/utils';
-
-import { signClient } from '../utils/connectionCreator';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import ConnectionContext from '../context/connectionContext';
-import { ERROR_CASES, STATUS } from '../constants/lifeCycle';
+import { STATUS } from '../constants/lifeCycle';
 
-const usePairings = () => {
-  const { pairings, setPairings } = useContext(ConnectionContext);
+export const usePairings = () => {
+  const { pairings, setPairings, signClient } = useContext(ConnectionContext);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   /**
    * Sets the pairing URI as an acknowledgement to the client.
    * Once the handshake is completed, the client will be able to
    * Request a pairing.
-   *
-   * @param {string} uri - The URI received from the web app.
    */
-  const setUri = useCallback(async (uri) => {
+  const setUri = async (uri) => {
     try {
       const data = await signClient.core.pairing.pair({ uri });
-
       return {
         status: STATUS.SUCCESS,
         data,
@@ -29,65 +24,44 @@ const usePairings = () => {
         message: e.message,
       };
     }
-  }, []);
+  };
 
-  const removePairing = useCallback((topic) => {
-    const newPairings = pairings.filter((pairing) => pairing.topic !== topic);
-    // Also inform the bridge
-    setPairings(newPairings);
-  }, []);
+  const removePairing = useCallback(
+    (topic) => {
+      setPairings((prevPairings) => prevPairings.filter((pairing) => pairing.topic !== topic));
+    },
+    [setPairings]
+  );
 
-  const addPairing = useCallback((pairing) => {
-    setPairings([...pairings, pairing]);
-  }, []);
-
-  /**
-   * Disconnect a given pairing. Removes the pairing from context and the bridge.
-   *
-   * @param {string} topic - The pairing topic (Connection ID) to disconnect.
-   */
-  const disconnect = useCallback(async (topic) => {
-    removePairing(topic);
-    try {
-      await signClient.disconnect({
-        topic,
-        reason: getSdkError(ERROR_CASES.USER_DISCONNECTED),
-      });
-      return {
-        status: STATUS.SUCCESS,
-      };
-    } catch (e) {
-      return {
-        status: STATUS.FAILURE,
-        message: e.message,
-      };
-    }
-  }, []);
+  const addPairing = useCallback(
+    (pairing) => {
+      setPairings((prevPairings) => [...prevPairings, pairing]);
+    },
+    [setPairings]
+  );
 
   /**
    * Retrieves the active parings and refreshes the list.
    */
-  const refreshPairings = useCallback(async () => {
+  const refreshPairings = useCallback(() => {
     const activePairings = signClient.pairing.getAll({ active: true });
-    setPairings([{ loaded: true }, ...activePairings]);
-  }, []);
-
-  useEffect(() => {
-    if (signClient?.pairing?.getAll && pairings?.length === 0) {
-      const activePairings = signClient.pairing.getAll({ active: true });
-      setPairings([{ loaded: true }, ...activePairings]);
-    }
+    setPairings([...activePairings]);
   }, [signClient]);
 
+  useEffect(() => {
+    if (signClient?.pairing?.getAll && !pairings?.length && setPairings) {
+      const activePairings = signClient.pairing.getAll({ active: true });
+      setPairings([...activePairings]);
+      setHasLoaded(true);
+    }
+  }, [signClient, setPairings]);
+
   return {
+    hasLoaded,
     pairings,
     setUri,
-    disconnect,
     addPairing,
-    setPairings,
     removePairing,
     refreshPairings,
   };
 };
-
-export default usePairings;

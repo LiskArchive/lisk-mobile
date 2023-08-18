@@ -15,7 +15,7 @@ import DropDownHolder from 'utilities/alert';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
-import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
@@ -24,13 +24,13 @@ import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventVal
 
 import getStyles from './styles';
 
-export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
+export default function ExternalApplicationSignatureRequest({ onClose, onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
 
   const [passwordForm, passwordFormController] = usePasswordForm();
   const [currentAccount] = useCurrentAccount();
-  const { respond } = useWalletConnectSession();
+  const { respond, sessionRequest } = useSession();
   const { events } = useContext(WalletConnectContext);
 
   const { styles } = useTheme({ styles: getStyles });
@@ -48,10 +48,12 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
-  const senderAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
+  console.log(transaction.error);
+
+  const senderAccountAddress = extractAddressFromPublicKey(sessionRequest.peer.publicKey);
 
   const handleRespond = async (payload) => {
-    setStatus({ ...session, isLoading: true });
+    setStatus({ ...sessionRequest, isLoading: true });
 
     const response = await respond({ payload });
 
@@ -101,7 +103,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
       case 'notification':
         return (
           <ExternalAppSignatureRequestNotification
-            session={session}
+            session={sessionRequest}
             senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
             senderAccountAddress={senderAccountAddress}
             onCancel={onCancel}
@@ -112,7 +114,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
       case 'summary':
         return (
           <ExternalAppSignatureRequestSummary
-            session={session}
+            session={sessionRequest}
             transaction={_transaction.transaction}
             senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
             onCancel={() => setActiveStep('notification')}
@@ -123,7 +125,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
       case 'sign':
         return (
           <ExternalAppSignatureRequestSignTransaction
-            session={session}
+            session={sessionRequest}
             transaction={_transaction}
             onSubmit={handleSubmit}
             onClose={onClose}
@@ -162,7 +164,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
           <P style={[styles.description, styles.theme.text]}>
             {i18next.t(
               'application.externalApplicationSignatureRequest.sign.invalidConnectionTitle',
-              { appName: session.peer.metadata.name }
+              { appName: sessionRequest.peer.metadata.name }
             )}
           </P>
         </View>

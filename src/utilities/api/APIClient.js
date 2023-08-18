@@ -28,7 +28,7 @@ export class APIClient {
   }
 
   async rest(config) {
-    const { url, params, method, data, headers, ...otherConfig } = config;
+    const { url, params = {}, method, data, headers, ...otherConfig } = config;
 
     // Constructing the URL with parameters
     let finalUrl = this.baseUrl + url;
@@ -66,6 +66,8 @@ export class APIClient {
     if (['POST', 'PUT', 'PATCH'].includes(method?.toUpperCase()) && data) {
       fetchOptions.body = JSON.stringify(data);
     }
+
+    console.log({ finalUrl });
 
     const response = await fetch(finalUrl, fetchOptions);
 

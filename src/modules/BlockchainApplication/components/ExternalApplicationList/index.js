@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -7,30 +7,24 @@ import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
 import EmptyExternalApplicationsIllustrationSvg from 'assets/svgs/EmptyExternalApplicationsIllustrationSvg';
 import { P } from 'components/shared/toolBox/typography';
-import useWalletConnectCPairings from '../../../../../libs/wcm/hooks/usePairings';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 import ExternalApplicationRow from '../ExternalApplicationRow';
 
 import getExternalApplicationListStyles from './styles';
 
 export default function ExternalApplicationList() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const { pairings } = useWalletConnectCPairings();
+  const { sessions, hasLoaded } = useSession();
 
   const { styles } = useTheme({
     styles: getExternalApplicationListStyles(),
   });
 
-  useEffect(() => {
-    if (Array.isArray(pairings)) {
-      setIsLoading(false);
-    }
-  }, [pairings]);
+  console.log('sessions: ', JSON.stringify(sessions));
 
   return (
     <DataRenderer
-      data={pairings.slice(1)}
-      isLoading={isLoading}
+      data={sessions}
+      isLoading={!hasLoaded}
       renderData={(data) => (
         <InfiniteScrollList
           data={data}

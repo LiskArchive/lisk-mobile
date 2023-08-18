@@ -9,14 +9,14 @@ import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';
-import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
 import getConnectionStyles from './styles';
 
 export default function ApproveConnection({ onFinish, sharedData: { accounts, chains } }) {
-  const { approve, reject } = useWalletConnectSession();
+  const { approve, reject } = useSession();
   const { events } = useContext(WalletConnectContext);
 
   const { styles } = useTheme({ styles: getConnectionStyles });
@@ -26,10 +26,10 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
     events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
     events[events.length - 1];
 
-  const accountsPubKeys = accounts.map((account) => account.metadata.pubkey);
+  const accountsAddresses = accounts.map((account) => account.metadata.address);
 
   const handleApprove = async () => {
-    await approve(accountsPubKeys);
+    await approve(accountsAddresses);
     onFinish();
   };
 

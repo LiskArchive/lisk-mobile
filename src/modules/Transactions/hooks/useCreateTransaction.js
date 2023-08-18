@@ -51,6 +51,8 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
 
   const baseSchema = commandParametersSchemasData?.data?.transaction?.schema;
 
+  console.log({ isErrorOnNetworkStatus, isErrorOnAuth, isErrorOnCommandParametersSchemas });
+
   useEffect(
     () => {
       if (isInitDataSuccess && baseSchema) {
@@ -69,6 +71,7 @@ export function useCreateTransaction({ module = null, command = null, encodedTra
           setIsLoading(false);
           setIsSuccess(true);
         } catch (e) {
+          console.log('e: ', e);
           setError(new Error('Error on transaction initialization.'));
           setIsLoading(false);
           setIsSuccess(false);
