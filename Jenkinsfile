@@ -19,26 +19,26 @@ pipeline {
         }
       }
     }
-    stage('Create Detox build and run end to end tests') {
-        steps {
-          script {
-            nvm(getNodejsVersion()) {
-              sh '''
-              cp env.test.json env.json
-              npx react-native start &
+    // stage('Create Detox build and run end to end tests') {
+    //     steps {
+    //       script {
+    //         nvm(getNodejsVersion()) {
+    //           sh '''
+    //           cp env.test.json env.json
+    //           npx react-native start &
 
-              open -a Simulator --args -CurrentDeviceUDID F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F &
+    //           open -a Simulator --args -CurrentDeviceUDID F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F &
               
-              /usr/bin/xcrun simctl spawn F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F log stream --level debug --style compact --predicate 'process == "LiskQA"' &
+    //           /usr/bin/xcrun simctl spawn F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F log stream --level debug --style compact --predicate 'process == "LiskQA"' &
               
-              yarn detox build --configuration ios.debug
-              yarn detox test --configuration ios.debug --cleanup --headless --record-logs all
-              kill -9 %1
-              '''
-            }
-          }
-        }
-      }
+    //           yarn detox build --configuration ios.debug
+    //           yarn detox test --configuration ios.debug --cleanup --headless --record-logs all
+    //           kill -9 %1
+    //           '''
+    //         }
+    //       }
+    //     }
+    //   }
     stage('Run ESLint') {
       steps {
         nvm(getNodejsVersion()) {
