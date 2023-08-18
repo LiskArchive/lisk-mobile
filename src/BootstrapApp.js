@@ -16,8 +16,6 @@ import { useBootstrapApplications } from './modules/BlockchainApplication/hooks/
 export default function BootstrapApp({ children }) {
   const [currentApplication] = useCurrentApplication();
 
-  console.log('Bootstrapping the application');
-
   const isLoading = currentApplication.status === 'loading';
   const isError = currentApplication.status === 'error';
   const error = currentApplication.error;
@@ -41,7 +39,6 @@ export default function BootstrapApp({ children }) {
   }
 
   if (isError) {
-    console.log(error);
     return <ErrorScreen onRetry={handleRetry} error={error} />;
   }
 
