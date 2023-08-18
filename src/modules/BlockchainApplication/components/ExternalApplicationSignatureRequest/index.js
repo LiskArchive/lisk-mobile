@@ -27,6 +27,7 @@ import getStyles from './styles';
 export default function ExternalApplicationSignatureRequest({ onClose, onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
+  // const [isEventSchemaValid, setIsEventSchemaValid] = useState()
 
   const [passwordForm, passwordFormController] = usePasswordForm();
   const [currentAccount] = useCurrentAccount();
@@ -37,7 +38,14 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
 
   const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
 
-  const isEventSchemaValid = validateConnectionSchema(event);
+  let isEventSchemaValid;
+  let invalidEventSchemaError;
+
+  try {
+    isEventSchemaValid = validateConnectionSchema(event);
+  } catch (error) {
+    invalidEventSchemaError = error;
+  }
 
   const createTransactionOptions = useMemo(
     () => ({
@@ -162,10 +170,11 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
           </H2>
 
           <P style={[styles.description, styles.theme.text]}>
-            {i18next.t(
-              'application.externalApplicationSignatureRequest.sign.invalidConnectionTitle',
-              { appName: sessionRequest.peer.metadata.name }
-            )}
+            {invalidEventSchemaError &&
+              i18next.t(
+                'application.externalApplicationSignatureRequest.sign.invalidConnectionDescription',
+                { appName: sessionRequest.peer.metadata.name }
+              )}
           </P>
         </View>
       )}

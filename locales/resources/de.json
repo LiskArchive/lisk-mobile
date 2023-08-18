@@ -397,7 +397,7 @@
         "copiedToClipboardButtonText": "Kopiert",
         "errorButtonText": "Weiterleitung zur App-Site",
         "invalidConnectionTitle": "Verbindung fehlgeschlagen",
-        "invalidConnectionDescription": "Die Verbindung von '{{appName}}' wurde aufgrund ungültiger Parameter blockiert."
+        "invalidConnectionDescription": "Das von '{{appName}}' empfangene Ereignis wurde aufgrund von Inkompatibilität mit Lisk Mobile blockiert."
       },
       "disconnect": {
         "title": "",
