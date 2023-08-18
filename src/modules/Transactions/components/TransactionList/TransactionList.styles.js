@@ -14,6 +14,7 @@ export default function getTransactionListStyles() {
       title: {
         fontWeight: '500',
         fontSize: fonts.size.input,
+        fontFamily: fonts.family.contextSemiBold,
       },
       labelButtonText: {
         fontSize: 12,

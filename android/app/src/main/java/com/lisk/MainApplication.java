@@ -12,7 +12,8 @@ import io.lisk.mobile.AppOpsManagerModulePackage;
 import io.lisk.mobile.ProviderInstallerPackage;
 import io.lisk.mobile.VerifyAppsPackage;
 import io.lisk.mobile.SensitiveClipboardPackage;
-import io.lisk.mobile.RNArgon2Package; 
+import io.lisk.mobile.RNArgon2Package;
+import io.lisk.mobile.UninstallPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new ProviderInstallerPackage());
       packages.add(new VerifyAppsPackage());
       packages.add(new RNArgon2Package());
+      packages.add(new UninstallPackage());
       return packages;
     }
 

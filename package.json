@@ -5,7 +5,7 @@
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "scripts": {
-    "android": "npx react-native run-android",
+    "android": "npx react-native run-android --variant=prodDebug",
     "ios": "npx react-native run-ios",
     "ios-dev": "npx react-native run-ios --scheme LiskDev",
     "android-dev": "npx react-native run-android --variant=devDebug --appIdSuffix=dev",

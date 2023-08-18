@@ -22,6 +22,10 @@ export default () => ({
       backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
       borderColor: setColorOpacity(colors.light.ultramarineBlue, 0.5),
     },
+    warningContainer: {
+      backgroundColor: setColorOpacity(colors.light.yellowCopacabana, 0.1),
+      borderColor: setColorOpacity(colors.light.yellowCopacabana, 0.5),
+    },
     copy: {
       color: colors.light.zodiacBlue,
     },
@@ -33,6 +37,10 @@ export default () => ({
     container: {
       backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.2),
       borderColor: setColorOpacity(colors.light.ultramarineBlue, 0.5),
+    },
+    warningContainer: {
+      backgroundColor: setColorOpacity(colors.light.yellowCopacabana, 0.1),
+      borderColor: setColorOpacity(colors.light.yellowCopacabana, 0.5),
     },
     copy: {
       color: colors.dark.white,
