@@ -5,10 +5,10 @@ import { useTheme } from 'contexts/ThemeContext';
 import CheckSvg from 'assets/svgs/CheckSvg';
 import checkboxStyles from './styles';
 
-export default function Checkbox({ children, selected, onPress, style }) {
+export default function Checkbox({ children, selected, onPress, style, ...props }) {
   const { styles } = useTheme({ styles: checkboxStyles });
   return (
-    <TouchableOpacity style={[styles.container, style?.container]} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, style?.container]} onPress={onPress} {...props}>
       <View style={[styles.checkbox, selected && styles.active, style?.checkbox]}>
         {selected && <CheckSvg strokeWidth={1} />}
       </View>
