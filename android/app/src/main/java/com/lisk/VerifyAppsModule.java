@@ -12,8 +12,18 @@ import com.google.android.gms.safetynet.SafetyNet;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class VerifyAppsModule extends ReactContextBaseJavaModule {
 
+  private static String bytesToHex(byte[] bytes) {
+      StringBuilder builder = new StringBuilder();
+      for (byte b : bytes) {
+          builder.append(String.format("%02x", b));
+      }
+      return builder.toString();
+  }
+  
   private final ReactApplicationContext reactContext;
 
   public VerifyAppsModule(ReactApplicationContext reactContext) {
@@ -39,7 +49,7 @@ public class VerifyAppsModule extends ReactContextBaseJavaModule {
             WritableMap appData = Arguments.createMap();
             appData.putString("packageName", app.apkPackageName);
             appData.putInt("category", app.apkCategory);
-            // appData.putByte("apkHash", app.apkSha256.getBytes());
+            appData.putString("apkHash", bytesToHex(app.apkSha256));
             harmfulAppsList.pushMap(appData);
           }
           promise.resolve(harmfulAppsList);
