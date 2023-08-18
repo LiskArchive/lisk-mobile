@@ -6,6 +6,7 @@ const liskAPIClient = new APIClient();
 liskAPIClient.create({
   http: API_BASE_URL,
   ws: WS_BASE_URL,
+  enableCertPinning: true,
 });
 
 export default liskAPIClient;

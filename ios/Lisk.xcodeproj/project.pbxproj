@@ -59,6 +59,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
+		CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CBD727A12A8A52DA00D33815 /* server-cert.cer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		BC88364E9EC48DA3B52412DA /* Pods-LiskApp-Lisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk.debug.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk/Pods-LiskApp-Lisk.debug.xcconfig"; sourceTree = "<group>"; };
 		CB9BAE4A26FF857E00EE1F48 /* Lisk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lisk-Bridging-Header.h"; sourceTree = "<group>"; };
 		CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
+		CBD727A12A8A52DA00D33815 /* server-cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = "server-cert.cer"; path = "../server-cert.cer"; sourceTree = "<group>"; };
 		D1FBD00EBB5BF68B90C6ACFF /* Pods-Lisk-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisk-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Lisk-tvOSTests/Pods-Lisk-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D62835011F787A4FF10BFE9B /* Pods-LiskApp-Lisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk/Pods-LiskApp-Lisk.release.xcconfig"; sourceTree = "<group>"; };
 		E01BE00324F84FB5D6186030 /* Pods-LiskApp-LiskDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-LiskDev.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-LiskDev/Pods-LiskApp-LiskDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CBD727A12A8A52DA00D33815 /* server-cert.cer */,
 				79DD0C352A3750F500E2DC9D /* LiskQA */,
 				79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */,
 				CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */,
@@ -574,6 +577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */,
 				7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */,
 				79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */,
 				7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */,
@@ -850,7 +854,6 @@
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-Glog/glog.framework/glog",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MobileProtect/MobileProtect.framework/MobileProtect",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -858,7 +861,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileProtect.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -981,7 +983,6 @@
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-Glog/glog.framework/glog",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MobileProtect/MobileProtect.framework/MobileProtect",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -989,7 +990,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileProtect.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1029,7 +1029,6 @@
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-Glog/glog.framework/glog",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MobileProtect/MobileProtect.framework/MobileProtect",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1037,7 +1036,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileProtect.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1127,7 +1125,6 @@
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-Glog/glog.framework/glog",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MobileProtect/MobileProtect.framework/MobileProtect",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1135,7 +1132,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileProtect.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1356,7 +1352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = arm64;
@@ -1386,7 +1382,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				EXCLUDED_ARCHS = arm64;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1667,7 +1663,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1729,7 +1725,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

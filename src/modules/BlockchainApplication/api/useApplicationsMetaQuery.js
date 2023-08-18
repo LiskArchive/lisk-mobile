@@ -14,7 +14,7 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
 export function useApplicationsMetaQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/blockchain/apps/meta`,
-    method: 'get',
+    method: 'GET',
     event: 'get.blockchain.apps.meta',
     ...customConfig,
     params: {

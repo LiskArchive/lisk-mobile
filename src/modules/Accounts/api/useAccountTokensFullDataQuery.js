@@ -27,7 +27,7 @@ export function useAccountTokensFullDataQuery(
 
   const config = {
     url: `${API_URL}/token/balances`,
-    method: 'get',
+    method: 'GET',
     event: 'get.token.balances',
     ...customConfig,
     params: {

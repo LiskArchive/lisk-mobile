@@ -7,7 +7,7 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
 export function getTokensMetaQueryConfig(customConfig = {}) {
   return {
     url: `${API_URL}/blockchain/apps/meta/tokens`,
-    method: 'get',
+    method: 'GET',
     event: 'get.blockchain.apps.meta.tokens',
     ...customConfig,
     params: { limit: LIMIT, ...customConfig.params },

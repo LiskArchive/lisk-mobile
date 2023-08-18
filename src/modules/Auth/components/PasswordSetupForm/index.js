@@ -139,8 +139,6 @@ export default function PasswordSetupForm({
                 formState.errors?.password?.message &&
                 i18next.t(formState.errors?.password?.message)
               }
-              textContentType="newPassword"
-              passwordRules="minlength: 8; required: lower; required: upper; required: digit;"
             />
           )}
         />
@@ -164,8 +162,6 @@ export default function PasswordSetupForm({
                 formState.errors?.confirmPassword?.message &&
                 i18next.t(formState.errors?.confirmPassword?.message)
               }
-              textContentType="newPassword"
-              passwordRules="minlength: 8; required: lower; required: upper; required: digit;"
             />
           )}
         />
@@ -179,7 +175,6 @@ export default function PasswordSetupForm({
             containerStyle: styles.inputContainer,
             input: styles.input,
           }}
-          textContentType="username"
         />
       </KeyboardAwareScrollView>
 
@@ -199,7 +194,7 @@ export default function PasswordSetupForm({
 
         <PrimaryButton
           onPress={encryptAccount}
-          disabled={!isAgreedField.value || isLoading}
+          disabled={!isAgreedField.value || isLoading || !formState.isValid}
           testID="save-account"
           isLoading={isLoading}
         >

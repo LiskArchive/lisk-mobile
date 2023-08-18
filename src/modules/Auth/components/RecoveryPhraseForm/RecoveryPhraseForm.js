@@ -59,15 +59,13 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     });
 
   const handleInputChange = (value) => {
-    if (value === toSecureRecoveryPhraseString(value)) {
+    if (value && value === toSecureRecoveryPhraseString(value)) {
       return;
     }
     setRecoveryPhrase({
       value,
       validity: [],
     });
-
-    return true;
   };
 
   const handleSubmit = () => {
@@ -201,6 +199,7 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
           onPress={toggleUseDerivationPath}
           selected={!settings.useDerivationPath}
           style={{ container: styles.derivationPathContainer, children: styles.row }}
+          testID="derivation-checkbox"
         >
           <P style={[styles.label, styles.theme.label]}>
             {i18next.t('settings.menu.enableDerivationPath')}

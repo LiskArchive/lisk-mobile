@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import io.lisk.mobile.AppOpsManagerModulePackage;
 import io.lisk.mobile.ProviderInstallerPackage;
 import io.lisk.mobile.SensitiveClipboardPackage;
+import io.lisk.mobile.RNArgon2Package; 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new AppOpsManagerModulePackage());
       packages.add(new SensitiveClipboardPackage());
       packages.add(new ProviderInstallerPackage());
+      packages.add(new RNArgon2Package());
       return packages;
     }
 

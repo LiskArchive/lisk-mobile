@@ -13,7 +13,7 @@ import { GET_TRANSACTION_POOL_QUERY } from 'utilities/api/queries';
 export function useTransactionPoolQuery({ config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/transactions`,
-    method: 'get',
+    method: 'GET',
     event: 'get.transactions',
     ...customConfig,
     params: {

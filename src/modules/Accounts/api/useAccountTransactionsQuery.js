@@ -19,7 +19,7 @@ export function useAccountTransactionsQuery(
 ) {
   const config = {
     url: `${API_URL}/transactions`,
-    method: 'get',
+    method: 'GET',
     event: 'get.transactions',
     ...customConfig,
     params: {

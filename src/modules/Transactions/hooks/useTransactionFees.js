@@ -95,6 +95,9 @@ export function useTransactionFees({
     if (isTransactionSuccess && areParamsValid && enabled) {
       const transactionJSON = transaction.toJSON();
 
+      delete transactionJSON.id;
+      delete transactionJSON.signatures;
+
       estimateFeesMutation.mutate({
         transaction: transactionJSON,
       });

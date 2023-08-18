@@ -14,7 +14,10 @@ import { useTokensMetaQuery } from './useTokensMetaQuery';
 export function useApplicationSupportedTokensQuery(application) {
   const toApplicationApiClient = useRef(new APIClient());
 
-  toApplicationApiClient.current.create(application?.serviceURLs[0]);
+  toApplicationApiClient.current.create({
+    ...application?.serviceURLs[0],
+    enableCertPinning: application?.chainName === 'lisk_mainchain',
+  });
 
   const {
     data: { data: tokensMetaData } = {},

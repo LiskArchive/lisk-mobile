@@ -11,7 +11,7 @@ describe('useCustomQuery hook', () => {
   const config = {
     baseURL: API_BASE_URL,
     url: `${API_URL}/mock/custom-query`,
-    method: 'get',
+    method: 'GET',
     params: {
       limit: LIMIT,
     },

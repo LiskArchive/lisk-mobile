@@ -6,7 +6,7 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
 export function getApplicationsQueryConfigCreator() {
   return (customConfig = {}) => ({
     url: `${API_URL}/blockchain/apps`,
-    method: 'get',
+    method: 'GET',
     event: 'get.blockchain.apps',
     ...customConfig,
     params: { limit: LIMIT, ...customConfig.params },

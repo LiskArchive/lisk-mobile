@@ -108,7 +108,7 @@ describe.skip('Auth module', () => {
     it('should add an account with derivation path enabled', async () => {
       device.reloadReactNative();
       await element(by.id('add-account')).tap();
-      await element(by.id('derivation-switch')).tap();
+      await element(by.id('derivation-checkbox')).tap();
       await element(by.id('secret-phrase')).tap();
       await expect(element(by.id('derivation-path-input'))).toBeVisible();
       await element(by.id('derivation-path-input')).typeText('invalid-path');

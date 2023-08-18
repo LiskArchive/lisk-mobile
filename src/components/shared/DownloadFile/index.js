@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-
+import i18next from 'i18next';
 import { useDownloadFile } from 'hooks/useDownloadFile';
 import { useTheme } from 'contexts/ThemeContext';
 import { LabelButton } from 'components/shared/toolBox/button';
@@ -16,7 +16,6 @@ export default function DownloadFile({
   onCompleted,
   onError,
   downloadFile: baseDownloadFile,
-  isLoading: baseIsLoading,
   style,
 }) {
   const [downloadFile, { isLoading }] = useDownloadFile({
@@ -42,11 +41,10 @@ export default function DownloadFile({
         adornments={{
           right: <DownloadSvg height={18} width={18} style={[styles.downloadFileIcon]} />,
         }}
-        disabled={baseIsLoading || isLoading}
         isLoading={isLoading}
         testID="download-file-button"
       >
-        Download
+        {i18next.t('accounts.accountsManager.downloadFileButtonText')}
       </LabelButton>
     </View>
   );

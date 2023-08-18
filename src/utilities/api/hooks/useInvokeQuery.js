@@ -10,7 +10,7 @@ import { useCustomQuery } from './useCustomQuery';
 export function useInvokeQuery({ config: customConfig = {}, options }) {
   const config = {
     url: `/api/${API_VERSION}/invoke`,
-    method: 'post',
+    method: 'POST',
     event: 'post.invoke',
     ...customConfig,
   };

@@ -15,7 +15,7 @@ export default function useBroadcastTransactionMutation(options = {}) {
     ({ transaction }) => {
       const config = {
         url: `${API_URL}/transactions`,
-        method: 'post',
+        method: 'POST',
         event: 'post.transactions',
         data: { transaction },
       };
