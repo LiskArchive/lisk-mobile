@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { H3 } from 'components/shared/toolBox/typography';
 
 import { useTheme } from 'contexts/ThemeContext';
 
@@ -21,7 +22,7 @@ export function Tab({ value, children, style }) {
       style={[styles.container, styles.theme.container, style?.container]}
     >
       {typeof children === 'string' ? (
-        <Text style={[styles.text, styles.theme.text, style?.text]}>{children}</Text>
+        <H3 style={[styles.text, styles.theme.text, style?.text]}>{children}</H3>
       ) : (
         children
       )}
