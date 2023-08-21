@@ -1,5 +1,5 @@
 diff --git a/node_modules/@liskhq/lisk-client/dist-browser/index.js b/node_modules/@liskhq/lisk-client/dist-browser/index.js
-index e21194e..a6949c2 100644
+index e21194e..40fbed6 100644
 --- a/node_modules/@liskhq/lisk-client/dist-browser/index.js
 +++ b/node_modules/@liskhq/lisk-client/dist-browser/index.js
 @@ -4727,7 +4727,13 @@ const encryptAES128GCMWithPassword = async (plainText, password, options) => {
@@ -7,7 +7,7 @@ index e21194e..a6949c2 100644
      const parallelism = (_e = (_d = options === null || options === void 0 ? void 0 : options.kdfparams) === null || _d === void 0 ? void 0 : _d.parallelism) !== null && _e !== void 0 ? _e : ARGON2_PARALLELISM;
      const memorySize = (_g = (_f = options === null || options === void 0 ? void 0 : options.kdfparams) === null || _f === void 0 ? void 0 : _f.memorySize) !== null && _g !== void 0 ? _g : exports.ARGON2_MEMORY;
 -    const key = kdf === KDF.ARGON2
-+    const key = options.getKey ? options.getKey({
++    const key = options.getKey ? await options.getKey({
 +          password,
 +          salt,
 +          iterations,
@@ -26,7 +26,7 @@ index e21194e..a6949c2 100644
      const { kdf, ciphertext, cipherparams: { iv, tag }, kdfparams: { parallelism, salt, iterations, memorySize }, } = encryptedMessage;
      const tagBuffer = getTagBuffer(tag);
 -    const key = kdf === KDF.ARGON2
-+    const key = options.getKey ? options.getKey({
++    const key = options.getKey ? await options.getKey({
 +          password,
 +          salt,
 +          iterations,

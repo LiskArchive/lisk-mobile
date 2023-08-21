@@ -1,7 +1,8 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
+import { P } from 'components/shared/toolBox/typography';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
@@ -37,10 +38,8 @@ export default function TransactionDetails(props) {
           isLoading={isLoadingTransaction}
           error={errorOnTransaction}
           renderData={(data) => <TransactionDetailsBody transaction={data} address={address} />}
-          renderLoading={() => (
-            <Text>{i18next.t('transactions.transactionDetails.loadingText')}</Text>
-          )}
-          renderError={() => <Text>{i18next.t('transactions.transactionDetails.errorText')}</Text>}
+          renderLoading={() => <P>{i18next.t('transactions.transactionDetails.loadingText')}</P>}
+          renderError={() => <P>{i18next.t('transactions.transactionDetails.errorText')}</P>}
         />
       </View>
     </SafeAreaView>

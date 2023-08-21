@@ -10,7 +10,6 @@ export default () => ({
       color: colors.dark.whiteSmoke,
       paddingTop: 15,
       fontFamily: fonts.family.recoveryPhraseText,
-      fontWeight: '700',
       lineHeight: 20,
       minHeight: 88,
     },

@@ -37,8 +37,8 @@ public class RNArgon2Module extends ReactContextBaseJavaModule {
             final byte[] passwordBytes = password.getBytes("UTF-8");
 
             final byte[] saltInputBytes = new BigInteger(salt, 16).toByteArray();
-            byte[] saltBytes = new byte[16];
-            System.arraycopy(saltInputBytes, saltInputBytes.length - 16, saltBytes, 0, 16);
+            byte[] saltBytes = new byte[8];
+            System.arraycopy(saltInputBytes, saltInputBytes.length - 8, saltBytes, 0, 8);
 
             Integer iterations = config.hasKey("iterations") ? new Integer(config.getInt("iterations")) : new Integer(2);
             Integer memory = config.hasKey("memory") ? new Integer(config.getInt("memory")) : new Integer(32 * 1024);
