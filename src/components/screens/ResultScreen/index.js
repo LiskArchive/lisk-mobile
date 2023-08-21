@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -39,7 +39,7 @@ export default function ResultScreen({
   }
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper, baseStyles?.wrapper]}>
+    <View>
       <View style={[styles.container, baseStyles?.container]}>
         {illustration && (
           <View style={[styles.illustration, baseStyles?.illustration]}>{illustration}</View>
@@ -72,6 +72,6 @@ export default function ResultScreen({
           </PrimaryButton>
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 }
