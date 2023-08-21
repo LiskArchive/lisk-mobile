@@ -1558,53 +1558,52 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@liskhq/lisk-api-client@^6.0.0-beta.2":
-  version "6.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-api-client/-/lisk-api-client-6.0.0-beta.5.tgz#5dd2cea8248cb1334207910f1975225cc2a77791"
-  integrity sha512-7xCxi+ONPEOWJOiGpoNY3YiX9sU4Rr4rWGI4B+hzw6L7Jh5wrfvg2KTDh8ItTjwQt1euhqZl1gCX0xr45Rxxlw==
+"@liskhq/lisk-api-client@^6.0.0-beta.6":
+  version "6.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-api-client/-/lisk-api-client-6.0.0-beta.6.tgz#9377c1f0af898c4f1ca49babd606faa4ba5f6e0e"
+  integrity sha512-Dhd7yWw2N7DlSrhTiQyitZ/Y8OSLCl1vlyWJx2GQXm+hbDf4nezcSdoAO3Z1W/hYFbvOckl+JKgZtALydOZogA==
   dependencies:
-    "@liskhq/lisk-codec" "^0.3.0-beta.4"
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.3"
-    "@liskhq/lisk-transactions" "^6.0.0-beta.4"
-    "@liskhq/lisk-validator" "^0.7.0-beta.4"
+    "@liskhq/lisk-codec" "^0.3.0-beta.5"
+    "@liskhq/lisk-cryptography" "^4.0.0-beta.4"
+    "@liskhq/lisk-transactions" "^6.0.0-beta.5"
+    "@liskhq/lisk-validator" "^0.7.0-beta.5"
     isomorphic-ws "4.0.1"
     ws "8.11.0"
     zeromq "6.0.0-beta.6"
 
-"@liskhq/lisk-client@6.0.0-beta.2":
-  version "6.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-client/-/lisk-client-6.0.0-beta.2.tgz#2df823ede105f91c0875eec98b5db86315739d1a"
-  integrity sha512-NjqMHTFTddaee1tOB9SAOi09VrbT2VeJMTUhoSacBjkQQfMFMmTXWmHWrLYFULZCv3r/daklfst4LXjH3wWt0g==
+"@liskhq/lisk-client@6.0.0-beta.6":
+  version "6.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-client/-/lisk-client-6.0.0-beta.6.tgz#725e263223d24990705328cea71cdbbc11c2ef0a"
+  integrity sha512-taC+VqiK/6xJvlZlS4VM7mLz6RRhcttTuI+QerSnp98aMWGIJ0a+jxnX7w/1W8vb1gC4NMPQfdzdVhs1dWYQYQ==
   dependencies:
-    "@liskhq/lisk-api-client" "^6.0.0-beta.2"
-    "@liskhq/lisk-codec" "^0.3.0-beta.2"
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.2"
+    "@liskhq/lisk-api-client" "^6.0.0-beta.6"
+    "@liskhq/lisk-codec" "^0.3.0-beta.5"
+    "@liskhq/lisk-cryptography" "^4.0.0-beta.4"
     "@liskhq/lisk-passphrase" "^4.0.0-beta.2"
-    "@liskhq/lisk-transactions" "^6.0.0-beta.2"
-    "@liskhq/lisk-tree" "^0.3.0-beta.2"
-    "@liskhq/lisk-utils" "^0.3.0-beta.2"
-    "@liskhq/lisk-validator" "^0.7.0-beta.2"
+    "@liskhq/lisk-transactions" "^6.0.0-beta.5"
+    "@liskhq/lisk-tree" "^0.3.0-beta.5"
+    "@liskhq/lisk-utils" "^0.3.0-beta.3"
+    "@liskhq/lisk-validator" "^0.7.0-beta.5"
     buffer "6.0.3"
 
-"@liskhq/lisk-codec@^0.3.0-beta.2", "@liskhq/lisk-codec@^0.3.0-beta.4":
-  version "0.3.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-codec/-/lisk-codec-0.3.0-beta.4.tgz#7d1ef30e17caf2724cf2dfd5c59a099d673d3c9a"
-  integrity sha512-p/OWDjR4z47KGWm81bo8n1eFGD3nxQAIJyYTyV1gnPbYgk/cnOtHZRNJj6xTBIjkOahuNqyJUo2Lhv6wyf9rmg==
+"@liskhq/lisk-codec@^0.3.0-beta.5":
+  version "0.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-codec/-/lisk-codec-0.3.0-beta.5.tgz#39599debb707574a851e1697c992747d1e3318d9"
+  integrity sha512-VAtJH5C2RNNkQ4751NRIl7HfpoojSmfuGEI3jHSq9SbtXKYigkXSzkh6FhiwnSLIuEZNtCEoO1kyla6WQox3aQ==
   dependencies:
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.3"
+    "@liskhq/lisk-cryptography" "^4.0.0-beta.4"
     "@liskhq/lisk-utils" "^0.3.0-beta.3"
-    "@liskhq/lisk-validator" "^0.7.0-beta.4"
+    "@liskhq/lisk-validator" "^0.7.0-beta.5"
 
-"@liskhq/lisk-cryptography@^4.0.0-beta.2", "@liskhq/lisk-cryptography@^4.0.0-beta.3":
-  version "4.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-cryptography/-/lisk-cryptography-4.0.0-beta.3.tgz#45edd9beefe0e6766ffd3b8af11dada381cead9d"
-  integrity sha512-Qj9zhvNELLmgOwXwVwDhK8ieFDTyHRTCf+U7AzqeKSIKOeNG9n5FyVqlg+8AC5yRx9vOZ4gVxPrvfIjcnKVx2w==
+"@liskhq/lisk-cryptography@^4.0.0-beta.4":
+  version "4.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-cryptography/-/lisk-cryptography-4.0.0-beta.4.tgz#36f3c18ee806a8e56e7ec6e1b6775ffa89215159"
+  integrity sha512-m+rwGPqVT4WmdHJ8HB6fCUyY4iCPweWf/DZBqmVmO3Mqnrxq0E0FjSXutofWiBrzLxtyNmolpGSENrMKvIdaSw==
   dependencies:
     "@liskhq/lisk-passphrase" "^4.0.0-beta.2"
     buffer-reverse "1.0.1"
     hash-wasm "4.9.0"
     tweetnacl "1.0.3"
-    varuint-bitcoin "1.1.2"
 
 "@liskhq/lisk-passphrase@^4.0.0-beta.2":
   version "4.0.0-beta.2"
@@ -1613,36 +1612,36 @@
   dependencies:
     bip39 "3.0.3"
 
-"@liskhq/lisk-transactions@^6.0.0-beta.2", "@liskhq/lisk-transactions@^6.0.0-beta.4":
-  version "6.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-transactions/-/lisk-transactions-6.0.0-beta.4.tgz#d697ae945adec2b1ef15aa2a908f73712a46c5ef"
-  integrity sha512-0HyG9rXYBUJWUroPkaDCIX+5UzqcRKcHEtg+lsRzMM+/5zZ5IUhGzqQiIXJ7/7DfnxxjPqaT942U1Wg2vZ8yFA==
+"@liskhq/lisk-transactions@^6.0.0-beta.5":
+  version "6.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-transactions/-/lisk-transactions-6.0.0-beta.5.tgz#cb00e54dc417c138e53da2aec89a65768860e8ca"
+  integrity sha512-vgdGjw4D1wrZVa0YAOc5YlvrfjYarHbKo9gx8CUrEJv72M0B/UImMyVQQbVODLT9YeIvJ1ajUWLYl372b9ZFow==
   dependencies:
-    "@liskhq/lisk-codec" "^0.3.0-beta.4"
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.3"
-    "@liskhq/lisk-validator" "^0.7.0-beta.4"
+    "@liskhq/lisk-codec" "^0.3.0-beta.5"
+    "@liskhq/lisk-cryptography" "^4.0.0-beta.4"
+    "@liskhq/lisk-validator" "^0.7.0-beta.5"
 
-"@liskhq/lisk-tree@^0.3.0-beta.2":
-  version "0.3.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-tree/-/lisk-tree-0.3.0-beta.4.tgz#aba8d150e85be023137c9f2af9f8b3ab3010be56"
-  integrity sha512-FTcBAV2Fjh+xp4QZkopx2WhYh/PLgmp+Dk8bsOR3geYKVHP38v7kiMOj1gDEmlAb6RtMlHrm1vJQwplXIyvBcQ==
+"@liskhq/lisk-tree@^0.3.0-beta.5":
+  version "0.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-tree/-/lisk-tree-0.3.0-beta.5.tgz#eaca57ba3942c97b23c13a92723f2cff3303848f"
+  integrity sha512-XUrTVmRpx/bn96TJOdrqbJG5sglfbeKk7+39o6BWH2KVFacyPAbEJi0bRmCCsEVjK9dzazxjWKjRp+qlqbjQcw==
   dependencies:
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.3"
+    "@liskhq/lisk-cryptography" "^4.0.0-beta.4"
     "@liskhq/lisk-utils" "^0.3.0-beta.3"
 
-"@liskhq/lisk-utils@^0.3.0-beta.2", "@liskhq/lisk-utils@^0.3.0-beta.3":
+"@liskhq/lisk-utils@^0.3.0-beta.3":
   version "0.3.0-beta.3"
   resolved "https://registry.yarnpkg.com/@liskhq/lisk-utils/-/lisk-utils-0.3.0-beta.3.tgz#40eff4baba8833bb4f185ce6b4fedada90d109b2"
   integrity sha512-xVLJ0vPFG+DAXOO9zcCKamG3fcZMH23JEtZ460mQGL/uErhOG0XChXm/zC6u6gMqKT3QOstDiUlog33q2279pA==
   dependencies:
     lodash.clonedeep "4.5.0"
 
-"@liskhq/lisk-validator@^0.7.0-beta.2", "@liskhq/lisk-validator@^0.7.0-beta.4":
-  version "0.7.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@liskhq/lisk-validator/-/lisk-validator-0.7.0-beta.4.tgz#299811803cad8f9d884cda50161e0cc9d57d5ad6"
-  integrity sha512-R8ed995+4hk0ssFpSakxj94Ig3EjEtUYO2q7UCXKH7JepxBYlYJY7HTEVbozcFk5IA7H7LmSvrWu44ATi1+YIw==
+"@liskhq/lisk-validator@^0.7.0-beta.5":
+  version "0.7.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@liskhq/lisk-validator/-/lisk-validator-0.7.0-beta.5.tgz#d8a7fdcb5eaa45c2cd01b23d1fde0c365e5cff1a"
+  integrity sha512-oySl7xe84Fnh7gUtZwrHPCtpLruPfFo//Owbf0spW56QAkYZWu+1eeGOICgKW8RzxPyFX9WAjWwK3P8Md8tNTg==
   dependencies:
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.3"
+    "@liskhq/lisk-cryptography" "^4.0.0-beta.4"
     ajv "8.1.0"
     ajv-formats "2.1.1"
     debug "4.3.4"
@@ -2159,17 +2158,17 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@tanstack/query-core@4.32.6":
-  version "4.32.6"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.32.6.tgz#cf7df91ab1542e67a82624fefb12a55f580b4c01"
-  integrity sha512-YVB+mVWENQwPyv+40qO7flMgKZ0uI41Ph7qXC2Zf1ft5AIGfnXnMZyifB2ghhZ27u+5wm5mlzO4Y6lwwadzxCA==
+"@tanstack/query-core@4.33.0":
+  version "4.33.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.33.0.tgz#7756da9a75a424e521622b1d84eb55b7a2b33715"
+  integrity sha512-qYu73ptvnzRh6se2nyBIDHGBQvPY1XXl3yR769B7B6mIDD7s+EZhdlWHQ67JI6UOTFRaI7wupnTnwJ3gE0Mr/g==
 
 "@tanstack/react-query@^4.29.15":
-  version "4.32.6"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.32.6.tgz#f88c2d57f423d4cd295c501df2edeb3285a301bd"
-  integrity sha512-AITu/IKJJJXsHHeXNBy5bclu12t08usMCY0vFC2dh9SP/w6JAk5U9GwfjOIPj3p+ATADZvxQPe8UiCtMLNeQbg==
+  version "4.33.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.33.0.tgz#e927b0343a6ecaa948fee59e9ca98fe561062638"
+  integrity sha512-97nGbmDK0/m0B86BdiXzx3EW9RcDYKpnyL2+WwyuLHEgpfThYAnXFaMMmnTDuAO4bQJXEhflumIEUfKmP7ESGA==
   dependencies:
-    "@tanstack/query-core" "4.32.6"
+    "@tanstack/query-core" "4.33.0"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/jest-native@^5.4.2":
@@ -2365,9 +2364,9 @@
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
 "@types/node@*":
-  version "20.5.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.0.tgz#7fc8636d5f1aaa3b21e6245e97d56b7f56702313"
-  integrity sha512-Mgq7eCtoTjT89FqNoTzzXg2XvCi5VMhRV6+I2aYanc6kQCBImeNaAYRs/DyoVqk1YEUJK5gN9VO7HRIdz4Wo3Q==
+  version "20.5.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.1.tgz#178d58ee7e4834152b0e8b4d30cbfab578b9bb30"
+  integrity sha512-4tT2UrL5LBqDwoed9wZ6N3umC4Yhz3W3FloMmiiG4JwmUJWpie0c7lcnUNd4gtMKuDEO4wRVS8B6Xa0uMRsMKg==
 
 "@types/node@11.11.6":
   version "11.11.6"
@@ -4228,7 +4227,7 @@ browserslist@^3.2.6:
     caniuse-lite "^1.0.30000844"
     electron-to-chromium "^1.3.47"
 
-browserslist@^4.21.9:
+browserslist@^4.21.10, browserslist@^4.21.9:
   version "4.21.10"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.21.10.tgz#dbbac576628c13d3b2231332cb2ec5a46e015bb0"
   integrity sha512-bipEBdZfVH5/pwrvqc+Ub0kUPVfGUhlKxbvfD+z1BDnPEO/X98ruXGA1WP5ASpAFKan7Qr6j736IacbZQuAlKQ==
@@ -4403,9 +4402,9 @@ camelcase@^6.0.0, camelcase@^6.2.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30001517:
-  version "1.0.30001521"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001521.tgz#e9930cf499f7c1e80334b6c1fbca52e00d889e56"
-  integrity sha512-fnx1grfpEOvDGH+V17eccmNjucGUnCbP6KL+l5KqBIerp26WK/+RQ7CIDE37KGJjaPyqWXXlFUyKiWmvdNNKmQ==
+  version "1.0.30001522"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001522.tgz#44b87a406c901269adcdb834713e23582dd71856"
+  integrity sha512-TKiyTVZxJGhsTszLuzb+6vUZSjVOAhClszBr2Ta2k9IwtNBT/4dzmL6aywt0HCgEZlmwJzXJd8yNiob6HgwTRg==
 
 capture-stack-trace@^1.0.0:
   version "1.0.2"
@@ -4847,11 +4846,11 @@ copy-descriptor@^0.1.0:
   integrity sha512-XgZ0pFcakEUlbwQEVNg3+QAis1FyTL3Qel9FYy8pSkQqoG3PNoT0bOCQtOXcOkur21r2Eq2kI+IE+gsmAEVlYw==
 
 core-js-compat@^3.31.0:
-  version "3.32.0"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.32.0.tgz#f41574b6893ab15ddb0ac1693681bd56c8550a90"
-  integrity sha512-7a9a3D1k4UCVKnLhrgALyFcP7YCsLOQIxPd0dKjf/6GuPcgyiGP70ewWdCGrSK7evyhymi0qO4EqCmSJofDeYw==
+  version "3.32.1"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.32.1.tgz#55f9a7d297c0761a8eb1d31b593e0f5b6ffae964"
+  integrity sha512-GSvKDv4wE0bPnQtjklV101juQ85g6H3rm5PDP20mqlS5j0kXF3pP97YvAu5hl+uFHqMictp3b2VxOHljWMAtuA==
   dependencies:
-    browserslist "^4.21.9"
+    browserslist "^4.21.10"
 
 core-js@^1.0.0:
   version "1.2.7"
@@ -5443,9 +5442,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.3.47, electron-to-chromium@^1.4.477:
-  version "1.4.495"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.495.tgz#d72d2eddc05d07c538275a00f2619b113848bff6"
-  integrity sha512-mwknuemBZnoOCths4GtpU/SDuVMp3uQHKa2UNJT9/aVD6WVRjGpXOxRGX7lm6ILIenTdGXPSTCTDaWos5tEU8Q==
+  version "1.4.496"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.496.tgz#a57534b70d2bdee7e1ad7dbd4c91e560cbd08db1"
+  integrity sha512-qeXC3Zbykq44RCrBa4kr8v/dWzYJA8rAwpyh9Qd+NKWoJfjG5vvJqy9XOJ9H4P/lqulZBCgUWAYi+FeK5AuJ8g==
 
 electron@^23.1.2:
   version "23.3.13"
@@ -5757,9 +5756,9 @@ eslint-module-utils@^2.7.4, eslint-module-utils@^2.8.0:
     debug "^3.2.7"
 
 eslint-plugin-import@^2.27.5:
-  version "2.28.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.28.0.tgz#8d66d6925117b06c4018d491ae84469eb3cb1005"
-  integrity sha512-B8s/n+ZluN7sxj9eUf7/pRFERX0r5bnFA2dCaLHy2ZeaQEAz0k+ZZkFWRFHJAqxfxQDx6KLv9LeIki7cFdwW+Q==
+  version "2.28.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.28.1.tgz#63b8b5b3c409bfc75ebaf8fb206b07ab435482c4"
+  integrity sha512-9I9hFlITvOV55alzoKBI+K9q74kv0iKMeY6av5+umsNwayt59fz692daGyjR+oStBQgx6nwR9rXldDev3Clw+A==
   dependencies:
     array-includes "^3.1.6"
     array.prototype.findlastindex "^1.2.2"
@@ -5770,13 +5769,12 @@ eslint-plugin-import@^2.27.5:
     eslint-import-resolver-node "^0.3.7"
     eslint-module-utils "^2.8.0"
     has "^1.0.3"
-    is-core-module "^2.12.1"
+    is-core-module "^2.13.0"
     is-glob "^4.0.3"
     minimatch "^3.1.2"
     object.fromentries "^2.0.6"
     object.groupby "^1.0.0"
     object.values "^1.1.6"
-    resolve "^1.22.3"
     semver "^6.3.1"
     tsconfig-paths "^3.14.2"
 
@@ -7304,7 +7302,7 @@ is-ci@^2.0.0:
   dependencies:
     ci-info "^2.0.0"
 
-is-core-module@^2.11.0, is-core-module@^2.12.1, is-core-module@^2.13.0, is-core-module@^2.9.0:
+is-core-module@^2.11.0, is-core-module@^2.13.0, is-core-module@^2.9.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.13.0.tgz#bb52aa6e2cbd49a30c2ba68c42bf3435ba6072db"
   integrity sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==
@@ -9491,9 +9489,9 @@ node-fetch@^1.0.1:
     is-stream "^1.0.1"
 
 node-fetch@^2.2.0, node-fetch@^2.6.0, node-fetch@^2.6.12, node-fetch@^2.6.7:
-  version "2.6.12"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.12.tgz#02eb8e22074018e3d5a83016649d04df0e348fba"
-  integrity sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==
+  version "2.6.13"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.13.tgz#a20acbbec73c2e09f9007de5cda17104122e0010"
+  integrity sha512-StxNAxh15zr77QvvkmveSQ8uCQ4+v5FkvNTj0OESmiHu+VRi/gXArXtkWMElOsOUNLtUEvI4yS+rdtOHZTwlQA==
   dependencies:
     whatwg-url "^5.0.0"
 
@@ -11290,7 +11288,7 @@ resolve.exports@^2.0.0:
   resolved "https://registry.yarnpkg.com/resolve.exports/-/resolve.exports-2.0.2.tgz#f8c934b8e6a13f539e38b7098e2e36134f01e800"
   integrity sha512-X2UW6Nw3n/aMgDVy+0rSqgHlv39WZAlZrXCdnbyEiKm17DSqHX4MmQMaST3FbeWR5FTuRcUwYAziZajji0Y7mg==
 
-resolve@^1.14.2, resolve@^1.20.0, resolve@^1.22.1, resolve@^1.22.3, resolve@^1.22.4:
+resolve@^1.14.2, resolve@^1.20.0, resolve@^1.22.1, resolve@^1.22.4:
   version "1.22.4"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.4.tgz#1dc40df46554cdaf8948a486a10f6ba1e2026c34"
   integrity sha512-PXNdCiPqDqeUou+w1C2eTQbNfxKSuMxqTCuvlmmMsk1NWHL5fRrhY6Pl0qEYYc6+QqGClco1Qj8XnjPego4wfg==
@@ -12476,9 +12474,9 @@ tslib@1.14.1, tslib@^1.8.1:
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
 tslib@^2.0.1, tslib@^2.1.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.1.tgz#fd8c9a0ff42590b25703c0acb3de3d3f4ede0410"
-  integrity sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
+  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 tsutils@^3.21.0:
   version "3.21.0"
@@ -12856,13 +12854,6 @@ value-or-function@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/value-or-function/-/value-or-function-3.0.0.tgz#1c243a50b595c1be54a754bfece8563b9ff8d813"
   integrity sha512-jdBB2FrWvQC/pnPtIqcLsMaQgjhdb6B7tk1MMyTKapox+tQZbdRP4uLxu/JY0t7fbfDCUMnuelzEYv5GsxHhdg==
-
-varuint-bitcoin@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/varuint-bitcoin/-/varuint-bitcoin-1.1.2.tgz#e76c138249d06138b480d4c5b40ef53693e24e92"
-  integrity sha512-4EVb+w4rx+YfVM32HQX42AbbT7/1f5zwAYhIujKXKk8NQK+JfRVl3pqT3hjNn/L+RstigmGGKVwHA/P0wgITZw==
-  dependencies:
-    safe-buffer "^5.1.1"
 
 vary@~1.1.2:
   version "1.1.2"
