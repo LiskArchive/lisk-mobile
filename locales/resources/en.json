@@ -306,7 +306,7 @@
     "stats": {
       "title": "Application Stats",
       "registered": "Registered",
-      "active": "Active",
+      "activated": "Activated",
       "terminated": "Terminated",
       "totalSupply": "Total supply",
       "staked": "Staked"

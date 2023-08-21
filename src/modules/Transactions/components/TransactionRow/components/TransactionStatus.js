@@ -10,7 +10,7 @@ export function TransactionStatus({ transaction }) {
   const props = { height: 14, width: 14 };
 
   switch (transaction.executionStatus) {
-    case 'success':
+    case 'successful':
       children = <CheckSvg {...props} />;
       break;
 
@@ -18,7 +18,7 @@ export function TransactionStatus({ transaction }) {
       children = <SandClockSvg {...props} />;
       break;
 
-    case 'fail':
+    case 'failed':
       children = <CircleCrossedSvg {...props} />;
       break;
 

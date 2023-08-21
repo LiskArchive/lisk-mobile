@@ -65,7 +65,7 @@ export default function ApplicationsStats(props) {
 
                 <View style={styles.legend}>
                   <ApplicationsStatsLegendItem label={'registered'} amount={data.registered} />
-                  <ApplicationsStatsLegendItem label={'active'} amount={data.active} />
+                  <ApplicationsStatsLegendItem label={'activated'} amount={data.activated} />
                   <ApplicationsStatsLegendItem label={'terminated'} amount={data.terminated} />
                 </View>
               </View>

@@ -115,13 +115,13 @@ export default {
     unregisteredContainer: {
       backgroundColor: 'rgba(64, 112, 244, 0.1)',
     },
-    activeContainer: {
+    activatedContainer: {
       backgroundColor: 'rgba(0, 213, 99, 0.1)',
     },
     registered: {
       color: colors.light.ultramarineBlue,
     },
-    active: {
+    activated: {
       color: colors.light.ufoGreen,
     },
   },

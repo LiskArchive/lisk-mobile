@@ -67,6 +67,7 @@ export default function AccountCard({ account }) {
 
           <View>
             <CopyToClipboard
+              key={account.address}
               value={account.address}
               labelStyle={[styles.addressText, styles.theme.addressText]}
               label={stringShortener(account.address, 7, 6)}
