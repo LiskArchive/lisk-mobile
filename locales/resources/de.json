@@ -309,7 +309,7 @@
     "stats": {
       "title": "Anwendungsstatistik",
       "registered": "Eingetragen",
-      "active": "Activ",
+      "activated": "Aktiviert",
       "terminated": "Beendet",
       "totalSupply": "Gesamtversorgung",
       "staked": "Abgesteckt"

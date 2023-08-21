@@ -41,7 +41,7 @@ export function useApplicationSupportedTokensQuery(application) {
     let tokens;
 
     if (tokensMetaData && supportedTokensData) {
-      const isSupportAllToken = supportedTokensData.isSupportAllToken;
+      const isSupportAllToken = supportedTokensData.isSupportAllTokens;
 
       if (isSupportAllToken) {
         tokens = tokensMetaData;
