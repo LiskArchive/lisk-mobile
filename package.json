@@ -5,9 +5,11 @@
   "homepage": "https://github.com/LiskHQ/lisk-mobile",
   "bugs": "https://github.com/LiskHQ/lisk-mobile/issues",
   "scripts": {
-    "android": "npx react-native run-android",
+    "android": "npx react-native run-android --variant=prodDebug",
     "ios": "npx react-native run-ios",
     "ios-dev": "npx react-native run-ios --scheme LiskDev",
+    "android-dev": "npx react-native run-android --variant=devDebug --appIdSuffix=dev",
+    "build:android:dev:release": "cd android && ./gradlew assembleDevRelease",
     "start": "npx react-native start",
     "release:android": "cd android && ./gradlew bundleRelease",
     "test": "cp env.test.json env.json && jest --config ./jest.config.js --env=jsdom",

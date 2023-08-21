@@ -108,6 +108,7 @@
     "menu": {
       "security": "Security",
       "backupRecoveryPhrase": "Backup your secret recovery phrase",
+      "scanDevice": "Scan device for harmful apps",
       "about": "About Lisk",
       "darkMode": "Dark mode",
       "shakePhone": "Discreet mode with phone shaking",
@@ -119,7 +120,13 @@
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
       "enableDerivationPath": "Enable access to legacy Lisk accounts"
-    }, 
+    },
+    "scanDevice": {
+      "description": "Lisk enhances security by conducting scans for potentially malicious apps that could jeopardize the integrity of your Lisk wallet on your device.",
+      "scanning": "Scanning",
+      "noHarmfulText": "No harmful app found.",
+      "details": "The “{{packageName}}” harbors malicious elements that have the potential to compromise the security of your Lisk wallet. It is strongly recommended to uninstall this app. Alternatively, you can choose to retain the app entirely at your own risk”."
+    },
     "backupPhrase": {
       "title": "Backup your secret recovery phrase",
       "confirmPhrase": "Confirm your secret recovery phrase",

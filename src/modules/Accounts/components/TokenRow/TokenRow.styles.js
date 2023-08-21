@@ -26,11 +26,11 @@ export default function getTokenRowStyles() {
       },
       balanceText: {
         marginBottom: 4,
-        fontWeight: '500',
+        fontFamily: fonts.family.contextSemiBold,
         fontSize: fonts.size.base,
       },
       currencyText: {
-        fontWeight: '400',
+        fontFamily: fonts.family.context,
         fontSize: 12,
       },
       row: {

@@ -28,7 +28,7 @@ export const encryptAccount = async ({
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
     const encryptOptions = {};
     if (Platform.OS === 'android') {
-      options.getKey = getKeyFromPasswordWithArgon2;
+      encryptOptions.getKey = getKeyFromPasswordWithArgon2;
     }
     const crypto = await encrypt.encryptMessageWithPassword(plainText, password, encryptOptions);
     return {
