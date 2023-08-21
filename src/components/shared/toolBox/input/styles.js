@@ -30,6 +30,7 @@ export default () => ({
     input: {
       fontSize: fonts.size.base,
       width: '100%',
+      fontFamily: fonts.family.context,
       borderWidth: 1,
       padding: 16,
       borderRadius: 10,

@@ -1,4 +1,4 @@
-import { themes, colors } from 'constants/styleGuide';
+import { themes, colors, fonts } from 'constants/styleGuide';
 
 export default function getTransactionSummaryStyles() {
   return {
@@ -7,12 +7,12 @@ export default function getTransactionSummaryStyles() {
         flex: 1,
       },
       label: {
-        fontWeight: '400',
+        fontFamily: fonts.family.context,
         fontSize: 14,
         color: colors.light.blueGray,
       },
       valueText: {
-        fontWeight: '500',
+        fontFamily: fonts.family.contextSemiBold,
         fontSize: 14,
         lineHeight: 18,
         color: colors.light.zodiacBlue,

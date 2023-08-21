@@ -5,7 +5,7 @@ export default function getStyles() {
     common: {
       container: { flexDirection: 'row', flex: 1, padding: 5, marginLeft: 10 },
       text: {
-        fontFamily: fonts.family.regular,
+        fontFamily: fonts.family.context,
         fontSize: fonts.size.small,
       },
       flex: {
