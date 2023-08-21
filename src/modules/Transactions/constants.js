@@ -23,8 +23,8 @@ export const MODULE_COMMANDS_NAMES = {
 };
 
 export const TRANSACTION_STATUS_NAMES = {
-  success: t('transactions.statusText.success'),
-  fail: t('transactions.statusText.fail'),
+  successful: t('transactions.statusText.success'),
+  failed: t('transactions.statusText.fail'),
   pending: t('transactions.statusText.pending'),
 };
 
