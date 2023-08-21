@@ -33,7 +33,7 @@ export default () => ({
     registeredIcon: {
       backgroundColor: colors.light.ultramarineBlue,
     },
-    activeIcon: {
+    activatedIcon: {
       backgroundColor: colors.light.ufoGreen,
     },
     terminatedIcon: {
