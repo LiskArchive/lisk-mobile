@@ -30,7 +30,8 @@ export function getTabBarIcon({ route }) {
 export function validateDeepLink(url) {
   const parsedUrl = new Url(url, true);
 
-  const pathname = parsedUrl.href.match(/(?<=(lisk:))(\/\/[\w|/]+)/g)?.[0];
+  const match = parsedUrl.href.match(/lisk:(\/\/[\w|/]+)/);
+  const pathname = match ? match[1] : null;
 
   const foundLink = WHITE_LISTED_DEEP_LINKS.find(({ pathRegex }) => pathRegex.test(pathname));
 
