@@ -17,6 +17,7 @@ import { useFeesQuery } from 'modules/Transactions/api/useFeesQuery';
 import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
+import { useDebounce } from 'hooks/useDebounce';
 import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
@@ -72,6 +73,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         .required(i18next.t('sendToken.errors.recipientAccountAddress')),
       tokenID: yup.string().required(i18next.t('sendToken.errors.tokenID')),
       priority: yup.string().required(i18next.t('sendToken.errors.priority')),
+      message: yup.string().nullable().length(64, i18next.t('sendToken.errors.priority')),
     })
     .required();
 
@@ -88,6 +90,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
   const command = form.watch('command');
   const amount = form.watch('amount');
+  const message = form.watch('message');
+  const debouncedMessage = useDebounce(message, 1000);
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
@@ -97,8 +101,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     useTransactionFees({
       transaction,
       isTransactionSuccess,
-      dependencies: [recipientAddress, tokenID, amount, isCrossChainTransfer],
-      enabled: recipientAddress && tokenID && amount,
+      dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
+      enabled: recipientAddress && tokenID,
       onError: () =>
         DropDownHolder.error(i18next.t('Error'), i18next.t('sendToken.errors.estimateFees')),
     });
@@ -301,7 +305,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     error,
     isError,
     command,
-    isLoadingTransactionFees,
+    isLoadingTransactionFees: isLoadingTransactionFees || message !== debouncedMessage,
     isErrorTransactionFees,
   };
 }

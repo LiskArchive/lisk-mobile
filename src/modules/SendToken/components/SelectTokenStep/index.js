@@ -66,7 +66,9 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     !form.watch('senderApplicationChainID') ||
     !form.watch('recipientApplicationChainID') ||
     !isValidAddress ||
-    isMaxAllowedAmountExceeded;
+    isMaxAllowedAmountExceeded ||
+    form.isLoadingTransactionFees ||
+    form.isErrorTransactionFees;
 
   return (
     <View style={[styles.container]}>
