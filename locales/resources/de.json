@@ -499,6 +499,7 @@
       "tokenID": "Zu sendendes Token muss angegeben werden",      
       "amountInvalid": "Betrag ungültig.",
       "priority": "Priorität muss angegeben werden",
+      "message": "Die Nachrichtengröße hat die maximal zulässige Größe überschritten",
       "insufficientBalance": "Dein Kontobetrag ist nicht ausreichend.",
       "estimateFees": "Fehler bei der Schätzung der Gebühren für diese Transaktion. Bitte versuchen Sie es mit anderen Parametern."
     },

@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-statements */
 import React from 'react';
 import { View } from 'react-native';
@@ -61,6 +62,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     transactionFee: transaction?.data?.transaction?.fee,
   });
 
+  const isMessageInvalid = messageField.value.length > 64;
+
   const disableNextStepButton =
     !form.watch('tokenID') ||
     !form.watch('senderApplicationChainID') ||
@@ -95,6 +98,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <SendTokenMessageField
         value={messageField.value}
         onChange={(value) => form.handleChange('params.data', value, messageField.onChange)}
+        errorMessage={isMessageInvalid && i18next.t('sendToken.errors.message')}
         style={{ container: { marginBottom: 16 } }}
       />
 
@@ -116,7 +120,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <View style={[styles.footer]}>
         <PrimaryButton
           onClick={nextStep}
-          disabled={disableNextStepButton}
+          disabled={disableNextStepButton || isMessageInvalid}
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
           style={{ flex: 1 }}

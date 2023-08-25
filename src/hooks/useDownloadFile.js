@@ -73,8 +73,15 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         onCompleted();
       }
     } catch (_error) {
+      if (Platform.OS === 'android') {
+        ToastAndroid.showWithGravity(
+          i18next.t('auth.setup.enablePermissions'),
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM
+        );
+      }
       setIsLoading(false);
-      setIsSuccess(false);
+      setIsSuccess(true);
       setError(_error);
       setIsError(true);
 
