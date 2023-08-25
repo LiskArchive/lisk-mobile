@@ -271,6 +271,7 @@
       "restoreFromFile": "Aus Datei wiederherstellen",
       "restoreFromFileErrorMessage": "",
       "downloaded": "Heruntergeladen!",
+      "enablePermissions": "Aktivieren Sie Lisk mobile für den Zugriff auf den Dateispeicher in den Einstellungen",
       "qrCodeError": "",
       "enableLegacyAccount": "",
       "enableLegacyAccountDescription": "",
