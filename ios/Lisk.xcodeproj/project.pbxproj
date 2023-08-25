@@ -1396,6 +1396,8 @@
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Lisk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
