@@ -20,6 +20,10 @@
 		41A689921EFA36A8D32F0086 /* libPods-Lisk-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C9CBE86C2F2D2BF3BA78C /* libPods-Lisk-tvOS.a */; };
 		6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 206B9A34AD589789FEDFFD79 /* libPods-LiskApp-Lisk.a */; };
 		6FD893360F595FFBC56983CF /* libPods-LiskApp-Lisk-LiskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F47CFD96B49A8A432C2DC73 /* libPods-LiskApp-Lisk-LiskTests.a */; };
+		791503B12A9652DF0030C457 /* RNArgon2Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791503B02A9652DF0030C457 /* RNArgon2Module.swift */; };
+		791503B22A9652DF0030C457 /* RNArgon2Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791503B02A9652DF0030C457 /* RNArgon2Module.swift */; };
+		791503B42A9653410030C457 /* RNArgon2Module.m in Sources */ = {isa = PBXBuildFile; fileRef = 791503B32A9653410030C457 /* RNArgon2Module.m */; };
+		791503B52A9653410030C457 /* RNArgon2Module.m in Sources */ = {isa = PBXBuildFile; fileRef = 791503B32A9653410030C457 /* RNArgon2Module.m */; };
 		7952112C25F765EA00CCF7F8 /* BasierCircle-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */; };
 		7952112D25F765EA00CCF7F8 /* BasierCircle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */; };
 		7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */; };
@@ -57,7 +61,7 @@
 		79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */; };
 		7E342449C772440C0543475E /* libPods-LiskApp-LiskDev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
 		CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CBD727A12A8A52DA00D33815 /* server-cert.cer */; };
 /* End PBXBuildFile section */
@@ -133,6 +137,8 @@
 		3F47CFD96B49A8A432C2DC73 /* libPods-LiskApp-Lisk-LiskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiskApp-Lisk-LiskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A22464A5DC1100C0EB84D2E /* Pods-LiskApp-Lisk-LiskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiskApp-Lisk-LiskTests.release.xcconfig"; path = "Target Support Files/Pods-LiskApp-Lisk-LiskTests/Pods-LiskApp-Lisk-LiskTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C22DE960F73D44CBF1D680D /* libPods-Lisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		791503B02A9652DF0030C457 /* RNArgon2Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RNArgon2Module.swift; path = Lisk/RNArgon2Module.swift; sourceTree = "<group>"; };
+		791503B32A9653410030C457 /* RNArgon2Module.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNArgon2Module.m; path = Lisk/RNArgon2Module.m; sourceTree = "<group>"; };
 		7952112925F765EA00CCF7F8 /* BasierCircle-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-Bold.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-Bold.otf"; sourceTree = "<group>"; };
 		7952112A25F765EA00CCF7F8 /* BasierCircle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-Regular.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-Regular.otf"; sourceTree = "<group>"; };
 		7952112B25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierCircle-SemiBold.otf"; path = "../../src/assets/fonts/basierCircle/BasierCircle-SemiBold.otf"; sourceTree = "<group>"; };
@@ -191,7 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */,
+				A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */,
 				6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +285,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				791503B02A9652DF0030C457 /* RNArgon2Module.swift */,
+				791503B32A9653410030C457 /* RNArgon2Module.m */,
 			);
 			name = Lisk;
 			sourceTree = "<group>";
@@ -1242,7 +1250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				791503B42A9653410030C457 /* RNArgon2Module.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				791503B12A9652DF0030C457 /* RNArgon2Module.swift in Sources */,
 				CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1279,7 +1289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				79DD0C3A2A3750FB00E2DC9D /* AppDelegate.m in Sources */,
+				791503B52A9653410030C457 /* RNArgon2Module.m in Sources */,
 				79DD0C3B2A3750FB00E2DC9D /* main.m in Sources */,
+				791503B22A9652DF0030C457 /* RNArgon2Module.swift in Sources */,
 				79DD0C3C2A3750FB00E2DC9D /* Bridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1358,7 +1370,7 @@
 				EXCLUDED_ARCHS = arm64;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Lisk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
 				OTHER_LDFLAGS = (
@@ -1387,7 +1399,7 @@
 				EXCLUDED_ARCHS = arm64;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Lisk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
 				OTHER_LDFLAGS = (

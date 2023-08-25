@@ -1,10 +1,9 @@
 /* eslint-disable max-statements */
 import React from 'react';
+import { validator } from '@liskhq/lisk-client';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { getStateFromPath } from '@react-navigation/core';
 import { View } from 'react-native';
-import * as Lisk from '@liskhq/lisk-client';
-import Url from 'url-parse';
 
 import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './navigation.options';
@@ -28,28 +27,33 @@ export function getTabBarIcon({ route }) {
 }
 
 export function validateDeepLink(url) {
-  const parsedUrl = new Url(url, true);
+  const { protocol, searchParams, hostname } = new URL(url);
+  if (protocol !== 'lisk:') return false;
 
-  const pathname = parsedUrl.href.match(/(?<=(lisk:))(\/\/[\w|/]+)/g)?.[0];
-
-  const foundLink = WHITE_LISTED_DEEP_LINKS.find(({ pathRegex }) => pathRegex.test(pathname));
-
+  const foundLink = WHITE_LISTED_DEEP_LINKS.find(({ pathRegex }) => pathRegex.test(hostname));
   if (!foundLink) return false;
 
-  const isSearchParamsValid = Object.keys(parsedUrl.query).every(
-    (key) => foundLink.validationSchema.properties[key]
+  const searchParamObject = [...searchParams.entries()].reduce(
+    (result, [key, value]) => ({ ...result, [key]: value }),
+    {}
   );
+
+  const isSearchParamsValid = Object.keys(searchParamObject).reduce((result, key) => {
+    const schemaValue = !!foundLink.validationSchema.properties[key];
+    if (!schemaValue || !result) return false;
+    return true;
+  }, true);
 
   if (!isSearchParamsValid) return false;
 
-  let queryParams = parsedUrl.query;
-
-  if (foundLink.paramsTransformer) {
-    queryParams = foundLink.paramsTransformer(parsedUrl.query);
-  }
-
   try {
-    Lisk.validator.validator.validate(foundLink.validationSchema, queryParams);
+    let queryParams = searchParamObject;
+
+    if (foundLink.paramsTransformer) {
+      queryParams = foundLink.paramsTransformer(searchParamObject);
+    }
+
+    validator.validator.validate(foundLink.validationSchema, queryParams);
   } catch {
     return false;
   }

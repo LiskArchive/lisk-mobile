@@ -9,5 +9,6 @@
 #ifndef Lisk_Bridging_Header_h
 #define Lisk_Bridging_Header_h
 
-
 #endif /* Lisk_Bridging_Header_h */
+
+#import <React/RCTBridgeModule.h>
