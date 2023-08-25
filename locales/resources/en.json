@@ -502,7 +502,7 @@
       "tokenID": "Token to send must be specified",
       "amountInvalid": "Amount not valid.",
       "priority": "Priority must be specified",
-      "message": "Maximum allowed message length is 64",
+      "message": "Message size has exceeded the maximum allowed size",
       "insufficientBalance": "Your balance is not sufficient.",
       "estimateFees": "Error estimating fees for this transaction. Please try with different parameters."
     },
