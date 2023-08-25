@@ -196,7 +196,7 @@ export function SendTokenAmountField({
   );
 }
 
-export function SendTokenMessageField({ value, onChange, style }) {
+export function SendTokenMessageField({ value, onChange, style, errorMessage }) {
   const [showInput, setShowInput] = useState(!!value);
 
   const { styles } = useTheme({
@@ -237,6 +237,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
             </TouchableOpacity>
           </View>
         }
+        error={errorMessage}
         placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
         multiline
         innerStyles={getSendTokenMessageFieldStyles(style)}

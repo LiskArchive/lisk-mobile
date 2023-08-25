@@ -73,7 +73,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
         .required(i18next.t('sendToken.errors.recipientAccountAddress')),
       tokenID: yup.string().required(i18next.t('sendToken.errors.tokenID')),
       priority: yup.string().required(i18next.t('sendToken.errors.priority')),
-      message: yup.string().nullable().length(64, i18next.t('sendToken.errors.priority')),
     })
     .required();
 
