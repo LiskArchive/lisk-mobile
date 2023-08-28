@@ -34,8 +34,8 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   };
 
   useEffect(() => {
-    tryFetchAccontPasswordFromBiometrics();
-  }, []);
+    account.isBiometricsEnabled && tryFetchAccontPasswordFromBiometrics();
+  }, [account.isBiometricsEnabled]);
 
   return (
     <View
