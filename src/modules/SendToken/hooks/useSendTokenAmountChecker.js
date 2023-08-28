@@ -29,7 +29,7 @@ export function useSendTokenAmountChecker({
     return { maxAllowedAmount, isMaxAllowedAmountExceeded: false };
   }
 
-  let validatedAmount = BigInt(0);
+  let validatedAmount;
 
   try {
     validatedAmount =
