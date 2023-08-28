@@ -70,6 +70,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     !form.watch('recipientApplicationChainID') ||
     !isValidAddress ||
     isMaxAllowedAmountExceeded ||
+    form.formState.errors.amount?.message ||
     form.isLoadingTransactionFees ||
     form.isErrorTransactionFees;
 
