@@ -54,7 +54,7 @@ export default function AccountList({
     if (mode === 'modal') {
       modal.close();
     }
-    navigation.navigate('AuthMethod');
+    navigation.navigate('AuthMethod', { authRequired: true });
   };
 
   return (
