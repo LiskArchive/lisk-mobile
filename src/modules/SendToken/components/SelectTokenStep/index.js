@@ -55,15 +55,12 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     (application) => application.chainID === recipientApplicationChainIDField.value
   );
 
-  const { isMaxAllowedAmountExceeded, isAmountValid: isTokenAmountValid } =
-    useSendTokenAmountChecker({
-      recipientApplication,
-      selectedTokenID: tokenIDField.value,
-      amount: amountField.value,
-      transactionFee: transaction?.data?.transaction?.fee,
-    });
-
-  const isAmountValid = amountField.value ? amountField.value && isTokenAmountValid : true;
+  const { isMaxAllowedAmountExceeded, isAmountValid } = useSendTokenAmountChecker({
+    recipientApplication,
+    selectedTokenID: tokenIDField.value,
+    amount: amountField.value,
+    transactionFee: transaction?.data?.transaction?.fee,
+  });
 
   const isMessageInvalid = messageField.value.length > 64;
 
