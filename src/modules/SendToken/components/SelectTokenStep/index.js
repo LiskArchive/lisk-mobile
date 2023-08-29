@@ -55,24 +55,27 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     (application) => application.chainID === recipientApplicationChainIDField.value
   );
 
-  const { isMaxAllowedAmountExceeded } = useSendTokenAmountChecker({
-    recipientApplication,
-    selectedTokenID: tokenIDField.value,
-    amount: amountField.value,
-    transactionFee: transaction?.data?.transaction?.fee,
-  });
+  const { isMaxAllowedAmountExceeded, isAmountValid: isTokenAmountValid } =
+    useSendTokenAmountChecker({
+      recipientApplication,
+      selectedTokenID: tokenIDField.value,
+      amount: amountField.value,
+      transactionFee: transaction?.data?.transaction?.fee,
+    });
+
+  const isAmountValid = amountField.value ? amountField.value && isTokenAmountValid : true;
 
   const isMessageInvalid = messageField.value.length > 64;
 
   const disableNextStepButton =
-    !form.watch('tokenID') ||
-    !form.watch('senderApplicationChainID') ||
-    !form.watch('recipientApplicationChainID') ||
     !isValidAddress ||
     isMaxAllowedAmountExceeded ||
+    !isAmountValid ||
     form.formState.errors.amount?.message ||
     form.isLoadingTransactionFees ||
-    form.isErrorTransactionFees;
+    form.isErrorTransactionFees ||
+    isMessageInvalid ||
+    !isAmountValid;
 
   return (
     <View style={[styles.container]}>
@@ -90,7 +93,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
         tokenID={tokenIDField.value}
         errorMessage={
           form.formState.errors.amount?.message ||
-          (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance'))
+          (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance')) ||
+          (!isAmountValid && i18next.t('sendToken.errors.amountInvalid'))
         }
         recipientApplication={recipientApplication}
         style={{ container: { marginBottom: 16 } }}
@@ -121,7 +125,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <View style={[styles.footer]}>
         <PrimaryButton
           onClick={nextStep}
-          disabled={disableNextStepButton || isMessageInvalid}
+          disabled={disableNextStepButton}
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
           style={{ flex: 1 }}

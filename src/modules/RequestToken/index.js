@@ -63,7 +63,7 @@ export default function RequestToken() {
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
-  const { isValid: isAmountValid } = useRequestTokenAmountValidation({
+  const { isAmountValid } = useRequestTokenAmountValidation({
     recipientApplication: recipientApplicationChainID,
     selectedTokenID: tokenID,
     amount: amount.value,

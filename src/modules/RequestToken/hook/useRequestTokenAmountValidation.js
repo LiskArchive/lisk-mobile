@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { validateTransactionAmount } from 'utilities/validators';
@@ -8,7 +7,7 @@ export function useRequestTokenAmountValidation({ recipientApplication, selected
 
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === selectedTokenID);
 
-  let isValid = true;
+  let isAmountValid = true;
 
   try {
     selectedToken && validateTransactionAmount(amount)
@@ -21,8 +20,8 @@ export function useRequestTokenAmountValidation({ recipientApplication, selected
         )
       : BigInt(0);
   } catch (error) {
-    isValid = false;
+    isAmountValid = false;
   }
 
-  return { isValid };
+  return { isAmountValid };
 }
