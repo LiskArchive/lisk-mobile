@@ -45,9 +45,7 @@ export function useSendTokenAmountChecker({
         : BigInt(0);
   } catch (error) {
     validatedAmount = BigInt(0);
-    if (amount) {
-      isAmountValid = false;
-    }
+    isAmountValid = false;
   }
 
   const isMaxAllowedAmountExceeded = maxAllowedAmount - validatedAmount <= 0;
