@@ -24,23 +24,31 @@ export function useSendTokenAmountChecker({
   const tokenBalance = BigInt(tokenBalanceData?.data[0]?.availableBalance || 0);
 
   const maxAllowedAmount = tokenBalance - transactionFee;
+  let isAmountValid = true;
 
   if (!amount) {
-    return { maxAllowedAmount, isMaxAllowedAmountExceeded: false };
+    return { isAmountValid, maxAllowedAmount, isMaxAllowedAmountExceeded: false };
   }
 
-  const validatedAmount =
-    selectedToken && validateTransactionAmount(amount)
-      ? BigInt(
-          fromDisplayToBaseDenom({
-            amount,
-            displayDenom: selectedToken.displayDenom,
-            denomUnits: selectedToken.denomUnits,
-          })
-        )
-      : BigInt(0);
+  let validatedAmount;
+
+  try {
+    validatedAmount =
+      selectedToken && validateTransactionAmount(amount)
+        ? BigInt(
+            fromDisplayToBaseDenom({
+              amount,
+              displayDenom: selectedToken.displayDenom,
+              denomUnits: selectedToken.denomUnits,
+            })
+          )
+        : BigInt(0);
+  } catch (error) {
+    validatedAmount = BigInt(0);
+    isAmountValid = false;
+  }
 
   const isMaxAllowedAmountExceeded = maxAllowedAmount - validatedAmount <= 0;
 
-  return { maxAllowedAmount, isMaxAllowedAmountExceeded };
+  return { isAmountValid, maxAllowedAmount, isMaxAllowedAmountExceeded };
 }
