@@ -223,13 +223,19 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   useEffect(() => {
     if (isTransactionSuccess && isSuccessApplicationSupportedTokensData) {
-      const amountInBaseDenom = token
-        ? fromDisplayToBaseDenom({
+      let amountInBaseDenom = 0;
+
+      try {
+        if (token) {
+          amountInBaseDenom = fromDisplayToBaseDenom({
             amount: defaultValues.amount,
             displayDenom: token.displayDenom,
             denomUnits: token.denomUnits,
-          })
-        : 0;
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
 
       transaction.update({
         params: {
