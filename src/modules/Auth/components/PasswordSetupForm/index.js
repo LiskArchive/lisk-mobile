@@ -100,7 +100,14 @@ export default function PasswordSetupForm({
     if (isSuccess) {
       navigation.navigate({
         name: 'PasswordSetupSuccess',
-        params: { encryptedAccount, onContinue: () => navigation.navigate('Main') },
+        params: {
+          encryptedAccount,
+          onContinue: () =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Main' }],
+            }),
+        },
       });
     }
   }, [navigation, isSuccess, encryptedAccount]);

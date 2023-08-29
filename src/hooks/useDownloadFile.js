@@ -34,6 +34,9 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
 
   const downloadFile = useCallback(async () => {
     try {
+      // delete added isBiometricsEnabled field
+      delete data.isBiometricsEnabled;
+
       resetState();
 
       setIsLoading(true);

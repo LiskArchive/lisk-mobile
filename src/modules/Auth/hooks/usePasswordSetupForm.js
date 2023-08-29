@@ -90,8 +90,6 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
         data.isBiometricsEnabled = values.isBiometricsEnabled;
       }
 
-      console.log('isBiometricsEnabled', values.isBiometricsEnabled);
-
       setEncryptedAccount(data);
       setAccount(data);
       setCurrentAccount(data);

@@ -23,7 +23,10 @@ export default function useAccountManagerModal() {
     setActiveScreen(undefined);
 
     if (data?.metadata.address === currentAccount?.metadata.address) {
-      navigation.navigate('AccountsManagerScreen');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'AccountsManagerScreen' }],
+      });
     }
   };
 
