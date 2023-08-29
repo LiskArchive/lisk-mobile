@@ -30,6 +30,9 @@ export const validateAddress = (address) => {
  */
 export function validateTransactionAmount(value) {
   const regex = /^\d+(\.\d+)?$/;
+  if (value > Number.MAX_SAFE_INTEGER) {
+    return false;
+  }
   if (!regex.test(value)) {
     return false;
   }

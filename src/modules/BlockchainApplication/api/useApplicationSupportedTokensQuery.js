@@ -15,7 +15,7 @@ export function useApplicationSupportedTokensQuery(application) {
   const toApplicationApiClient = useRef(new APIClient());
 
   toApplicationApiClient.current.create({
-    ...application?.serviceURLs[0],
+    ...application?.serviceURLs?.[0],
     enableCertPinning: application?.chainName === 'lisk_mainchain',
   });
 

@@ -37,6 +37,7 @@ import { stringShortener } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
+import { useRequestTokenAmountValidation } from './hook/useRequestTokenAmountValidation';
 import getStyles from './styles';
 
 export default function RequestToken() {
@@ -61,6 +62,12 @@ export default function RequestToken() {
   const [tokenID, setTokenID] = useState();
 
   const { styles, theme } = useTheme({ styles: getStyles() });
+
+  const { isValid: isAmountValid } = useRequestTokenAmountValidation({
+    recipientApplication: recipientApplicationChainID,
+    selectedTokenID: tokenID,
+    amount: amount.value,
+  });
 
   const getQRCodeUrl = () => {
     const validator = (str) => reg.amount.test(str);
@@ -192,7 +199,9 @@ export default function RequestToken() {
             tokenID={tokenID}
             recipientApplication={currentApplication.data}
             style={{ container: styles.fieldContainer }}
-            errorMessage={!amount.validity ? i18next.t('sendToken.errors.amountInvalid') : ''}
+            errorMessage={
+              !amount.validity || !isAmountValid ? i18next.t('sendToken.errors.amountInvalid') : ''
+            }
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
@@ -201,7 +210,7 @@ export default function RequestToken() {
         <View style={styles.footer} testID="request-token-link-button">
           <PrimaryButton
             onPress={handleCopyToClipboard}
-            disabled={!amount.validity}
+            disabled={!amount.validity || !isAmountValid}
             adornments={{
               left: !copiedToClipboard ? (
                 <CopySvg color={colors.light.white} variant="outline" style={{ marginRight: 8 }} />
