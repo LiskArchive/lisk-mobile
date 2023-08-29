@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
 import React, { useEffect, useState } from 'react';
-import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -99,7 +99,7 @@ export default function RequestToken() {
 
   const renderFullCode = () => (
     <View style={styles.shareContainer}>
-      <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
+      <Share type={TouchableOpacity} value={qrCodeUrl} title={qrCodeUrl}>
         {renderQRCode(qrCodeSize)}
       </Share>
 
