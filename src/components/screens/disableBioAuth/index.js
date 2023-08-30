@@ -4,6 +4,7 @@ import { useModal } from 'hooks/useModal';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useSelector } from 'react-redux';
+import DropDownHolder from 'utilities/alert';
 import { B, Small } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import { PrimaryButton } from 'components/shared/toolBox/button';
@@ -27,7 +28,7 @@ const DisableBioAuth = ({ onSubmit }) => {
       modal.close();
       onSubmit?.();
     } catch (error) {
-      console.log(error);
+      DropDownHolder.error('Error', error?.message);
     }
   };
 

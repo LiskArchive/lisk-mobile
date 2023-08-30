@@ -154,7 +154,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       return EVENT_DATA_RESULT[event.data.result];
     }
 
-    return 'Transaction dry run failed with errors, hence aborting next step.';
+    return i18next.t('transactions.errors.dryRunFailed');
   };
 
   const getDryRunErrors = (events) => {

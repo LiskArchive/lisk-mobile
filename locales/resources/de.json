@@ -606,7 +606,8 @@
       "insufficientEscrowBalance": "Diese Transaktion konnte aufgrund eines unzureichenden Treuhandsaldos nicht bearbeitet werden.",
       "invalidReceivingChain": "Diese Transaktion konnte aufgrund einer ungültigen Empfangskette nicht verarbeitet werden.",
       "insufficientFee": "Bitte verwenden Sie die benutzerdefinierte Gebühr und geben Sie eine höhere Gebühr für die Bearbeitung dieser Transaktion an.",
-      "invalidSignature": "Die Transaktion konnte aufgrund einer ungültigen Unterschrift nicht verarbeitet werden. Bitte starten Sie die Transaktion von vorne."
+      "invalidSignature": "Die Transaktion konnte aufgrund einer ungültigen Unterschrift nicht verarbeitet werden. Bitte starten Sie die Transaktion von vorne.",
+      "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
     }
   },
   "deepLinkNotFound": {
