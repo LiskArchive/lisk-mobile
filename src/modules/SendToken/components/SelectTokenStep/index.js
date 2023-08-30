@@ -88,7 +88,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     !isValidAddress ||
     isMaxAllowedAmountExceeded ||
     !isAmountValid ||
-    form.formState.errors.amount?.message ||
+    !!form.formState.errors.amount?.message ||
     form.isLoadingTransactionFees ||
     form.isErrorTransactionFees ||
     isMessageInvalid;
