@@ -18,9 +18,13 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
+import { useModal } from '../../../../hooks/useModal';
+import SignTransactionError from '../../../Transactions/components/SignTransaction/SignTransactionError';
 
 export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, form, transaction }) {
   const applications = useApplicationsExplorer();
+
+  const modal = useModal();
 
   const { field: tokenIDField } = useController({
     name: 'tokenID',
@@ -64,6 +68,22 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
 
   const isMessageInvalid = messageField.value.length > 64;
 
+  const showErrorModal = (error) => {
+    modal.open(() => (
+      <SignTransactionError
+        onClick={form.handleReset}
+        actionButton={
+          <PrimaryButton
+            onClick={modal.close}
+            title={i18next.t('sendToken.result.error.retryButtonText')}
+            style={[styles.tryAgainButton]}
+          />
+        }
+        title={error}
+      />
+    ));
+  };
+
   const disableNextStepButton =
     !isValidAddress ||
     isMaxAllowedAmountExceeded ||
@@ -71,8 +91,15 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     form.formState.errors.amount?.message ||
     form.isLoadingTransactionFees ||
     form.isErrorTransactionFees ||
-    isMessageInvalid ||
-    !isAmountValid;
+    isMessageInvalid;
+
+  const verifyFormWithDryRun = async () => {
+    let dryRunResult = await form.handleContinue(showErrorModal);
+    if (dryRunResult) {
+      form.handleReset();
+      nextStep();
+    }
+  };
 
   return (
     <View style={[styles.container]}>
@@ -121,7 +148,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       )}
       <View style={[styles.footer]}>
         <PrimaryButton
-          onClick={nextStep}
+          onClick={verifyFormWithDryRun}
           disabled={disableNextStepButton}
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
