@@ -1,7 +1,9 @@
+/* eslint-disable max-statements */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useCallback, useState } from 'react';
 import { getSdkError } from '@walletconnect/utils';
 
-import { formatJsonRpcResult } from '../utils/jsonRPCFormat';
+import { formatJsonRpcError, formatJsonRpcResult } from '../utils/jsonRPCFormat';
 import ConnectionContext from '../context/connectionContext';
 import { onApprove, onReject } from '../utils/sessionHandlers';
 import { EVENTS, STATUS, ERROR_CASES } from '../constants/lifeCycle';
@@ -56,8 +58,10 @@ export const useSession = () => {
 
   const reject = useCallback(async (event) => {
     const proposalEvents = event || events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
+
     try {
       await onReject(proposalEvents.meta, signClient);
+
       removeEvent(proposalEvents);
       setSessionProposal(null);
       setSessionRequest(null);
@@ -83,6 +87,36 @@ export const useSession = () => {
         topic,
         response,
       });
+      return {
+        status: STATUS.SUCCESS,
+        data,
+      };
+    } catch (e) {
+      return {
+        status: STATUS.FAILURE,
+        message: e.message,
+      };
+    }
+  }, []);
+
+  const rejectRequest = useCallback(async () => {
+    const requestEvent = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
+
+    const topic = requestEvent.meta.topic;
+    const response = formatJsonRpcError(
+      requestEvent.meta.id,
+      getSdkError(ERROR_CASES.USER_REJECTED_METHODS).message
+    );
+
+    try {
+      const data = await signClient.respond({
+        topic,
+        response,
+      });
+
+      removeEvent(requestEvent);
+      setSessionRequest(null);
+
       return {
         status: STATUS.SUCCESS,
         data,
@@ -132,6 +166,7 @@ export const useSession = () => {
     reject,
     approve,
     respond,
+    rejectRequest,
     sessions,
     sessionRequest,
     setSessions,

@@ -59,7 +59,6 @@ describe('useSession', () => {
     const { result } = renderHook(() => useSession());
     const { reject } = result.current;
     await reject();
-    // await flushPromises();
     expect(sessionHandlers.onReject).toHaveBeenCalledWith(session, signClient);
   });
 });

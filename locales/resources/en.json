@@ -9,7 +9,8 @@
       "reject": "Reject",
       "reload": "Reload",
       "viewAll": "View all",
-      "selectAll": "Select all"
+      "selectAll": "Select all",
+      "close": "Close"
     },
     "copy": "Copy",
     "copied": "Copied",

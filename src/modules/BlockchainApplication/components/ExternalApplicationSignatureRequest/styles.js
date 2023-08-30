@@ -5,6 +5,7 @@ export default {
   common: {
     container: {
       flex: 1,
+      marginTop: 8,
     },
     imageContainer: {
       alignItems: 'center',
@@ -110,6 +111,12 @@ export default {
     buttonRight: {
       flex: 1,
       marginLeft: 8,
+    },
+    button: {
+      flex: 1,
+    },
+    buttonMarginVertical: {
+      marginVertical: 8,
     },
     outlineButton: {
       backgroundColor: 'transparent',

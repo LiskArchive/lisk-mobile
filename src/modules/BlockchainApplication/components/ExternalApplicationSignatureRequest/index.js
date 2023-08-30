@@ -11,6 +11,7 @@ import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
 import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
+import { Button } from 'components/shared/toolBox/button';
 import DropDownHolder from 'utilities/alert';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
@@ -24,14 +25,13 @@ import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventVal
 
 import getStyles from './styles';
 
-export default function ExternalApplicationSignatureRequest({ onClose, onCancel }) {
+export default function ExternalApplicationSignatureRequest({ onCancel }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
-  // const [isEventSchemaValid, setIsEventSchemaValid] = useState()
 
   const [passwordForm, passwordFormController] = usePasswordForm();
   const [currentAccount] = useCurrentAccount();
-  const { respond, sessionRequest } = useSession();
+  const { respond, sessionRequest, rejectRequest } = useSession();
   const { events } = useContext(WalletConnectContext);
 
   const { styles } = useTheme({ styles: getStyles });
@@ -49,16 +49,17 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
 
   const createTransactionOptions = useMemo(
     () => ({
-      encodedTransaction: event.meta.params.request.params.payload,
+      encodedTransaction: event?.meta.params.request.params.payload,
     }),
-    [event.meta.params.request.params.payload]
+    [event?.meta.params.request.params.payload]
   );
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
-  const senderAccountAddress = extractAddressFromPublicKey(sessionRequest.peer.publicKey);
+  const senderAccountAddress =
+    sessionRequest && extractAddressFromPublicKey(sessionRequest.peer.publicKey);
 
-  const senderApplicationChainID = event.meta.params.chainId.replace('lisk:', '');
+  const senderApplicationChainID = event?.meta.params.chainId.replace('lisk:', '');
 
   const handleRespond = async (payload) => {
     setStatus({ ...sessionRequest, isLoading: true });
@@ -70,6 +71,12 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
     } else if (response.status === STATUS.SUCCESS) {
       setStatus({ ...response, isSuccess: true });
     }
+  };
+
+  const handleReject = async () => {
+    await rejectRequest();
+
+    onCancel();
   };
 
   const handleSubmit = passwordForm.handleSubmit(async (values) => {
@@ -114,7 +121,7 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
             session={sessionRequest}
             senderApplicationChainID={senderApplicationChainID}
             senderAccountAddress={senderAccountAddress}
-            onCancel={onCancel}
+            onCancel={handleReject}
             onSubmit={() => setActiveStep('summary')}
           />
         );
@@ -136,7 +143,7 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
             session={sessionRequest}
             transaction={_transaction}
             onSubmit={handleSubmit}
-            onClose={onClose}
+            onClose={handleReject}
             userPassword={passwordFormController.field.value}
             onUserPasswordChange={passwordFormController.field.onChange}
             isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
@@ -158,7 +165,7 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
       error={transaction.error || !isEventSchemaValid}
       renderData={renderStep}
       renderError={() => (
-        <View>
+        <View style={styles.container}>
           <View style={styles.imageContainer}>
             <CircleCrossedSvg height={56} width={56} />
           </View>
@@ -173,9 +180,15 @@ export default function ExternalApplicationSignatureRequest({ onClose, onCancel 
             {invalidEventSchemaError &&
               i18next.t(
                 'application.externalApplicationSignatureRequest.sign.invalidConnectionDescription',
-                { appName: sessionRequest.peer.metadata.name }
+                { appName: sessionRequest?.peer.metadata.name }
               )}
           </P>
+
+          <View style={styles.footer}>
+            <Button onPress={handleReject} style={styles.button}>
+              {i18next.t('commons.buttons.close')}
+            </Button>
+          </View>
         </View>
       )}
     />

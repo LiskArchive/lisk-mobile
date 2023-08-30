@@ -30,7 +30,7 @@ export default function ExternalAppSignatureRequestSummary({
   const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
 
   return (
-    <>
+    <View style={styles.container}>
       <H3 style={[styles.title, styles.theme.title]}>
         {i18next.t('application.externalApplicationSignatureRequest.summary.title')}
       </H3>
@@ -62,6 +62,6 @@ export default function ExternalAppSignatureRequestSummary({
           {i18next.t('application.externalApplicationSignatureRequest.summary.continueButtonText')}
         </PrimaryButton>
       </View>
-    </>
+    </View>
   );
 }
