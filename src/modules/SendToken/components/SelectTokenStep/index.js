@@ -149,7 +149,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <View style={[styles.footer]}>
         <PrimaryButton
           onClick={verifyFormWithDryRun}
-          disabled={disableNextStepButton}
+          disabled={disableNextStepButton || form.isLoading}
+          isLoading={form.isLoading}
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
           style={{ flex: 1 }}
