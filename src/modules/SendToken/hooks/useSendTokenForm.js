@@ -183,10 +183,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
             if (!isOk) {
               if (data?.events) {
                 const errorMessage = getDryRunErrors(data?.events);
-                reject(new Error(errorMessage));
+                return reject(new Error(errorMessage));
               }
               if (data?.errorMessage) {
-                reject(new Error(data?.errorMessage));
+                return reject(new Error(data?.errorMessage));
               }
             }
             if (!skipBroadcast) {
@@ -199,7 +199,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
               const errorJson = await error.json();
               reject(new Error(errorJson.message));
             }
-            reject(new Error(error.message));
+            reject(new Error(error?.message));
           },
         }
       );
