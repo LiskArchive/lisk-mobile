@@ -119,7 +119,7 @@ export function computeNonce(authNonce, transactionPool) {
  * See https://github.com/LiskHQ/lisk-mobile/issues/1578 for details.
  */
 export function getDryRunTransactionError(responseData) {
-  const isError = responseData.result === TRANSACTION_VERIFY_RESULT.invalid;
+  const isError = responseData.result === TRANSACTION_VERIFY_RESULT.INVALID;
 
   if (!isError) {
     return null;

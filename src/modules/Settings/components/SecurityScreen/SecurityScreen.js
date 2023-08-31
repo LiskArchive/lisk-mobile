@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,10 +15,8 @@ import { settingsUpdated } from 'modules/Settings/store/actions';
 import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
 import app from 'constants/app';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
-import {
-  getAccountPasswordFromKeyChain,
-  storeAccountPasswordInKeyChain,
-} from 'modules/Auth/utils/recoveryPhrase';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { storeAccountPasswordInKeyChain } from 'modules/Auth/utils/recoveryPhrase';
 import EnableBioAuth from 'components/screens/enableBioAuth';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import DisableBioAuth from 'components/screens/disableBioAuth';
@@ -27,17 +25,15 @@ import ItemTitle from '../ItemTitle';
 
 import getStyles from './SecurityScreen.styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ScanDeviceSvg from '../../../../assets/svgs/ScanDeviceSvg';
+import ScanDeviceSvg from 'assets/svgs/ScanDeviceSvg';
 
 export default function SecurityScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
-  const [biometricsEnabled, setBiometricsEnabled] = useState(false);
-
   const settings = useSelector((state) => state.settings);
-
-  const [account] = useCurrentAccount();
+  const [account, setCurrentAccount] = useCurrentAccount();
+  const { setAccount } = useAccounts();
+  const biometricsEnabled = account.isBiometricsEnabled;
 
   const modal = useModal();
 
@@ -62,20 +58,17 @@ export default function SecurityScreen() {
       })
     );
 
-  const checkBiometricsFeature = async () => {
-    const accountPassword = await getAccountPasswordFromKeyChain(account.metadata?.address);
-    setBiometricsEnabled(Boolean(accountPassword && settings.sensorType));
-  };
-
   const enableBioAuth = async (address, password) => {
     await storeAccountPasswordInKeyChain(address, password);
+    const newAccount = { ...account, isBiometricsEnabled: true };
+    setCurrentAccount(newAccount);
+    setAccount(newAccount);
     modal.close();
-    checkBiometricsFeature();
   };
 
   const toggleBiometrics = () => {
     if (biometricsEnabled) {
-      modal.open(() => <DisableBioAuth onSubmit={checkBiometricsFeature} />);
+      modal.open(() => <DisableBioAuth />);
     } else {
       modal.open(() => (
         <Stepper finalCallback={enableBioAuth}>
@@ -96,10 +89,6 @@ export default function SecurityScreen() {
       ));
     }
   };
-
-  useEffect(() => {
-    checkBiometricsFeature();
-  }, [settings.sensorType, account.metadata.address]);
 
   const sensorStatus = <SwitchButton value={biometricsEnabled} onChange={toggleBiometrics} />;
 

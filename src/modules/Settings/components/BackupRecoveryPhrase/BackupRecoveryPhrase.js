@@ -6,7 +6,6 @@ import { useTheme } from 'contexts/ThemeContext';
 import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import PasswordSetupSuccess from 'modules/Auth/components/PasswordSetupSuccess';
 import DecryptRecoveryPhrase from 'modules/Auth/components/DecryptRecoveryPhrase/DecryptRecoveryPhrase';
-import RecoveryPhraseQuiz from 'modules/Auth/components/RecoveryPhraseQuiz/RecoveryPhraseQuiz';
 import Stepper from 'components/shared/Stepper';
 
 import getStyles from './BackupRecoveryPhrase.styles';
@@ -38,7 +37,6 @@ export default function BackupRecoveryPhrase() {
           style={{ form: styles.decryptRecoveryPhrase }}
         />
         <CopyRecoveryPhrase />
-        <RecoveryPhraseQuiz customHeader />
         <PasswordSetupSuccess
           route={{
             params: {

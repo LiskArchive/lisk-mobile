@@ -595,7 +595,19 @@
       "dryRunErrorMainMessage": "Beim Validieren der Transaktion ist ein Fehler aufgetreten.",
       "dryRunErrorReasonMessage": "Grund: {{message}}",
       "broadcastErrorDescription": "Fehler beim Senden Ihrer Transaktion. Bitte versuchen Sie es später erneut.",
-      "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut."
+      "signErrorDescription": "Fehler beim Signieren Ihrer Transaktion. Bitte versuchen Sie es später erneut.",
+      "insufficientBalance": "Diese Transaktion konnte aufgrund eines unzureichenden Guthabens nicht verarbeitet werden.",
+      "messageTooLong": "Diese Transaktion konnte nicht verarbeitet werden, da die Nachricht zu lang war.",
+      "invalidTokenID": "Diese Transaktion konnte aufgrund einer ungültigen Token-ID nicht verarbeitet werden",
+      "unsupportedToken": "Diese Transaktion konnte nicht verarbeitet werden, da das Token nicht unterstützt wird.",
+      "insufficientLockedAmount": "Diese Transaktion konnte nicht bearbeitet werden, da der gesperrte Betrag nicht ausreicht.",
+      "tokenUnavailable": "Diese Transaktion konnte nicht verarbeitet werden, da die Token-ID nicht verfügbar ist.",
+      "tokenNotNative": "Diese Transaktion konnte nicht verarbeitet werden, da die Token-ID nicht nativ ist.",
+      "insufficientEscrowBalance": "Diese Transaktion konnte aufgrund eines unzureichenden Treuhandsaldos nicht bearbeitet werden.",
+      "invalidReceivingChain": "Diese Transaktion konnte aufgrund einer ungültigen Empfangskette nicht verarbeitet werden.",
+      "insufficientFee": "Bitte verwenden Sie die benutzerdefinierte Gebühr und geben Sie eine höhere Gebühr für die Bearbeitung dieser Transaktion an.",
+      "invalidSignature": "Die Transaktion konnte aufgrund einer ungültigen Unterschrift nicht verarbeitet werden. Bitte starten Sie die Transaktion von vorne.",
+      "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
     }
   },
   "deepLinkNotFound": {

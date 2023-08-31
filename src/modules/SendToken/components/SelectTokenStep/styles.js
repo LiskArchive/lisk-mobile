@@ -10,6 +10,10 @@ export default function getSendTokenSelectTokenStepStyles() {
       container: {
         paddingTop: boxes.boxPadding,
       },
+      tryAgainButton: {
+        marginTop: 24,
+        marginBottom: 24,
+      },
       addMessageLabel: { fontSize: 14, marginBottom: 16 },
       addMessageLabelContainer: { width: 178 },
       row: {

@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -14,7 +14,11 @@ import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTran
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useTransactionFees } from 'modules/Transactions/hooks/useTransactionFees';
 import { useFeesQuery } from 'modules/Transactions/api/useFeesQuery';
-import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
+import {
+  TRANSACTION_VERIFY_RESULT,
+  EVENT_DATA_RESULT,
+  ERROR_EVENTS,
+} from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useDebounce } from 'hooks/useDebounce';
@@ -25,6 +29,8 @@ import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
+
+  const [dryRunError, setDryRunError] = useState(false);
 
   const [currentApplication] = useCurrentApplication();
 
@@ -141,56 +147,119 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
   };
 
-  const handleSubmit = baseHandleSubmit(async (values) => {
-    const accountNonceData = await refetchAccountNonce();
+  const getEventDataResultError = (events) => {
+    const event = events?.find((e) => e.data?.result && e.data?.result !== 0);
 
+    if (event) {
+      return EVENT_DATA_RESULT[event.data.result];
+    }
+
+    return i18next.t('transactions.errors.dryRunFailed');
+  };
+
+  const getDryRunErrors = (events) => {
+    const event = events?.find((e) => ERROR_EVENTS[e.name]);
+
+    if (event) {
+      return ERROR_EVENTS[event.name];
+    }
+
+    return getEventDataResultError(events);
+  };
+
+  const executeDryRun = async ({
+    dryRunTransaction,
+    skipBroadcast = false,
+    strict = false,
+    skipVerify = false,
+  }) => {
+    return new Promise((resolve, reject) => {
+      const encodedTransaction = transaction.encode(dryRunTransaction).toString('hex');
+      dryRunTransactionMutation.mutate(
+        { transaction: encodedTransaction, strict, skipVerify },
+        {
+          onSettled: ({ data }) => {
+            const isOk = data?.result === TRANSACTION_VERIFY_RESULT.OK;
+            if (!isOk) {
+              if (data?.events) {
+                const errorMessage = getDryRunErrors(data?.events);
+                return reject(new Error(errorMessage));
+              }
+              if (data?.errorMessage) {
+                return reject(new Error(data?.errorMessage));
+              }
+            }
+            if (!skipBroadcast) {
+              broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+            }
+            resolve();
+          },
+          onError: async (error) => {
+            if (error?.json) {
+              const errorJson = await error.json();
+              reject(new Error(errorJson.message));
+            }
+            reject(new Error(error?.message));
+          },
+        }
+      );
+    });
+  };
+
+  const updateTransactionNounce = async () => {
+    const accountNonceData = await refetchAccountNonce();
     if (accountNonceData) {
       transaction.update({ nonce: accountNonceData });
     }
+  };
 
+  const handleSubmit = baseHandleSubmit(async (values) => {
     let privateKey;
 
     try {
+      await updateTransactionNounce();
       const decryptedAccount = await decryptAccount(currentAccount.crypto, values.userPassword);
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
       DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+      return;
     }
 
-    if (privateKey) {
-      try {
-        const signedTransaction = await transaction.sign(privateKey);
-
-        const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
-
-        dryRunTransactionMutation.mutate(
-          { transaction: encodedTransaction },
-          {
-            onSettled: ({ data }) => {
-              if (data.result !== TRANSACTION_VERIFY_RESULT.invalid) {
-                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
-              }
-            },
-          }
-        );
-      } catch (error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          i18next.t('transactions.errors.signErrorDescription')
-        );
-      }
+    try {
+      const signedTransaction = await transaction.sign(privateKey);
+      await executeDryRun({ dryRunTransaction: signedTransaction, strict: true });
+    } catch (error) {
+      setDryRunError(error.message);
     }
   });
+
+  const handleContinue = async (onError) => {
+    try {
+      await updateTransactionNounce();
+      await executeDryRun({
+        dryRunTransaction: transaction.transaction,
+        skipBroadcast: true,
+        strict: false,
+        skipVerify: true,
+      });
+      return true;
+    } catch (error) {
+      onError(error.message);
+      return false;
+    }
+  };
 
   const handleReset = () => {
     dryRunTransactionMutation.reset();
     broadcastTransactionMutation.reset();
+    setDryRunError();
   };
 
   const handleMutationsReset = () => {
     dryRunTransactionMutation.reset();
     broadcastTransactionMutation.reset();
+    setDryRunError();
   };
 
   useEffect(() => {
@@ -290,21 +359,23 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const isSuccess = broadcastTransactionMutation.isSuccess;
 
   const error =
+    dryRunError ||
     dryRunTransactionMutation.error ||
     (dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
     broadcastTransactionMutation.error;
 
-  const isError = !!error;
+  const isError = !!dryRunError || !!error;
 
   return {
     ...form,
     handleChange,
     handleSubmit,
     handleReset,
+    handleMutationsReset,
+    handleContinue,
     broadcastTransactionMutation,
     dryRunTransactionMutation,
-    handleMutationsReset,
     isLoading,
     isSuccess,
     error,

@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
 import i18next from 'i18next';
 import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 import { H3, P } from 'components/shared/toolBox/typography';
@@ -23,9 +22,9 @@ import SendTokenOnMultisignatureAccount from './components/SendTokenOnMultisigna
 import { getSendTokenStyles } from './SendToken.styles';
 import SendTokenSkeleton from './components/SendTokenSkeleton/SendTokenSkeleton';
 import { useCurrentAccount } from '../Accounts/hooks/useCurrentAccount';
-import { selectAccountSummary } from '../Accounts/store/selectors';
 import { useModal } from '../../hooks/useModal';
 import AccountItem from '../Accounts/components/AccountItem';
+import { useAuth } from '../Auth/hooks/useAuth';
 
 /**
  * UI form to perform a token:transfer transaction (within and across apps).
@@ -39,6 +38,9 @@ export default function SendToken() {
   const { accounts } = useAccounts();
 
   const [currentAccount, setCurrentAccount] = useCurrentAccount();
+  const { data: accountSummary, isLoading } = useAuth(currentAccount.metadata.address);
+
+  const accountIsMultisignature = accountSummary?.numberOfSignatures > 0;
 
   const { styles } = useTheme({
     styles: getSendTokenStyles(),
@@ -75,8 +77,6 @@ export default function SendToken() {
   );
 
   const accountListModal = useModal(renderAccountList);
-
-  const accountSummary = useSelector(selectAccountSummary);
 
   const createTransactionOptions = useMemo(
     () => ({
@@ -115,8 +115,6 @@ export default function SendToken() {
     },
   ];
 
-  const accountIsMultisignature = accountSummary.isMultisignature;
-
   useEffect(() => {
     if (!accounts.length) {
       navigation.navigate('AuthMethod');
@@ -138,7 +136,7 @@ export default function SendToken() {
 
       <DataRenderer
         data={transaction}
-        isLoading={transaction.isLoading}
+        isLoading={transaction.isLoading || isLoading}
         error={transaction.error}
         renderData={(data) => (
           <>

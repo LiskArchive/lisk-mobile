@@ -34,6 +34,10 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
 
   const downloadFile = useCallback(async () => {
     try {
+      // delete added isBiometricsEnabled field
+      const newData = { ...data };
+      delete newData.isBiometricsEnabled;
+
       resetState();
 
       setIsLoading(true);
@@ -50,14 +54,14 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         if (fileExists) {
           await RNFS.unlink(path);
         }
-        await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+        await RNFS.writeFile(path, JSON.stringify(newData), 'utf8');
         ToastAndroid.showWithGravity(
           i18next.t('auth.setup.downloaded'),
           ToastAndroid.LONG,
           ToastAndroid.BOTTOM
         );
       } else {
-        await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+        await RNFS.writeFile(path, JSON.stringify(newData), 'utf8');
 
         await Share.open({
           filename: fileName,

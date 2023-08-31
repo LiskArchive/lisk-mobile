@@ -41,7 +41,10 @@ export default function AccountList({
     } else {
       setAccount(account);
 
-      navigation.navigate('Main');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Main' }],
+      });
 
       if (onAccountClick) onAccountClick(account);
     }
@@ -51,7 +54,7 @@ export default function AccountList({
     if (mode === 'modal') {
       modal.close();
     }
-    navigation.navigate('AuthMethod');
+    navigation.navigate('AuthMethod', { authRequired: true });
   };
 
   return (

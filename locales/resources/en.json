@@ -22,8 +22,8 @@
       "writeDownInstructionsLink": "secure"
     }
   },
-  "fallbackScreens" : {
-    "error" : {
+  "fallbackScreens": {
+    "error": {
       "title": "Something went wrong",
       "description": "Please try again later and if you’re still experiencing problems, then report via email.",
       "retryButton": "Retry",
@@ -38,7 +38,7 @@
       "continueButtonText": "Continue to home"
     }
   },
-  "intro" : {
+  "intro": {
     "sendAndRequestTokensTitle": "Send and request tokens",
     "sendAndRequestTokensDescription": "Creating an account is your first step in benefiting from blockchain technology. With your account, you can securely send and request tokens within and across blockchain applications.",
     "uniqueAvatarTitle": "A unique avatar",
@@ -54,7 +54,7 @@
   "Add to bookmarks": "Add to bookmarks",
   "Allow camera access": "Allow camera access",
   "Amount": "Amount",
-  "Status": "Status",  
+  "Status": "Status",
   "Cancel": "Cancel",
   "I have read and agreed with the": "I have read and agreed with the",
   "Initialize your account": "Initialize your account",
@@ -221,8 +221,8 @@
     }
   },
   "auth": {
-    "register" : {
-      "title": "Create account",  
+    "register": {
+      "title": "Create account",
       "recoveryPhraseType": {
         "title": "Select phrase type",
         "description": "Please select the type of recovery phrase you want to create.",
@@ -230,7 +230,7 @@
         "12wordsOptionDescription": "A phrase with 12 words will be generated.",
         "24wordsOptionTitle": "24 word recovery phrase",
         "24wordsOptionDescription": "A phrase with 24 words will be generated."
-      },   
+      },
       "safeKeeping": {
         "title": "Save your secret recovery phrase",
         "description": "Please write down these 12 words carefully, and store them in a safe place.",
@@ -340,13 +340,13 @@
         "success": {
           "title": "Application has now been removed",
           "description": "You can always add {{applicationName}} again to your application list."
-        }        
+        }
       },
       "deleteDefaultApplicationModal": {
         "description": "The default application can not be removed.",
         "buttonText": "Continue to applications"
       },
-      "continueToWalletButtonText": "Continue to wallet"   
+      "continueToWalletButtonText": "Continue to wallet"
     },
     "explore": {
       "title": "Applications",
@@ -385,7 +385,7 @@
       "errorOnSignTransactionText": "Unable to sign your transaction. Please try again.",
       "noEncodedTransactionErrorText": "No encoded transaction before responding.",
       "notification": {
-        "chainIDLabel" : "Chain ID",
+        "chainIDLabel": "Chain ID",
         "descriptionLabel": "Information",
         "description": "This transaction was initiated from another application for signature request.",
         "accountLabel": "Selected account"
@@ -464,7 +464,7 @@
       "highPriorityLabel": "High",
       "transactionFeeLabel": "Transaction fee",
       "transactionFeeBreakdownText": "Fee breakdown",
-      "minFeeLabel": "Minimum fee",      
+      "minFeeLabel": "Minimum fee",
       "priorityFeeLabel": "Network priority",
       "extraCommandFeeLabel": "Account initialization",
       "messageFeeLabel": "Message fee"
@@ -519,7 +519,7 @@
       "messageFee": {
         "title": "Message fee",
         "description1": "Message fees are the incentive given to relayer for collecting messages to be transported from sending network to recipient network."
-      }   
+      }
     }
   },
   "accounts": {
@@ -598,8 +598,20 @@
       "dryRunErrorMainMessage": "There was an error validating the transaction.",
       "dryRunErrorReasonMessage": "Reason: {{message}}",
       "broadcastErrorDescription": "Error submitting your transaction. Please try again later.",
-      "signErrorDescription": "Error signing your transaction. Please try again later."
-    }   
+      "signErrorDescription": "Error signing your transaction. Please try again later.",
+      "insufficientBalance": "Failed to process this transaction due to insufficient balance.",
+      "messageTooLong": "Failed to process this transaction due to message too long.",
+      "invalidTokenID": "Failed to process this transaction due to invalid token ID",
+      "unsupportedToken": "Failed to process this transaction due to token not supported.",
+      "insufficientLockedAmount": "Failed to process this transaction due to insufficient locked amount.",
+      "tokenUnavailable": "Failed to process this transaction due to token ID not available.",
+      "tokenNotNative": "Failed to process this transaction due to token ID not native.",
+      "insufficientEscrowBalance": "Failed to process this transaction due to insufficient escrow balance.",
+      "invalidReceivingChain": "Failed to process this transaction due to invalid receiving chain.",
+      "insufficientFee": "Please use custom fee and provide a higher fee to process this transaction.",
+      "invalidSignature": "Failed to process transaction due to invalid signature, please restart the transaction from scratch.",
+      "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
+    }
   },
   "deepLinkNotFound": {
     "title": "Deeplink failed",
@@ -611,7 +623,7 @@
       "maxDecimalPointExceededMessage": "Maximum allowed decimal point is {{conversionDecimals}}"
     }
   },
-  "scanner" : {
+  "scanner": {
     "cameraAccessTitle": "Allow camera access",
     "cameraAccessDescription": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings."
   }

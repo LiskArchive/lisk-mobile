@@ -43,7 +43,7 @@ export default function ConfirmTransaction({
   };
 
   useEffect(() => {
-    if (sensorType) {
+    if (sensorType && currentAccount.isBiometricsEnabled) {
       fetchAccountPasswordFromBiometrics();
     }
     return () => onUserPasswordChange('');

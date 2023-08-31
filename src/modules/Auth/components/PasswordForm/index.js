@@ -14,7 +14,15 @@ import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import getStyles from './styles';
 import { getAccountPasswordFromKeyChain } from '../../utils/recoveryPhrase';
 
-export default function PasswordForm({ account, onPress, testID, theme, onSubmit, style }) {
+export default function PasswordForm({
+  account,
+  onPress,
+  isLoading,
+  testID,
+  theme,
+  onSubmit,
+  style,
+}) {
   useScreenshotPrevent();
   const [password, setPassword] = useState('');
   const { sensorType } = useSelector((state) => state.settings);
@@ -34,8 +42,8 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
   };
 
   useEffect(() => {
-    tryFetchAccontPasswordFromBiometrics();
-  }, []);
+    account.isBiometricsEnabled && tryFetchAccontPasswordFromBiometrics();
+  }, [account.isBiometricsEnabled]);
 
   return (
     <View
@@ -68,7 +76,8 @@ export default function PasswordForm({ account, onPress, testID, theme, onSubmit
       <View style={[styles.footer]}>
         <PrimaryButton
           noTheme
-          disabled={!password}
+          disabled={!password || isLoading}
+          isLoading={isLoading}
           onPress={() => onSubmit(password)}
           testID="decrypt-button-continue"
         >

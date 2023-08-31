@@ -1,6 +1,5 @@
 /* eslint-disable max-statements */
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useForm, useController } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +10,6 @@ import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useEncryptAccount } from 'modules/Accounts/hooks/useEncryptAccount';
-import { settingsUpdated } from 'modules/Settings/store/actions';
 import { storeAccountPasswordInKeyChain } from '../utils/recoveryPhrase';
 
 const validationSchema = yup
@@ -47,8 +45,6 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
   const { setAccount } = useAccounts();
   const [, setCurrentAccount] = useCurrentAccount();
   const { encryptAccount } = useEncryptAccount();
-
-  const dispatch = useDispatch();
 
   const resetState = useCallback(() => {
     if (isSuccess !== undefined) {
@@ -87,11 +83,11 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
         derivationPath,
       });
 
-      const address = data?.metadata.address;
+      const address = data.metadata.address;
 
       if (values.isBiometricsEnabled) {
         await storeAccountPasswordInKeyChain(address, values.password);
-        dispatch(settingsUpdated({ biometricsEnabled: true }));
+        data.isBiometricsEnabled = values.isBiometricsEnabled;
       }
 
       setEncryptedAccount(data);

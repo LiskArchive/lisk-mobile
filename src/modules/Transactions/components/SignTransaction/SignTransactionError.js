@@ -17,7 +17,7 @@ export default function SignTransactionError({ onClick, error, title, descriptio
     styles: getSignTransactionErrorStyles(),
   });
 
-  const errorMessage = error instanceof Error && error.message;
+  const errorMessage = typeof error === 'string' ? error : error instanceof Error && error.message;
 
   const renderDescription = () => {
     if (description) {
