@@ -132,7 +132,7 @@ export default function InitiateConnection({ nextStep, onFinish }) {
                   <Image style={[styles.itemImage]} source={{ uri: chain.logo?.png }} />
 
                   <View style={[styles.itemBody]}>
-                    <P style={[styles.itemTitle, styles.theme.itemTitle]}>{chain.chainName}</P>
+                    <P style={[styles.itemTitle, styles.theme.itemTitle]}>{chain.displayName}</P>
 
                     <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
                       Chain ID: {chain.chainID}

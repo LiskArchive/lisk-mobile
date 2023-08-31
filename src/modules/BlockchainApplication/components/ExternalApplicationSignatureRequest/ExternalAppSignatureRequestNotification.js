@@ -11,7 +11,7 @@ import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';
 
-import getExternalApplicationSignatureRequestStyles from './styles';
+import getStyles from './styles';
 
 export default function ExternalAppSignatureRequestNotification({
   session,
@@ -26,10 +26,10 @@ export default function ExternalAppSignatureRequestNotification({
     (account) => account.metadata.address === senderAccountAddress
   );
 
-  const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
+  const { styles } = useTheme({ styles: getStyles });
 
   return (
-    <>
+    <View style={styles.container}>
       <View>
         <H3 style={[styles.title, styles.theme.title]}>Signature request</H3>
 
@@ -98,6 +98,6 @@ export default function ExternalAppSignatureRequestNotification({
           {i18next.t('commons.buttons.continue')}
         </PrimaryButton>
       </View>
-    </>
+    </View>
   );
 }

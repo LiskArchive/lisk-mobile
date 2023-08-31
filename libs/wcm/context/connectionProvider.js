@@ -1,51 +1,46 @@
-/* eslint-disable max-statements */
 import React, { useState, useEffect } from 'react';
 import ConnectionContext from './connectionContext';
 import { createSignClient } from '../utils/connectionCreator';
-import { useApplicationsMetaQuery } from '../../../src/modules/BlockchainApplication/api/useApplicationsMetaQuery';
+import { ConnectionEventsManagerWrapper } from './ConnectionEventsManagerWrapper';
 
 const ConnectionProvider = ({ children }) => {
-  const [session, setSession] = useState({
-    request: false,
-    data: false,
-    loaded: false,
-  });
+  const [sessions, setSessions] = useState([]);
   const [events, setEvents] = useState([]);
   const [pairings, setPairings] = useState([]);
-
-  const pushEvent = (event) => {
-    setEvents([...events, event]);
-  };
-
-  const removeEvent = (event) => {
-    const newEvents = events.filter((e) => e.name !== event.name);
-
-    setEvents(newEvents);
-  };
-
-  const { data: liskApplication } = useApplicationsMetaQuery({
-    config: { params: { chainName: 'lisk_mainchain' } },
-  });
-
-  const icon = liskApplication?.data[0]?.logo.svg;
+  const [sessionProposal, setSessionProposal] = useState();
+  const [sessionRequest, setSessionRequest] = useState();
+  const [signClient, setSignClient] = useState();
 
   const value = {
     events,
     pairings,
-    session,
-    setSession,
-    pushEvent,
-    removeEvent,
+    sessions,
+    sessionProposal,
+    sessionRequest,
+    setSessions,
+    setEvents,
     setPairings,
+    setSessionProposal,
+    setSessionRequest,
+    signClient,
   };
 
   useEffect(() => {
-    if (icon) {
-      createSignClient(icon);
-    }
-  }, [icon]);
+    (async () => {
+      if (!signClient) {
+        const client = await createSignClient();
+        setSignClient(client);
+      }
+    })();
+  }, [signClient]);
 
-  return <ConnectionContext.Provider value={value}>{children}</ConnectionContext.Provider>;
+  return (
+    <ConnectionContext.Provider value={value}>
+      {!signClient ? null : (
+        <ConnectionEventsManagerWrapper>{children}</ConnectionEventsManagerWrapper>
+      )}
+    </ConnectionContext.Provider>
+  );
 };
 
 export default ConnectionProvider;

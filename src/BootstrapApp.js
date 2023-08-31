@@ -6,7 +6,7 @@ import { useTransactionsEventsManager } from 'modules/Transactions/hooks/useTran
 import { useBootstrapCurrentApplication } from 'modules/BlockchainApplication/hooks/useBootstrapCurrentApplication';
 import ErrorScreen from 'components/screens/ErrorFallbackScreen';
 import LoadingScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
-import useWalletConnectEventsManager from '../libs/wcm/hooks/useConnectionEventsManager';
+import { useEvents } from '../libs/wcm/hooks/useEvents';
 import { useBootstrapApplications } from './modules/BlockchainApplication/hooks/useBootstrapApplications';
 
 /**
@@ -30,7 +30,7 @@ export default function BootstrapApp({ children }) {
   useTransactionsEventsManager();
 
   // Bootstrap WC.
-  useWalletConnectEventsManager();
+  useEvents();
 
   const handleRetry = () => retryBootstrapCurrentApplication();
 

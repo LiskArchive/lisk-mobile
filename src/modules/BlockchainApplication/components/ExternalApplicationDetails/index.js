@@ -15,9 +15,9 @@ export default function ExternalApplicationDetails({ application, onApplicationD
   return (
     <View style={[styles.container, styles.theme.container]}>
       <View style={[styles.header]}>
-        <Image source={{ uri: application.peerMetadata.icons[0] }} style={[styles.logo]} />
+        <Image source={{ uri: application.peer.metadata.icons[0] }} style={[styles.logo]} />
 
-        <H3 style={[styles.title, styles.theme.title]}>{application.peerMetadata.name}</H3>
+        <H3 style={[styles.title, styles.theme.title]}>{application.peer.metadata.name}</H3>
       </View>
 
       <View style={[styles.body]}>

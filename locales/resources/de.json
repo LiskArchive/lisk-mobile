@@ -9,7 +9,8 @@
       "reject": "Ablehnen",
       "reload": "Neu laden",
       "viewAll": "Alle ansehen",
-      "selectAll": "Alle auswählen"
+      "selectAll": "Alle auswählen",
+      "close": "Schließen"
     },
     "copy": "Kopieren",
     "copied": "Kopiert",
@@ -405,7 +406,7 @@
         "copiedToClipboardButtonText": "Kopiert",
         "errorButtonText": "Weiterleitung zur App-Site",
         "invalidConnectionTitle": "Verbindung fehlgeschlagen",
-        "invalidConnectionDescription": "Die Verbindung von '{{appName}}' wurde aufgrund ungültiger Parameter blockiert."
+        "invalidConnectionDescription": "Das von '{{appName}}' empfangene Ereignis wurde aufgrund von Inkompatibilität mit Lisk Mobile blockiert."
       },
       "disconnect": {
         "title": "",

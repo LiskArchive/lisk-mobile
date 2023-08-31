@@ -1,39 +1,36 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import wallets from 'tests/constants/wallets';
-import { signClient } from '../utils/connectionCreator';
 import { EVENTS } from '../constants/lifeCycle';
 import * as sessionHandlers from '../utils/sessionHandlers';
-import useSession from './useSession';
+import { useSession } from './useSession';
 
-const setSession = jest.fn();
+const setSessions = jest.fn();
 const setPairings = jest.fn();
 const session = { id: '0x123' };
 const pairings = [];
-const selectedAccounts = [wallets.genesis.summary.address, wallets.delegate.summary.address];
+const selectedAccounts = [wallets.genesis.summary.address, wallets.validator.summary.address];
+const signClient = {
+  session: {
+    keys: [session.id],
+    get: jest.fn().mockReturnValue(session),
+  },
+  pairing: {
+    getAll: jest.fn().mockReturnValue(pairings),
+  },
+};
 
 jest.spyOn(React, 'useContext').mockImplementation(() => ({
   events: [{ name: EVENTS.SESSION_PROPOSAL, meta: { id: '0x123' } }],
-  session: { data: false, request: false, loaded: false },
-  setSession,
+  sessions: [],
+  setSessions,
   setPairings,
   pairings: [],
+  signClient,
 }));
 
 jest.mock('@walletconnect/utils', () => ({
   getSdkError: jest.fn((str) => str),
-}));
-
-jest.mock('@libs/wcm/utils/connectionCreator', () => ({
-  signClient: {
-    session: {
-      keys: [session.id],
-      get: jest.fn().mockReturnValue(session),
-    },
-    pairing: {
-      getAll: jest.fn().mockReturnValue(pairings),
-    },
-  },
 }));
 
 jest.mock('../utils/sessionHandlers', () => ({
@@ -55,14 +52,13 @@ describe('useSession', () => {
     const { result } = renderHook(() => useSession());
     const { approve } = result.current;
     await approve(selectedAccounts);
-    expect(sessionHandlers.onApprove).toHaveBeenCalledWith(session, selectedAccounts);
+    expect(sessionHandlers.onApprove).toHaveBeenCalledWith(session, selectedAccounts, signClient);
   });
 
   it('Should call onReject with correct params', async () => {
     const { result } = renderHook(() => useSession());
     const { reject } = result.current;
     await reject();
-    await new Promise(setImmediate);
-    expect(sessionHandlers.onReject).toHaveBeenCalledWith(session);
+    expect(sessionHandlers.onReject).toHaveBeenCalledWith(session, signClient);
   });
 });

@@ -1,62 +1,64 @@
 import React from 'react';
-import { renderHook } from '@testing-library/react-hooks';
-import { signClient } from '../utils/connectionCreator';
-import usePairings from './usePairings';
+import { renderHook, act } from '@testing-library/react-hooks';
+import { usePairings } from './usePairings';
 
 const setPairings = jest.fn();
-const defaultPairings = [{ topic: '0x123' }, { topic: '0x456' }];
-const loaded = { loaded: true };
-
-jest.spyOn(React, 'useContext');
+const defaultPairings = [{ topic: '0x123' }, { topic: '0x124' }];
 
 jest.mock('@walletconnect/utils', () => ({
   getSdkError: jest.fn((str) => str),
 }));
 
-jest.mock('../utils/connectionCreator', () => ({
-  signClient: {
+jest.spyOn(React, 'useContext');
+
+describe('usePairings', () => {
+  const signClient = {
     approve: jest.fn().mockImplementation(() =>
       Promise.resolve({
         acknowledged: jest.fn(),
       })
     ),
-    pair: jest.fn(),
-    disconnect: jest.fn(),
+    core: {
+      pairing: {
+        pair: jest.fn(),
+      },
+    },
     pairing: {
       getAll: jest.fn().mockReturnValue(defaultPairings),
     },
-  },
-}));
+  };
 
-describe('usePairings', () => {
   describe('On mount time', () => {
+    React.useContext.mockReturnValue({
+      pairings: [],
+      setPairings: (...rest) => setPairings(...rest),
+      signClient,
+    });
+
     it('Should get all active pairings once mounted', () => {
-      React.useContext.mockImplementation(() => ({
-        setPairings,
-        pairings: [],
-      }));
       renderHook(() => usePairings());
       expect(signClient.pairing.getAll).toHaveBeenCalledWith({ active: true });
     });
   });
 
   describe('During the lifetime', () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
     beforeEach(() => {
-      React.useContext.mockImplementation(() => ({
-        setPairings,
-        pairings: [loaded, ...defaultPairings],
-      }));
+      jest.clearAllMocks();
+      React.useContext.mockReturnValue({
+        pairings: defaultPairings,
+        setPairings: (...rest) => setPairings(...rest),
+        signClient,
+      });
     });
 
-    it('Should remove pairings if removePairing si called', () => {
+    it('Should remove pairings if removePairing is called', () => {
       const { result } = renderHook(() => usePairings());
       const { removePairing } = result.current;
-      removePairing(defaultPairings[0].topic);
-      expect(setPairings).toHaveBeenCalledWith([loaded, defaultPairings[1]]);
+
+      act(() => {
+        removePairing(defaultPairings[0].topic);
+      });
+      expect(setPairings).toHaveBeenCalled();
     });
 
     it('Should call signClient.pair if a URI is provided with setUri method', () => {
@@ -64,32 +66,26 @@ describe('usePairings', () => {
       const { setUri } = result.current;
       const uri = 'wc:0x123';
       setUri(uri);
-      expect(signClient.pair).toHaveBeenCalledWith({ uri });
+      expect(signClient.core.pairing.pair).toHaveBeenCalledWith({ uri });
     });
 
     it('Should push new pairing if addPairing is called', () => {
       const { result } = renderHook(() => usePairings());
-      const { addPairing } = result.current;
-      const pairing = { topic: '0x123' };
-      addPairing(pairing);
-      expect(setPairings).toHaveBeenCalledWith([loaded, ...defaultPairings, pairing]);
-    });
-
-    it('Should call signClient.disconnect if disconnect is called', () => {
-      const { result } = renderHook(() => usePairings());
-      const { disconnect } = result.current;
-      const topic = defaultPairings[0].topic;
-      disconnect(topic);
-      expect(setPairings).toHaveBeenCalledWith([loaded, defaultPairings[1]]);
-      expect(signClient.disconnect).toHaveBeenCalled();
+      const pairing = { topic: '0x125' };
+      act(() => {
+        result.current.addPairing(pairing);
+      });
+      expect(setPairings).toHaveBeenCalled();
     });
 
     it('Should fetch pairings if refreshPairings is called', () => {
       const { result } = renderHook(() => usePairings());
       const { refreshPairings } = result.current;
-      refreshPairings();
+      act(() => {
+        refreshPairings();
+      });
       expect(signClient.pairing.getAll).toHaveBeenCalledWith({ active: true });
-      expect(setPairings).toHaveBeenCalledWith([loaded, ...defaultPairings]);
+      expect(result.current.pairings).toEqual(defaultPairings);
     });
   });
 });

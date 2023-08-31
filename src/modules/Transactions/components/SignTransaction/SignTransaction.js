@@ -8,9 +8,11 @@ export default function SignTransaction({
   isValidationError,
   submitButtonTitle,
   successActionButton,
+  successSecondaryButton,
   successTitle,
   successDescription,
   errorActionButton,
+  errorSecondaryButton,
   errorTitle,
   errorDescription,
   onReset,
@@ -69,6 +71,7 @@ export default function SignTransaction({
         <SignTransactionSuccess
           onSubmit={handleSuccessSubmit}
           actionButton={successActionButton}
+          secondaryButton={successSecondaryButton}
           title={successTitle}
           description={successDescription}
         />
@@ -80,6 +83,7 @@ export default function SignTransaction({
           onClick={handleReset}
           error={error}
           actionButton={errorActionButton}
+          secondaryButton={errorSecondaryButton}
           title={errorTitle}
           description={errorDescription}
         />

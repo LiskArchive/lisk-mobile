@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import { fetch } from 'react-native-ssl-pinning';
 import { io } from 'socket.io-client';
+import { removeUndefinedObjectKeys } from '../helpers';
 
 import { METHOD } from './constants';
 
@@ -27,13 +28,15 @@ export class APIClient {
   }
 
   async rest(config) {
-    const { url, params, method, data, headers, ...otherConfig } = config;
+    const { url, params = {}, method, data, headers, ...otherConfig } = config;
 
     // Constructing the URL with parameters
     let finalUrl = this.baseUrl + url;
 
-    if (params && Object.keys(params).length) {
-      const queryString = new URLSearchParams(params).toString();
+    const sanitizedParams = removeUndefinedObjectKeys(params);
+
+    if (sanitizedParams && Object.keys(sanitizedParams).length) {
+      const queryString = new URLSearchParams(sanitizedParams).toString();
       finalUrl = `${finalUrl}?${queryString}`;
     }
 

@@ -1,14 +1,12 @@
-/* istanbul ignore file */
 import { createContext } from 'react';
 
 const ConnectionContext = createContext({
   events: [],
   pairings: [],
-  session: {
-    request: false,
-    data: false,
-    loaded: false,
-  },
+  sessions: [],
+  sessionProposal: null,
+  sessionRequest: null,
+  signClient: null,
 });
 
 export default ConnectionContext;

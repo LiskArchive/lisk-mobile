@@ -9,7 +9,8 @@
       "reject": "Reject",
       "reload": "Reload",
       "viewAll": "View all",
-      "selectAll": "Select all"
+      "selectAll": "Select all",
+      "close": "Close"
     },
     "copy": "Copy",
     "copied": "Copied",
@@ -402,7 +403,7 @@
         "copiedToClipboardButtonText": "Copied",
         "errorButtonText": "Redirect to application site",
         "invalidConnectionTitle": "Connection failed",
-        "invalidConnectionDescription": "Connection from the '{{appName}}' has been blocked due to invalid parameters."
+        "invalidConnectionDescription": "Received event from '{{appName}}' has been blocked due to incompatibility with Lisk Mobile."
       },
       "disconnect": {
         "title": "Disconnect Application",

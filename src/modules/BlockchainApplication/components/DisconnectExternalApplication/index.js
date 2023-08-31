@@ -8,7 +8,7 @@ import { P, H3, B } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
 import getDisconnectExternalBlockchainApplicationStyles from './styles';
-import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 
 export default function DisconnectExternalApplication({
   application,
@@ -20,7 +20,7 @@ export default function DisconnectExternalApplication({
   const [error, setError] = useState();
   const modal = useModal();
 
-  const { disconnect } = useWalletConnectPairings();
+  const { disconnect } = useSession();
 
   const { styles } = useTheme({ styles: getDisconnectExternalBlockchainApplicationStyles() });
 
@@ -52,7 +52,7 @@ export default function DisconnectExternalApplication({
           {i18next.t(
             'application.externalApplicationSignatureRequest.disconnect.disconnectingFirst'
           )}{' '}
-          <B>“{application.peerMetadata.name}”</B>{' '}
+          <B>“{application.peer.metadata.name}”</B>{' '}
           {i18next.t(
             'application.externalApplicationSignatureRequest.disconnect.disconnectingSecond'
           )}
