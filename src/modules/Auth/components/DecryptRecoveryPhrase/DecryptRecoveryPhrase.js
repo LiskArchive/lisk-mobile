@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import i18next from 'i18next';
 
@@ -22,14 +22,17 @@ export default function DecryptRecoveryPhrase({
   style,
 }) {
   const { setAccount } = useAccounts();
+  const [isLoading, setIsLoading] = useState();
   const { styles } = useTheme({ styles: getStyles() });
   const { encryptedData, title, description } = route.params;
   const encryptedAccount = account || JSON.parse(encryptedData);
 
   const onSubmit = async (password) => {
     try {
+      setIsLoading(true);
       const { successRoute } = route.params;
       const { recoveryPhrase } = await decryptAccount(encryptedAccount.crypto, password);
+      setIsLoading(false);
       if (finalCallback) {
         finalCallback(account.metadata.address, password);
       } else if (nextStep && typeof nextStep === 'function') {
@@ -44,6 +47,7 @@ export default function DecryptRecoveryPhrase({
         navigation.navigate(successRoute);
       }
     } catch (error) {
+      setIsLoading(false);
       DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
     }
   };
@@ -73,7 +77,12 @@ export default function DecryptRecoveryPhrase({
     <Container style={[styles.container, styles.theme.container, style?.container]}>
       {renderHeader()}
 
-      <PasswordForm account={encryptedAccount} onSubmit={onSubmit} style={style?.form} />
+      <PasswordForm
+        account={encryptedAccount}
+        isLoading={isLoading}
+        onSubmit={onSubmit}
+        style={style?.form}
+      />
     </Container>
   );
 }

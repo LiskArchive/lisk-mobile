@@ -83,7 +83,7 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
         derivationPath,
       });
 
-      const address = data?.metadata.address;
+      const address = data.metadata.address;
 
       if (values.isBiometricsEnabled) {
         await storeAccountPasswordInKeyChain(address, values.password);
