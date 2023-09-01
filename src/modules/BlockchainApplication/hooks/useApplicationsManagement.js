@@ -49,7 +49,10 @@ export function useApplicationsManagement() {
 
         applications.dispatchData({ type: 'delete', chainID });
 
-        setCurrentApplication(defaultApplication);
+        setCurrentApplication({
+          ...defaultApplication,
+          serviceURL: defaultApplication.serviceURLs[0],
+        });
 
         togglePin(chainID);
       } catch (_error) {
