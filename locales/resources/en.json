@@ -389,7 +389,7 @@
         "chainIDLabel": "Chain ID",
         "descriptionLabel": "Information",
         "description": "This transaction was initiated from another application for signature request.",
-        "accountLabel": "Selected account"
+        "accountLabel": "Current account"
       },
       "summary": {
         "title": "Transaction summary",

@@ -60,7 +60,7 @@ export default function ExternalApplicationSignatureRequest({ onCancel, navigati
   const senderAccountAddress =
     sessionRequest && extractAddressFromPublicKey(sessionRequest.peer.publicKey);
 
-  const isCurrentAccount = currentAccount === senderAccountAddress;
+  const isCurrentAccount = currentAccount.metadata.address === senderAccountAddress;
   const signingAccount = getAccount(senderAccountAddress);
 
   const switchAccount = () => setCurrentAccount(signingAccount);
@@ -126,7 +126,7 @@ export default function ExternalApplicationSignatureRequest({ onCancel, navigati
           <ExternalAppSignatureRequestNotification
             session={sessionRequest}
             senderApplicationChainID={senderApplicationChainID}
-            senderAccountAddress={senderAccountAddress}
+            senderAccountAddress={currentAccount.metadata.address}
             onCancel={handleReject}
             switchAccount={switchAccount}
             onSubmit={() => setActiveStep('summary')}
