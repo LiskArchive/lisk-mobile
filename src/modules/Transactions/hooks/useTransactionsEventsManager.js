@@ -6,7 +6,7 @@ import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { spliceArray } from 'utilities/helpers';
 import {
-  GET_ACCOUNT_TOKENS_QUERY,
+  GET_ACCOUNT_TOKENS_FULL_DATA_QUERY,
   GET_AUTH_QUERY,
   GET_ACCOUNT_TRANSACTIONS_QUERY,
 } from 'utilities/api/queries';
@@ -22,7 +22,7 @@ export function useTransactionsEventsManager() {
   const [currentApplication] = useCurrentApplication();
 
   const handleNewTransactionsEvent = useCallback(
-    (event) => {
+    async (event) => {
       const currentAccountNewTransactions = event.data.filter(
         (newTransaction) =>
           newTransaction.sender.address === currentAccount?.metadata?.address ||
@@ -33,24 +33,26 @@ export function useTransactionsEventsManager() {
         return null;
       }
 
-      queryClient.invalidateQueries([GET_AUTH_QUERY, currentAccount?.metadata?.address]);
-      queryClient.invalidateQueries([GET_ACCOUNT_TOKENS_QUERY, currentAccount?.metadata?.address]);
+      setTimeout(async () => {
+        await queryClient.invalidateQueries([GET_AUTH_QUERY, currentAccount?.metadata?.address]);
+        await queryClient.refetchQueries({ queryKey: [GET_ACCOUNT_TOKENS_FULL_DATA_QUERY] });
 
-      queryClient.setQueriesData(
-        [GET_ACCOUNT_TRANSACTIONS_QUERY, currentAccount?.metadata?.address],
-        (prevQuery) => {
-          const prevTransactions = prevQuery.pages[0].data;
+        queryClient.setQueriesData(
+          [GET_ACCOUNT_TRANSACTIONS_QUERY, currentAccount?.metadata?.address],
+          (prevQuery) => {
+            const prevTransactions = prevQuery.pages[0].data;
 
-          const newPage = {
-            ...prevQuery.pages[0],
-            data: [...currentAccountNewTransactions, ...prevTransactions],
-          };
+            const newPage = {
+              ...prevQuery.pages[0],
+              data: [...currentAccountNewTransactions, ...prevTransactions],
+            };
 
-          const newPages = spliceArray(prevQuery.pages, 0, 1, newPage);
+            const newPages = spliceArray(prevQuery.pages, 0, 1, newPage);
 
-          return { ...prevQuery, pages: newPages };
-        }
-      );
+            return { ...prevQuery, pages: newPages };
+          }
+        );
+      }, 3000);
 
       return event;
     },
