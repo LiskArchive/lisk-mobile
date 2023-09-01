@@ -20,7 +20,7 @@ export function useApplicationsManagement() {
 
   const [, setCurrentApplication] = useCurrentApplication();
 
-  const defaultApplication = applications.data.find((app) => app.chainName === 'lisk_mainchain');
+  const defaultApplication = applications?.data.find((app) => app.chainName === 'lisk_mainchain');
 
   const {
     addApplication: addApplicationToStorage,
@@ -49,10 +49,12 @@ export function useApplicationsManagement() {
 
         applications.dispatchData({ type: 'delete', chainID });
 
-        setCurrentApplication({
-          ...defaultApplication,
-          serviceURL: defaultApplication.serviceURLs[0],
-        });
+        if (defaultApplication) {
+          setCurrentApplication({
+            ...defaultApplication,
+            serviceURL: defaultApplication.serviceURLs[0],
+          });
+        }
 
         togglePin(chainID);
       } catch (_error) {
