@@ -406,13 +406,20 @@
         "copiedToClipboardButtonText": "Kopiert",
         "errorButtonText": "Weiterleitung zur App-Site",
         "invalidConnectionTitle": "Verbindung fehlgeschlagen",
-        "invalidConnectionDescription": "Das von '{{appName}}' empfangene Ereignis wurde aufgrund von Inkompatibilität mit Lisk Mobile blockiert."
+        "invalidConnectionDescription": "Das von '{{appName}}' empfangene Ereignis wurde aufgrund von Inkompatibilität mit Lisk Mobile blockiert.",
+        "switchAccount": "Zum Signierkonto wechseln"
       },
       "disconnect": {
         "title": "",
         "disconnectingFirst": "",
         "disconnectingSecond": "",
         "disconnect": ""
+      },
+      "errors": {
+        "notCurrentAccount1": "Bitte klicken Sie auf “Zu signierendem Konto wechseln“ ",
+        "notCurrentAccount2": " um die Anfrage abzuschließen.",
+        "accountNotAdded1": "Das ausgewählte Konto zum Signieren der angeforderten Transaktion fehlt. Bitte fügen Sie das fehlende Konto ",
+        "accountNotAdded2": " zu Lisk Mobile hinzu und initiieren Sie die Transaktionssignierung erneut von der externen Anwendung aus."
       }
     }
   },

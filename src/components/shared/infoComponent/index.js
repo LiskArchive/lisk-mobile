@@ -8,7 +8,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 import { colors } from 'constants/styleGuide';
 
-const InfoComponent = ({ text, buttonText, onPress, styles, variant = 'info' }) => {
+const InfoComponent = ({ text, component, buttonText, onPress, styles, variant = 'info' }) => {
   let icon = null;
 
   switch (variant) {
@@ -26,7 +26,8 @@ const InfoComponent = ({ text, buttonText, onPress, styles, variant = 'info' }) 
     <View style={[styles.container, styles.theme.container, styles.theme[`${variant}Container`]]}>
       {icon}
       <View style={styles.description}>
-        <P style={[styles.copy, styles.theme.copy, styles.theme[`${variant}`]]}>{text}</P>
+        {text && <P style={[styles.copy, styles.theme.copy, styles.theme[`${variant}`]]}>{text}</P>}
+        {component}
       </View>
       {onPress && (
         <TouchableOpacity onPress={onPress}>

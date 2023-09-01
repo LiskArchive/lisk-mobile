@@ -8,6 +8,7 @@ import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransa
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
@@ -25,12 +26,12 @@ import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventVal
 
 import getStyles from './styles';
 
-export default function ExternalApplicationSignatureRequest({ onCancel }) {
+export default function ExternalApplicationSignatureRequest({ onCancel, navigation }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
-
   const [passwordForm, passwordFormController] = usePasswordForm();
-  const [currentAccount] = useCurrentAccount();
+  const [currentAccount, setCurrentAccount] = useCurrentAccount();
+  const { getAccount } = useAccounts();
   const { respond, sessionRequest, rejectRequest } = useSession();
   const { events } = useContext(WalletConnectContext);
 
@@ -58,6 +59,11 @@ export default function ExternalApplicationSignatureRequest({ onCancel }) {
 
   const senderAccountAddress =
     sessionRequest && extractAddressFromPublicKey(sessionRequest.peer.publicKey);
+
+  const isCurrentAccount = currentAccount === senderAccountAddress;
+  const signingAccount = getAccount(senderAccountAddress);
+
+  const switchAccount = () => setCurrentAccount(signingAccount);
 
   const senderApplicationChainID = event?.meta.params.chainId.replace('lisk:', '');
 
@@ -122,7 +128,11 @@ export default function ExternalApplicationSignatureRequest({ onCancel }) {
             senderApplicationChainID={senderApplicationChainID}
             senderAccountAddress={senderAccountAddress}
             onCancel={handleReject}
+            switchAccount={switchAccount}
             onSubmit={() => setActiveStep('summary')}
+            isCurrentAccount={isCurrentAccount}
+            isAccountAdded={!!signingAccount}
+            navigation={navigation}
           />
         );
 

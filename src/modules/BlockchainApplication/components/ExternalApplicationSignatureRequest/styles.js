@@ -104,6 +104,18 @@ export default {
       flexDirection: 'row',
       marginTop: boxes.boxPadding,
     },
+    switchButton: {
+      marginTop: 10,
+      borderWidth: 0,
+    },
+    switchTextContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    switchText: {
+      color: colors.light.ultramarineBlue,
+      marginHorizontal: 10,
+    },
     buttonLeft: {
       flex: 1,
       marginRight: 8,

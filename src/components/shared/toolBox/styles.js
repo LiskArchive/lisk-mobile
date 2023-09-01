@@ -28,7 +28,7 @@ const styles = {
   },
   b: {
     fontSize: fonts.size.base,
-    fontFamily: fonts.family.context,
+    fontFamily: fonts.family.contextBold,
   },
   span: {
     fontSize: fonts.size.base,

@@ -5,7 +5,7 @@ import ExternalApplicationSignatureRequest from 'modules/BlockchainApplication/c
 import WalletConnectContext from '../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../libs/wcm/constants/lifeCycle';
 
-export function useExternalApplicationSignatureRequest() {
+export function useExternalApplicationSignatureRequest(navigation) {
   const { events } = useContext(WalletConnectContext);
 
   const modal = useModal();
@@ -14,7 +14,10 @@ export function useExternalApplicationSignatureRequest() {
 
   useEffect(() => {
     if (event.name === EVENTS.SESSION_REQUEST) {
-      modal.open(<ExternalApplicationSignatureRequest onCancel={modal.close} />, false);
+      modal.open(
+        <ExternalApplicationSignatureRequest onCancel={modal.close} navigation={navigation} />,
+        false
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event?.meta?.id]);
