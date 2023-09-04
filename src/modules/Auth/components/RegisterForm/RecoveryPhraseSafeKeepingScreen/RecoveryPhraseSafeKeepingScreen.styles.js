@@ -62,6 +62,9 @@ export default function getRegisterSafeKeepingStyles() {
         color: colors.light.blueGray,
         fontSize: fonts.size.input,
       },
+      securityAdviceCard: {
+        marginBottom: 32,
+      },
     },
     [themes.light]: {
       container: {
