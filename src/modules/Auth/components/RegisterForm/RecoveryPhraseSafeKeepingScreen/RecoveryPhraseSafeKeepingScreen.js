@@ -51,7 +51,7 @@ export default function RecoveryPhraseSafeKeepingScreen({
         </P>
 
         <View style={styles.recoveryPhraseContainer}>
-          <RecoveryPhraseSecurityAdviceCard />
+          <RecoveryPhraseSecurityAdviceCard style={{ container: styles.securityAdviceCard }} />
 
           <P
             style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}

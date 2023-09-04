@@ -63,7 +63,7 @@ export default function getRegisterSafeKeepingStyles() {
         fontSize: fonts.size.input,
       },
       securityAdviceCard: {
-        marginBottom: 32,
+        marginBottom: 24,
       },
     },
     [themes.light]: {

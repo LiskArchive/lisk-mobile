@@ -27,11 +27,11 @@ export function getRecoveryPhraseSecurityAdviceCardStyles() {
     },
     [themes.dark]: {
       container: {
-        backgroundColor: setColorOpacity(colors.dark.yellowCopacabana, 0.1),
+        backgroundColor: setColorOpacity(colors.dark.yellowCopacabana, 0.3),
         borderColor: setColorOpacity(colors.dark.yellowCopacabana, 0.5),
       },
       description: {
-        color: colors.dark.zodiacBlue,
+        color: colors.dark.white,
       },
     },
   };
