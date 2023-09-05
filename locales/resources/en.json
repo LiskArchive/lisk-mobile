@@ -118,7 +118,8 @@
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
-      "enableDerivationPath": "Enable access to legacy Lisk accounts"
+      "enableDerivationPath": "Enable access to legacy Lisk accounts",
+      "showDerivationPath": "Show custom derivation path"
     },
     "scanDevice": {
       "description": "Lisk enhances security by conducting scans for potentially malicious apps that could jeopardize the integrity of your Lisk wallet on your device.",

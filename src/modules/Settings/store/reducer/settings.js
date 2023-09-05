@@ -12,6 +12,7 @@ export const INITIAL_STATE = {
   currency: currencyKeys[0],
   language: languageKeys[0],
   useDerivationPath: false,
+  showDerivationPath: false,
   showedIntro: false,
   enableShakePhone: true,
   token: {
