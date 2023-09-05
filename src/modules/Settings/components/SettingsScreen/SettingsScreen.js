@@ -10,6 +10,7 @@ import { themes, colors } from 'constants/styleGuide';
 import { useTheme } from 'contexts/ThemeContext';
 import SwitchButton from 'components/shared/toolBox/switchButton';
 import Checkbox from 'components/shared/Checkbox';
+import InfoToggler from 'components/shared/InfoToggler';
 import Icon from 'components/shared/toolBox/icon';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
@@ -47,6 +48,13 @@ export default function SettingsScreen() {
     dispatch(
       settingsUpdated({
         useDerivationPath: !settings.useDerivationPath,
+      })
+    );
+
+  const toggleShowDerivationPath = () =>
+    dispatch(
+      settingsUpdated({
+        showDerivationPath: !settings.showDerivationPath,
       })
     );
 
@@ -147,6 +155,22 @@ export default function SettingsScreen() {
                 {i18next.t('settings.menu.enableDerivationPath')}
               </P>
             </Checkbox>
+          </View>
+
+          <View style={[styles.item, styles.theme.item]}>
+            <View style={styles.row}>
+              <Checkbox selected={settings.showDerivationPath} onPress={toggleShowDerivationPath}>
+                <P style={[styles.itemTitle, styles.theme.itemTitle]}>
+                  Show custom derivation path
+                </P>
+              </Checkbox>
+
+              <InfoToggler
+                title={i18next.t('commons.customDerivationPath')}
+                description={i18next.t('auth.setup.customDerivationPathDescription')}
+                style={{ toggleButton: styles.infoToggler }}
+              />
+            </View>
           </View>
         </View>
       </ScrollView>
