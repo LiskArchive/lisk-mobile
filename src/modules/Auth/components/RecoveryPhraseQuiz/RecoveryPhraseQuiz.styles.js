@@ -71,7 +71,8 @@ export default function getRecoveryPhraseQuizStyles() {
       optionsContainer: {
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
       },
       optionPlaceholder: {
         height: 33,
@@ -101,6 +102,8 @@ export default function getRecoveryPhraseQuizStyles() {
         borderColor: colors.light.mystic,
         paddingVertical: 2,
         paddingHorizontal: 8,
+        marginHorizontal: 5,
+        marginBottom: 10,
         borderRadius: 8,
         minWidth: 56,
       },
