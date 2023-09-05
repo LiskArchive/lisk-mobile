@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, Linking } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { P, B, A } from 'components/shared/toolBox/typography';
-import DropDownHolder from 'utilities/alert';
+import { B } from 'components/shared/toolBox/typography';
 import { colors } from 'constants/styleGuide';
-import URLs from 'constants/URLs';
 import CopySvg from 'assets/svgs/CopySvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 
@@ -18,21 +16,8 @@ export default function CopyRecoveryPhraseToClipboard({ recoveryPhrase }) {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const handleOpenSecurityLink = () =>
-    Linking.openURL(URLs.recoveryPhraseSecurityDocs).catch(() =>
-      DropDownHolder.error('Error', 'Error opening link. Please try again later.')
-    );
-
   return (
-    <View style={[styles.container, styles.theme.container]}>
-      <P style={[styles.description, styles.theme.description]}>
-        {i18next.t('commons.recoveryPhrase.writeDownInstructions1')}{' '}
-        <A onPress={handleOpenSecurityLink} style={[styles.link, styles.theme.link]}>
-          {i18next.t('commons.recoveryPhrase.writeDownInstructionsLink')}
-        </A>{' '}
-        {i18next.t('commons.recoveryPhrase.writeDownInstructions2')}
-      </P>
-
+    <View style={styles.container}>
       <TouchableOpacity style={[styles.copyTextContainer]} onPress={handleCopy}>
         <B style={[styles.copyText]}>
           {copied ? i18next.t('commons.copied') : i18next.t('commons.copy')}

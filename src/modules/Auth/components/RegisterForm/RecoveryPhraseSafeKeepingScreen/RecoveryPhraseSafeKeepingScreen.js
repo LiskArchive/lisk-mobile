@@ -10,6 +10,7 @@ import SwitchButton from 'components/shared/toolBox/switchButton';
 import CopyRecoveryPhraseToClipboard from 'components/shared/CopyRecoveryPhraseToClipboard/CopyRecoveryPhraseToClipboard';
 
 import getRegisterSafeKeepingStyles from './RecoveryPhraseSafeKeepingScreen.styles';
+import RecoveryPhraseSecurityAdviceCard from '../../RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
 export default function RecoveryPhraseSafeKeepingScreen({
   recoveryPhrase,
@@ -50,6 +51,8 @@ export default function RecoveryPhraseSafeKeepingScreen({
         </P>
 
         <View style={styles.recoveryPhraseContainer}>
+          <RecoveryPhraseSecurityAdviceCard style={{ container: styles.securityAdviceCard }} />
+
           <P
             style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}
             testID="recoveryPhraseText"

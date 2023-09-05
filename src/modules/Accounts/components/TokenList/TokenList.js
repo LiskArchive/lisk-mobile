@@ -45,6 +45,9 @@ export default function TokenList({ mode = 'overview', address, style }) {
     config: {
       params: { limit: mode === 'overview' ? NO_OF_TOKENS_ON_OVERVIEW : LIMIT },
     },
+    options: {
+      cacheTime: 0,
+    },
   });
 
   const lockedTokens = useMemo(() => {
