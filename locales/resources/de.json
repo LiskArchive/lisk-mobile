@@ -121,7 +121,8 @@
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
-      "enableDerivationPath": ""
+      "enableDerivationPath": "Zugriff auf ältere Lisk-Konten aktivieren",
+      "showDerivationPath": "Benutzerdefinierten Ableitungspfad anzeigen"
     },
     "scanDevice": {
       "description": "",
