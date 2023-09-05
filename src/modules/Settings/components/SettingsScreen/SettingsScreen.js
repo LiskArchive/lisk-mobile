@@ -161,7 +161,7 @@ export default function SettingsScreen() {
             <View style={styles.row}>
               <Checkbox selected={settings.showDerivationPath} onPress={toggleShowDerivationPath}>
                 <P style={[styles.itemTitle, styles.theme.itemTitle]}>
-                  Show custom derivation path
+                  {i18next.t('settings.menu.showDerivationPath')}
                 </P>
               </Checkbox>
 
