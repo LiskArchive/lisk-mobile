@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -22,10 +22,11 @@ import { settingsUpdated } from 'modules/Settings/store/actions';
 import { toSecureRecoveryPhraseString } from '../../utils/recoveryPhrase';
 
 import getStyles from './RecoveryPhraseForm.styles';
+import { defaultDerivationPath } from '../../constants/recoveryPhrase.constants';
 
 const devDefaultRecoveryPhrase = process.env.RECOVERY_PHRASE || '';
 
-export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDerivationPath }) {
+export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const [showRecoveryPhrase, setShowRecoveryPhrase] = useState(false);
@@ -34,7 +35,8 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
     value: devDefaultRecoveryPhrase,
     validity: [],
   });
-  const [derivationPath, setDerivationPath] = useState(`m/44'/134'/0'`);
+
+  const [derivationPath, setDerivationPath] = useState(defaultDerivationPath);
 
   const shouldShowMask = !(focused || showRecoveryPhrase);
 
@@ -44,10 +46,7 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const derivationPathError = useMemo(
-    () => validateDerivationPath(derivationPath),
-    [derivationPath]
-  );
+  const derivationPathError = validateDerivationPath(derivationPath);
 
   const [fetchClipboardValue, { isLoading: isLoadingClipboardValue, pasted }] =
     usePasteFromClipboard({
@@ -170,7 +169,7 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng, useDer
             : i18next.t('commons.pasteFromClipboard')}
         </LabelButton>
 
-        {useDerivationPath && (
+        {settings.useDerivationPath && settings.showDerivationPath && (
           <>
             <View style={[styles.labelContainer]}>
               <P style={[styles.label, styles.theme.label]}>
