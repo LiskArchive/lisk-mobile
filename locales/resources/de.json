@@ -18,9 +18,7 @@
     "pasteFromClipboard": "Aus der Zwischenablage einfügen",
     "pastedFromClipboard": "Eingefügt",
     "recoveryPhrase": {
-      "writeDownInstructions1": "Es niederzuschreiben ist mehr",
-      "writeDownInstructions2": "als zu kopieren.",
-      "writeDownInstructionsLink": "sicher"
+     "writeDownInstructions": "Das manuelle Aufschreiben bietet mehr Sicherheit als das Kopieren und Einfügen der Wiederherstellungsphrase."
     }
   },  
   "fallbackScreens" : {

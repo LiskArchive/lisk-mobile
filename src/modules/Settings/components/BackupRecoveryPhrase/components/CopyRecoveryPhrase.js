@@ -13,6 +13,7 @@ import { P, A } from 'components/shared/toolBox/typography';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 
 import { getCopyRecoveryPhraseStyles } from './CopyRecoveryPhrase.styles';
+import RecoveryPhraseSecurityAdviceCard from '../../../../Auth/components/RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
@@ -47,6 +48,8 @@ export default function CopyRecoveryPhrase({ sharedData: data, nextStep }) {
         </P>
 
         <View style={[styles.recoveryPhraseContainer, styles.theme.recoveryPhraseContainer]}>
+          <RecoveryPhraseSecurityAdviceCard style={{ container: styles.securityAdviceCard }} />
+
           <P style={[styles.recoveryPhrase, styles.theme.recoveryPhrase]}>{data.recoveryPhrase}</P>
 
           <CopyRecoveryPhraseToClipboard recoveryPhrase={data.recoveryPhrase} />
