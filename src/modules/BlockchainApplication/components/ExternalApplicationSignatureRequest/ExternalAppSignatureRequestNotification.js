@@ -22,6 +22,7 @@ export default function ExternalAppSignatureRequestNotification({
   senderAccountAddress,
   onCancel,
   onSubmit,
+  signingAddress,
   switchAccount,
   isCurrentAccount,
   isAccountAdded,
@@ -107,9 +108,7 @@ export default function ExternalAppSignatureRequestNotification({
               {i18next.t(
                 'application.externalApplicationSignatureRequest.errors.notCurrentAccount1'
               )}
-              <B style={[styles.theme.description]}>
-                {stringShortener(senderAccountAddress, 7, 4)}
-              </B>
+              <B style={[styles.theme.description]}>{stringShortener(signingAddress, 7, 4)}</B>
               {i18next.t(
                 'application.externalApplicationSignatureRequest.errors.notCurrentAccount2'
               )}
@@ -123,9 +122,7 @@ export default function ExternalAppSignatureRequestNotification({
           component={
             <P style={[styles.theme.description]}>
               {i18next.t('application.externalApplicationSignatureRequest.errors.accountNotAdded1')}
-              <B style={[styles.theme.description]}>
-                {stringShortener(senderAccountAddress, 7, 4)}
-              </B>
+              <B style={[styles.theme.description]}>{stringShortener(signingAddress, 7, 4)}</B>
               {i18next.t('application.externalApplicationSignatureRequest.errors.accountNotAdded2')}
             </P>
           }
