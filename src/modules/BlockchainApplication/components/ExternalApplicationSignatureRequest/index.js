@@ -2,7 +2,7 @@
 import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
-import { cryptography } from '@liskhq/lisk-client';
+import { cryptography, validator } from '@liskhq/lisk-client';
 
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
@@ -91,6 +91,7 @@ export default function ExternalApplicationSignatureRequest({ onCancel, navigati
         const { payload, schema } = request.params;
         let transactionObj;
         transactionObj = decodeTransaction(Buffer.from(payload, 'hex'), schema);
+        validator.validator.validate(schema, transactionObj.params);
         let address = cryptography.address
           .getLisk32AddressFromPublicKey(transactionObj.senderPublicKey)
           .toString('hex');

@@ -41,6 +41,8 @@ export default function ExternalAppSignatureRequestNotification({
 
   const { styles } = useTheme({ styles: getStyles });
 
+  const shouldSwitchAccount = !isCurrentAccount && isAccountAdded;
+
   return (
     <View style={styles.container}>
       <View>
@@ -101,21 +103,31 @@ export default function ExternalAppSignatureRequestNotification({
       </View>
 
       <View style={styles.horizontalLine} />
-      {isAccountAdded && !isCurrentAccount && (
-        <InfoComponent
-          component={
-            <P style={[styles.theme.description]}>
-              {i18next.t(
-                'application.externalApplicationSignatureRequest.errors.notCurrentAccount1'
-              )}
-              <B style={[styles.theme.description]}>{stringShortener(signingAddress, 7, 4)}</B>
-              {i18next.t(
-                'application.externalApplicationSignatureRequest.errors.notCurrentAccount2'
-              )}
-            </P>
-          }
-          variant="warning"
-        />
+      {shouldSwitchAccount && (
+        <View>
+          <InfoComponent
+            component={
+              <P style={[styles.theme.description]}>
+                {i18next.t(
+                  'application.externalApplicationSignatureRequest.errors.notCurrentAccount1'
+                )}
+                <B style={[styles.theme.description]}>{stringShortener(signingAddress, 7, 4)}</B>
+                {i18next.t(
+                  'application.externalApplicationSignatureRequest.errors.notCurrentAccount2'
+                )}
+              </P>
+            }
+            variant="warning"
+          />
+          <Button style={[styles.switchButton]} onPress={switchAccount}>
+            <View style={styles.switchTextContainer}>
+              <P style={styles.switchText}>
+                {i18next.t('application.externalApplicationSignatureRequest.sign.switchAccount')}
+              </P>
+              <SwitchSvg color={colors.light.ultramarineBlue} />
+            </View>
+          </Button>
+        </View>
       )}
       {!isAccountAdded && (
         <InfoComponent
@@ -128,17 +140,6 @@ export default function ExternalAppSignatureRequestNotification({
           }
           variant="warning"
         />
-      )}
-
-      {!isCurrentAccount && isAccountAdded && (
-        <Button style={[styles.switchButton]} onPress={switchAccount}>
-          <View style={styles.switchTextContainer}>
-            <P style={styles.switchText}>
-              {i18next.t('application.externalApplicationSignatureRequest.sign.switchAccount')}
-            </P>
-            <SwitchSvg color={colors.light.ultramarineBlue} />
-          </View>
-        </Button>
       )}
 
       <View style={[styles.footer]}>
