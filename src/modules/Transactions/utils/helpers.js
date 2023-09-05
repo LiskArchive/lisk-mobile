@@ -3,7 +3,7 @@ import * as Lisk from '@liskhq/lisk-client';
 import i18next from 'i18next';
 
 import { findMaxBigInt } from 'utilities/helpers';
-import { TRANSACTION_VERIFY_RESULT } from './constants';
+import { TRANSACTION_VERIFY_RESULT, BASE_TRANSACTION_SCHEMA } from './constants';
 
 export const getCommandParamsSchema = (module, command, schema = []) => {
   const moduleCommand = module.concat(':', command);
@@ -17,8 +17,10 @@ export const getCommandParamsSchema = (module, command, schema = []) => {
   return commandSchema.schema;
 };
 
-export const decodeBaseTransaction = (encodedTransaction, baseTransactionSchema) =>
-  Lisk.codec.codec.decode(baseTransactionSchema, encodedTransaction);
+export const decodeBaseTransaction = (
+  encodedTransaction,
+  baseTransactionSchema = BASE_TRANSACTION_SCHEMA
+) => Lisk.codec.codec.decode(baseTransactionSchema, encodedTransaction);
 
 export const decodeTransaction = (encodedTransaction, paramsSchema) => {
   const transaction = decodeBaseTransaction(encodedTransaction);

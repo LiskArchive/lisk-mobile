@@ -388,7 +388,7 @@
         "chainIDLabel": "Chain ID",
         "descriptionLabel": "Information",
         "description": "This transaction was initiated from another application for signature request.",
-        "accountLabel": "Selected account"
+        "accountLabel": "Current account"
       },
       "summary": {
         "title": "Transaction summary",
@@ -402,13 +402,20 @@
         "copiedToClipboardButtonText": "Copied",
         "errorButtonText": "Redirect to application site",
         "invalidConnectionTitle": "Connection failed",
-        "invalidConnectionDescription": "Received event from '{{appName}}' has been blocked due to incompatibility with Lisk Mobile."
+        "invalidConnectionDescription": "Received event from '{{appName}}' has been blocked due to incompatibility with Lisk Mobile.",
+        "switchAccount": "Switch to signing account"
       },
       "disconnect": {
         "title": "Disconnect Application",
         "disconnectingFirst": "Disconnecting the ",
         "disconnectingSecond": "application removes your wallet details from the site.",
         "disconnect": "Disconnect"
+      },
+      "errors": {
+        "notCurrentAccount1": "Please click on “Switch to signing account” ",
+        "notCurrentAccount2": " to complete the request.",
+        "accountNotAdded1": "The selected account for signing the requested transaction is missing. Please add the missing account ",
+        "accountNotAdded2": " to Lisk Mobile and re-initiate the transaction signing from the external application."
       }
     },
     "externalConnectionValidation": {

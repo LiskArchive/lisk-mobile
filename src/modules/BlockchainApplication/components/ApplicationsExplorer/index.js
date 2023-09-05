@@ -55,7 +55,6 @@ export default function ApplicationsExplorer() {
 
   const applicationStatsModal = useModal();
   const newConnectionModal = useModal();
-  const qrCodeConnectionModal = useModal();
 
   const { theme, styles } = useTheme({
     styles: getApplicationsExplorerStyles(),
@@ -73,23 +72,15 @@ export default function ApplicationsExplorer() {
       />
     );
 
-  const showNewConnectionModal = () =>
+  const showNewConnectionModal = (value) => {
     newConnectionModal.open(
       <Stepper>
-        <BridgeApplication />
+        <BridgeApplication uri={value} />
         <InitiateConnection onFinish={newConnectionModal.close} />
         <ApproveConnection onFinish={newConnectionModal.close} />
       </Stepper>
     );
-
-  const handleQRCodeRead = (value) =>
-    qrCodeConnectionModal.open(
-      <Stepper>
-        <BridgeApplication uri={value} />
-        <InitiateConnection onFinish={qrCodeConnectionModal.close} />
-        <ApproveConnection onFinish={qrCodeConnectionModal.close} />
-      </Stepper>
-    );
+  };
 
   const handleFabItemPress = (item) => {
     if (item.key === 'paste') {
@@ -134,7 +125,7 @@ export default function ApplicationsExplorer() {
           fullScreen
           navigation={navigation}
           readFromCameraRoll={false}
-          onQRCodeRead={handleQRCodeRead}
+          onQRCodeRead={showNewConnectionModal}
           onCameraVisibilityChange={setCameraIsOpen}
           permissionDialogTitle={i18next.t('Permission to use camera')}
           permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}

@@ -1,13 +1,14 @@
 /* eslint-disable max-statements */
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
+import { cryptography, validator } from '@liskhq/lisk-client';
 
-import { extractAddressFromPublicKey } from 'modules/Auth/utils/accountKeys';
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
@@ -24,13 +25,15 @@ import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRe
 import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventValidators';
 
 import getStyles from './styles';
+import { decodeTransaction } from '../../../Transactions/utils/helpers';
 
-export default function ExternalApplicationSignatureRequest({ onCancel }) {
+export default function ExternalApplicationSignatureRequest({ onCancel, navigation }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
-
   const [passwordForm, passwordFormController] = usePasswordForm();
-  const [currentAccount] = useCurrentAccount();
+  const [currentAccount, setCurrentAccount] = useCurrentAccount();
+  const [accountAddress, setAccountAddress] = useState('');
+  const { getAccount } = useAccounts();
   const { respond, sessionRequest, rejectRequest } = useSession();
   const { events } = useContext(WalletConnectContext);
 
@@ -56,8 +59,9 @@ export default function ExternalApplicationSignatureRequest({ onCancel }) {
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
-  const senderAccountAddress =
-    sessionRequest && extractAddressFromPublicKey(sessionRequest.peer.publicKey);
+  const signingAccount = getAccount(accountAddress);
+
+  const switchAccount = () => setCurrentAccount(signingAccount);
 
   const senderApplicationChainID = event?.meta.params.chainId.replace('lisk:', '');
 
@@ -78,6 +82,25 @@ export default function ExternalApplicationSignatureRequest({ onCancel }) {
 
     onCancel();
   };
+
+  const request = event?.meta?.params.request;
+
+  useEffect(() => {
+    if (request) {
+      try {
+        const { payload, schema } = request.params;
+        let transactionObj;
+        transactionObj = decodeTransaction(Buffer.from(payload, 'hex'), schema);
+        validator.validator.validate(schema, transactionObj.params);
+        let address = cryptography.address
+          .getLisk32AddressFromPublicKey(transactionObj.senderPublicKey)
+          .toString('hex');
+        setAccountAddress(address);
+      } catch (error) {
+        setStatus({ ...status, error: new Error(error.message) });
+      }
+    }
+  }, [request]);
 
   const handleSubmit = passwordForm.handleSubmit(async (values) => {
     let privateKey;
@@ -120,9 +143,14 @@ export default function ExternalApplicationSignatureRequest({ onCancel }) {
           <ExternalAppSignatureRequestNotification
             session={sessionRequest}
             senderApplicationChainID={senderApplicationChainID}
-            senderAccountAddress={senderAccountAddress}
+            senderAccountAddress={currentAccount.metadata.address}
             onCancel={handleReject}
+            switchAccount={switchAccount}
             onSubmit={() => setActiveStep('summary')}
+            signingAddress={accountAddress}
+            isCurrentAccount={accountAddress === currentAccount.metadata.address}
+            isAccountAdded={!!signingAccount}
+            navigation={navigation}
           />
         );
 

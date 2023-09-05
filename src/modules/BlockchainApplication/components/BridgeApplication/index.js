@@ -53,7 +53,7 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
 
     setIsLoading(true);
 
-    const response = await setUri(inputUri);
+    const response = await setUri(uri ? uri : inputUri);
 
     if (response.status === STATUS.FAILURE) {
       setError(new Error('Error connecting application. Please try again.'));
@@ -62,6 +62,12 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
       setEventTopic(response.data.topic);
     }
   };
+
+  useEffect(() => {
+    if (uri) {
+      handleSubmit();
+    }
+  }, [uri]);
 
   useEffect(() => {
     if (proposalEvent && isLoading) {

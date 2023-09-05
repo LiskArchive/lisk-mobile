@@ -26,10 +26,10 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
     events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
     events[events.length - 1];
 
-  const accountsAddresses = accounts.map((account) => account.metadata.address);
+  const accountPublicKeys = accounts.map((account) => account.metadata.pubkey);
 
   const handleApprove = async () => {
-    await approve(accountsAddresses);
+    await approve(accountPublicKeys);
     onFinish();
   };
 

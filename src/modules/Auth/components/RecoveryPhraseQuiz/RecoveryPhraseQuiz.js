@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,7 +23,6 @@ export default function RecoveryPhraseQuiz({
   length,
 }) {
   const navigation = useNavigation();
-
   const { recoveryPhrase } = data;
 
   const [buttonStatus, setButtonStatus] = useState(true);
@@ -167,46 +167,47 @@ export default function RecoveryPhraseQuiz({
           length={length}
         />
       )}
+      <ScrollView>
+        <View style={[styles.body]}>
+          {!customHeader && (
+            <H4 style={[styles.title, styles.theme.title]}>
+              {i18next.t('auth.register.confirm.title')}
+            </H4>
+          )}
 
-      <View style={[styles.body]}>
-        {!customHeader && (
-          <H4 style={[styles.title, styles.theme.title]}>
-            {i18next.t('auth.register.confirm.title')}
-          </H4>
-        )}
+          <P style={[styles.description, styles.theme.description]}>
+            {i18next.t('auth.register.confirm.description')}
+          </P>
 
-        <P style={[styles.description, styles.theme.description]}>
-          {i18next.t('auth.register.confirm.description')}
-        </P>
+          <View style={styles.box}>
+            <View style={[styles.recoveryPhraseContainer, styles.horizontalPadding]}>
+              {renderRecoveryPhrase()}
+            </View>
 
-        <View style={styles.box}>
-          <View style={[styles.recoveryPhraseContainer, styles.horizontalPadding]}>
-            {renderRecoveryPhrase()}
-          </View>
-
-          <View
-            testID="recoveryPhraseOptionsContainer"
-            style={[styles.optionsContainer, styles.horizontalPadding]}
-          >
-            {options[visibleOptions] ? (
-              options[visibleOptions].map((value, idx) => (
-                <Button
-                  key={idx}
-                  onClick={() => fillOption(value)}
-                  testID={`recoveryPhraseOptionFor-${value}`}
-                  noPredefinedStyle
-                  style={[styles.option]}
-                  textStyle={[styles.label, styles.theme.label]}
-                >
-                  {value}
-                </Button>
-              ))
-            ) : (
-              <View style={styles.optionPlaceholder} />
-            )}
+            <View
+              testID="recoveryPhraseOptionsContainer"
+              style={[styles.optionsContainer, styles.horizontalPadding]}
+            >
+              {options[visibleOptions] ? (
+                options[visibleOptions].map((value, idx) => (
+                  <Button
+                    key={idx}
+                    onClick={() => fillOption(value)}
+                    testID={`recoveryPhraseOptionFor-${value}`}
+                    noPredefinedStyle
+                    style={[styles.option]}
+                    textStyle={[styles.label, styles.theme.label]}
+                  >
+                    {value}
+                  </Button>
+                ))
+              ) : (
+                <View style={styles.optionPlaceholder} />
+              )}
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
 
       <View style={[styles.footer]}>
         <PrimaryButton

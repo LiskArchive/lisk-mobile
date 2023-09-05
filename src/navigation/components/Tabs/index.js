@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
 
 import { ModalContext } from 'contexts/ModalContext';
 import { useExternalApplicationSignatureRequest } from 'modules/BlockchainApplication/hooks/useExternalApplicationSignatureRequest';
@@ -14,8 +15,9 @@ const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   const { isOpen: modalOpen } = useContext(ModalContext);
+  const navigation = useNavigation();
 
-  useExternalApplicationSignatureRequest();
+  useExternalApplicationSignatureRequest(navigation);
 
   return (
     <>
