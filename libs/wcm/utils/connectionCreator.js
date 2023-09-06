@@ -6,7 +6,7 @@ import pkg from '../../../package.json';
 export async function createSignClient(icon) {
   const [, result] = await to(
     SignClient.init({
-      projectId: process.env.PROJECT_ID ?? '8f2a5ab63f54b27471714e81d1a49da3',
+      projectId: process.env.PROJECT_ID,
       metadata: {
         name: pkg.name,
         description: pkg.description,
