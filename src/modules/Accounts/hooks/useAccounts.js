@@ -22,9 +22,11 @@ export const useAccounts = () => {
     [dispatch]
   );
   const deleteAccount = useCallback(
-    (address) => {
+    (address, passwordIsInKeychain) => {
       dispatch(deleteAccountAction(address));
-      removeAccountPasswordFromKeychain(address);
+      if (passwordIsInKeychain) {
+        removeAccountPasswordFromKeychain(address);
+      }
     },
     [dispatch]
   );
