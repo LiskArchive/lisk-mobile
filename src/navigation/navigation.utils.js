@@ -1,10 +1,10 @@
 /* eslint-disable max-statements */
 import React from 'react';
+import { View } from 'react-native';
 import { validator } from '@liskhq/lisk-client';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { getStateFromPath } from '@react-navigation/core';
-import { View } from 'react-native';
-
+import Url from 'url-parse';
 import TabBarIcon from './components/TabBarIcon';
 import navigationOptions from './navigation.options';
 import { WHITE_LISTED_DEEP_LINKS } from './navigation.constants';
@@ -27,32 +27,28 @@ export function getTabBarIcon({ route }) {
 }
 
 export function validateDeepLink(url) {
-  const { protocol, searchParams, hostname } = new URL(url);
-  if (protocol !== 'lisk:') return false;
+  const parsedUrl = new Url(url, true);
 
-  const foundLink = WHITE_LISTED_DEEP_LINKS.find(({ pathRegex }) => pathRegex.test(hostname));
+  const match = parsedUrl.href.match(/lisk:(\/\/[\w|/]+)/);
+  const pathname = match ? match[1] : null;
+
+  const foundLink = WHITE_LISTED_DEEP_LINKS.find(({ pathRegex }) => pathRegex.test(pathname));
+
   if (!foundLink) return false;
 
-  const searchParamObject = [...searchParams.entries()].reduce(
-    (result, [key, value]) => ({ ...result, [key]: value }),
-    {}
+  const isSearchParamsValid = Object.keys(parsedUrl.query).every(
+    (key) => foundLink.validationSchema.properties[key]
   );
-
-  const isSearchParamsValid = Object.keys(searchParamObject).reduce((result, key) => {
-    const schemaValue = !!foundLink.validationSchema.properties[key];
-    if (!schemaValue || !result) return false;
-    return true;
-  }, true);
 
   if (!isSearchParamsValid) return false;
 
+  let queryParams = parsedUrl.query;
+
+  if (foundLink.paramsTransformer) {
+    queryParams = foundLink.paramsTransformer(parsedUrl.query);
+  }
+
   try {
-    let queryParams = searchParamObject;
-
-    if (foundLink.paramsTransformer) {
-      queryParams = foundLink.paramsTransformer(searchParamObject);
-    }
-
     validator.validator.validate(foundLink.validationSchema, queryParams);
   } catch {
     return false;

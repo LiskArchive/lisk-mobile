@@ -2,7 +2,7 @@ import { TOKEN_TRANSFER_VALIDATION_SCHEMA } from 'modules/Transactions/utils/con
 
 export const WHITE_LISTED_DEEP_LINKS = [
   {
-    pathRegex: /^wallet$/,
+    pathRegex: /^\/\/wallet\/?$/,
     validationSchema: TOKEN_TRANSFER_VALIDATION_SCHEMA,
     paramsTransformer: (queryParams) => {
       let result = queryParams;
