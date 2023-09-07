@@ -4,7 +4,7 @@ import { getKeyFromPasswordWithArgon2 } from './getKeyFromArgon';
 export const decryptAccount = async (crypto, password) => {
   try {
     const { encrypt } = cryptography;
-    const plainText = await encrypt.decryptMessageWithPassword(crypto, password, null, {
+    const plainText = await encrypt.decryptMessageWithPassword(crypto, password, 'utf-8', {
       getKey: getKeyFromPasswordWithArgon2,
     });
     const { recoveryPhrase, privateKey } = JSON.parse(plainText);
