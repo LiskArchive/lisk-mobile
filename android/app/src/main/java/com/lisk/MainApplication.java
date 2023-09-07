@@ -14,6 +14,7 @@ import io.lisk.mobile.VerifyAppsPackage;
 import io.lisk.mobile.SensitiveClipboardPackage;
 import io.lisk.mobile.RNArgon2Package;
 import io.lisk.mobile.UninstallPackage;
+import io.lisk.mobile.ScopedStoragePackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new VerifyAppsPackage());
       packages.add(new RNArgon2Package());
       packages.add(new UninstallPackage());
+      packages.add(new ScopedStoragePackage());
       return packages;
     }
 

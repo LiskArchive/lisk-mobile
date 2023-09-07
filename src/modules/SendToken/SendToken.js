@@ -38,7 +38,7 @@ export default function SendToken() {
   const { accounts } = useAccounts();
 
   const [currentAccount, setCurrentAccount] = useCurrentAccount();
-  const { data: accountSummary, isLoading } = useAuth(currentAccount.metadata.address);
+  const { data: accountSummary, isLoading } = useAuth(currentAccount?.metadata?.address);
 
   const accountIsMultisignature = accountSummary?.numberOfSignatures > 0;
 
@@ -67,7 +67,7 @@ export default function SendToken() {
             key={item.metadata.address}
             account={item}
             onPress={() => handleSelectAccountClick(item, modal)}
-            active={item.metadata.address === currentAccount.metadata?.address}
+            active={item.metadata.address === currentAccount?.metadata?.address}
             testID={`account-list-item`}
             navigation={navigation}
           />
