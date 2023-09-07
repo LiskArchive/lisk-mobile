@@ -17,16 +17,19 @@ export function useSendTokenAmountChecker({
 
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === selectedTokenID);
 
-  const { data: tokenBalanceData } = useAccountTokenBalancesQuery(currentAccount.metadata.address, {
-    params: { tokenID: selectedTokenID },
-  });
+  const { data: tokenBalanceData, isLoading } = useAccountTokenBalancesQuery(
+    currentAccount.metadata.address,
+    {
+      params: { tokenID: selectedTokenID },
+    }
+  );
 
   const tokenBalance = BigInt(tokenBalanceData?.data[0]?.availableBalance || 0);
 
   const maxAllowedAmount = tokenBalance - transactionFee;
   let isAmountValid = true;
 
-  if (!amount) {
+  if (!amount || isLoading) {
     return { isAmountValid, maxAllowedAmount, isMaxAllowedAmountExceeded: false };
   }
 
