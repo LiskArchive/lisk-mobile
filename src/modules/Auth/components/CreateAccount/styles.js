@@ -15,7 +15,6 @@ export default function getCreateAccountStyles() {
         marginBottom: 5,
       },
       link: {
-        fontWeight: 'bold',
         textAlign: 'center',
       },
     },
