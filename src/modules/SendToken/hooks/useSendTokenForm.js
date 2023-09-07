@@ -63,7 +63,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       userPassword: '',
       command: 'transfer',
     }),
-    [currentApplication.data?.chainID, initialValues]
+    [
+      currentApplication.data?.chainID,
+      initialValues?.token,
+      initialValues?.amount,
+      initialValues?.reference,
+      initialValues?.recipientAccountAddressFormat,
+      initialValues?.recipient,
+      initialValues?.recipientChain,
+    ]
   );
 
   const validationSchema = yup
@@ -349,6 +357,26 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     transaction,
     defaultTokenID,
     isTransactionSuccess,
+  ]);
+
+  useEffect(() => {
+    form.reset({
+      ...defaultValues,
+      recipientApplicationChainID: initialValues?.recipientChain,
+      recipientAccountAddress: initialValues?.recipient,
+      recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
+      tokenID: initialValues?.token,
+      amount: initialValues?.amount,
+      message: initialValues?.reference,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    initialValues?.token,
+    initialValues?.amount,
+    initialValues?.reference,
+    initialValues?.recipientAccountAddressFormat,
+    initialValues?.recipient,
+    initialValues?.recipientChain,
   ]);
 
   const isLoading =
