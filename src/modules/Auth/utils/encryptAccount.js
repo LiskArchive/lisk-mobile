@@ -6,7 +6,7 @@ import { extractKeyPair, extractAddressFromPublicKey } from './accountKeys';
 import { getKeyFromPasswordWithArgon2 } from './getKeyFromArgon';
 
 const ARGON2 = {
-  ITERATIONS: 1,
+  ITERATIONS: 3,
   MEMORY: 65536,
 };
 
