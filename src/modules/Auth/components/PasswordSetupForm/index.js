@@ -18,6 +18,8 @@ import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { Controller } from 'react-hook-form';
 import { useModal } from 'hooks/useModal';
+import { selectSettings } from 'store/selectors';
+
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
@@ -30,12 +32,14 @@ export default function PasswordSetupForm({
   length,
   title,
   description,
+  isRegister,
 }) {
   useScreenshotPrevent();
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const route = useRoute();
+  const { useDerivationPath } = useSelector(selectSettings);
 
   const recoveryPhrase = route.params?.recoveryPhrase || data.recoveryPhrase;
 
@@ -68,7 +72,7 @@ export default function PasswordSetupForm({
       trigger,
     },
     { encryptedAccount, isLoading, isSuccess },
-  ] = usePasswordSetupForm(recoveryPhrase, derivationPath);
+  ] = usePasswordSetupForm(recoveryPhrase, derivationPath, isRegister || useDerivationPath);
 
   const biometricsModal = useModal();
 

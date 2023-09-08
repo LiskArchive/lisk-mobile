@@ -1,15 +1,16 @@
 /* eslint-disable max-statements */
 import { useCallback, useState } from 'react';
 import { useForm, useController } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import i18next from 'i18next';
+import * as yup from 'yup';
 
 import DropDownHolder from 'utilities/alert';
 import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useEncryptAccount } from 'modules/Accounts/hooks/useEncryptAccount';
+
 import { storeAccountPasswordInKeyChain } from '../utils/recoveryPhrase';
 
 const validationSchema = yup
@@ -35,7 +36,7 @@ const validationSchema = yup
  * @returns - The form fields, error state, submit callback and other handlers.
  * Also, the encrypt process state (isLoading, isError, isSuccess, among others).
  */
-export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
+export function usePasswordSetupForm(recoveryPhrase, derivationPath, useDerivationPath) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
   const [isError, setIsError] = useState();
@@ -44,7 +45,7 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
 
   const { setAccount } = useAccounts();
   const [, setCurrentAccount] = useCurrentAccount();
-  const { encryptAccount } = useEncryptAccount();
+  const { encryptAccount } = useEncryptAccount(useDerivationPath);
 
   const resetState = useCallback(() => {
     if (isSuccess !== undefined) {
