@@ -3,7 +3,7 @@ import { Animated } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
-import { P, A } from 'components/shared/toolBox/typography';
+import { P, B } from 'components/shared/toolBox/typography';
 
 import getCreateAccountStyles from './styles';
 
@@ -18,13 +18,13 @@ export default function CreateAccount({ onPress, style, opacity = 1 }) {
         {i18next.t('Don’t have a Lisk Account?')}
       </P>
 
-      <A
+      <B
         testID="createAccountButton"
         style={[styles.link, styles.theme.link, style?.link]}
         onPress={onPress}
       >
         {i18next.t('Create it now')}
-      </A>
+      </B>
     </Animated.View>
   );
 }

@@ -94,6 +94,7 @@ export default function RegisterForm() {
               {i18next.t('auth.register.passwordSetup.description')}
             </P>
           }
+          isRegister={true}
         />
       </Stepper>
     </SafeAreaView>

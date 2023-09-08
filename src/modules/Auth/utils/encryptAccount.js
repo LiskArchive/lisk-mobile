@@ -5,6 +5,11 @@ import { defaultDerivationPath } from '../constants/recoveryPhrase.constants';
 import { extractKeyPair, extractAddressFromPublicKey } from './accountKeys';
 import { getKeyFromPasswordWithArgon2 } from './getKeyFromArgon';
 
+const ARGON2 = {
+  ITERATIONS: 3,
+  MEMORY: 65536,
+};
+
 export const encryptAccount = async ({
   recoveryPhrase,
   password,
@@ -16,7 +21,7 @@ export const encryptAccount = async ({
     const { encrypt } = cryptography;
     const options = {
       recoveryPhrase,
-      enableCustomDerivationPath: derivationPath && enableCustomDerivationPath,
+      enableCustomDerivationPath,
       derivationPath,
     };
     const { privateKey, publicKey, isValid } = await extractKeyPair(options);
@@ -27,7 +32,13 @@ export const encryptAccount = async ({
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
     const crypto = await encrypt.encryptMessageWithPassword(plainText, password, {
       getKey: getKeyFromPasswordWithArgon2,
+      kdf: cryptography.encrypt.KDF.ARGON2,
+      kdfparams: {
+        iterations: ARGON2.ITERATIONS,
+        memorySize: ARGON2.MEMORY,
+      },
     });
+
     return {
       crypto,
       metadata: {
