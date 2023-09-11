@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import apiClient from 'utilities/api/APIClient';
@@ -17,6 +17,7 @@ import { TRANSACTION_EVENTS } from '../utils/constants';
  */
 export function useTransactionsEventsManager() {
   const queryClient = useQueryClient();
+  const timeoutRef = useRef();
 
   const [currentAccount] = useCurrentAccount();
   const [currentApplication] = useCurrentApplication();
@@ -33,7 +34,7 @@ export function useTransactionsEventsManager() {
         return null;
       }
 
-      setTimeout(async () => {
+      timeoutRef.current = setTimeout(async () => {
         await queryClient.invalidateQueries([GET_AUTH_QUERY, currentAccount?.metadata?.address]);
         await queryClient.refetchQueries({ queryKey: [GET_ACCOUNT_TOKENS_FULL_DATA_QUERY] });
 
@@ -65,6 +66,8 @@ export function useTransactionsEventsManager() {
     }
 
     return () => {
+      clearTimeout(timeoutRef.current);
+
       if (apiClient?.ws) {
         apiClient.ws.off(TRANSACTION_EVENTS.newTransactions);
       }
