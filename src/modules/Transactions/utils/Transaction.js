@@ -28,6 +28,8 @@ export class Transaction {
 
   extraCommandFee = BigInt(0);
 
+  feeTokenID = null;
+
   dynamicFeeEstimates = null;
 
   transaction = {
@@ -104,6 +106,7 @@ export class Transaction {
     minFee,
     extraCommandFee,
     dynamicFeeEstimates,
+    feeTokenID = this.feeTokenID,
     ...others
   }) {
     if (this.module || !command || !this._paramsSchema) {
@@ -115,6 +118,8 @@ export class Transaction {
       extraCommandFee,
       dynamicFeeEstimates,
     });
+
+    this.feeTokenID = feeTokenID;
 
     this._computeParamsSchema(module, command);
 

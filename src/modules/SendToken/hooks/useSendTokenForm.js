@@ -395,6 +395,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const isError = !!dryRunError || !!error;
 
+  console.log('transaction: ', transaction.transaction);
+
   return {
     ...form,
     handleChange,

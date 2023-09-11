@@ -137,15 +137,13 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
         dynamicFeeEstimates={transaction?.data?.dynamicFeeEstimates}
       />
 
-      {tokenIDField.value && (
-        <SendTokenTransactionFeesLabels
-          tokenID={tokenIDField.value}
-          recipientApplication={recipientApplication}
-          transaction={transaction}
-          isLoadingTransactionFees={form.isLoadingTransactionFees}
-          isErrorTransactionFees={form.isErrorTransactionFees}
-        />
-      )}
+      <SendTokenTransactionFeesLabels
+        recipientApplication={recipientApplication}
+        transaction={transaction}
+        isLoadingTransactionFees={form.isLoadingTransactionFees}
+        isErrorTransactionFees={form.isErrorTransactionFees}
+      />
+
       <View style={[styles.footer]}>
         <PrimaryButton
           onClick={verifyFormWithDryRun}

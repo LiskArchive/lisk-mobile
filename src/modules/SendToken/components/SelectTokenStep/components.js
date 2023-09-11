@@ -303,7 +303,6 @@ export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, s
 }
 
 export function SendTokenTransactionFeesLabels({
-  tokenID,
   recipientApplication,
   transaction,
   isLoadingTransactionFees,
@@ -313,7 +312,9 @@ export function SendTokenTransactionFeesLabels({
 
   const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
+  const feeTokenID = transaction.data.feeTokenID;
+
+  const selectedToken = tokensData?.find((token) => token.tokenID === feeTokenID);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),
