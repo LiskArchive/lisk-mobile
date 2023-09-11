@@ -362,7 +362,6 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   useEffect(() => {
     form.reset({
       ...defaultValues,
-      recipientApplicationChainID: initialValues?.recipientChain,
       recipientAccountAddress: initialValues?.recipient,
       recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
       tokenID: initialValues?.token,
