@@ -18,7 +18,7 @@ export class APIClient {
   };
 
   create({ http, ws, enableCertPinning = false } = {}) {
-    this.ws = io(`${ws}/blockchain`);
+    this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
     this.baseUrl = http;
     this.enableCertPinning = enableCertPinning;
   }

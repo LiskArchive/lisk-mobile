@@ -66,7 +66,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     transactionFee: transaction?.data?.transaction?.fee,
   });
 
-  const isMessageInvalid = messageField.value.length > 64;
+  const isMessageInvalid = messageField.value?.length > 64;
 
   const showErrorModal = (error) => {
     modal.open(() => (
