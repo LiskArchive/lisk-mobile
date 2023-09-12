@@ -71,6 +71,7 @@ export function TransactionDetailsBody({ transaction, address }) {
       <ResultScreen
         illustration={<ErrorIllustrationSvg />}
         description={i18next.t('transactions.transactionDetails.errorText')}
+        fluid
       >
         <LabelButton onPress={refetchFees}>{i18next.t('commons.buttons.reload')}</LabelButton>
       </ResultScreen>

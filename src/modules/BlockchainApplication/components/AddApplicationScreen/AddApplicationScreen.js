@@ -57,6 +57,7 @@ export default function AddApplicationScreen() {
           <ResultScreen
             illustration={<EmptyApplicationsIllustrationSvg />}
             description="All applications are now added to the application management list."
+            fluid
           />
         )}
         style={{ container: styles.applicationsListContainer }}

@@ -18,6 +18,7 @@ export default function ResultScreen({
   children,
   disabled,
   variant,
+  fluid = false,
   styles: baseStyles,
 }) {
   const { styles } = useTheme({ styles: getStyles() });
@@ -39,8 +40,8 @@ export default function ResultScreen({
   }
 
   return (
-    <View>
-      <View style={[styles.container, baseStyles?.container]}>
+    <View style={[fluid && styles.fluid, baseStyles?.wrapper]}>
+      <View style={[styles.container, fluid && styles.fluid, baseStyles?.container]}>
         {illustration && (
           <View style={[styles.illustration, baseStyles?.illustration]}>{illustration}</View>
         )}

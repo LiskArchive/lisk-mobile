@@ -153,7 +153,7 @@ export default function SendToken() {
         )}
         renderLoading={() => <SendTokenSkeleton />}
         renderError={(error) => (
-          <ResultScreen illustration={<ErrorIllustrationSvg />} description={error.message} />
+          <ResultScreen illustration={<ErrorIllustrationSvg />} description={error.message} fluid />
         )}
       />
     </SafeAreaView>

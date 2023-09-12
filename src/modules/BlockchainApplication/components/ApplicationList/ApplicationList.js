@@ -26,6 +26,7 @@ export default function ApplicationList({
       <ResultScreen
         illustration={<EmptyApplicationsIllustrationSvg />}
         description={i18next.t('application.explore.applicationList.emptyText')}
+        fluid
       />
     ));
 
@@ -35,6 +36,7 @@ export default function ApplicationList({
       <ResultScreen
         illustration={<ErrorIllustrationSvg />}
         description={i18next.t('application.explore.applicationList.errorText')}
+        fluid
       />
     ));
 

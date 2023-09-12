@@ -121,20 +121,12 @@ export default function TransactionList({ mode = 'overview', address, style }) {
                 ? i18next.t('transactions.transactionList.emptyText')
                 : "This account hasn't performed any transaction yet."
             }
-            styles={{
-              wrapper: styles.resultScreenContainer,
-              container: styles.resultScreenContainer,
-            }}
           />
         )}
         renderError={() => (
           <ResultScreen
             illustration={<ErrorIllustrationSvg height={72} />}
             description={i18next.t('transactions.transactionList.errorText')}
-            styles={{
-              wrapper: styles.resultScreenContainer,
-              container: styles.resultScreenContainer,
-            }}
           >
             <LabelButton onPress={refetchTransactions} textStyle={[styles.labelButtonText]}>
               {i18next.t('commons.buttons.reload')}
