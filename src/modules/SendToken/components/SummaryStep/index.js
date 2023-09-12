@@ -20,7 +20,6 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
   const recipientAccountAddress = form.watch('recipientAccountAddress');
-  const tokenID = form.watch('tokenID');
   const amount = parseFloat(form.watch('amount'));
   const message = form.watch('message');
   const priority = form.watch('priority');
@@ -34,7 +33,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     senderApplicationChainID,
     recipientApplicationChainID,
     recipientAccountAddress,
-    tokenID,
+    tokenID: transaction.data.feeTokenID,
     amount,
     message,
     priority,

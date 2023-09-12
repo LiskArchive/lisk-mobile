@@ -34,6 +34,8 @@ export function useTransactionFees({
 
       const minFee = res.data.transaction.fee.minimum;
 
+      const feeTokenID = res.data.transaction.fee.tokenID;
+
       const dynamicFeeEstimates = res.data.transaction.fee.priority;
 
       if (accountInitializationFee) {
@@ -54,6 +56,10 @@ export function useTransactionFees({
 
       if (minFee) {
         updates = { ...updates, minFee };
+      }
+
+      if (feeTokenID) {
+        updates = { ...updates, feeTokenID };
       }
 
       if (dynamicFeeEstimates) {
