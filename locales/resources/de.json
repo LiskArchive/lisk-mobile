@@ -627,7 +627,6 @@
     }
   },
   "scanner" : {
-    "cameraAccessTitle": "Erlauben Sie den Kamerazugriff",
-    "cameraAccessDescription": "Lisk muss zum Scannen von QR-Codes auf Ihre Kamera zugreifen. Tippen Sie auf das Symbol oben, um zu den Einstellungen zu gelangen."
+    "cameraAccessTitle": "“Lisk” hat keinen Zugriff auf Ihre Kamera. Um den Zugriff zu aktivieren, tippen Sie auf Einstellungen und schalten Sie die Kamera ein."
   }
 }
