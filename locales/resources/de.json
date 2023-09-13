@@ -627,6 +627,7 @@
     }
   },
   "scanner" : {
-    "cameraAccessTitle": "“Lisk” hat keinen Zugriff auf Ihre Kamera. Um den Zugriff zu aktivieren, tippen Sie auf Einstellungen und schalten Sie die Kamera ein."
+    "cameraAccessTitle": "Erlauben Sie den Kamerazugriff",
+    "cameraAccessDescription": "“Lisk” hat keinen Zugriff auf Ihre Kamera. Um den Zugriff zu aktivieren, tippen Sie auf Einstellungen und schalten Sie die Kamera ein."
   }
 }

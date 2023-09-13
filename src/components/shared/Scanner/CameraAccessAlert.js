@@ -8,14 +8,18 @@ export default function CameraAccessAlert({ type, close }) {
 
   useEffect(() => {
     if (type === 'noAuth') {
-      Alert.alert(i18next.t('scanner.cameraAccessTitle'), null, [
-        {
-          text: i18next.t('commons.buttons.cancel'),
-          onPress: close,
-          style: 'cancel',
-        },
-        { text: i18next.t('settings.title'), onPress: handleOpenSettingsPress },
-      ]);
+      Alert.alert(
+        i18next.t('scanner.cameraAccessTitle'),
+        i18next.t('scanner.cameraAccessDescription'),
+        [
+          {
+            text: i18next.t('commons.buttons.cancel'),
+            onPress: close,
+            style: 'cancel',
+          },
+          { text: i18next.t('settings.title'), onPress: handleOpenSettingsPress },
+        ]
+      );
     }
   }, [close, type]);
 
