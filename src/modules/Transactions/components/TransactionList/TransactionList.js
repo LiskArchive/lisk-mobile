@@ -121,6 +121,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
                 ? i18next.t('transactions.transactionList.emptyText')
                 : "This account hasn't performed any transaction yet."
             }
+            styles={{ wrapper: { paddingVertical: 32 } }}
           />
         )}
         renderError={() => (

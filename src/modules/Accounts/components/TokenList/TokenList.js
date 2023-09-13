@@ -133,6 +133,7 @@ export default function TokenList({ mode = 'overview', address, style }) {
                 ? i18next.t('accounts.currentAccountEmptyTokenMessage')
                 : i18next.t('accounts.emptyTokenMessage')
             }
+            styles={{ wrapper: { paddingVertical: 32 } }}
           />
         )}
         renderError={() => (
