@@ -24,6 +24,7 @@ export default function NotFoundScreen() {
         description={i18next.t('navigation.notFound.description')}
         continueButtonTitle={i18next.t('navigation.notFound.continueButtonText')}
         illustration={<ErrorIllustrationSvg height={80} style={styles.illustration} />}
+        fluid
       />
     </SafeAreaView>
   );

@@ -133,20 +133,13 @@ export default function TokenList({ mode = 'overview', address, style }) {
                 ? i18next.t('accounts.currentAccountEmptyTokenMessage')
                 : i18next.t('accounts.emptyTokenMessage')
             }
-            styles={{
-              wrapper: styles.resultScreenContainer,
-              container: styles.resultScreenContainer,
-            }}
+            styles={{ wrapper: { paddingVertical: 32 } }}
           />
         )}
         renderError={() => (
           <ResultScreen
             illustration={<ErrorIllustrationSvg height={72} />}
             description={i18next.t('accounts.errorOnTokensText')}
-            styles={{
-              wrapper: styles.resultScreenContainer,
-              container: styles.resultScreenContainer,
-            }}
           >
             <LabelButton onPress={refetchTokens} textStyle={styles.labelButtonText}>
               {i18next.t('commons.buttons.reload')}

@@ -39,6 +39,7 @@ const BookmarkList = ({
       <ResultScreen
         illustration={<EmptyIllustrationSvg />}
         description={i18next.t('bookmarks.emptyText')}
+        fluid
       />
     )
   ) : (

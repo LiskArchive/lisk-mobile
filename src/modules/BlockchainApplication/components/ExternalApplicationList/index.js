@@ -39,6 +39,7 @@ export default function ExternalApplicationList() {
         <ResultScreen
           illustration={<EmptyExternalApplicationsIllustrationSvg />}
           description={i18next.t('application.explore.externalApplicationList.emptyText')}
+          fluid
         />
       )}
     />

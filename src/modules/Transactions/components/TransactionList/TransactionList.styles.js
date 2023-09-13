@@ -29,10 +29,6 @@ export default function getTransactionListStyles() {
         marginTop: 8,
         marginBottom: 8,
       },
-      resultScreenContainer: {
-        flex: undefined,
-        maxHeight: 150,
-      },
     },
     [themes.light]: {
       container: {

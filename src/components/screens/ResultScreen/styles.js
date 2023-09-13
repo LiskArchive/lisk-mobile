@@ -8,6 +8,9 @@ export default () => ({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    fluid: {
+      flex: 1,
+    },
     illustration: {
       marginBottom: 16,
     },

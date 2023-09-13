@@ -52,9 +52,6 @@ export default function getTokenListStyles() {
         marginTop: 8,
         marginBottom: 8,
       },
-      resultScreenContainer: {
-        marginBottom: 8,
-      },
     },
     [themes.light]: {
       container: {
