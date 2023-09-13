@@ -146,97 +146,91 @@ export default function AddBookmark({ route }) {
   }, [bookmarkList, navigation, route.params?.account, route.params?.action]);
 
   return (
-    <>
-      <SafeAreaView style={[styles.container, styles.theme.container]}>
-        <HeaderBackButton
-          title={i18next.t('bookmarks.addBookmark.title')}
-          onPress={navigation.goBack}
-        />
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <HeaderBackButton
+        title={i18next.t('bookmarks.addBookmark.title')}
+        onPress={navigation.goBack}
+      />
 
-        <Scanner
-          ref={scanner}
-          navigation={navigation}
-          readFromCameraRoll={true}
-          handleQRCodeRead={handleQRCodeRead}
-          onClose={handleCloseScanner}
-          permissionDialogTitle={i18next.t('Permission to use camera')}
-          permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
-        />
-        <ScrollView style={styles.body} testID="add-bookmark-screen">
-          {!incomingData ? (
-            <View style={styles.addressContainer}>
-              <Input
-                label={
-                  <View style={styles.labelContainer}>
-                    <P style={[styles.label, styles.theme.label]}>
-                      {i18next.t('bookmarks.addBookmark.addressLabel')}
-                    </P>
+      <Scanner
+        ref={scanner}
+        navigation={navigation}
+        readFromCameraRoll={true}
+        handleQRCodeRead={handleQRCodeRead}
+        onClose={handleCloseScanner}
+        permissionDialogTitle={i18next.t('Permission to use camera')}
+        permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
+      />
+      <ScrollView style={styles.body} testID="add-bookmark-screen">
+        {!incomingData ? (
+          <View style={styles.addressContainer}>
+            <Input
+              label={
+                <View style={styles.labelContainer}>
+                  <P style={[styles.label, styles.theme.label]}>
+                    {i18next.t('bookmarks.addBookmark.addressLabel')}
+                  </P>
 
-                    <IconButton
-                      onPress={() => scanner.current?.toggleCamera?.()}
-                      titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                      title={i18next.t('Scan')}
-                      icon="scanner"
-                      iconSize={18}
-                      color={colors.light.ultramarineBlue}
-                    />
-                  </View>
-                }
-                autoCorrect={false}
-                autoCapitalize="none"
-                innerStyles={{
-                  errorMessage: styles.errorMessage,
-                }}
-                testID="bookmark-address-input"
-                onChange={(value) => setAddress({ value })}
-                value={address.value}
-                error={setError(address.validity, 'address')}
-                adornments={{
-                  left: <Avatar address={address.value} size={24} />,
-                }}
-              />
-            </View>
-          ) : (
-            <View style={styles.row}>
-              <P style={[styles.label, styles.theme.label]}>
-                {i18next.t('bookmarks.addBookmark.addressLabel')}
+                  <IconButton
+                    onPress={() => scanner.current?.toggleCamera?.()}
+                    titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
+                    title={i18next.t('Scan')}
+                    icon="scanner"
+                    iconSize={18}
+                    color={colors.light.ultramarineBlue}
+                  />
+                </View>
+              }
+              autoCorrect={false}
+              autoCapitalize="none"
+              innerStyles={{
+                errorMessage: styles.errorMessage,
+              }}
+              testID="bookmark-address-input"
+              onChange={(value) => setAddress({ value })}
+              value={address.value}
+              error={setError(address.validity, 'address')}
+              adornments={{
+                left: <Avatar address={address.value} size={24} />,
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.row}>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t('bookmarks.addBookmark.addressLabel')}
+            </P>
+
+            <View style={styles.staticAddressContainer}>
+              <Avatar address={incomingData.address || ''} style={styles.staticAvatar} size={35} />
+
+              <P style={[styles.address, styles.theme.address]}>
+                {stringShortener(incomingData.address, 6, 5)}
               </P>
-
-              <View style={styles.staticAddressContainer}>
-                <Avatar
-                  address={incomingData.address || ''}
-                  style={styles.staticAvatar}
-                  size={35}
-                />
-
-                <P style={[styles.address, styles.theme.address]}>
-                  {stringShortener(incomingData.address, 6, 5)}
-                </P>
-              </View>
             </View>
-          )}
+          </View>
+        )}
 
-          <Input
-            testID="bookmark-label-input"
-            label={i18next.t('bookmarks.addBookmark.labelLabel')}
-            autoCorrect={false}
-            autoCapitalize="none"
-            innerStyles={{ inputLabel: styles.input }}
-            multiline={false}
-            onChange={handleLabel}
-            error={setError(label.validity, 'label')}
-            value={label.value}
-          />
-        </ScrollView>
+        <Input
+          testID="bookmark-label-input"
+          label={i18next.t('bookmarks.addBookmark.labelLabel')}
+          autoCorrect={false}
+          autoCapitalize="none"
+          innerStyles={{ inputLabel: styles.input }}
+          multiline={false}
+          onChange={handleLabel}
+          error={setError(label.validity, 'label')}
+          value={label.value}
+        />
+      </ScrollView>
 
-        <View style={[styles.footer]}>
-          <PrimaryButton onClick={handleSubmit} noTheme testID="add-bookmark-button">
-            {editMode
-              ? i18next.t('bookmarks.addBookmark.saveButtonText')
-              : i18next.t('bookmarks.addBookmark.addButtonText')}
-          </PrimaryButton>
-        </View>
-      </SafeAreaView>
-    </>
+      <View style={[styles.footer]}>
+        <PrimaryButton onClick={handleSubmit} noTheme testID="add-bookmark-button">
+          {editMode
+            ? i18next.t('bookmarks.addBookmark.saveButtonText')
+            : i18next.t('bookmarks.addBookmark.addButtonText')}
+        </PrimaryButton>
+      </View>
+    </SafeAreaView>
   );
 }
