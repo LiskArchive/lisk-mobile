@@ -51,7 +51,6 @@
   },
   "Activity": "Aktivitäten",
   "Add to bookmarks": "Zu Lesezeichen hinzufügen",  
-  "Allow camera access": "Kamerazugriff erlauben",
   "Amount": "Betrag",
   "Status": "",  
   "Cancel": "Abbrechen",
@@ -59,8 +58,7 @@
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
-  "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
-  "New bookmark": "Neues Lesezeichen",
+  "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",  
   "No internet connection!": "Keine Internetverbindung!",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
@@ -188,6 +186,7 @@
     "title": "Lesezeichen",
     "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
+      "title": "Neues Lesezeichen",
       "addressLabel": "Wallet-Adresse",
       "labelLabel": "Bezeichnung",
       "invalidLabel": "Die Bezeichnung muss zwischen 3 und 20 Zeichen lang sein",
@@ -629,6 +628,6 @@
   },
   "scanner" : {
     "cameraAccessTitle": "Erlauben Sie den Kamerazugriff",
-    "cameraAccessDescription": "Lisk muss zum Scannen von QR-Codes auf Ihre Kamera zugreifen. Tippen Sie auf das Symbol oben, um zu den Einstellungen zu gelangen."
+    "cameraAccessDescription": "“Lisk” hat keinen Zugriff auf Ihre Kamera. Um den Zugriff zu aktivieren, tippen Sie auf Einstellungen und schalten Sie die Kamera ein."
   }
 }

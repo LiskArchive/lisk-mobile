@@ -147,6 +147,11 @@ export default function AddBookmark({ route }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <HeaderBackButton
+        title={i18next.t('bookmarks.addBookmark.title')}
+        onPress={navigation.goBack}
+      />
+
       <Scanner
         ref={scanner}
         navigation={navigation}
@@ -156,7 +161,6 @@ export default function AddBookmark({ route }) {
         permissionDialogTitle={i18next.t('Permission to use camera')}
         permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
       />
-
       <ScrollView style={styles.body} testID="add-bookmark-screen">
         {!incomingData ? (
           <View style={styles.addressContainer}>

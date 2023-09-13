@@ -33,11 +33,6 @@ export default function RecoveryPhraseScreen() {
 
       <Scanner
         ref={scannerRef}
-        containerStyles={{
-          cameraRoll: styles.cameraRoll,
-          cameraOverlay: styles.cameraOverlay,
-        }}
-        fullScreen={true}
         navigation={navigation}
         readFromCameraRoll={false}
         onQRCodeRead={handleQRCodeRead}
