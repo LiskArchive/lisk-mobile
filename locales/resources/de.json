@@ -58,8 +58,7 @@
   "Initialize now": "Jetzt initialisieren",
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
-  "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",
-  "New bookmark": "Neues Lesezeichen",
+  "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",  
   "No internet connection!": "Keine Internetverbindung!",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
@@ -187,6 +186,7 @@
     "title": "Lesezeichen",
     "emptyText": "Noch keine Adressen mit Lesezeichen versehen.",
     "addBookmark": {
+      "title": "Neues Lesezeichen",
       "addressLabel": "Wallet-Adresse",
       "labelLabel": "Bezeichnung",
       "invalidLabel": "Die Bezeichnung muss zwischen 3 und 20 Zeichen lang sein",

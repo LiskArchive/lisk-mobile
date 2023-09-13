@@ -71,9 +71,7 @@ const navigationOptions = {
   },
   AddBookmark: {
     title: null,
-    headerLeft: (props) => <HeaderBackButton {...props} title="New bookmark" />,
-    headerStyle: navigationNoShadowStyle,
-    headerTitleStyle: navigationGenericTitleStyle,
+    header: () => null,
   },
   SignIn: {
     header: () => null,

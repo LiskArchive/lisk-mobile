@@ -58,7 +58,6 @@
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
-  "New bookmark": "New bookmark",
   "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
@@ -185,6 +184,7 @@
     "title": "Bookmarks",
     "emptyText": "No addresses bookmarked yet.",
     "addBookmark": {
+      "title": "New bookmark",
       "addressLabel": "Wallet address",
       "labelLabel": "Label",
       "invalidLabel": "The label must be between 3 to 20 characters",

@@ -118,10 +118,6 @@ export default function ApplicationsExplorer() {
 
         <Scanner
           ref={scannerRef}
-          containerStyles={{
-            cameraRoll: styles.cameraRoll,
-            cameraOverlay: styles.cameraOverlay,
-          }}
           navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={showNewConnectionModal}
