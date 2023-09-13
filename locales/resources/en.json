@@ -50,8 +50,7 @@
     "continueToCreateAccountButton": "Continue to account creation"
   },
   "Activity": "Activity",
-  "Add to bookmarks": "Add to bookmarks",
-  "Allow camera access": "Allow camera access",
+  "Add to bookmarks": "Add to bookmarks",  
   "Amount": "Amount",
   "Status": "Status",
   "Cancel": "Cancel",
@@ -99,6 +98,7 @@
   "will be available to unlock": "will be available to unlock in ~ {{timeToUnlock}}",
   "available to unlock (only on desktop)": "available to unlock (only on desktop)",
   "settings": {
+    "title": "Settings",
     "headers": {
       "general": "General",
       "info": "Info",
@@ -631,7 +631,6 @@
     }
   },
   "scanner": {
-    "cameraAccessTitle": "Allow camera access",
-    "cameraAccessDescription": "Lisk needs to access your camera for scanning QR codes. Tap on the icon above to go to settings."
+    "cameraAccessTitle": "“Lisk” does not have access to your camera. To enable access, tap settings and turn on camera.",
   }
 }

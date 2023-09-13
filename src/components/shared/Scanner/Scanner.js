@@ -1,12 +1,5 @@
 /* eslint-disable max-statements */
-import React, {
-  Fragment,
-  useEffect,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useCallback,
-} from 'react';
+import React, { useEffect, useState, forwardRef, useImperativeHandle, useCallback } from 'react';
 import i18next from 'i18next';
 import { useModal } from 'hooks/useModal';
 import { AppState, SafeAreaView } from 'react-native';
@@ -15,7 +8,7 @@ import { RNCamera } from 'react-native-camera';
 import DropDownHolder from 'utilities/alert';
 import { launchImageLibrary } from 'react-native-image-picker';
 import RNQRGenerator from 'rn-qr-generator';
-import CameraAccess from './CameraAccess';
+import CameraAccessAlert from './CameraAccessAlert';
 import CameraOverlay from './CameraOverlay';
 import withTheme from '../withTheme';
 import getStyles from './Scanner.styles';
@@ -28,7 +21,6 @@ const Scanner = forwardRef(
       onQRCodeRead,
       onClose,
       onCameraVisibilityChange,
-      fullScreen,
       permissionDialogTitle,
       permissionDialogMessage,
       reference,
@@ -125,36 +117,36 @@ const Scanner = forwardRef(
       AppState.addEventListener('change', checkPermissions);
     }, []);
 
+    if (!camera.visible) {
+      return null;
+    }
+
     return (
-      <Fragment>
-        {camera.visible ? (
-          <SafeAreaView style={styles.scannerContainer}>
-            <RNCamera
-              ref={reference}
-              style={[styles.preview, styles.cameraPreview, scanner]}
-              onBarCodeRead={readQRcode}
-              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-              type={RNCamera.Constants.Type.back}
-              captureAudio={false}
-              notAuthorizedView={<CameraAccess close={toggleCamera} fullScreen={fullScreen} />}
-              pendingAuthorizationView={<CameraAccess close={toggleCamera} />}
-              androidCameraPermissionOptions={{
-                title: permissionDialogTitle,
-                message: permissionDialogMessage,
-                buttonPositive: 'Ok',
-                buttonNegative: 'Cancel',
-              }}
-            >
-              <CameraOverlay
-                containerStyles={[styles.cameraOverlay, cameraOverlay]}
-                toggleGallery={toggleGallery}
-                photoPermission={photo.permission}
-                close={toggleCamera}
-              />
-            </RNCamera>
-          </SafeAreaView>
-        ) : null}
-      </Fragment>
+      <SafeAreaView style={styles.scannerContainer}>
+        <RNCamera
+          ref={reference}
+          style={[styles.preview, styles.cameraPreview, scanner]}
+          onBarCodeRead={readQRcode}
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          type={RNCamera.Constants.Type.back}
+          captureAudio={false}
+          notAuthorizedView={<CameraAccessAlert close={toggleCamera} type="noAuth" />}
+          pendingAuthorizationView={<CameraAccessAlert close={toggleCamera} type="pendingAuth" />}
+          androidCameraPermissionOptions={{
+            title: permissionDialogTitle,
+            message: permissionDialogMessage,
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+        >
+          <CameraOverlay
+            containerStyles={[styles.cameraOverlay, cameraOverlay]}
+            toggleGallery={toggleGallery}
+            photoPermission={photo.permission}
+            close={toggleCamera}
+          />
+        </RNCamera>
+      </SafeAreaView>
     );
   }
 );

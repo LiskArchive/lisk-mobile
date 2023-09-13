@@ -122,7 +122,6 @@ export default function ApplicationsExplorer() {
             cameraRoll: styles.cameraRoll,
             cameraOverlay: styles.cameraOverlay,
           }}
-          fullScreen
           navigation={navigation}
           readFromCameraRoll={false}
           onQRCodeRead={showNewConnectionModal}
