@@ -11,6 +11,7 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import Stepper from 'components/shared/Stepper';
 import DataRenderer from 'components/shared/DataRenderer';
 import ResultScreen from 'components/screens/ResultScreen';
+import { LabelButton } from 'components/shared/toolBox/button';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCreateTransaction } from '../Transactions/hooks/useCreateTransaction';
@@ -104,6 +105,12 @@ export default function SendToken() {
     }
   };
 
+  const handleReloadPress = () =>
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Send' }],
+    });
+
   const steps = [
     {
       component: SendTokenApplicationsStep,
@@ -153,7 +160,11 @@ export default function SendToken() {
         )}
         renderLoading={() => <SendTokenSkeleton />}
         renderError={(error) => (
-          <ResultScreen illustration={<ErrorIllustrationSvg />} description={error.message} fluid />
+          <ResultScreen illustration={<ErrorIllustrationSvg />} description={error.message} fluid>
+            <LabelButton onPress={handleReloadPress}>
+              {i18next.t('commons.buttons.reload')}
+            </LabelButton>
+          </ResultScreen>
         )}
       />
     </SafeAreaView>
