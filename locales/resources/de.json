@@ -275,16 +275,15 @@
       "enableLegacyAccount": "",
       "enableLegacyAccountDescription": "",
       "customDerivationPathDescription": "",
-
       "buttons": {
         "passwordSetupContinueButton": "Weiter zu Dashboard",
         "saveAccountButton": "Konto speichern"
       },
       "migration": {
-        "title": "",
-        "content": "",
+        "title": "Einführung der Passworteinrichtung für Lisk V3",
+        "content": "Um Ihr Konto sicher zu halten, führen wir Passwörter ein. Mit Passwörtern können Sie Ihre Transaktionen ohne Ihr Passphrase signieren.",
         "button": {
-          "continue": ""
+          "continue": "Mein Passwort einrichten"
         }
       }
     },

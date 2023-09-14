@@ -280,7 +280,7 @@
       },
       "migration": {
         "title": "Introducing password set up for Lisk V3",
-        "content": "It looks like you already have this account saved on this device. To keep your account secure, we’re introducing passwords. With passwords, you will be able to sign your transactions without your secret recovery phrase.",
+        "content": "To keep your account secure, we’re introducing passwords. With passwords, you will be able to sign your transactions without your passphrase.",
         "button": {
           "continue": "Set up my password"
         }
