@@ -37,15 +37,15 @@
       "continueButtonText": "Continue to home"
     }
   },
-  "intro": {
+  "intro" : {
+    "manageAccountsTitle": "Manage accounts",
+    "manageAccountsDescription": "Creating an account is your first step in benefiting from blockchain technology. Create and manage several accounts on Lisk Mobile.",
     "sendAndRequestTokensTitle": "Send and request tokens",
-    "sendAndRequestTokensDescription": "Creating an account is your first step in benefiting from blockchain technology. With your account, you can securely send and request tokens within and across blockchain applications.",
-    "uniqueAvatarTitle": "A unique avatar",
-    "uniqueAvatarDescription": "The Avatar represents the address, making it easy to recognize.",
+    "sendAndRequestTokensDescription": "Securely send and request tokens within and across blockchain applications.",    
     "manageApplicationsTitle": "Manage blockchain application assets",
-    "manageApplicationsDescription": "You can manage several blockchain application assets using your accounts.",
+    "manageApplicationsDescription": "You can manage several blockchain application assets (claim tokens, NFTs, etc..) using your accounts.",
     "skipButton": "Skip",
-    "nextButton": "Continue",
+    "nextButton": "Next",
     "continueToAddAccountButton": "Continue to add account",
     "continueToCreateAccountButton": "Continue to account creation"
   },

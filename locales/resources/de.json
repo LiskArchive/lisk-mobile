@@ -38,15 +38,15 @@
     }  
   },
   "intro": {
-    "sendAndRequestTokensTitle": "Senden und Token anfordern",
-    "sendAndRequestTokensDescription": "Ein Konto zu erstellen ist der erste Schritt, um von der Blockchain-Technologie zu profitieren. Mit Ihrem Konto können Sie sicher Tokens innerhalb und über Blockchain-Anwendungen senden und anfordern.",
-    "uniqueAvatarTitle": "Ein einzigartiger Avatar",
-    "uniqueAvatarDescription": "Der Avatar repräsentiert die Adresse und macht es einfach zu erkennen.",
-    "manageApplicationsTitle": "Verwalten Sie Anwendungsvermögen von Blockchain-Anwendungen",
-    "manageApplicationsDescription": "Sie können mehrere Anwendungsvermögen von Blockchain-Anwendungen (Anspruchstoken, NFTs usw.) mit Ihren Konten verwalten.",
+    "manageAccountsTitle": "Konten verwalten",
+    "manageAccountsDescription": "Die Erstellung eines Kontos ist Ihr erster Schritt, um von der Blockchain-Technologie zu profitieren. Erstellen und verwalten Sie mehrere Konten auf Lisk Mobile.",
+    "sendAndRequestTokensTitle": "Tokens senden und anfordern",
+    "sendAndRequestTokensDescription": "Senden und fordern Sie Tokens sicher innerhalb und zwischen Blockchain-Anwendungen an.",
+    "manageApplicationsTitle": "Blockchain-Anwendungsressourcen verwalten",
+    "manageApplicationsDescription": "Sie können mehrere Blockchain-Anwendungsressourcen (Beanspruchung von Tokens, NFTs usw.) mit Ihren Konten verwalten.",
     "skipButton": "Überspringen",
     "nextButton": "Weiter",
-    "continueToAddAccountButton": "Weiter zur Konto hinzufügen",
+    "continueToAddAccountButton": "Weiter zum Konto hinzufügen",
     "continueToCreateAccountButton": "Weiter zur Kontoerstellung"
   },
   "Activity": "Aktivitäten",
