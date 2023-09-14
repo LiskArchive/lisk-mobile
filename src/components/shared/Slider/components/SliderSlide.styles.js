@@ -2,14 +2,13 @@ import { Dimensions } from 'react-native';
 
 import { themes, colors, boxes } from 'constants/styleGuide';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function getSliderSlideStyles() {
   return {
     common: {
       container: {
         width,
-        height,
         alignItems: 'center',
         padding: boxes.boxPadding,
       },
@@ -21,12 +20,13 @@ export default function getSliderSlideStyles() {
         flex: 1,
         width: '100%',
         alignItems: 'center',
+        justifyContent: 'center',
       },
       title: {
         textAlign: 'center',
       },
       description: {
-        marginVertical: 12,
+        marginTop: 12,
         textAlign: 'center',
       },
     },
