@@ -77,6 +77,7 @@ const ManageApplication = ({ nextStep, style, navigation }) => {
         Component={ApplicationRow}
         onItemPress={selectApplication}
         showActive
+        style={{ container: styles.container }}
         deleteApplication={deleteApplication}
         navigation={navigation}
       />

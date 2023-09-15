@@ -1,24 +1,19 @@
 /* eslint-disable max-statements */
-import React, { useEffect } from 'react';
-import {
-  TouchableOpacity,
-  View,
-  KeyboardAvoidingView,
-  Animated,
-  SafeAreaView,
-  Platform,
-  ScrollView,
-} from 'react-native';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
+import { TouchableOpacity, View, Platform, Keyboard } from 'react-native';
 import { useModal } from 'hooks/useModal';
-
+import BottomSheet from '@gorhom/bottom-sheet';
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 
 import getStyles from './styles';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const BottomModal = ({ style }) => {
+const BottomModal = () => {
   const { toggle: toggleModalContext, close, isOpen, component, showClose } = useModal();
+  const bottomSheetRef = useRef(null);
+  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
 
   const { styles } = useTheme({ styles: getStyles() });
 
@@ -28,41 +23,85 @@ const BottomModal = ({ style }) => {
     }
   }, [isOpen, toggleModalContext]);
 
+  const snapPoints = useMemo(() => (keyboardIsOpen ? ['75%'] : ['60%']), [keyboardIsOpen]);
+
+  const handleKeyboardDidShow = () => {
+    setKeyboardIsOpen(true);
+  };
+
+  const handleKeyboardDidHide = () => {
+    setKeyboardIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      const keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        handleKeyboardDidShow
+      );
+
+      const keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        handleKeyboardDidHide
+      );
+
+      return () => {
+        keyboardDidShowListener.remove();
+        keyboardDidHideListener.remove();
+      };
+    }
+  }, []);
+
+  const onModalClose = () => {
+    close();
+  };
+
+  const closeModal = () => {
+    bottomSheetRef.current?.close?.();
+  };
+
   if (!isOpen || !component) {
     return null;
   }
 
   return (
-    <Animated.View style={styles.content} onPress={close}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : ''}
-        style={[styles.overlay, styles.theme.overlay, style?.overlay]}
+    <KeyboardAwareScrollView
+      style={[styles.content]}
+      contentContainerStyle={[styles.content, styles.theme.content]}
+      bounces
+      enableOnAndroid
+      renderToHardwareTextureAndroid
+      nestedScrollEnabled
+      extraScrollHeight={50}
+    >
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={0}
+        snapPoints={snapPoints}
+        onClose={onModalClose}
+        android_keyboardInputMode="adjustResize"
+        keyboardBlurBehavior="restore"
+        keyboardBehavior="interactive"
+        handleComponent={() => (
+          <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
+        )}
+        enablePanDownToClose={showClose}
+        style={[styles.container]}
+        backgroundStyle={[styles.theme.container]}
+        enableHandlePanningGesture
       >
-        <Animated.View>
-          <SafeAreaView style={[styles.safeArea, styles.container, styles.theme.container]}>
-            <View style={[styles.container, style?.container]}>
-              <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
-
-              {showClose && (
-                <TouchableOpacity
-                  style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
-                  onPress={close}
-                >
-                  <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
-                </TouchableOpacity>
-              )}
-
-              {/* TODO: Replace {children} container with another VirtualizedList-backed container.
-          VirtualizedLists should never be nested inside plain ScrollViews with the 
-          same orientation because it can break windowing and other functionality.
-          (details on https://github.com/LiskHQ/lisk-mobile/issues/1606).
-          */}
-              <ScrollView style={[style?.children]}>{component}</ScrollView>
-            </View>
-          </SafeAreaView>
-        </Animated.View>
-      </KeyboardAvoidingView>
-    </Animated.View>
+        {showClose && (
+          <TouchableOpacity
+            style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
+            onPress={closeModal}
+          >
+            <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
+          </TouchableOpacity>
+        )}
+        {component}
+        <View style={styles.bottomHeight} />
+      </BottomSheet>
+    </KeyboardAwareScrollView>
   );
 };
 
