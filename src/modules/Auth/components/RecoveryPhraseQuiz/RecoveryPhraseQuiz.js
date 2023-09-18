@@ -143,8 +143,6 @@ export default function RecoveryPhraseQuiz({
           const sortedMissing = missing.sort();
           const optionIndex = sortedMissing.indexOf(index);
 
-          console.log({ sortedMissing, optionIndex, index, val, answers });
-
           const element =
             optionIndex >= 0 ? (
               generatePlaceholder(index, optionIndex, val)
