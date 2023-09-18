@@ -14,7 +14,6 @@ import HeaderBackButton from 'components/navigation/headerBackButton';
 import RecoveryPhraseSecurityAdviceCard from 'modules/Auth/components/RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
 import { getCopyRecoveryPhraseStyles } from './CopyRecoveryPhrase.styles';
-import RecoveryPhraseSecurityAdviceCard from '../../../../Auth/components/RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.MD;
 const qrCodeSize = deviceWidth() * (isSmallScreen ? 0.64 : 0.72);
