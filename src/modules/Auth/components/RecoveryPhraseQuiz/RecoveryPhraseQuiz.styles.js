@@ -58,6 +58,7 @@ export default function getRecoveryPhraseQuizStyles() {
         alignItems: 'center',
         fontFamily: fonts.family.recoveryPhraseText,
         fontSize: fonts.size.base,
+        borderBottomColor: colors.light.ultramarineBlue,
       },
       deActivePlaceholder: {
         borderBottomColor: colors.light.ghost,

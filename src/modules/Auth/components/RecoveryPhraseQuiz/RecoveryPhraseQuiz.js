@@ -115,9 +115,16 @@ export default function RecoveryPhraseQuiz({
 
   const generatePlaceholder = (index, optionIndex, value) => {
     const style = visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
+
     return (
       <View style={styles.recoveryPhraseWordContainer}>
-        <P style={[styles.label, styles.theme.label, answers[optionIndex].textStyle]}>
+        <P
+          style={
+            visibleOptions === optionIndex
+              ? styles.theme.recoveryPhraseSelectedIndexText
+              : styles.theme.recoveryPhraseIndexText
+          }
+        >
           {index + 1}.
         </P>
 
