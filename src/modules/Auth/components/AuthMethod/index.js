@@ -22,7 +22,7 @@ import AuthTypeItem from '../AuthType';
 import getStyles from './styles';
 import { selectEncryptedFile } from '../../utils/documentPicker';
 import { retrieveAccountsPasswordMapFromKeychain } from '../../utils/recoveryPhrase';
-import Version2Migration from '../Version2Migration';
+import Version2MigrationScreen from '../Version2MigrationScreen/Version2MigrationScreen';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -110,7 +110,7 @@ export default function AuthMethod({ route }) {
   }
 
   if (v2RecoveryPhrase) {
-    return <Version2Migration recoveryPhrase={v2RecoveryPhrase} />;
+    return <Version2MigrationScreen recoveryPhrase={v2RecoveryPhrase} />;
   }
 
   return (

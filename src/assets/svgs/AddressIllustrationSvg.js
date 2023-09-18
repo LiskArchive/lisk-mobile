@@ -9,7 +9,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
 
   const strokeColor = theme === themes.light ? colors.light.zodiacBlue : colors.dark.platinumGray;
 
-  const fillColor = theme === themes.light ? colors.light.platinumGray : colors.dark.volcanicSand;
+  const fillColor = theme === themes.light ? colors.light.white : colors.dark.mainBg;
 
   return (
     <Svg width={width} height={height} viewBox="0 0 249 338" fill="none" style={style}>
@@ -29,7 +29,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
         fillRule="evenodd"
         clipRule="evenodd"
         d="M105.232 307.179C101.406 305.561 97.1989 304.666 92.7831 304.666H69.0621C51.3999 304.666 37.0811 318.985 37.0811 336.648V336.658"
-        fill="white"
+        fill={fillColor}
       />
       <Path
         d="M105.232 307.179C101.406 305.561 97.1989 304.666 92.7831 304.666H69.0621C51.3999 304.666 37.0811 318.985 37.0811 336.648V336.658"
@@ -87,7 +87,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M1 337.094H248.296V0.871094H1V337.094Z"
-          fill="white"
+          fill={fillColor}
         />
       </Mask>
       <G mask="url(#mask0_9_19181)">
@@ -109,7 +109,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M104.881 336.658H113.108V117.976H104.881V336.658Z"
-          fill={fillColor}
+          fill={strokeColor}
         />
         <Path
           fillRule="evenodd"
@@ -139,7 +139,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M208.264 336.655C208.264 331.812 204.338 327.885 199.493 327.885H192.989C188.145 327.885 184.218 331.811 184.218 336.655V336.658H208.264V336.655Z"
-          fill="white"
+          fill={fillColor}
         />
         <Path
           fillRule="evenodd"
@@ -153,7 +153,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M55.7419 107.91H97.3264V102.952H55.7419V107.91Z"
-          fill="white"
+          fill={fillColor}
         />
         <Path
           fillRule="evenodd"
@@ -167,7 +167,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M47.6335 112.868H97.3265V107.911H47.6335V112.868Z"
-          fill="white"
+          fill={fillColor}
         />
         <Path
           fillRule="evenodd"
@@ -181,7 +181,7 @@ export default function AddressIllustrationSvg({ height = 338, width = 249, styl
           fillRule="evenodd"
           clipRule="evenodd"
           d="M44.1438 117.815H97.3265V112.857H44.1438V117.815Z"
-          fill="white"
+          fill={fillColor}
         />
         <Path
           fillRule="evenodd"

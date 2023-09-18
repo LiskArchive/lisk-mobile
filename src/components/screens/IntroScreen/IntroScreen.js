@@ -11,7 +11,7 @@ import { settingsUpdated as settingsUpdatedAction } from 'modules/Settings/store
 import Slider from 'components/shared/Slider/Slider';
 import { PrimaryButton, Button, LabelButton } from 'components/shared/toolBox/button';
 import AddressIllustrationSvg from 'assets/svgs/AddressIllustrationSvg';
-import AvatarIllustrationSvg from 'assets/svgs/AvatarIllustrationSvg';
+import WalletKeyIllustrationSvg from 'assets/svgs/WalletKeyIllustrationSvg';
 import LockerIllustrationSvg from 'assets/svgs/LockerIllustrationSvg';
 
 import getIntroScreenStyles from './IntroScreen.styles';
@@ -30,15 +30,15 @@ export default function IntroScreen() {
   const slides = [
     {
       id: 1,
-      title: i18next.t('intro.sendAndRequestTokensTitle'),
-      description: i18next.t('intro.sendAndRequestTokensDescription'),
-      body: <AddressIllustrationSvg />,
+      title: i18next.t('intro.manageAccountsTitle'),
+      description: i18next.t('intro.manageAccountsDescription'),
+      body: <WalletKeyIllustrationSvg />,
     },
     {
       id: 2,
-      title: i18next.t('intro.uniqueAvatarTitle'),
-      description: i18next.t('intro.uniqueAvatarDescription'),
-      body: <AvatarIllustrationSvg />,
+      title: i18next.t('intro.sendAndRequestTokensTitle'),
+      description: i18next.t('intro.sendAndRequestTokensDescription'),
+      body: <AddressIllustrationSvg />,
     },
     {
       id: 3,
@@ -90,7 +90,11 @@ export default function IntroScreen() {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="intro-screen">
-      <Slider data={slides} renderController={renderFooter} style={{ container: { flex: 1 } }} />
+      <Slider
+        data={slides}
+        renderController={renderFooter}
+        style={{ container: { flex: 1 }, slide: { title: { maxWidth: 300 } } }}
+      />
     </SafeAreaView>
   );
 }
