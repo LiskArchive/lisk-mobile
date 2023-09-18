@@ -18,7 +18,7 @@
     "pasteFromClipboard": "Paste from clipboard",
     "pastedFromClipboard": "Pasted",
     "recoveryPhrase": {
-      "writeDownInstructions": "Writing it down manually offers greater security compared to copying and pasting the recovery phrase."      
+      "writeDownInstructions": "Writing it down manually offers greater security compared to copying and pasting the recovery phrase."
     }
   },
   "fallbackScreens": {

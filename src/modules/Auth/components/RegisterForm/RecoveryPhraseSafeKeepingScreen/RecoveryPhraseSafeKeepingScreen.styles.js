@@ -31,12 +31,21 @@ export default function getRegisterSafeKeepingStyles() {
         justifyContent: 'space-between',
         alignItems: 'center',
       },
+      recoveryPhraseWordsContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginBottom: 8,
+      },
+      recoveryPhraseWordContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
       recoveryPhraseText: {
         lineHeight: 33,
         fontSize: fonts.size.base,
         fontFamily: fonts.family.recoveryPhraseText,
-        textAlign: 'center',
-        marginBottom: 24,
       },
       copyContainer: {
         alignItems: 'center',
@@ -79,6 +88,9 @@ export default function getRegisterSafeKeepingStyles() {
       recoveryPhraseText: {
         color: colors.light.zodiacBlue,
       },
+      recoveryPhraseIndexText: {
+        color: colors.light.smoothGray,
+      },
     },
     [themes.dark]: {
       container: {
@@ -92,6 +104,9 @@ export default function getRegisterSafeKeepingStyles() {
       },
       recoveryPhraseText: {
         color: colors.dark.white,
+      },
+      recoveryPhraseIndexText: {
+        color: colors.light.mountainMist,
       },
     },
   };
