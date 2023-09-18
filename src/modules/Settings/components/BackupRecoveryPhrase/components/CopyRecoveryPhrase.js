@@ -11,6 +11,7 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import CopyRecoveryPhraseToClipboard from 'components/shared/CopyRecoveryPhraseToClipboard/CopyRecoveryPhraseToClipboard';
 import { P, A } from 'components/shared/toolBox/typography';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import RecoveryPhraseSecurityAdviceCard from 'modules/Auth/components/RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
 import { getCopyRecoveryPhraseStyles } from './CopyRecoveryPhrase.styles';
 import RecoveryPhraseSecurityAdviceCard from '../../../../Auth/components/RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
