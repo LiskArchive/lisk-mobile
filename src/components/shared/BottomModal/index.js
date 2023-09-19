@@ -1,63 +1,39 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useRef, useMemo, useState } from 'react';
-import { TouchableOpacity, View, Platform, Keyboard } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { KeyboardAvoidingView, TouchableOpacity, View } from 'react-native';
 import { useModal } from 'hooks/useModal';
-import BottomSheet from '@gorhom/bottom-sheet';
+import {
+  BottomSheetScrollView,
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from '@gorhom/bottom-sheet';
 import Icon from 'components/shared/toolBox/icon';
 import { useTheme } from 'contexts/ThemeContext';
 import { colors } from 'constants/styleGuide';
 
 import getStyles from './styles';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const BottomModal = () => {
   const { toggle: toggleModalContext, close, isOpen, component, showClose } = useModal();
   const bottomSheetRef = useRef(null);
-  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
+  const timeout = useRef();
 
   const { styles } = useTheme({ styles: getStyles() });
 
   useEffect(() => {
     if (isOpen) {
       toggleModalContext(isOpen);
+      bottomSheetRef.current?.present?.();
     }
+    return () => clearTimeout(timeout.current);
   }, [isOpen, toggleModalContext]);
-
-  const snapPoints = useMemo(() => (keyboardIsOpen ? ['75%'] : ['60%']), [keyboardIsOpen]);
-
-  const handleKeyboardDidShow = () => {
-    setKeyboardIsOpen(true);
-  };
-
-  const handleKeyboardDidHide = () => {
-    setKeyboardIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      const keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        handleKeyboardDidShow
-      );
-
-      const keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        handleKeyboardDidHide
-      );
-
-      return () => {
-        keyboardDidShowListener.remove();
-        keyboardDidHideListener.remove();
-      };
-    }
-  }, []);
-
-  const onModalClose = () => {
-    close();
-  };
 
   const closeModal = () => {
     bottomSheetRef.current?.close?.();
+    timeout.current = setTimeout(() => {
+      close();
+    }, 300);
   };
 
   if (!isOpen || !component) {
@@ -65,43 +41,54 @@ const BottomModal = () => {
   }
 
   return (
-    <KeyboardAwareScrollView
-      style={[styles.content]}
-      contentContainerStyle={[styles.content, styles.theme.content]}
-      bounces
-      enableOnAndroid
-      renderToHardwareTextureAndroid
-      nestedScrollEnabled
-      extraScrollHeight={50}
+    <KeyboardAvoidingView
+      contentContainerStyle={styles.content}
+      style={styles.content}
+      behavior="height"
     >
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={0}
-        snapPoints={snapPoints}
-        onClose={onModalClose}
-        android_keyboardInputMode="adjustResize"
-        keyboardBlurBehavior="restore"
-        keyboardBehavior="interactive"
-        handleComponent={() => (
-          <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
-        )}
-        enablePanDownToClose={showClose}
-        style={[styles.container]}
-        backgroundStyle={[styles.theme.container]}
-        enableHandlePanningGesture
-      >
-        {showClose && (
-          <TouchableOpacity
-            style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
-            onPress={closeModal}
+      <BottomSheetModalProvider>
+        <BottomSheetModal
+          ref={bottomSheetRef}
+          enableDynamicSizing
+          android_keyboardInputMode="adjustResize"
+          keyboardBlurBehavior="restore"
+          keyboardBehavior="extend"
+          handleComponent={() => (
+            <View style={[styles.horizontalLine, styles.theme.horizontalLine]} />
+          )}
+          enablePanDownToClose={false}
+          enableDismissOnClose={false}
+          backdropComponent={() => (
+            <TouchableWithoutFeedback
+              onPress={showClose ? closeModal : null}
+              containerStyle={[styles.content, styles.theme.content]}
+            />
+          )}
+          style={[styles.container]}
+          backgroundStyle={[styles.theme.container]}
+          enableHandlePanningGesture
+        >
+          <BottomSheetScrollView
+            bounces
+            enableOnAndroid
+            renderToHardwareTextureAndroid
+            nestedScrollEnabled
+            extraScrollHeight={50}
           >
-            <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
-          </TouchableOpacity>
-        )}
-        {component}
-        <View style={styles.bottomHeight} />
-      </BottomSheet>
-    </KeyboardAwareScrollView>
+            {showClose && (
+              <TouchableOpacity
+                style={[styles.closeButtonContainer, styles.theme.closeButtonContainer]}
+                onPress={closeModal}
+              >
+                <Icon name="cross" color={colors.light.ultramarineBlue} size={20} />
+              </TouchableOpacity>
+            )}
+            {component}
+            <View style={styles.bottomHeight} />
+          </BottomSheetScrollView>
+        </BottomSheetModal>
+      </BottomSheetModalProvider>
+    </KeyboardAvoidingView>
   );
 };
 
