@@ -38,9 +38,14 @@ export default function getRecoveryPhraseQuizStyles() {
         justifyContent: 'center',
         marginBottom: 32,
       },
+      recoveryPhraseWordContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
       recoveryPhraseText: {
+        lineHeight: 33,
         fontSize: fonts.size.base,
-        margin: 8,
         fontFamily: fonts.family.recoveryPhraseText,
       },
       placeholder: {
@@ -53,20 +58,24 @@ export default function getRecoveryPhraseQuizStyles() {
         alignItems: 'center',
         fontFamily: fonts.family.recoveryPhraseText,
         fontSize: fonts.size.base,
+        borderBottomColor: colors.light.ultramarineBlue,
       },
       deActivePlaceholder: {
         borderBottomColor: colors.light.ghost,
       },
-      noBorderBottom: {
-        borderBottomWidth: 0,
+      placeHolderCorrect: {
+        borderBottomColor: colors.light.ufoGreen,
+      },
+      placeHolderIncorrect: {
+        borderBottomColor: colors.light.burntSieanna,
       },
       selectedPlaceholder: {
         borderBottomColor: colors.light.ultramarineBlue,
       },
       filledOutPlaceholder: {
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        borderBottomWidth: 0,
+        borderBottomColor: colors.light.ultramarineBlue,
       },
       optionsContainer: {
         flexDirection: 'row',
@@ -127,6 +136,12 @@ export default function getRecoveryPhraseQuizStyles() {
       label: {
         color: colors.light.zodiacBlue,
       },
+      recoveryPhraseIndexText: {
+        color: colors.light.smoothGray,
+      },
+      recoveryPhraseSelectedIndexText: {
+        color: colors.light.ultramarineBlue,
+      },
     },
     [themes.dark]: {
       container: {
@@ -143,6 +158,12 @@ export default function getRecoveryPhraseQuizStyles() {
       },
       label: {
         color: colors.dark.white,
+      },
+      recoveryPhraseIndexText: {
+        color: colors.light.mountainMist,
+      },
+      recoveryPhraseSelectedIndexText: {
+        color: colors.light.ultramarineBlue,
       },
     },
   };
