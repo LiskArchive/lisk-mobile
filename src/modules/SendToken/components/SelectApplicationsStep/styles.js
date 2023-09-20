@@ -1,7 +1,5 @@
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
-import { deviceType } from 'utilities/device';
-
 export default function getSendTokenSelectApplicationsStepStyles() {
   return {
     common: {
@@ -21,7 +19,6 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       },
       bookmarkIcon: {
         marginLeft: 4,
-        padding: deviceType() === 'android' ? 18 : 16,
       },
       applicationLogoImage: {
         borderRadius: 50,
