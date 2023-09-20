@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useRef } from 'react';
-import { KeyboardAvoidingView, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { KeyboardAvoidingView, TouchableOpacity, View, Keyboard } from 'react-native';
 import { useModal } from 'hooks/useModal';
 import {
   BottomSheetScrollView,
@@ -15,19 +15,18 @@ import getStyles from './styles';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const BottomModal = () => {
-  const { toggle: toggleModalContext, close, isOpen, component, showClose } = useModal();
+  const { close, isOpen, component, showClose } = useModal();
   const bottomSheetRef = useRef(null);
+  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
   const timeout = useRef();
 
   const { styles } = useTheme({ styles: getStyles() });
 
   useEffect(() => {
     if (isOpen) {
-      toggleModalContext(isOpen);
       bottomSheetRef.current?.present?.();
     }
-    return () => clearTimeout(timeout.current);
-  }, [isOpen, toggleModalContext]);
+  }, [isOpen]);
 
   const closeModal = () => {
     bottomSheetRef.current?.close?.();
@@ -36,14 +35,42 @@ const BottomModal = () => {
     }, 300);
   };
 
+  const handleKeyboardWillShow = () => {
+    setKeyboardIsOpen(true);
+  };
+
+  const handleKeyboardWillHide = () => {
+    setKeyboardIsOpen(false);
+  };
+
+  useEffect(() => {
+    const keyboardWillShowListener = Keyboard.addListener(
+      'keyboardWillShow',
+      handleKeyboardWillShow
+    );
+
+    const keyboardWillHideListener = Keyboard.addListener(
+      'keyboardWillHide',
+      handleKeyboardWillHide
+    );
+
+    return () => {
+      keyboardWillShowListener.remove();
+      keyboardWillHideListener.remove();
+      clearTimeout(timeout.current);
+    };
+  }, []);
+
+  const shouldDismissModalOnTap = showClose && !keyboardIsOpen;
+
   if (!isOpen || !component) {
     return null;
   }
 
   return (
     <KeyboardAvoidingView
-      contentContainerStyle={styles.content}
-      style={styles.content}
+      contentContainerStyle={isOpen && styles.content}
+      style={isOpen && styles.content}
       behavior="height"
     >
       <BottomSheetModalProvider>
@@ -60,7 +87,7 @@ const BottomModal = () => {
           enableDismissOnClose={false}
           backdropComponent={() => (
             <TouchableWithoutFeedback
-              onPress={showClose ? closeModal : null}
+              onPress={shouldDismissModalOnTap ? closeModal : null}
               containerStyle={[styles.content, styles.theme.content]}
             />
           )}
