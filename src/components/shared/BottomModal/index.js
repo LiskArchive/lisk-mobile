@@ -69,8 +69,8 @@ const BottomModal = () => {
 
   return (
     <KeyboardAvoidingView
-      contentContainerStyle={isOpen && styles.content}
-      style={isOpen && styles.content}
+      contentContainerStyle={styles.content}
+      style={styles.content}
       behavior="height"
     >
       <BottomSheetModalProvider>
