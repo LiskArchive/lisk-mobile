@@ -14,10 +14,12 @@ export default () => ({
       fontFamily: fonts.family.contextSemiBold,
       color: colors.dark.white,
       paddingTop: 15,
+      textAlign: 'center',
     },
     content: {
       color: colors.dark.white,
       marginTop: 20,
+      textAlign: 'center',
     },
     flex: {
       flex: 1,
@@ -32,6 +34,9 @@ export default () => ({
     },
     buttonText: {
       color: colors.light.ultramarineBlue,
+    },
+    footer: {
+      paddingBottom: boxes.boxPadding,
     },
   },
 });

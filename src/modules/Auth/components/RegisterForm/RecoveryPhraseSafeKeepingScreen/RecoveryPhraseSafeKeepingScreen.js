@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -42,30 +41,37 @@ export default function RecoveryPhraseSafeKeepingScreen({
           length={length}
         />
       )}
-      <ScrollView>
-        <View style={[styles.body]}>
-          <H4 style={[styles.title, styles.theme.title]}>
-            {i18next.t('auth.register.safeKeeping.title')}
-          </H4>
+      <View style={[styles.body]}>
+        <H4 style={[styles.title, styles.theme.title]}>
+          {i18next.t('auth.register.safeKeeping.title')}
+        </H4>
 
-          <P style={[styles.description, styles.theme.description]}>
-            {i18next.t('auth.register.safeKeeping.description')}
-          </P>
+        <P style={[styles.description, styles.theme.description]}>
+          {i18next.t('auth.register.safeKeeping.description')}
+        </P>
 
-          <View style={styles.recoveryPhraseContainer}>
-            <RecoveryPhraseSecurityAdviceCard style={{ container: styles.securityAdviceCard }} />
+        <View style={styles.recoveryPhraseContainer}>
+          <RecoveryPhraseSecurityAdviceCard style={{ container: styles.securityAdviceCard }} />
 
-            <P
-              style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}
-              testID="recoveryPhraseText"
-            >
-              {recoveryPhrase.replace(/\s+/g, '  ')}
-            </P>
+          <View style={styles.recoveryPhraseWordsContainer}>
+            {recoveryPhrase.split(' ').map((word, index) => (
+              <View
+                key={index}
+                testID="recoveryPhraseText"
+                style={styles.recoveryPhraseWordContainer}
+              >
+                <P style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseIndexText]}>
+                  {index + 1}.
+                </P>
 
-            <CopyRecoveryPhraseToClipboard recoveryPhrase={recoveryPhrase} />
+                <P style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}>{word} </P>
+              </View>
+            ))}
           </View>
+
+          <CopyRecoveryPhraseToClipboard recoveryPhrase={recoveryPhrase} />
         </View>
-      </ScrollView>
+      </View>
 
       <View style={[styles.footer]}>
         <View style={[styles.switchContainer]}>

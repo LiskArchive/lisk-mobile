@@ -47,7 +47,7 @@ export default function RecoveryPhraseQuiz({
 
   const generateTest = useCallback(() => {
     const words = recoveryPhrase.match(/\w+/g);
-    const _missing = chooseRandomWords(2, words);
+    const _missing = chooseRandomWords(2, words).sort();
 
     setMissing(_missing);
     setVisibleOptions(0);
@@ -89,7 +89,7 @@ export default function RecoveryPhraseQuiz({
       }
       const finalAnswers = _answers.map((item) => ({
         value: item.value,
-        style: styles.noBorderBottom,
+        style: isCorrect ? styles.placeHolderCorrect : styles.placeHolderIncorrect,
         textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
       }));
       setAnswers(finalAnswers);
@@ -115,32 +115,54 @@ export default function RecoveryPhraseQuiz({
 
   const generatePlaceholder = (index, optionIndex, value) => {
     const style = visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
+
     return (
-      <Button
-        noPredefinedStyle
-        testID={`recoveryPhrasePlaceholderFor-${value}`}
-        key={index}
-        title={answers[optionIndex].value}
-        onClick={() => toggleOptions(optionIndex)}
-        textStyle={[styles.label, styles.theme.label, answers[optionIndex].textStyle]}
-        style={[styles.placeholder, style, answers[optionIndex].style]}
-      />
+      <View style={styles.recoveryPhraseWordContainer}>
+        <P
+          style={
+            visibleOptions === optionIndex
+              ? styles.theme.recoveryPhraseSelectedIndexText
+              : styles.theme.recoveryPhraseIndexText
+          }
+        >
+          {index + 1}.
+        </P>
+
+        <Button
+          noPredefinedStyle
+          testID={`recoveryPhrasePlaceholderFor-${value}`}
+          key={index}
+          onClick={() => toggleOptions(optionIndex)}
+          textStyle={[styles.label, styles.theme.label, answers[optionIndex].textStyle]}
+          style={[styles.placeholder, style, answers[optionIndex].style]}
+        >
+          {answers[optionIndex].value}
+        </Button>
+      </View>
     );
   };
 
   const renderRecoveryPhrase = () => {
     const phrase = recoveryPhrase.split(' ');
+
     return missing.length > 0
       ? phrase.map((val, index) => {
-          const optionIndex = missing.indexOf(index);
+          const sortedMissing = missing.sort();
+          const optionIndex = sortedMissing.indexOf(index);
+
           const element =
             optionIndex >= 0 ? (
               generatePlaceholder(index, optionIndex, val)
             ) : (
-              <P key={index} style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}>
-                {val}
-              </P>
+              <View key={index} style={styles.recoveryPhraseWordContainer}>
+                <P style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseIndexText]}>
+                  {index + 1}.
+                </P>
+
+                <P style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}>{val} </P>
+              </View>
             );
+
           return element;
         })
       : null;
