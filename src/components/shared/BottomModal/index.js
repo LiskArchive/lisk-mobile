@@ -95,6 +95,11 @@ const BottomModal = () => {
           backgroundStyle={[styles.theme.container]}
           enableHandlePanningGesture
         >
+          {/* TODO: Replace {children} container with another VirtualizedList-backed container.
+          VirtualizedLists should never be nested inside plain ScrollViews with the 
+          same orientation because it can break windowing and other functionality.
+          (details on https://github.com/LiskHQ/lisk-mobile/issues/2051).
+          */}
           <BottomSheetScrollView
             bounces
             enableOnAndroid
