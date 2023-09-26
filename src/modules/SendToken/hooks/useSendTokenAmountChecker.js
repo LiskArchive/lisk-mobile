@@ -1,9 +1,9 @@
 /* eslint-disable max-statements */
-import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { validateTransactionAmount } from 'utilities/validators';
+import { useTransferableTokens } from '../../BlockchainApplication/api/useTransferableTokens';
 
 export function useSendTokenAmountChecker({
   recipientApplication,
@@ -13,7 +13,7 @@ export function useSendTokenAmountChecker({
 }) {
   const [currentAccount] = useCurrentAccount();
 
-  const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
+  const { data: supportedTokensData } = useTransferableTokens(recipientApplication);
 
   const selectedToken = supportedTokensData?.find((token) => token.tokenID === selectedTokenID);
 
