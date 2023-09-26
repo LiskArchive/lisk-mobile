@@ -1,4 +1,5 @@
-import { useMemo, useRef } from 'react';
+/* eslint-disable max-statements */
+import { useRef } from 'react';
 
 import { APIClient } from 'utilities/api/APIClient';
 import { useSupportedTokensQuery } from './useSupportedTokensQuery';
@@ -12,9 +13,9 @@ import { useTokensMetaQuery } from './useTokensMetaQuery';
  * (supported tokens), loading state, error state, and more.
  */
 export function useApplicationSupportedTokensQuery(application) {
-  const toApplicationApiClient = useRef(new APIClient());
+  const apiClient = useRef(new APIClient());
 
-  toApplicationApiClient.current.create({
+  apiClient.current.create({
     ...application?.serviceURLs?.[0],
     enableCertPinning: application?.chainName === 'lisk_mainchain',
   });
@@ -23,56 +24,45 @@ export function useApplicationSupportedTokensQuery(application) {
     data: { data: tokensMetaData } = {},
     isLoading: isTokensMetaDataLoading,
     isError: isTokensMetaDataError,
-    error: errorOnTokensMetaData,
     isSuccess: isSuccessTokensMetaData,
-  } = useTokensMetaQuery();
-
-  const {
-    data: { data: { supportedTokens: supportedTokensData } = {} } = {},
-    isLoading: isSupportedTokensLoading,
-    isError: isSupportedTokensError,
-    error: errorOnSupportedTokens,
-    isSuccess: isSuccessSupportedTokens,
-  } = useSupportedTokensQuery({
-    client: toApplicationApiClient.current,
+  } = useTokensMetaQuery({
+    config: { params: { chainID: undefined, network: application?.networkType } },
+    client: apiClient.current,
   });
 
-  const data = useMemo(() => {
-    let tokens;
+  const {
+    data: { data: { supportedTokens: supportedTokensData = {} } = {} } = {},
+    isLoading: isSupportedTokensLoading,
+    isError: isSupportedTokensError,
+    isSuccess: isSuccessSupportedTokens,
+  } = useSupportedTokensQuery({
+    client: apiClient.current,
+  });
 
-    if (tokensMetaData && supportedTokensData) {
-      const isSupportAllToken = supportedTokensData.isSupportAllTokens;
+  const isSupportAllTokens = supportedTokensData?.isSupportAllTokens;
 
-      if (isSupportAllToken) {
-        tokens = tokensMetaData;
-      } else {
-        const exactTokensSupported = tokensMetaData.filter((token) =>
-          supportedTokensData.exactTokenIDs.includes(token.tokenID)
-        );
+  let tokens = [];
 
-        const patternTokensSupported = supportedTokensData.patternTokenIDs
-          .map((pattern) => {
-            const chainID = pattern.slice(0, 8);
-            return tokensMetaData.filter((token) => chainID === token.tokenID.slice(0, 8));
-          })
-          .flatMap((res) => res);
+  if (!isSupportAllTokens) {
+    const { exactTokenIDs = [] } = supportedTokensData;
+    tokens = exactTokenIDs
+      .map((exactTokenID) => tokensMetaData?.find(({ tokenID }) => tokenID === exactTokenID))
+      .filter((token) => token);
+  } else {
+    tokens = tokensMetaData || [];
+  }
 
-        const supportedAppTokens = [...(patternTokensSupported || []), ...exactTokensSupported];
+  const isLoading = isTokensMetaDataLoading || isSupportedTokensLoading;
+  const isSuccess = isSuccessTokensMetaData && isSuccessSupportedTokens;
+  const isError = (!tokens && isSupportedTokensError) || isTokensMetaDataError;
 
-        tokens = Array.from(new Set(supportedAppTokens));
-      }
-    }
-
-    return tokens;
-  }, [tokensMetaData, supportedTokensData]);
+  const nonNativeTokens = tokens.filter(({ chainID }) => chainID !== application.chainID);
+  const nativeTokens = tokens.filter(({ chainID }) => chainID === application.chainID);
 
   return {
-    data,
-    isLoading: isTokensMetaDataLoading || isSupportedTokensLoading,
-    isSuccess: isSuccessTokensMetaData && isSuccessSupportedTokens,
-    isError: (!data && isSupportedTokensError) || isTokensMetaDataError,
-    error: (!data && errorOnSupportedTokens) || errorOnTokensMetaData,
-    errorOnSupportedTokens,
-    errorOnTokensMetaData,
+    data: [...nativeTokens, ...nonNativeTokens],
+    isLoading,
+    isSuccess,
+    isError,
   };
 }

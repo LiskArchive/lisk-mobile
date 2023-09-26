@@ -8,12 +8,11 @@ import i18next from 'i18next';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useTransactionFees } from 'modules/Transactions/hooks/useTransactionFees';
-import { useFeesQuery } from 'modules/Transactions/api/useFeesQuery';
 import {
   TRANSACTION_VERIFY_RESULT,
   EVENT_DATA_RESULT,
@@ -26,6 +25,7 @@ import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
+import { useTransferableTokens } from '../../BlockchainApplication/api/useTransferableTokens';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -34,12 +34,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const [currentApplication] = useCurrentApplication();
 
-  const {
-    data: applicationSupportedTokensData,
-    isSuccess: isSuccessApplicationSupportedTokensData,
-  } = useApplicationSupportedTokensQuery(currentApplication.data);
-
-  const { data: feesData } = useFeesQuery();
+  const applications = useApplicationsExplorer();
 
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
@@ -100,15 +95,25 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
-  const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
   const command = form.watch('command');
   const amount = form.watch('amount');
   const message = form.watch('message');
   const debouncedMessage = useDebounce(message, 1000);
 
+  const recipientApplication = applications.data?.find(
+    (application) => application.chainID === recipientApplicationChainID
+  );
+
+  const {
+    data: applicationSupportedTokensData,
+    isSuccess: isSuccessApplicationSupportedTokensData,
+  } = useTransferableTokens(recipientApplication);
+
+  const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
+
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
-  const defaultTokenID = feesData?.data.feeTokenID;
+  const defaultTokenID = applicationSupportedTokensData[0]?.tokenID;
 
   const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
     useTransactionFees({
