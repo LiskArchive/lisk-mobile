@@ -20,7 +20,7 @@ export function useSupportedTokensQuery({ config: customConfig = {}, options, cl
     params: customConfig?.params,
   };
 
-  const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config]);
+  const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config, client.host]);
 
   return useCustomQuery({
     keys,

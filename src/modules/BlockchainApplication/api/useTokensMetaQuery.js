@@ -33,7 +33,7 @@ export function useTokensMetaQuery({
 } = {}) {
   const config = getTokensMetaQueryConfig(customConfig);
 
-  const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY]);
+  const keys = useQueryKeys([GET_TOKENS_METADATA_QUERY, client.host]);
 
   return useCustomInfiniteQuery({ config, options, keys, client });
 }
