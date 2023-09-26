@@ -10,6 +10,7 @@ export class APIClient {
   ws = null;
   enableCertPinning = false;
   baseUrl = '';
+  host = null;
   fetchConfig = {
     headers: {
       'Content-Type': 'application/json',
@@ -18,6 +19,7 @@ export class APIClient {
   };
 
   create({ http, ws, enableCertPinning = false } = {}) {
+    this.host = http || ws;
     this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
     this.baseUrl = http;
     this.enableCertPinning = enableCertPinning;
