@@ -54,7 +54,7 @@ export function useApplicationSupportedTokensQuery(application) {
 
   const isLoading = isTokensMetaDataLoading || isSupportedTokensLoading;
   const isSuccess = isSuccessTokensMetaData && isSuccessSupportedTokens;
-  const isError = (!tokens && isSupportedTokensError) || isTokensMetaDataError;
+  const isError = isSupportedTokensError || isTokensMetaDataError;
 
   const nonNativeTokens = tokens.filter(({ chainID }) => chainID !== application.chainID);
   const nativeTokens = tokens.filter(({ chainID }) => chainID === application.chainID);

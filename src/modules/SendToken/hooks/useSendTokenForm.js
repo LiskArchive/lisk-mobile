@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import { useEffect, useMemo, useState } from 'react';
@@ -113,7 +114,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
-  const defaultTokenID = applicationSupportedTokensData[0]?.tokenID;
+  const defaultTokenID =
+    applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
 
   const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
     useTransactionFees({
