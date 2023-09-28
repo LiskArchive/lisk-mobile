@@ -18,9 +18,13 @@ import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import PrivacySvg from 'assets/svgs/PrivacySvg';
 import KeySvg from 'assets/svgs/KeySvg';
-import ItemTitle from '../ItemTitle';
-
 import getStyles from './SettingsScreen.styles';
+import MoonSvg from 'assets/svgs/MoonSvg';
+import CurrencySvg from 'assets/svgs/CurrencySvg';
+import AboutSvg from 'assets/svgs/AboutSvg';
+import TermsOfUseSvg from 'assets/svgs/TermsOfUseSvg';
+
+import ItemTitle from '../ItemTitle';
 
 export default function SettingsScreen() {
   const dispatch = useDispatch();
@@ -86,7 +90,7 @@ export default function SettingsScreen() {
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               testID="dark-mode"
-              icon="dark-mode"
+              icon={<MoonSvg />}
               targetStateLabel={
                 <SwitchButton value={settings.theme === themes.dark} onChange={switchTheme} />
               }
@@ -97,7 +101,7 @@ export default function SettingsScreen() {
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
-              icon="currency"
+              icon={<CurrencySvg />}
               testID="currency"
               title={i18next.t('settings.menu.currency')}
               target="CurrencySelection"
@@ -118,7 +122,7 @@ export default function SettingsScreen() {
               navigation={navigation}
               target="About"
               testID="about"
-              icon="about"
+              icon={<AboutSvg />}
               title={i18next.t('settings.menu.about')}
             />
           </View>
@@ -126,14 +130,14 @@ export default function SettingsScreen() {
           <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
-              icon="terms"
+              icon={<TermsOfUseSvg />}
               testID="terms"
               target="Terms"
               title={i18next.t('settings.menu.terms')}
             />
           </View>
 
-          <View style={[styles.item, styles.theme.item, styles.itemNoBorder]}>
+          <View style={[styles.item, styles.theme.item]}>
             <ItemTitle
               navigation={navigation}
               icon={<PrivacySvg />}
