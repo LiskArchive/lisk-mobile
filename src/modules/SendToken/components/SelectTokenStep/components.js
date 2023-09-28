@@ -9,6 +9,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useTransferableTokens } from 'modules/BlockchainApplication/api/useTransferableTokens';
 import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
@@ -36,7 +37,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
     data: supportedTokensData,
     isLoading: isLoadingSupportedTokens,
     isError: isSupportedTokensError,
-  } = useApplicationSupportedTokensQuery(recipientApplication);
+  } = useTransferableTokens(recipientApplication);
 
   const [currentAccount] = useCurrentAccount();
 
