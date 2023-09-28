@@ -1,15 +1,19 @@
+/* eslint-disable max-statements */
 import React from 'react';
 import { View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
+import { settingsUpdated } from 'modules/Settings/store/actions';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
+import Checkbox from 'components/shared/Checkbox';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import DropDownHolder from 'utilities/alert';
 import AccountItem from '../AccountItem';
 
@@ -30,9 +34,13 @@ export default function AccountList({
 
   const [currentApplication] = useCurrentApplication();
 
+  const discrete = useSelector((state) => state.settings.discrete);
+
+  const dispatch = useDispatch();
+
   const { styles } = useTheme({ styles: getAccountsListStyles() });
 
-  function handleSelectAccountClick(account) {
+  const handleSelectAccountClick = (account) => {
     if (!currentApplication.data) {
       DropDownHolder.error(
         i18next.t('Error'),
@@ -48,7 +56,7 @@ export default function AccountList({
 
       if (onAccountClick) onAccountClick(account);
     }
-  }
+  };
 
   const addAccount = () => {
     if (mode === 'modal') {
@@ -56,6 +64,13 @@ export default function AccountList({
     }
     navigation.navigate('AuthMethod', { authRequired: true });
   };
+
+  const toggleDiscreteMode = () =>
+    dispatch(
+      settingsUpdated({
+        discrete: !discrete,
+      })
+    );
 
   return (
     <View style={[styles.container, style?.container]}>
@@ -88,6 +103,16 @@ export default function AccountList({
       />
 
       <View style={[styles.footer, style?.footer]}>
+        {mode === 'screen' && (
+          <Checkbox
+            onPress={toggleDiscreteMode}
+            selected={discrete}
+            style={{ container: styles.checkBox }}
+          >
+            <P style={styles.checkBoxText}>{i18next.t('auth.setup.enableDiscreteMode')}</P>
+          </Checkbox>
+        )}
+
         <PrimaryButton onClick={addAccount} testID="add-account">
           {i18next.t('accounts.accountsManager.addAccountButtonText')}
         </PrimaryButton>
