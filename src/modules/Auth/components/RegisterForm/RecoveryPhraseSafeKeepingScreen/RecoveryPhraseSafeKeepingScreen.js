@@ -12,6 +12,8 @@ import CopyRecoveryPhraseToClipboard from 'components/shared/CopyRecoveryPhraseT
 import getRegisterSafeKeepingStyles from './RecoveryPhraseSafeKeepingScreen.styles';
 import RecoveryPhraseSecurityAdviceCard from '../../RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
+// onion fiber near nuclear merry idle front daring first into wheel mirror
+
 export default function RecoveryPhraseSafeKeepingScreen({
   recoveryPhrase,
   prevStep,
