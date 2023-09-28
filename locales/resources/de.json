@@ -79,9 +79,7 @@
   "Edit": "Bearbeiten",
   "Request": "Anfrage",
   "Select your currency": "Wähle deine Währung",
-  "Settings": "Einstellungen",
-  "Create it now": "Jetzt erstellen",
-  "Don’t have a Lisk Account?": "Noch keine Lisk ID?",
+  "Settings": "Einstellungen",  
   "This field is required.": "Dieses Feld wird benötigt.",
   "Add bookmark": "Zu Lesezeichen hinzufügen",
   "Delegate registration": "Delegiertenregistrierung",
@@ -226,7 +224,11 @@
       "title": "Das offizielle Lisk Mobile Wallet"
     },
     "register" : {
-      "title": "Konto erstellen",  
+      "title": "Konto erstellen",
+      "createAccountButton": {
+        "text": "Haben noch kein Konto?",
+        "buttonText": "Jetzt erstellen"
+      },  
       "recoveryPhraseType": {
         "title": "Wählen Sie den Phrasentyp aus",
         "description": "Bitte wählen Sie die Art der Wiederherstellungsphrase aus, die Sie erstellen möchten.",

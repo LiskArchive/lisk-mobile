@@ -78,8 +78,6 @@
   "Request": "Request",
   "Select your currency": "Select your currency",
   "Settings": "Settings",
-  "Create it now": "Create it now",
-  "Don’t have a Lisk Account?": "Don’t have a Lisk Account?",
   "This field is required.": "This field is required.",
   "Add bookmark": "Add bookmark",
   "Delegate registration": "Delegate registration",
@@ -225,6 +223,10 @@
     },
     "register": {
       "title": "Create account",
+      "createAccountButton": {
+        "text": "Don’t have an account?",
+        "buttonText": "Create one now"
+      },
       "recoveryPhraseType": {
         "title": "Select phrase type",
         "description": "Please select the type of recovery phrase you want to create.",
