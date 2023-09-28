@@ -6,6 +6,9 @@ export const selectEncryptedFile = async (onError) => {
     const file = await DocumentPicker.pickSingle({
       type: DocumentPicker.types.allFiles,
     });
+    if (file.type !== 'application/json') {
+      throw new Error('Invalid file type');
+    }
     const encryptedData = await RNFS.readFile(file.uri);
     return encryptedData;
   } catch (error) {
