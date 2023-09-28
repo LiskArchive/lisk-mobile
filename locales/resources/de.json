@@ -86,7 +86,6 @@
   "Register multisignature group": "Multisignaturgruppe registrieren",
   "Transfer": "Senden",
   "Vote": "Abstimmen",
-  "Disable bioAuth": "{{sensorType}} deaktivieren",
   "You don’t have any bookmarks.": "Du hast noch keine Lesezeichen.",
   "Error": "Fehler",
   "You will be able to add it again anytime.": "Du kannst es jederzeit wieder hinzufügen.",
@@ -135,16 +134,18 @@
       "hideQrButton": "QR-Code ausblenden"
     },
     "biometrics": {
-      "enableTitle": "",
-      "disableTitle": "",
-      "disableDescription": "",
-      "description": "",
-      "title1": "",
-      "description1": "",
-      "title2": "",
-      "description2": "",
+      "enableTitle": "{{sensorType}} aktivieren",
+      "disableTitle": "{{sensorType}} deaktivieren",
+      "disableDescription": "Das Deaktivieren der Gesichts-ID erfordert die Eingabe eines kontospezifischen Passworts, um Transaktionen zu signieren.",
+      "description": "Das sollten Sie wissen:",
+      "title1": "Schnell und sicher",
+      "description1": "Face ID bietet eine sichere und schnellere Möglichkeit, Ihren verschlüsselten geheimen Wiederherstellungssatz zu entschlüsseln und Transaktionen zu signieren.",
+      "title2": "Sie können es jederzeit ausschalten",
+      "description2": "Sie können {{sensorType}} jederzeit deaktivieren und sich mit Ihrem kontospezifischen Passwort authentifizieren.",
       "decryptRecoveryPhraseTitle": "Geben Sie Ihr Passwort ein",
-      "decryptRecoveryPhraseDescription": "Bitte geben Sie Ihr Kontopasswort ein, um Face ID zu aktivieren."
+      "decryptRecoveryPhraseDescription": "Bitte geben Sie Ihr Kontopasswort ein, um Face ID zu aktivieren.",
+      "cancelButton": "Nein, abbrechen",
+      "submitButton": "{{sensorType}} aktivieren"
     },
     "about": {
       "versionDescription": "Version {{version}}",

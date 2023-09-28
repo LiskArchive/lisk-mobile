@@ -84,7 +84,6 @@
   "Register multisignature group": "Register multisignature group",
   "Transfer": "Transfer",
   "Vote": "Vote",
-  "Disable bioAuth": "Disable {{sensorType}}",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
   "We’ve got good news!": "We’ve got good news!",
@@ -142,7 +141,9 @@
       "title2": "You can always turn it off",
       "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password.",
       "decryptRecoveryPhraseTitle": "Enter your password",
-      "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID."
+      "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID.",
+      "cancelButton": "No, cancel",
+      "submitButton": "Enable {{sensorType}}"
     },
     "about": {
       "versionDescription": "Version {{version}}",

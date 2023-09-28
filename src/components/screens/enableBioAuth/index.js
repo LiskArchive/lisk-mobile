@@ -73,12 +73,12 @@ const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
       <View style={styles.footer}>
         {enableSkip && (
           <Button onClick={skip} style={styles.secondaryButton}>
-            No, thanks
+            {i18next.t('settings.biometrics.cancelButton')}
           </Button>
         )}
 
         <PrimaryButton onPress={confirm} style={enableSkip ? styles.semiFlex : styles.flex}>
-          {i18next.t(`Enable ${sensorType}`)}
+          {i18next.t('settings.biometrics.submitButton', { sensorType })}
         </PrimaryButton>
       </View>
     </View>
