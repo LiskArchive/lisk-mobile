@@ -65,7 +65,6 @@
   "Search": "Search",
   "Search for a bookmark": "Search for a bookmark",
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
-  "The official Lisk mobile wallet.": "The official Lisk mobile wallet.",
   "terms and conditions.": "terms and conditions.",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
   "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
@@ -79,15 +78,12 @@
   "Request": "Request",
   "Select your currency": "Select your currency",
   "Settings": "Settings",
-  "Create it now": "Create it now",
-  "Don’t have a Lisk Account?": "Don’t have a Lisk Account?",
   "This field is required.": "This field is required.",
   "Add bookmark": "Add bookmark",
   "Delegate registration": "Delegate registration",
   "Register multisignature group": "Register multisignature group",
   "Transfer": "Transfer",
   "Vote": "Vote",
-  "Disable bioAuth": "Disable {{sensorType}}",
   "You don’t have any bookmarks.": "You don’t have any bookmarks.",
   "Error": "Error",
   "We’ve got good news!": "We’ve got good news!",
@@ -145,7 +141,9 @@
       "title2": "You can always turn it off",
       "description2": "You can disable {{sensorType}} at any time, and authenticate with your account specific password.",
       "decryptRecoveryPhraseTitle": "Enter your password",
-      "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID."
+      "decryptRecoveryPhraseDescription": "Please enter your account password to enable Face ID.",
+      "cancelButton": "No, cancel",
+      "submitButton": "Enable {{sensorType}}"
     },
     "about": {
       "versionDescription": "Version {{version}}",
@@ -221,8 +219,15 @@
     }
   },
   "auth": {
+    "authLogo": {
+      "title": "The official Lisk mobile wallet"
+    },
     "register": {
       "title": "Create account",
+      "createAccountButton": {
+        "text": "Don’t have an account?",
+        "buttonText": "Create one now"
+      },
       "recoveryPhraseType": {
         "title": "Select phrase type",
         "description": "Please select the type of recovery phrase you want to create.",

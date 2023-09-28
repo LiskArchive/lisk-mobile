@@ -23,7 +23,7 @@ export default function HeaderLogo({ style }) {
       <LiskMobileLogoSvg style={[styles.logo, style?.logo]} />
 
       <P style={[styles.title, styles.theme.title, style?.title]}>
-        {i18next.t('The official Lisk mobile wallet.')}
+        {i18next.t('auth.authLogo.title')}
       </P>
     </View>
   );

@@ -62,7 +62,7 @@ export default function getRegisterSafeKeepingStyles() {
       switchContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBottom: 10,
+        marginBottom: 24,
       },
       confirmText: {
         flex: 1,

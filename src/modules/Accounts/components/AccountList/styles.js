@@ -21,6 +21,13 @@ export default function getAccountsListStyles() {
       footer: {
         marginTop: 24,
       },
+      checkBox: {
+        marginBottom: 24,
+      },
+      checkBoxText: {
+        fontSize: 16,
+        color: colors.light.smoothGray,
+      },
     },
     [themes.light]: {
       title: {

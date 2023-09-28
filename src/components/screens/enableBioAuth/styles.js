@@ -1,24 +1,16 @@
 import { deviceHeight, SCREEN_HEIGHTS } from 'utilities/device';
 import { themes, colors, boxes, fonts } from 'constants/styleGuide';
-import { setColorOpacity } from 'utilities/helpers';
 
 const isSmallScreen = deviceHeight() < SCREEN_HEIGHTS.SM;
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-      backgroundColor: colors.light.white,
-    },
     container: {
       flexDirection: 'column',
       flex: 1,
       padding: boxes.boxPadding,
       justifyContent: 'space-between',
       paddingBottom: 20,
-    },
-    enableButton: {
-      marginBottom: 15,
     },
     header: {
       textAlign: 'center',
@@ -34,9 +26,6 @@ export default () => ({
       paddingRight: 50,
       marginBottom: isSmallScreen ? 8 : 10,
       paddingBottom: isSmallScreen ? 12 : 14,
-    },
-    separator: {
-      borderBottomWidth: 1,
     },
     rowTitle: {
       marginTop: 5,
@@ -54,6 +43,21 @@ export default () => ({
     label: {
       marginLeft: 12,
     },
+    flex: {
+      flex: 1,
+    },
+    semiFlex: {
+      flex: 0.5,
+    },
+    secondaryButton: {
+      flex: 0.5,
+      marginRight: 24,
+    },
+    footer: {
+      flex: 1,
+      flexDirection: 'row',
+      marginVertical: 16,
+    },
   },
 
   [themes.light]: {
@@ -62,9 +66,6 @@ export default () => ({
     },
     subHeader: {
       color: colors.light.slateGray,
-    },
-    separator: {
-      borderBottomColor: colors.light.mystic,
     },
     rowTitle: {
       color: colors.light.maastrichtBlue,
@@ -80,9 +81,6 @@ export default () => ({
     },
     subHeader: {
       color: colors.dark.slateGray,
-    },
-    separator: {
-      borderBottomColor: setColorOpacity(colors.dark.white, 0.24),
     },
     rowTitle: {
       color: colors.dark.white,

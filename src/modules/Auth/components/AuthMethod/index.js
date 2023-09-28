@@ -16,7 +16,7 @@ import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import DropDownHolder from 'utilities/alert';
 import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import CreateAccount from '../CreateAccount';
+import CreateAccount from '../CreateAccountButton/CreateAccountButton';
 import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
