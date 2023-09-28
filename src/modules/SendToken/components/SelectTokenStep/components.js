@@ -106,7 +106,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
             {selectedToken && (
               <View style={[styles.row]} testID="select-token-picker">
-                <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
+                <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
                 <Image source={{ uri: selectedToken.logo?.png }} style={styles.logo} />
               </View>
             )}

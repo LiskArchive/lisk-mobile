@@ -32,8 +32,8 @@ export default () => ({
       width: '100%',
       fontFamily: fonts.family.context,
       borderWidth: 1,
-      padding: 16,
-      borderRadius: 10,
+      padding: 12,
+      borderRadius: 6,
     },
     inputWithLeftAdornment: {
       paddingLeft: 40,
