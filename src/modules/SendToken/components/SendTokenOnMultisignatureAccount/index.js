@@ -17,7 +17,7 @@ export default function SendTokenOnMultisignatureAccount() {
     <View style={[styles.container]}>
       <SendLSKIllustrationSvg style={{ marginBottom: 16 }} />
 
-      <P style={styles.theme.copy}>{i18next.t('multisignature.send.description')}</P>
+      <P style={[styles.copy, styles.theme.copy]}>{i18next.t('multisignature.send.description')}</P>
 
       <TouchableOpacity
         style={styles.buttonContainer}
