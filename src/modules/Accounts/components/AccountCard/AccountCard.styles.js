@@ -11,6 +11,7 @@ export default function getAccountCardStyles() {
       },
       row: {
         flexDirection: 'row',
+        alignItems: 'center',
       },
       switchContainer: {
         alignSelf: 'flex-start',
@@ -26,6 +27,15 @@ export default function getAccountCardStyles() {
         fontFamily: fonts.family.contextSemiBold,
         fontSize: fonts.size.h4,
         marginBottom: 4,
+      },
+      multisigContainer: {
+        backgroundColor: colors.light.platinumGray,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 10,
+        borderRadius: 13,
+        height: 25,
+        width: 25,
       },
       addressText: {
         fontFamily: fonts.family.context,
