@@ -24,23 +24,6 @@ pipeline {
           script {
             nvm(getNodejsVersion()) {
               sh '''
-              # Fix permissions for Homebrew
-              echo "Fixing permissions for Homebrew..."
-              sudo mkdir -p /usr/local/var/homebrew
-              sudo chown -R $(whoami) /usr/local/var/homebrew
-
-              # Install Homebrew
-              echo "Installing Homebrew..."
-              /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-              
-              # Ensure that Homebrew is in the PATH
-              export PATH="/usr/local/bin:$PATH"
-              
-              # Install applesimutils using Homebrew
-              echo "Installing applesimutils..."
-              brew tap wix/brew
-              brew install wix/brew/applesimutils
-              
               # Run the update_device.sh script
               echo "Running the update_device.sh script..."
               chmod +x ./update_device.sh
