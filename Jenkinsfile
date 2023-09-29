@@ -24,12 +24,21 @@ pipeline {
           script {
             nvm(getNodejsVersion()) {
               sh '''
-              # Install jq
+              # Install Homebrew
+              echo "Installing Homebrew..."
+              /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+              
+              # Ensure that Homebrew is in the PATH
+              export PATH="/usr/local/bin:$PATH"
+              
+              # Install jq using Homebrew
               echo "Installing jq..."
-              echo "Installing jq..."
-              curl -Lo jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-osx-amd64
-              chmod +x ./jq
-              sudo mv jq /usr/local/bin
+              brew install jq
+              
+              # Install applesimutils using Homebrew
+              echo "Installing applesimutils..."
+              brew tap wix/brew
+              brew install wix/brew/applesimutils
               
               # Run the update_device.sh script
               echo "Running the update_device.sh script..."
