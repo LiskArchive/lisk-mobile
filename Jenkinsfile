@@ -26,7 +26,8 @@ pipeline {
               sh '''
               # Install jq
               echo "Installing jq..."
-              wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+              echo "Installing jq..."
+              curl -Lo jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-osx-amd64
               chmod +x ./jq
               sudo mv jq /usr/local/bin
               
