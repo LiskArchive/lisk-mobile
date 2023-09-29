@@ -25,13 +25,6 @@ pipeline {
             nvm(getNodejsVersion()) {
               sh '''
               # Install Command Line Tools
-              echo "Installing Command Line Tools..."
-              xcode-select --install
-              
-              # Set Xcode Path
-              echo "Setting Xcode Path..."
-              sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-
               cp env.test.json env.json
               npx react-native start &
 
