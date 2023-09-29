@@ -24,6 +24,7 @@ jobs:
           
     - name: Install Project Dependencies
       run: |
+        yarn remove mobile-protect
         yarn install && yarn run link
         cd ios && pod install && cd ..
         
