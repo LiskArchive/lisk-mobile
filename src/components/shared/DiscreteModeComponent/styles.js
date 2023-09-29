@@ -5,6 +5,7 @@ export default () => ({
       textAlign: 'right',
       justifyContent: 'flex-end',
       position: 'relative',
+      maxHeight: 20,
     },
     blurSmall: {
       width: 140,

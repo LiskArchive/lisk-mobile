@@ -15,6 +15,7 @@ export function getSendTokenOnMultisignatureAccountStyles() {
         padding: 8,
         marginTop: 8,
       },
+      copy: { textAlign: 'center' },
     },
     [themes.light]: {
       container: {

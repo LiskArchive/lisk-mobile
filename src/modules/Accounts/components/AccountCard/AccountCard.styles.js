@@ -23,8 +23,8 @@ export default function getAccountCardStyles() {
         justifyContent: 'center',
       },
       usernameText: {
-        fontFamily: fonts.family.contextBold,
-        fontSize: fonts.size.h3,
+        fontFamily: fonts.family.contextSemiBold,
+        fontSize: fonts.size.h4,
         marginBottom: 4,
       },
       addressText: {
