@@ -36,10 +36,6 @@ pipeline {
               # Ensure that Homebrew is in the PATH
               export PATH="/usr/local/bin:$PATH"
               
-              # Install jq using Homebrew
-              echo "Installing jq..."
-              brew install jq
-              
               # Install applesimutils using Homebrew
               echo "Installing applesimutils..."
               brew tap wix/brew
