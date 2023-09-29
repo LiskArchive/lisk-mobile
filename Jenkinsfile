@@ -24,6 +24,11 @@ pipeline {
           script {
             nvm(getNodejsVersion()) {
               sh '''
+              # Fix permissions for Homebrew
+              echo "Fixing permissions for Homebrew..."
+              sudo mkdir -p /usr/local/var/homebrew
+              sudo chown -R $(whoami) /usr/local/var/homebrew
+
               # Install Homebrew
               echo "Installing Homebrew..."
               /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
