@@ -26,7 +26,9 @@ pipeline {
               sh '''
               # Install jq
               echo "Installing jq..."
-              brew install jq
+              wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+              chmod +x ./jq
+              sudo mv jq /usr/local/bin
               
               # Run the update_device.sh script
               echo "Running the update_device.sh script..."
