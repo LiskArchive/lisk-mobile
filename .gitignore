@@ -83,3 +83,4 @@ android/app/src/main/assets/fonts/Gilroy-Bold.ttf
 
 # Detox artifacts
 artifacts
+.detoxrc.js.bak

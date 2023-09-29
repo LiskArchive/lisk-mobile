@@ -24,11 +24,25 @@ pipeline {
           script {
             nvm(getNodejsVersion()) {
               sh '''
+              # Install jq
+              echo "Installing jq..."
+              brew install jq
+              
+              # Run the update_device.sh script
+              echo "Running the update_device.sh script..."
+              chmod +x ./update_device.sh
+              ./update_device.sh
+
+              # Setup and run tests
               cp env.test.json env.json
               npx react-native start &
 
-              open -a Simulator --args -CurrentDeviceUDID F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F &
-              
+              # Using a device UDID might not be required after running the script,
+              # but if it is, make sure to update this with the correct UDID 
+              # after running the update_device.sh script.
+              open -a Simulator &
+
+              # The line below should also be adjusted based on the device selected by the script
               /usr/bin/xcrun simctl spawn F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F log stream --level debug --style compact --predicate 'process == "LiskQA"' &
               
               yarn detox build --configuration ios.debug
@@ -39,6 +53,7 @@ pipeline {
           }
         }
       }
+
     stage('Run ESLint') {
       steps {
         nvm(getNodejsVersion()) {
