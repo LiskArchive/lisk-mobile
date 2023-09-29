@@ -24,7 +24,7 @@ jobs:
           
     - name: Install Project Dependencies
       run: |
-        yarn install
+        yarn install && yarn run link
         cd ios && pod install && cd ..
         
     - name: Install Homebrew Dependencies
