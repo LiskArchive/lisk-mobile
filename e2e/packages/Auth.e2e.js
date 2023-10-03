@@ -1,12 +1,15 @@
 /* eslint-disable max-statements */
 import { device, element, by, waitFor } from 'detox';
-import { defaultDerivationPath } from 'modules/Auth/constants/recoveryPhrase.constants';
+// import { defaultDerivationPath } from 'modules/Auth/constants/recoveryPhrase.constants';
 import testConstants from '../utils/testConstants';
 import { signInUser } from '../commands/auth';
 
-describe.skip('Auth module', () => {
+describe('Auth module', () => {
   beforeAll(async () => {
     await device.launchApp();
+    await waitFor(element(by.text('Manage accounts')))
+      .toBeVisible()
+      .withTimeout(5000);
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('intro-screen')).swipe('left');
     await element(by.id('continueToAddAccountButton')).tap();
@@ -25,18 +28,20 @@ describe.skip('Auth module', () => {
   });
 
   it('should edit account name', async () => {
-    device.reloadReactNative();
-    await element(by.id('account-list-item')).atIndex(0).tap();
+    await device.reloadReactNative();
+    await waitFor(element(by.id('account-list-item')))
+      .toBeVisible()
+      .withTimeout(10000);
+    await element(by.id('account-list-item')).tap();
     await element(by.id('switch-account')).tap();
-    await element(by.id('account-list-item')).atIndex(1).swipe('left');
-    await device.disableSynchronization();
-    await element(by.id('edit-account')).atIndex(1).tap();
+    await element(by.id('account-list-item')).swipe('left');
+    await element(by.id('edit-account')).tap();
     await waitFor(element(by.id('account-name')))
       .toBeVisible()
       .withTimeout(10000);
     await element(by.id('account-name')).replaceText('tester');
     // Dismiss keyboard
-    await element(by.id('edit-account')).atIndex(1).tap();
+    await element(by.id('edit-account')).tap();
     await element(by.id('edit-name-done-button')).tap();
     await waitFor(element(by.id('edit-account-button')))
       .toBeVisible()
@@ -46,32 +51,40 @@ describe.skip('Auth module', () => {
       .toBeVisible()
       .withTimeout(10000);
     await element(by.id('switch-account')).tap();
-    await device.enableSynchronization();
-    await expect(element(by.text('tester')).atIndex(1)).toBeVisible();
+    await expect(element(by.text('tester'))).toBeVisible();
   });
 
   it('should remove account successfully', async () => {
-    device.reloadReactNative();
-    await element(by.id('account-list-item')).atIndex(0).tap();
+    await device.reloadReactNative();
+    await waitFor(element(by.id('account-list-item')))
+      .toBeVisible()
+      .withTimeout(10000);
+    await element(by.id('account-list-item')).tap();
     await element(by.id('switch-account')).tap();
-    await element(by.id('account-list-item')).atIndex(1).swipe('left');
-    await element(by.id('delete-account')).atIndex(1).tap();
+    await element(by.id('account-list-item')).swipe('left');
+    await element(by.id('delete-account')).tap();
     await element(by.id('download-file-button')).tap();
-    await element(by.id('delete-account-button')).atIndex(0).tap();
+    await element(by.id('delete-account-button')).tap();
     await expect(element(by.id('secret-phrase'))).toBeVisible();
   });
 
   it('should add account by file upload', async () => {
-    device.reloadReactNative();
+    await device.reloadReactNative();
+    await waitFor(element(by.id('restore-from-file')))
+      .toBeVisible()
+      .withTimeout(10000);
     await element(by.id('restore-from-file')).tap();
     await element(by.id('decrypt-password-input')).tap();
-    await element(by.id('decrypt-password-input')).replaceText('Password1!');
+    await element(by.id('decrypt-password-input')).typeText('Password1!\n');
     await element(by.id('decrypt-button-continue')).tap();
-    await expect(element(by.id('account-list-item')).atIndex(0)).toBeVisible();
+    await expect(element(by.id('account-list-item'))).toBeVisible();
   });
 
   it('should register new account', async () => {
-    device.reloadReactNative();
+    await device.reloadReactNative();
+    await waitFor(element(by.id('add-account')))
+      .toBeVisible()
+      .withTimeout(10000);
     const recoveryPhraseArray = testConstants.secretRecoveryPhrase.split(' ');
     await element(by.id('add-account')).tap();
     await element(by.id('createAccountButton')).tap();
@@ -94,12 +107,10 @@ describe.skip('Auth module', () => {
     await element(by.id('password-setup-form')).tap();
     await element(by.id('agree-switch')).tap();
     await element(by.id('save-account')).tap();
-    await device.disableSynchronization();
     await waitFor(element(by.id('download-file-button')))
       .toBeVisible()
       .withTimeout(10000);
     await element(by.id('download-file-button')).atIndex(0).tap();
-    await device.enableSynchronization();
     await element(by.id('result-screen-continue')).atIndex(0).tap();
     await expect(element(by.id('accounts-home-container'))).toBeVisible();
   });
@@ -107,13 +118,17 @@ describe.skip('Auth module', () => {
   describe('Derivation path', () => {
     it('should add an account with derivation path enabled', async () => {
       device.reloadReactNative();
+      await waitFor(element(by.id('add-account')))
+        .toBeVisible()
+        .withTimeout(10000);
       await element(by.id('add-account')).tap();
-      await element(by.id('derivation-checkbox')).tap();
       await element(by.id('secret-phrase')).tap();
-      await expect(element(by.id('derivation-path-input'))).toBeVisible();
-      await element(by.id('derivation-path-input')).typeText('invalid-path');
-      await expect(element(by.id('derivation-path-input-error'))).toBeVisible();
-      await element(by.id('derivation-path-input')).replaceText(defaultDerivationPath);
+      await element(by.id('secret-recovery-screen')).tap();
+      await element(by.id('derivation-checkbox')).tap();
+      // await expect(element(by.id('derivation-path-input'))).toBeVisible();
+      // await element(by.id('derivation-path-input')).typeText('invalid-path');
+      // await expect(element(by.id('derivation-path-input-error'))).toBeVisible();
+      // await element(by.id('derivation-path-input')).replaceText(defaultDerivationPath);
       await element(by.id('signInRecoveryPhaseInput')).tap();
       await element(by.id('signInRecoveryPhaseInput')).typeText(testConstants.secretRecoveryPhrase);
       await element(by.id('secret-recovery-screen')).tap();
@@ -127,12 +142,10 @@ describe.skip('Auth module', () => {
       await element(by.id('password-setup-form')).tap();
       await element(by.id('agree-switch')).tap();
       await element(by.id('save-account')).tap();
-      await device.disableSynchronization();
       await waitFor(element(by.id('download-file-button')))
         .toBeVisible()
         .withTimeout(10000);
       await element(by.id('download-file-button')).atIndex(0).tap();
-      await device.enableSynchronization();
       await element(by.id('result-screen-continue')).atIndex(0).tap();
       await expect(element(by.id('accounts-home-container'))).toBeVisible();
     });

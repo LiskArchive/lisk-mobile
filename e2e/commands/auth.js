@@ -3,7 +3,7 @@ import { element, by, waitFor } from 'detox';
 import testConstants from '../utils/testConstants';
 
 export const signInUser = async () => {
-  await element(by.id('secret-phrase')).atIndex(1).tap();
+  await element(by.id('secret-phrase')).tap();
   await element(by.id('signInRecoveryPhaseInput')).tap();
   await element(by.id('signInRecoveryPhaseInput')).typeText(
     `${testConstants.secretRecoveryPhrase}`
