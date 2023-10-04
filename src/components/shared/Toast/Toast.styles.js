@@ -52,24 +52,24 @@ export default function getToastStyles() {
     },
     [themes.dark]: {
       successBody: {
-        backgroundColor: '#F9FFFC',
-        borderColor: colors.light.ufoGreen,
+        backgroundColor: colors.dark.satinDeepBlack,
+        borderColor: colors.dark.ufoGreen,
       },
       successTitle: {
-        color: colors.light.ufoGreen,
+        color: colors.dark.ufoGreen,
       },
       successDescription: {
-        color: colors.light.ufoGreen,
+        color: colors.dark.ufoGreen,
       },
       errorBody: {
-        backgroundColor: '#FFF6F7',
-        borderColor: colors.light.furyRed,
+        backgroundColor: colors.dark.satinDeepBlack,
+        borderColor: colors.dark.furyRed,
       },
       errorTitle: {
-        color: colors.light.furyRed,
+        color: colors.dark.furyRed,
       },
       errorDescription: {
-        color: colors.light.furyRed,
+        color: colors.dark.furyRed,
       },
     },
   };
