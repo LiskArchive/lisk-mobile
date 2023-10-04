@@ -81,9 +81,8 @@ export default () => ({
       color: colors.dark.platinum,
     },
     input: {
-      backgroundColor: colors.dark.textInputBg,
       color: colors.dark.white,
-      borderColor: colors.dark.mainBg,
+      borderColor: colors.dark.volcanicSand,
     },
     inputErrorStyle: {
       borderColor: colors.dark.burntSieanna,
