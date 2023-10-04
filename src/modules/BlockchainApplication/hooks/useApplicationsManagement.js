@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
-import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
-import DropDownHolder from 'utilities/alert';
 import { useApplications } from '../context/ApplicationsContext';
 import { usePinApplications } from './usePinApplications';
 import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
@@ -58,10 +57,10 @@ export function useApplicationsManagement() {
 
         togglePin(chainID);
       } catch (_error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          'Error deleting application. Please try again later.'
-        );
+        Toast.show({
+          type: 'error',
+          text2: 'Error deleting application. Please try again later.',
+        });
       }
     },
     [

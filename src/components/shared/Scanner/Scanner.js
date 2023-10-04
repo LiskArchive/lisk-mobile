@@ -1,13 +1,14 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useState, forwardRef, useImperativeHandle, useCallback } from 'react';
-import i18next from 'i18next';
-import { useModal } from 'hooks/useModal';
 import { AppState, SafeAreaView } from 'react-native';
+import i18next from 'i18next';
+import RNQRGenerator from 'rn-qr-generator';
+import { launchImageLibrary } from 'react-native-image-picker';
 import Permissions from 'react-native-permissions';
 import { RNCamera } from 'react-native-camera';
-import DropDownHolder from 'utilities/alert';
-import { launchImageLibrary } from 'react-native-image-picker';
-import RNQRGenerator from 'rn-qr-generator';
+import Toast from 'react-native-toast-message';
+
+import { useModal } from 'hooks/useModal';
 import CameraAccessAlert from './CameraAccessAlert';
 import CameraOverlay from './CameraOverlay';
 import withTheme from '../withTheme';
@@ -51,7 +52,11 @@ const Scanner = forwardRef(
     }, []);
 
     const handleSelectedImageError = () =>
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.qrCodeError'));
+      Toast.show({
+        type: 'error',
+        text1: i18next.t('Error'),
+        text2: i18next.t('auth.setup.qrCodeError'),
+      });
 
     const readFromPhotoGallery = (items) => {
       setCamera((prevState) => ({ ...prevState, visible: false }));

@@ -12,7 +12,6 @@ import { ThemeProvider } from 'contexts/ThemeContext';
 import { ModalProvider } from 'contexts/ModalContext';
 
 import { toastConfig } from 'components/shared/Toast/Toast.config';
-import Alert from 'components/shared/alert';
 import StatusBar from 'components/shared/StatusBar';
 import reactQueryClient from 'utilities/api/reactQueryClient';
 import store, { persistedStore } from 'store/index';
@@ -37,7 +36,6 @@ export default function App() {
                       <BootstrapApp>
                         <Navigator>
                           <StatusBar />
-                          <Alert />
                           <Toast config={toastConfig} />
                         </Navigator>
                       </BootstrapApp>

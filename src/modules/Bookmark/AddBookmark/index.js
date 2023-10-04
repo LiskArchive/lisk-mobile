@@ -7,13 +7,13 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'contexts/ThemeContext';
+import Toast from 'react-native-toast-message';
 
 import { colors } from 'constants/styleGuide';
 import { decodeLaunchUrl } from 'utilities/qrCode';
 import { validateAddress } from 'utilities/validators';
 import { stringShortener } from 'utilities/helpers';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import DropDownHolder from 'utilities/alert';
 import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
@@ -87,10 +87,11 @@ export default function AddBookmark({ route }) {
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
-      return DropDownHolder.error(
-        i18next.t('multisignature.error.title'),
-        i18next.t('multisignature.error.description')
-      );
+      return Toast.show({
+        type: 'error',
+        text1: i18next.t('multisignature.error.title'),
+        text2: i18next.t('multisignature.error.description'),
+      });
     }
     const addressValidity = validateAddress(address.value);
     const labelValidity = validateLabel(label.value);

@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
@@ -14,7 +15,6 @@ import { H2, P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import Checkbox from 'components/shared/Checkbox';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
-import DropDownHolder from 'utilities/alert';
 import AccountItem from '../AccountItem';
 
 import getAccountsListStyles from './styles';
@@ -42,10 +42,10 @@ export default function AccountList({
 
   const handleSelectAccountClick = (account) => {
     if (!currentApplication.data) {
-      DropDownHolder.error(
-        i18next.t('Error'),
-        'Wallet is not available right now. Please try again later.'
-      );
+      Toast.show({
+        type: 'error',
+        text2: 'Wallet is not available right now. Please try again later.',
+      });
     } else {
       setAccount(account);
 

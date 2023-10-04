@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { usePasteFromClipboard } from 'hooks/usePasteFromClipboard';
 import Checkbox from 'components/shared/Checkbox';
@@ -17,7 +18,6 @@ import { IconButton, PrimaryButton, LabelButton } from 'components/shared/toolBo
 import CopySvg from 'assets/svgs/CopySvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { colors } from 'constants/styleGuide';
-import DropDownHolder from 'utilities/alert';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { toSecureRecoveryPhraseString } from '../../utils/recoveryPhrase';
 
@@ -73,7 +73,6 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
     const validity = validateRecoveryPhrase(normalizedRecoveryPhrase);
 
     if (!validity.length) {
-      DropDownHolder.closeAlert();
       onSubmit(normalizedRecoveryPhrase, derivationPath);
     } else {
       const errors = validity.filter(
@@ -84,7 +83,12 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
           ' Please check the secret recovery phrase.',
           ''
         );
-        DropDownHolder.error(i18next.t('Error'), errorMessage);
+
+        Toast.show({
+          type: 'error',
+          text1: i18next.t('Error'),
+          text2: errorMessage,
+        });
       }
 
       setRecoveryPhrase({

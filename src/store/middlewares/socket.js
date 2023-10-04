@@ -1,7 +1,8 @@
 import BackgroundTimer from 'react-native-background-timer';
 import NetInfo from '@react-native-community/netinfo';
+import Toast from 'react-native-toast-message';
+
 import actionTypes from 'modules/Accounts/actionTypes';
-import DropDownHolder from 'utilities/alert';
 import i18n from '../../../locales';
 
 /** To-Do We have to disable socket connection because of
@@ -14,13 +15,12 @@ const closeConnection = () => {
 };
 
 const handleConnectivityChange = (connectionInfo) => {
-  if (connectionInfo.isConnected) {
-    DropDownHolder.closeAlert();
-  } else if (!connectionInfo.isConnected) {
-    DropDownHolder.error(
-      i18n.t('No internet connection!'),
-      i18n.t('Your connection seems to be down, try again later.')
-    );
+  if (!connectionInfo.isConnected) {
+    Toast.show({
+      type: 'error',
+      text1: i18n.t('No internet connection!'),
+      text2: i18n.t('Your connection seems to be down, try again later.'),
+    });
   }
 };
 

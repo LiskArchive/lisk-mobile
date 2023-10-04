@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { useTheme } from 'contexts/ThemeContext';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H4, P } from 'components/shared/toolBox/typography';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
-import DropDownHolder from 'utilities/alert';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import PasswordForm from '../PasswordForm';
 import getStyles from './DecryptRecoveryPhrase.styles';
@@ -48,7 +48,11 @@ export default function DecryptRecoveryPhrase({
       }
     } catch (error) {
       setIsLoading(false);
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.decryptRecoveryPhraseError'),
+      });
     }
   };
 
