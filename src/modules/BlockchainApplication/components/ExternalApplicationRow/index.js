@@ -28,6 +28,8 @@ export default function ExternalApplicationRow({ application }) {
     }
   }, [modal.isOpen]);
 
+  console.log(JSON.stringify(application));
+
   const rightActions = [
     {
       title: i18next.t('application.explore.externalApplicationList.detailsText'),
@@ -43,7 +45,7 @@ export default function ExternalApplicationRow({ application }) {
     },
   ];
 
-  function renderActiveAction() {
+  const renderActiveAction = () => {
     switch (activeAction) {
       case 'details':
         return (
@@ -98,7 +100,7 @@ export default function ExternalApplicationRow({ application }) {
       default:
         return null;
     }
-  }
+  };
 
   useEffect(() => {
     if (activeAction) {
@@ -124,6 +126,10 @@ export default function ExternalApplicationRow({ application }) {
             <View>
               <P style={[styles.applicationNameLabel, styles.theme.applicationNameLabel]}>
                 {application.peer.metadata.name}
+              </P>
+
+              <P style={[styles.applicationUrlLabel, styles.theme.applicationUrlLabel]}>
+                {application.peer.metadata.url}
               </P>
             </View>
           </View>
