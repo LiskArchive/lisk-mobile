@@ -114,7 +114,7 @@ export default function ExternalApplicationRow({ application }) {
     <>
       <Swipeable key={application.topic} rightActions={rightActions}>
         <TouchableOpacity
-          style={[styles.applicationContainer]}
+          style={[styles.applicationContainer, styles.theme.applicationContainer]}
           onPress={() => setActiveAction('details')}
         >
           <View style={[styles.applicationNameContainer]}>

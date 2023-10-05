@@ -14,7 +14,6 @@ export default function getExternalBlockchainApplicationRowStyles() {
         paddingTop: 16,
         paddingBottom: 16,
         borderBottomWidth: 1,
-        borderBottomColor: colors.light.platinumGray,
       },
       applicationNameContainer: {
         flexDirection: 'row',
@@ -48,6 +47,9 @@ export default function getExternalBlockchainApplicationRowStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
+      applicationContainer: {
+        borderBottomColor: colors.light.platinumGray,
+      },
       applicationNameLabel: {
         color: colors.light.zodiacBlue,
       },
@@ -62,6 +64,9 @@ export default function getExternalBlockchainApplicationRowStyles() {
     [themes.dark]: {
       container: {
         backgroundColor: colors.dark.mainBg,
+      },
+      applicationContainer: {
+        borderBottomColor: colors.dark.volcanicSand,
       },
       applicationNameLabel: {
         color: colors.dark.platinum,
