@@ -50,7 +50,6 @@ describe('Auth module', () => {
     await waitFor(element(by.id('switch-account')))
       .toBeVisible()
       .withTimeout(10000);
-    await element(by.id('switch-account')).tap();
     await expect(element(by.text('tester'))).toBeVisible();
   });
 
