@@ -7,10 +7,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from 'contexts/ThemeContext';
 import { useAccountCanSendTokens } from 'modules/SendToken/hooks/useAccountCanSendTokens';
 import { P } from 'components/shared/toolBox/typography';
+import { useAuth } from 'modules/Auth/hooks/useAuth';
 import Avatar from 'components/shared/avatar';
 import { stringShortener } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import SwitchSvg from 'assets/svgs/SwitchSvg';
+import MultiSignatureSvg from 'assets/svgs/MultiSignatureSvg';
 import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
 import useAccountManagerModal from '../../hooks/useAccountManagerModal';
 
@@ -24,6 +26,9 @@ export default function AccountCard({ account }) {
   const navigation = useNavigation();
 
   const [currentAccount] = useCurrentAccount();
+
+  const { data: accountSummary } = useAuth(account.address);
+  const accountIsMultisignature = accountSummary?.numberOfSignatures > 0;
 
   const { styles } = useTheme({ styles: getAccountDetailsStyles() });
 
@@ -59,11 +64,18 @@ export default function AccountCard({ account }) {
         <Avatar address={account.address} size={48} />
 
         <View style={[styles.detailsContainer]}>
-          {account.name && (
-            <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
-              {account.name}
-            </P>
-          )}
+          <View style={styles.row}>
+            {account.name && (
+              <P style={[styles.usernameText, styles.theme.usernameText]} testID="username-label">
+                {account.name}
+              </P>
+            )}
+            {accountIsMultisignature && (
+              <View style={styles.multisigContainer}>
+                <MultiSignatureSvg size={0.8} />
+              </View>
+            )}
+          </View>
 
           <View>
             <CopyToClipboard
