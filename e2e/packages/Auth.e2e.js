@@ -1,8 +1,7 @@
 /* eslint-disable max-statements */
 import { device, element, by, waitFor } from 'detox';
-// import { defaultDerivationPath } from 'modules/Auth/constants/recoveryPhrase.constants';
+import { defaultDerivationPath } from 'modules/Auth/constants/recoveryPhrase.constants';
 import testConstants from '../utils/testConstants';
-import { signInUser } from '../commands/auth';
 
 describe('Auth module', () => {
   beforeAll(async () => {
@@ -16,7 +15,39 @@ describe('Auth module', () => {
   });
 
   it('should add an account by recovery phrase', async () => {
-    await signInUser();
+    await element(by.id('secret-phrase')).tap();
+    await element(by.id('signInRecoveryPhaseInput')).tap();
+    await element(by.id('signInRecoveryPhaseInput')).typeText(
+      `${testConstants.secretRecoveryPhrase}`
+    );
+    await element(by.id('secret-recovery-screen')).tap();
+    await waitFor(element(by.id('continue-button')))
+      .toBeVisible()
+      .withTimeout(1000);
+    await element(by.id('continue-button')).tap();
+    await element(by.id('enter-password')).tap();
+    await element(by.id('enter-password')).typeText(`Pass\n`);
+    // Password validation works as expected
+    await expect(element(by.id('enter-password-error'))).toBeVisible();
+    await element(by.id('enter-password')).tap();
+    await element(by.id('enter-password')).replaceText(`${testConstants.password}`);
+    await element(by.id('confirm-password')).tap();
+    await element(by.id('confirm-password')).typeText(`${testConstants.password}x\n`);
+    // Password validation works as expected
+    await expect(element(by.id('confirm-password-error'))).toBeVisible();
+    await element(by.id('confirm-password')).tap();
+    await element(by.id('confirm-password')).replaceText(`${testConstants.password}`);
+    await element(by.id('account-name')).tap();
+    await element(by.id('account-name')).typeText(`${testConstants.accountName}`);
+    // Dismiss keyboard
+    await element(by.id('password-setup-form')).tap();
+    await element(by.id('agree-switch')).tap();
+    await element(by.id('save-account')).tap();
+    await waitFor(element(by.id('download-file-button')))
+      .toBeVisible()
+      .withTimeout(10000);
+    await element(by.id('download-file-button')).atIndex(0).tap();
+    await element(by.id('result-screen-continue')).atIndex(0).tap();
     await expect(element(by.id('accounts-home-container'))).toBeVisible();
   });
 
@@ -64,6 +95,7 @@ describe('Auth module', () => {
     await element(by.id('delete-account')).tap();
     await element(by.id('download-file-button')).tap();
     await element(by.id('delete-account-button')).tap();
+    // Deleted current account (navigate back to auth method)
     await expect(element(by.id('secret-phrase'))).toBeVisible();
   });
 
@@ -115,7 +147,7 @@ describe('Auth module', () => {
   });
 
   describe('Derivation path', () => {
-    it('should add an account with derivation path enabled', async () => {
+    it('should add an account with enable access to legacy account disabled', async () => {
       device.reloadReactNative();
       await waitFor(element(by.id('add-account')))
         .toBeVisible()
@@ -124,10 +156,6 @@ describe('Auth module', () => {
       await element(by.id('secret-phrase')).tap();
       await element(by.id('secret-recovery-screen')).tap();
       await element(by.id('derivation-checkbox')).tap();
-      // await expect(element(by.id('derivation-path-input'))).toBeVisible();
-      // await element(by.id('derivation-path-input')).typeText('invalid-path');
-      // await expect(element(by.id('derivation-path-input-error'))).toBeVisible();
-      // await element(by.id('derivation-path-input')).replaceText(defaultDerivationPath);
       await element(by.id('signInRecoveryPhaseInput')).tap();
       await element(by.id('signInRecoveryPhaseInput')).typeText(testConstants.secretRecoveryPhrase);
       await element(by.id('secret-recovery-screen')).tap();
@@ -139,6 +167,40 @@ describe('Auth module', () => {
       await element(by.id('account-name')).tap();
       await element(by.id('account-name')).typeText(testConstants.accountName);
       await element(by.id('password-setup-form')).tap();
+      await element(by.id('agree-switch')).tap();
+      await element(by.id('save-account')).tap();
+      await waitFor(element(by.id('download-file-button')))
+        .toBeVisible()
+        .withTimeout(10000);
+      await element(by.id('download-file-button')).atIndex(0).tap();
+      await element(by.id('result-screen-continue')).atIndex(0).tap();
+      await expect(element(by.id('accounts-home-container'))).toBeVisible();
+    });
+
+    it('should add an account with updated derivation path enabled', async () => {
+      await element(by.id('Settings-tab')).atIndex(0).tap();
+      await element(by.id('show-derivation-path')).tap();
+      await element(by.id('AccountHome-tab')).atIndex(0).tap();
+      await element(by.id('switch-account')).tap();
+
+      await element(by.id('add-account')).tap();
+      await element(by.id('secret-phrase')).tap();
+      await element(by.id('secret-recovery-screen')).tap();
+      await expect(element(by.id('derivation-path-input'))).toBeVisible();
+      await element(by.id('derivation-path-input')).typeText('invalid-path');
+      await expect(element(by.id('derivation-path-input-error'))).toBeVisible();
+      await element(by.id('derivation-path-input')).replaceText(defaultDerivationPath);
+      await element(by.id('signInRecoveryPhaseInput')).tap();
+      await element(by.id('signInRecoveryPhaseInput')).typeText(
+        `${testConstants.secretRecoveryPhrase}\n`
+      );
+      await element(by.id('continue-button')).tap();
+      await element(by.id('enter-password')).tap();
+      await element(by.id('enter-password')).typeText(`${testConstants.password}\n`);
+      await element(by.id('confirm-password')).tap();
+      await element(by.id('confirm-password')).typeText(`${testConstants.password}\n`);
+      await element(by.id('account-name')).tap();
+      await element(by.id('account-name')).typeText(`${testConstants.accountName}\n`);
       await element(by.id('agree-switch')).tap();
       await element(by.id('save-account')).tap();
       await waitFor(element(by.id('download-file-button')))

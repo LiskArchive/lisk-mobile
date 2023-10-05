@@ -161,7 +161,7 @@ export default function SettingsScreen() {
             </Checkbox>
           </View>
 
-          <View style={[styles.item, styles.theme.item]}>
+          <View style={[styles.item, styles.theme.item]} testID="show-derivation-path">
             <View style={styles.row}>
               <Checkbox selected={settings.showDerivationPath} onPress={toggleShowDerivationPath}>
                 <P style={[styles.itemTitle, styles.theme.itemTitle]}>
