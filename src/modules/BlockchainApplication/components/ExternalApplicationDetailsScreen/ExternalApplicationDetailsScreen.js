@@ -1,19 +1,42 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { SafeAreaView, Image, View } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useTheme } from 'contexts/ThemeContext';
+import { useModal } from 'hooks/useModal';
+import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P, H3 } from 'components/shared/toolBox/typography';
 import FormattedDate from 'components/shared/formattedDate';
 import { Button } from 'components/shared/toolBox/button';
 import { stringShortener } from 'utilities/helpers';
+import DisconnectExternalApplicationModal from '../DisconnectExternalApplicationModal/DisconnectExternalApplicationModal';
 
-import getExternalBlockchainApplicationDetailsStyles from './styles';
+import getExternalBlockchainApplicationDetailsStyles from './ExternalApplicationDetailsScreen.styles';
 
-export default function ExternalApplicationDetails({ application, onApplicationDisconnect }) {
+export default function ExternalApplicationDetailsScreen() {
+  const navigation = useNavigation();
+
+  const route = useRoute();
+
+  const disconnectApplicationModal = useModal();
+
+  const { application } = route.params;
+
   const { styles } = useTheme({ styles: getExternalBlockchainApplicationDetailsStyles() });
 
+  const handleDisconnectPress = () =>
+    disconnectApplicationModal.open(() => (
+      <DisconnectExternalApplicationModal
+        application={application}
+        onSuccess={disconnectApplicationModal.close}
+        onCancel={disconnectApplicationModal.close}
+      />
+    ));
+
   return (
-    <View style={[styles.container, styles.theme.container]}>
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <HeaderBackButton onPress={navigation.goBack} />
+
       <View style={[styles.header]}>
         <Image source={{ uri: application.peer.metadata.icons[0] }} style={[styles.logo]} />
 
@@ -36,9 +59,9 @@ export default function ExternalApplicationDetails({ application, onApplicationD
         </View>
       </View>
 
-      <Button style={{ marginBottom: 16 }} onClick={onApplicationDisconnect}>
+      <Button onPress={handleDisconnectPress} style={{ marginBottom: 16 }}>
         Disconnect
       </Button>
-    </View>
+    </SafeAreaView>
   );
 }

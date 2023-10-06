@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 
-import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { P, H3, B } from 'components/shared/toolBox/typography';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
 
-import getDisconnectExternalBlockchainApplicationStyles from './styles';
+import getDisconnectExternalBlockchainApplicationStyles from './DisconnectExternalApplicationModal.styles';
 import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 
-export default function DisconnectExternalApplication({
+export default function DisconnectExternalApplicationModal({
   application,
   onSuccess,
   onError,
@@ -18,26 +17,24 @@ export default function DisconnectExternalApplication({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const modal = useModal();
 
   const { disconnect } = useSession();
 
   const { styles } = useTheme({ styles: getDisconnectExternalBlockchainApplicationStyles() });
 
-  async function handleDisconnectClick() {
+  const handleDisconnectPress = async () => {
     setIsLoading(true);
 
     try {
       await disconnect(application.topic);
       setIsLoading(false);
       onSuccess();
-      modal.close();
     } catch (e) {
       setError(e);
       setIsLoading(false);
       onError(error);
     }
-  }
+  };
 
   return (
     <View style={[styles.container, styles.theme.container]}>
@@ -60,10 +57,10 @@ export default function DisconnectExternalApplication({
       </View>
 
       <PrimaryButton
-        style={{ marginBottom: 16 }}
-        onClick={handleDisconnectClick}
+        onPress={handleDisconnectPress}
         disabled={isLoading}
         isLoading={isLoading}
+        style={{ marginBottom: 16 }}
       >
         {i18next.t('application.externalApplicationSignatureRequest.disconnect.disconnect')}
       </PrimaryButton>
