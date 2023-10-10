@@ -249,10 +249,6 @@ If you have licensed copies of `Basier Circle` and `Gilroy`, you can add them to
 $ react-native link ./src/assets/fonts
 ```
 
-## iMessage Extension
-
-Please check out [iMessage extension docs](ios/LiskMessageExtension/README.md) for more information.
-
 ## Contributing
 
 Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for more information.

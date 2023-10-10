@@ -1,17 +1,5 @@
-/* eslint-disable max-lines */
 import { passphrase as LiskPassphrase, cryptography } from '@liskhq/lisk-client';
 import regex from 'constants/regex';
-
-/**
- * Extracts wallet address from recoveryPhrase for given token.
- * @param {String} tokenType
- * @param {String} recoveryPhrase
- * @returns {String}
- */
-export const extractAddress = (recoveryPhrase) => {
-  const { publicKey } = cryptography.legacy.getKeys(recoveryPhrase);
-  return cryptography.address.getLisk32AddressFromPublicKey(publicKey).toString('hex');
-};
 
 /**
  * Extracts Lisk PrivateKey/PublicKey pair from a given valid Mnemonic recoveryPhrase
