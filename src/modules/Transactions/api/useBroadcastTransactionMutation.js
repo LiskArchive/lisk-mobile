@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { METHOD, API_URL } from 'utilities/api/constants';
 import apiClient from 'utilities/api/APIClient';
-import DropDownHolder from 'utilities/alert';
 
 /**
  * Broadcast signed transactions to a blockchain application
@@ -24,10 +24,10 @@ export default function useBroadcastTransactionMutation(options = {}) {
     },
     {
       onError: (error) => {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          i18next.t('transactions.errors.broadcastErrorDescription')
-        );
+        Toast.show({
+          type: 'error',
+          text2: i18next.t('transactions.errors.broadcastErrorDescription'),
+        });
 
         if (options.onError) options.onError(error);
       },

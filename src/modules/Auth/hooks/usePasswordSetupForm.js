@@ -4,8 +4,8 @@ import { useForm, useController } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import i18next from 'i18next';
 import * as yup from 'yup';
+import Toast from 'react-native-toast-message';
 
-import DropDownHolder from 'utilities/alert';
 import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
@@ -103,7 +103,10 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath, useDerivati
       setError(_error);
       setIsError(true);
 
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.encryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.encryptRecoveryPhraseError'),
+      });
     }
   });
 

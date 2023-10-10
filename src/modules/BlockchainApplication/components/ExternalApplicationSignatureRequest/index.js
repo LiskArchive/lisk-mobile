@@ -3,6 +3,7 @@ import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 import { cryptography, validator } from '@liskhq/lisk-client';
+import Toast from 'react-native-toast-message';
 
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
@@ -13,7 +14,6 @@ import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
 import { Button } from 'components/shared/toolBox/button';
-import DropDownHolder from 'utilities/alert';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
@@ -110,7 +110,10 @@ export default function ExternalApplicationSignatureRequest({ onCancel, navigati
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.decryptRecoveryPhraseError'),
+      });
     }
 
     if (privateKey) {
@@ -128,10 +131,12 @@ export default function ExternalApplicationSignatureRequest({ onCancel, navigati
 
         handleRespond(encodedTransaction);
       } catch (error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          i18next.t('application.externalApplicationSignatureRequest.errorOnSignTransactionText')
-        );
+        Toast.show({
+          type: 'error',
+          text2: i18next.t(
+            'application.externalApplicationSignatureRequest.errorOnSignTransactionText'
+          ),
+        });
       }
     }
   });

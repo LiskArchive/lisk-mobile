@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { validateRecoveryPhrase } from 'modules/Auth/utils';
@@ -13,7 +14,6 @@ import { settingsRetrieved, settingsUpdated } from 'modules/Settings/store/actio
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
-import DropDownHolder from 'utilities/alert';
 import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
 import CreateAccount from '../CreateAccountButton/CreateAccountButton';
@@ -84,7 +84,10 @@ export default function AuthMethod({ route }) {
   const selectEncryptedJSON = async () => {
     try {
       const encryptedData = await selectEncryptedFile(() =>
-        DropDownHolder.error(undefined, i18next.t('auth.setup.restoreFromFileErrorMessage'))
+        Toast.show({
+          type: 'error',
+          text2: i18next.t('auth.setup.restoreFromFileErrorMessage'),
+        })
       );
 
       if (encryptedData) {
@@ -95,7 +98,10 @@ export default function AuthMethod({ route }) {
         });
       }
     } catch {
-      DropDownHolder.error(undefined, i18next.t('auth.setup.restoreFromFileErrorMessage'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.restoreFromFileErrorMessage'),
+      });
     }
   };
 

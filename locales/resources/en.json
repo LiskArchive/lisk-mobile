@@ -19,6 +19,10 @@
     "pastedFromClipboard": "Pasted",
     "recoveryPhrase": {
       "writeDownInstructions": "Writing it down manually offers greater security compared to copying and pasting the recovery phrase."
+    },
+    "connectivity": {
+      "noInternetConnectionTitle": "No internet connection!",
+      "noInternetConnectionDescription": "Your connection seems to be down, try again later."
     }
   },
   "fallbackScreens": {
@@ -58,7 +62,6 @@
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
-  "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
   "Scan": "Scan",
@@ -67,7 +70,6 @@
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
   "terms and conditions.": "terms and conditions.",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
-  "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
   "About Lisk": "About Lisk",
   "Disabled": "Disabled",
   "Enabled": "Enabled",
@@ -544,6 +546,7 @@
       "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "deleteAccountButtonText": "Remove now",
       "downloadFileButtonText": "Download",
+      "walletUnavailableErrorText": "Wallet is not available right now. Please try again later.",
       "backButtonText": "Back"
     },
     "editAccount": {

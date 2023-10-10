@@ -12,8 +12,8 @@ export function getPickerStyles(error) {
       },
       toggleContainer: {
         borderWidth: 1,
-        borderRadius: 10,
-        padding: 16,
+        borderRadius: 6,
+        padding: 14,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

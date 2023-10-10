@@ -19,6 +19,10 @@
     "pastedFromClipboard": "Eingefügt",
     "recoveryPhrase": {
      "writeDownInstructions": "Das manuelle Aufschreiben bietet mehr Sicherheit als das Kopieren und Einfügen der Wiederherstellungsphrase."
+    },
+     "connectivity": {
+      "noInternetConnectionTitle": "Keine Internetverbindung!",
+      "noInternetConnectionDescription": "Ihre Verbindung scheint unterbrochen zu sein. Versuchen Sie es später noch einmal."
     }
   },  
   "fallbackScreens" : {
@@ -59,7 +63,6 @@
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",  
-  "No internet connection!": "Keine Internetverbindung!",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
@@ -69,7 +72,6 @@
   "Tap on the QR Code to share it.": "Tippe auf den QR-Code um ihn zu teilen",  
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Wilkommen bei Lisk. Jetzt kannst du LSK Tokens unterwegs senden und empfangen.",
-  "Your connection seems to be down, try again later.": "Deine Verbindung scheint unterbrochen zu sein, bitte versuch es spääter noch einmal.",
   "About Lisk": "Über Lisk",
   "Disabled": "Deaktiviert",
   "Enabled": "Aktiviert",
@@ -539,6 +541,7 @@
       "deleteAccountDescription": "Dieses Konto wird nicht mehr auf diesem Gerät gespeichert. Sie können Ihre geheime Wiederherstellungsphrase sichern, bevor Sie sie entfernen.",
       "deleteAccountButtonText": "Jetzt entfernen",
       "downloadFileButtonText": "Download",
+      "walletUnavailableErrorText": "Wallet ist derzeit nicht verfügbar. Bitte versuchen Sie es später noch einmal.",
       "backButtonText": "Zurück"
     },
     "editAccount": {

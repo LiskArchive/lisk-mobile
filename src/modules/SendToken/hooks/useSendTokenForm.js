@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
@@ -22,7 +23,6 @@ import {
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useDebounce } from 'hooks/useDebounce';
-import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
@@ -124,7 +124,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
       enabled: recipientAddress && tokenID,
       onError: () =>
-        DropDownHolder.error(i18next.t('Error'), i18next.t('sendToken.errors.estimateFees')),
+        Toast.show({
+          type: 'error',
+          text2: i18next.t('sendToken.errors.estimateFees'),
+        }),
     });
 
   const handleChange = (field, value, onChange) => {
@@ -237,7 +240,11 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.decryptRecoveryPhraseError'),
+      });
+
       return;
     }
 

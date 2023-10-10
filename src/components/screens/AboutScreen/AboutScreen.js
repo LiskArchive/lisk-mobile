@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Linking } from 'react-native';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { H4, P, A } from 'components/shared/toolBox/typography';
-import DropDownHolder from 'utilities/alert';
 import URLs from 'constants/URLs';
 import LiskIsotypeSvg from 'assets/svgs/LiskIsotypeSvg';
 import packageJson from '../../../../package.json';
@@ -18,7 +18,10 @@ export default function AboutScreen() {
 
   const handleOpenLiskWebsite = () =>
     Linking.openURL(URLs.liskHomepage).catch(() =>
-      DropDownHolder.error('Error', 'Error opening link. Please try again later.')
+      Toast.show({
+        type: 'error',
+        text2: 'Error opening link. Please try again later.',
+      })
     );
 
   return (
