@@ -385,8 +385,6 @@ PODS:
     - React-Core
   - react-native-shake (5.3.2):
     - React
-  - react-native-splash-screen (3.2.0):
-    - React
   - react-native-wasm (0.1.3):
     - React
   - react-native-webview (11.26.1):
@@ -616,7 +614,6 @@ DEPENDENCIES:
   - react-native-randombytes (from `../node_modules/react-native-randombytes`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-shake (from `../node_modules/react-native-shake`)
-  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-wasm (from `../node_modules/react-native-wasm`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -749,8 +746,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-shake:
     :path: "../node_modules/react-native-shake"
-  react-native-splash-screen:
-    :path: "../node_modules/react-native-splash-screen"
   react-native-wasm:
     :path: "../node_modules/react-native-wasm"
   react-native-webview:
@@ -877,7 +872,6 @@ SPEC CHECKSUMS:
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
   react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
   react-native-shake: 62aa5681863203090a087842da70183c442b97f8
-  react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-wasm: 6bb5d9915e8d4b9b7d080247d3fbf7354a582695
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   React-perflogger: e706562ab7eb8eb590aa83a224d26fa13963d7f2
