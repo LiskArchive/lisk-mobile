@@ -164,10 +164,10 @@ export default function ExternalApplicationDetailsScreen() {
 
             <View style={styles.row}>
               <View style={[{ flex: 1 }]}>
-                <B style={[styles.itemTitle, styles.label]}>Methods</B>
+                <B style={[styles.itemTitle, styles.label, styles.theme.itemTitle]}>Methods</B>
 
                 {application.namespaces.lisk?.methods.map((method, index) => (
-                  <P key={index} style={[styles.label, styles.theme.label]}>
+                  <P key={index} style={[styles.label, styles.theme.itemSubtitle]}>
                     {method}
                   </P>
                 ))}
@@ -178,7 +178,7 @@ export default function ExternalApplicationDetailsScreen() {
                   <B style={[styles.itemTitle, styles.label]}>Events</B>
 
                   {application.namespaces.lisk?.events.map((event, index) => (
-                    <P key={index} style={[styles.label, styles.theme.label]}>
+                    <P key={index} style={[styles.label, styles.theme.itemSubtitle]}>
                       {event}
                     </P>
                   ))}

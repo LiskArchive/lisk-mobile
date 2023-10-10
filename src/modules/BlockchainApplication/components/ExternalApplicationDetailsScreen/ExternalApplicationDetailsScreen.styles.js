@@ -143,16 +143,16 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
         color: colors.dark.ghost,
       },
       label: {
-        color: colors.dark.whiteSmoke,
+        color: colors.dark.blueGray,
       },
       value: {
-        color: colors.dark.ghost,
+        color: colors.dark.white,
       },
       itemTitle: {
         color: colors.dark.white,
       },
       itemSubtitle: {
-        color: colors.dark.smoothGray,
+        color: colors.dark.mountainMist,
       },
       divider: {
         borderColor: colors.dark.volcanicSand,
