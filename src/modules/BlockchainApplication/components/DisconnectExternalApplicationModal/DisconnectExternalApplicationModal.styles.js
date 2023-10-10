@@ -51,6 +51,12 @@ export default function getDisconnectExternalBlockchainApplicationStyles() {
       value: {
         fontSize: fonts.size.base,
       },
+      primaryButton: {
+        marginBottom: 16,
+      },
+      footer: {
+        paddingBottom: 16,
+      },
     },
     [themes.light]: {
       container: {

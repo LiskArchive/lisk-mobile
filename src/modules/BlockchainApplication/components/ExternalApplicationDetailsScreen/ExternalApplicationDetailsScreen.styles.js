@@ -17,6 +17,11 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
         overflow: 'hidden',
         paddingTop: safeAreaPadding,
       },
+      headerBg: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+      },
       logoContainer: {
         marginTop: -logoMarginTop,
         marginBottom: Platform.select({ ios: -32, android: 10 }),

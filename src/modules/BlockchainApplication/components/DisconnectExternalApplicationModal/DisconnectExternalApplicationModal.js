@@ -56,16 +56,18 @@ export default function DisconnectExternalApplicationModal({
         </P>
       </View>
 
-      <PrimaryButton
-        onPress={handleDisconnectPress}
-        disabled={isLoading}
-        isLoading={isLoading}
-        style={{ marginBottom: 16 }}
-      >
-        {i18next.t('application.externalApplicationSignatureRequest.disconnect.disconnect')}
-      </PrimaryButton>
+      <View style={styles.footer}>
+        <PrimaryButton
+          onPress={handleDisconnectPress}
+          disabled={isLoading}
+          isLoading={isLoading}
+          style={styles.primaryButton}
+        >
+          {i18next.t('application.externalApplicationSignatureRequest.disconnect.disconnect')}
+        </PrimaryButton>
 
-      <Button onClick={onCancel}>{i18next.t('commons.buttons.cancel')}</Button>
+        <Button onPress={onCancel}>{i18next.t('commons.buttons.cancel')}</Button>
+      </View>
     </View>
   );
 }

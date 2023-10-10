@@ -82,11 +82,7 @@ export default function ApplicationDetails({ route }) {
                 end={{ x: 1, y: 0 }}
                 style={[[styles.header, styles.theme.header]]}
               >
-                <WavesPatternSvg
-                  height={280}
-                  width={400}
-                  style={{ position: 'absolute', top: 0, left: 0 }}
-                />
+                <WavesPatternSvg height={280} width={400} style={styles.headerBg} />
 
                 <HeaderBackButton color={colors.light.white} onPress={navigation.goBack} />
               </LinearGradient>
