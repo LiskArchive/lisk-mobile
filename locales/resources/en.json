@@ -544,6 +544,7 @@
       "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "deleteAccountButtonText": "Remove now",
       "downloadFileButtonText": "Download",
+      "walletUnavailableErrorText": "Wallet is not available right now. Please try again later.",
       "backButtonText": "Back"
     },
     "editAccount": {

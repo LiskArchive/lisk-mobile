@@ -44,7 +44,7 @@ export default function AccountList({
     if (!currentApplication.data) {
       Toast.show({
         type: 'error',
-        text2: 'Wallet is not available right now. Please try again later.',
+        text2: i18next.t('accounts.accountsManager.walletUnavailableErrorText'),
       });
     } else {
       setAccount(account);

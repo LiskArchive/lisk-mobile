@@ -539,6 +539,7 @@
       "deleteAccountDescription": "Dieses Konto wird nicht mehr auf diesem Gerät gespeichert. Sie können Ihre geheime Wiederherstellungsphrase sichern, bevor Sie sie entfernen.",
       "deleteAccountButtonText": "Jetzt entfernen",
       "downloadFileButtonText": "Download",
+      "walletUnavailableErrorText": "Wallet ist derzeit nicht verfügbar. Bitte versuchen Sie es später noch einmal.",
       "backButtonText": "Zurück"
     },
     "editAccount": {
