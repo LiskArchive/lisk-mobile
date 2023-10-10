@@ -1,21 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { merge } from './helpers';
 
-export const blankAccounts = [];
 export const blankSettings = {
   validated: true,
-};
-
-const validateAccounts = (data) => {
-  try {
-    const parsedData = Array.isArray(data) ? data : JSON.parse(data);
-    if (!parsedData || typeof parsedData !== 'object') {
-      return blankAccounts;
-    }
-    return parsedData;
-  } catch (error) {
-    return blankAccounts;
-  }
 };
 
 const validateSettings = (data) => {
@@ -48,16 +35,6 @@ export async function fetchData(key) {
     throw new Error('Error retrieving data');
   }
 }
-
-export const retrieveAccounts = () =>
-  fetchData('LiskfollowedAccounts')
-    .then((data) => validateAccounts(data))
-    .catch(() => blankAccounts);
-
-export const storeFollowedAccount = (followedAccountsList) =>
-  persistData('LiskfollowedAccounts', followedAccountsList)
-    .then((data) => validateAccounts(data))
-    .catch(() => blankAccounts);
 
 export const getSettings = () =>
   fetchData('LiskSettings')

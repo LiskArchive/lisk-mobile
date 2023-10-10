@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import regex from 'constants/regex';
 import { themes } from 'constants/styleGuide';
 
 /**
@@ -97,19 +96,6 @@ export function fromPathToObject(path, value, obj = {}) {
 }
 
 /**
- * Checks if the given collection is empty.
- * @param {Object|Array} collection
- * @returns {Boolean}
- */
-export const isEmpty = (collection) => {
-  if (Array.isArray(collection)) {
-    return collection.length === 0;
-  }
-
-  return Object.keys(collection).length === 0;
-};
-
-/**
  * Converts a given hex color to rgba with a given alpha
  * If no alpha passed, simply coverts hex to rgba
  *
@@ -133,15 +119,6 @@ export const setColorOpacity = (hex, alpha = 1) => {
 
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
-
-export const validateAmount = (amount) => new RegExp(regex.amount).test(amount);
-
-/**
- * This function tests if a string passed can be parsed to a number
- * @param {string} value
- * @returns {boolean}
- */
-export const isNumeric = (value) => /^([0-9]+\.?[0-9]*|\.[0-9]+)$/.test(value);
 
 /**
  * Finds the maximum value in an array of BigInt numbers.
