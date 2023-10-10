@@ -3,6 +3,7 @@ import React from 'react';
 import { Image, View, Linking, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useModal } from 'hooks/useModal';
@@ -80,7 +81,9 @@ export default function ExternalApplicationDetailsScreen() {
           </View>
 
           <View style={styles.row}>
-            <P style={[styles.theme.label]}>Expiry date: </P>
+            <P style={[styles.theme.label]}>
+              {i18next.t('application.explore.externalApplicationDetailsScreen.expiryText')}:{' '}
+            </P>
 
             <FormattedDate style={[styles.value, styles.theme.value]}>
               {application.expiry * 1000}
@@ -90,7 +93,11 @@ export default function ExternalApplicationDetailsScreen() {
           <View style={[styles.divider, styles.theme.divider]} />
 
           <View>
-            <P style={[styles.label, styles.theme.label]}>Connected chains</P>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t(
+                'application.explore.externalApplicationDetailsScreen.connectedChainsTitle'
+              )}
+            </P>
 
             <DataRenderer
               data={connectedChains.chains}
@@ -109,7 +116,10 @@ export default function ExternalApplicationDetailsScreen() {
                           </P>
 
                           <P style={[styles.itemSubtitle, styles.theme.itemSubtitle]}>
-                            Chain ID: {chain.chainID}
+                            {i18next.t(
+                              'application.explore.externalApplicationDetailsScreen.chainIDLabel'
+                            )}
+                            : {chain.chainID}
                           </P>
                         </View>
                       </View>
@@ -122,7 +132,11 @@ export default function ExternalApplicationDetailsScreen() {
           <View style={[styles.dividerSmall, styles.theme.divider]} />
 
           <View>
-            <P style={[styles.label, styles.theme.label]}>Connected accounts</P>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t(
+                'application.explore.externalApplicationDetailsScreen.connectedAccountsTitle'
+              )}
+            </P>
 
             <View>
               {connectedAccounts.map((account) => (
@@ -148,7 +162,9 @@ export default function ExternalApplicationDetailsScreen() {
           <View style={[styles.dividerSmall, styles.theme.divider]} />
 
           <View style={styles.column}>
-            <P style={[styles.label, styles.theme.label]}>Connection ID</P>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t('application.explore.externalApplicationDetailsScreen.connectionIDTitle')}
+            </P>
 
             <P style={[styles.value, styles.theme.value]}>{application.topic}</P>
           </View>
@@ -156,11 +172,15 @@ export default function ExternalApplicationDetailsScreen() {
           <View style={[styles.divider, styles.theme.divider]} />
 
           <View style={styles.column}>
-            <P style={[styles.label, styles.theme.label]}>Application permissions</P>
+            <P style={[styles.label, styles.theme.label]}>
+              {i18next.t('application.explore.externalApplicationDetailsScreen.permissionsTitle')}
+            </P>
 
             <View style={styles.row}>
               <View style={[{ flex: 1 }]}>
-                <B style={[styles.itemTitle, styles.label, styles.theme.itemTitle]}>Methods</B>
+                <B style={[styles.itemTitle, styles.label, styles.theme.itemTitle]}>
+                  {i18next.t('application.explore.externalApplicationDetailsScreen.methodsTitle')}
+                </B>
 
                 {application.namespaces.lisk?.methods.map((method, index) => (
                   <P key={index} style={[styles.label, styles.theme.itemSubtitle]}>
@@ -171,7 +191,9 @@ export default function ExternalApplicationDetailsScreen() {
 
               {application.namespaces.lisk?.events.length > 0 && (
                 <View style={[{ flex: 1 }]}>
-                  <B style={[styles.itemTitle, styles.label]}>Events</B>
+                  <B style={[styles.itemTitle, styles.label]}>
+                    {i18next.t('application.explore.externalApplicationDetailsScreen.eventsTitle')}
+                  </B>
 
                   {application.namespaces.lisk?.events.map((event, index) => (
                     <P key={index} style={[styles.label, styles.theme.itemSubtitle]}>
@@ -187,7 +209,7 @@ export default function ExternalApplicationDetailsScreen() {
 
       <View style={styles.footer}>
         <Button onPress={handleDisconnectPress} textStyle={styles.disconnectButton}>
-          Disconnect
+          {i18next.t('application.explore.externalApplicationDetailsScreen.disconnectButtonText')}
         </Button>
       </View>
     </View>

@@ -384,6 +384,17 @@
         "enterConnectionUri": "Enter connection URI",
         "approveConnectionChainsTitle": "Connected chains",
         "approveConnectionAccountsTitle": "Connected accounts"
+      },
+      "externalApplicationDetailsScreen": {
+        "expiryText": "Expiry date",
+        "connectedChainsTitle": "Connected chains",
+        "chainIDLabel": "Chain ID",
+        "connectedAccountsTitle": "Connected accounts",
+        "connectionIDTitle": "Connection ID",
+        "permissionsTitle": "Application permissions",
+        "methodsTitle": "Methods",
+        "eventsTitle": "Events",
+        "disconnectButtonText": "Disconnect"
       }
     },
     "externalApplicationSignatureRequest": {

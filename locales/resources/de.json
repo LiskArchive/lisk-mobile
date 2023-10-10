@@ -385,7 +385,18 @@
         "enterConnectionUri": "Verbindungs-URI eingeben",
         "approveConnectionChainsTitle": "Verbundene Ketten",
         "approveConnectionAccountsTitle": "Verbundene Konten"
-        }
+      },
+      "externalApplicationDetailsScreen": {
+        "expiryText": "Ablaufdatum",
+        "connectedChainsTitle": "Verbundene Ketten",
+        "chainIDLabel": "Ketten-ID",
+        "connectedAccountsTitle": "Verbundene Konten",
+        "connectionIDTitle": "Verbindungs-ID",
+        "permissionsTitle": "Anwendungsberechtigungen",
+        "methodsTitle": "Methoden",
+        "eventsTitle": "Ereignisse",
+        "disconnectButtonText": "Trennen"
+      }
     },
     "externalApplicationSignatureRequest": {
       "errorOnSignTransactionText": "Ihre Transaktion kann nicht signiert werden. Bitte versuche es erneut.",
