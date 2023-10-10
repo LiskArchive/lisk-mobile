@@ -14,7 +14,6 @@ export default function getExternalBlockchainApplicationRowStyles() {
         paddingTop: 16,
         paddingBottom: 16,
         borderBottomWidth: 1,
-        borderBottomColor: colors.light.platinumGray,
       },
       applicationNameContainer: {
         flexDirection: 'row',
@@ -32,6 +31,10 @@ export default function getExternalBlockchainApplicationRowStyles() {
       applicationNameLabel: {
         fontSize: fonts.size.base,
         fontWeight: '600',
+        marginBottom: 4,
+      },
+      applicationUrlLabel: {
+        fontSize: 12,
       },
       resultDescription: {
         fontFamily: fonts.family.context,
@@ -44,8 +47,14 @@ export default function getExternalBlockchainApplicationRowStyles() {
       container: {
         backgroundColor: colors.light.white,
       },
+      applicationContainer: {
+        borderBottomColor: colors.light.platinumGray,
+      },
       applicationNameLabel: {
         color: colors.light.zodiacBlue,
+      },
+      applicationUrlLabel: {
+        color: colors.light.blueGray,
       },
       resultDescription: {
         color: colors.light.zodiacBlue,
@@ -56,8 +65,14 @@ export default function getExternalBlockchainApplicationRowStyles() {
       container: {
         backgroundColor: colors.dark.mainBg,
       },
+      applicationContainer: {
+        borderBottomColor: colors.dark.volcanicSand,
+      },
       applicationNameLabel: {
-        color: colors.light.platinum,
+        color: colors.dark.platinum,
+      },
+      applicationUrlLabel: {
+        color: colors.dark.mountainMist,
       },
       resultDescription: {
         color: colors.dark.ghost,

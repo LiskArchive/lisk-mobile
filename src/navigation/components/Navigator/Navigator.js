@@ -45,6 +45,7 @@ import AppNavigator from '../AppNavigator';
 import navigationOptions from '../../navigation.options';
 import navigationLinking from '../../navigation.linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './Navigator.styles';
+import ExternalApplicationDetailsScreen from '../../../modules/BlockchainApplication/components/ExternalApplicationDetailsScreen/ExternalApplicationDetailsScreen';
 
 const StackNavigator = createStackNavigator();
 
@@ -146,6 +147,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="ApplicationDetails"
             component={ApplicationDetails}
+            options={navigationOptions.SignIn}
+          />
+          <StackNavigator.Screen
+            name="ExternalApplicationDetails"
+            component={ExternalApplicationDetailsScreen}
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen

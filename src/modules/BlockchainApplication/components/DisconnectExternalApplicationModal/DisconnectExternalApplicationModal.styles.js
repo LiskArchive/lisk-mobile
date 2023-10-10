@@ -1,23 +1,24 @@
 import { themes, colors, fonts } from 'constants/styleGuide';
 
-export default function getExternalBlockchainApplicationDetailsStyles() {
+export default function getDisconnectExternalBlockchainApplicationStyles() {
   return {
     common: {
       container: {
         flex: 1,
-        width: '100%',
       },
       header: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
+        marginBottom: 16,
       },
       body: {
         flex: 1,
         marginBottom: 16,
+        alignItems: 'center',
       },
       title: {
-        fontSize: fonts.size.h4,
+        fontSize: fonts.size.h3,
       },
       logo: {
         borderRadius: 50,
@@ -43,11 +44,18 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
         paddingTop: 16,
         paddingBottom: 16,
       },
-      label: {
+      text: {
         fontSize: fonts.size.base,
+        textAlign: 'center',
       },
       value: {
         fontSize: fonts.size.base,
+      },
+      primaryButton: {
+        marginBottom: 16,
+      },
+      footer: {
+        paddingBottom: 16,
       },
     },
     [themes.light]: {
@@ -57,8 +65,8 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
       title: {
         color: colors.light.zodiacBlue,
       },
-      label: {
-        color: colors.light.blueGray,
+      text: {
+        color: colors.light.zodiacBlue,
       },
       value: {
         color: colors.light.zodiacBlue,
@@ -72,8 +80,8 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
       title: {
         color: colors.dark.ghost,
       },
-      label: {
-        color: colors.dark.whiteSmoke,
+      text: {
+        color: colors.dark.ghost,
       },
       value: {
         color: colors.dark.ghost,
