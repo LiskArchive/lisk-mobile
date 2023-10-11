@@ -27,11 +27,10 @@ pipeline {
               # Install Command Line Tools
               cp env.test.json env.json
               npx react-native start &
+              xcrun simctl shutdown F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F
               xcrun simctl boot F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F
               open -a Simulator --args -CurrentDeviceUDID F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F &
-              
               /usr/bin/xcrun simctl spawn F084BDF1-55E5-4E4C-B4D6-70AA1DA5D41F log stream --level debug --style compact --predicate 'process == "LiskQA"' &
-              
               yarn detox build --configuration ios.debug
               yarn detox test --configuration ios.debug --cleanup --headless --record-logs all
               kill -9 %1
