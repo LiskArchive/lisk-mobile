@@ -157,7 +157,7 @@ export function SendTokenAmountField({
       renderData={() => (
         <Input
           value={value}
-          onChange={(newValue) => onChange(newValue)}
+          onChange={(value) => onChange(value?.replace(',', '.'))}
           keyboardType="numeric"
           disabled={!selectedToken}
           label={
