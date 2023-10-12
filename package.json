@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@liskhq/lisk-client": "5.2.0",
-    "@react-native-async-storage/async-storage": "^1.14.1",
+    "@react-native-async-storage/async-storage": "1.16.0",
     "@react-native-community/cameraroll": "4.0.2",
     "@react-native-community/netinfo": "6.0.0",
     "@react-navigation/bottom-tabs": "^5.11.8",
@@ -64,7 +64,6 @@
     "react-i18next": "^9.0.2",
     "react-native": "0.65.1",
     "react-native-app-settings": "^2.0.1",
-    "react-native-appearance": "0.3.4",
     "react-native-background-timer": "2.4.1",
     "react-native-blur-overlay": "1.0.7",
     "react-native-camera": "3.43.0",
@@ -82,7 +81,7 @@
     "react-native-level-fs": "3.0.1",
     "react-native-modalbox": "2.0.2",
     "react-native-os": "^1.2.6",
-    "react-native-permissions": "3.0.1",
+    "react-native-permissions": "3.8.0",
     "react-native-qrcode-svg": "6.1.1",
     "react-native-quick-actions": "0.3.13",
     "react-native-randombytes": "^3.6.0",
@@ -97,7 +96,7 @@
     "react-native-tcp": "^3.3.2",
     "react-native-udp": "^2.7.0",
     "react-native-vector-icons": "8.1.0",
-    "react-native-webview": "11.2.3",
+    "react-native-webview": "^11.23.1",
     "react-redux": "^7.2.2",
     "readable-stream": "^3.6.0",
     "redux": "^4.0.5",
@@ -161,7 +160,7 @@
     "react-native-codegen": "0.0.9",
     "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
-    "rn-nodeify": "github:tradle/rn-nodeify",
+    "rn-nodeify": "https://github.com/tradle/rn-nodeify.git",
     "schedule": "^0.5.0"
   },
   "jest": {

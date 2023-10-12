@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-blur-overlay/android/build.gradle b/node_modules/react-native-blur-overlay/android/build.gradle
+index 8c6e8e8..ff6d657 100644
+--- a/node_modules/react-native-blur-overlay/android/build.gradle
++++ b/node_modules/react-native-blur-overlay/android/build.gradle
+@@ -31,6 +31,6 @@ repositories {
+ }
+ 
+ dependencies {
+-    compile 'com.facebook.react:react-native:+'
++    implementation 'com.facebook.react:react-native:+'
+ }
+   
+\ No newline at end of file
