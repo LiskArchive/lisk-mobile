@@ -120,7 +120,13 @@ class Input extends React.Component {
             keyboardType={keyboardType}
             keyboardAppearance={keyboardAppearance}
             autoFocus={autoFocus}
-            onChangeText={onChange}
+            onChangeText={(value) => {
+              if (keyboardType === 'numeric') {
+                onChange(value?.replace(',', '.'));
+              } else {
+                onChange(value);
+              }
+            }}
             onSelectionChange={onSelectionChange}
             autoCorrect={autoCorrect}
             onFocus={this.onFocus}
