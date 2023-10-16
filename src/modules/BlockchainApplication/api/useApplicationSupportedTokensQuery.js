@@ -28,6 +28,9 @@ export function useApplicationSupportedTokensQuery(application) {
   } = useTokensMetaQuery({
     config: { params: { chainID: undefined, network: application?.networkType } },
     client: apiClient.current,
+    options: {
+      enabled: !!apiClient.current.host,
+    },
   });
 
   const {
@@ -37,6 +40,9 @@ export function useApplicationSupportedTokensQuery(application) {
     isSuccess: isSuccessSupportedTokens,
   } = useSupportedTokensQuery({
     client: apiClient.current,
+    options: {
+      enabled: !!apiClient.current.host,
+    },
   });
 
   const isSupportAllTokens = supportedTokensData?.isSupportAllTokens;
