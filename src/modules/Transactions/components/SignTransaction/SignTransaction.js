@@ -19,7 +19,6 @@ export default function SignTransaction({
   error,
   isSuccess,
   isLoading,
-  userPassword,
   onUserPasswordChange,
   onSubmit,
   navigation,
@@ -58,7 +57,6 @@ export default function SignTransaction({
       return (
         <ConfirmTransaction
           onSubmit={onSubmit}
-          userPassword={userPassword}
           onUserPasswordChange={onUserPasswordChange}
           isLoading={isLoading}
           isValidationError={isValidationError}
