@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import i18next from 'i18next';
@@ -14,7 +14,6 @@ import { stringShortener } from 'utilities/helpers';
 import getConfirmTransactionStyles from './styles';
 
 export default function ConfirmTransaction({
-  userPassword,
   onUserPasswordChange,
   isLoading,
   isValidationError,
@@ -23,12 +22,13 @@ export default function ConfirmTransaction({
 }) {
   const [currentAccount] = useCurrentAccount();
   const { sensorType } = useSelector((state) => state.settings);
+  const [password, setPassword] = useState('');
 
   const { styles } = useTheme({
     styles: getConfirmTransactionStyles(),
   });
 
-  const submitDisabled = isLoading || !userPassword || isValidationError;
+  const submitDisabled = isLoading || !password || isValidationError;
 
   const fetchAccountPassword = async () => {
     const accountPassword = await getAccountPasswordFromKeyChain(currentAccount.metadata?.address);
@@ -38,8 +38,14 @@ export default function ConfirmTransaction({
   const fetchAccountPasswordFromBiometrics = async () => {
     const accountPassword = await fetchAccountPassword();
     if (accountPassword) {
+      setPassword(accountPassword);
       onUserPasswordChange(accountPassword);
     }
+  };
+
+  const handleUserPasswordChange = (value) => {
+    onUserPasswordChange(value);
+    setPassword(value);
   };
 
   useEffect(() => {
@@ -71,8 +77,10 @@ export default function ConfirmTransaction({
         </Text>
 
         <Input
-          value={userPassword}
-          onChange={onUserPasswordChange}
+          value={password}
+          onChange={handleUserPasswordChange}
+          autoCapitalize="none"
+          autoCorrect={false}
           innerStyles={{
             containerStyle: {
               paddingTop: 0,

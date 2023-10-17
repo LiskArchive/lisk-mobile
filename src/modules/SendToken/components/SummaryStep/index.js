@@ -55,7 +55,6 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     (modal) => (
       <SignTransaction
         onSubmit={form.handleSubmit}
-        userPassword={userPasswordField.value}
         onUserPasswordChange={userPasswordField.onChange}
         onReset={() => handleSignTransactionModalReset(modal)}
         isSuccess={form.isSuccess}
@@ -65,14 +64,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
         navigation={navigation}
       />
     ),
-    [
-      userPasswordField.value,
-      summary.amount,
-      summary.token,
-      form.isSuccess,
-      form.isLoading,
-      form.isError,
-    ]
+    [summary.amount, summary.token, form.isSuccess, form.isLoading, form.isError]
   );
 
   return (
