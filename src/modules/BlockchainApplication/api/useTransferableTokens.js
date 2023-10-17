@@ -6,10 +6,11 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 
 export function useTransferableTokens(application = {}) {
   const [currentAccount] = useCurrentAccount();
+  const address = currentAccount?.metadata?.address;
 
   const networkSupportedTokens = useApplicationSupportedTokensQuery(application);
-  const tokenBalances = useAccountTokenBalancesQuery(currentAccount.metadata.address, {
-    options: { enabled: networkSupportedTokens.isSuccess },
+  const tokenBalances = useAccountTokenBalancesQuery(address, {
+    options: { enabled: !!address && networkSupportedTokens.isSuccess },
   });
 
   const transferrableTokens = networkSupportedTokens.data
