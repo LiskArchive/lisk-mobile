@@ -18,7 +18,6 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 import {
   SendTokenMessageField,
   SendTokenAmountField,
-  TokenSelectField,
 } from 'modules/SendToken/components/SelectTokenStep/components';
 import { SendTokenRecipientApplicationField } from 'modules/SendToken/components/SelectApplicationsStep/components';
 import DataRenderer from 'components/shared/DataRenderer';
@@ -39,6 +38,7 @@ import CheckSvg from 'assets/svgs/CheckSvg';
 
 import { useRequestTokenAmountValidation } from './hook/useRequestTokenAmountValidation';
 import getStyles from './styles';
+import { RequestTokenSelectField } from './components/RequestTokenSelectField';
 
 export default function RequestToken() {
   const navigation = useNavigation();
@@ -186,7 +186,7 @@ export default function RequestToken() {
             )}
           />
 
-          <TokenSelectField
+          <RequestTokenSelectField
             value={tokenID}
             onChange={setTokenID}
             recipientApplication={currentApplication.data}
