@@ -547,9 +547,9 @@ PODS:
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
-  - ZXingObjC (3.6.5):
-    - ZXingObjC/All (= 3.6.5)
-  - ZXingObjC/All (3.6.5)
+  - ZXingObjC (3.6.9):
+    - ZXingObjC/All (= 3.6.9)
+  - ZXingObjC/All (3.6.9)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
@@ -910,8 +910,8 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
-  ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
+  ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
 PODFILE CHECKSUM: 15948ed2eab00a8ddc2910ffdc1dfbe0adacd00c
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
