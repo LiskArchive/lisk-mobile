@@ -29,7 +29,7 @@ const fallback = (settings) => {
     ? settings.currency
     : currencyKeys[0];
 
-  settings.token = { ...(settings.token ?? {}), active: tokenKeys[0] }
+  settings.token.active = tokenKeys[0]
   return settings;
 };
 
