@@ -97,8 +97,7 @@ class SignIn extends React.Component {
   };
 
   async defineDefaultAuthMethod() {
-    // const introShowed = await AsyncStorage.getItem('@lisk-mobile-intro');
-    const introShowed = false
+    const introShowed = await AsyncStorage.getItem('@lisk-mobile-intro');
     if (!introShowed) {
       this.props.navigation.navigate('Intro');
     }
