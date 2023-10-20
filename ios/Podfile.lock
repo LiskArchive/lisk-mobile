@@ -80,17 +80,17 @@ PODS:
     - lottie-ios (~> 3.2.3)
     - React-Core
   - OpenSSL-Universal (1.1.180)
-  - Permission-BluetoothPeripheral (3.0.1):
+  - Permission-BluetoothPeripheral (3.8.0):
     - RNPermissions
-  - Permission-Calendars (3.0.1):
+  - Permission-Calendars (3.8.0):
     - RNPermissions
-  - Permission-Camera (3.0.1):
+  - Permission-Camera (3.8.0):
     - RNPermissions
-  - Permission-Contacts (3.0.1):
+  - Permission-Contacts (3.8.0):
     - RNPermissions
-  - Permission-FaceID (3.0.1):
+  - Permission-FaceID (3.8.0):
     - RNPermissions
-  - Permission-PhotoLibrary (3.0.1):
+  - Permission-PhotoLibrary (3.8.0):
     - RNPermissions
   - RCT-Folly (2021.04.26.00):
     - boost-for-react-native
@@ -287,8 +287,6 @@ PODS:
     - React-jsi (= 0.65.1)
     - React-perflogger (= 0.65.1)
   - React-jsinspector (0.65.1)
-  - react-native-appearance (0.3.4):
-    - React
   - react-native-background-timer (2.4.1):
     - React-Core
   - react-native-camera (3.43.0):
@@ -307,13 +305,13 @@ PODS:
     - React-Core
   - react-native-randombytes (3.6.1):
     - React-Core
-  - react-native-safe-area-context (3.3.2):
+  - react-native-safe-area-context (3.4.1):
     - React-Core
   - react-native-shake (3.5.0):
     - React-Core
   - react-native-splash-screen (3.2.0):
     - React
-  - react-native-webview (11.2.3):
+  - react-native-webview (11.26.1):
     - React-Core
   - React-perflogger (0.65.1)
   - React-RCTActionSheet (0.65.1):
@@ -381,7 +379,7 @@ PODS:
     - React-perflogger (= 0.65.1)
   - ReactNativeKeyboardTrackingView (5.7.0):
     - React
-  - RNCAsyncStorage (1.15.8):
+  - RNCAsyncStorage (1.17.11):
     - React-Core
   - RNDeviceInfo (8.0.2):
     - React-Core
@@ -393,7 +391,7 @@ PODS:
     - React
   - RNOS (1.2.6):
     - React
-  - RNPermissions (3.0.1):
+  - RNPermissions (3.8.0):
     - React-Core
   - RNQuickAction (0.3.13):
     - React
@@ -459,7 +457,6 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-appearance (from `../node_modules/react-native-appearance`)
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
@@ -565,8 +562,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
-  react-native-appearance:
-    :path: "../node_modules/react-native-appearance"
   react-native-background-timer:
     :path: "../node_modules/react-native-background-timer"
   react-native-camera:
@@ -659,17 +654,17 @@ SPEC CHECKSUMS:
   FlipperKit: aec2d931adeee48a07bab1ea8bcc8a6bb87dfce4
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
-  Interactable: 334971ca372efcb6791bb47f81f3265963c47f3e
+  Interactable: 411887c89fa16ac41f8e7898aca06dcad55e5f22
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   lottie-react-native: 9c11659dfd571028a2233fa53e332110651c4b25
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
-  Permission-BluetoothPeripheral: 5b9259419dc19ad903c5718c9822ae78583317f4
-  Permission-Calendars: 19c4fe30f4de76b62352d93c72456ed6c77cbac7
-  Permission-Camera: 0d2d15352e9c54c3ea8686c8c21fb1a9edf3431b
-  Permission-Contacts: ee9db81f22b95bb4d46925c68c16cdfc66591de0
-  Permission-FaceID: 2f7fd19556aad57344ef2b411b392da7331dce5d
-  Permission-PhotoLibrary: e5d0500209f22e2a5b281501cd3744a965747726
+  Permission-BluetoothPeripheral: 2d2d32c4651752655c19345abbb45ad15651f987
+  Permission-Calendars: cd50284b7a311813fb893a488bad61771e6cb494
+  Permission-Camera: e6d142d7d8b714afe0a83e5e6ae17eb949f1e3e9
+  Permission-Contacts: 113bcfffb98667533e4e6611e9df92e57ea786d7
+  Permission-FaceID: 257965cb6ba2dc098cd485642df13e8ee6e281ef
+  Permission-PhotoLibrary: 31787bbe77d0d3ae6a5267b8435e4a2e9ef78f1d
   RCT-Folly: 0dd9e1eb86348ecab5ba76f910b56f4b5fef3c46
   RCTRequired: 6cf071ab2adfd769014b3d94373744ee6e789530
   RCTTypeSafety: b829c59453478bb5b02487b8de3336386ab93ab1
@@ -681,17 +676,16 @@ SPEC CHECKSUMS:
   React-jsi: 12913c841713a15f64eabf5c9ad98592c0ec5940
   React-jsiexecutor: 43f2542aed3c26e42175b339f8d37fe3dd683765
   React-jsinspector: 41e58e5b8e3e0bf061fdf725b03f2144014a8fb0
-  react-native-appearance: fc2014516054585d531e07aa0b40ab0de1d2be85
-  react-native-background-timer: 117fffdc9b0d6f144444bb49029f94275a45fdb5
-  react-native-camera: c2cb270b2546bb6d99352455676cd01a1cbeb1d5
-  react-native-cameraroll: 717193a0427fd0db78d3f10385a008fcc102213c
-  react-native-fingerprint-scanner: c68136ca57e3704d7bdf5faa554ea535ce15b1d0
-  react-native-netinfo: 34f4d7a42f49157f3b45c14217d256bce7dc9682
-  react-native-randombytes: 5fc412efe7b5c55b9002c0004d75fe5fabcaa507
-  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
-  react-native-shake: 488ec862a69aa48503bfeb05f585518fd8d72456
+  react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
+  react-native-camera: f432fcf1b32b528bbf7c3543d3e3b1deb0c5b72a
+  react-native-cameraroll: 1965db75c851b15e77a22ca0ac78e32af6b571ae
+  react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
+  react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
+  react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
+  react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
+  react-native-shake: 41a1ea8ec541fccf3f01566edef8d3cb722b00e3
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
-  react-native-webview: 36561eaf7508e67f72d8c959b713bac841f3652e
+  react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   React-perflogger: fd28ee1f2b5b150b00043f0301d96bd417fdc339
   React-RCTActionSheet: 7f3fa0855c346aa5d7c60f9ced16e067db6d29fa
   React-RCTAnimation: 2119a18ee26159004b001bc56404ca5dbaae6077
@@ -705,13 +699,13 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 85187f19dd9c47a7c102f9994f9d14e4dc2110de
   ReactCommon: eafed38eec7b591c31751bfa7494801618460459
   ReactNativeKeyboardTrackingView: 02137fac3b2ebd330d74fa54ead48b14750a2306
-  RNCAsyncStorage: 0f655864a81214d1c5a9bf0faf79d86dc25c383e
-  RNDeviceInfo: 71696ed3282a5058d08378a17d78d7367d9496e5
+  RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
+  RNDeviceInfo: a9601119924a67d2479d3facf04cec7b658f44ed
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNKeychain: b8e0711b959a19c5b057d1e970d3c83d159b6da5
   RNOpenAppSettings: 1169b90a275e9e18c5973e1608949f97d426e7f3
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
-  RNPermissions: eb94f9fdc0a8ecd02fcce0676d56ffb1395d41e1
+  RNPermissions: 215c54462104b3925b412b0fb3c9c497b21c358b
   RNQuickAction: 6d404a869dc872cde841ad3147416a670d13fa93
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
@@ -721,6 +715,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 100465d584ed15cf4a3d73ae987572cacfeba0f4
+PODFILE CHECKSUM: 24869614aaa669b0477685f8239bf5e3c31f4e3c
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.13.0

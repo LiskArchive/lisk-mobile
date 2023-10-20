@@ -24,6 +24,7 @@ import {
   getPassphraseFromKeyChain,
   storePassphraseInKeyChain,
   bioMetricAuthentication,
+  validatePassphrase,
 } from '../../../utilities/passphrase';
 import {
   accountSignedIn as accountSignedInAction,
@@ -40,6 +41,7 @@ import BiometricAuth from './biometricAuth';
 import deepLinkMapper, { parseDeepLink } from '../../../utilities/deepLink';
 import quickActionsList from '../../../constants/quickActions';
 import { deviceHeight } from '../../../utilities/device';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // there is a warning in RNOS module. remove this then that warning is fixed
 LogBox.ignoreAllLogs();
@@ -106,11 +108,17 @@ class SignIn extends React.Component {
     } catch (error) {
       sensorType = null;
     }
-    this.props.settingsUpdated({
+    const settingsUpdate  = {
       sensorType,
-      hasStoredPassphrase: !!password,
-    });
-    this.updateView();
+    }
+    const isValidPassphrase = !validatePassphrase(password).length
+    settingsUpdate.hasStoredPassphrase = isValidPassphrase
+    if (isValidPassphrase) {
+      this.updateView(password, sensorType);
+    } else {
+      this.updateView()
+    }
+    this.props.settingsUpdated(settingsUpdate);
   }
 
   updateView = (password, sensorType) => {
@@ -347,7 +355,7 @@ class SignIn extends React.Component {
     const { sensorType, hasStoredPassphrase } = this.props.settings;
     const signOut = this.props.route.params?.signOut;
     return (
-      <View style={[styles.wrapper, styles.theme.wrapper]}>
+      <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
         <Splash
           animate={!signOut}
           showSimplifiedView={this.showSimplifiedView()}
@@ -384,7 +392,7 @@ class SignIn extends React.Component {
             />
           ) : null}
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

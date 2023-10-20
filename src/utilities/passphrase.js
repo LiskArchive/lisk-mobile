@@ -31,10 +31,11 @@ const fullWordsList = Lisk.passphrase.Mnemonic.wordlists.EN;
  *  {String} message - A descriptive message for what went wrong
  */
 export const validatePassphrase = passphrase => {
-  if (passphrase.trim().length === 0) {
+  const trimmedPassphrase = passphrase?.trim?.() || ''
+  if (trimmedPassphrase.length === 0) {
     return [{ code: 'empty_value', message: 'Invalid Passphrase' }];
   }
-  const numberOfWords = Math.ceil(passphrase.trim().split(' ').length / 3) * 3;
+  const numberOfWords = Math.ceil(trimmedPassphrase.split(' ').length / 3) * 3;
   const validPassLength = Math.max(Math.min(numberOfWords, 24), 12);
   return Lisk.passphrase.validation.getPassphraseValidationErrors(
     passphrase,

@@ -21,6 +21,8 @@ target 'Lisk' do
   pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID"
   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'LiskTests' do
     inherit! :complete
     # Pods for testing

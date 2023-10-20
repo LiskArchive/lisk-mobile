@@ -52,7 +52,7 @@ module.exports = {
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
   coverageReporters: ['text', 'html', 'lcov', 'cobertura'],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?react-native|@react-native-community|@react-native|@react-navigation)'
+    'node_modules/(?!(jest-)?react-native|@react-native-community/*|@react-native|@react-navigation)'
   ],
   reporters: [
     'default',

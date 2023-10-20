@@ -58,7 +58,6 @@ export default () => ({
       width: 130,
       height: 32,
       left: 3,
-      top: deviceType() === 'iOSx' ? 48 : 24,
     },
     backButtonTitle: {
       color: colors.light.ultramarineBlue,
