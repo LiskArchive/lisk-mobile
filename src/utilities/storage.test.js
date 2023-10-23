@@ -1,14 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  persistData,
-  fetchData,
-  getSettings,
-  storeSettings,
-  blankSettings,
-  storeFollowedAccount,
-  blankAccounts,
-  retrieveAccounts,
-} from './storage';
+import { persistData, fetchData, getSettings, storeSettings, blankSettings } from './storage';
 import { merge } from './helpers';
 
 const items = {};
@@ -106,31 +97,5 @@ describe('storeSettings/getSettings', () => {
   it('reads written settings from storage', async () => {
     const result = await getSettings();
     expect(result).toMatchObject(SETTINGS_TO_STORE);
-  });
-});
-
-describe('storeFollowedAccounts/retrieveFollowedAccounts', () => {
-  beforeAll(() => AsyncStorage.clear());
-
-  const ACCOUNTS_TO_STORE = [{ address: '1L', label: '1L' }];
-
-  it('writes wrong typed accounts as validated format', async () => {
-    const result = await storeFollowedAccount('invalid_accounts');
-    expect(result).toMatchObject(blankAccounts);
-  });
-
-  it('reads empty accounts from storage', async () => {
-    const result = await retrieveAccounts();
-    expect(result).toMatchObject(blankAccounts);
-  });
-
-  it('writes accounts to storage', async () => {
-    const result = await storeFollowedAccount(ACCOUNTS_TO_STORE);
-    expect(result).toMatchObject(ACCOUNTS_TO_STORE);
-  });
-
-  it('reads written accounts from storage', async () => {
-    const result = await retrieveAccounts();
-    expect(result).toMatchObject(ACCOUNTS_TO_STORE);
   });
 });
