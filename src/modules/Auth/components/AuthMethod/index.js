@@ -81,6 +81,8 @@ export default function AuthMethod({ route }) {
     return () => clearTimeout(timeout.current);
   }, []);
 
+  console.log('here');
+
   const selectEncryptedJSON = async () => {
     try {
       const encryptedData = await selectEncryptedFile(() =>
