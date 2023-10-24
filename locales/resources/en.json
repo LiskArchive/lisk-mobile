@@ -240,7 +240,7 @@
       },
       "safeKeeping": {
         "title": "Save your secret recovery phrase",
-        "description": "Please write down these 12 words carefully, and store them in a safe place.",
+        "description": "Please write down these {{length}} words carefully, and store them in a safe place.",
         "understandResponsibilityDescription": "I understand that it's my responsibility to keep my secret recovery phrase safe.",
         "continueButtonText": "I have written them down"
       },
