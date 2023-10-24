@@ -36,13 +36,14 @@ export function validateDeepLink(url) {
 
   if (!foundLink) return false;
 
+  let queryParams = parsedUrl.query;
+  delete queryParams.modal;
+
   const isSearchParamsValid = Object.keys(parsedUrl.query).every(
     (key) => foundLink.validationSchema.properties[key]
   );
 
   if (!isSearchParamsValid) return false;
-
-  let queryParams = parsedUrl.query;
 
   if (foundLink.paramsTransformer) {
     queryParams = foundLink.paramsTransformer(parsedUrl.query);

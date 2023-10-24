@@ -77,6 +77,7 @@ export default function RequestToken() {
     const url = new Url('lisk://wallet');
 
     const urlParams = {
+      modal: 'send',
       recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
       recipientChain: recipientApplicationChainID,
