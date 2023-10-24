@@ -25,7 +25,10 @@ export default function ErrorScreen(props) {
   const { styles } = useTheme({ styles: getErrorFallbackScreenStyles() });
 
   const title = props.title || i18next.t('fallbackScreens.error.title');
-  const description = props.description || i18next.t('fallbackScreens.error.description');
+  const description =
+    typeof props.error === 'string'
+      ? props.error
+      : props.description || i18next.t('fallbackScreens.error.description');
 
   const handleRetryClick = props.onRetry;
 
