@@ -36,8 +36,6 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
     validity: [],
   });
 
-  console.log('RecoveryPhraseForm');
-
   const [derivationPath, setDerivationPath] = useState(defaultDerivationPath);
 
   const shouldShowMask = !(focused || showRecoveryPhrase);

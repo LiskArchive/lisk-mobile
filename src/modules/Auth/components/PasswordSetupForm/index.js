@@ -48,18 +48,18 @@ export default function PasswordSetupForm({
 
   const { sensorType } = useSelector((state) => state.settings);
 
-  const setBiometricSensorType = async () => {
-    try {
-      const deviceSensorType = await FingerprintScanner.isSensorAvailable();
-      dispatch(settingsUpdated({ sensorType: deviceSensorType }));
-    } catch (error) {
-      dispatch(settingsUpdated({ sensorType: null }));
-    }
-  };
-
   useEffect(() => {
+    const setBiometricSensorType = async () => {
+      try {
+        const deviceSensorType = await FingerprintScanner.isSensorAvailable();
+        dispatch(settingsUpdated({ sensorType: deviceSensorType }));
+      } catch (error) {
+        dispatch(settingsUpdated({ sensorType: null }));
+      }
+    };
+
     setBiometricSensorType();
-  }, []);
+  }, [dispatch]);
 
   const [
     {

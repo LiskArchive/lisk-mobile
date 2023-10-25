@@ -41,16 +41,16 @@ export default function AuthMethod({ route }) {
     styles: getStyles(),
   });
 
-  const setBiometricSensorType = async () => {
-    try {
-      const sensorType = await FingerprintScanner.isSensorAvailable();
-      dispatch(settingsUpdated({ sensorType }));
-    } catch (error) {
-      dispatch(settingsUpdated({ sensorType: null }));
-    }
-  };
-
   useEffect(() => {
+    const setBiometricSensorType = async () => {
+      try {
+        const sensorType = await FingerprintScanner.isSensorAvailable();
+        dispatch(settingsUpdated({ sensorType }));
+      } catch (error) {
+        dispatch(settingsUpdated({ sensorType: null }));
+      }
+    };
+
     if (settings.showedIntro) {
       setBiometricSensorType();
       dispatch(settingsRetrieved());
@@ -60,17 +60,17 @@ export default function AuthMethod({ route }) {
     } else {
       navigation.push('Intro');
     }
-  }, [settings.showedIntro]);
-
-  const checkVersion2Migration = async () => {
-    const { password: recoveryPhrase } = await retrieveAccountsPasswordMapFromKeychain();
-    const validity = validateRecoveryPhrase(recoveryPhrase);
-    if (!validity.length && !accounts.length) {
-      setV2RecoveryPhrase(recoveryPhrase);
-    }
-  };
+  }, [settings.showedIntro, accounts.length, dispatch, navigation, route.params?.authRequired]);
 
   useEffect(() => {
+    const checkVersion2Migration = async () => {
+      const { password: recoveryPhrase } = await retrieveAccountsPasswordMapFromKeychain();
+      const validity = validateRecoveryPhrase(recoveryPhrase);
+      if (!validity.length && !accounts.length) {
+        setV2RecoveryPhrase(recoveryPhrase);
+      }
+    };
+
     if (!accounts?.length && settings.showedIntro) {
       checkVersion2Migration();
     }
@@ -80,8 +80,6 @@ export default function AuthMethod({ route }) {
     timeout.current = setTimeout(() => setScreenReady(true), 500);
     return () => clearTimeout(timeout.current);
   }, []);
-
-  console.log('here');
 
   const selectEncryptedJSON = async () => {
     try {
@@ -114,7 +112,7 @@ export default function AuthMethod({ route }) {
   const showBackButton = accounts.length > 0;
 
   if (!isScreenReady) {
-    return <SafeAreaView style={[styles.container, styles.theme.container]}></SafeAreaView>;
+    return <SafeAreaView style={[styles.container, styles.theme.container]} />;
   }
 
   if (v2RecoveryPhrase) {
