@@ -242,7 +242,7 @@
       },      
       "safeKeeping": {
         "title": "Speichern Sie Ihre geheime Wiederherstellungsphrase",
-        "description": "Bitte schreiben Sie diese 12 Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
+        "description": "Bitte schreiben Sie diese {{length}} Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
         "understandResponsibilityDescription": "Ich verstehe, dass es in meiner Verantwortung liegt, meine geheime Wiederherstellungsphrase sicher aufzubewahren.",
         "continueButtonText": "Ich habe sie aufgeschrieben"
       },

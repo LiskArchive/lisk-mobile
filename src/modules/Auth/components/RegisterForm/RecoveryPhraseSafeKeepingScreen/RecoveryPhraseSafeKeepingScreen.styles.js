@@ -60,6 +60,7 @@ export default function getRegisterSafeKeepingStyles() {
         padding: boxes.boxPadding,
       },
       switchContainer: {
+        marginTop: 20,
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 24,
