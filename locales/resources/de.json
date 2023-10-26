@@ -117,7 +117,9 @@
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
-      "enableDerivationPath": "Zugriff auf ältere Lisk-Konten aktivieren",
+      "enableLegacyAccountLabel": "Zugriff auf Legacy-Lisk-Konten aktivieren",
+      "enableLegacyAccountTitle": "Zugriff auf Legacy-Lisk-Konten",
+      "enableLegacyAccountDescription": "Aktivieren Sie diese Option, um auf Ihre mit dem Lisk v3-Protokoll oder älter erstellten Lisk-Konten zuzugreifen.",
       "showDerivationPath": "Benutzerdefinierten Ableitungspfad anzeigen"
     },
     "scanDevice": {
@@ -279,7 +281,8 @@
       "downloaded": "Heruntergeladen!",
       "enablePermissions": "Aktivieren Sie Lisk mobile für den Zugriff auf den Dateispeicher in den Einstellungen",
       "qrCodeError": "",
-      "enableLegacyAccount": "",
+      "enableLegacyAccountLabel": "Zugriff auf Legacy-Lisk-Konten aktivieren",
+      "enableLegacyAccountTitle": "Zugriff auf Legacy-Lisk-Konten",
       "enableLegacyAccountDescription": "",
       "customDerivationPathDescription": "",
       "buttons": {
