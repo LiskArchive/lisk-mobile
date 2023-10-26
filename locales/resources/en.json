@@ -115,7 +115,9 @@
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
-      "enableDerivationPath": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountLabel": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountTitle": "Access to legacy Lisk accounts",
+      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",      
       "showDerivationPath": "Show custom derivation path"
     },
     "scanDevice": {
@@ -278,8 +280,9 @@
       "downloaded": "Downloaded!",
       "enablePermissions": "Enable Lisk mobile to access file storage in settings",
       "qrCodeError": "QR Code not found.",
-      "enableLegacyAccount": "Enable access to legacy Lisk accounts",
-      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",
+      "enableLegacyAccountLabel": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountTitle": "Access to legacy Lisk accounts",
+      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",      
       "customDerivationPathDescription": "The derivation path(m’ / purpose’ / coin_type’ / address_index’) is a way to derive multiple accounts from the same secret recovery phrase.",
       "buttons": {
         "passwordSetupContinueButton": "Continue to wallet",

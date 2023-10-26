@@ -208,13 +208,13 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
           testID="derivation-checkbox"
         >
           <P style={[styles.label, styles.theme.label]}>
-            {i18next.t('settings.menu.enableDerivationPath')}
+            {i18next.t('auth.setup.enableLegacyAccountLabel')}
           </P>
 
           <InfoToggler
-            title={i18next.t('auth.setup.enableLegacyAccount')}
-            style={{ toggleButton: styles.info }}
+            title={i18next.t('auth.setup.enableLegacyAccountTitle')}
             description={i18next.t('auth.setup.enableLegacyAccountDescription')}
+            style={{ toggleButton: styles.info }}
           />
         </Checkbox>
 

@@ -154,11 +154,19 @@ export default function SettingsScreen() {
           </H4>
 
           <View style={[styles.item, styles.theme.item]}>
-            <Checkbox selected={!settings.useDerivationPath} onPress={toggleUseDerivationPath}>
-              <P style={[styles.itemTitle, styles.theme.itemTitle]}>
-                {i18next.t('settings.menu.enableDerivationPath')}
-              </P>
-            </Checkbox>
+            <View style={styles.row}>
+              <Checkbox selected={!settings.useDerivationPath} onPress={toggleUseDerivationPath}>
+                <P style={[styles.itemTitle, styles.theme.itemTitle]}>
+                  {i18next.t('settings.menu.enableLegacyAccountLabel')}
+                </P>
+              </Checkbox>
+
+              <InfoToggler
+                title={i18next.t('settings.menu.enableLegacyAccountTitle')}
+                description={i18next.t('settings.menu.enableLegacyAccountDescription')}
+                style={{ toggleButton: styles.infoToggler }}
+              />
+            </View>
           </View>
 
           <View style={[styles.item, styles.theme.item]} testID="show-derivation-path">
