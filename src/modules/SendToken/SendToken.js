@@ -135,8 +135,6 @@ export default function SendToken() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts, currentAccount]);
 
-  console.log('SendToken');
-
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]} testID="send-token-screen">
       <HeaderBackButton
