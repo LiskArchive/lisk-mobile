@@ -39,7 +39,9 @@ export default function SendToken() {
   const { accounts } = useAccounts();
 
   const [currentAccount, setCurrentAccount] = useCurrentAccount();
-  const { data: accountSummary, isLoading } = useAuth(currentAccount?.metadata?.address);
+  const { data: accountSummary, isLoading: isAuthLoading } = useAuth(
+    currentAccount?.metadata?.address
+  );
 
   const accountIsMultisignature = accountSummary?.numberOfSignatures > 0;
 
@@ -143,7 +145,7 @@ export default function SendToken() {
 
       <DataRenderer
         data={transaction}
-        isLoading={transaction.isLoading || isLoading}
+        isLoading={transaction.isLoading || isAuthLoading}
         error={transaction.error}
         renderData={(data) => (
           <>

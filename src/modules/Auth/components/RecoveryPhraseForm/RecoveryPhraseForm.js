@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -46,7 +46,10 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const derivationPathError = validateDerivationPath(derivationPath);
+  const derivationPathError = useMemo(
+    () => validateDerivationPath(derivationPath),
+    [derivationPath]
+  );
 
   const [fetchClipboardValue, { isLoading: isLoadingClipboardValue, pasted }] =
     usePasteFromClipboard({
