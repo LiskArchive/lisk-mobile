@@ -73,7 +73,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
         successSecondaryButton={
           !isRecipientAccountBookmarked && (
             <Button onPress={handleAddAddressToBookmarkPress} style={styles.buttonMarginVertical}>
-              Add address to bookmarks
+              {i18next.t('sendToken.summary.addAddressToBookmarkButtonText')}
             </Button>
           )
         }

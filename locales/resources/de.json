@@ -494,7 +494,8 @@
     },
     "summary": {
       "prevStepButtonText": "Zurück",
-      "submitTransactionButtonText": "Senden"
+      "submitTransactionButtonText": "Senden",
+      "addAddressToBookmarkButtonText": "Adresse zu Lesezeichen hinzufügen"
     },
     "confirmAndSign": {
       "title": "Geben Sie Ihr Passwort ein",
