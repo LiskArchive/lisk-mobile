@@ -499,7 +499,8 @@
     },
     "summary": {
       "prevStepButtonText": "Back",
-      "submitTransactionButtonText": "Send"
+      "submitTransactionButtonText": "Send",
+      "addAddressToBookmarkButtonText": "Add address to bookmarks"
     },
     "confirmAndSign": {
       "title": "Enter your account password",

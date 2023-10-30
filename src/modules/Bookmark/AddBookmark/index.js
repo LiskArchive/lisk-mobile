@@ -33,7 +33,7 @@ export default function AddBookmark({ route }) {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const [address, setAddress] = useState({ value: '' });
+  const [address, setAddress] = useState({ value: route.params?.address || '' });
   const [label, setLabel] = useState({ value: '' });
   const [incomingData, setIncomingData] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -82,6 +82,28 @@ export default function AddBookmark({ route }) {
     navigation.dispatch(CommonActions.setParams({ action: false }));
   };
 
+  const handleGoBack = () =>
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: 'Main',
+          state: {
+            index: 0,
+            routes: [
+              {
+                name: 'AccountHome',
+                state: {
+                  index: 0,
+                  routes: [{ name: 'Bookmarks' }],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    });
+
   const handleSubmit = () => {
     const filteredAccount = bookmarkList?.filter(
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
@@ -98,10 +120,10 @@ export default function AddBookmark({ route }) {
     if (incomingData && labelValidity === 0) {
       const action = editMode ? editBookmark : addBookmark;
       dispatch(action({ address: incomingData.address, label: label.value }));
-      navigation.dispatch(CommonActions.goBack());
+      handleGoBack();
     } else if (addressValidity === 0 && labelValidity === 0) {
       dispatch(addBookmark({ address: address.value, label: label.value }));
-      navigation.dispatch(CommonActions.goBack());
+      handleGoBack();
     } else {
       setAddress({
         value: address.value,
@@ -148,10 +170,7 @@ export default function AddBookmark({ route }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <HeaderBackButton
-        title={i18next.t('bookmarks.addBookmark.title')}
-        onPress={navigation.goBack}
-      />
+      <HeaderBackButton title={i18next.t('bookmarks.addBookmark.title')} onPress={handleGoBack} />
 
       <Scanner
         ref={scanner}

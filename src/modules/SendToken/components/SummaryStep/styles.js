@@ -13,6 +13,9 @@ export default function getSendTokenSummaryStepStyles() {
         justifyContent: 'center',
         padding: boxes.boxPadding,
       },
+      buttonMarginVertical: {
+        marginVertical: 16,
+      },
     },
     [themes.light]: {
       container: {
