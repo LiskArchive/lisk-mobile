@@ -1,13 +1,11 @@
 /* eslint-disable max-statements */
 import { fetch } from 'react-native-ssl-pinning';
-import { io } from 'socket.io-client';
 import { removeUndefinedObjectKeys } from '../helpers';
 
 import { METHOD } from './constants';
 
 export class APIClient {
   http = null;
-  ws = null;
   enableCertPinning = false;
   baseUrl = '';
   host = null;
@@ -18,9 +16,8 @@ export class APIClient {
     timeoutInterval: 10000,
   };
 
-  create({ http, ws, enableCertPinning = false } = {}) {
-    this.host = http || ws;
-    this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
+  create({ http, enableCertPinning = false } = {}) {
+    this.host = http;
     this.baseUrl = http;
     this.enableCertPinning = enableCertPinning;
   }
@@ -78,23 +75,6 @@ export class APIClient {
     }
 
     return responseData;
-  }
-
-  rpc({ event, params, data }) {
-    return new Promise((resolve, reject) => {
-      if (this.ws.disconnected) {
-        reject(new Error('socket not connected'));
-        return;
-      }
-
-      this.ws.emit('request', { method: event, params: params || data || {} }, (response) => {
-        if (Object.keys(response).length && response.error) {
-          return reject(response);
-        }
-
-        return resolve(response);
-      });
-    });
   }
 }
 

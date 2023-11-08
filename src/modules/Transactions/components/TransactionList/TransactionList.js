@@ -30,6 +30,14 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
   const noOfItemsToRender = mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT;
 
+  const options =
+    mode === 'overview'
+      ? {
+          refetchInterval: 5000,
+          refetchIntervalInBackground: false,
+        }
+      : {};
+
   const {
     data: transactionsData,
     isLoading: isLoadingAccountTransactions,
@@ -42,6 +50,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
     config: {
       params: { limit: noOfItemsToRender },
     },
+    options,
   });
 
   const { styles } = useTheme({

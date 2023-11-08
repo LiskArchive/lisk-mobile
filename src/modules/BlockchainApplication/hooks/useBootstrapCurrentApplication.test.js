@@ -18,7 +18,6 @@ const refetchApplicationsMetaQueryMock = jest.fn();
 const refetchApplicationsQueryMock = jest.fn();
 
 jest.spyOn(apiClient, 'create').mockImplementation(() => Promise.resolve());
-jest.spyOn(apiClient, 'rpc').mockImplementation(() => Promise.resolve());
 jest.spyOn(apiClient, 'rest').mockImplementation(() => Promise.resolve({ data: {} }));
 
 jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({

@@ -61,7 +61,7 @@
 		79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79EFB6BC2A39221F0006FBEF /* MobileProtect.plist */; };
 		7E342449C772440C0543475E /* libPods-LiskApp-LiskDev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEFA1D98EA6EED99C4BE95A /* libPods-LiskApp-LiskDev.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
 		CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CBD727A12A8A52DA00D33815 /* server-cert.cer */; };
 /* End PBXBuildFile section */
@@ -197,7 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */,
+				A23A1AEDA1EFDCFFD8819768 /* BuildFile in Frameworks */,
 				6113352CBF486318C1753F84 /* libPods-LiskApp-Lisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

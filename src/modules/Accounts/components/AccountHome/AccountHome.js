@@ -36,12 +36,14 @@ function AccountHome() {
       },
     });
 
-  const { refetch: refetchTransactions, isRefetching: isRefetchingTransactions } =
-    useAccountTransactionsQuery(currentAccount.metadata.address, {
+  const { refetch: refetchTransactions } = useAccountTransactionsQuery(
+    currentAccount.metadata.address,
+    {
       config: {
         params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
       },
-    });
+    }
+  );
 
   const discrete = useSelector((state) => state.settings.discrete);
 
@@ -71,13 +73,13 @@ function AccountHome() {
     }
   }, [accounts, navigation]);
 
-  const isRefreshing = isRefetchingTokens || isRefetchingTransactions;
-
   return (
     <>
       <NavigationSafeAreaView>
         <ScrollView
-          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+          refreshControl={
+            <RefreshControl refreshing={isRefetchingTokens} onRefresh={handleRefresh} />
+          }
         >
           <View
             style={[styles.row, styles.alignItemsCenter, styles.topContainer]}
