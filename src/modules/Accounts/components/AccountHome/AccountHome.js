@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, RefreshControl, TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
@@ -28,6 +28,7 @@ function AccountHome() {
   const navigation = useNavigation();
 
   const [currentAccount] = useCurrentAccount();
+  const [refreshControl, setRefreshControl] = useState(false);
 
   const { refetch: refetchTokens, isRefetching: isRefetchingTokens } =
     useAccountTokensFullDataQuery(currentAccount.metadata.address, {
@@ -53,7 +54,15 @@ function AccountHome() {
 
   const { styles } = useTheme({ styles: getStyles() });
 
+  useEffect(() => {
+    if (refreshControl) {
+      let timeout = setTimeout(() => setRefreshControl(false), 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [refreshControl]);
+
   const handleRefresh = () => {
+    setRefreshControl(true);
     refetchTokens();
     refetchTransactions();
   };
@@ -78,7 +87,10 @@ function AccountHome() {
       <NavigationSafeAreaView>
         <ScrollView
           refreshControl={
-            <RefreshControl refreshing={isRefetchingTokens} onRefresh={handleRefresh} />
+            <RefreshControl
+              refreshing={isRefetchingTokens && refreshControl}
+              onRefresh={handleRefresh}
+            />
           }
         >
           <View
