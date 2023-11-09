@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, RefreshControl, TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
@@ -28,6 +28,7 @@ function AccountHome() {
   const navigation = useNavigation();
 
   const [currentAccount] = useCurrentAccount();
+  const [refreshControl, setRefreshControl] = useState(false);
 
   const { refetch: refetchTokens, isRefetching: isRefetchingTokens } =
     useAccountTokensFullDataQuery(currentAccount.metadata.address, {
@@ -36,12 +37,14 @@ function AccountHome() {
       },
     });
 
-  const { refetch: refetchTransactions, isRefetching: isRefetchingTransactions } =
-    useAccountTransactionsQuery(currentAccount.metadata.address, {
+  const { refetch: refetchTransactions } = useAccountTransactionsQuery(
+    currentAccount.metadata.address,
+    {
       config: {
         params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
       },
-    });
+    }
+  );
 
   const discrete = useSelector((state) => state.settings.discrete);
 
@@ -51,7 +54,15 @@ function AccountHome() {
 
   const { styles } = useTheme({ styles: getStyles() });
 
+  useEffect(() => {
+    if (refreshControl) {
+      let timeout = setTimeout(() => setRefreshControl(false), 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [refreshControl]);
+
   const handleRefresh = () => {
+    setRefreshControl(true);
     refetchTokens();
     refetchTransactions();
   };
@@ -71,13 +82,16 @@ function AccountHome() {
     }
   }, [accounts, navigation]);
 
-  const isRefreshing = isRefetchingTokens || isRefetchingTransactions;
-
   return (
     <>
       <NavigationSafeAreaView>
         <ScrollView
-          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefetchingTokens && refreshControl}
+              onRefresh={handleRefresh}
+            />
+          }
         >
           <View
             style={[styles.row, styles.alignItemsCenter, styles.topContainer]}

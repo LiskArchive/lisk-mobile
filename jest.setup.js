@@ -43,5 +43,3 @@ jest.mock('@react-native-clipboard/clipboard', () => mockClipboard);
 if (!global.setImmediate) {
   global.setImmediate = setTimeout;
 }
-
-jest.mock('socket.io-client', () => ({ io: jest.fn() }));

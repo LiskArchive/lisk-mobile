@@ -2,7 +2,6 @@
 import React from 'react';
 
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { useTransactionsEventsManager } from 'modules/Transactions/hooks/useTransactionsEventsManager';
 import { useBootstrapCurrentApplication } from 'modules/BlockchainApplication/hooks/useBootstrapCurrentApplication';
 import ErrorScreen from 'components/screens/ErrorFallbackScreen';
 import LoadingScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
@@ -25,9 +24,6 @@ export default function BootstrapApp({ children }) {
 
   // Bootstrap applications
   useBootstrapApplications();
-
-  // Bootstrap WS connections for handling queries updates based on transactions events.
-  useTransactionsEventsManager();
 
   // Bootstrap WC.
   useEvents();

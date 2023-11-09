@@ -47,6 +47,8 @@ export default function TokenList({ mode = 'overview', address, style }) {
     },
     options: {
       cacheTime: 0,
+      refetchInterval: 5000,
+      refetchIntervalInBackground: false,
     },
   });
 
