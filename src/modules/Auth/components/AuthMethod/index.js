@@ -95,6 +95,7 @@ export default function AuthMethod({ route }) {
           title: 'auth.setup.decryptRecoveryPhrase',
           encryptedData,
           successRoute: 'AccountsManagerScreen',
+          enableBioAuth: true,
         });
       }
     } catch {
