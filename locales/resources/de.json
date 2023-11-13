@@ -372,7 +372,6 @@
       },
       "externalApplicationList": {
         "title": "Wallet-Verbindungen",
-        "loadingText": "Externe Verbindungen werden geladen...",
         "emptyText": "Sie haben sich noch mit keiner Anwendung verknüpft.",
         "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
         "detailsText": "Info",
@@ -383,11 +382,8 @@
         "chainsTitle": "Ketten verbinden",
         "accountsTitle": "Zu verwendende Konto/Konten auf dieser Seite",
         "sitePermissions": "Seitenberechtigungen",
-        "methods": "Methoden",
-        "bridgeApplication": "Wallet verbinden",
-        "bridgeApplicationDescription": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
-        "addApplication": "Verbinden",
-        "enterConnectionUri": "Verbindungs-URI eingeben",
+        "methods": "Methoden",        
+        "addApplication": "Verbinden",        
         "approveConnectionChainsTitle": "Verbundene Ketten",
         "approveConnectionAccountsTitle": "Verbundene Konten"
       },
@@ -438,6 +434,23 @@
         "notCurrentAccount2": " um die Anfrage abzuschließen.",
         "accountNotAdded1": "Das ausgewählte Konto zum Signieren der angeforderten Transaktion fehlt. Bitte fügen Sie das fehlende Konto ",
         "accountNotAdded2": " zu Lisk Mobile hinzu und initiieren Sie die Transaktionssignierung erneut von der externen Anwendung aus."
+      }
+    },
+    "externalConnectionValidation": {
+      "errors": {
+        "namespaceErrorDescription": "Die Namensraumvalidierung ist nur für 'session_proposal'-Ereignisse verfügbar.",
+        "schemaErrorDescription": "Verbindungsereignis hat kein Schema für Parameter."
+      }
+    },
+    "bridgeExternalApplication": {
+      "title": "Wallet verbinden",
+      "description": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
+      "inputPlaceholder": "Verbindungs-URI eingeben",
+      "errors": {
+        "timeout": "Die Verbindung dauert länger als erwartet. Bitte versuchen Sie es später noch einmal.",
+        "invalidUri": "Fehler beim Verbinden der Anwendung. Bitte versuchen Sie es erneut.",
+        "unsupportedApp": "Sie versuchen, eine nicht unterstützte externe App zu verbinden. Bitte geben Sie eine unterstützte WalletConnect-URI ein.",
+        "nameSpaceInvalid": "Fehler bei der Validierung der Verbindung. Bitte versuchen Sie es erneut."
       }
     }
   },
