@@ -43,7 +43,10 @@ export default function ExternalApplicationDetailsScreen() {
     disconnectApplicationModal.open(() => (
       <DisconnectExternalApplicationModal
         application={application}
-        onSuccess={disconnectApplicationModal.close}
+        onSuccess={() => {
+          disconnectApplicationModal.close();
+          navigation.goBack();
+        }}
         onCancel={disconnectApplicationModal.close}
       />
     ));
