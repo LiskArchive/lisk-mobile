@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import React, { useEffect, useRef, useState } from 'react'; // eslint-disable-line
-import { Animated, LayoutAnimation, Platform, Keyboard } from 'react-native';
+import { Animated, LayoutAnimation, Platform, Keyboard, InteractionManager } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AddSvg from 'assets/svgs/AddSvg';
 import { colors } from 'constants/styleGuide';
@@ -53,6 +53,30 @@ const Fab = ({
   const animation = useRef(new Animated.Value(openOnMount ? 1 : 0));
   const actionsAnimation = useRef(new Animated.Value(0));
   const opacity = useRef(new Animated.Value(1));
+
+  useEffect(() => {
+    const interactionPromise = InteractionManager.runAfterInteractions(() => {
+      Animated.spring(mainBottomAnimation.current, {
+        bounciness: 0,
+        toValue: mainVerticalDistance + bottom,
+        duration: 250,
+        useNativeDriver: false,
+      }).start();
+    });
+    return () => interactionPromise.cancel();
+  }, [bottom]);
+
+  useEffect(() => {
+    const interactionPromise = InteractionManager.runAfterInteractions(() => {
+      Animated.spring(actionsBottomAnimation.current, {
+        bounciness: 0,
+        toValue: buttonSize + bottom + 50,
+        duration: 250,
+        useNativeDriver: false,
+      }).start();
+    });
+    return () => interactionPromise.cancel();
+  }, [bottom]);
 
   const onKeyboardShow = () => {
     Animated.spring(opacity.current, {
@@ -145,12 +169,15 @@ const Fab = ({
   };
 
   useEffect(() => {
-    Animated.spring(animation.current, {
-      bounciness: 0,
-      toValue: active ? 1 : 0,
-      duration: 250,
-      useNativeDriver: false,
-    }).start();
+    const interactionPromise = InteractionManager.runAfterInteractions(() => {
+      Animated.spring(animation.current, {
+        bounciness: 0,
+        toValue: active ? 1 : 0,
+        duration: 250,
+        useNativeDriver: false,
+      }).start();
+    });
+    return () => interactionPromise.cancel();
   }, [active]);
 
   useEffect(() => {
@@ -164,7 +191,7 @@ const Fab = ({
       Keyboard.addListener(hideEvent, onKeyboardHideHide);
     }
     return () => Keyboard.removeAllListeners();
-  }, []);
+  }, [listenKeyboard]);
 
   const handlePressBackdrop = () => {
     handleReset();
