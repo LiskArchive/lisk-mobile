@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
-import React, { useState, useRef } from 'react';
-import { View } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, InteractionManager } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import Stepper from 'components/shared/Stepper';
@@ -47,6 +47,8 @@ export default function ApplicationsExplorer() {
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [cameraIsOpen, setCameraIsOpen] = useState(false);
 
+  let interactionPromise = useRef();
+
   const scannerRef = useRef();
 
   const navigation = useNavigation();
@@ -73,14 +75,22 @@ export default function ApplicationsExplorer() {
     );
 
   const showNewConnectionModal = (value) => {
-    newConnectionModal.open(
-      <Stepper>
-        <BridgeApplication uri={value} />
-        <InitiateConnection onFinish={newConnectionModal.close} />
-        <ApproveConnection onFinish={newConnectionModal.close} />
-      </Stepper>
-    );
+    interactionPromise.current = InteractionManager.runAfterInteractions(() => {
+      newConnectionModal.open(
+        <Stepper>
+          <BridgeApplication uri={value} />
+          <InitiateConnection onFinish={newConnectionModal.close} />
+          <ApproveConnection onFinish={newConnectionModal.close} />
+        </Stepper>
+      );
+    });
   };
+
+  useEffect(() => {
+    if (interactionPromise.current?.cancel) {
+      return () => interactionPromise.current.cancel();
+    }
+  }, []);
 
   const handleFabItemPress = (item) => {
     if (item.key === 'paste') {
