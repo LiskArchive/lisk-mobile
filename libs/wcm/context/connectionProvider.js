@@ -49,10 +49,6 @@ const ConnectionProvider = ({ children }) => {
     }
   }, [signClient]);
 
-  console.log('sign client: ', signClient?.session);
-  console.log('errorSignClient: ', errorSignClient);
-  console.log('isLoadingSignClient: ', isLoadingSignClient);
-
   return (
     <ConnectionContext.Provider value={value}>
       <ConnectionEventsManagerWrapper>{children}</ConnectionEventsManagerWrapper>

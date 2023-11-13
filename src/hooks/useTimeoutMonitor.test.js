@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useTimeoutMonitor from './useTimeoutMonitor'; // adjust the import path as necessary
+import { useTimeoutMonitor } from './useTimeoutMonitor';
 
 describe('useTimeoutMonitor', () => {
   let setTimeoutSpy;

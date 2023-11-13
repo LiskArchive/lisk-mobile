@@ -66,7 +66,9 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
     const isUriValid = validateConnectionURI(uri ? uri : inputUri);
 
     if (!isUriValid) {
-      setError(new Error('URI not valid.'));
+      setError(
+        new Error(i18next.t('application.bridgeExternalApplication.errors.invalidUriFormat'))
+      );
       return;
     }
 

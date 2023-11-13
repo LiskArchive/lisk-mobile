@@ -449,6 +449,7 @@
       "errors": {
         "timeout": "Die Verbindung dauert länger als erwartet. Bitte versuchen Sie es später noch einmal.",
         "invalidUri": "Fehler beim Verbinden der Anwendung. Bitte versuchen Sie es erneut.",
+        "invalidUriFormat": "URI ungültig. Bitte versuchen Sie es erneut.",
         "unsupportedApp": "Sie versuchen, eine nicht unterstützte externe App zu verbinden. Bitte geben Sie eine unterstützte WalletConnect-URI ein.",
         "nameSpaceInvalid": "Fehler bei der Validierung der Verbindung. Bitte versuchen Sie es erneut."
       }
