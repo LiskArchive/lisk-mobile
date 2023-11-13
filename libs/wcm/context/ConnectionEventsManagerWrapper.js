@@ -10,6 +10,7 @@ export const ConnectionEventsManagerWrapper = ({ children }) => {
   const { signClient } = useContext(ConnectionContext);
 
   const onSessionRequest = useCallback(async (event) => {
+    console.log('onSessionRequest: ', event);
     const request = signClient.session.get(event.topic);
     setSessionRequest(request);
   }, []);
@@ -33,9 +34,6 @@ export const ConnectionEventsManagerWrapper = ({ children }) => {
       Object.keys(EVENTS).forEach((eventName) => {
         signClient.on(EVENTS[eventName], eventHandler.bind(null, EVENTS[eventName]));
       });
-    } else {
-      // eslint-disable-next-line no-console
-      console.log('There was an error initializing the client');
     }
   }, [onSessionRequest, onSessionDelete, eventHandler, signClient?.on]);
 
