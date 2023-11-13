@@ -27,7 +27,7 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
 
   const handleConnectionTimeout = () => {
     setIsLoading(false);
-    setError(new Error(i18next.t('application.explore.bridgeExternalApplication.errors.timeout')));
+    setError(new Error(i18next.t('application.bridgeExternalApplication.errors.timeout')));
     setIsSuccess(undefined);
   };
 
@@ -67,9 +67,7 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
     const response = await setUri(uri ? uri : inputUri);
 
     if (response.status === STATUS.FAILURE) {
-      setError(
-        new Error(i18next.t('application.explore.bridgeExternalApplication.errors.invalidUri'))
-      );
+      setError(new Error(i18next.t('application.bridgeExternalApplication.errors.invalidUri')));
       setIsLoading(false);
     } else if (response.status === STATUS.SUCCESS) {
       connectionTimeoutMonitor.destroy();
@@ -93,17 +91,13 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
           setIsSuccess(true);
         } else {
           setError(
-            new Error(
-              i18next.t('application.explore.bridgeExternalApplication.errors.unsupportedApp')
-            )
+            new Error(i18next.t('application.bridgeExternalApplication.errors.unsupportedApp'))
           );
           setIsLoading(false);
         }
       } catch {
         setError(
-          new Error(
-            i18next.t('application.explore.bridgeExternalApplication.errors.nameSpaceInvalid')
-          )
+          new Error(i18next.t('application.bridgeExternalApplication.errors.nameSpaceInvalid'))
         );
         setIsLoading(false);
       }
@@ -120,16 +114,16 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
   return (
     <View style={styles.container}>
       <H2 style={[styles.title, styles.theme.title]}>
-        {i18next.t('application.explore.bridgeExternalApplication.title')}
+        {i18next.t('application.bridgeExternalApplication.title')}
       </H2>
 
       <P style={[styles.description, styles.theme.description]}>
-        {i18next.t('application.explore.bridgeExternalApplication.description')}
+        {i18next.t('application.bridgeExternalApplication.description')}
       </P>
 
       <View style={styles.inputContainer}>
         <Input
-          placeholder={i18next.t('application.explore.bridgeExternalApplication.inputPlaceholder')}
+          placeholder={i18next.t('application.bridgeExternalApplication.inputPlaceholder')}
           autoCorrect={false}
           autoFocus
           onChange={handleInputChange}
