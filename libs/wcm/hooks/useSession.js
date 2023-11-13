@@ -11,6 +11,8 @@ import { useEvents } from './useEvents';
 
 export const useSession = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     events,
     sessions,
@@ -20,10 +22,13 @@ export const useSession = () => {
     setSessionProposal,
     setSessionRequest,
     signClient,
+    isLoadingSignClient,
+    errorSignClient,
   } = useContext(ConnectionContext);
   const { removeEvent } = useEvents();
 
-  const loadSessions = useCallback(async () => {
+  const loadSessions = async () => {
+    setIsLoading(true);
     const loadedSessions = [];
 
     await Promise.all(
@@ -32,9 +37,10 @@ export const useSession = () => {
       })
     );
 
+    setIsLoading(false);
     setHasLoaded(true);
     setSessions(loadedSessions);
-  }, []);
+  };
 
   const approve = useCallback(async (selectedAccounts) => {
     const proposalEvents = events.find((e) => e.name === EVENTS.SESSION_PROPOSAL);
@@ -155,14 +161,11 @@ export const useSession = () => {
 
   useEffect(() => {
     if (signClient?.session && !hasLoaded) {
-      (async () => {
-        await loadSessions();
-      })();
+      loadSessions();
     }
   }, [signClient, sessions]);
 
   return {
-    hasLoaded,
     reject,
     approve,
     respond,
@@ -173,5 +176,7 @@ export const useSession = () => {
     sessionProposal,
     disconnect,
     setSessionRequest,
+    isLoading: isLoadingSignClient || isLoading,
+    error: errorSignClient,
   };
 };

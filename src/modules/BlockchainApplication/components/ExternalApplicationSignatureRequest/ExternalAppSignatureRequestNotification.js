@@ -32,7 +32,7 @@ export default function ExternalAppSignatureRequestNotification({
 
   const addAccount = () => {
     onCancel();
-    navigation.navigate('AuthMethod');
+    navigation.navigate('AuthMethod', { authRequired: true });
   };
 
   const senderAccount = accounts.find(
