@@ -371,7 +371,6 @@
       },
       "externalApplicationList": {
         "title": "Wallet connections",
-        "loadingText": "Loading external connections...",
         "emptyText": "You haven't paired with any application yet.",
         "errorText": "Error loading your wallet connections.",
         "detailsText": "Info",
@@ -382,11 +381,8 @@
         "chainsTitle": "Chains connecting",
         "accountsTitle": "Account(s) to use on this site",
         "sitePermissions": "Site Permissions",
-        "methods": "Methods",
-        "bridgeApplication": "Connect wallet",
-        "bridgeApplicationDescription": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
-        "addApplication": "Connect",
-        "enterConnectionUri": "Enter connection URI",
+        "methods": "Methods",        
+        "addApplication": "Connect",        
         "approveConnectionChainsTitle": "Connected chains",
         "approveConnectionAccountsTitle": "Connected accounts"
       },
@@ -443,6 +439,18 @@
       "errors": {
         "namespaceErrorDescription": "Name space validation is only available for session_proposal events.",
         "schemaErrorDescription": "Connection event has no schema on params."
+      }
+    },
+    "bridgeExternalApplication": {
+      "title": "Connect wallet",
+      "description": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
+      "inputPlaceholder": "Enter connection URI",
+      "errors": {
+        "timeout": "Connection is taking more than expected. Please try again later.",
+        "invalidUri": "Error connecting application. Please try again.",
+        "invalidUriFormat": "URI not valid. Please try again.",
+        "unsupportedApp": "You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.",
+        "nameSpaceInvalid": "Error validating connection. Please try again."
       }
     }
   },
