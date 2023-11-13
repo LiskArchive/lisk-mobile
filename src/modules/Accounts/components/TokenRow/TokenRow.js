@@ -36,7 +36,7 @@ export default function TokenRow({ token }) {
   return (
     <View style={[styles.container, styles.theme.container]}>
       <View style={[styles.row, styles.alignCenter]}>
-        <Image source={{ uri: token?.logo?.png }} style={styles.logo} />
+        <Image source={{ uri: token.logo?.png }} style={styles.logo} />
 
         <P style={[styles.title, styles.theme.title]}>{token.tokenName}</P>
       </View>
