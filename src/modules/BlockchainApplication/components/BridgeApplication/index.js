@@ -66,8 +66,6 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
 
     const response = await setUri(uri ? uri : inputUri);
 
-    console.log('response: ', response);
-
     if (response.status === STATUS.FAILURE) {
       setError(
         new Error(i18next.t('application.explore.bridgeExternalApplication.errors.invalidUri'))
