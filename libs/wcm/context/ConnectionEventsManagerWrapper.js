@@ -9,25 +9,35 @@ export const ConnectionEventsManagerWrapper = ({ children }) => {
   const { setSessionRequest, setSessions } = useSession();
   const { signClient } = useContext(ConnectionContext);
 
-  const onSessionRequest = useCallback(async (event) => {
-    console.log('onSessionRequest: ', event);
-    const request = signClient.session.get(event.topic);
-    setSessionRequest(request);
-  }, []);
+  const onSessionRequest = useCallback(
+    async (event) => {
+      const request = signClient.session.get(event.topic);
+      setSessionRequest(request);
+    },
+    [signClient]
+  );
 
-  const onSessionDelete = useCallback((event) => {
-    setSessions((prevSessions) => prevSessions.filter((session) => session.topic !== event.topic));
-  }, []);
+  const onSessionDelete = useCallback(
+    (event) => {
+      setSessions((prevSessions) =>
+        prevSessions.filter((session) => session.topic !== event.topic)
+      );
+    },
+    [signClient]
+  );
 
-  const eventHandler = useCallback(async (name, meta) => {
-    pushEvent({ name, meta });
+  const eventHandler = useCallback(
+    async (name, meta) => {
+      pushEvent({ name, meta });
 
-    if (name === EVENTS.SESSION_DELETE) {
-      onSessionDelete(meta);
-    } else if (name === EVENTS.SESSION_REQUEST) {
-      await onSessionRequest(meta);
-    }
-  }, []);
+      if (name === EVENTS.SESSION_DELETE) {
+        onSessionDelete(meta);
+      } else if (name === EVENTS.SESSION_REQUEST) {
+        await onSessionRequest(meta);
+      }
+    },
+    [signClient]
+  );
 
   useEffect(() => {
     if (signClient?.on) {
