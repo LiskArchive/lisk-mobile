@@ -58,6 +58,7 @@
     "moment": "^2.29.1",
     "patch-package": "^6.4.7",
     "prop-types": "^15.7.2",
+    "qs": "^6.11.2",
     "querystring-es3": "~0.2.0",
     "react": "18.2.0",
     "react-hook-form": "^7.34.0",

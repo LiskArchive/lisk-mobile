@@ -10,7 +10,10 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useTimeoutMonitor } from 'hooks/useTimeoutMonitor';
 import { usePairings } from '../../../../../libs/wcm/hooks/usePairings';
 import { STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
-import { validateConnectionNameSpace } from '../../../../../libs/wcm/utils/eventValidators';
+import {
+  validateConnectionNameSpace,
+  validateConnectionURI,
+} from '../../../../../libs/wcm/utils/eventValidators';
 import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
 
 import getStyles from './styles';
@@ -59,6 +62,13 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
 
   const handleSubmit = async () => {
     handleStateCleanup();
+
+    const isUriValid = validateConnectionURI(uri ? uri : inputUri);
+
+    if (!isUriValid) {
+      setError(new Error('URI not valid.'));
+      return;
+    }
 
     connectionTimeoutMonitor.initialize();
 

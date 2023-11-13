@@ -1,4 +1,6 @@
 import * as Lisk from '@liskhq/lisk-client';
+import { parseRelayParams } from '@walletconnect/utils';
+import qs from 'qs';
 import i18next from 'i18next';
 
 import { EVENTS } from '../constants/lifeCycle';
@@ -38,4 +40,39 @@ export function validateConnectionSchema(event) {
   } catch {
     return false;
   }
+}
+
+function parseWalletConnectUri(uri) {
+  // Handle wc:{} and wc://{} format
+  const str = uri.startsWith('wc://') ? uri.replace('wc://', 'wc:') : uri;
+  const pathStart = str.indexOf(':');
+  const pathEnd = str.indexOf('?') !== -1 ? str.indexOf('?') : undefined;
+  const protocol = str.substring(0, pathStart);
+  const path = str.substring(pathStart + 1, pathEnd);
+  const requiredValues = path.split('@');
+
+  const queryString = typeof pathEnd !== 'undefined' ? str.substring(pathEnd) : '';
+  const queryParams = qs.parse(queryString);
+  const result = {
+    protocol,
+    topic: requiredValues[0],
+    version: parseInt(requiredValues[1], 10),
+    symKey: queryParams.symKey,
+    relay: parseRelayParams(queryParams),
+    bridge: queryParams.bridge,
+    key: queryParams.key,
+    handshakeTopic: queryParams.handshakeTopic,
+  };
+
+  return result;
+}
+
+export function validateConnectionURI(uri) {
+  const [protocol, ...rest] = uri.split(':');
+  if (protocol !== 'wc' || rest.length > 1) {
+    return false;
+  }
+  const result = parseWalletConnectUri(uri);
+
+  return !(!result.topic || !result.symKey || !result.relay);
 }
