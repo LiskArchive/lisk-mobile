@@ -217,3 +217,17 @@ export function addUniqueStringToArray(array, value) {
 
   return [...array, value];
 }
+
+/**
+ * Takes a full name and returns the initials.
+ * If the name has only one part, it returns the first character of that part.
+ * If the name has more than one part, it returns the first character of the first two parts.
+ *
+ * @param {string} name - The full name.
+ * @returns {string} The initials of the name.
+ */
+export function getInitials(name) {
+  const parts = name.split(' ');
+  if (parts.length === 1) return parts[0][0];
+  return parts[0][0] + parts[1][0];
+}

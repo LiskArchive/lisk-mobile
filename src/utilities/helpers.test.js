@@ -12,6 +12,7 @@ import {
   spliceArray,
   countDecimals,
   addUniqueStringToArray,
+  getInitials,
 } from './helpers';
 
 describe('helpers', () => {
@@ -318,6 +319,20 @@ describe('helpers', () => {
 
       addUniqueStringToArray(array, string);
       expect(array).toEqual(originalArray);
+    });
+  });
+
+  describe('getInitials', () => {
+    it('should return the first character of a single-part name', () => {
+      expect(getInitials('Mononym')).toBe('M');
+    });
+
+    it('should return the first characters of the first two parts of a multi-part name', () => {
+      expect(getInitials('First Second')).toBe('FS');
+    });
+
+    it('should handle empty strings', () => {
+      expect(getInitials('')).toBe('');
     });
   });
 });
