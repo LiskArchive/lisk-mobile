@@ -1,9 +1,10 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import Logo from 'components/shared/Logo/Logo';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
@@ -37,8 +38,10 @@ export default function TransactionSummary(transaction) {
             )}
           </View>
 
-          <Image
-            source={{ uri: transaction.senderApplication?.logo.png }}
+          <Logo
+            uri={transaction.senderApplication?.logo.png}
+            name={transaction.senderApplication?.displayName}
+            size={24}
             style={[styles.applicationLogoImage]}
           />
         </View>
@@ -62,8 +65,10 @@ export default function TransactionSummary(transaction) {
             )}
           </View>
 
-          <Image
-            source={{ uri: transaction.recipientApplication?.logo.png }}
+          <Logo
+            uri={transaction.recipientApplication?.logo.png}
+            name={transaction.recipientApplication?.displayName}
+            size={24}
             style={[styles.applicationLogoImage]}
           />
         </View>
@@ -115,8 +120,10 @@ export default function TransactionSummary(transaction) {
             {transaction.token?.symbol}
           </Text>
 
-          <Image
-            source={{ uri: transaction.token?.logo?.png }}
+          <Logo
+            uri={transaction.token?.logo?.png}
+            name={transaction.token?.symbol}
+            size={24}
             style={styles.applicationLogoImage}
           />
         </View>

@@ -43,8 +43,6 @@ export default function getTransactionSummaryStyles() {
       },
       applicationLogoImage: {
         borderRadius: 50,
-        width: 24,
-        height: 24,
         marginLeft: 8,
         borderWidth: 1,
         borderColor: colors.light.platinumGray,

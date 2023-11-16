@@ -9,7 +9,7 @@ export default {
     },
     imageContainer: {
       alignItems: 'center',
-      marginBottom: 8,
+      marginBottom: 16,
     },
     applicationLogoImage: {
       borderRadius: 50,

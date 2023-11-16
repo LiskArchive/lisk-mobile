@@ -14,6 +14,7 @@ import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import Avatar from 'components/shared/avatar';
 import { useApplicationsMetaQuery } from '../../api/useApplicationsMetaQuery';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
+import Logo from 'components/shared/Logo/Logo';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
 import getConnectionStyles from './styles';
@@ -98,7 +99,7 @@ export default function InitiateConnection({ nextStep, onFinish }) {
   return (
     <View style={[styles.container]}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: iconUri }} style={styles.image} />
+        <Logo src={iconUri} name={name} size={40} />
       </View>
 
       <H3 style={[styles.title, styles.theme.title]}>{name}</H3>

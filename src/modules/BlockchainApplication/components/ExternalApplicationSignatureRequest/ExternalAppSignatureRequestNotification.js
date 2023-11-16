@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import i18next from 'i18next';
 import { colors } from 'constants/styleGuide';
 
@@ -8,6 +8,7 @@ import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { H3, P, B } from 'components/shared/toolBox/typography';
 import InfoComponent from 'components/shared/infoComponent';
 import { Button, PrimaryButton } from 'components/shared/toolBox/button';
+import Logo from 'components/shared/Logo/Logo';
 import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import SwitchSvg from 'assets/svgs/SwitchSvg';
@@ -49,10 +50,7 @@ export default function ExternalAppSignatureRequestNotification({
         <H3 style={[styles.title, styles.theme.title]}>Signature request</H3>
 
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: session.peer.metadata.icons[0] }}
-            style={styles.applicationLogoImage}
-          />
+          <Logo src={session.peer.metadata.icons[0]} name={session.peer.metadata.name} />
         </View>
 
         <H3 style={[styles.applicationTitle, styles.theme.text]}>{session.peer.metadata.name}</H3>
