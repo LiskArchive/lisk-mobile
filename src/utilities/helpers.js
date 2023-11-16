@@ -227,6 +227,7 @@ export function addUniqueStringToArray(array, value) {
  * @returns {string} The initials of the name.
  */
 export function getInitials(name) {
+  if (!name) return '';
   const parts = name.split(' ');
   if (parts.length === 1) return parts[0][0];
   return parts[0][0] + parts[1][0];
