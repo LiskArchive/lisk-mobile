@@ -73,7 +73,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
 
   const isMessageInvalid = messageField.value?.length > 64;
 
-  const feeTokenID = transaction.data.feeTokenID;
+  const feeTokenID = transaction?.data.feeTokenID;
 
   const selectedToken = tokensData?.find((token) => token.tokenID === feeTokenID);
 
@@ -99,7 +99,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
             }}
             title={
               isInsufficientToken
-                ? `${i18next.t('Request')} ${tokenName?.toUpperCase()}`
+                ? `${i18next.t('Request')} ${tokenName.toUpperCase()}`
                 : i18next.t('sendToken.result.error.retryButtonText')
             }
             style={[styles.tryAgainButton]}
@@ -108,11 +108,11 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
         description={
           isInsufficientToken
             ? i18next.t('transactions.errors.insufficientFeeDescription', {
-                message: tokenName?.toUpperCase(),
+                message: tokenName.toUpperCase(),
               })
             : null
         }
-        title={i18next.t(error, { message: tokenName?.toUpperCase() })}
+        title={i18next.t(error, { message: tokenName.toUpperCase() })}
         hideReport={isInsufficientToken}
       />
     ));
