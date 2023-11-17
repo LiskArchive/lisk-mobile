@@ -10,17 +10,12 @@ export function useAccountCanSendTokens(address) {
   const accountTokensQuery = useAccountTokensQuery(address);
   const feesQuery = useFeesQuery();
 
-  const feeTokenID = feesQuery.data?.feeTokenID;
+  const feeTokenID = feesQuery.data?.data?.feeTokenID;
 
   const hasBalance = accountTokensQuery.data?.data.reduce(
-    (acc, token) => acc || BigInt(token.availableBalance) > 0,
-    false
-  );
-
-  const hasNativeTokenBalance = accountTokensQuery.data?.data.reduce(
     (acc, token) => acc || (BigInt(token.availableBalance) > 0 && token.tokenID === feeTokenID),
     false
   );
 
-  return { ...accountTokensQuery, data: hasBalance && hasNativeTokenBalance };
+  return { ...accountTokensQuery, data: hasBalance };
 }
