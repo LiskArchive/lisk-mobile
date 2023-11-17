@@ -10,12 +10,16 @@ export default function getToastStyles() {
         width: deviceWidth() - 32,
       },
       body: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'flex-start',
         paddingVertical: 12,
         paddingHorizontal: 16,
         borderWidth: 1,
         borderRadius: 4,
+      },
+      textContainer: {
+        flex: 1,
       },
       icon: {
         marginRight: 12,
