@@ -21,12 +21,7 @@ export default function getExternalBlockchainApplicationRowStyles() {
         marginRight: 16,
       },
       applicationLogoImage: {
-        borderRadius: 50,
-        width: 40,
-        height: 40,
         marginRight: 16,
-        borderWidth: 1,
-        borderColor: colors.light.platinumGray,
       },
       applicationNameLabel: {
         fontSize: fonts.size.base,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 
@@ -7,6 +7,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useModal } from 'hooks/useModal';
 import { P } from 'components/shared/toolBox/typography';
 import Swipeable from 'components/shared/Swipeable';
+import Logo from 'components/shared/Logo/Logo';
 import CaretSvg from 'assets/svgs/CaretSvg';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import { colors } from 'constants/styleGuide';
@@ -48,8 +49,9 @@ export default function ExternalApplicationRow({ application }) {
           onPress={handleGoToDetailsPress}
         >
           <View style={[styles.applicationNameContainer]}>
-            <Image
-              source={{ uri: application.peer.metadata.icons[0] }}
+            <Logo
+              src={application.peer.metadata.icons[0]}
+              name={application.peer.metadata.name}
               style={[styles.applicationLogoImage]}
             />
 
