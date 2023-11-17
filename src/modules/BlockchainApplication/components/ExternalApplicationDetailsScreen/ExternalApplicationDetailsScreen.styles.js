@@ -25,8 +25,6 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
       logoContainer: {
         marginTop: -logoMarginTop,
         marginBottom: Platform.select({ ios: -32, android: 10 }),
-        height: 70,
-        width: 70,
         borderRadius: 35,
         alignSelf: 'center',
         borderWidth: 1,
@@ -91,13 +89,6 @@ export default function getExternalBlockchainApplicationDetailsStyles() {
       },
       itemSubtitle: {
         fontSize: 12,
-      },
-      itemImage: {
-        height: 32,
-        width: 32,
-        borderRadius: 25,
-        borderColor: colors.light.platinumGray,
-        borderWidth: 1,
       },
       divider: {
         marginVertical: 16,

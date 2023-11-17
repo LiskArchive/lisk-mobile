@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { Image, View, Linking, ScrollView } from 'react-native';
+import { View, Linking, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import i18next from 'i18next';
@@ -14,6 +14,7 @@ import FormattedDate from 'components/shared/formattedDate';
 import { Button } from 'components/shared/toolBox/button';
 import DisconnectExternalApplicationModal from '../DisconnectExternalApplicationModal/DisconnectExternalApplicationModal';
 import Avatar from 'components/shared/avatar';
+import Logo from 'components/shared/Logo/Logo';
 import WavesPatternSvg from 'assets/svgs/WavesPatternSvg';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
@@ -64,9 +65,11 @@ export default function ExternalApplicationDetailsScreen() {
         <HeaderBackButton color={colors.light.white} onPress={navigation.goBack} />
       </LinearGradient>
 
-      <Image
+      <Logo
+        src={application.peer.metadata.icons[0]}
+        name={application.peer.metadata.name}
+        size={70}
         style={[styles.logoContainer, styles.theme.logoContainer]}
-        source={{ uri: application.peer.metadata.icons[0] }}
       />
 
       <View style={styles.body}>
@@ -111,7 +114,7 @@ export default function ExternalApplicationDetailsScreen() {
                   {chains.length > 0 &&
                     chains.map((chain, index) => (
                       <View key={index} style={[styles.itemContainer]}>
-                        <Image style={styles.itemImage} source={{ uri: chain.logo?.png }} />
+                        <Logo uri={chain.logo?.png} name={chain.displayName} size={32} />
 
                         <View style={[styles.itemBody]}>
                           <P style={[styles.itemTitle, styles.theme.itemTitle]}>

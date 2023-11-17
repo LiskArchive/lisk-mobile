@@ -25,17 +25,22 @@ export function useTransactionSummary(props) {
 
   const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const token = supportedTokensData?.find((_token) => _token.tokenID === props.tokenID);
+  const token = supportedTokensData?.find((_token) => _token.tokenID === props.tokenID) || {
+    tokenID: props.tokenID,
+  };
 
   const transactionFee =
-    token &&
-    fromBaseToDisplayDenom({
-      amount: props.fee,
-      displayDenom: token.displayDenom,
-      denomUnits: token.denomUnits,
-      symbol: token.symbol,
-      withSymbol: true,
-    });
+    (token.displayDenom &&
+      token.denomUnits &&
+      token.symbol &&
+      fromBaseToDisplayDenom({
+        amount: props.fee,
+        displayDenom: token.displayDenom,
+        denomUnits: token.denomUnits,
+        symbol: token.symbol,
+        withSymbol: true,
+      })) ||
+    Number(props.fee).toLocaleString('en-US');
 
   const messageFee = props.messageFee && fromBeddowsToLsk(props.messageFee, true);
 
