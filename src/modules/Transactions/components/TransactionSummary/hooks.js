@@ -25,7 +25,9 @@ export function useTransactionSummary(props) {
 
   const { data: supportedTokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const token = supportedTokensData?.find((_token) => _token.tokenID === props.tokenID);
+  const token = supportedTokensData?.find((_token) => _token.tokenID === props.tokenID) || {
+    tokenID: props.tokenID,
+  };
 
   const transactionFee =
     token &&

@@ -54,9 +54,11 @@ export default function TransactionSummary(transaction) {
 
         <View style={[styles.row]}>
           <View style={[styles.applicationNameContainer]}>
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {transaction.recipientApplication?.displayName}
-            </Text>
+            {transaction.recipientApplication?.displayName && (
+              <Text style={[styles.valueText, styles.theme.valueText]}>
+                {transaction.recipientApplication.displayName}
+              </Text>
+            )}
 
             {transaction.recipientApplication?.chainID && (
               <Text style={[styles.label, styles.theme.label]}>
@@ -116,10 +118,17 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}</Text>
 
         <View style={[styles.row]}>
-          <Text style={[styles.valueText, styles.theme.valueText]}>
-            {transaction.token?.symbol}
-          </Text>
+          <View style={[styles.applicationNameContainer]}>
+            {transaction.token?.symbol && (
+              <Text style={[styles.valueText, styles.theme.valueText]}>
+                {transaction.token.symbol}
+              </Text>
+            )}
 
+            <Text style={[styles.label, styles.theme.label]}>
+              Token ID: {transaction.token?.tokenID}
+            </Text>
+          </View>
           <Logo
             uri={transaction.token?.logo?.png}
             name={transaction.token?.symbol}
