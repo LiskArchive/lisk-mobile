@@ -22,7 +22,7 @@ export function SuccessToast({ text1, text2 }) {
           style={styles.icon}
         />
 
-        <View>
+        <View style={styles.textContainer}>
           {text1 && <H3 style={[styles.title, styles.theme.successTitle]}>{text1}</H3>}
 
           {text2 && <P style={[styles.description, styles.theme.successDescription]}>{text2}</P>}
@@ -40,7 +40,7 @@ export function ErrorToast({ text1, text2 }) {
       <View style={[styles.body, styles.theme.errorBody]}>
         <WarningSvg height={16} width={16} color={colors.light.furyRed} style={styles.icon} />
 
-        <View>
+        <View style={styles.textContainer}>
           {text1 && <H3 style={[styles.title, styles.theme.errorTitle]}>{text1}</H3>}
 
           {text2 && <P style={[styles.description, styles.theme.errorDescription]}>{text2}</P>}

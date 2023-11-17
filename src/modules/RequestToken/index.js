@@ -1,7 +1,8 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
 import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -141,13 +142,8 @@ export default function RequestToken() {
         )}
       />
 
-      <KeyboardAwareScrollView
-        viewIsInsideTab
-        enableOnAndroid
-        enableResetScrollToCoords={false}
-        contentContainerStyle={{ flex: 1 }}
-      >
-        <View style={[styles.innerContainer, styles.theme.innerContainer]}>
+      <KeyboardAwareScrollView enableOnAndroid>
+        <View style={[styles.body, styles.theme.body]}>
           <P style={[styles.addressLabel, styles.theme.addressLabel]}>
             {i18next.t('requestTokens.recipient')}
           </P>
