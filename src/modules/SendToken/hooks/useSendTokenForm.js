@@ -27,6 +27,7 @@ import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
 import { useTransferableTokens } from '../../BlockchainApplication/api/useTransferableTokens';
+import { useValidateFeeBalance } from './useValidateFeeBalance';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -117,18 +118,28 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const defaultTokenID =
     applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
 
-  const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
-    useTransactionFees({
-      transaction,
-      isTransactionSuccess,
-      dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
-      enabled: recipientAddress && tokenID,
-      onError: () =>
-        Toast.show({
-          type: 'error',
-          text2: i18next.t('sendToken.errors.estimateFees'),
-        }),
-    });
+  const {
+    data,
+    isLoading: isLoadingTransactionFees,
+    isError: isErrorTransactionFees,
+  } = useTransactionFees({
+    transaction,
+    isTransactionSuccess,
+    dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
+    enabled: recipientAddress && tokenID,
+    onError: () =>
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('sendToken.errors.estimateFees'),
+      }),
+  });
+
+  const feeTokenId = data?.data?.transaction?.fee?.tokenID;
+
+  const { hasSufficientBalanceForFee } = useValidateFeeBalance(
+    currentAccount?.metadata?.address,
+    feeTokenId
+  );
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -176,6 +187,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   };
 
   const getDryRunErrors = (events) => {
+    if (!hasSufficientBalanceForFee) {
+      return ERROR_EVENTS.insufficientFee;
+    }
+
     const event = events?.find((e) => ERROR_EVENTS[e.name]);
 
     if (event) {
