@@ -646,7 +646,8 @@
       "tokenNotNative": "Failed to process this transaction due to token ID not native.",
       "insufficientEscrowBalance": "Failed to process this transaction due to insufficient escrow balance.",
       "invalidReceivingChain": "Failed to process this transaction due to invalid receiving chain.",
-      "insufficientFee": "Please use custom fee and provide a higher fee to process this transaction.",
+      "insufficientFee": "Insufficient Fee",
+      "insufficientFeeDescription": "The account does not have enough {{message}} to process this transaction",
       "invalidSignature": "Failed to process transaction due to invalid signature, please restart the transaction from scratch.",
       "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
     }
