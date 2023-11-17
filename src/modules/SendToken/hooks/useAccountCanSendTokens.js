@@ -1,4 +1,5 @@
 import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuery';
+import { useFeesQuery } from '../../Transactions/api/useFeesQuery';
 
 /**
  * Checks if an account is available or not to send tokens based on its balance.
@@ -7,11 +8,19 @@ import { useAccountTokensQuery } from 'modules/Accounts/api/useAccountTokensQuer
  */
 export function useAccountCanSendTokens(address) {
   const accountTokensQuery = useAccountTokensQuery(address);
+  const feesQuery = useFeesQuery();
+
+  const feeTokenID = feesQuery.data?.feeTokenID;
 
   const hasBalance = accountTokensQuery.data?.data.reduce(
     (acc, token) => acc || BigInt(token.availableBalance) > 0,
     false
   );
 
-  return { ...accountTokensQuery, data: hasBalance };
+  const hasNativeTokenBalance = accountTokensQuery.data?.data.reduce(
+    (acc, token) => acc || (BigInt(token.availableBalance) > 0 && token.tokenID === feeTokenID),
+    false
+  );
+
+  return { ...accountTokensQuery, data: hasBalance && hasNativeTokenBalance };
 }
