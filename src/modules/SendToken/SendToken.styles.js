@@ -16,6 +16,26 @@ export function getSendTokenStyles() {
       header: {
         marginBottom: 8,
       },
+      nameContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 20,
+      },
+      closeIconContainer: {
+        alignItems: 'flex-end',
+      },
+      logoImage: {
+        borderRadius: 50,
+        width: 40,
+        height: 40,
+        marginRight: 16,
+        borderWidth: 1,
+        borderColor: colors.light.platinumGray,
+      },
+      tryAgainButton: {
+        marginTop: 24,
+        marginBottom: 24,
+      },
       progressBar: {
         marginBottom: 16,
       },

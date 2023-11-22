@@ -18,6 +18,7 @@ export default function SignTransactionError({
   actionButton,
   secondaryButton,
   hideReport = false,
+  hideIcon = false,
 }) {
   const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
@@ -51,9 +52,11 @@ export default function SignTransactionError({
 
   return (
     <View style={[styles.container, styles.theme.container]}>
-      <View style={styles.illustrationContainer}>
-        <TxErrorSvg />
-      </View>
+      {!hideIcon && (
+        <View style={styles.illustrationContainer}>
+          <TxErrorSvg />
+        </View>
+      )}
 
       <H3 style={[styles.title, styles.theme.title]}>
         {title || i18next.t('sendToken.result.error.title')}

@@ -13,6 +13,10 @@ export default function getAccountCardStyles() {
         flexDirection: 'row',
         alignItems: 'center',
       },
+      tryAgainButton: {
+        marginTop: 24,
+        marginBottom: 24,
+      },
       switchContainer: {
         alignSelf: 'flex-start',
         padding: 8,
