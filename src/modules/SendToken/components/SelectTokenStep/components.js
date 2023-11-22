@@ -54,7 +54,9 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
   const tokenBalance =
     selectedToken && tokenBalanceData
       ? fromBaseToDisplayDenom({
-          amount: tokenBalanceData?.data[0]?.availableBalance || 0,
+          amount:
+            tokenBalanceData?.data?.find?.((token) => token.tokenID === value)?.availableBalance ||
+            0,
           displayDenom: selectedToken.displayDenom,
           denomUnits: selectedToken.denomUnits,
           symbol: selectedToken.symbol,
