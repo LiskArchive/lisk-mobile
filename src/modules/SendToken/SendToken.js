@@ -60,26 +60,28 @@ export default function SendToken() {
 
   const { isLoading, accountCanSendTokens, feeTokenName } = form;
 
+  const requestToken = () => {
+    navigation.reset({
+      index: 1,
+      routes: [
+        {
+          name: 'Main',
+        },
+        {
+          name: 'Request',
+        },
+      ],
+    });
+    modal.close();
+  };
+
   const openCannotSendTokenModal = () =>
     modal.open(
       () => (
         <TransactionError
           actionButton={
             <PrimaryButton
-              onClick={() => {
-                navigation.reset({
-                  index: 1,
-                  routes: [
-                    {
-                      name: 'Main',
-                    },
-                    {
-                      name: 'Request',
-                    },
-                  ],
-                });
-                modal.close();
-              }}
+              onClick={requestToken}
               title={`${i18next.t('Request')} ${feeTokenName.toUpperCase()}`}
               style={[styles.tryAgainButton]}
             />
@@ -121,9 +123,7 @@ export default function SendToken() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, accountCanSendTokens]);
 
-  useEffect(() => {
-    return () => form.reset();
-  }, []);
+  useEffect(() => form.reset, []);
 
   return (
     <DataRenderer
