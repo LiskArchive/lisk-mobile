@@ -476,7 +476,10 @@
       "recipientApplicationFieldPlaceholder": "Select an application",
       "recipientAccountFieldLabel": "Recipient",
       "addressPlaceholder": "Enter address",
-      "nextStepButtonText": "Continue"
+      "nextStepButtonText": "Continue",
+      "addAndSwitch": "Add & switch application",
+      "description": "{{displayName}} application has not been added to your wallet, please add and switch to this application to continue with this transaction",
+      "addAndSwitchButton": "Add and switch to application"
     },
     "tokenSelect": {
       "prevStepButtonText": "Back",
@@ -646,7 +649,7 @@
       "tokenNotNative": "Failed to process this transaction due to token ID not native.",
       "insufficientEscrowBalance": "Failed to process this transaction due to insufficient escrow balance.",
       "invalidReceivingChain": "Failed to process this transaction due to invalid receiving chain.",
-      "insufficientFee": "Insufficient Fee",
+      "insufficientFee": "Insufficient Balance",
       "insufficientFeeDescription": "The account does not have enough {{message}} to process this transaction",
       "invalidSignature": "Failed to process transaction due to invalid signature, please restart the transaction from scratch.",
       "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."

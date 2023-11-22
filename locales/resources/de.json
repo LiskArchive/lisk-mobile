@@ -477,7 +477,10 @@
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
       "addressPlaceholder": "Adresse eingeben",
-      "nextStepButtonText": "Weiter"
+      "nextStepButtonText": "Weiter",
+      "addAndSwitch": "Anwendung hinzufügen und wechseln",
+      "description": "{{displayName}} Anwendung wurde nicht zu Ihrer Brieftasche hinzugefügt, bitte fügen Sie diese Anwendung hinzu und wechseln Sie zu ihr, um mit dieser Transaktion fortzufahren",
+      "addAndSwitchButton": "Hinzufügen und zur Anwendung wechseln"
     },
     "tokenSelect": {
       "prevStepButtonText": "Zurück",
@@ -647,7 +650,7 @@
       "tokenNotNative": "Diese Transaktion konnte nicht verarbeitet werden, da die Token-ID nicht nativ ist.",
       "insufficientEscrowBalance": "Diese Transaktion konnte aufgrund eines unzureichenden Treuhandsaldos nicht bearbeitet werden.",
       "invalidReceivingChain": "Diese Transaktion konnte aufgrund einer ungültigen Empfangskette nicht verarbeitet werden.",
-      "insufficientFee": "Unzureichende Gebühr",
+      "insufficientFee": "Unzureichendes Gleichgewicht",
       "insufficientFeeDescription": "Das Konto hat nicht genug {{message}} um diese Transaktion zu verarbeiten",
       "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
     }

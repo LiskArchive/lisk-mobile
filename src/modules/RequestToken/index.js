@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import QRCode from 'react-native-qrcode-svg';
@@ -61,6 +61,19 @@ export default function RequestToken() {
     currentApplication.data?.chainID
   );
   const [tokenID, setTokenID] = useState();
+
+  const handleSetApplicationChainId = (chainId) => {
+    setRecipientApplicationChainID(chainId);
+    setTokenID('');
+  };
+
+  const selectedApplication = useMemo(
+    () =>
+      applications?.data?.find(
+        (application) => application.chainID === recipientApplicationChainID
+      ),
+    [recipientApplicationChainID, applications?.isLoading]
+  );
 
   const { styles, theme } = useTheme({ styles: getStyles() });
 
@@ -169,7 +182,7 @@ export default function RequestToken() {
             renderData={() => (
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainID}
-                onChange={setRecipientApplicationChainID}
+                onChange={handleSetApplicationChainId}
                 applications={applications}
                 style={{ toggle: { container: styles.fieldContainer } }}
               />
@@ -186,7 +199,7 @@ export default function RequestToken() {
           <RequestTokenSelectField
             value={tokenID}
             onChange={setTokenID}
-            recipientApplication={currentApplication.data}
+            recipientApplication={selectedApplication}
             style={{ toggle: { container: styles.fieldContainer } }}
           />
 
@@ -194,7 +207,7 @@ export default function RequestToken() {
             value={amount.value}
             onChange={handleAmountChange}
             tokenID={tokenID}
-            recipientApplication={currentApplication.data}
+            recipientApplication={selectedApplication}
             style={{ container: styles.fieldContainer }}
             errorMessage={
               !amount.validity || !isAmountValid ? i18next.t('sendToken.errors.amountInvalid') : ''
@@ -207,7 +220,7 @@ export default function RequestToken() {
         <View style={styles.footer} testID="request-token-link-button">
           <PrimaryButton
             onPress={handleCopyToClipboard}
-            disabled={!amount.validity || !isAmountValid}
+            disabled={!amount.validity || !isAmountValid || !tokenID}
             adornments={{
               left: !copiedToClipboard ? (
                 <CopySvg color={colors.light.white} variant="outline" style={{ marginRight: 8 }} />

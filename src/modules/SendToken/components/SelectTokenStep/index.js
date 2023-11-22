@@ -11,6 +11,7 @@ import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/use
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useSendTokenAmountChecker } from 'modules/SendToken/hooks/useSendTokenAmountChecker';
+import { useModal } from 'hooks/useModal';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import {
@@ -20,7 +21,6 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
-import { useModal } from '../../../../hooks/useModal';
 import SignTransactionError from '../../../Transactions/components/SignTransaction/SignTransactionError';
 
 export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, form, transaction }) {

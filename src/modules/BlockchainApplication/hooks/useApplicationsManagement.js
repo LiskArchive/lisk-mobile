@@ -19,7 +19,9 @@ export function useApplicationsManagement() {
 
   const [, setCurrentApplication] = useCurrentApplication();
 
-  const defaultApplication = applications?.data.find((app) => app.chainName === 'lisk_mainchain');
+  const defaultApplication = applications?.data?.find?.(
+    (app) => app.chainName === 'lisk_mainchain'
+  );
 
   const {
     addApplication: addApplicationToStorage,

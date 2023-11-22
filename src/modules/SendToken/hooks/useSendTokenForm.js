@@ -28,6 +28,7 @@ import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
 import { useTransferableTokens } from '../../BlockchainApplication/api/useTransferableTokens';
 import { useValidateFeeBalance } from './useValidateFeeBalance';
+import { useAccountCanSendTokens } from './useAccountCanSendTokens';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -41,6 +42,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
   });
+
+  const {
+    data: accountCanSendTokens,
+    tokenName: feeTokenName,
+    isLoading: isLoadingAccountCanSendTokens,
+    isError: isErrorAccountCanSendTokens,
+  } = useAccountCanSendTokens(currentAccount?.metadata?.address);
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -410,7 +418,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const isLoading =
     form.formState.isSubmitting ||
     dryRunTransactionMutation.isLoading ||
-    broadcastTransactionMutation.isLoading;
+    broadcastTransactionMutation.isLoading ||
+    isLoadingAccountCanSendTokens;
 
   const isSuccess = broadcastTransactionMutation.isSuccess;
 
@@ -419,7 +428,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     dryRunTransactionMutation.error ||
     (dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
-    broadcastTransactionMutation.error;
+    broadcastTransactionMutation.error ||
+    isErrorAccountCanSendTokens;
 
   const isError = !!dryRunError || !!error;
 
@@ -439,5 +449,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     command,
     isLoadingTransactionFees: isLoadingTransactionFees || message !== debouncedMessage,
     isErrorTransactionFees,
+    accountCanSendTokens,
+    feeTokenName,
   };
 }
