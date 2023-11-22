@@ -1,7 +1,12 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useMemo, useRef } from 'react';
 import { View, FlatList, Image, TouchableOpacity } from 'react-native';
-import { useFocusEffect , useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useNavigationState,
+  useRoute,
+} from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import i18next from 'i18next';
 import { H3, P } from 'components/shared/toolBox/typography';
@@ -143,7 +148,7 @@ export default function SendTokenContainer() {
     return true;
   }, [currentApplicationChainID]);
 
-  const isApplicationInMyApps = !!myApplications?.data?.find?.(
+  const isApplicationInMyApps = myApplications?.data?.find?.(
     (app) => app?.chainID === route.params?.recipientChain
   );
 

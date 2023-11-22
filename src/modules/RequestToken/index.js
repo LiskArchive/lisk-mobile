@@ -69,10 +69,8 @@ export default function RequestToken() {
 
   const selectedApplication = useMemo(
     () =>
-      applications?.data?.find(
-        (application) => application.chainID === recipientApplicationChainID
-      ),
-    [recipientApplicationChainID, applications?.isLoading]
+      applications.data?.find((application) => application.chainID === recipientApplicationChainID),
+    [recipientApplicationChainID, applications.isLoading]
   );
 
   const { styles, theme } = useTheme({ styles: getStyles() });
