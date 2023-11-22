@@ -52,9 +52,7 @@ export default function SendTokenContainer() {
   };
 
   const toApplication = route.params?.recipientChain
-    ? applications?.data?.find(
-        (application) => application.chainID === route.params?.recipientChain
-      )
+    ? applications.data?.find((application) => application.chainID === route.params?.recipientChain)
     : currentApplication;
 
   const renderAccountList = (modal) => (
@@ -148,14 +146,14 @@ export default function SendTokenContainer() {
     return true;
   }, [currentApplicationChainID]);
 
-  const isApplicationInMyApps = myApplications?.data?.find?.(
+  const isApplicationInMyApps = myApplications.data?.find?.(
     (app) => app?.chainID === route.params?.recipientChain
   );
 
   useFocusEffect(() => {
     isMounted.current = true;
     return () => (isMounted.current = false);
-  }, []);
+  });
 
   useEffect(() => {
     if (isMounted && !applications.isLoading) {
