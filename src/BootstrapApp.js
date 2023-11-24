@@ -7,6 +7,7 @@ import ErrorScreen from 'components/screens/ErrorFallbackScreen';
 import LoadingScreen from 'components/screens/LoadingFallbackScreen/LoadingFallbackScreen';
 import { useEvents } from '../libs/wcm/hooks/useEvents';
 import { useBootstrapApplications } from './modules/BlockchainApplication/hooks/useBootstrapApplications';
+import { useBootstrapAPI } from './utilities/api/hooks/useBootstrapAPI';
 
 /**
  * Bootstrap the app by calling all previous business logic to load the required data.
@@ -15,9 +16,16 @@ import { useBootstrapApplications } from './modules/BlockchainApplication/hooks/
 export default function BootstrapApp({ children }) {
   const [currentApplication] = useCurrentApplication();
 
-  const isLoading = currentApplication.status === 'loading';
-  const isError = currentApplication.status === 'error';
-  const error = currentApplication.error;
+  // Bootstrap service API.
+  const {
+    isLoading: isLoadingBootstrapAPI,
+    isError: isErrorBootstrapAPI,
+    error: errorOnBootstrapAPI,
+  } = useBootstrapAPI();
+
+  const isLoading = currentApplication.status === 'loading' || isLoadingBootstrapAPI;
+  const isError = currentApplication.status === 'error' || isErrorBootstrapAPI;
+  const error = currentApplication.error || errorOnBootstrapAPI;
 
   // Bootstrap API client with current application.
   const retryBootstrapCurrentApplication = useBootstrapCurrentApplication();
