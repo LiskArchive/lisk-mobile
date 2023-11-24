@@ -68,7 +68,7 @@ export function removeUndefinedObjectKeys(obj) {
   return Object.keys(obj).reduce((acc, key) => {
     const item = obj[key];
 
-    if (typeof item !== 'undefined' || !item) {
+    if (typeof item !== 'undefined' && item) {
       acc[key] = item;
     }
 
