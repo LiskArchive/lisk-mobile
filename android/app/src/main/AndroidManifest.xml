@@ -45,7 +45,7 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="https"
           android:host="lisk.com"
-          android:pathPrefix="/wallet" />
+          android:pathPrefix="/send" />
       </intent-filter>
     </activity>
     <activity android:name=".DataAccessRationaleActivity"
