@@ -33,7 +33,7 @@ import { validateTransactionAmount } from 'utilities/validators';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
 import { deviceWidth } from 'utilities/device';
-import { stringShortener , removeUndefinedObjectKeys } from 'utilities/helpers';
+import { stringShortener, removeUndefinedObjectKeys } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
@@ -86,10 +86,9 @@ export default function RequestToken() {
 
     const amountValidity = validator(amount.value) ? 0 : 1;
 
-    const url = new Url('https://lisk.com/send?modal=send');
+    const url = new Url('https://lisk.com/send');
 
     const urlParams = {
-      modal: 'send',
       recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
       recipientChain: recipientApplicationChainID,
