@@ -33,7 +33,7 @@ import { validateTransactionAmount } from 'utilities/validators';
 import reg from 'constants/regex';
 import { themes, colors } from 'constants/styleGuide';
 import { deviceWidth } from 'utilities/device';
-import { stringShortener, removeUndefinedObjectKeys } from 'utilities/helpers';
+import { stringShortener } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
@@ -96,7 +96,7 @@ export default function RequestToken() {
       reference: message,
     };
 
-    url.set('query', removeUndefinedObjectKeys(urlParams));
+    url.set('query', urlParams);
 
     return url.toString();
   };
