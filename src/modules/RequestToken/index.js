@@ -86,10 +86,9 @@ export default function RequestToken() {
 
     const amountValidity = validator(amount.value) ? 0 : 1;
 
-    const url = new Url('lisk://wallet');
+    const url = new Url('https://lisk.com/send');
 
     const urlParams = {
-      modal: 'send',
       recipient: currentAccount.metadata.address,
       amount: amountValidity === 0 ? amount.value : 0,
       recipientChain: recipientApplicationChainID,
