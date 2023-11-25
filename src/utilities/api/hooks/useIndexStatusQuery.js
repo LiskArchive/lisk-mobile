@@ -4,7 +4,7 @@ import { useCustomQuery } from 'utilities/api/hooks/useCustomQuery';
 import liskAPIClient from 'utilities/api/LiskAPIClient';
 import { useMemo } from 'react';
 
-export function useBootstrapAPI() {
+export function useIndexStatusQuery() {
   const config = {
     url: `${API_URL}/index/status`,
     method: 'GET',
@@ -13,7 +13,12 @@ export function useBootstrapAPI() {
 
   const keys = [GET_INDEX_STATUS_QUERY, config, METHOD];
 
-  const query = useCustomQuery({ config, keys, client: liskAPIClient });
+  const options = {
+    refetchInterval: 10000,
+    refetchIntervalInBackground: false,
+  };
+
+  const query = useCustomQuery({ config, keys, options, client: liskAPIClient });
 
   const isLoading = useMemo(
     () => query.isLoading || query.data?.data.isIndexingInProgress,
