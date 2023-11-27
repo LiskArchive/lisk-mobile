@@ -12,13 +12,19 @@ export class APIClient {
   fetchConfig = {
     headers: {
       'Content-Type': 'application/json',
+      'User-Agent': 'lisk-mobile/3.0.0',
     },
     timeoutInterval: 10000,
   };
 
   create({ http, enableCertPinning = false } = {}) {
-    this.host = http;
-    this.baseUrl = http;
+    let url = http;
+    // TODO: https://github.com/LiskHQ/lisk-mobile/issues/2144
+    if (url === 'https://testnet-service.lisk.com') {
+      url = 'https://mainnet-service.lisk.com';
+    }
+    this.host = url;
+    this.baseUrl = url;
     this.enableCertPinning = enableCertPinning;
   }
 
