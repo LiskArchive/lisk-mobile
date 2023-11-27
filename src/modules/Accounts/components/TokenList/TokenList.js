@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 /* eslint-disable complexity */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import { LabelButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
 
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
 import EmptyTokensIllustrationSvg from 'assets/svgs/EmptyTokensIllustrationSvg';
@@ -30,6 +31,13 @@ export default function TokenList({ mode = 'overview', address, style }) {
   const [activeTab, setActiveTab] = useState(0);
 
   const [currentAccount] = useCurrentAccount();
+  const [currentApplication] = useCurrentApplication();
+
+  const currentApplicationChainId = currentApplication?.data?.chainID;
+
+  useEffect(() => {
+    setActiveTab(0);
+  }, [currentApplicationChainId]);
 
   const navigation = useNavigation();
 
@@ -57,16 +65,17 @@ export default function TokenList({ mode = 'overview', address, style }) {
     let amount = 0;
 
     tokensData?.data?.forEach((token) => {
+      const denomUnits = token?.denomUnits;
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
           amount += Number(lockedBalance.amount);
         });
       }
       if (amount) {
-        res.push({ symbol: token.symbol, amount });
+        res.push({ ...token, availableBalance: amount, denomUnits });
       }
     });
-    return lockedTokens;
+    return res;
   }, [tokensData?.data]);
 
   const { styles } = useTheme({

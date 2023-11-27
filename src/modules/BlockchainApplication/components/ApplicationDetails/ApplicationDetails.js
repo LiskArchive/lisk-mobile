@@ -22,6 +22,8 @@ import WavesPatternSvg from 'assets/svgs/WavesPatternSvg';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import PinSvg from 'assets/svgs/PinSvg';
 import { colors } from 'constants/styleGuide';
+import { fromBeddowsToLsk } from 'utilities/conversions.utils';
+
 import { usePinApplications } from '../../hooks/usePinApplications';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
 import { useApplicationsManagement } from '../../hooks/useApplicationsManagement';
@@ -132,11 +134,13 @@ export default function ApplicationDetails({ route }) {
                 </View>
 
                 <DataRenderer
-                  data={data.deposited}
+                  data={data.escrowedLSK}
                   renderData={(deposited) => (
                     <View style={[styles.row, styles.depositedContainer]}>
                       <P style={styles.deposited}>{i18next.t('application.details.deposited')}:</P>
-                      <P style={styles.amount}>{`${deposited.toLocaleString('en-US')} LSK`}</P>
+                      <P style={styles.amount}>{`${fromBeddowsToLsk(deposited).toLocaleString(
+                        'en-US'
+                      )} LSK`}</P>
                     </View>
                   )}
                   hideOnEmpty
