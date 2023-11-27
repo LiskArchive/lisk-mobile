@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,7 +23,6 @@ export default function RecoveryPhraseQuiz({
   length,
 }) {
   const navigation = useNavigation();
-
   const { recoveryPhrase } = data;
 
   const [buttonStatus, setButtonStatus] = useState(true);
@@ -47,7 +47,7 @@ export default function RecoveryPhraseQuiz({
 
   const generateTest = useCallback(() => {
     const words = recoveryPhrase.match(/\w+/g);
-    const _missing = chooseRandomWords(2, words);
+    const _missing = chooseRandomWords(2, words).sort();
 
     setMissing(_missing);
     setVisibleOptions(0);
@@ -89,7 +89,7 @@ export default function RecoveryPhraseQuiz({
       }
       const finalAnswers = _answers.map((item) => ({
         value: item.value,
-        style: styles.noBorderBottom,
+        style: isCorrect ? styles.placeHolderCorrect : styles.placeHolderIncorrect,
         textStyle: isCorrect ? styles.labelCorrect : styles.labelIncorrect,
       }));
       setAnswers(finalAnswers);
@@ -115,32 +115,54 @@ export default function RecoveryPhraseQuiz({
 
   const generatePlaceholder = (index, optionIndex, value) => {
     const style = visibleOptions === optionIndex ? null : styles.deActivePlaceholder;
+
     return (
-      <Button
-        noPredefinedStyle
-        testID={`recoveryPhrasePlaceholderFor-${value}`}
-        key={index}
-        title={answers[optionIndex].value}
-        onClick={() => toggleOptions(optionIndex)}
-        textStyle={[styles.label, styles.theme.label, answers[optionIndex].textStyle]}
-        style={[styles.placeholder, style, answers[optionIndex].style]}
-      />
+      <View style={styles.recoveryPhraseWordContainer}>
+        <P
+          style={
+            visibleOptions === optionIndex
+              ? styles.theme.recoveryPhraseSelectedIndexText
+              : styles.theme.recoveryPhraseIndexText
+          }
+        >
+          {index + 1}.
+        </P>
+
+        <Button
+          noPredefinedStyle
+          testID={`recoveryPhrasePlaceholderFor-${value}`}
+          key={index}
+          onClick={() => toggleOptions(optionIndex)}
+          textStyle={[styles.label, styles.theme.label, answers[optionIndex].textStyle]}
+          style={[styles.placeholder, style, answers[optionIndex].style]}
+        >
+          {answers[optionIndex].value}
+        </Button>
+      </View>
     );
   };
 
   const renderRecoveryPhrase = () => {
     const phrase = recoveryPhrase.split(' ');
+
     return missing.length > 0
       ? phrase.map((val, index) => {
-          const optionIndex = missing.indexOf(index);
+          const sortedMissing = missing.sort();
+          const optionIndex = sortedMissing.indexOf(index);
+
           const element =
             optionIndex >= 0 ? (
               generatePlaceholder(index, optionIndex, val)
             ) : (
-              <P key={index} style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}>
-                {val}
-              </P>
+              <View key={index} style={styles.recoveryPhraseWordContainer}>
+                <P style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseIndexText]}>
+                  {index + 1}.
+                </P>
+
+                <P style={[styles.recoveryPhraseText, styles.theme.recoveryPhraseText]}>{val} </P>
+              </View>
             );
+
           return element;
         })
       : null;
@@ -167,46 +189,47 @@ export default function RecoveryPhraseQuiz({
           length={length}
         />
       )}
+      <ScrollView>
+        <View style={[styles.body]}>
+          {!customHeader && (
+            <H4 style={[styles.title, styles.theme.title]}>
+              {i18next.t('auth.register.confirm.title')}
+            </H4>
+          )}
 
-      <View style={[styles.body]}>
-        {!customHeader && (
-          <H4 style={[styles.title, styles.theme.title]}>
-            {i18next.t('auth.register.confirm.title')}
-          </H4>
-        )}
+          <P style={[styles.description, styles.theme.description]}>
+            {i18next.t('auth.register.confirm.description')}
+          </P>
 
-        <P style={[styles.description, styles.theme.description]}>
-          {i18next.t('auth.register.confirm.description')}
-        </P>
+          <View style={styles.box}>
+            <View style={[styles.recoveryPhraseContainer, styles.horizontalPadding]}>
+              {renderRecoveryPhrase()}
+            </View>
 
-        <View style={styles.box}>
-          <View style={[styles.recoveryPhraseContainer, styles.horizontalPadding]}>
-            {renderRecoveryPhrase()}
-          </View>
-
-          <View
-            testID="recoveryPhraseOptionsContainer"
-            style={[styles.optionsContainer, styles.horizontalPadding]}
-          >
-            {options[visibleOptions] ? (
-              options[visibleOptions].map((value, idx) => (
-                <Button
-                  key={idx}
-                  onClick={() => fillOption(value)}
-                  testID={`recoveryPhraseOptionFor-${value}`}
-                  noPredefinedStyle
-                  style={[styles.option]}
-                  textStyle={[styles.label, styles.theme.label]}
-                >
-                  {value}
-                </Button>
-              ))
-            ) : (
-              <View style={styles.optionPlaceholder} />
-            )}
+            <View
+              testID="recoveryPhraseOptionsContainer"
+              style={[styles.optionsContainer, styles.horizontalPadding]}
+            >
+              {options[visibleOptions] ? (
+                options[visibleOptions].map((value, idx) => (
+                  <Button
+                    key={idx}
+                    onClick={() => fillOption(value)}
+                    testID={`recoveryPhraseOptionFor-${value}`}
+                    noPredefinedStyle
+                    style={[styles.option]}
+                    textStyle={[styles.label, styles.theme.label]}
+                  >
+                    {value}
+                  </Button>
+                ))
+              ) : (
+                <View style={styles.optionPlaceholder} />
+              )}
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
 
       <View style={[styles.footer]}>
         <PrimaryButton

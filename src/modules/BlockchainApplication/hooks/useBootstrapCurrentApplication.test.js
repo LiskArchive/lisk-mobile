@@ -18,7 +18,6 @@ const refetchApplicationsMetaQueryMock = jest.fn();
 const refetchApplicationsQueryMock = jest.fn();
 
 jest.spyOn(apiClient, 'create').mockImplementation(() => Promise.resolve());
-jest.spyOn(apiClient, 'rpc').mockImplementation(() => Promise.resolve());
 jest.spyOn(apiClient, 'rest').mockImplementation(() => Promise.resolve({ data: {} }));
 
 jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
@@ -56,7 +55,10 @@ describe('useBootstrapCurrentApplication hook', () => {
   it('should bootstrap the current application', async () => {
     renderHook(() => useBootstrapCurrentApplication());
 
-    expect(apiClient.create).toHaveBeenCalledWith(currentApplicationDataMock.serviceURLs[0]);
+    expect(apiClient.create).toHaveBeenCalledWith({
+      ...currentApplicationDataMock.serviceURLs[0],
+      enableCertPinning: true,
+    });
     expect(setCurrentApplicationDataMock).toHaveBeenCalledWith(currentApplicationDataMock);
     expect(setCurrentApplicationStatusMock).toHaveBeenCalledWith('success');
     expect(setCurrentApplicationErrorMock).not.toHaveBeenCalled();

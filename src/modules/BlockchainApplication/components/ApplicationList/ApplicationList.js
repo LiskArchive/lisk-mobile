@@ -26,6 +26,7 @@ export default function ApplicationList({
       <ResultScreen
         illustration={<EmptyApplicationsIllustrationSvg />}
         description={i18next.t('application.explore.applicationList.emptyText')}
+        fluid
       />
     ));
 
@@ -35,6 +36,7 @@ export default function ApplicationList({
       <ResultScreen
         illustration={<ErrorIllustrationSvg />}
         description={i18next.t('application.explore.applicationList.errorText')}
+        fluid
       />
     ));
 
@@ -62,7 +64,6 @@ export default function ApplicationList({
             fetchNextPage={applications.fetchNextPage}
             hasNextPage={applications.fetchNextPage}
             isFetchingNextPage={applications.isFetchingNextPage}
-            ListFooterComponent={<View style={{ height: 120 }} />}
             Spinner={<ActivityIndicator style={{ marginTop: 20, marginBottom: 100 }} />}
           />
         </View>

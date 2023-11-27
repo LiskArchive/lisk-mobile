@@ -11,6 +11,7 @@ import { PrimaryButton } from 'components/shared/toolBox/button';
 import CopyRecoveryPhraseToClipboard from 'components/shared/CopyRecoveryPhraseToClipboard/CopyRecoveryPhraseToClipboard';
 import { P, A } from 'components/shared/toolBox/typography';
 import HeaderBackButton from 'components/navigation/headerBackButton';
+import RecoveryPhraseSecurityAdviceCard from 'modules/Auth/components/RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
 
 import { getCopyRecoveryPhraseStyles } from './CopyRecoveryPhrase.styles';
 
@@ -47,6 +48,8 @@ export default function CopyRecoveryPhrase({ sharedData: data, nextStep }) {
         </P>
 
         <View style={[styles.recoveryPhraseContainer, styles.theme.recoveryPhraseContainer]}>
+          <RecoveryPhraseSecurityAdviceCard style={{ container: styles.securityAdviceCard }} />
+
           <P style={[styles.recoveryPhrase, styles.theme.recoveryPhrase]}>{data.recoveryPhrase}</P>
 
           <CopyRecoveryPhraseToClipboard recoveryPhrase={data.recoveryPhrase} />

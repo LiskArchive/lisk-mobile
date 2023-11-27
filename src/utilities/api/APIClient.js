@@ -1,53 +1,86 @@
-import axios from 'axios';
-import { io } from 'socket.io-client';
+/* eslint-disable max-statements */
+import { fetch } from 'react-native-ssl-pinning';
+import { removeUndefinedObjectKeys } from '../helpers';
 
 import { METHOD } from './constants';
 
 export class APIClient {
   http = null;
-
-  ws = null;
-
-  axiosConfig = {
-    timeout: 10000,
+  enableCertPinning = false;
+  baseUrl = '';
+  host = null;
+  fetchConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': 'lisk-mobile/3.0.0',
+    },
+    timeoutInterval: 10000,
   };
 
-  rpc({ event, params, data }) {
-    return new Promise((resolve, reject) => {
-      if (this.ws.disconnected) {
-        reject(new Error('socket not connected'));
-        return;
-      }
-
-      this.ws.emit('request', { method: event, params: params || data || {} }, (response) => {
-        if (Object.keys(response).length && response.error) {
-          return reject(response);
-        }
-
-        return resolve(response);
-      });
-    });
+  create({ http, enableCertPinning = false } = {}) {
+    let url = http;
+    // TODO: https://github.com/LiskHQ/lisk-mobile/issues/2144
+    if (url === 'https://testnet-service.lisk.com') {
+      url = 'https://mainnet-service.lisk.com';
+    }
+    this.host = url;
+    this.baseUrl = url;
+    this.enableCertPinning = enableCertPinning;
   }
 
-  rest(config) {
-    return this.http?.request({ ...this.http.defaults, ...config });
-  }
-
-  create({ http, ws } = {}) {
-    this.ws = io(`${ws}/blockchain`);
-
-    const request = axios.create({
-      ...this.axiosConfig,
-      baseURL: http,
-    });
-
-    request.interceptors.response.use((res) => res.data);
-
-    this.http = request;
-  }
-
-  call({ transformResult = async (data) => data, ...args }) {
+  async call({ transformResult = async (data) => data, ...args }) {
     return this[METHOD](args).then(transformResult);
+  }
+
+  async rest(config) {
+    const { url, params = {}, method, data, headers, ...otherConfig } = config;
+
+    // Constructing the URL with parameters
+    let finalUrl = this.baseUrl + url;
+
+    const sanitizedParams = removeUndefinedObjectKeys(params);
+
+    if (sanitizedParams && Object.keys(sanitizedParams).length) {
+      const queryString = new URLSearchParams(sanitizedParams).toString();
+      finalUrl = `${finalUrl}?${queryString}`;
+    }
+
+    // Setting up request headers
+    const finalHeaders = {
+      ...this.fetchConfig.headers,
+      ...headers,
+    };
+
+    // Request configuration for pinned fetch
+    const fetchOptions = {
+      ...this.fetchConfig,
+      ...otherConfig,
+      method: method || 'GET',
+      headers: finalHeaders,
+    };
+
+    if (this.enableCertPinning && process.env.NETWORK !== 'devnet') {
+      fetchOptions.sslPinning = {
+        certs: ['server-cert'],
+      };
+    } else {
+      fetchOptions.disableAllSecurity = true;
+    }
+
+    // Adding the request body
+    if (['POST', 'PUT', 'PATCH'].includes(method?.toUpperCase()) && data) {
+      fetchOptions.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(finalUrl, fetchOptions);
+
+    const responseData = await response.json();
+
+    if (response.status !== 200) {
+      throw new Error(responseData.message || 'Request failed');
+    }
+
+    return responseData;
   }
 }
 

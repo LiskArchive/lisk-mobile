@@ -1,5 +1,5 @@
 import SignClient from '@walletconnect/sign-client';
-import { createSignClient, signClient } from './connectionCreator';
+import { createSignClient } from './connectionCreator';
 
 jest.mock('@walletconnect/sign-client', () => ({
   init: jest.fn().mockResolvedValue(Promise.resolve({ mock: true })),
@@ -11,7 +11,7 @@ describe('connectionCreator', () => {
       PROJECT_ID: '2be454834309cb634d1472f88154ec8a',
       RELAY_URL: 'wss://relay.walletconnect.com',
     };
-    expect(signClient).toBeUndefined();
+
     const res = await createSignClient('https://lisk.com/documentation/_/img/lisk-symbol.svg');
     expect(SignClient.init).toHaveBeenCalledWith({
       projectId: process.env.PROJECT_ID,
@@ -24,6 +24,5 @@ describe('connectionCreator', () => {
       },
     });
     expect(res).toEqual({ mock: true });
-    expect(signClient).toEqual({ mock: true });
   });
 });

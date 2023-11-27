@@ -2,11 +2,7 @@ import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-      height: '100%',
-    },
-    innerContainer: {
+    body: {
       flex: 1,
       paddingTop: boxes.boxPadding,
       paddingLeft: boxes.boxPadding,
@@ -69,10 +65,7 @@ export default () => ({
   },
 
   [themes.light]: {
-    wrapper: {
-      backgroundColor: colors.light.white,
-    },
-    innerContainer: {
+    body: {
       backgroundColor: colors.light.white,
     },
     addressLabel: {
@@ -90,10 +83,7 @@ export default () => ({
   },
 
   [themes.dark]: {
-    wrapper: {
-      backgroundColor: colors.dark.mainBg,
-    },
-    innerContainer: {
+    body: {
       backgroundColor: colors.dark.mainBg,
     },
     addressLabel: {

@@ -11,6 +11,11 @@ export default function getAccountCardStyles() {
       },
       row: {
         flexDirection: 'row',
+        alignItems: 'center',
+      },
+      tryAgainButton: {
+        marginTop: 24,
+        marginBottom: 24,
       },
       switchContainer: {
         alignSelf: 'flex-start',
@@ -23,9 +28,18 @@ export default function getAccountCardStyles() {
         justifyContent: 'center',
       },
       usernameText: {
-        fontFamily: fonts.family.contextBold,
-        fontSize: fonts.size.h3,
+        fontFamily: fonts.family.contextSemiBold,
+        fontSize: fonts.size.h4,
         marginBottom: 4,
+      },
+      multisigContainer: {
+        backgroundColor: colors.light.platinumGray,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 10,
+        borderRadius: 13,
+        height: 25,
+        width: 25,
       },
       addressText: {
         fontFamily: fonts.family.context,

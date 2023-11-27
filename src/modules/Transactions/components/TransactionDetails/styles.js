@@ -1,4 +1,4 @@
-import { themes, colors, boxes } from 'constants/styleGuide';
+import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default function getTransactionDetailsStyles() {
   return {
@@ -28,16 +28,16 @@ export default function getTransactionDetailsStyles() {
         flex: 1,
       },
       text: {
-        fontWeight: '500',
+        fontFamily: fonts.family.contextSemiBold,
         fontSize: 16,
       },
       label: {
-        fontWeight: '400',
+        fontFamily: fonts.family.context,
         fontSize: 14,
         marginBottom: 8,
       },
       date: {
-        fontWeight: '400',
+        fontFamily: fonts.family.context,
         fontSize: 14,
         lineHeight: 18,
       },
@@ -48,9 +48,10 @@ export default function getTransactionDetailsStyles() {
       },
       statusText: {
         fontSize: 14,
-        fontWeight: '500',
+        fontFamily: fonts.family.contextSemiBold,
       },
       showParamsButton: {
+        fontFamily: fonts.family.context,
         fontSize: 14,
         alignSelf: 'flex-start',
       },

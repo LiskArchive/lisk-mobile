@@ -1,7 +1,6 @@
 const common = {
   black: '#000',
   white: '#fff',
-  BTC: '#EC8D08',
   ultramarineBlue: '#4070F4',
   maastrichtBlue: '#0C142D',
   inkBlue: '#254898',

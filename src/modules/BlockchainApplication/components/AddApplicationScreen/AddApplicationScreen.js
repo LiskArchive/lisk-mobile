@@ -6,7 +6,7 @@ import i18next from 'i18next';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { useTheme } from 'contexts/ThemeContext';
 import ResultScreen from 'components/screens/ResultScreen';
-import EmptyApplicationsIllustrationSvg from 'assets/svgs/EmptyIllustrationSvg';
+import EmptyApplicationsIllustrationSvg from 'assets/svgs/EmptyApplicationsIllustrationSvg';
 import ApplicationList from '../ApplicationList/ApplicationList';
 import ApplicationRow from '../ApplicationRow/ApplicationRow';
 import { useApplicationsExplorer } from '../../hooks/useApplicationsExplorer';
@@ -57,6 +57,7 @@ export default function AddApplicationScreen() {
           <ResultScreen
             illustration={<EmptyApplicationsIllustrationSvg />}
             description="All applications are now added to the application management list."
+            fluid
           />
         )}
         style={{ container: styles.applicationsListContainer }}

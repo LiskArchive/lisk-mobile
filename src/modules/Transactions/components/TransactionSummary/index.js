@@ -1,9 +1,10 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
+import Logo from 'components/shared/Logo/Logo';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { P } from 'components/shared/toolBox/typography';
 import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
@@ -37,8 +38,10 @@ export default function TransactionSummary(transaction) {
             )}
           </View>
 
-          <Image
-            source={{ uri: transaction.senderApplication?.logo.png }}
+          <Logo
+            uri={transaction.senderApplication?.logo.png}
+            name={transaction.senderApplication?.displayName}
+            size={24}
             style={[styles.applicationLogoImage]}
           />
         </View>
@@ -51,9 +54,11 @@ export default function TransactionSummary(transaction) {
 
         <View style={[styles.row]}>
           <View style={[styles.applicationNameContainer]}>
-            <Text style={[styles.valueText, styles.theme.valueText]}>
-              {transaction.recipientApplication?.displayName}
-            </Text>
+            {transaction.recipientApplication?.displayName && (
+              <Text style={[styles.valueText, styles.theme.valueText]}>
+                {transaction.recipientApplication.displayName}
+              </Text>
+            )}
 
             {transaction.recipientApplication?.chainID && (
               <Text style={[styles.label, styles.theme.label]}>
@@ -62,8 +67,10 @@ export default function TransactionSummary(transaction) {
             )}
           </View>
 
-          <Image
-            source={{ uri: transaction.recipientApplication?.logo.png }}
+          <Logo
+            uri={transaction.recipientApplication?.logo.png}
+            name={transaction.recipientApplication?.displayName}
+            size={24}
             style={[styles.applicationLogoImage]}
           />
         </View>
@@ -111,12 +118,21 @@ export default function TransactionSummary(transaction) {
         <Text style={[styles.label]}>{i18next.t('sendToken.tokenSelect.tokenIDFieldLabel')}</Text>
 
         <View style={[styles.row]}>
-          <Text style={[styles.valueText, styles.theme.valueText]}>
-            {transaction.token?.symbol}
-          </Text>
+          <View style={[styles.applicationNameContainer]}>
+            {transaction.token?.symbol && (
+              <Text style={[styles.valueText, styles.theme.valueText]}>
+                {transaction.token.symbol}
+              </Text>
+            )}
 
-          <Image
-            source={{ uri: transaction.token?.logo?.png }}
+            <Text style={[styles.label, styles.theme.label]}>
+              Token ID: {transaction.token?.tokenID}
+            </Text>
+          </View>
+          <Logo
+            uri={transaction.token?.logo?.png}
+            name={transaction.token?.symbol}
+            size={24}
             style={styles.applicationLogoImage}
           />
         </View>

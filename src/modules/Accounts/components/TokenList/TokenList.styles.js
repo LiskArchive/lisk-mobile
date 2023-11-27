@@ -22,11 +22,12 @@ export default function getTokenListStyles() {
         borderRadius: 20,
       },
       tabSingleItemText: {
-        fontWeight: '500',
+        fontFamily: fonts.family.contextSemiBold,
         fontSize: 14,
       },
       tabItemText: {
         fontSize: 14,
+        fontFamily: fonts.family.contextSemiBold,
         color: colors.light.blueGray,
       },
       tabItemTextActive: {
@@ -49,9 +50,6 @@ export default function getTokenListStyles() {
       loadingText: {
         fontSize: 14,
         marginTop: 8,
-        marginBottom: 8,
-      },
-      resultScreenContainer: {
         marginBottom: 8,
       },
     },

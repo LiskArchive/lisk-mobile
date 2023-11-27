@@ -3,19 +3,22 @@ import { colors, themes, boxes } from 'constants/styleGuide';
 export default function getAccountsManagerScreenStyles() {
   return {
     common: {
-      wrapper: {
+      container: {
         flex: 1,
         padding: boxes.boxPadding,
       },
+      headerLogoContainer: {
+        marginVertical: 40,
+      },
     },
     [themes.light]: {
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.white,
       },
     },
 
     [themes.dark]: {
-      wrapper: {
+      container: {
         backgroundColor: colors.dark.black,
       },
     },

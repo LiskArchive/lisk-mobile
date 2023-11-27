@@ -15,11 +15,10 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         alignItems: 'center',
       },
       recipientRow: {
-        alignItems: 'flex-end',
+        justifyContent: 'center',
       },
       bookmarkIcon: {
-        marginBottom: 8,
-        marginLeft: 5,
+        marginLeft: 4,
       },
       applicationLogoImage: {
         borderRadius: 50,
@@ -38,7 +37,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         marginLeft: 8,
       },
       text: {
-        color: colors.light.blueGray,
+        fontSize: 16,
       },
       placeholder: {
         fontSize: 16,
@@ -47,6 +46,10 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       },
       footer: {
         padding: boxes.boxPadding,
+      },
+      label: {
+        fontSize: 14,
+        marginBottom: 8,
       },
     },
     [themes.light]: {
@@ -60,6 +63,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         color: colors.light.blueGray,
       },
       text: {
+        color: colors.light.zodiacBlue,
+      },
+      label: {
         color: colors.light.zodiacBlue,
       },
       bookmarkIcon: {
@@ -80,6 +86,9 @@ export default function getSendTokenSelectApplicationsStepStyles() {
       text: {
         color: colors.light.whiteSmoke,
       },
+      label: {
+        color: colors.light.white,
+      },
       bookmarkIcon: {
         backgroundColor: colors.light.satinDeepBlack,
         borderColor: colors.light.satinDeepBlack,
@@ -94,7 +103,6 @@ export function getSendTokenRecipientAccountFieldStyles(styles) {
       paddingTop: 0,
       paddingRight: 0,
       paddingLeft: 0,
-      marginBottom: 8,
       flex: 1,
       ...styles?.container,
     },

@@ -1,5 +1,4 @@
 import { themes, colors } from 'constants/styleGuide';
-import { setColorOpacity } from 'utilities/helpers';
 
 export default function getCopyRecoveryPhraseToClipboardStyles() {
   return {
@@ -33,9 +32,6 @@ export default function getCopyRecoveryPhraseToClipboardStyles() {
       },
     },
     [themes.light]: {
-      container: {
-        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.1),
-      },
       description: {
         color: colors.light.zodiacBlue,
       },
@@ -44,9 +40,6 @@ export default function getCopyRecoveryPhraseToClipboardStyles() {
       },
     },
     [themes.dark]: {
-      container: {
-        backgroundColor: setColorOpacity(colors.light.ultramarineBlue, 0.2),
-      },
       description: {
         color: colors.dark.mountainMist,
       },

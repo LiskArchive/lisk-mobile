@@ -8,7 +8,6 @@ import useScreenshotPrevent from 'hooks/useScreenshotPrevent';
 import Scanner from 'components/shared/Scanner/Scanner';
 import HeaderBackButton from 'components/navigation/headerBackButton';
 import { P } from 'components/shared/toolBox/typography';
-import { useSelector } from 'react-redux';
 import RecoveryPhraseForm from '../RecoveryPhraseForm/RecoveryPhraseForm';
 
 import getStyles from './RecoveryPhraseScreen.styles';
@@ -16,7 +15,6 @@ import getStyles from './RecoveryPhraseScreen.styles';
 export default function RecoveryPhraseScreen() {
   useScreenshotPrevent();
   const navigation = useNavigation();
-  const settings = useSelector((state) => state.settings);
 
   const scannerRef = useRef();
 
@@ -35,11 +33,6 @@ export default function RecoveryPhraseScreen() {
 
       <Scanner
         ref={scannerRef}
-        containerStyles={{
-          cameraRoll: styles.cameraRoll,
-          cameraOverlay: styles.cameraOverlay,
-        }}
-        fullScreen={true}
         navigation={navigation}
         readFromCameraRoll={false}
         onQRCodeRead={handleQRCodeRead}
@@ -52,11 +45,7 @@ export default function RecoveryPhraseScreen() {
           {i18next.t('auth.setup.addAccountDescription')}
         </P>
 
-        <RecoveryPhraseForm
-          useDerivationPath={settings.useDerivationPath}
-          onSubmit={handleFormSubmission}
-          onScanQrCode={handleScanQrCode}
-        />
+        <RecoveryPhraseForm onSubmit={handleFormSubmission} onScanQrCode={handleScanQrCode} />
       </ScrollView>
     </SafeAreaView>
   );

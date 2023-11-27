@@ -9,14 +9,15 @@ import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';
-import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
+import Logo from 'components/shared/Logo/Logo';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
 
 import getConnectionStyles from './styles';
 
 export default function ApproveConnection({ onFinish, sharedData: { accounts, chains } }) {
-  const { approve, reject } = useWalletConnectSession();
+  const { approve, reject } = useSession();
   const { events } = useContext(WalletConnectContext);
 
   const { styles } = useTheme({ styles: getConnectionStyles });
@@ -26,10 +27,10 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
     events[events.length - 1].name === EVENTS.SESSION_PROPOSAL &&
     events[events.length - 1];
 
-  const accountsPubKeys = accounts.map((account) => account.metadata.pubkey);
+  const accountPublicKeys = accounts.map((account) => account.metadata.pubkey);
 
   const handleApprove = async () => {
-    await approve(accountsPubKeys);
+    await approve(accountPublicKeys);
     onFinish();
   };
 
@@ -57,7 +58,7 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
     <>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: icons[0] }} style={styles.image} />
+          <Logo src={icons[0]} name={name} size={40} />
         </View>
 
         <H3 style={[styles.title, styles.theme.title]}>{name}</H3>

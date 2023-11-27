@@ -34,7 +34,7 @@ export default function TokenListTabs({
         </P>
       )}
 
-      {lockedTokens && (
+      {!!lockedTokens?.length && (
         <TouchableOpacity
           style={[styles.tabItem, activeTab === 1 && styles.theme.tabItemActive]}
           onPress={onLockedTokensClick}

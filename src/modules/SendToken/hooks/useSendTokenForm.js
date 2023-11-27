@@ -1,42 +1,54 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines */
 /* eslint-disable max-statements */
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
-import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
+import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
 import { useAccountNonce } from 'modules/Accounts/hooks/useAccountNonce';
 import useDryRunTransactionMutation from 'modules/Transactions/api/useDryRunTransactionMutation';
 import useBroadcastTransactionMutation from 'modules/Transactions/api/useBroadcastTransactionMutation';
 import { useTransactionFees } from 'modules/Transactions/hooks/useTransactionFees';
-import { useFeesQuery } from 'modules/Transactions/api/useFeesQuery';
-import { TRANSACTION_VERIFY_RESULT } from 'modules/Transactions/utils/constants';
+import {
+  TRANSACTION_VERIFY_RESULT,
+  EVENT_DATA_RESULT,
+  ERROR_EVENTS,
+} from 'modules/Transactions/utils/constants';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
-import DropDownHolder from 'utilities/alert';
+import { useDebounce } from 'hooks/useDebounce';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
+import { useTransferableTokens } from '../../BlockchainApplication/api/useTransferableTokens';
+import { useValidateFeeBalance } from './useValidateFeeBalance';
+import { useAccountCanSendTokens } from './useAccountCanSendTokens';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
 
+  const [dryRunError, setDryRunError] = useState(false);
+
   const [currentApplication] = useCurrentApplication();
 
-  const {
-    data: applicationSupportedTokensData,
-    isSuccess: isSuccessApplicationSupportedTokensData,
-  } = useApplicationSupportedTokensQuery(currentApplication.data);
-
-  const { data: feesData } = useFeesQuery();
+  const applications = useApplicationsExplorer();
 
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
   });
+
+  const {
+    data: accountCanSendTokens,
+    tokenName: feeTokenName,
+    isLoading: isLoadingAccountCanSendTokens,
+    isError: isErrorAccountCanSendTokens,
+  } = useAccountCanSendTokens(currentAccount?.metadata?.address);
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -56,7 +68,15 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
       userPassword: '',
       command: 'transfer',
     }),
-    [currentApplication.data?.chainID, initialValues]
+    [
+      currentApplication.data?.chainID,
+      initialValues?.token,
+      initialValues?.amount,
+      initialValues?.reference,
+      initialValues?.recipientAccountAddressFormat,
+      initialValues?.recipient,
+      initialValues?.recipientChain,
+    ]
   );
 
   const validationSchema = yup
@@ -85,23 +105,49 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientAddress = form.watch('recipientAccountAddress');
   const tokenID = form.watch('tokenID');
-  const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
   const command = form.watch('command');
   const amount = form.watch('amount');
+  const message = form.watch('message');
+  const debouncedMessage = useDebounce(message, 1000);
+
+  const recipientApplication = applications.data?.find(
+    (application) => application.chainID === recipientApplicationChainID
+  );
+
+  const {
+    data: applicationSupportedTokensData,
+    isSuccess: isSuccessApplicationSupportedTokensData,
+  } = useTransferableTokens(recipientApplication);
+
+  const token = applicationSupportedTokensData?.find((_token) => _token.tokenID === tokenID);
 
   const isCrossChainTransfer = senderApplicationChainID !== recipientApplicationChainID;
 
-  const defaultTokenID = feesData?.data.feeTokenID;
+  const defaultTokenID =
+    applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
 
-  const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
-    useTransactionFees({
-      transaction,
-      isTransactionSuccess,
-      dependencies: [recipientAddress, tokenID, amount, isCrossChainTransfer],
-      enabled: recipientAddress && tokenID && amount,
-      onError: () =>
-        DropDownHolder.error(i18next.t('Error'), i18next.t('sendToken.errors.estimateFees')),
-    });
+  const {
+    data,
+    isLoading: isLoadingTransactionFees,
+    isError: isErrorTransactionFees,
+  } = useTransactionFees({
+    transaction,
+    isTransactionSuccess,
+    dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
+    enabled: recipientAddress && tokenID,
+    onError: () =>
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('sendToken.errors.estimateFees'),
+      }),
+  });
+
+  const feeTokenId = data?.data?.transaction?.fee?.tokenID;
+
+  const { hasSufficientBalanceForFee } = useValidateFeeBalance(
+    currentAccount?.metadata?.address,
+    feeTokenId
+  );
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -138,56 +184,127 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     }
   };
 
-  const handleSubmit = baseHandleSubmit(async (values) => {
-    const accountNonceData = await refetchAccountNonce();
+  const getEventDataResultError = (events) => {
+    const event = events?.find((e) => e.data?.result && e.data?.result !== 0);
 
+    if (event) {
+      return EVENT_DATA_RESULT[event.data.result];
+    }
+
+    return i18next.t('transactions.errors.dryRunFailed');
+  };
+
+  const getDryRunErrors = (events) => {
+    if (!hasSufficientBalanceForFee) {
+      return ERROR_EVENTS.insufficientFee;
+    }
+
+    const event = events?.find((e) => ERROR_EVENTS[e.name]);
+
+    if (event) {
+      return ERROR_EVENTS[event.name];
+    }
+
+    return getEventDataResultError(events);
+  };
+
+  const executeDryRun = async ({
+    dryRunTransaction,
+    skipBroadcast = false,
+    strict = false,
+    skipVerify = false,
+  }) => {
+    return new Promise((resolve, reject) => {
+      const encodedTransaction = transaction.encode(dryRunTransaction).toString('hex');
+      dryRunTransactionMutation.mutate(
+        { transaction: encodedTransaction, strict, skipVerify },
+        {
+          onSettled: ({ data }) => {
+            const isOk = data?.result === TRANSACTION_VERIFY_RESULT.OK;
+            if (!isOk) {
+              if (data?.events) {
+                const errorMessage = getDryRunErrors(data?.events);
+                return reject(new Error(errorMessage));
+              }
+              if (data?.errorMessage) {
+                return reject(new Error(data?.errorMessage));
+              }
+            }
+            if (!skipBroadcast) {
+              broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
+            }
+            resolve();
+          },
+          onError: async (error) => {
+            if (error?.json) {
+              const errorJson = await error.json();
+              reject(new Error(errorJson.message));
+            }
+            reject(new Error(error?.message));
+          },
+        }
+      );
+    });
+  };
+
+  const updateTransactionNounce = async () => {
+    const accountNonceData = await refetchAccountNonce();
     if (accountNonceData) {
       transaction.update({ nonce: accountNonceData });
     }
+  };
 
+  const handleSubmit = baseHandleSubmit(async (values) => {
     let privateKey;
 
     try {
+      await updateTransactionNounce();
       const decryptedAccount = await decryptAccount(currentAccount.crypto, values.userPassword);
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.decryptRecoveryPhraseError'),
+      });
+
+      return;
     }
 
-    if (privateKey) {
-      try {
-        const signedTransaction = await transaction.sign(privateKey);
-
-        const encodedTransaction = transaction.encode(signedTransaction).toString('hex');
-
-        dryRunTransactionMutation.mutate(
-          { transaction: encodedTransaction },
-          {
-            onSettled: ({ data }) => {
-              if (data.result !== TRANSACTION_VERIFY_RESULT.invalid) {
-                broadcastTransactionMutation.mutate({ transaction: encodedTransaction });
-              }
-            },
-          }
-        );
-      } catch (error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          i18next.t('transactions.errors.signErrorDescription')
-        );
-      }
+    try {
+      const signedTransaction = await transaction.sign(privateKey);
+      await executeDryRun({ dryRunTransaction: signedTransaction, strict: true });
+    } catch (error) {
+      setDryRunError(error.message);
     }
   });
+
+  const handleContinue = async (onError) => {
+    try {
+      await updateTransactionNounce();
+      await executeDryRun({
+        dryRunTransaction: transaction.transaction,
+        skipBroadcast: true,
+        strict: false,
+        skipVerify: true,
+      });
+      return true;
+    } catch (error) {
+      onError(error.message);
+      return false;
+    }
+  };
 
   const handleReset = () => {
     dryRunTransactionMutation.reset();
     broadcastTransactionMutation.reset();
+    setDryRunError();
   };
 
   const handleMutationsReset = () => {
     dryRunTransactionMutation.reset();
     broadcastTransactionMutation.reset();
+    setDryRunError();
   };
 
   useEffect(() => {
@@ -220,13 +337,19 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
   useEffect(() => {
     if (isTransactionSuccess && isSuccessApplicationSupportedTokensData) {
-      const amountInBaseDenom = token
-        ? fromDisplayToBaseDenom({
+      let amountInBaseDenom = 0;
+
+      try {
+        if (token) {
+          amountInBaseDenom = fromDisplayToBaseDenom({
             amount: defaultValues.amount,
             displayDenom: token.displayDenom,
             denomUnits: token.denomUnits,
-          })
-        : 0;
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
 
       transaction.update({
         params: {
@@ -273,35 +396,60 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     isTransactionSuccess,
   ]);
 
+  useEffect(() => {
+    form.reset({
+      ...defaultValues,
+      recipientAccountAddress: initialValues?.recipient,
+      recipientAccountAddressFormat: initialValues?.recipientAccountAddressFormat || 'input',
+      tokenID: initialValues?.token,
+      amount: initialValues?.amount,
+      message: initialValues?.reference,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    initialValues?.token,
+    initialValues?.amount,
+    initialValues?.reference,
+    initialValues?.recipientAccountAddressFormat,
+    initialValues?.recipient,
+    initialValues?.recipientChain,
+  ]);
+
   const isLoading =
     form.formState.isSubmitting ||
     dryRunTransactionMutation.isLoading ||
-    broadcastTransactionMutation.isLoading;
+    broadcastTransactionMutation.isLoading ||
+    isLoadingAccountCanSendTokens;
 
   const isSuccess = broadcastTransactionMutation.isSuccess;
 
   const error =
+    dryRunError ||
     dryRunTransactionMutation.error ||
     (dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
-    broadcastTransactionMutation.error;
+    broadcastTransactionMutation.error ||
+    isErrorAccountCanSendTokens;
 
-  const isError = !!error;
+  const isError = !!dryRunError || !!error;
 
   return {
     ...form,
     handleChange,
     handleSubmit,
     handleReset,
+    handleMutationsReset,
+    handleContinue,
     broadcastTransactionMutation,
     dryRunTransactionMutation,
-    handleMutationsReset,
     isLoading,
     isSuccess,
     error,
     isError,
     command,
-    isLoadingTransactionFees,
+    isLoadingTransactionFees: isLoadingTransactionFees || message !== debouncedMessage,
     isErrorTransactionFees,
+    accountCanSendTokens,
+    feeTokenName,
   };
 }

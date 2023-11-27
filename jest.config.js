@@ -21,7 +21,6 @@ module.exports = {
     'src/utilities/easing.js',
     'src/utilities/api/',
     'src/tests/',
-    'src/utilities/networks.js',
     'src/modules/Auth/utils/recoveryPhrase.js',
     'src/utilities/api/account.js',
     'utilities/tests/mock-react-i18next.js',

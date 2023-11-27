@@ -2,12 +2,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useController } from 'react-hook-form';
-import i18next from 'i18next';
+import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import i18next from 'i18next';
 
 import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { useTransactionSummary } from 'modules/Transactions/components/TransactionSummary/hooks';
+import { selectBookmarkList } from 'modules/Bookmark/store/selectors';
 import TransactionSummary from 'modules/Transactions/components/TransactionSummary';
 import SignTransaction from 'modules/Transactions/components/SignTransaction/SignTransaction';
 import { PrimaryButton, Button } from 'components/shared/toolBox/button';
@@ -16,11 +18,12 @@ import getSendTokenSummaryStepStyles from './styles';
 
 export default function SendTokenSummaryStep({ form, prevStep, transaction, reset: resetSteps }) {
   const navigation = useNavigation();
+  const bookmarks = useSelector(selectBookmarkList);
+  const modal = useModal();
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
   const recipientAccountAddress = form.watch('recipientAccountAddress');
-  const tokenID = form.watch('tokenID');
   const amount = parseFloat(form.watch('amount'));
   const message = form.watch('message');
   const priority = form.watch('priority');
@@ -34,7 +37,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     senderApplicationChainID,
     recipientApplicationChainID,
     recipientAccountAddress,
-    tokenID,
+    tokenID: transaction.data.feeTokenID,
     amount,
     message,
     priority,
@@ -42,9 +45,7 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     messageFee: transaction.data.transaction.params.messageFee,
   });
 
-  const { styles } = useTheme({
-    styles: getSendTokenSummaryStepStyles(),
-  });
+  const { styles } = useTheme({ styles: getSendTokenSummaryStepStyles() });
 
   const handleSignTransactionModalReset = (modal) => {
     form.handleReset();
@@ -52,11 +53,19 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     modal.close();
   };
 
+  const handleAddAddressToBookmarkPress = () => {
+    modal.close();
+    navigation.navigate({ name: 'AddBookmark', params: { address: recipientAccountAddress } });
+  };
+
+  const isRecipientAccountBookmarked = !!bookmarks.find(
+    (bookmark) => bookmark.address === recipientAccountAddress
+  );
+
   const signTransactionModal = useModal(
     (modal) => (
       <SignTransaction
         onSubmit={form.handleSubmit}
-        userPassword={userPasswordField.value}
         onUserPasswordChange={userPasswordField.onChange}
         onReset={() => handleSignTransactionModalReset(modal)}
         isSuccess={form.isSuccess}
@@ -64,16 +73,16 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
         isValidationError={Object.keys(form.formState.errors).length > 0}
         error={form.error}
         navigation={navigation}
+        successSecondaryButton={
+          !isRecipientAccountBookmarked && (
+            <Button onPress={handleAddAddressToBookmarkPress} style={styles.buttonMarginVertical}>
+              {i18next.t('sendToken.summary.addAddressToBookmarkButtonText')}
+            </Button>
+          )
+        }
       />
     ),
-    [
-      userPasswordField.value,
-      summary.amount,
-      summary.token,
-      form.isSuccess,
-      form.isLoading,
-      form.isError,
-    ]
+    [summary.amount, summary.token, form.isSuccess, form.isLoading, form.isError]
   );
 
   return (

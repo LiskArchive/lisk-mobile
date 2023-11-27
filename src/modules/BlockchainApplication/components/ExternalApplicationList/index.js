@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import i18next from 'i18next';
 
-import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
 import EmptyExternalApplicationsIllustrationSvg from 'assets/svgs/EmptyExternalApplicationsIllustrationSvg';
-import { P } from 'components/shared/toolBox/typography';
-import useWalletConnectCPairings from '../../../../../libs/wcm/hooks/usePairings';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 import ExternalApplicationRow from '../ExternalApplicationRow';
 
-import getExternalApplicationListStyles from './styles';
+import ApplicationListSkeleton from '../ApplicationList/components/ApplicationListSkeleton';
 
 export default function ExternalApplicationList() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const { pairings } = useWalletConnectCPairings();
-
-  const { styles } = useTheme({
-    styles: getExternalApplicationListStyles(),
-  });
-
-  useEffect(() => {
-    if (Array.isArray(pairings)) {
-      setIsLoading(false);
-    }
-  }, [pairings]);
+  const { sessions, isLoading: isLoadingSessions, error: errorOnSessions } = useSession();
 
   return (
     <DataRenderer
-      data={pairings.slice(1)}
-      isLoading={isLoading}
+      data={sessions}
+      isLoading={isLoadingSessions}
+      error={errorOnSessions}
       renderData={(data) => (
         <InfiniteScrollList
           data={data}
@@ -38,15 +25,12 @@ export default function ExternalApplicationList() {
           renderItem={(item) => <ExternalApplicationRow application={item} />}
         />
       )}
-      renderLoading={() => (
-        <P style={[styles.text, styles.theme.text]}>
-          {i18next.t('application.explore.externalApplicationList.loadingText')}
-        </P>
-      )}
+      renderLoading={() => <ApplicationListSkeleton />}
       renderEmpty={() => (
         <ResultScreen
           illustration={<EmptyExternalApplicationsIllustrationSvg />}
           description={i18next.t('application.explore.externalApplicationList.emptyText')}
+          fluid
         />
       )}
     />

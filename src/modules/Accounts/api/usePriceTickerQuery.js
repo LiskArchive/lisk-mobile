@@ -16,7 +16,7 @@ import apiClient from 'utilities/api/APIClient';
 export function usePriceTickerQuery({ config: customConfig = {} } = {}) {
   const config = {
     url: `${API_URL}/market/prices`,
-    method: 'get',
+    method: 'GET',
     event: 'get.prices',
     ...customConfig,
   };

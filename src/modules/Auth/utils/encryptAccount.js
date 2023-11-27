@@ -3,6 +3,12 @@ import { cryptography } from '@liskhq/lisk-client';
 
 import { defaultDerivationPath } from '../constants/recoveryPhrase.constants';
 import { extractKeyPair, extractAddressFromPublicKey } from './accountKeys';
+import { getKeyFromPasswordWithArgon2 } from './getKeyFromArgon';
+
+const ARGON2 = {
+  ITERATIONS: 3,
+  MEMORY: 65536,
+};
 
 export const encryptAccount = async ({
   recoveryPhrase,
@@ -15,7 +21,7 @@ export const encryptAccount = async ({
     const { encrypt } = cryptography;
     const options = {
       recoveryPhrase,
-      enableCustomDerivationPath: derivationPath && enableCustomDerivationPath,
+      enableCustomDerivationPath,
       derivationPath,
     };
     const { privateKey, publicKey, isValid } = await extractKeyPair(options);
@@ -25,13 +31,14 @@ export const encryptAccount = async ({
     const address = extractAddressFromPublicKey(publicKey);
     const plainText = JSON.stringify({ privateKey, recoveryPhrase });
     const crypto = await encrypt.encryptMessageWithPassword(plainText, password, {
-      kdf: 'PBKDF2',
+      getKey: getKeyFromPasswordWithArgon2,
+      kdf: cryptography.encrypt.KDF.ARGON2,
       kdfparams: {
-        parallelism: 4,
-        iterations: 1,
-        memorySize: 2024,
+        iterations: ARGON2.ITERATIONS,
+        memorySize: ARGON2.MEMORY,
       },
     });
+
     return {
       crypto,
       metadata: {

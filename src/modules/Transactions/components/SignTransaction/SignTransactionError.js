@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
@@ -10,14 +10,23 @@ import TxErrorSvg from 'assets/svgs/TxErrorSvg';
 
 import { getSignTransactionErrorStyles } from './styles';
 
-export default function SignTransactionError({ onClick, error, title, description, actionButton }) {
+export default function SignTransactionError({
+  onClick,
+  error,
+  title,
+  description,
+  actionButton,
+  secondaryButton,
+  hideReport = false,
+  hideIcon = false,
+}) {
   const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
   const { styles } = useTheme({
     styles: getSignTransactionErrorStyles(),
   });
 
-  const errorMessage = error instanceof Error && error.message;
+  const errorMessage = typeof error === 'string' ? error : error instanceof Error && error.message;
 
   const renderDescription = () => {
     if (description) {
@@ -43,9 +52,11 @@ export default function SignTransactionError({ onClick, error, title, descriptio
 
   return (
     <View style={[styles.container, styles.theme.container]}>
-      <View style={styles.illustrationContainer}>
-        <TxErrorSvg />
-      </View>
+      {!hideIcon && (
+        <View style={styles.illustrationContainer}>
+          <TxErrorSvg />
+        </View>
+      )}
 
       <H3 style={[styles.title, styles.theme.title]}>
         {title || i18next.t('sendToken.result.error.title')}
@@ -61,17 +72,23 @@ export default function SignTransactionError({ onClick, error, title, descriptio
         />
       )}
 
-      <Text style={[styles.actionLabel, styles.theme.actionLabel]}>
-        {i18next.t('sendToken.result.error.reportErrorLabel')}
-      </Text>
+      {secondaryButton}
 
-      <LabelButton
-        onClick={emailReport.handleSend}
-        disabled={emailReport.isLoading || emailReport.error}
-        isLoading={emailReport.isLoading}
-      >
-        {i18next.t('sendToken.result.error.reportErrorButtonText')}
-      </LabelButton>
+      {!hideReport && (
+        <Fragment>
+          <Text style={[styles.actionLabel, styles.theme.actionLabel]}>
+            {i18next.t('sendToken.result.error.reportErrorLabel')}
+          </Text>
+
+          <LabelButton
+            onClick={emailReport.handleSend}
+            disabled={emailReport.isLoading || emailReport.error}
+            isLoading={emailReport.isLoading}
+          >
+            {i18next.t('sendToken.result.error.reportErrorButtonText')}
+          </LabelButton>
+        </Fragment>
+      )}
     </View>
   );
 }

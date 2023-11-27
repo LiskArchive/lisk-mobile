@@ -1,16 +1,12 @@
 import { getSdkError } from '@walletconnect/utils';
 import { to } from 'await-to-js';
-import { signClient } from './connectionCreator';
-import { ERROR_CASES, STATUS } from '../constants/lifeCycle';
+import { STATUS, ERROR_CASES } from '../constants/lifeCycle';
 
 /**
- * The approve handler for connection proposal
- *
- * @param {object} proposal The proposal object as received via the event
- * @param {array} selectedAccounts List of lisk addresses selected by the user
+ * The approval handler for connection proposal
  * @returns {Promise} The promise that resolves when the approval is complete
  */
-export const onApprove = async (proposal, selectedAccounts) => {
+export const onApprove = async (proposal, selectedAccounts, signClient) => {
   const { id, params } = proposal;
   const { requiredNamespaces, relays } = params;
 
@@ -46,11 +42,9 @@ export const onApprove = async (proposal, selectedAccounts) => {
 
 /**
  * The reject handler for connection proposal
- *
- * @param {object} proposal The proposal object as received via the event
  * @returns {Promise} The promise that resolves when the rejection is complete
  */
-export const onReject = (proposal) => {
+export const onReject = (proposal, signClient) => {
   const { id } = proposal;
   return signClient.reject({
     id,

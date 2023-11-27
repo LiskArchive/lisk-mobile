@@ -32,7 +32,7 @@ export default function DeleteAccountForm({ mode, account, onCompleted, style })
   const { styles } = useTheme({ styles: getDeleteAccountFormStyles() });
 
   const handleSubmit = () => {
-    deleteAccount(account.metadata.address);
+    deleteAccount(account.metadata.address, account.isBiometricsEnabled);
 
     if (onCompleted) {
       onCompleted();

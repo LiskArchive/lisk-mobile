@@ -1,7 +1,8 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements, no-shadow */
-import React, { useEffect, useState } from 'react';
-import { View, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import QRCode from 'react-native-qrcode-svg';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -18,7 +19,6 @@ import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplicatio
 import {
   SendTokenMessageField,
   SendTokenAmountField,
-  TokenSelectField,
 } from 'modules/SendToken/components/SelectTokenStep/components';
 import { SendTokenRecipientApplicationField } from 'modules/SendToken/components/SelectApplicationsStep/components';
 import DataRenderer from 'components/shared/DataRenderer';
@@ -37,7 +37,9 @@ import { stringShortener } from 'utilities/helpers';
 import CopySvg from 'assets/svgs/CopySvg';
 import CheckSvg from 'assets/svgs/CheckSvg';
 
+import { useRequestTokenAmountValidation } from './hook/useRequestTokenAmountValidation';
 import getStyles from './styles';
+import { RequestTokenSelectField } from './components/RequestTokenSelectField';
 
 export default function RequestToken() {
   const navigation = useNavigation();
@@ -60,14 +62,31 @@ export default function RequestToken() {
   );
   const [tokenID, setTokenID] = useState();
 
+  const handleSetApplicationChainId = (chainId) => {
+    setRecipientApplicationChainID(chainId);
+    setTokenID('');
+  };
+
+  const selectedApplication = useMemo(
+    () =>
+      applications.data?.find((application) => application.chainID === recipientApplicationChainID),
+    [recipientApplicationChainID, applications.isLoading]
+  );
+
   const { styles, theme } = useTheme({ styles: getStyles() });
+
+  const { isAmountValid } = useRequestTokenAmountValidation({
+    recipientApplication: recipientApplicationChainID,
+    selectedTokenID: tokenID,
+    amount: amount.value,
+  });
 
   const getQRCodeUrl = () => {
     const validator = (str) => reg.amount.test(str);
 
     const amountValidity = validator(amount.value) ? 0 : 1;
 
-    const url = new Url('lisk://wallet');
+    const url = new Url('https://lisk.com/send');
 
     const urlParams = {
       recipient: currentAccount.metadata.address,
@@ -99,7 +118,7 @@ export default function RequestToken() {
 
   const renderFullCode = () => (
     <View style={styles.shareContainer}>
-      <Share type={TouchableWithoutFeedback} value={qrCodeUrl} title={qrCodeUrl}>
+      <Share type={TouchableOpacity} value={qrCodeUrl} title={qrCodeUrl}>
         {renderQRCode(qrCodeSize)}
       </Share>
 
@@ -133,13 +152,8 @@ export default function RequestToken() {
         )}
       />
 
-      <KeyboardAwareScrollView
-        viewIsInsideTab
-        enableOnAndroid
-        enableResetScrollToCoords={false}
-        contentContainerStyle={{ flex: 1 }}
-      >
-        <View style={[styles.innerContainer, styles.theme.innerContainer]}>
+      <KeyboardAwareScrollView enableOnAndroid>
+        <View style={[styles.body, styles.theme.body]}>
           <P style={[styles.addressLabel, styles.theme.addressLabel]}>
             {i18next.t('requestTokens.recipient')}
           </P>
@@ -165,7 +179,7 @@ export default function RequestToken() {
             renderData={() => (
               <SendTokenRecipientApplicationField
                 value={recipientApplicationChainID}
-                onChange={setRecipientApplicationChainID}
+                onChange={handleSetApplicationChainId}
                 applications={applications}
                 style={{ toggle: { container: styles.fieldContainer } }}
               />
@@ -179,10 +193,10 @@ export default function RequestToken() {
             )}
           />
 
-          <TokenSelectField
+          <RequestTokenSelectField
             value={tokenID}
             onChange={setTokenID}
-            recipientApplication={currentApplication.data}
+            recipientApplication={selectedApplication}
             style={{ toggle: { container: styles.fieldContainer } }}
           />
 
@@ -190,9 +204,11 @@ export default function RequestToken() {
             value={amount.value}
             onChange={handleAmountChange}
             tokenID={tokenID}
-            recipientApplication={currentApplication.data}
+            recipientApplication={selectedApplication}
             style={{ container: styles.fieldContainer }}
-            errorMessage={!amount.validity ? i18next.t('sendToken.errors.amountInvalid') : ''}
+            errorMessage={
+              !amount.validity || !isAmountValid ? i18next.t('sendToken.errors.amountInvalid') : ''
+            }
           />
 
           <SendTokenMessageField onChange={setMessage} value={message} />
@@ -201,7 +217,7 @@ export default function RequestToken() {
         <View style={styles.footer} testID="request-token-link-button">
           <PrimaryButton
             onPress={handleCopyToClipboard}
-            disabled={!amount.validity}
+            disabled={!amount.validity || !isAmountValid || !tokenID}
             adornments={{
               left: !copiedToClipboard ? (
                 <CopySvg color={colors.light.white} variant="outline" style={{ marginRight: 8 }} />

@@ -18,6 +18,7 @@ export default function ExternalAppSignatureRequestSummary({
   onCancel,
 }) {
   const summary = useTransactionSummary({
+    recipientApplicationChainID: senderApplicationChainID,
     recipientAccountAddress: transaction.params.recipientAddress.toString('hex'),
     tokenID: transaction.params.tokenID.toString('hex'),
     amount: Number(transaction.params.amount),
@@ -29,7 +30,7 @@ export default function ExternalAppSignatureRequestSummary({
   const { styles } = useTheme({ styles: getExternalApplicationSignatureRequestStyles });
 
   return (
-    <>
+    <View style={styles.container}>
       <H3 style={[styles.title, styles.theme.title]}>
         {i18next.t('application.externalApplicationSignatureRequest.summary.title')}
       </H3>
@@ -47,7 +48,7 @@ export default function ExternalAppSignatureRequestSummary({
       <TransactionSummary
         {...summary}
         senderApplication={{
-          chainName: session.peer.metadata.name,
+          displayName: session.peer.metadata.name,
           logo: { png: session.peer.metadata.icons[0] },
         }}
       />
@@ -61,6 +62,6 @@ export default function ExternalAppSignatureRequestSummary({
           {i18next.t('application.externalApplicationSignatureRequest.summary.continueButtonText')}
         </PrimaryButton>
       </View>
-    </>
+    </View>
   );
 }

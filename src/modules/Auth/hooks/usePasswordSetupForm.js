@@ -1,17 +1,16 @@
 /* eslint-disable max-statements */
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useForm, useController } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import i18next from 'i18next';
+import * as yup from 'yup';
+import Toast from 'react-native-toast-message';
 
-import DropDownHolder from 'utilities/alert';
 import { passwordValidationRegex } from 'modules/Auth/validators';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useEncryptAccount } from 'modules/Accounts/hooks/useEncryptAccount';
-import { settingsUpdated } from 'modules/Settings/store/actions';
+
 import { storeAccountPasswordInKeyChain } from '../utils/recoveryPhrase';
 
 const validationSchema = yup
@@ -37,7 +36,7 @@ const validationSchema = yup
  * @returns - The form fields, error state, submit callback and other handlers.
  * Also, the encrypt process state (isLoading, isError, isSuccess, among others).
  */
-export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
+export function usePasswordSetupForm(recoveryPhrase, derivationPath, useDerivationPath) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState();
   const [isError, setIsError] = useState();
@@ -46,9 +45,7 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
 
   const { setAccount } = useAccounts();
   const [, setCurrentAccount] = useCurrentAccount();
-  const { encryptAccount } = useEncryptAccount();
-
-  const dispatch = useDispatch();
+  const { encryptAccount } = useEncryptAccount(useDerivationPath);
 
   const resetState = useCallback(() => {
     if (isSuccess !== undefined) {
@@ -87,11 +84,11 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
         derivationPath,
       });
 
-      const address = data?.metadata.address;
+      const address = data.metadata.address;
 
       if (values.isBiometricsEnabled) {
         await storeAccountPasswordInKeyChain(address, values.password);
-        dispatch(settingsUpdated({ biometricsEnabled: true }));
+        data.isBiometricsEnabled = values.isBiometricsEnabled;
       }
 
       setEncryptedAccount(data);
@@ -106,7 +103,10 @@ export function usePasswordSetupForm(recoveryPhrase, derivationPath) {
       setError(_error);
       setIsError(true);
 
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.encryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.encryptRecoveryPhraseError'),
+      });
     }
   });
 

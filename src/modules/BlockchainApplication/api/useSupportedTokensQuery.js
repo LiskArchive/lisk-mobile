@@ -14,13 +14,13 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 export function useSupportedTokensQuery({ config: customConfig = {}, options, client } = {}) {
   const config = {
     url: `${API_URL}/token/summary`,
-    method: 'get',
+    method: 'GET',
     event: 'get.token.summary',
     ...customConfig,
     params: customConfig?.params,
   };
 
-  const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config]);
+  const keys = useQueryKeys([GET_SUPPORTED_TOKENS_QUERY, config, client.host]);
 
   return useCustomQuery({
     keys,

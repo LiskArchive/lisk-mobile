@@ -18,7 +18,7 @@ import { useQueryKeys } from 'utilities/api/hooks/useQueryKeys';
 export function useCommandParametersSchemasQuery({ config: customConfig = {}, options } = {}) {
   const config = {
     url: `${API_URL}/schemas`,
-    method: 'get',
+    method: 'GET',
     event: 'get.schemas',
     ...customConfig,
     params: { ...customConfig.params },

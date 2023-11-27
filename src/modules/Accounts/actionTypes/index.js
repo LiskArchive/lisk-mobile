@@ -3,8 +3,6 @@ const actionTypes = {
   addAccount: 'ADD_ACCOUNT',
   updateAccount: 'UPDATE_ACCOUNT',
   deleteAccount: 'DELETE_ACCOUNT',
-  setAccountSummary: 'SET_ACCOUNT_SUMMARY',
-  resetAccountSummary: 'RESET_ACCOUNT_SUMMARY',
 };
 
 export default actionTypes;

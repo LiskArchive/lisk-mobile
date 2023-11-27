@@ -28,13 +28,13 @@ import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen
 import DecryptRecoveryPhraseScreen from 'modules/Auth/components/DecryptRecoveryPhraseScreen/DecryptRecoveryPhraseScreen';
 import AddApplicationScreen from 'modules/BlockchainApplication/components/AddApplicationScreen/AddApplicationScreen';
 import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
-import SendToken from 'modules/SendToken/SendToken';
 import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
 import SecurityScreen from 'modules/Settings/components/SecurityScreen/SecurityScreen';
+import ScanDeviceScreen from 'modules/Settings/components/ScanDeviceScreen/ScanDeviceScreen';
 
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -44,6 +44,8 @@ import AppNavigator from '../AppNavigator';
 import navigationOptions from '../../navigation.options';
 import navigationLinking from '../../navigation.linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './Navigator.styles';
+import ExternalApplicationDetailsScreen from '../../../modules/BlockchainApplication/components/ExternalApplicationDetailsScreen/ExternalApplicationDetailsScreen';
+import SendTokenContainer from '../../../modules/SendToken/SendTokenContainer';
 
 const StackNavigator = createStackNavigator();
 
@@ -148,6 +150,11 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
+            name="ExternalApplicationDetails"
+            component={ExternalApplicationDetailsScreen}
+            options={navigationOptions.SignIn}
+          />
+          <StackNavigator.Screen
             name="About"
             component={AboutScreen}
             options={navigationOptions.About}
@@ -185,7 +192,7 @@ export default function Navigator({ children }) {
           />
           <StackNavigator.Screen
             name="Send"
-            component={SendToken}
+            component={SendTokenContainer}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen
@@ -211,6 +218,11 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="SecurityScreen"
             component={SecurityScreen}
+            options={navigationOptions.NoHeader}
+          />
+          <StackNavigator.Screen
+            name="ScanDeviceScreen"
+            component={ScanDeviceScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>

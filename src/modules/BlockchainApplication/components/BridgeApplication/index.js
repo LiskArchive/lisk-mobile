@@ -7,9 +7,13 @@ import { H2, P } from 'components/shared/toolBox/typography';
 import Input from 'components/shared/toolBox/input';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { useTheme } from 'contexts/ThemeContext';
-import useWalletConnectPairings from '../../../../../libs/wcm/hooks/usePairings';
+import { useTimeoutMonitor } from 'hooks/useTimeoutMonitor';
+import { usePairings } from '../../../../../libs/wcm/hooks/usePairings';
 import { STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
-import { validateConnectionNameSpace } from '../../../../../libs/wcm/utils/eventValidators';
+import {
+  validateConnectionNameSpace,
+  validateConnectionURI,
+} from '../../../../../libs/wcm/utils/eventValidators';
 import ConnectionContext from '../../../../../libs/wcm/context/connectionContext';
 
 import getStyles from './styles';
@@ -22,7 +26,15 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
   const [eventTopic, setEventTopic] = useState('');
 
   const { events } = useContext(ConnectionContext);
-  const { setUri } = useWalletConnectPairings();
+  const { setUri } = usePairings();
+
+  const handleConnectionTimeout = () => {
+    setIsLoading(false);
+    setError(new Error(i18next.t('application.bridgeExternalApplication.errors.timeout')));
+    setIsSuccess(undefined);
+  };
+
+  const connectionTimeoutMonitor = useTimeoutMonitor(5000, handleConnectionTimeout);
 
   const { styles } = useTheme({ styles: getStyles });
 
@@ -51,17 +63,35 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
   const handleSubmit = async () => {
     handleStateCleanup();
 
+    const isUriValid = validateConnectionURI(uri ? uri : inputUri);
+
+    if (!isUriValid) {
+      setError(
+        new Error(i18next.t('application.bridgeExternalApplication.errors.invalidUriFormat'))
+      );
+      return;
+    }
+
+    connectionTimeoutMonitor.initialize();
+
     setIsLoading(true);
 
-    const response = await setUri(inputUri);
+    const response = await setUri(uri ? uri : inputUri);
 
     if (response.status === STATUS.FAILURE) {
-      setError(new Error('Error connecting application. Please try again.'));
+      setError(new Error(i18next.t('application.bridgeExternalApplication.errors.invalidUri')));
       setIsLoading(false);
     } else if (response.status === STATUS.SUCCESS) {
+      connectionTimeoutMonitor.destroy();
       setEventTopic(response.data.topic);
     }
   };
+
+  useEffect(() => {
+    if (uri) {
+      handleSubmit();
+    }
+  }, [uri]);
 
   useEffect(() => {
     if (proposalEvent && isLoading) {
@@ -73,14 +103,14 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
           setIsSuccess(true);
         } else {
           setError(
-            new Error(
-              'You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.'
-            )
+            new Error(i18next.t('application.bridgeExternalApplication.errors.unsupportedApp'))
           );
           setIsLoading(false);
         }
       } catch {
-        setError(new Error('Error validating connection. Please try again.'));
+        setError(
+          new Error(i18next.t('application.bridgeExternalApplication.errors.nameSpaceInvalid'))
+        );
         setIsLoading(false);
       }
     }
@@ -96,16 +126,16 @@ export default function BridgeApplication({ nextStep, uri = '' }) {
   return (
     <View style={styles.container}>
       <H2 style={[styles.title, styles.theme.title]}>
-        {i18next.t('application.explore.externalApplicationList.bridgeApplication')}
+        {i18next.t('application.bridgeExternalApplication.title')}
       </H2>
 
       <P style={[styles.description, styles.theme.description]}>
-        {i18next.t('application.explore.externalApplicationList.bridgeApplicationDescription')}
+        {i18next.t('application.bridgeExternalApplication.description')}
       </P>
 
       <View style={styles.inputContainer}>
         <Input
-          placeholder={i18next.t('application.explore.externalApplicationList.enterConnectionUri')}
+          placeholder={i18next.t('application.bridgeExternalApplication.inputPlaceholder')}
           autoCorrect={false}
           autoFocus
           onChange={handleInputChange}

@@ -2,15 +2,14 @@ import { themes, colors, boxes, fonts } from 'constants/styleGuide';
 
 export default () => ({
   common: {
-    wrapper: {
-      flex: 1,
-    },
     container: {
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
-      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    fluid: {
+      flex: 1,
     },
     illustration: {
       marginBottom: 16,

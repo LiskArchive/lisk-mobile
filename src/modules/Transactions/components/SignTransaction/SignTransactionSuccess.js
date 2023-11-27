@@ -11,7 +11,13 @@ import { themes } from 'constants/styleGuide';
 
 import { getSignTransactionSuccessStyles } from './styles';
 
-export default function SignTransactionSuccess({ onSubmit, title, description, actionButton }) {
+export default function SignTransactionSuccess({
+  onSubmit,
+  title,
+  description,
+  actionButton,
+  secondaryButton,
+}) {
   const { styles, theme } = useTheme({
     styles: getSignTransactionSuccessStyles(),
   });
@@ -40,6 +46,8 @@ export default function SignTransactionSuccess({ onSubmit, title, description, a
           title={i18next.t('sendToken.result.success.closeButtonText')}
         />
       )}
+
+      {secondaryButton}
     </View>
   );
 }

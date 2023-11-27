@@ -30,7 +30,8 @@ const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
       <B style={[styles.header, styles.theme.rowTitle]}>
         {i18next.t('settings.biometrics.enableTitle', { sensorType })}
       </B>
-      <View style={[styles.row, styles.separator, styles.theme.separator]}>
+
+      <View style={styles.row}>
         <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
           <Icon
             name="secure"
@@ -49,7 +50,7 @@ const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
           </Small>
         </View>
       </View>
-      <View style={[styles.row, styles.separator, styles.theme.separator]}>
+      <View style={styles.row}>
         <View style={[styles.iconWrapper, styles.theme.iconWrapper]}>
           <Icon
             name="settings-bg"
@@ -68,9 +69,18 @@ const EnableBioAuth = ({ onSubmit, nextStep, enableSkip = false, skip }) => {
           </Small>
         </View>
       </View>
-      <PrimaryButton onPress={confirm}>{i18next.t(`Enable ${sensorType}`)}</PrimaryButton>
 
-      {enableSkip && <Button onClick={skip} title="Skip" />}
+      <View style={styles.footer}>
+        {enableSkip && (
+          <Button onClick={skip} style={styles.secondaryButton}>
+            {i18next.t('settings.biometrics.cancelButton')}
+          </Button>
+        )}
+
+        <PrimaryButton onPress={confirm} style={enableSkip ? styles.semiFlex : styles.flex}>
+          {i18next.t('settings.biometrics.submitButton', { sensorType })}
+        </PrimaryButton>
+      </View>
     </View>
   );
 };

@@ -29,9 +29,9 @@ export function useModal(renderComponent, componentDeps = []) {
   };
 
   const open = (componentRendered = renderComponent({ ...modal, close }), showCloseIcon = true) => {
-    modal.toggle(true);
     modal.setComponent(componentRendered);
     modal.setShowClose(showCloseIcon);
+    modal.toggle(true);
   };
 
   useEffect(() => {

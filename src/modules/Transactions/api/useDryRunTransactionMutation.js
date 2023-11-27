@@ -11,12 +11,12 @@ import apiClient from 'utilities/api/APIClient';
  */
 export default function useDryRunTransactionMutation({ onSuccess, onError, ...options } = {}) {
   return useMutation(
-    ({ transaction }) => {
+    ({ transaction, strict, skipVerify }) => {
       const config = {
         url: `${API_URL}/transactions/dryrun`,
-        method: 'post',
+        method: 'POST',
         event: 'post.transactions.dryrun',
-        data: { transaction },
+        data: { transaction, strict, skipVerify },
       };
 
       return apiClient[METHOD](config);

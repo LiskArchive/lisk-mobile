@@ -30,6 +30,14 @@ export default function TransactionList({ mode = 'overview', address, style }) {
 
   const noOfItemsToRender = mode === 'overview' ? NO_OF_TRANSACTIONS_ON_OVERVIEW : LIMIT;
 
+  const options =
+    mode === 'overview'
+      ? {
+          refetchInterval: 5000,
+          refetchIntervalInBackground: false,
+        }
+      : {};
+
   const {
     data: transactionsData,
     isLoading: isLoadingAccountTransactions,
@@ -42,6 +50,7 @@ export default function TransactionList({ mode = 'overview', address, style }) {
     config: {
       params: { limit: noOfItemsToRender },
     },
+    options,
   });
 
   const { styles } = useTheme({
@@ -121,20 +130,13 @@ export default function TransactionList({ mode = 'overview', address, style }) {
                 ? i18next.t('transactions.transactionList.emptyText')
                 : "This account hasn't performed any transaction yet."
             }
-            styles={{
-              wrapper: styles.resultScreenContainer,
-              container: styles.resultScreenContainer,
-            }}
+            styles={{ wrapper: { paddingVertical: 32 } }}
           />
         )}
         renderError={() => (
           <ResultScreen
             illustration={<ErrorIllustrationSvg height={72} />}
             description={i18next.t('transactions.transactionList.errorText')}
-            styles={{
-              wrapper: styles.resultScreenContainer,
-              container: styles.resultScreenContainer,
-            }}
           >
             <LabelButton onPress={refetchTransactions} textStyle={[styles.labelButtonText]}>
               {i18next.t('commons.buttons.reload')}

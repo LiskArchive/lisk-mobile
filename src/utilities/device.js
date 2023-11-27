@@ -1,9 +1,7 @@
 import { Dimensions, Platform, NativeModules } from 'react-native';
-// import { Header } from 'react-navigation';
 import DeviceInfo from 'react-native-device-info';
 
 const { width, height } = Dimensions.get('window');
-const Header = { HEIGHT: 40 };
 
 /**
  * Returns a simple string defining the device type
@@ -32,28 +30,6 @@ export const deviceWidth = () => width;
 export const deviceHeight = () => height;
 
 export const isSmallDevice = deviceHeight() <= 680;
-
-/**
- * @returns {Number} - The height of the header
- */
-export const headerHeight = () => {
-  if (Platform.OS === 'ios' && DeviceInfo.hasNotch()) {
-    return Header.HEIGHT + 23;
-  }
-  return Header.HEIGHT;
-};
-
-/**
- * @returns {Number} - The height of the TabBarBottom
- */
-// https://github.com/react-navigation/react-navigation/blob/1.x/src/views/TabView/TabBarBottom.js#L296-L297
-export const tabBarHeight = () => 49;
-
-/**
- * @returns {Number} - The height of the view under the header and above the tabs bar
- */
-export const viewportHeight = () =>
-  deviceHeight() - headerHeight() - 56 - (DeviceInfo.hasNotch() ? 24 : 0);
 
 export const SCREEN_HEIGHTS = {
   SM: 640, // 640

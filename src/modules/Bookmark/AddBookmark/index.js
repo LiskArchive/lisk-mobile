@@ -1,23 +1,20 @@
 /* eslint-disable max-statements */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BackHandler, SafeAreaView, View, ScrollView } from 'react-native';
-import { CommonActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'contexts/ThemeContext';
+import Toast from 'react-native-toast-message';
 
-import { colors } from 'constants/styleGuide';
-import { decodeLaunchUrl } from 'utilities/qrCode';
 import { validateAddress } from 'utilities/validators';
 import { stringShortener } from 'utilities/helpers';
 import HeaderBackButton from 'components/navigation/headerBackButton';
-import DropDownHolder from 'utilities/alert';
-import { IconButton, PrimaryButton } from 'components/shared/toolBox/button';
+import { PrimaryButton } from 'components/shared/toolBox/button';
 import Input from 'components/shared/toolBox/input';
 import Avatar from 'components/shared/avatar';
-import Scanner from 'components/shared/Scanner/Scanner';
 import { P } from 'components/shared/toolBox/typography';
 import { selectBookmarkList } from '../store/selectors';
 import { addBookmark, editBookmark } from '../store/actions';
@@ -33,12 +30,10 @@ export default function AddBookmark({ route }) {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const [address, setAddress] = useState({ value: '' });
+  const [address, setAddress] = useState({ value: route.params?.address || '' });
   const [label, setLabel] = useState({ value: '' });
   const [incomingData, setIncomingData] = useState(null);
   const [editMode, setEditMode] = useState(false);
-
-  const scanner = useRef();
 
   const errors = {
     label: i18next.t('bookmarks.addBookmark.invalidLabel'),
@@ -73,34 +68,48 @@ export default function AddBookmark({ route }) {
     });
   };
 
-  const handleQRCodeRead = (data) => {
-    const decodedData = decodeLaunchUrl(data);
-    setAddress(decodedData.address);
-  };
-
-  const handleCloseScanner = () => {
-    navigation.dispatch(CommonActions.setParams({ action: false }));
-  };
+  const handleGoBack = () =>
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: 'Main',
+          state: {
+            index: 0,
+            routes: [
+              {
+                name: 'AccountHome',
+                state: {
+                  index: 0,
+                  routes: [{ name: 'Bookmarks' }],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    });
 
   const handleSubmit = () => {
     const filteredAccount = bookmarkList?.filter(
       (account) => account.label.toLocaleLowerCase() === label.value.toLocaleLowerCase()
     );
     if (filteredAccount?.length) {
-      return DropDownHolder.error(
-        i18next.t('multisignature.error.title'),
-        i18next.t('multisignature.error.description')
-      );
+      return Toast.show({
+        type: 'error',
+        text1: i18next.t('multisignature.error.title'),
+        text2: i18next.t('multisignature.error.description'),
+      });
     }
     const addressValidity = validateAddress(address.value);
     const labelValidity = validateLabel(label.value);
     if (incomingData && labelValidity === 0) {
       const action = editMode ? editBookmark : addBookmark;
       dispatch(action({ address: incomingData.address, label: label.value }));
-      navigation.dispatch(CommonActions.goBack());
+      handleGoBack();
     } else if (addressValidity === 0 && labelValidity === 0) {
       dispatch(addBookmark({ address: address.value, label: label.value }));
-      navigation.dispatch(CommonActions.goBack());
+      handleGoBack();
     } else {
       setAddress({
         value: address.value,
@@ -147,15 +156,7 @@ export default function AddBookmark({ route }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
-      <Scanner
-        ref={scanner}
-        navigation={navigation}
-        readFromCameraRoll={true}
-        handleQRCodeRead={handleQRCodeRead}
-        onClose={handleCloseScanner}
-        permissionDialogTitle={i18next.t('Permission to use camera')}
-        permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}
-      />
+      <HeaderBackButton title={i18next.t('bookmarks.addBookmark.title')} onPress={handleGoBack} />
 
       <ScrollView style={styles.body} testID="add-bookmark-screen">
         {!incomingData ? (
@@ -166,22 +167,11 @@ export default function AddBookmark({ route }) {
                   <P style={[styles.label, styles.theme.label]}>
                     {i18next.t('bookmarks.addBookmark.addressLabel')}
                   </P>
-
-                  <IconButton
-                    onPress={() => scanner.current?.toggleCamera?.()}
-                    titleStyle={[styles.scanButtonTitle, styles.theme.scanButtonTitle]}
-                    title={i18next.t('Scan')}
-                    icon="scanner"
-                    iconSize={18}
-                    color={colors.light.ultramarineBlue}
-                  />
                 </View>
               }
               autoCorrect={false}
               autoCapitalize="none"
-              innerStyles={{
-                errorMessage: styles.errorMessage,
-              }}
+              innerStyles={{ errorMessage: styles.errorMessage }}
               testID="bookmark-address-input"
               onChange={(value) => setAddress({ value })}
               value={address.value}

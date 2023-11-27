@@ -1,13 +1,17 @@
+/* eslint-disable complexity */
 /* eslint-disable max-statements */
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
+import { useSendTokenAmountChecker } from 'modules/SendToken/hooks/useSendTokenAmountChecker';
+import { useModal } from 'hooks/useModal';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import {
@@ -17,9 +21,13 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
+import SignTransactionError from '../../../Transactions/components/SignTransaction/SignTransactionError';
 
 export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, form, transaction }) {
   const applications = useApplicationsExplorer();
+  const navigation = useNavigation();
+
+  const modal = useModal();
 
   const { field: tokenIDField } = useController({
     name: 'tokenID',
@@ -54,19 +62,78 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     (application) => application.chainID === recipientApplicationChainIDField.value
   );
 
-  const { isMaxAllowedAmountExceeded } = useSendTokenAmountChecker({
+  const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
+
+  const { isMaxAllowedAmountExceeded, isAmountValid } = useSendTokenAmountChecker({
     recipientApplication,
     selectedTokenID: tokenIDField.value,
     amount: amountField.value,
     transactionFee: transaction?.data?.transaction?.fee,
   });
 
+  const isMessageInvalid = messageField.value?.length > 64;
+
+  const feeTokenID = transaction?.data.feeTokenID;
+
+  const selectedToken = tokensData?.find((token) => token.tokenID === feeTokenID);
+
+  const tokenName = selectedToken?.tokenName ?? '';
+
+  const showErrorModal = (error) => {
+    let isInsufficientToken = false;
+    if (typeof error === 'string' && error.includes('insufficient')) {
+      isInsufficientToken = true;
+    }
+
+    modal.open(() => (
+      <SignTransactionError
+        onClick={form.handleReset}
+        actionButton={
+          <PrimaryButton
+            key="retry"
+            onClick={() => {
+              if (isInsufficientToken) {
+                navigation.navigate('Request');
+              }
+              modal.close();
+            }}
+            title={
+              isInsufficientToken
+                ? `${i18next.t('Request')} ${tokenName.toUpperCase()}`
+                : i18next.t('sendToken.result.error.retryButtonText')
+            }
+            style={[styles.tryAgainButton]}
+          />
+        }
+        description={
+          isInsufficientToken
+            ? i18next.t('transactions.errors.insufficientFeeDescription', {
+                message: tokenName.toUpperCase(),
+              })
+            : null
+        }
+        title={i18next.t(error, { message: tokenName.toUpperCase() })}
+        hideReport={isInsufficientToken}
+      />
+    ));
+  };
+
   const disableNextStepButton =
-    !form.watch('tokenID') ||
-    !form.watch('senderApplicationChainID') ||
-    !form.watch('recipientApplicationChainID') ||
     !isValidAddress ||
-    isMaxAllowedAmountExceeded;
+    isMaxAllowedAmountExceeded ||
+    !isAmountValid ||
+    !!form.formState.errors.amount?.message ||
+    form.isLoadingTransactionFees ||
+    form.isErrorTransactionFees ||
+    isMessageInvalid;
+
+  const verifyFormWithDryRun = async () => {
+    let dryRunResult = await form.handleContinue(showErrorModal);
+    if (dryRunResult) {
+      form.handleReset();
+      nextStep();
+    }
+  };
 
   return (
     <View style={[styles.container]}>
@@ -84,7 +151,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
         tokenID={tokenIDField.value}
         errorMessage={
           form.formState.errors.amount?.message ||
-          (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance'))
+          (isMaxAllowedAmountExceeded && i18next.t('sendToken.errors.insufficientBalance')) ||
+          (!isAmountValid && i18next.t('sendToken.errors.amountInvalid'))
         }
         recipientApplication={recipientApplication}
         style={{ container: { marginBottom: 16 } }}
@@ -93,6 +161,7 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
       <SendTokenMessageField
         value={messageField.value}
         onChange={(value) => form.handleChange('params.data', value, messageField.onChange)}
+        errorMessage={isMessageInvalid && i18next.t('sendToken.errors.message')}
         style={{ container: { marginBottom: 16 } }}
       />
 
@@ -102,19 +171,18 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
         dynamicFeeEstimates={transaction?.data?.dynamicFeeEstimates}
       />
 
-      {tokenIDField.value && (
-        <SendTokenTransactionFeesLabels
-          tokenID={tokenIDField.value}
-          recipientApplication={recipientApplication}
-          transaction={transaction}
-          isLoadingTransactionFees={form.isLoadingTransactionFees}
-          isErrorTransactionFees={form.isErrorTransactionFees}
-        />
-      )}
+      <SendTokenTransactionFeesLabels
+        recipientApplication={recipientApplication}
+        transaction={transaction}
+        isLoadingTransactionFees={form.isLoadingTransactionFees}
+        isErrorTransactionFees={form.isErrorTransactionFees}
+      />
+
       <View style={[styles.footer]}>
         <PrimaryButton
-          onClick={nextStep}
-          disabled={disableNextStepButton}
+          onClick={verifyFormWithDryRun}
+          disabled={disableNextStepButton || form.isLoading}
+          isLoading={form.isLoading}
           title={i18next.t('sendToken.tokenSelect.nextStepButtonText')}
           noTheme
           style={{ flex: 1 }}

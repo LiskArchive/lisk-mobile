@@ -45,12 +45,7 @@ export default function Bookmarks() {
         <TouchableOpacity
           style={[styles.titleContainer]}
           testID="add-bookmark"
-          onPress={() =>
-            navigation.navigate({
-              name: 'AddBookmark',
-              params: { title: i18next.t('New bookmark') },
-            })
-          }
+          onPress={() => navigation.navigate('AddBookmark')}
         >
           <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={20} />
         </TouchableOpacity>

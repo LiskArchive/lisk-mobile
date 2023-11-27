@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
-import React, { useState, useRef } from 'react';
-import { View } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, InteractionManager } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import i18next from 'i18next';
 import Stepper from 'components/shared/Stepper';
@@ -47,6 +47,8 @@ export default function ApplicationsExplorer() {
   const [activeTab, setActiveTab] = useState('internalApplications');
   const [cameraIsOpen, setCameraIsOpen] = useState(false);
 
+  let interactionPromise = useRef();
+
   const scannerRef = useRef();
 
   const navigation = useNavigation();
@@ -55,7 +57,6 @@ export default function ApplicationsExplorer() {
 
   const applicationStatsModal = useModal();
   const newConnectionModal = useModal();
-  const qrCodeConnectionModal = useModal();
 
   const { theme, styles } = useTheme({
     styles: getApplicationsExplorerStyles(),
@@ -73,23 +74,23 @@ export default function ApplicationsExplorer() {
       />
     );
 
-  const showNewConnectionModal = () =>
-    newConnectionModal.open(
-      <Stepper>
-        <BridgeApplication />
-        <InitiateConnection onFinish={newConnectionModal.close} />
-        <ApproveConnection onFinish={newConnectionModal.close} />
-      </Stepper>
-    );
+  const showNewConnectionModal = (value) => {
+    interactionPromise.current = InteractionManager.runAfterInteractions(() => {
+      newConnectionModal.open(
+        <Stepper>
+          <BridgeApplication uri={value} />
+          <InitiateConnection onFinish={newConnectionModal.close} />
+          <ApproveConnection onFinish={newConnectionModal.close} />
+        </Stepper>
+      );
+    });
+  };
 
-  const handleQRCodeRead = (value) =>
-    qrCodeConnectionModal.open(
-      <Stepper>
-        <BridgeApplication uri={value} />
-        <InitiateConnection onFinish={qrCodeConnectionModal.close} />
-        <ApproveConnection onFinish={qrCodeConnectionModal.close} />
-      </Stepper>
-    );
+  useEffect(() => {
+    if (interactionPromise.current?.cancel) {
+      return () => interactionPromise.current.cancel();
+    }
+  }, []);
 
   const handleFabItemPress = (item) => {
     if (item.key === 'paste') {
@@ -127,14 +128,9 @@ export default function ApplicationsExplorer() {
 
         <Scanner
           ref={scannerRef}
-          containerStyles={{
-            cameraRoll: styles.cameraRoll,
-            cameraOverlay: styles.cameraOverlay,
-          }}
-          fullScreen
           navigation={navigation}
           readFromCameraRoll={false}
-          onQRCodeRead={handleQRCodeRead}
+          onQRCodeRead={showNewConnectionModal}
           onCameraVisibilityChange={setCameraIsOpen}
           permissionDialogTitle={i18next.t('Permission to use camera')}
           permissionDialogMessage={i18next.t('Lisk needs to connect to your camera')}

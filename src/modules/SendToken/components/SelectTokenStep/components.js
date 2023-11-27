@@ -9,6 +9,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { PRIORITY_NAMES_MAP } from 'modules/Transactions/utils/constants';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
+import { useTransferableTokens } from 'modules/BlockchainApplication/api/useTransferableTokens';
 import { useAccountTokenBalancesQuery } from 'modules/Accounts/api/useAccountTokenBalancesQuery';
 import Input from 'components/shared/toolBox/input';
 import Picker from 'components/shared/Picker';
@@ -36,7 +37,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
     data: supportedTokensData,
     isLoading: isLoadingSupportedTokens,
     isError: isSupportedTokensError,
-  } = useApplicationSupportedTokensQuery(recipientApplication);
+  } = useTransferableTokens(recipientApplication);
 
   const [currentAccount] = useCurrentAccount();
 
@@ -53,7 +54,9 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
   const tokenBalance =
     selectedToken && tokenBalanceData
       ? fromBaseToDisplayDenom({
-          amount: tokenBalanceData?.data[0]?.availableBalance || 0,
+          amount:
+            tokenBalanceData?.data?.find?.((token) => token.tokenID === value)?.availableBalance ||
+            0,
           displayDenom: selectedToken.displayDenom,
           denomUnits: selectedToken.denomUnits,
           symbol: selectedToken.symbol,
@@ -105,7 +108,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
             {selectedToken && (
               <View style={[styles.row]} testID="select-token-picker">
-                <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
+                <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
                 <Image source={{ uri: selectedToken.logo?.png }} style={styles.logo} />
               </View>
             )}
@@ -156,7 +159,7 @@ export function SendTokenAmountField({
       renderData={() => (
         <Input
           value={value}
-          onChange={(newValue) => onChange(newValue)}
+          onChange={onChange}
           keyboardType="numeric"
           disabled={!selectedToken}
           label={
@@ -196,7 +199,7 @@ export function SendTokenAmountField({
   );
 }
 
-export function SendTokenMessageField({ value, onChange, style }) {
+export function SendTokenMessageField({ value, onChange, style, errorMessage }) {
   const [showInput, setShowInput] = useState(!!value);
 
   const { styles } = useTheme({
@@ -237,6 +240,7 @@ export function SendTokenMessageField({ value, onChange, style }) {
             </TouchableOpacity>
           </View>
         }
+        error={errorMessage}
         placeholder={i18next.t('sendToken.tokenSelect.messageFieldPlaceholder')}
         multiline
         innerStyles={getSendTokenMessageFieldStyles(style)}
@@ -302,7 +306,6 @@ export function SendTokenPriorityField({ value, onChange, dynamicFeeEstimates, s
 }
 
 export function SendTokenTransactionFeesLabels({
-  tokenID,
   recipientApplication,
   transaction,
   isLoadingTransactionFees,
@@ -312,7 +315,9 @@ export function SendTokenTransactionFeesLabels({
 
   const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
 
-  const selectedToken = tokensData?.find((token) => token.tokenID === tokenID);
+  const feeTokenID = transaction.data.feeTokenID;
+
+  const selectedToken = tokensData?.find((token) => token.tokenID === feeTokenID);
 
   const { styles } = useTheme({
     styles: getSendTokenSelectTokenStepStyles(),

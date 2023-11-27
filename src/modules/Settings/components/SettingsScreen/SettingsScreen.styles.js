@@ -31,6 +31,17 @@ export default () => ({
     signOut: {
       marginBottom: 40,
     },
+    derivationPathInput: {
+      marginTop: 16,
+    },
+    row: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    infoToggler: {
+      marginLeft: 8,
+    },
   },
 
   [themes.light]: {

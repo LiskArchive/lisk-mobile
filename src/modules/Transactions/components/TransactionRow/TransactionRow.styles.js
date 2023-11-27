@@ -27,8 +27,8 @@ export default function getTransactionRowStyles() {
         alignItems: 'center',
       },
       addressText: {
-        fontWeight: '500',
         fontSize: fonts.size.input,
+        fontFamily: fonts.family.contextSemiBold,
         marginBottom: 8,
       },
       date: {

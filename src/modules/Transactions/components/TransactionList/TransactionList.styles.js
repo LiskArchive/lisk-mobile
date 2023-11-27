@@ -14,6 +14,7 @@ export default function getTransactionListStyles() {
       title: {
         fontWeight: '500',
         fontSize: fonts.size.input,
+        fontFamily: fonts.family.contextSemiBold,
       },
       labelButtonText: {
         fontSize: 12,
@@ -27,10 +28,6 @@ export default function getTransactionListStyles() {
         fontSize: fonts.size.input,
         marginTop: 8,
         marginBottom: 8,
-      },
-      resultScreenContainer: {
-        flex: undefined,
-        maxHeight: 150,
       },
     },
     [themes.light]: {

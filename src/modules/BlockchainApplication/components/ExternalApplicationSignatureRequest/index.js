@@ -1,21 +1,23 @@
 /* eslint-disable max-statements */
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
+import { cryptography, validator } from '@liskhq/lisk-client';
+import Toast from 'react-native-toast-message';
 
-import { extractAddressFromPublicKey } from 'modules/Auth/utils/accountKeys';
 import { useCreateTransaction } from 'modules/Transactions/hooks/useCreateTransaction';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { usePasswordForm } from 'modules/Auth/hooks/usePasswordForm';
+import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useTheme } from 'contexts/ThemeContext';
 import DataRenderer from 'components/shared/DataRenderer';
 import { H2, P } from 'components/shared/toolBox/typography';
-import DropDownHolder from 'utilities/alert';
+import { Button } from 'components/shared/toolBox/button';
 import CircleCrossedSvg from 'assets/svgs/CircleCrossedSvg';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS, STATUS } from '../../../../../libs/wcm/constants/lifeCycle';
-import useWalletConnectSession from '../../../../../libs/wcm/hooks/useSession';
+import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 
 import ExternalAppSignatureRequestSummary from './ExternalAppSignatureRequestSummary';
 import ExternalAppSignatureRequestNotification from './ExternalAppSignatureRequestNotification';
@@ -23,35 +25,48 @@ import ExternalAppSignatureRequestSignTransaction from './ExternalAppSignatureRe
 import { validateConnectionSchema } from '../../../../../libs/wcm/utils/eventValidators';
 
 import getStyles from './styles';
+import { decodeTransaction } from '../../../Transactions/utils/helpers';
 
-export default function ExternalApplicationSignatureRequest({ session, onClose, onCancel }) {
+export default function ExternalApplicationSignatureRequest({ onCancel, navigation }) {
   const [status, setStatus] = useState({});
   const [activeStep, setActiveStep] = useState('notification');
-
   const [passwordForm, passwordFormController] = usePasswordForm();
-  const [currentAccount] = useCurrentAccount();
-  const { respond } = useWalletConnectSession();
+  const [currentAccount, setCurrentAccount] = useCurrentAccount();
+  const [accountAddress, setAccountAddress] = useState('');
+  const { getAccount } = useAccounts();
+  const { respond, sessionRequest, rejectRequest } = useSession();
   const { events } = useContext(WalletConnectContext);
 
   const { styles } = useTheme({ styles: getStyles });
 
   const event = events.find((e) => e.name === EVENTS.SESSION_REQUEST);
 
-  const isEventSchemaValid = validateConnectionSchema(event);
+  let isEventSchemaValid;
+  let invalidEventSchemaError;
+
+  try {
+    isEventSchemaValid = validateConnectionSchema(event);
+  } catch (error) {
+    invalidEventSchemaError = error;
+  }
 
   const createTransactionOptions = useMemo(
     () => ({
-      encodedTransaction: event.meta.params.request.params.payload,
+      encodedTransaction: event?.meta.params.request.params.payload,
     }),
-    [event.meta.params.request.params.payload]
+    [event?.meta.params.request.params.payload]
   );
 
   const transaction = useCreateTransaction(createTransactionOptions);
 
-  const senderAccountAddress = extractAddressFromPublicKey(session.peer.publicKey);
+  const signingAccount = getAccount(accountAddress);
+
+  const switchAccount = () => setCurrentAccount(signingAccount);
+
+  const senderApplicationChainID = event?.meta.params.chainId.replace('lisk:', '');
 
   const handleRespond = async (payload) => {
-    setStatus({ ...session, isLoading: true });
+    setStatus({ ...sessionRequest, isLoading: true });
 
     const response = await respond({ payload });
 
@@ -62,6 +77,31 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
     }
   };
 
+  const handleReject = async () => {
+    await rejectRequest();
+
+    onCancel();
+  };
+
+  const request = event?.meta?.params.request;
+
+  useEffect(() => {
+    if (request) {
+      try {
+        const { payload, schema } = request.params;
+        let transactionObj;
+        transactionObj = decodeTransaction(Buffer.from(payload, 'hex'), schema);
+        validator.validator.validate(schema, transactionObj.params);
+        let address = cryptography.address
+          .getLisk32AddressFromPublicKey(transactionObj.senderPublicKey)
+          .toString('hex');
+        setAccountAddress(address);
+      } catch (error) {
+        setStatus({ ...status, error: new Error(error.message) });
+      }
+    }
+  }, [request]);
+
   const handleSubmit = passwordForm.handleSubmit(async (values) => {
     let privateKey;
 
@@ -70,7 +110,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.decryptRecoveryPhraseError'),
+      });
     }
 
     if (privateKey) {
@@ -88,10 +131,12 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
 
         handleRespond(encodedTransaction);
       } catch (error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          i18next.t('application.externalApplicationSignatureRequest.errorOnSignTransactionText')
-        );
+        Toast.show({
+          type: 'error',
+          text2: i18next.t(
+            'application.externalApplicationSignatureRequest.errorOnSignTransactionText'
+          ),
+        });
       }
     }
   });
@@ -101,20 +146,25 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
       case 'notification':
         return (
           <ExternalAppSignatureRequestNotification
-            session={session}
-            senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
-            senderAccountAddress={senderAccountAddress}
-            onCancel={onCancel}
+            session={sessionRequest}
+            senderApplicationChainID={senderApplicationChainID}
+            senderAccountAddress={currentAccount.metadata.address}
+            onCancel={handleReject}
+            switchAccount={switchAccount}
             onSubmit={() => setActiveStep('summary')}
+            signingAddress={accountAddress}
+            isCurrentAccount={accountAddress === currentAccount.metadata.address}
+            isAccountAdded={!!signingAccount}
+            navigation={navigation}
           />
         );
 
       case 'summary':
         return (
           <ExternalAppSignatureRequestSummary
-            session={session}
+            session={sessionRequest}
             transaction={_transaction.transaction}
-            senderApplicationChainID={event.meta.params.chainId.replace('lisk:', '')}
+            senderApplicationChainID={senderApplicationChainID}
             onCancel={() => setActiveStep('notification')}
             onSubmit={() => setActiveStep('sign')}
           />
@@ -123,10 +173,10 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
       case 'sign':
         return (
           <ExternalAppSignatureRequestSignTransaction
-            session={session}
+            session={sessionRequest}
             transaction={_transaction}
             onSubmit={handleSubmit}
-            onClose={onClose}
+            onClose={handleReject}
             userPassword={passwordFormController.field.value}
             onUserPasswordChange={passwordFormController.field.onChange}
             isValidationError={Object.keys(passwordForm.formState.errors).length > 0}
@@ -148,7 +198,7 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
       error={transaction.error || !isEventSchemaValid}
       renderData={renderStep}
       renderError={() => (
-        <View>
+        <View style={styles.container}>
           <View style={styles.imageContainer}>
             <CircleCrossedSvg height={56} width={56} />
           </View>
@@ -160,11 +210,18 @@ export default function ExternalApplicationSignatureRequest({ session, onClose, 
           </H2>
 
           <P style={[styles.description, styles.theme.text]}>
-            {i18next.t(
-              'application.externalApplicationSignatureRequest.sign.invalidConnectionTitle',
-              { appName: session.peer.metadata.name }
-            )}
+            {invalidEventSchemaError &&
+              i18next.t(
+                'application.externalApplicationSignatureRequest.sign.invalidConnectionDescription',
+                { appName: sessionRequest?.peer.metadata.name }
+              )}
           </P>
+
+          <View style={styles.footer}>
+            <Button onPress={handleReject} style={styles.button}>
+              {i18next.t('commons.buttons.close')}
+            </Button>
+          </View>
         </View>
       )}
     />

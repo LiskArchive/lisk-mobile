@@ -18,6 +18,8 @@ import { P } from 'components/shared/toolBox/typography';
 import { PrimaryButton } from 'components/shared/toolBox/button';
 import { Controller } from 'react-hook-form';
 import { useModal } from 'hooks/useModal';
+import { selectSettings } from 'store/selectors';
+
 import { usePasswordSetupForm } from '../../hooks/usePasswordSetupForm';
 
 import getStyles from './styles';
@@ -30,12 +32,14 @@ export default function PasswordSetupForm({
   length,
   title,
   description,
+  isRegister,
 }) {
   useScreenshotPrevent();
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const route = useRoute();
+  const { useDerivationPath } = useSelector(selectSettings);
 
   const recoveryPhrase = route.params?.recoveryPhrase || data.recoveryPhrase;
 
@@ -44,23 +48,31 @@ export default function PasswordSetupForm({
 
   const { sensorType } = useSelector((state) => state.settings);
 
-  const setBiometricSensorType = async () => {
-    try {
-      const deviceSensorType = await FingerprintScanner.isSensorAvailable();
-      dispatch(settingsUpdated({ sensorType: deviceSensorType }));
-    } catch (error) {
-      dispatch(settingsUpdated({ sensorType: null }));
-    }
-  };
-
   useEffect(() => {
+    const setBiometricSensorType = async () => {
+      try {
+        const deviceSensorType = await FingerprintScanner.isSensorAvailable();
+        dispatch(settingsUpdated({ sensorType: deviceSensorType }));
+      } catch (error) {
+        dispatch(settingsUpdated({ sensorType: null }));
+      }
+    };
+
     setBiometricSensorType();
-  }, []);
+  }, [dispatch]);
 
   const [
-    { handleSubmit, accountNameField, isAgreedField, isBiometricsEnabled, formState, control },
+    {
+      handleSubmit,
+      accountNameField,
+      isAgreedField,
+      isBiometricsEnabled,
+      formState,
+      control,
+      trigger,
+    },
     { encryptedAccount, isLoading, isSuccess },
-  ] = usePasswordSetupForm(recoveryPhrase, derivationPath);
+  ] = usePasswordSetupForm(recoveryPhrase, derivationPath, isRegister || useDerivationPath);
 
   const biometricsModal = useModal();
 
@@ -92,10 +104,23 @@ export default function PasswordSetupForm({
     if (isSuccess) {
       navigation.navigate({
         name: 'PasswordSetupSuccess',
-        params: { encryptedAccount, onContinue: () => navigation.navigate('Main') },
+        params: {
+          encryptedAccount,
+          onContinue: () =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Main' }],
+            }),
+        },
       });
     }
   }, [navigation, isSuccess, encryptedAccount]);
+
+  useEffect(() => {
+    // We need to re-trigger this as useForm don't re-validate after this change
+    // Cause validation method is set to onBlur, but the component isn't an input
+    trigger('isAgreed');
+  }, [isAgreedField.value]);
 
   return (
     <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>

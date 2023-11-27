@@ -1,10 +1,12 @@
 /* eslint-disable max-statements */
 import { useCallback, useState } from 'react';
+import { Platform, ToastAndroid, NativeModules } from 'react-native';
 import Share from 'react-native-share';
 import Permissions from 'react-native-permissions';
 import RNFS from 'react-native-fs';
-import { Platform, ToastAndroid } from 'react-native';
 import i18next from 'i18next';
+
+const { ScopedStorage } = NativeModules;
 
 /**
  * Provides a stateful callback to download data as files.
@@ -34,6 +36,10 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
 
   const downloadFile = useCallback(async () => {
     try {
+      // delete added isBiometricsEnabled field
+      const newData = { ...data };
+      delete newData.isBiometricsEnabled;
+
       resetState();
 
       setIsLoading(true);
@@ -43,21 +49,24 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
       if (Platform.OS === 'android') {
         await Permissions.request(Permissions.PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
 
-        path = `${RNFS.DownloadDirectoryPath}/${fileName}`;
-
-        const fileExists = await RNFS.exists(path);
-
-        if (fileExists) {
-          await RNFS.unlink(path);
+        if (Platform.OS === 'android' && Platform.Version < 29) {
+          path = `${RNFS.DownloadDirectoryPath}/${fileName}`;
+          await RNFS.writeFile(path, JSON.stringify(newData), 'utf8');
+        } else {
+          await ScopedStorage.saveToDownloads(
+            fileName,
+            'application/json',
+            JSON.stringify(newData)
+          );
         }
-        await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+
         ToastAndroid.showWithGravity(
           i18next.t('auth.setup.downloaded'),
           ToastAndroid.LONG,
           ToastAndroid.BOTTOM
         );
       } else {
-        await RNFS.writeFile(path, JSON.stringify(data), 'utf8');
+        await RNFS.writeFile(path, JSON.stringify(newData), 'utf8');
 
         await Share.open({
           filename: fileName,
@@ -73,8 +82,15 @@ export function useDownloadFile({ data, fileName, onCompleted, onError }) {
         onCompleted();
       }
     } catch (_error) {
+      if (Platform.OS === 'android') {
+        ToastAndroid.showWithGravity(
+          _error?.message || i18next.t('auth.setup.enablePermissions'),
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM
+        );
+      }
       setIsLoading(false);
-      setIsSuccess(false);
+      setIsSuccess(true);
       setError(_error);
       setIsError(true);
 

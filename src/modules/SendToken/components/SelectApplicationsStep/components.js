@@ -179,35 +179,47 @@ export function SendTokenRecipientAccountField({
   const { showOptions } = Picker.usePickerMenu(renderOptions());
 
   return (
-    <View style={[styles.row, styles.recipientRow]}>
-      <Input
-        label={i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
-        value={value}
-        placeholder={i18next.t('sendToken.applicationsSelect.addressPlaceholder')}
-        error={addressFormat === 'input' && errorMessage}
-        adornments={{
-          left: <Avatar address={value} size={24} />,
-          right: isValidAddress && <CircleCheckedSvg variant="fill" />,
-        }}
-        testID="recipient-address"
-        onChange={handleInputChange}
-        innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
-      />
+    <>
+      <P style={[styles.label, styles.theme.label]}>
+        {i18next.t('sendToken.applicationsSelect.recipientAccountFieldLabel')}
+      </P>
 
-      {bookmarks.length ? (
-        <Picker
-          value={addressFormat === 'picker' && value}
-          onChange={handlePickerChange}
-          error={addressFormat === 'picker' && errorMessage}
-        >
-          <Picker.Toggle
-            openMenu={showOptions}
-            showCaret={false}
-            style={{ container: [styles.bookmarkIcon, styles.theme.bookmarkIcon] }}
-            placeholder={<BookmarksSvg variant="outline" color={colors.light.blueGray} />}
-          />
-        </Picker>
-      ) : null}
-    </View>
+      <View style={[styles.row, styles.recipientRow]}>
+        <Input
+          value={value}
+          placeholder={i18next.t('sendToken.applicationsSelect.addressPlaceholder')}
+          error={addressFormat === 'input' && errorMessage}
+          adornments={{
+            left: <Avatar address={value} size={24} />,
+            right: isValidAddress && <CircleCheckedSvg variant="fill" />,
+          }}
+          testID="recipient-address"
+          onChange={handleInputChange}
+          innerStyles={getSendTokenRecipientAccountFieldStyles(style)}
+        />
+
+        {!!bookmarks.length && (
+          <Picker
+            value={addressFormat === 'picker' && value}
+            onChange={handlePickerChange}
+            error={addressFormat === 'picker' && errorMessage}
+          >
+            <Picker.Toggle
+              openMenu={showOptions}
+              showCaret={false}
+              style={{ container: [styles.bookmarkIcon, styles.theme.bookmarkIcon] }}
+              placeholder={
+                <BookmarksSvg
+                  variant="outline"
+                  height={22}
+                  width={22}
+                  color={colors.light.blueGray}
+                />
+              }
+            />
+          </Picker>
+        )}
+      </View>
+    </>
   );
 }

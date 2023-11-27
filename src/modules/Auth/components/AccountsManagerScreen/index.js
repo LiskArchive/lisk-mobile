@@ -16,8 +16,8 @@ export default function AccountsManagerScreen() {
   });
 
   return (
-    <SafeAreaView style={[styles.wrapper, styles.theme.wrapper]}>
-      <HeaderLogo style={{ container: { marginBottom: 40 } }} />
+    <SafeAreaView style={[styles.container, styles.theme.container]}>
+      <HeaderLogo style={{ container: styles.headerLogoContainer }} />
 
       <AccountList
         mode="screen"

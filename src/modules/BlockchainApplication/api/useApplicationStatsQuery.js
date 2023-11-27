@@ -7,7 +7,7 @@ import liskAPIClient from 'utilities/api/LiskAPIClient';
 export function useApplicationStatsQuery() {
   const config = {
     url: `${API_URL}/blockchain/apps/statistics`,
-    method: 'get',
+    method: 'GET',
   };
 
   const keys = useQueryKeys([GET_APPLICATION_STATS, config]);

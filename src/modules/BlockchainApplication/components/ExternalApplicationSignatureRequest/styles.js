@@ -5,10 +5,11 @@ export default {
   common: {
     container: {
       flex: 1,
+      marginTop: 8,
     },
     imageContainer: {
       alignItems: 'center',
-      marginBottom: 8,
+      marginBottom: 16,
     },
     applicationLogoImage: {
       borderRadius: 50,
@@ -103,6 +104,18 @@ export default {
       flexDirection: 'row',
       marginTop: boxes.boxPadding,
     },
+    switchButton: {
+      marginTop: 10,
+      borderWidth: 0,
+    },
+    switchTextContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    switchText: {
+      color: colors.light.ultramarineBlue,
+      marginHorizontal: 10,
+    },
     buttonLeft: {
       flex: 1,
       marginRight: 8,
@@ -110,6 +123,12 @@ export default {
     buttonRight: {
       flex: 1,
       marginLeft: 8,
+    },
+    button: {
+      flex: 1,
+    },
+    buttonMarginVertical: {
+      marginVertical: 8,
     },
     outlineButton: {
       backgroundColor: 'transparent',

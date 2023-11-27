@@ -14,7 +14,7 @@ import { API_URL } from 'utilities/api/constants';
 export function useTransactionQuery(id, { config: customConfig = {}, options = {} } = {}) {
   const config = {
     url: `${API_URL}/transactions`,
-    method: 'get',
+    method: 'GET',
     event: 'get.transaction',
     ...customConfig,
     params: {

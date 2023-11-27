@@ -17,7 +17,7 @@ export default function useTransactionEstimateFeesMutation({
     ({ transaction }) => {
       const config = {
         url: `${API_URL}/transactions/estimate-fees`,
-        method: 'post',
+        method: 'POST',
         event: 'post.transactions.estimate-fees',
         data: { transaction },
       };

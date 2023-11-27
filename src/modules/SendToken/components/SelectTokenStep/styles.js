@@ -10,6 +10,10 @@ export default function getSendTokenSelectTokenStepStyles() {
       container: {
         paddingTop: boxes.boxPadding,
       },
+      tryAgainButton: {
+        marginTop: 24,
+        marginBottom: 24,
+      },
       addMessageLabel: { fontSize: 14, marginBottom: 16 },
       addMessageLabelContainer: { width: 178 },
       row: {
@@ -41,9 +45,9 @@ export default function getSendTokenSelectTokenStepStyles() {
         marginBottom: 8,
       },
       logo: {
-        height: 20,
-        width: 20,
-        borderRadius: 10,
+        height: 24,
+        width: 24,
+        borderRadius: 16,
         marginLeft: 8,
       },
       primaryText: {
@@ -73,6 +77,9 @@ export default function getSendTokenSelectTokenStepStyles() {
       },
       selectedPriorityButton: {
         borderColor: colors.light.ultramarineBlue,
+      },
+      text: {
+        fontSize: 16,
       },
       label: {
         fontSize: 14,

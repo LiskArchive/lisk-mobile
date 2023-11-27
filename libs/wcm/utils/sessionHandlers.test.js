@@ -1,24 +1,21 @@
 import wallets from 'tests/constants/wallets';
-import { signClient } from './connectionCreator';
 import { onApprove, onReject } from './sessionHandlers';
-import { ERROR_CASES, STATUS } from '../constants/lifeCycle';
+import { STATUS, ERROR_CASES } from '../constants/lifeCycle';
 
 jest.mock('@walletconnect/utils', () => ({
   getSdkError: jest.fn((str) => str),
 }));
 
-jest.mock('./connectionCreator', () => ({
-  signClient: {
+describe('sessionHandlers', () => {
+  const signClient = {
     approve: jest.fn().mockImplementation(() =>
       Promise.resolve({
         acknowledged: jest.fn(),
       })
     ),
     reject: jest.fn().mockImplementation(() => Promise.resolve({})),
-  },
-}));
+  };
 
-describe('sessionHandlers', () => {
   const proposal = {
     params: {
       requiredNamespaces: [],
@@ -26,11 +23,11 @@ describe('sessionHandlers', () => {
     },
     id: 'sample_id',
   };
-  const selectedAccounts = [wallets.genesis.summary.address];
+  const selectedAccounts = [wallets.genesis.summary.address, wallets.validator.summary.address];
 
   describe('onApprove', () => {
-    it('Should signClient.approve with correct arguments', async () => {
-      const res = await onApprove(proposal, selectedAccounts);
+    it('Should client.approve with correct arguments', async () => {
+      const res = await onApprove(proposal, selectedAccounts, signClient);
       expect(signClient.approve).toHaveBeenCalledWith({
         id: proposal.id,
         namespaces: {},
@@ -43,14 +40,14 @@ describe('sessionHandlers', () => {
       signClient.approve.mockImplementation(() =>
         Promise.reject(new Error('Accounts are invalid'))
       );
-      const res = await onApprove(proposal, []);
+      const res = await onApprove(proposal, [], signClient);
       expect(res).toEqual(STATUS.FAILURE);
     });
   });
 
   describe('onReject', () => {
-    it('Should signClient.approve with correct arguments', async () => {
-      await onReject(proposal);
+    it('Should client.approve with correct arguments', async () => {
+      await onReject(proposal, signClient);
 
       expect(signClient.reject).toHaveBeenCalledWith({
         id: proposal.id,

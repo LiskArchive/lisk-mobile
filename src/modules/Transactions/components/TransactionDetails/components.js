@@ -71,6 +71,7 @@ export function TransactionDetailsBody({ transaction, address }) {
       <ResultScreen
         illustration={<ErrorIllustrationSvg />}
         description={i18next.t('transactions.transactionDetails.errorText')}
+        fluid
       >
         <LabelButton onPress={refetchFees}>{i18next.t('commons.buttons.reload')}</LabelButton>
       </ResultScreen>
@@ -213,7 +214,7 @@ function TransactionDetailsStatus({ status }) {
   let backgroundColor;
 
   switch (status) {
-    case 'success':
+    case 'successful':
       color = colors.light.ufoGreen;
       backgroundColor = setColorOpacity(colors.light.ufoGreen, 0.15);
       break;
@@ -223,7 +224,7 @@ function TransactionDetailsStatus({ status }) {
       backgroundColor = setColorOpacity(colors.light.yellowCopacabana, 0.15);
       break;
 
-    case 'fail':
+    case 'failed':
       color = colors.light.burntSieanna;
       backgroundColor = setColorOpacity(colors.light.burntSieanna, 0.15);
       break;

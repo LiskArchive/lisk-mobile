@@ -43,7 +43,7 @@ export default function ApplicationsStats(props) {
         isLoading={isLoadingStatsData}
         error={errorOnStatsData}
         renderData={(data) => {
-          const series = [data.registered, data.active, data.terminated];
+          const series = [data.registered, data.activated, data.terminated];
 
           const showPieChart = series.reduce((acc, seriesItem) => acc || !!seriesItem, false);
 
@@ -65,7 +65,7 @@ export default function ApplicationsStats(props) {
 
                 <View style={styles.legend}>
                   <ApplicationsStatsLegendItem label={'registered'} amount={data.registered} />
-                  <ApplicationsStatsLegendItem label={'active'} amount={data.active} />
+                  <ApplicationsStatsLegendItem label={'activated'} amount={data.activated} />
                   <ApplicationsStatsLegendItem label={'terminated'} amount={data.terminated} />
                 </View>
               </View>

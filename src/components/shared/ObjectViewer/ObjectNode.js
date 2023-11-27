@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { P } from 'components/shared/toolBox/typography';
 import { useTheme } from 'contexts/ThemeContext';
 import getStyles from './ObjectViewer.styles';
 
@@ -15,16 +16,14 @@ const ObjectNode = ({ data, style }) => {
   const entries = Object.keys(data);
   return (
     <View style={style}>
-      <Text style={[styles.text, styles.theme.text]}>{`{`}</Text>
+      <P style={[styles.text, styles.theme.text]}>{`{`}</P>
       {entries.map((key) => (
         <View key={key} style={styles.container}>
-          <Text style={[styles.text, styles.theme.text]}>{JSON.stringify(key)}: </Text>
-          <Text style={[styles.text, styles.theme.text, styles.flex]}>
-            {JSON.stringify(data[key])},
-          </Text>
+          <P style={[styles.text, styles.theme.text]}>{JSON.stringify(key)}: </P>
+          <P style={[styles.text, styles.theme.text, styles.flex]}>{JSON.stringify(data[key])},</P>
         </View>
       ))}
-      <Text style={[styles.text, styles.theme.text]}>{`}`}</Text>
+      <P style={[styles.text, styles.theme.text]}>{`}`}</P>
     </View>
   );
 };

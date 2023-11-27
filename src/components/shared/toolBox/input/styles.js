@@ -30,9 +30,10 @@ export default () => ({
     input: {
       fontSize: fonts.size.base,
       width: '100%',
+      fontFamily: fonts.family.context,
       borderWidth: 1,
-      padding: 16,
-      borderRadius: 10,
+      padding: 12,
+      borderRadius: 6,
     },
     inputWithLeftAdornment: {
       paddingLeft: 40,
@@ -80,9 +81,8 @@ export default () => ({
       color: colors.dark.platinum,
     },
     input: {
-      backgroundColor: colors.dark.textInputBg,
       color: colors.dark.white,
-      borderColor: colors.dark.mainBg,
+      borderColor: colors.dark.volcanicSand,
     },
     inputErrorStyle: {
       borderColor: colors.dark.burntSieanna,

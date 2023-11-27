@@ -21,6 +21,11 @@ export default {
       overflow: 'hidden',
       paddingTop: safeAreaPaddingTop,
     },
+    headerBg: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+    },
     body: {
       flex: 1,
       paddingLeft: boxes.boxPadding,
@@ -115,13 +120,13 @@ export default {
     unregisteredContainer: {
       backgroundColor: 'rgba(64, 112, 244, 0.1)',
     },
-    activeContainer: {
+    activatedContainer: {
       backgroundColor: 'rgba(0, 213, 99, 0.1)',
     },
     registered: {
       color: colors.light.ultramarineBlue,
     },
-    active: {
+    activated: {
       color: colors.light.ufoGreen,
     },
   },

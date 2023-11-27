@@ -4,7 +4,7 @@ export default {
   sideChainRecoveryPhrase:
     'where glow borrow found path hero produce gasp entry street recycle rich prepare carry almost parrot maze circle nuclear smile unveil captain assist together',
   address: 'lskv6v53emsaen6cwbbk226wusdpa6ojdonunka4x',
-  newAddress: 'lskqzpfr3uq8bm2jee5dkv4ns79uuswjzc9bbpezu',
+  newAddress: 'lskujedwe2nxoeehxwpztuateojsjfv6oge2ktefe',
   emptyAccount: '',
   password: 'Password1!',
   accountName: 'lisker',

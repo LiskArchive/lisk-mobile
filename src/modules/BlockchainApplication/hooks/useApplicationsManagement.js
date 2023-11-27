@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
-import DropDownHolder from 'utilities/alert';
 import { useApplications } from '../context/ApplicationsContext';
 import { usePinApplications } from './usePinApplications';
 import { useApplicationsLocalStorage } from './useApplicationsLocalStorage';
 import { isMainchainApplication } from '../utils';
+import { useCurrentApplication } from './useCurrentApplication';
 
 /**
  * Provides an API to add, delete and read the blockchain applications saved by the user.
@@ -16,6 +16,12 @@ export function useApplicationsManagement() {
   const { applications } = useApplications();
 
   const { checkPin, togglePin } = usePinApplications();
+
+  const [, setCurrentApplication] = useCurrentApplication();
+
+  const defaultApplication = applications?.data?.find?.(
+    (app) => app.chainName === 'lisk_mainchain'
+  );
 
   const {
     addApplication: addApplicationToStorage,
@@ -44,15 +50,28 @@ export function useApplicationsManagement() {
 
         applications.dispatchData({ type: 'delete', chainID });
 
+        if (defaultApplication) {
+          setCurrentApplication({
+            ...defaultApplication,
+            serviceURL: defaultApplication.serviceURLs[0],
+          });
+        }
+
         togglePin(chainID);
       } catch (_error) {
-        DropDownHolder.error(
-          i18next.t('Error'),
-          'Error deleting application. Please try again later.'
-        );
+        Toast.show({
+          type: 'error',
+          text2: 'Error deleting application. Please try again later.',
+        });
       }
     },
-    [deleteApplicationFromStorage, applications, togglePin]
+    [
+      deleteApplicationFromStorage,
+      applications,
+      togglePin,
+      setCurrentApplication,
+      defaultApplication,
+    ]
   );
 
   // sort by mainchain and pinned applications

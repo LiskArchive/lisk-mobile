@@ -14,7 +14,7 @@ const applicationsSetErrorMock = jest.fn();
 
 jest.spyOn(useApplications, 'useApplications').mockImplementation(() => ({
   applications: {
-    data: undefined,
+    data: [{ chainID: '123' }],
     dispatchData: dispatchApplicationsDataMock,
     setIsLoading: applicationsSetIsLoadingMock,
     setIsSuccess: applicationsSetIsSuccessMock,

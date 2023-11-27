@@ -15,9 +15,9 @@ export default function getTokenRowStyles() {
         flexDirection: 'row',
       },
       logo: {
-        height: 28,
-        width: 28,
-        borderRadius: 14,
+        height: 40,
+        width: 40,
+        borderRadius: 20,
       },
       title: {
         marginLeft: 8,
@@ -26,11 +26,11 @@ export default function getTokenRowStyles() {
       },
       balanceText: {
         marginBottom: 4,
-        fontWeight: '500',
+        fontFamily: fonts.family.contextSemiBold,
         fontSize: fonts.size.base,
       },
       currencyText: {
-        fontWeight: '400',
+        fontFamily: fonts.family.context,
         fontSize: 12,
       },
       row: {

@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import * as Lisk from '@liskhq/lisk-client';
 
 import { useCommandParametersSchemasQuery } from 'modules/Network/api/useCommandParametersSchemasQuery';
@@ -34,6 +34,8 @@ export function useTransactionFees({
 
       const minFee = res.data.transaction.fee.minimum;
 
+      const feeTokenID = res.data.transaction.fee.tokenID;
+
       const dynamicFeeEstimates = res.data.transaction.fee.priority;
 
       if (accountInitializationFee) {
@@ -56,6 +58,10 @@ export function useTransactionFees({
         updates = { ...updates, minFee };
       }
 
+      if (feeTokenID) {
+        updates = { ...updates, feeTokenID };
+      }
+
       if (dynamicFeeEstimates) {
         updates = { ...updates, dynamicFeeEstimates };
       }
@@ -75,7 +81,7 @@ export function useTransactionFees({
       `${transaction.transaction.module}:${transaction.transaction.command}`
   )?.schema;
 
-  const validateParams = () => {
+  const areParamsValid = useMemo(() => {
     if (!transactionSchema) {
       return false;
     }
@@ -87,9 +93,7 @@ export function useTransactionFees({
     } catch {
       return false;
     }
-  };
-
-  const areParamsValid = validateParams();
+  }, [transaction.transaction.params, transactionSchema]);
 
   useEffect(() => {
     if (isTransactionSuccess && areParamsValid && enabled) {

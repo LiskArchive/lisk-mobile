@@ -5,25 +5,21 @@ const styles = {
   h1: {
     color: colors.light.black,
     fontSize: fonts.size.h1,
-    fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   h2: {
     color: colors.light.black,
     fontSize: fonts.size.h2,
-    fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   h3: {
     color: colors.light.black,
     fontSize: fonts.size.h3,
-    fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   h4: {
     color: colors.light.black,
     fontSize: fonts.size.h4,
-    fontWeight: 'bold',
     fontFamily: fonts.family.heading,
   },
   p: {
@@ -32,8 +28,7 @@ const styles = {
   },
   b: {
     fontSize: fonts.size.base,
-    fontFamily: fonts.family.context,
-    fontWeight: 'bold',
+    fontFamily: fonts.family.contextBold,
   },
   span: {
     fontSize: fonts.size.base,

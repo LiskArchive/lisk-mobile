@@ -8,9 +8,11 @@ import {
   updateAccount as updateAccountAction,
 } from '../store/actions';
 import { selectAccounts } from '../store/selectors';
+import { useCurrentAccount } from './useCurrentAccount';
 
 export const useAccounts = () => {
   const dispatch = useDispatch();
+  const [currentAccount, setCurrentAccount] = useCurrentAccount();
 
   const accountsObject = useSelector(selectAccounts);
 
@@ -18,13 +20,21 @@ export const useAccounts = () => {
 
   const setAccount = useCallback((account) => dispatch(addAccountAction(account)), [dispatch]);
   const updateAccount = useCallback(
-    (address, data) => dispatch(updateAccountAction(address, data)),
+    (address, data) => {
+      if (address === currentAccount?.metadata?.address) {
+        const metadata = { ...currentAccount.metadata, ...data };
+        setCurrentAccount({ ...currentAccount, metadata });
+      }
+      dispatch(updateAccountAction(address, data));
+    },
     [dispatch]
   );
   const deleteAccount = useCallback(
-    (address) => {
+    (address, passwordIsInKeychain) => {
       dispatch(deleteAccountAction(address));
-      removeAccountPasswordFromKeychain(address);
+      if (passwordIsInKeychain) {
+        removeAccountPasswordFromKeychain(address);
+      }
     },
     [dispatch]
   );

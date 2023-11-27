@@ -1,18 +1,12 @@
 import { themes, colors } from 'constants/styleGuide';
-import { Dimensions, Platform } from 'react-native';
 import { setColorOpacity } from 'utilities/helpers';
 
 export default () => ({
   common: {
     container: {
-      padding: Platform.select({ ios: 20, android: 10 }),
+      padding: 20,
       borderTopRightRadius: 24,
       borderTopLeftRadius: 24,
-    },
-    safeArea: {
-      flexGrow: 1,
-      marginTop: 30,
-      maxHeight: Dimensions.get('screen').height * 0.75,
     },
     content: {
       position: 'absolute',
@@ -21,13 +15,11 @@ export default () => ({
       left: 0,
       right: 0,
     },
-    overlay: {
-      flex: 1,
-      justifyContent: 'flex-end',
+    bottomHeight: {
+      height: 40,
     },
     closeButtonContainer: {
       alignSelf: 'flex-end',
-      marginTop: -8,
       padding: 4,
       borderRadius: 50,
     },
@@ -50,7 +42,7 @@ export default () => ({
     closeButtonContainer: {
       backgroundColor: colors.light.platinumGray,
     },
-    overlay: {
+    content: {
       backgroundColor: setColorOpacity(colors.light.black, 0.5),
     },
   },
@@ -65,7 +57,7 @@ export default () => ({
     closeButtonContainer: {
       backgroundColor: colors.dark.volcanicSand,
     },
-    overlay: {
+    content: {
       backgroundColor: setColorOpacity(colors.dark.volcanicSand, 0.5),
     },
   },
