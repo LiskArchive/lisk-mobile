@@ -33,11 +33,11 @@ export default function TokenList({ mode = 'overview', address, style }) {
   const [currentAccount] = useCurrentAccount();
   const [currentApplication] = useCurrentApplication();
 
-  const currentApplicationChainId = currentApplication?.data?.chainID;
+  const currentApplicationChainID = currentApplication?.data?.chainID;
 
   useEffect(() => {
     setActiveTab(0);
-  }, [currentApplicationChainId]);
+  }, [currentApplicationChainID]);
 
   const navigation = useNavigation();
 
@@ -65,14 +65,13 @@ export default function TokenList({ mode = 'overview', address, style }) {
     let amount = 0;
 
     tokensData?.data?.forEach((token) => {
-      const denomUnits = token?.denomUnits;
       if (token.lockedBalances) {
         token.lockedBalances.forEach((lockedBalance) => {
           amount += Number(lockedBalance.amount);
         });
       }
       if (amount) {
-        res.push({ ...token, availableBalance: amount, denomUnits });
+        res.push({ ...token, availableBalance: amount });
       }
     });
     return res;
