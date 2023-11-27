@@ -310,7 +310,7 @@
       }
     },
     "syncing": {
-      "inProgress": "Service indexing progress: {{percentageIndexed}}%"
+      "inProgress": "Blockchain indexing in-progress: {{percentageIndexed}}%"
     }
   },
   "application": {

@@ -28,6 +28,7 @@ export default function Tabs() {
   const { percentageIndexed, chainLength, numBlocksIndexed } = data?.data ?? {};
 
   const showIndexStatusAlert = () => {
+    // Take a difference of latest chain length against blocks indexed to show the notification
     if (chainLength - numBlocksIndexed >= 5) {
       toastOpen.current = true;
       Toast.show({

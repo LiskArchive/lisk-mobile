@@ -311,7 +311,7 @@
       }
     },
     "syncing": {
-      "inProgress": "Fortschritte bei der Indizierung der Dienste: {{percentageIndexed}}%"
+      "inProgress": "Blockchain-Indizierung in Arbeit: {{percentageIndexed}}%"
     }
   },
   "application": {
