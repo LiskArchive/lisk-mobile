@@ -19,6 +19,7 @@ import getSendTokenSummaryStepStyles from './styles';
 export default function SendTokenSummaryStep({ form, prevStep, transaction, reset: resetSteps }) {
   const navigation = useNavigation();
   const bookmarks = useSelector(selectBookmarkList);
+  const modal = useModal();
 
   const senderApplicationChainID = form.watch('senderApplicationChainID');
   const recipientApplicationChainID = form.watch('recipientApplicationChainID');
@@ -52,8 +53,10 @@ export default function SendTokenSummaryStep({ form, prevStep, transaction, rese
     modal.close();
   };
 
-  const handleAddAddressToBookmarkPress = () =>
+  const handleAddAddressToBookmarkPress = () => {
+    modal.close();
     navigation.navigate({ name: 'AddBookmark', params: { address: recipientAccountAddress } });
+  };
 
   const isRecipientAccountBookmarked = !!bookmarks.find(
     (bookmark) => bookmark.address === recipientAccountAddress
