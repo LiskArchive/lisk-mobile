@@ -39,14 +39,6 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="lisk" />
       </intent-filter>
-      <intent-filter android:autoVerify="true">
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https"
-          android:host="lisk.com"
-          android:pathPrefix="/send" />
-      </intent-filter>
     </activity>
     <activity android:name=".DataAccessRationaleActivity"
       android:permission="android.permission.START_VIEW_PERMISSION_USAGE"

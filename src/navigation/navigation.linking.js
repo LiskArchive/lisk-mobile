@@ -11,7 +11,7 @@ const navigationLinkingConfig = {
 };
 
 const navigationLinking = {
-  prefixes: ['lisk://', 'https://lisk.com'],
+  prefixes: ['lisk://'],
   config: navigationLinkingConfig,
   getStateFromPath: getNavigationStateFromPath,
   getPathFromState,
