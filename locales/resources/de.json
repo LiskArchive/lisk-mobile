@@ -309,6 +309,9 @@
         "passwordRequirementsError": "Das Passwort muss 8 Zeichen enthalten, einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und einen Sonderbuchstaben",
         "passwordsDontMatchError": "Bestätigen Sie, dass die Passwörter übereinstimmen"
       }
+    },
+    "syncing": {
+      "inProgress": "Blockchain-Indizierung in Arbeit: {{percentageIndexed}}%"
     }
   },
   "application": {

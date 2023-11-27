@@ -308,6 +308,9 @@
         "passwordRequirementsError": "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character.",
         "passwordsDontMatchError": "Confirm that passwords match"
       }
+    },
+    "syncing": {
+      "inProgress": "Blockchain indexing in-progress: {{percentageIndexed}}%"
     }
   },
   "application": {
