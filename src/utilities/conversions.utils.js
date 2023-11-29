@@ -107,13 +107,3 @@ export function fromLskToBeddows(amount) {
     denomUnits: [{ decimals: 8, denom: 'lsk' }],
   });
 }
-
-export const includeFee = (value, fee, asRawLsk = false) => {
-  const factor = new BigNumber(10).pow(8);
-  const bigValue = new BigNumber(value);
-  const rawValue = bigValue.multipliedBy(factor);
-  const bigFee = new BigNumber(fee);
-  const result = rawValue.plus(bigFee);
-  // eslint-disable-next-line no-undef
-  return asRawLsk ? result : fromBeddowsToLsk(BigInt(result ?? 0));
-};

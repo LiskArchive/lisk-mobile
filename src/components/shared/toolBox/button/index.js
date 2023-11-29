@@ -29,7 +29,8 @@ const BaseButton = (props) => {
       onPress={onPress || onClick}
       testID={testID}
       style={[
-        noPredefinedStyle ? null : styles.buttonContainer,
+        !noPredefinedStyle && styles.buttonContainer,
+        !noPredefinedStyle && styles.theme.buttonContainer,
         props.style,
         disabled ? styles.disabledButtonContainer : null,
       ]}

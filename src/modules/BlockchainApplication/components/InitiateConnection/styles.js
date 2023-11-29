@@ -21,14 +21,7 @@ export default {
     },
     imageContainer: {
       alignItems: 'center',
-    },
-    image: {
-      width: 40,
-      height: 40,
-      marginBottom: 8,
-      borderRadius: 25,
-      borderColor: colors.light.platinumGray,
-      borderWidth: 1,
+      marginBottom: 16,
     },
     urlContainer: {
       flexDirection: 'row',

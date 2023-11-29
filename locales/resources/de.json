@@ -19,6 +19,10 @@
     "pastedFromClipboard": "Eingefügt",
     "recoveryPhrase": {
      "writeDownInstructions": "Das manuelle Aufschreiben bietet mehr Sicherheit als das Kopieren und Einfügen der Wiederherstellungsphrase."
+    },
+     "connectivity": {
+      "noInternetConnectionTitle": "Keine Internetverbindung!",
+      "noInternetConnectionDescription": "Ihre Verbindung scheint unterbrochen zu sein. Versuchen Sie es später noch einmal."
     }
   },  
   "fallbackScreens" : {
@@ -59,7 +63,6 @@
   "Initialize your account": "Dein Konto initialisieren",
   "Invalid address.": "Ungültige Adresse.",
   "Lisk needs to connect to your camera": "Lisk benötigt Zugriff auf deine Kamera",  
-  "No internet connection!": "Keine Internetverbindung!",
   "Pending confirmation": "Bevorstehende Bestätigung",
   "Permission to use camera": "Erlaubnis die Kamera zu benutzen",
   "Private use only": "Nur für private Nutzung",
@@ -69,7 +72,6 @@
   "Tap on the QR Code to share it.": "Tippe auf den QR-Code um ihn zu teilen",  
   "terms and conditions.": "allgemeinen Geschäftsbedingungen",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Wilkommen bei Lisk. Jetzt kannst du LSK Tokens unterwegs senden und empfangen.",
-  "Your connection seems to be down, try again later.": "Deine Verbindung scheint unterbrochen zu sein, bitte versuch es spääter noch einmal.",
   "About Lisk": "Über Lisk",
   "Disabled": "Deaktiviert",
   "Enabled": "Aktiviert",
@@ -115,7 +117,9 @@
       "terms": "Nutzungsbedingungen",
       "privacyPolicy": "Datenschutz-Bestimmungen",
       "currency": "Währung",
-      "enableDerivationPath": "Zugriff auf ältere Lisk-Konten aktivieren",
+      "enableLegacyAccountLabel": "Zugriff auf Legacy-Lisk-Konten aktivieren",
+      "enableLegacyAccountTitle": "Zugriff auf Legacy-Lisk-Konten",
+      "enableLegacyAccountDescription": "Aktivieren Sie diese Option, um auf Ihre mit dem Lisk v3-Protokoll oder älter erstellten Lisk-Konten zuzugreifen.",
       "showDerivationPath": "Benutzerdefinierten Ableitungspfad anzeigen"
     },
     "scanDevice": {
@@ -240,7 +244,7 @@
       },      
       "safeKeeping": {
         "title": "Speichern Sie Ihre geheime Wiederherstellungsphrase",
-        "description": "Bitte schreiben Sie diese 12 Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
+        "description": "Bitte schreiben Sie diese {{length}} Wörter sorgfältig auf und bewahren Sie sie an einem sicheren Ort auf.",
         "understandResponsibilityDescription": "Ich verstehe, dass es in meiner Verantwortung liegt, meine geheime Wiederherstellungsphrase sicher aufzubewahren.",
         "continueButtonText": "Ich habe sie aufgeschrieben"
       },
@@ -277,7 +281,8 @@
       "downloaded": "Heruntergeladen!",
       "enablePermissions": "Aktivieren Sie Lisk mobile für den Zugriff auf den Dateispeicher in den Einstellungen",
       "qrCodeError": "",
-      "enableLegacyAccount": "",
+      "enableLegacyAccountLabel": "Zugriff auf Legacy-Lisk-Konten aktivieren",
+      "enableLegacyAccountTitle": "Zugriff auf Legacy-Lisk-Konten",
       "enableLegacyAccountDescription": "",
       "customDerivationPathDescription": "",
       "buttons": {
@@ -304,6 +309,9 @@
         "passwordRequirementsError": "Das Passwort muss 8 Zeichen enthalten, einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und einen Sonderbuchstaben",
         "passwordsDontMatchError": "Bestätigen Sie, dass die Passwörter übereinstimmen"
       }
+    },
+    "syncing": {
+      "inProgress": "Blockchain-Indizierung in Arbeit: {{percentageIndexed}}%"
     }
   },
   "application": {
@@ -367,7 +375,6 @@
       },
       "externalApplicationList": {
         "title": "Wallet-Verbindungen",
-        "loadingText": "Externe Verbindungen werden geladen...",
         "emptyText": "Sie haben sich noch mit keiner Anwendung verknüpft.",
         "errorText": "Fehler beim Laden Ihrer Wallet-Verbindungen.",
         "detailsText": "Info",
@@ -378,14 +385,22 @@
         "chainsTitle": "Ketten verbinden",
         "accountsTitle": "Zu verwendende Konto/Konten auf dieser Seite",
         "sitePermissions": "Seitenberechtigungen",
-        "methods": "Methoden",
-        "bridgeApplication": "Wallet verbinden",
-        "bridgeApplicationDescription": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
-        "addApplication": "Verbinden",
-        "enterConnectionUri": "Verbindungs-URI eingeben",
+        "methods": "Methoden",        
+        "addApplication": "Verbinden",        
         "approveConnectionChainsTitle": "Verbundene Ketten",
         "approveConnectionAccountsTitle": "Verbundene Konten"
-        }
+      },
+      "externalApplicationDetailsScreen": {
+        "expiryText": "Ablaufdatum",
+        "connectedChainsTitle": "Verbundene Ketten",
+        "chainIDLabel": "Ketten-ID",
+        "connectedAccountsTitle": "Verbundene Konten",
+        "connectionIDTitle": "Verbindungs-ID",
+        "permissionsTitle": "Anwendungsberechtigungen",
+        "methodsTitle": "Methoden",
+        "eventsTitle": "Ereignisse",
+        "disconnectButtonText": "Trennen"
+      }
     },
     "externalApplicationSignatureRequest": {
       "errorOnSignTransactionText": "Ihre Transaktion kann nicht signiert werden. Bitte versuche es erneut.",
@@ -423,6 +438,24 @@
         "accountNotAdded1": "Das ausgewählte Konto zum Signieren der angeforderten Transaktion fehlt. Bitte fügen Sie das fehlende Konto ",
         "accountNotAdded2": " zu Lisk Mobile hinzu und initiieren Sie die Transaktionssignierung erneut von der externen Anwendung aus."
       }
+    },
+    "externalConnectionValidation": {
+      "errors": {
+        "namespaceErrorDescription": "Die Namensraumvalidierung ist nur für 'session_proposal'-Ereignisse verfügbar.",
+        "schemaErrorDescription": "Verbindungsereignis hat kein Schema für Parameter."
+      }
+    },
+    "bridgeExternalApplication": {
+      "title": "Wallet verbinden",
+      "description": "Fügen Sie die WalletConnect-URI ein, um Ihre Anwendung mit Lisk Mobile zu verbinden.",
+      "inputPlaceholder": "Verbindungs-URI eingeben",
+      "errors": {
+        "timeout": "Die Verbindung dauert länger als erwartet. Bitte versuchen Sie es später noch einmal.",
+        "invalidUri": "Fehler beim Verbinden der Anwendung. Bitte versuchen Sie es erneut.",
+        "invalidUriFormat": "URI ungültig. Bitte versuchen Sie es erneut.",
+        "unsupportedApp": "Sie versuchen, eine nicht unterstützte externe App zu verbinden. Bitte geben Sie eine unterstützte WalletConnect-URI ein.",
+        "nameSpaceInvalid": "Fehler bei der Validierung der Verbindung. Bitte versuchen Sie es erneut."
+      }
     }
   },
   "requestTokens": {
@@ -447,7 +480,10 @@
       "recipientApplicationFieldPlaceholder": "Wählen Sie eine App aus",
       "recipientAccountFieldLabel": "Empfänger:in",
       "addressPlaceholder": "Adresse eingeben",
-      "nextStepButtonText": "Weiter"
+      "nextStepButtonText": "Weiter",
+      "addAndSwitch": "Anwendung hinzufügen und wechseln",
+      "description": "{{displayName}} Anwendung wurde nicht zu Ihrer Brieftasche hinzugefügt, bitte fügen Sie diese Anwendung hinzu und wechseln Sie zu ihr, um mit dieser Transaktion fortzufahren",
+      "addAndSwitchButton": "Hinzufügen und zur Anwendung wechseln"
     },
     "tokenSelect": {
       "prevStepButtonText": "Zurück",
@@ -478,7 +514,8 @@
     },
     "summary": {
       "prevStepButtonText": "Zurück",
-      "submitTransactionButtonText": "Senden"
+      "submitTransactionButtonText": "Senden",
+      "addAddressToBookmarkButtonText": "Adresse zu Lesezeichen hinzufügen"
     },
     "confirmAndSign": {
       "title": "Geben Sie Ihr Passwort ein",
@@ -539,6 +576,7 @@
       "deleteAccountDescription": "Dieses Konto wird nicht mehr auf diesem Gerät gespeichert. Sie können Ihre geheime Wiederherstellungsphrase sichern, bevor Sie sie entfernen.",
       "deleteAccountButtonText": "Jetzt entfernen",
       "downloadFileButtonText": "Download",
+      "walletUnavailableErrorText": "Wallet ist derzeit nicht verfügbar. Bitte versuchen Sie es später noch einmal.",
       "backButtonText": "Zurück"
     },
     "editAccount": {
@@ -615,8 +653,8 @@
       "tokenNotNative": "Diese Transaktion konnte nicht verarbeitet werden, da die Token-ID nicht nativ ist.",
       "insufficientEscrowBalance": "Diese Transaktion konnte aufgrund eines unzureichenden Treuhandsaldos nicht bearbeitet werden.",
       "invalidReceivingChain": "Diese Transaktion konnte aufgrund einer ungültigen Empfangskette nicht verarbeitet werden.",
-      "insufficientFee": "Bitte verwenden Sie die benutzerdefinierte Gebühr und geben Sie eine höhere Gebühr für die Bearbeitung dieser Transaktion an.",
-      "invalidSignature": "Die Transaktion konnte aufgrund einer ungültigen Unterschrift nicht verarbeitet werden. Bitte starten Sie die Transaktion von vorne.",
+      "insufficientFee": "Unzureichendes Gleichgewicht",
+      "insufficientFeeDescription": "Das Konto hat nicht genug {{message}} um diese Transaktion zu verarbeiten",
       "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
     }
   },

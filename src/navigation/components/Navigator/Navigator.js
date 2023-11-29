@@ -28,7 +28,6 @@ import AccountsManagerScreen from 'modules/Auth/components/AccountsManagerScreen
 import DecryptRecoveryPhraseScreen from 'modules/Auth/components/DecryptRecoveryPhraseScreen/DecryptRecoveryPhraseScreen';
 import AddApplicationScreen from 'modules/BlockchainApplication/components/AddApplicationScreen/AddApplicationScreen';
 import ApplicationDetails from 'modules/BlockchainApplication/components/ApplicationDetails/ApplicationDetails';
-import SendToken from 'modules/SendToken/SendToken';
 import RequestToken from 'modules/RequestToken';
 import TokensScreen from 'modules/Accounts/components/TokensScreen';
 import TransactionsHistory from 'modules/Transactions/components/TransactionsHistory';
@@ -45,6 +44,8 @@ import AppNavigator from '../AppNavigator';
 import navigationOptions from '../../navigation.options';
 import navigationLinking from '../../navigation.linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './Navigator.styles';
+import ExternalApplicationDetailsScreen from '../../../modules/BlockchainApplication/components/ExternalApplicationDetailsScreen/ExternalApplicationDetailsScreen';
+import SendTokenContainer from '../../../modules/SendToken/SendTokenContainer';
 
 const StackNavigator = createStackNavigator();
 
@@ -149,6 +150,11 @@ export default function Navigator({ children }) {
             options={navigationOptions.SignIn}
           />
           <StackNavigator.Screen
+            name="ExternalApplicationDetails"
+            component={ExternalApplicationDetailsScreen}
+            options={navigationOptions.SignIn}
+          />
+          <StackNavigator.Screen
             name="About"
             component={AboutScreen}
             options={navigationOptions.About}
@@ -186,7 +192,7 @@ export default function Navigator({ children }) {
           />
           <StackNavigator.Screen
             name="Send"
-            component={SendToken}
+            component={SendTokenContainer}
             options={navigationOptions.NoHeader}
           />
           <StackNavigator.Screen

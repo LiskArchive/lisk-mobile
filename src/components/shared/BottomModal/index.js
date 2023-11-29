@@ -71,7 +71,7 @@ const BottomModal = () => {
     <KeyboardAvoidingView
       contentContainerStyle={styles.content}
       style={styles.content}
-      behavior="height"
+      behavior="position"
     >
       <BottomSheetModalProvider>
         <BottomSheetModal

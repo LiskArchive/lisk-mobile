@@ -50,6 +50,7 @@
 		79D723192A6FF5040086AEF9 /* Dots-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114925F7661900CCF7F8 /* Dots-Regular.ttf */; };
 		79D7231A2A6FF5040086AEF9 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7952114A25F7661900CCF7F8 /* PTMono-Regular.ttf */; };
 		79D7231B2A6FF5040086AEF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		79D862BF2B14EFF30030FAF1 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CBD727A12A8A52DA00D33815 /* server-cert.cer */; };
 		79DD0C3A2A3750FB00E2DC9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		79DD0C3B2A3750FB00E2DC9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		79DD0C3C2A3750FB00E2DC9D /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
@@ -63,7 +64,6 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A23A1AEDA1EFDCFFD8819768 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CB9BAE4C26FF857E00EE1F48 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9BAE4B26FF857E00EE1F48 /* Bridge.swift */; };
-		CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = CBD727A12A8A52DA00D33815 /* server-cert.cer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -585,7 +585,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBD727A22A8A52DA00D33815 /* server-cert.cer in Resources */,
+				79D862BF2B14EFF30030FAF1 /* server-cert.cer in Resources */,
 				7952112E25F765EA00CCF7F8 /* BasierCircle-SemiBold.otf in Resources */,
 				79EFB6BD2A39221F0006FBEF /* MobileProtect.plist in Resources */,
 				7952113A25F7660200CCF7F8 /* icomoon.ttf in Resources */,
@@ -1372,7 +1372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = arm64;
@@ -1402,7 +1402,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				EXCLUDED_ARCHS = arm64;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;

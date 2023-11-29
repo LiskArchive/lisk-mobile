@@ -12,7 +12,7 @@ export default function getInfoTogglerStyles() {
         fontFamily: fonts.family.heading,
         fontSize: fonts.size.h3,
         textAlign: 'center',
-        marginBottom: 8,
+        marginBottom: 16,
       },
       descriptionText: {
         fontFamily: fonts.family.context,

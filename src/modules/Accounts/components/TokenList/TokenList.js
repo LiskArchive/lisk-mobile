@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 /* eslint-disable complexity */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import i18next from 'i18next';
 import { useNavigation } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import { LabelButton } from 'components/shared/toolBox/button';
 import { colors } from 'constants/styleGuide';
 import CaretSvg from 'assets/svgs/CaretSvg';
 
+import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import ResultScreen from 'components/screens/ResultScreen';
 import EmptyTokensIllustrationSvg from 'assets/svgs/EmptyTokensIllustrationSvg';
@@ -30,6 +31,13 @@ export default function TokenList({ mode = 'overview', address, style }) {
   const [activeTab, setActiveTab] = useState(0);
 
   const [currentAccount] = useCurrentAccount();
+  const [currentApplication] = useCurrentApplication();
+
+  const currentApplicationChainID = currentApplication?.data?.chainID;
+
+  useEffect(() => {
+    setActiveTab(0);
+  }, [currentApplicationChainID]);
 
   const navigation = useNavigation();
 
@@ -47,6 +55,8 @@ export default function TokenList({ mode = 'overview', address, style }) {
     },
     options: {
       cacheTime: 0,
+      refetchInterval: 5000,
+      refetchIntervalInBackground: false,
     },
   });
 
@@ -61,10 +71,10 @@ export default function TokenList({ mode = 'overview', address, style }) {
         });
       }
       if (amount) {
-        res.push({ symbol: token.symbol, amount });
+        res.push({ ...token, availableBalance: amount });
       }
     });
-    return lockedTokens;
+    return res;
   }, [tokensData?.data]);
 
   const { styles } = useTheme({

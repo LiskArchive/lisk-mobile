@@ -19,6 +19,10 @@
     "pastedFromClipboard": "Pasted",
     "recoveryPhrase": {
       "writeDownInstructions": "Writing it down manually offers greater security compared to copying and pasting the recovery phrase."
+    },
+    "connectivity": {
+      "noInternetConnectionTitle": "No internet connection!",
+      "noInternetConnectionDescription": "Your connection seems to be down, try again later."
     }
   },
   "fallbackScreens": {
@@ -58,7 +62,6 @@
   "Initialize your account": "Initialize your account",
   "Invalid address.": "Invalid address.",
   "Lisk needs to connect to your camera": "Lisk needs to connect to your camera",
-  "No internet connection!": "No internet connection!",
   "Pending confirmation": "Pending confirmation",
   "Permission to use camera": "Permission to use camera",
   "Scan": "Scan",
@@ -67,7 +70,6 @@
   "Tap on the QR Code to share it.": "Tap on the QR Code to share it.",
   "terms and conditions.": "terms and conditions.",
   "Welcome to Lisk. Now you can send and request LSK token on the go.": "Welcome to Lisk. Now you can send and request LSK token on the go.",
-  "Your connection seems to be down, try again later.": "Your connection seems to be down, try again later.",
   "About Lisk": "About Lisk",
   "Disabled": "Disabled",
   "Enabled": "Enabled",
@@ -113,7 +115,9 @@
       "terms": "Terms of use",
       "privacyPolicy": "Privacy policy",
       "currency": "Currency",
-      "enableDerivationPath": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountLabel": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountTitle": "Access to legacy Lisk accounts",
+      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",      
       "showDerivationPath": "Show custom derivation path"
     },
     "scanDevice": {
@@ -238,7 +242,7 @@
       },
       "safeKeeping": {
         "title": "Save your secret recovery phrase",
-        "description": "Please write down these 12 words carefully, and store them in a safe place.",
+        "description": "Please write down these {{length}} words carefully, and store them in a safe place.",
         "understandResponsibilityDescription": "I understand that it's my responsibility to keep my secret recovery phrase safe.",
         "continueButtonText": "I have written them down"
       },
@@ -276,8 +280,9 @@
       "downloaded": "Downloaded!",
       "enablePermissions": "Enable Lisk mobile to access file storage in settings",
       "qrCodeError": "QR Code not found.",
-      "enableLegacyAccount": "Enable access to legacy Lisk accounts",
-      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",
+      "enableLegacyAccountLabel": "Enable access to legacy Lisk accounts",
+      "enableLegacyAccountTitle": "Access to legacy Lisk accounts",
+      "enableLegacyAccountDescription": "Enable this option to access your Lisk accounts created using Lisk v3 protocol or older.",      
       "customDerivationPathDescription": "The derivation path(m’ / purpose’ / coin_type’ / address_index’) is a way to derive multiple accounts from the same secret recovery phrase.",
       "buttons": {
         "passwordSetupContinueButton": "Continue to wallet",
@@ -303,6 +308,9 @@
         "passwordRequirementsError": "Password must contain 8 characters, one uppercase, one lowercase, one number and one special case character.",
         "passwordsDontMatchError": "Confirm that passwords match"
       }
+    },
+    "syncing": {
+      "inProgress": "Blockchain indexing in-progress: {{percentageIndexed}}%"
     }
   },
   "application": {
@@ -366,7 +374,6 @@
       },
       "externalApplicationList": {
         "title": "Wallet connections",
-        "loadingText": "Loading external connections...",
         "emptyText": "You haven't paired with any application yet.",
         "errorText": "Error loading your wallet connections.",
         "detailsText": "Info",
@@ -377,13 +384,21 @@
         "chainsTitle": "Chains connecting",
         "accountsTitle": "Account(s) to use on this site",
         "sitePermissions": "Site Permissions",
-        "methods": "Methods",
-        "bridgeApplication": "Connect wallet",
-        "bridgeApplicationDescription": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
-        "addApplication": "Connect",
-        "enterConnectionUri": "Enter connection URI",
+        "methods": "Methods",        
+        "addApplication": "Connect",        
         "approveConnectionChainsTitle": "Connected chains",
         "approveConnectionAccountsTitle": "Connected accounts"
+      },
+      "externalApplicationDetailsScreen": {
+        "expiryText": "Expiry date",
+        "connectedChainsTitle": "Connected chains",
+        "chainIDLabel": "Chain ID",
+        "connectedAccountsTitle": "Connected accounts",
+        "connectionIDTitle": "Connection ID",
+        "permissionsTitle": "Application permissions",
+        "methodsTitle": "Methods",
+        "eventsTitle": "Events",
+        "disconnectButtonText": "Disconnect"
       }
     },
     "externalApplicationSignatureRequest": {
@@ -428,6 +443,18 @@
         "namespaceErrorDescription": "Name space validation is only available for session_proposal events.",
         "schemaErrorDescription": "Connection event has no schema on params."
       }
+    },
+    "bridgeExternalApplication": {
+      "title": "Connect wallet",
+      "description": "Paste WalletConnect URI to connect your application to Lisk Mobile.",
+      "inputPlaceholder": "Enter connection URI",
+      "errors": {
+        "timeout": "Connection is taking more than expected. Please try again later.",
+        "invalidUri": "Error connecting application. Please try again.",
+        "invalidUriFormat": "URI not valid. Please try again.",
+        "unsupportedApp": "You’re trying to connect to an unsupported external app. Please enter a supported WalletConnect URI.",
+        "nameSpaceInvalid": "Error validating connection. Please try again."
+      }
     }
   },
   "requestTokens": {
@@ -452,7 +479,10 @@
       "recipientApplicationFieldPlaceholder": "Select an application",
       "recipientAccountFieldLabel": "Recipient",
       "addressPlaceholder": "Enter address",
-      "nextStepButtonText": "Continue"
+      "nextStepButtonText": "Continue",
+      "addAndSwitch": "Add & switch application",
+      "description": "{{displayName}} application has not been added to your wallet, please add and switch to this application to continue with this transaction",
+      "addAndSwitchButton": "Add and switch to application"
     },
     "tokenSelect": {
       "prevStepButtonText": "Back",
@@ -483,7 +513,8 @@
     },
     "summary": {
       "prevStepButtonText": "Back",
-      "submitTransactionButtonText": "Send"
+      "submitTransactionButtonText": "Send",
+      "addAddressToBookmarkButtonText": "Add address to bookmarks"
     },
     "confirmAndSign": {
       "title": "Enter your account password",
@@ -544,6 +575,7 @@
       "deleteAccountDescription": "This account will no longer be stored on this device. You can backup your secret recovery phrase before remove it.",
       "deleteAccountButtonText": "Remove now",
       "downloadFileButtonText": "Download",
+      "walletUnavailableErrorText": "Wallet is not available right now. Please try again later.",
       "backButtonText": "Back"
     },
     "editAccount": {
@@ -620,7 +652,8 @@
       "tokenNotNative": "Failed to process this transaction due to token ID not native.",
       "insufficientEscrowBalance": "Failed to process this transaction due to insufficient escrow balance.",
       "invalidReceivingChain": "Failed to process this transaction due to invalid receiving chain.",
-      "insufficientFee": "Please use custom fee and provide a higher fee to process this transaction.",
+      "insufficientFee": "Insufficient Balance",
+      "insufficientFeeDescription": "The account does not have enough {{message}} to process this transaction",
       "invalidSignature": "Failed to process transaction due to invalid signature, please restart the transaction from scratch.",
       "dryRunFailed": "Transaction dry run failed with errors, hence aborting next step."
     }

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
@@ -22,11 +23,12 @@ import {
 import { decryptAccount } from 'modules/Auth/utils/decryptAccount';
 import { getDryRunTransactionError } from 'modules/Transactions/utils/helpers';
 import { useDebounce } from 'hooks/useDebounce';
-import DropDownHolder from 'utilities/alert';
 import { fromPathToObject } from 'utilities/helpers';
 import { fromDisplayToBaseDenom } from 'utilities/conversions.utils';
 import { BASE_TRANSACTION_MESSAGE_FEE } from '../constants';
 import { useTransferableTokens } from '../../BlockchainApplication/api/useTransferableTokens';
+import { useValidateFeeBalance } from './useValidateFeeBalance';
+import { useAccountCanSendTokens } from './useAccountCanSendTokens';
 
 export default function useSendTokenForm({ transaction, isTransactionSuccess, initialValues }) {
   const [currentAccount] = useCurrentAccount();
@@ -40,6 +42,13 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const { refetch: refetchAccountNonce } = useAccountNonce(currentAccount?.metadata?.address, {
     enabled: false,
   });
+
+  const {
+    data: accountCanSendTokens,
+    tokenName: feeTokenName,
+    isLoading: isLoadingAccountCanSendTokens,
+    isError: isErrorAccountCanSendTokens,
+  } = useAccountCanSendTokens(currentAccount?.metadata?.address);
 
   const dryRunTransactionMutation = useDryRunTransactionMutation();
 
@@ -117,15 +126,28 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const defaultTokenID =
     applicationSupportedTokensData && applicationSupportedTokensData[0]?.tokenID;
 
-  const { isLoading: isLoadingTransactionFees, isError: isErrorTransactionFees } =
-    useTransactionFees({
-      transaction,
-      isTransactionSuccess,
-      dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
-      enabled: recipientAddress && tokenID,
-      onError: () =>
-        DropDownHolder.error(i18next.t('Error'), i18next.t('sendToken.errors.estimateFees')),
-    });
+  const {
+    data,
+    isLoading: isLoadingTransactionFees,
+    isError: isErrorTransactionFees,
+  } = useTransactionFees({
+    transaction,
+    isTransactionSuccess,
+    dependencies: [recipientAddress, tokenID, amount, debouncedMessage, isCrossChainTransfer],
+    enabled: recipientAddress && tokenID,
+    onError: () =>
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('sendToken.errors.estimateFees'),
+      }),
+  });
+
+  const feeTokenId = data?.data?.transaction?.fee?.tokenID;
+
+  const { hasSufficientBalanceForFee } = useValidateFeeBalance(
+    currentAccount?.metadata?.address,
+    feeTokenId
+  );
 
   const handleChange = (field, value, onChange) => {
     const [fieldPrefix, fieldSuffix] = field.split('.');
@@ -173,6 +195,10 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   };
 
   const getDryRunErrors = (events) => {
+    if (!hasSufficientBalanceForFee) {
+      return ERROR_EVENTS.insufficientFee;
+    }
+
     const event = events?.find((e) => ERROR_EVENTS[e.name]);
 
     if (event) {
@@ -237,7 +263,11 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
 
       privateKey = decryptedAccount.privateKey;
     } catch (error) {
-      DropDownHolder.error(i18next.t('Error'), i18next.t('auth.setup.decryptRecoveryPhraseError'));
+      Toast.show({
+        type: 'error',
+        text2: i18next.t('auth.setup.decryptRecoveryPhraseError'),
+      });
+
       return;
     }
 
@@ -388,7 +418,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
   const isLoading =
     form.formState.isSubmitting ||
     dryRunTransactionMutation.isLoading ||
-    broadcastTransactionMutation.isLoading;
+    broadcastTransactionMutation.isLoading ||
+    isLoadingAccountCanSendTokens;
 
   const isSuccess = broadcastTransactionMutation.isSuccess;
 
@@ -397,7 +428,8 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     dryRunTransactionMutation.error ||
     (dryRunTransactionMutation.data?.data &&
       getDryRunTransactionError(dryRunTransactionMutation.data.data)) ||
-    broadcastTransactionMutation.error;
+    broadcastTransactionMutation.error ||
+    isErrorAccountCanSendTokens;
 
   const isError = !!dryRunError || !!error;
 
@@ -417,5 +449,7 @@ export default function useSendTokenForm({ transaction, isTransactionSuccess, in
     command,
     isLoadingTransactionFees: isLoadingTransactionFees || message !== debouncedMessage,
     isErrorTransactionFees,
+    accountCanSendTokens,
+    feeTokenName,
   };
 }

@@ -1,27 +1,30 @@
 /* eslint-disable max-statements */
 import { fetch } from 'react-native-ssl-pinning';
-import { io } from 'socket.io-client';
 import { removeUndefinedObjectKeys } from '../helpers';
 
 import { METHOD } from './constants';
 
 export class APIClient {
   http = null;
-  ws = null;
   enableCertPinning = false;
   baseUrl = '';
   host = null;
   fetchConfig = {
     headers: {
       'Content-Type': 'application/json',
+      'User-Agent': 'lisk-mobile/3.0.0',
     },
     timeoutInterval: 10000,
   };
 
-  create({ http, ws, enableCertPinning = false } = {}) {
-    this.host = http || ws;
-    this.ws = io(`${ws}/blockchain`, { transports: ['websocket'] });
-    this.baseUrl = http;
+  create({ http, enableCertPinning = false } = {}) {
+    let url = http;
+    // TODO: https://github.com/LiskHQ/lisk-mobile/issues/2144
+    if (url === 'https://testnet-service.lisk.com') {
+      url = 'https://mainnet-service.lisk.com';
+    }
+    this.host = url;
+    this.baseUrl = url;
     this.enableCertPinning = enableCertPinning;
   }
 
@@ -78,23 +81,6 @@ export class APIClient {
     }
 
     return responseData;
-  }
-
-  rpc({ event, params, data }) {
-    return new Promise((resolve, reject) => {
-      if (this.ws.disconnected) {
-        reject(new Error('socket not connected'));
-        return;
-      }
-
-      this.ws.emit('request', { method: event, params: params || data || {} }, (response) => {
-        if (Object.keys(response).length && response.error) {
-          return reject(response);
-        }
-
-        return resolve(response);
-      });
-    });
   }
 }
 

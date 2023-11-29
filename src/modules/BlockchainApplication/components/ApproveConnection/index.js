@@ -9,6 +9,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import UrlSvg from 'assets/svgs/UrlSvg';
 import { stringShortener } from 'utilities/helpers';
 import Avatar from 'components/shared/avatar';
+import Logo from 'components/shared/Logo/Logo';
 import { useSession } from '../../../../../libs/wcm/hooks/useSession';
 import WalletConnectContext from '../../../../../libs/wcm/context/connectionContext';
 import { EVENTS } from '../../../../../libs/wcm/constants/lifeCycle';
@@ -57,7 +58,7 @@ export default function ApproveConnection({ onFinish, sharedData: { accounts, ch
     <>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: icons[0] }} style={styles.image} />
+          <Logo src={icons[0]} name={name} size={40} />
         </View>
 
         <H3 style={[styles.title, styles.theme.title]}>{name}</H3>

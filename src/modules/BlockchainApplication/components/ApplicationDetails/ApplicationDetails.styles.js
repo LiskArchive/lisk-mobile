@@ -21,6 +21,11 @@ export default {
       overflow: 'hidden',
       paddingTop: safeAreaPaddingTop,
     },
+    headerBg: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+    },
     body: {
       flex: 1,
       paddingLeft: boxes.boxPadding,

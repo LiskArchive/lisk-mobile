@@ -4,7 +4,7 @@ import { to } from 'await-to-js';
 import pkg from '../../../package.json';
 
 export async function createSignClient(icon) {
-  const [, result] = await to(
+  const [error, result] = await to(
     SignClient.init({
       projectId: process.env.PROJECT_ID,
       metadata: {
@@ -15,6 +15,14 @@ export async function createSignClient(icon) {
       },
     })
   );
+
+  if (error) {
+    throw error;
+  }
+
+  if (!result) {
+    throw new Error('Not able to setup WalletConnect client.');
+  }
 
   return result;
 }

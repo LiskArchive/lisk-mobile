@@ -2,13 +2,16 @@
 /* eslint-disable max-statements */
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useController } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
 import { useApplicationsExplorer } from 'modules/BlockchainApplication/hooks/useApplicationsExplorer';
+import { useApplicationSupportedTokensQuery } from 'modules/BlockchainApplication/api/useApplicationSupportedTokensQuery';
 import { PrimaryButton } from 'components/shared/toolBox/button';
-import { useSendTokenAmountChecker } from '../../hooks/useSendTokenAmountChecker';
+import { useSendTokenAmountChecker } from 'modules/SendToken/hooks/useSendTokenAmountChecker';
+import { useModal } from 'hooks/useModal';
 
 import getSendTokenSelectTokenStepStyles from './styles';
 import {
@@ -18,11 +21,11 @@ import {
   SendTokenAmountField,
   TokenSelectField,
 } from './components';
-import { useModal } from '../../../../hooks/useModal';
 import SignTransactionError from '../../../Transactions/components/SignTransaction/SignTransactionError';
 
 export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, form, transaction }) {
   const applications = useApplicationsExplorer();
+  const navigation = useNavigation();
 
   const modal = useModal();
 
@@ -59,6 +62,8 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
     (application) => application.chainID === recipientApplicationChainIDField.value
   );
 
+  const { data: tokensData } = useApplicationSupportedTokensQuery(recipientApplication);
+
   const { isMaxAllowedAmountExceeded, isAmountValid } = useSendTokenAmountChecker({
     recipientApplication,
     selectedTokenID: tokenIDField.value,
@@ -68,18 +73,47 @@ export default function SendTokenSelectTokenStep({ nextStep, isValidAddress, for
 
   const isMessageInvalid = messageField.value?.length > 64;
 
+  const feeTokenID = transaction?.data.feeTokenID;
+
+  const selectedToken = tokensData?.find((token) => token.tokenID === feeTokenID);
+
+  const tokenName = selectedToken?.tokenName ?? '';
+
   const showErrorModal = (error) => {
+    let isInsufficientToken = false;
+    if (typeof error === 'string' && error.includes('insufficient')) {
+      isInsufficientToken = true;
+    }
+
     modal.open(() => (
       <SignTransactionError
         onClick={form.handleReset}
         actionButton={
           <PrimaryButton
-            onClick={modal.close}
-            title={i18next.t('sendToken.result.error.retryButtonText')}
+            key="retry"
+            onClick={() => {
+              if (isInsufficientToken) {
+                navigation.navigate('Request');
+              }
+              modal.close();
+            }}
+            title={
+              isInsufficientToken
+                ? `${i18next.t('Request')} ${tokenName.toUpperCase()}`
+                : i18next.t('sendToken.result.error.retryButtonText')
+            }
             style={[styles.tryAgainButton]}
           />
         }
-        title={error}
+        description={
+          isInsufficientToken
+            ? i18next.t('transactions.errors.insufficientFeeDescription', {
+                message: tokenName.toUpperCase(),
+              })
+            : null
+        }
+        title={i18next.t(error, { message: tokenName.toUpperCase() })}
+        hideReport={isInsufficientToken}
       />
     ));
   };

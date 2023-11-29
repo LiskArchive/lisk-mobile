@@ -54,7 +54,9 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
   const tokenBalance =
     selectedToken && tokenBalanceData
       ? fromBaseToDisplayDenom({
-          amount: tokenBalanceData?.data[0]?.availableBalance || 0,
+          amount:
+            tokenBalanceData?.data?.find?.((token) => token.tokenID === value)?.availableBalance ||
+            0,
           displayDenom: selectedToken.displayDenom,
           denomUnits: selectedToken.denomUnits,
           symbol: selectedToken.symbol,
@@ -106,7 +108,7 @@ export function TokenSelectField({ value, onChange, recipientApplication, errorM
           <Picker.Toggle style={style?.toggle} openMenu={showOptions}>
             {selectedToken && (
               <View style={[styles.row]} testID="select-token-picker">
-                <Text style={[styles.theme.text]}>{selectedToken.symbol}</Text>
+                <Text style={[styles.text, styles.theme.text]}>{selectedToken.symbol}</Text>
                 <Image source={{ uri: selectedToken.logo?.png }} style={styles.logo} />
               </View>
             )}
@@ -157,7 +159,7 @@ export function SendTokenAmountField({
       renderData={() => (
         <Input
           value={value}
-          onChange={(newValue) => onChange(newValue)}
+          onChange={onChange}
           keyboardType="numeric"
           disabled={!selectedToken}
           label={

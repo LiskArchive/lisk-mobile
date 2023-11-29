@@ -37,7 +37,7 @@ export default function getSendTokenSelectApplicationsStepStyles() {
         marginLeft: 8,
       },
       text: {
-        color: colors.light.blueGray,
+        fontSize: 16,
       },
       placeholder: {
         fontSize: 16,

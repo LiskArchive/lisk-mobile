@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, Text } from 'react-native';
 import i18next from 'i18next';
 
@@ -17,6 +17,8 @@ export default function SignTransactionError({
   description,
   actionButton,
   secondaryButton,
+  hideReport = false,
+  hideIcon = false,
 }) {
   const emailReport = useEmailReport({ error, errorMessage: 'Error sending token' });
 
@@ -50,9 +52,11 @@ export default function SignTransactionError({
 
   return (
     <View style={[styles.container, styles.theme.container]}>
-      <View style={styles.illustrationContainer}>
-        <TxErrorSvg />
-      </View>
+      {!hideIcon && (
+        <View style={styles.illustrationContainer}>
+          <TxErrorSvg />
+        </View>
+      )}
 
       <H3 style={[styles.title, styles.theme.title]}>
         {title || i18next.t('sendToken.result.error.title')}
@@ -70,17 +74,21 @@ export default function SignTransactionError({
 
       {secondaryButton}
 
-      <Text style={[styles.actionLabel, styles.theme.actionLabel]}>
-        {i18next.t('sendToken.result.error.reportErrorLabel')}
-      </Text>
+      {!hideReport && (
+        <Fragment>
+          <Text style={[styles.actionLabel, styles.theme.actionLabel]}>
+            {i18next.t('sendToken.result.error.reportErrorLabel')}
+          </Text>
 
-      <LabelButton
-        onClick={emailReport.handleSend}
-        disabled={emailReport.isLoading || emailReport.error}
-        isLoading={emailReport.isLoading}
-      >
-        {i18next.t('sendToken.result.error.reportErrorButtonText')}
-      </LabelButton>
+          <LabelButton
+            onClick={emailReport.handleSend}
+            disabled={emailReport.isLoading || emailReport.error}
+            isLoading={emailReport.isLoading}
+          >
+            {i18next.t('sendToken.result.error.reportErrorButtonText')}
+          </LabelButton>
+        </Fragment>
+      )}
     </View>
   );
 }

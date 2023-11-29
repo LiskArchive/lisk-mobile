@@ -1,9 +1,10 @@
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Keyboard } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import { usePasteFromClipboard } from 'hooks/usePasteFromClipboard';
 import Checkbox from 'components/shared/Checkbox';
@@ -17,7 +18,6 @@ import { IconButton, PrimaryButton, LabelButton } from 'components/shared/toolBo
 import CopySvg from 'assets/svgs/CopySvg';
 import CircleCheckedSvg from 'assets/svgs/CircleCheckedSvg';
 import { colors } from 'constants/styleGuide';
-import DropDownHolder from 'utilities/alert';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { toSecureRecoveryPhraseString } from '../../utils/recoveryPhrase';
 
@@ -46,7 +46,10 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
 
   const { styles } = useTheme({ styles: getStyles() });
 
-  const derivationPathError = validateDerivationPath(derivationPath);
+  const derivationPathError = useMemo(
+    () => validateDerivationPath(derivationPath),
+    [derivationPath]
+  );
 
   const [fetchClipboardValue, { isLoading: isLoadingClipboardValue, pasted }] =
     usePasteFromClipboard({
@@ -73,7 +76,6 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
     const validity = validateRecoveryPhrase(normalizedRecoveryPhrase);
 
     if (!validity.length) {
-      DropDownHolder.closeAlert();
       onSubmit(normalizedRecoveryPhrase, derivationPath);
     } else {
       const errors = validity.filter(
@@ -84,7 +86,12 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
           ' Please check the secret recovery phrase.',
           ''
         );
-        DropDownHolder.error(i18next.t('Error'), errorMessage);
+
+        Toast.show({
+          type: 'error',
+          text1: i18next.t('Error'),
+          text2: errorMessage,
+        });
       }
 
       setRecoveryPhrase({
@@ -201,13 +208,13 @@ export default function RecoveryPhraseForm({ onSubmit, onScanQrCode, lng }) {
           testID="derivation-checkbox"
         >
           <P style={[styles.label, styles.theme.label]}>
-            {i18next.t('settings.menu.enableDerivationPath')}
+            {i18next.t('auth.setup.enableLegacyAccountLabel')}
           </P>
 
           <InfoToggler
-            title={i18next.t('auth.setup.enableLegacyAccount')}
-            style={{ toggleButton: styles.info }}
+            title={i18next.t('auth.setup.enableLegacyAccountTitle')}
             description={i18next.t('auth.setup.enableLegacyAccountDescription')}
+            style={{ toggleButton: styles.info }}
           />
         </Checkbox>
 

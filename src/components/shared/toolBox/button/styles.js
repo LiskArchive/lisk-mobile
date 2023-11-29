@@ -61,11 +61,17 @@ export default () => ({
     buttonText: {
       color: colors.light.maastrichtBlue,
     },
+    buttonContainer: {
+      borderColor: colors.light.ghost,
+    },
   },
 
   [themes.dark]: {
     buttonText: {
       color: colors.light.white,
+    },
+    buttonContainer: {
+      borderColor: colors.dark.volcanicSand,
     },
   },
 });
