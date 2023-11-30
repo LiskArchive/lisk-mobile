@@ -15,7 +15,7 @@ import { SUPPORT_EMAIL_ADDRESS } from 'constants/mail';
  * @param {String} errorMessage - Error message to add to the email metadata (optional).
  * @returns {Object} - The send email callback and its execution state (loading, error and data).
  */
-export function useEmailReport({ error, errorMessage } = {}) {
+export function useEmailReport({ error, errorMessage, onError } = {}) {
   const [isFetching, setIsFetching] = useState(false);
   const [errorOnLinking, setErrorOnLinking] = useState();
 
@@ -33,13 +33,12 @@ export function useEmailReport({ error, errorMessage } = {}) {
 
     if (networkStatusData?.data) {
       baseBody = `
-        \r
-        - Lisk Core Version: ${networkStatusData.data.version}
-        \r
-        - Lisk Network Version: ${networkStatusData.data.networkVersion}
-        \r
-        - Chain ID: ${networkStatusData.data.chainID}
-      `;
+      \r
+      - Lisk Core Version: ${networkStatusData.data.version}
+      \r
+      - Lisk Network Version: ${networkStatusData.data.networkVersion}
+      \r
+      - Chain ID: ${networkStatusData.data.chainID}`;
     }
 
     if (currentApplication.data?.serviceURLs) {
@@ -48,26 +47,17 @@ export function useEmailReport({ error, errorMessage } = {}) {
         ''
       );
 
-      baseBody += `
-        \r
-        - Service URL: ${stringifiedAppApis}
-      `;
+      baseBody += `- Service URL: ${stringifiedAppApis}`;
     }
 
     if (errorMessage) {
-      baseBody += `
-        \r
-        - Error Message: "${errorMessage}".
-      `;
+      baseBody += `- Error Message: "${errorMessage}".`;
     }
 
     if (error) {
       const stringifiedError = JSON.stringify({ message: error?.message, stack: error?.stack });
 
-      baseBody += `
-        \r
-        - Error: "${stringifiedError}".
-      `;
+      baseBody += `- Error: "${stringifiedError}".`;
     }
 
     if (baseBody) {
@@ -101,14 +91,18 @@ export function useEmailReport({ error, errorMessage } = {}) {
     return Linking.canOpenURL(url)
       .then((isURLSupported) => {
         if (!isURLSupported) {
+          const error = new Error(`Can't handle url: ${url}`);
           setErrorOnLinking(new Error(`Can't handle url: ${url}`));
           setIsFetching(false);
+          onError && onError(error);
         } else {
           Linking.openURL(url)
             .then(() => setIsFetching(false))
             .catch((_error) => {
+              console.log('error', _error);
               setErrorOnLinking(_error);
               setIsFetching(false);
+              onError && onError(_error);
             });
         }
       })

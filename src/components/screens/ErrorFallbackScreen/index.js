@@ -10,6 +10,7 @@ import { H4, P } from 'components/shared/toolBox/typography';
 import ErrorIllustrationSvg from 'assets/svgs/ErrorIllustrationSvg';
 
 import { getErrorFallbackScreenStyles } from './styles';
+import Toast from 'react-native-toast-message';
 
 /**
  * Renders an Error UI as fallback screen when a provided error occurs.
@@ -32,7 +33,14 @@ export default function ErrorScreen(props) {
 
   const handleRetryClick = props.onRetry;
 
-  const emailReport = useEmailReport({ error: props.error, errorMessage: description });
+  const handleErrorOnReport = (error) =>
+    Toast.show({ type: 'error', text1: 'Error trying to report error', text2: error.message });
+
+  const emailReport = useEmailReport({
+    error: props.error,
+    errorMessage: description,
+    onError: handleErrorOnReport,
+  });
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]}>
@@ -51,7 +59,7 @@ export default function ErrorScreen(props) {
           </PrimaryButton>
         )}
 
-        {!emailReport.isLoading && !emailReport.error && (
+        {!emailReport.isLoading && (
           <>
             <P style={[styles.label]}>{i18next.t('fallbackScreens.error.emailReportLabel')}</P>
 
