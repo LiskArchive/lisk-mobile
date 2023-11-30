@@ -15,7 +15,7 @@ import { useCurrentApplication } from './useCurrentApplication';
 export function useApplicationsManagement() {
   const { applications } = useApplications();
 
-  const { checkPin, togglePin } = usePinApplications();
+  const { checkPin, deletePin } = usePinApplications();
 
   const [, setCurrentApplication] = useCurrentApplication();
 
@@ -57,7 +57,7 @@ export function useApplicationsManagement() {
           });
         }
 
-        togglePin(chainID);
+        deletePin(chainID);
       } catch (_error) {
         Toast.show({
           type: 'error',
@@ -68,7 +68,7 @@ export function useApplicationsManagement() {
     [
       deleteApplicationFromStorage,
       applications,
-      togglePin,
+      deletePin,
       setCurrentApplication,
       defaultApplication,
     ]
