@@ -535,7 +535,8 @@
         "description2": "Please try again.",
         "retryButtonText": "Try again",
         "reportErrorLabel": "Is the problem persisting?",
-        "reportErrorButtonText": "Report the error via email"
+        "reportErrorButtonText": "Report the error via email",
+        "errorReportingEmail": "Fehlermeldung per E-Mail fehlgeschlagen."
       }
     },
     "errors": {

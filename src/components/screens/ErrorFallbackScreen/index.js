@@ -34,7 +34,11 @@ export default function ErrorScreen(props) {
   const handleRetryClick = props.onRetry;
 
   const handleErrorOnReport = (error) =>
-    Toast.show({ type: 'error', text1: 'Error trying to report error', text2: error.message });
+    Toast.show({
+      type: 'error',
+      text1: 'sendToken.result.error.errorReportingEmail',
+      text2: error.message,
+    });
 
   const emailReport = useEmailReport({
     error: props.error,

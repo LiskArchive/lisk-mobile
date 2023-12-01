@@ -536,7 +536,8 @@
         "description2": "Bitte versuche es erneut.",
         "retryButtonText": "Versuchen Sie es nochmal",
         "reportErrorLabel": "Bleibt das Problem bestehen?",
-        "reportErrorButtonText": "Melden Sie den Fehler per E-Mail"
+        "reportErrorButtonText": "Melden Sie den Fehler per E-Mail",
+        "errorReportingEmail": ""
       }
     },
     "errors": {

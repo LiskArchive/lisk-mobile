@@ -99,7 +99,6 @@ export function useEmailReport({ error, errorMessage, onError } = {}) {
           Linking.openURL(url)
             .then(() => setIsFetching(false))
             .catch((_error) => {
-              console.log('error', _error);
               setErrorOnLinking(_error);
               setIsFetching(false);
               onError && onError(_error);
