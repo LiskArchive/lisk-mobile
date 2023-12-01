@@ -39,6 +39,17 @@ export function usePinApplications() {
     [addPinToStorage, checkPin, deletePinFromStorage, pins]
   );
 
+  const deletePin = useCallback(
+    async (chainID) => {
+      if (checkPin(chainID)) {
+        await deletePinFromStorage(chainID);
+
+        pins.dispatchData({ type: 'delete', chainID });
+      }
+    },
+    [checkPin, deletePinFromStorage, pins]
+  );
+
   useEffect(() => {
     if (!pins.data) {
       getPinsFromStorage().then((cachedPins) => {
@@ -54,5 +65,5 @@ export function usePinApplications() {
     pins.setError(errorOnPinsStorage);
   }, [errorOnPinsStorage, pins]);
 
-  return { pins, togglePin, checkPin };
+  return { pins, togglePin, checkPin, deletePin };
 }
