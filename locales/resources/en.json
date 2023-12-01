@@ -31,7 +31,8 @@
       "description": "Please try again later and if you’re still experiencing problems, then report via email.",
       "retryButton": "Retry",
       "emailReportLabel": "Is the problem persisting?",
-      "emailReportButton": "Report the error via email"
+      "emailReportButton": "Report the error via email",
+      "errorReportingEmail": "Fehlermeldung per E-Mail fehlgeschlagen."
     }
   },
   "navigation": {
