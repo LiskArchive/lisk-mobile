@@ -23,7 +23,9 @@ describe('accounts utils', () => {
 
   describe('validateDerivationPath util', () => {
     it('should throw error for invalid derivation path', () => {
-      expect(validateDerivationPath('invalid-path')).toStrictEqual('Invalid path format');
+      expect(validateDerivationPath('invalid-path')).toStrictEqual(
+        'Invalid key derivation path format'
+      );
     });
     it('should return undefined for valid derivation path', () => {
       expect(validateDerivationPath(defaultDerivationPath)).toBeUndefined();
