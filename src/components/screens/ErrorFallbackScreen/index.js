@@ -36,7 +36,7 @@ export default function ErrorScreen(props) {
   const handleErrorOnReport = (error) =>
     Toast.show({
       type: 'error',
-      text1: 'sendToken.result.error.errorReportingEmail',
+      text1: 'fallbackScreens.errorReportingEmail',
       text2: error.message,
     });
 
