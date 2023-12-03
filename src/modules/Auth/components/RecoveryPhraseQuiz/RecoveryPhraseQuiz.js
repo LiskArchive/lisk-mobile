@@ -47,7 +47,7 @@ export default function RecoveryPhraseQuiz({
 
   const generateTest = useCallback(() => {
     const words = recoveryPhrase.match(/\w+/g);
-    const _missing = chooseRandomWords(2, words).sort();
+    const _missing = chooseRandomWords(2, words).sort((a, b) => a - b);
 
     setMissing(_missing);
     setVisibleOptions(0);
@@ -147,7 +147,7 @@ export default function RecoveryPhraseQuiz({
 
     return missing.length > 0
       ? phrase.map((val, index) => {
-          const sortedMissing = missing.sort();
+          const sortedMissing = missing;
           const optionIndex = sortedMissing.indexOf(index);
 
           const element =
