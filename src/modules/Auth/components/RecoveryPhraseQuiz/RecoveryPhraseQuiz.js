@@ -147,8 +147,7 @@ export default function RecoveryPhraseQuiz({
 
     return missing.length > 0
       ? phrase.map((val, index) => {
-          const sortedMissing = missing;
-          const optionIndex = sortedMissing.indexOf(index);
+          const optionIndex = missing.indexOf(index);
 
           const element =
             optionIndex >= 0 ? (
