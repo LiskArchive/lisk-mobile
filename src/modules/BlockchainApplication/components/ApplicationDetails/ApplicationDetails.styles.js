@@ -28,7 +28,6 @@ export default {
     },
     body: {
       flex: 1,
-      paddingTop: 16,
       paddingLeft: boxes.boxPadding,
       paddingRight: boxes.boxPadding,
     },
@@ -37,6 +36,7 @@ export default {
     },
     logoContainer: {
       marginTop: -35,
+      marginBottom: Platform.select({ ios: -32, android: 10 }),
       height: 70,
       width: 70,
       borderRadius: 35,
