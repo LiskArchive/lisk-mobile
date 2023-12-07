@@ -100,7 +100,7 @@ export default function ApplicationDetails({ route }) {
                 hideOnEmpty
               />
 
-              <SafeAreaView style={[styles.flex, styles.body]}>
+              <View style={[styles.flex, styles.body]}>
                 <View style={styles.titleRow}>
                   <DataRenderer
                     data={data.displayName}
@@ -108,7 +108,12 @@ export default function ApplicationDetails({ route }) {
                       <>
                         <H3 style={[styles.title, styles.theme.title]}>{displayName}</H3>
                         <TouchableOpacity style={styles.pinIcon} onPress={() => togglePin(chainID)}>
-                          <PinSvg variant={isPinned ? 'fill' : 'outline'} width={22} height={22} />
+                          <PinSvg
+                            color={colors.light.ultramarineBlue}
+                            variant={isPinned ? 'fill' : 'outline'}
+                            width={22}
+                            height={22}
+                          />
                         </TouchableOpacity>
                       </>
                     )}
@@ -225,7 +230,7 @@ export default function ApplicationDetails({ route }) {
                     />
                   </View>
                 </View>
-              </SafeAreaView>
+              </View>
             </ScrollView>
 
             {variant === 'manage' && (

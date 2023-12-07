@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import i18next from 'i18next';
 
 import { useTheme } from 'contexts/ThemeContext';
@@ -11,7 +12,6 @@ import CopyRecoveryPhraseToClipboard from 'components/shared/CopyRecoveryPhraseT
 
 import getRegisterSafeKeepingStyles from './RecoveryPhraseSafeKeepingScreen.styles';
 import RecoveryPhraseSecurityAdviceCard from '../../RecoveryPhraseSecurityAdviceCard/RecoveryPhraseSecurityAdviceCard';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export default function RecoveryPhraseSafeKeepingScreen({
   recoveryPhrase,

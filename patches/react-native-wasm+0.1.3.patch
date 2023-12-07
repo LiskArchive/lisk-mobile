@@ -27,7 +27,7 @@ index 6ba940e..7eae2e5 100644
    buildToolsVersion getExtOrDefault('buildToolsVersion')
    defaultConfig {
 -    minSdkVersion 16
-+    minSdkVersion 33
++    minSdkVersion 31
      targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
      versionCode 1
      versionName "1.0"
