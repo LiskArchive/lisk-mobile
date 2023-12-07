@@ -12,6 +12,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import getStyles from './styles';
 import { BookmarkList } from './components';
 import { useSearch } from '../../hooks/useSearch';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 export default function Bookmarks() {
   const navigation = useNavigation();
@@ -28,6 +29,8 @@ export default function Bookmarks() {
 
   const handlePress = (data) => navigation.navigate('AccountDetails', { address: data.address });
 
+  const tabBarHeight = useBottomTabBarHeight();
+
   return (
     <NavigationSafeAreaView>
       <HeaderSearchBar
@@ -41,15 +44,15 @@ export default function Bookmarks() {
 
       <View style={[styles.body]}>
         <BookmarkList draggable query={search.term} renderEmpty onPress={handlePress} />
-
-        <TouchableOpacity
-          style={[styles.titleContainer]}
-          testID="add-bookmark"
-          onPress={() => navigation.navigate('AddBookmark')}
-        >
-          <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={20} />
-        </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        style={[styles.titleContainer, { bottom: tabBarHeight + 50 }]}
+        testID="add-bookmark"
+        onPress={() => navigation.navigate('AddBookmark')}
+      >
+        <Icon style={[styles.addButtonIcon]} name="cross" color={colors[theme].white} size={24} />
+      </TouchableOpacity>
     </NavigationSafeAreaView>
   );
 }

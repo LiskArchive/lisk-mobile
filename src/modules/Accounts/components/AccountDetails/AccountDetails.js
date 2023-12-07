@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import { useTheme } from 'contexts/ThemeContext';
 import TransactionList from 'modules/Transactions/components/TransactionList/TransactionList';
@@ -17,7 +17,7 @@ export default function AccountDetails({ account }) {
   const { styles } = useTheme({ styles: getAccountDetailsStyles() });
 
   return (
-    <View style={[styles.container]}>
+    <ScrollView style={[styles.container]}>
       <AccountCard account={account} />
 
       <TokenList
@@ -31,6 +31,6 @@ export default function AccountDetails({ account }) {
         address={account.address}
         style={{ container: styles.transactionListContainer }}
       />
-    </View>
+    </ScrollView>
   );
 }
