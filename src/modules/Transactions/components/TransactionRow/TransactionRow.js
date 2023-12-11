@@ -50,7 +50,7 @@ export default function TransactionRow({ transaction, address }) {
           </H4>
 
           <TransactionTimestamp
-            timestamp={transaction.block.timestamp}
+            timestamp={transaction.block?.timestamp}
             format="MMM D, YYYY"
             styles={styles}
           />
