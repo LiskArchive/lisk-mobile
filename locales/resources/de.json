@@ -107,7 +107,6 @@
     "menu": {
       "security": "",
       "backupRecoveryPhrase": "Sichern Sie Ihre Secret Recovery Phrase",
-      "scanDevice": "",
       "about": "Über Lisk",
       "darkMode": "Dunkler Modus",
       "shakePhone": "",
@@ -122,12 +121,6 @@
       "enableLegacyAccountTitle": "Zugriff auf Legacy-Lisk-Konten",
       "enableLegacyAccountDescription": "Aktivieren Sie diese Option, um auf Ihre mit dem Lisk v3-Protokoll oder älter erstellten Lisk-Konten zuzugreifen.",
       "showDerivationPath": "Benutzerdefinierten Ableitungspfad anzeigen"
-    },
-    "scanDevice": {
-      "description": "",
-      "scanning": "",
-      "noHarmfulText": "",
-      "details": "The “{{packageName}}” harbors malicious elements that have the potential to compromise the security of your Lisk wallet. It is strongly recommended to uninstall this app. Alternatively, you can choose to retain the app entirely at your own risk”."
     },
     "backupPhrase": {
       "title": "Sichern Sie Ihre geheime Wiederherstellungsphrase",

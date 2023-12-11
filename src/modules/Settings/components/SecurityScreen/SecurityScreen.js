@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 import React from 'react';
-import { Platform, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
@@ -25,7 +25,6 @@ import ItemTitle from '../ItemTitle';
 
 import getStyles from './SecurityScreen.styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ScanDeviceSvg from 'assets/svgs/ScanDeviceSvg';
 
 export default function SecurityScreen() {
   const dispatch = useDispatch();
@@ -148,17 +147,6 @@ export default function SecurityScreen() {
               title={i18next.t('settings.menu.shakePhone')}
             />
           </View>
-          {Platform.OS === 'android' && (
-            <View style={[styles.item, styles.theme.item]}>
-              <ItemTitle
-                icon={<ScanDeviceSvg />}
-                title={i18next.t('settings.menu.scanDevice')}
-                iconSize={22}
-                target="ScanDeviceScreen"
-                navigation={navigation}
-              />
-            </View>
-          )}
         </View>
       </ScrollView>
     </SafeAreaView>

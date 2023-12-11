@@ -19,7 +19,7 @@ export default function TokenListTabs({
 
   return (
     <View style={[styles.tabsContainer]}>
-      {lockedTokens ? (
+      {lockedTokens?.length ? (
         <TouchableOpacity
           style={[styles.tabItem, activeTab === 0 && styles.theme.tabItemActive]}
           onPress={onTokensClick}

@@ -34,7 +34,6 @@ import TransactionsHistory from 'modules/Transactions/components/TransactionsHis
 import EditAccountScreen from 'modules/Accounts/components/EditAccountScreen';
 import DeleteAccountScreen from 'modules/Accounts/components/DeleteAccountScreen';
 import SecurityScreen from 'modules/Settings/components/SecurityScreen/SecurityScreen';
-import ScanDeviceScreen from 'modules/Settings/components/ScanDeviceScreen/ScanDeviceScreen';
 
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
@@ -218,11 +217,6 @@ export default function Navigator({ children }) {
           <StackNavigator.Screen
             name="SecurityScreen"
             component={SecurityScreen}
-            options={navigationOptions.NoHeader}
-          />
-          <StackNavigator.Screen
-            name="ScanDeviceScreen"
-            component={ScanDeviceScreen}
             options={navigationOptions.NoHeader}
           />
         </StackNavigator.Navigator>
