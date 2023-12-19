@@ -55,7 +55,7 @@ export class APIClient {
       headers: finalHeaders,
     };
 
-    if (this.enableCertPinning && process.env.NETWORK !== 'devnet') {
+    if (this.enableCertPinning && process.env.NETWORK !== 'testnet') {
       fetchOptions.sslPinning = {
         certs: ['server-cert'],
       };
