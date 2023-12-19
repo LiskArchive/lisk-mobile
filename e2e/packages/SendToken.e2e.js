@@ -39,7 +39,6 @@ describe('Send Token Screen', () => {
     await element(by.id('fees-breakdown-toggle')).tap();
     await element(by.id('send-token-screen')).atIndex(0).swipe('up');
     await expect(element(by.id('initialization-fee'))).not.toBeVisible();
-    await element(by.id('next-step-button')).tap();
   });
 
   it('should show transaction summary screen', async () => {
@@ -54,6 +53,9 @@ describe('Send Token Screen', () => {
     await element(by.id('send-token-screen')).atIndex(0).swipe('up');
     await expect(element(by.id('initialization-fee'))).not.toBeVisible();
     await element(by.id('next-step-button')).tap();
+    await waitFor(element(by.id('transaction-summary-screen')))
+      .toBeVisible()
+      .withTimeout(1000);
     await expect(element(by.id('transaction-summary-screen'))).toBeVisible();
   });
 
@@ -100,7 +102,7 @@ describe('Send Token Screen', () => {
   });
 
   // TODO: Fix cross-chain test
-  it.skip('should successfully send a cross-chain transaction', async () => {
+  it('should successfully send a cross-chain transaction', async () => {
     device.reloadReactNative();
     await element(by.id('account-list-item')).tap();
     await element(by.id('send-tokens-button')).tap();
