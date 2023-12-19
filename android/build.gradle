@@ -3,7 +3,7 @@
 buildscript {
     ext {
         buildToolsVersion = "33.0.0"
-        minSdkVersion = 33
+        minSdkVersion = 31
         compileSdkVersion = 33
         targetSdkVersion = 33
 
@@ -23,6 +23,7 @@ buildscript {
 
 plugins {
     id "com.dtplugin.mobileprotect" version("23.0.3")
+    id 'com.google.gms.google-services' version '4.4.0' apply false
 }
 
 allprojects {
