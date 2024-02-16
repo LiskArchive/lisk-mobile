@@ -69,7 +69,7 @@
     "react-native-blur-overlay": "1.0.7",
     "react-native-camera": "3.43.0",
     "react-native-device-info": "8.0.2",
-    "react-native-document-picker": "^8.1.1",
+    "react-native-document-picker": "^9.1.1",
     "react-native-fingerprint-scanner": "6.0.0",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "2.9.0",
