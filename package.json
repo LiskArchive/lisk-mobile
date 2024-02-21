@@ -45,7 +45,7 @@
     "@walletconnect/utils": "2.9.0",
     "assert": "^2.0.0",
     "await-to-js": "^3.0.0",
-    "axios": "^0.21.1",
+    "axios": "^0.28.0",
     "bignumber.js": "^9.0.1",
     "browserify-zlib": "^0.1.4",
     "buffer": "^4.9.1",
