@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 import Toast from 'react-native-toast-message';
 
-import { useModal } from 'hooks/useModal';
+// import { useModal } from 'hooks/useModal';
 import { useTheme } from 'contexts/ThemeContext';
 import { useCurrentAccount } from 'modules/Accounts/hooks/useCurrentAccount';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
 import { useCurrentApplication } from 'modules/BlockchainApplication/hooks/useCurrentApplication';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { H2, P } from 'components/shared/toolBox/typography';
-import { PrimaryButton } from 'components/shared/toolBox/button';
+// import { PrimaryButton } from 'components/shared/toolBox/button';
 import Checkbox from 'components/shared/Checkbox';
 import InfiniteScrollList from 'components/shared/InfiniteScrollList';
 import AccountItem from '../AccountItem';
@@ -28,7 +28,7 @@ export default function AccountList({
   navigation,
 }) {
   const { accounts } = useAccounts();
-  const modal = useModal();
+  // const modal = useModal();
 
   const [currentAccount, setAccount] = useCurrentAccount();
 
@@ -58,12 +58,12 @@ export default function AccountList({
     }
   };
 
-  const addAccount = () => {
-    if (mode === 'modal') {
-      modal.close();
-    }
-    navigation.navigate('AuthMethod', { authRequired: true });
-  };
+  // const addAccount = () => {
+  //   if (mode === 'modal') {
+  //     modal.close();
+  //   }
+  //   navigation.navigate('AuthMethod', { authRequired: true });
+  // };
 
   const toggleDiscreteMode = () =>
     dispatch(
@@ -72,17 +72,32 @@ export default function AccountList({
       })
     );
 
+  if (!accounts.length && mode === 'modal') {
+    return (
+      <View style={[styles.container, style?.container]}>
+        <P style={[styles.description, styles.theme.description, style?.description]}>
+          No accounts saved on this device.
+        </P>
+      </View>
+    );
+  }
+
+  if (!accounts.length && mode === 'screen') {
+    return null;
+  }
+
   return (
     <View style={[styles.container, style?.container]}>
-      <H2 style={[styles.title, styles.theme.title, style?.title]}>
-        {i18next.t('accounts.accountsManager.title')}
-      </H2>
-
-      <P style={[styles.description, styles.theme.description, style?.description]}>
-        {mode === 'modal'
-          ? i18next.t('accounts.accountsManager.modalDescription')
-          : i18next.t('accounts.accountsManager.screenDescription')}
-      </P>
+      {mode === 'modal' && (
+        <>
+          <H2 style={[styles.title, styles.theme.title, style?.title]}>
+            {i18next.t('accounts.accountsManager.title')}
+          </H2>
+          <P style={[styles.description, styles.theme.description, style?.description]}>
+            {i18next.t('accounts.accountsManager.modalDescription')}
+          </P>
+        </>
+      )}
 
       <InfiniteScrollList
         data={accounts}
@@ -101,7 +116,6 @@ export default function AccountList({
         )}
         withDefaultSpinner
       />
-
       <View style={[styles.footer, style?.footer]}>
         {mode === 'screen' && (
           <Checkbox
@@ -113,9 +127,9 @@ export default function AccountList({
           </Checkbox>
         )}
 
-        <PrimaryButton onClick={addAccount} testID="add-account">
+        {/* <PrimaryButton onClick={addAccount} testID="add-account">
           {i18next.t('accounts.accountsManager.addAccountButtonText')}
-        </PrimaryButton>
+        </PrimaryButton> */}
       </View>
     </View>
   );
