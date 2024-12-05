@@ -79,9 +79,9 @@ export default function Navigator({ children }) {
   return (
     <SafeAreaProvider>
       <NavigationContainer linking={navigationLinking} theme={themeColors}>
-        <StackNavigator.Navigator initialRouteName="MigrateToL2Screen">
+        <StackNavigator.Navigator initialRouteName="MigrateToL2">
           <StackNavigator.Screen
-            name="MigrateToL2Screen"
+            name="MigrateToL2"
             component={MigrateToL2Screen}
             options={navigationOptions.NoHeader}
           />

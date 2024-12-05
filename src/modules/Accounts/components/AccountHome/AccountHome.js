@@ -1,20 +1,20 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useState } from 'react';
-import { ScrollView, RefreshControl, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
-import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from 'modules/Transactions/components/TransactionList/TransactionList.constants';
+// import { useAccountTransactionsQuery } from 'modules/Accounts/api/useAccountTransactionsQuery';
+// import { NO_OF_TRANSACTIONS_ON_OVERVIEW } from 'modules/Transactions/components/TransactionList/TransactionList.constants';
 import { useTheme } from 'contexts/ThemeContext';
 import IncognitoSvg from 'assets/svgs/IncognitoSvg';
 import { settingsUpdated } from 'modules/Settings/store/actions';
 import { useAccounts } from 'modules/Accounts/hooks/useAccounts';
-import ApplicationSwitcher from 'modules/BlockchainApplication/components/ApplicationSwitcher';
+// import ApplicationSwitcher from 'modules/BlockchainApplication/components/ApplicationSwitcher';
 import NavigationSafeAreaView from 'components/navigation/NavigationSafeAreaView';
-import { NO_OF_TOKENS_ON_OVERVIEW } from '../TokenList/TokenList.constants';
-import { useAccountTokensFullDataQuery } from '../../api/useAccountTokensFullDataQuery';
+// import { NO_OF_TOKENS_ON_OVERVIEW } from '../TokenList/TokenList.constants';
+// import { useAccountTokensFullDataQuery } from '../../api/useAccountTokensFullDataQuery';
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
 
 import getStyles from './AccountHome.styles';
@@ -30,21 +30,21 @@ function AccountHome() {
   const [currentAccount] = useCurrentAccount();
   const [refreshControl, setRefreshControl] = useState(false);
 
-  const { refetch: refetchTokens, isRefetching: isRefetchingTokens } =
-    useAccountTokensFullDataQuery(currentAccount.metadata.address, {
-      config: {
-        params: { limit: NO_OF_TOKENS_ON_OVERVIEW },
-      },
-    });
+  // const { refetch: refetchTokens, isRefetching: isRefetchingTokens } =
+  //   useAccountTokensFullDataQuery(currentAccount.metadata.address, {
+  //     config: {
+  //       params: { limit: NO_OF_TOKENS_ON_OVERVIEW },
+  //     },
+  //   });
 
-  const { refetch: refetchTransactions } = useAccountTransactionsQuery(
-    currentAccount.metadata.address,
-    {
-      config: {
-        params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
-      },
-    }
-  );
+  // const { refetch: refetchTransactions } = useAccountTransactionsQuery(
+  //   currentAccount.metadata.address,
+  //   {
+  //     config: {
+  //       params: { limit: NO_OF_TRANSACTIONS_ON_OVERVIEW },
+  //     },
+  //   }
+  // );
 
   const discrete = useSelector((state) => state.settings.discrete);
 
@@ -61,11 +61,11 @@ function AccountHome() {
     }
   }, [refreshControl]);
 
-  const handleRefresh = () => {
-    setRefreshControl(true);
-    refetchTokens();
-    refetchTransactions();
-  };
+  // const handleRefresh = () => {
+  //   setRefreshControl(true);
+  //   refetchTokens();
+  //   refetchTransactions();
+  // };
 
   const toggleIncognito = () => {
     ReactNativeHapticFeedback.trigger('selection');
@@ -78,7 +78,7 @@ function AccountHome() {
 
   useEffect(() => {
     if (!accounts?.length) {
-      navigation.navigate('AuthMethod');
+      navigation.navigate('MigrateToL2');
     }
   }, [accounts, navigation]);
 
@@ -86,12 +86,12 @@ function AccountHome() {
     <>
       <NavigationSafeAreaView>
         <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={isRefetchingTokens && refreshControl}
-              onRefresh={handleRefresh}
-            />
-          }
+        // refreshControl={
+        //   <RefreshControl
+        //     refreshing={isRefetchingTokens && refreshControl}
+        //     onRefresh={handleRefresh}
+        //   />
+        // }
         >
           <View
             style={[styles.row, styles.alignItemsCenter, styles.topContainer]}
@@ -101,9 +101,9 @@ function AccountHome() {
               <IncognitoSvg size={1.2} disabled={discrete} />
             </TouchableOpacity>
 
-            <View style={styles.flex}>
+            {/* <View style={styles.flex}>
               <ApplicationSwitcher />
-            </View>
+            </View> */}
           </View>
 
           <AccountDetails account={currentAccount.metadata} />

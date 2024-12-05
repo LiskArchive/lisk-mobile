@@ -5,6 +5,7 @@ import {
   applicationsContextReducer,
   applicationPinsContextReducer,
 } from './ApplicationsContext.utils';
+import { LISK_TESTNET_APPLICATION } from './ApplicationsContext.constants';
 
 export const ApplicationsContext = createContext();
 
@@ -30,6 +31,8 @@ export function ApplicationsProvider({ children }) {
   const [currentApplicationStatus, setCurrentApplicationStatus] = useState();
   const [errorOnCurrentApplication, setErrorOnCurrentApplication] = useState();
 
+  console.log({ currentApplication: JSON.stringify(currentApplication) });
+
   return (
     <ApplicationsContext.Provider
       value={{
@@ -52,7 +55,7 @@ export function ApplicationsProvider({ children }) {
           setError: setErrorOnPins,
         },
         currentApplication: {
-          data: currentApplication,
+          data: LISK_TESTNET_APPLICATION,
           setData: setCurrentApplication,
           status: currentApplicationStatus,
           setStatus: setCurrentApplicationStatus,

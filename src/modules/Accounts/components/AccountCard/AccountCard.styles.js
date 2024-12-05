@@ -8,6 +8,7 @@ export default function getAccountCardStyles() {
         backgroundColor: colors.light.ultramarineBlue,
         padding: 24,
         borderRadius: 20,
+        minHeight: 210,
       },
       row: {
         flexDirection: 'row',
