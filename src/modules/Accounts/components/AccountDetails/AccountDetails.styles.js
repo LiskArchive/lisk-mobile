@@ -6,10 +6,7 @@ export default function getAccountDetailsStyles() {
       container: {
         padding: boxes.boxPadding,
       },
-      tokenListContainer: {
-        marginTop: 32,
-      },
-      transactionListContainer: {
+      migrateToL2Card: {
         marginTop: 16,
       },
     },
