@@ -19,6 +19,8 @@ export default function AccountDetails({ account }) {
     <View style={[styles.container]}>
       <AccountCard account={account} />
 
+      <View></View>
+
       {/* <TokenList
         mode="overview"
         address={account.address}

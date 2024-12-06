@@ -10,6 +10,7 @@ import { stringShortener } from 'utilities/helpers';
 import { colors } from 'constants/styleGuide';
 import SwitchSvg from 'assets/svgs/SwitchSvg';
 import CopyToClipboard from 'components/shared/CopyToClipboard/CopyToClipboard';
+import DiscreteModeComponent from 'components/shared/DiscreteModeComponent';
 import useAccountManagerModal from '../../hooks/useAccountManagerModal';
 
 import { useCurrentAccount } from '../../hooks/useCurrentAccount';
@@ -87,7 +88,13 @@ export default function AccountCard({ account }) {
             style={{ container: { borderRadius: 4, marginTop: 8, opacity: 0.2 } }}
           />
         ) : (
-          <P style={[styles.balanceText, styles.theme.balanceText]}>{balance} LSK</P>
+          <DiscreteModeComponent
+            data={balance}
+            blurVariant="balance"
+            style={{ opacity: 0.2, marginTop: 16 }}
+          >
+            <P style={[styles.balanceText, styles.theme.balanceText]}>{balance} LSK</P>
+          </DiscreteModeComponent>
         )}
       </View>
     </LinearGradient>
