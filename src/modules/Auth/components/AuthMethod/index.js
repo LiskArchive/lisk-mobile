@@ -16,7 +16,7 @@ import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import CreateAccount from '../CreateAccountButton/CreateAccountButton';
+// import CreateAccount from '../CreateAccountButton/CreateAccountButton';
 import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
@@ -51,15 +51,21 @@ export default function AuthMethod({ route }) {
       }
     };
 
-    if (settings.showedIntro) {
-      setBiometricSensorType();
-      dispatch(settingsRetrieved());
-      if (accounts.length && !route.params?.authRequired) {
-        navigation.navigate('AccountsManagerScreen');
-      }
-    } else {
-      navigation.push('Intro');
+    setBiometricSensorType();
+    dispatch(settingsRetrieved());
+    if (accounts.length && !route.params?.authRequired) {
+      navigation.navigate('AccountsManagerScreen');
     }
+
+    // if (settings.showedIntro) {
+    //   setBiometricSensorType();
+    //   dispatch(settingsRetrieved());
+    //   if (accounts.length && !route.params?.authRequired) {
+    //     navigation.navigate('AccountsManagerScreen');
+    //   }
+    // } else {
+    //   navigation.push('Intro');
+    // }
   }, [settings.showedIntro, accounts.length, dispatch, navigation, route.params?.authRequired]);
 
   useEffect(() => {
@@ -106,7 +112,7 @@ export default function AuthMethod({ route }) {
     }
   };
 
-  const handleCreateAccountClick = () => navigation.navigate('Register');
+  // const handleCreateAccountClick = () => navigation.navigate('Register');
 
   const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
 
@@ -146,7 +152,7 @@ export default function AuthMethod({ route }) {
         />
       </View>
 
-      <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} />
+      {/* <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} /> */}
     </SafeAreaView>
   );
 }

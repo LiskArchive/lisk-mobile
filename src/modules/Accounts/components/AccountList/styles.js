@@ -23,7 +23,6 @@ export default function getAccountsListStyles() {
       },
       checkBox: {
         marginBottom: 24,
-        alignSelf: 'center',
       },
       checkBoxText: {
         fontSize: 16,
