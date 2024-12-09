@@ -12,7 +12,6 @@ export default () => ({
     },
     title: {
       textAlign: 'center',
-      marginTop: 40,
       marginBottom: 8,
     },
     derivationPath: {

@@ -62,7 +62,7 @@ export default function AccountList({
     if (mode === 'modal') {
       modal.close();
     }
-    navigation.navigate('AuthMethod', { authRequired: true });
+    navigation.navigate('AuthMethod', { authRequired: true, showBackButton: true });
   };
 
   const toggleDiscreteMode = () =>
@@ -80,10 +80,6 @@ export default function AccountList({
         </P>
       </View>
     );
-  }
-
-  if (!accounts.length && mode === 'screen') {
-    return null;
   }
 
   return (
@@ -116,6 +112,7 @@ export default function AccountList({
         )}
         withDefaultSpinner
       />
+
       <View style={[styles.footer, style?.footer]}>
         {mode === 'screen' && (
           <Checkbox

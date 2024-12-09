@@ -53,8 +53,9 @@ export default function AuthMethod({ route }) {
 
     setBiometricSensorType();
     dispatch(settingsRetrieved());
+
     if (accounts.length && !route.params?.authRequired) {
-      navigation.navigate('AccountsManagerScreen');
+      navigation.navigate('MigrateToL2Screen');
     }
 
     // if (settings.showedIntro) {
@@ -114,9 +115,9 @@ export default function AuthMethod({ route }) {
 
   // const handleCreateAccountClick = () => navigation.navigate('Register');
 
-  const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
+  const handleGoBackClick = () => navigation.navigate('MigrateToL2');
 
-  const showBackButton = accounts.length > 0;
+  // const showBackButton = accounts.length > 0;
 
   if (!isScreenReady) {
     return <SafeAreaView style={[styles.container, styles.theme.container]} />;
@@ -128,10 +129,10 @@ export default function AuthMethod({ route }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
-      {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
+      <HeaderBackButton onPress={handleGoBackClick} />
 
       <View style={[styles.body]}>
-        <HeaderLogo style={{ container: { marginTop: 40 } }} />
+        <HeaderLogo />
 
         <H2 style={[styles.title, styles.theme.title]} testID="add-account-title">
           {i18next.t('auth.setup.authMethodTitle')}

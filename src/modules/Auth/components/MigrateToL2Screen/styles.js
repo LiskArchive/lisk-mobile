@@ -7,10 +7,6 @@ export default function getAccountsManagerScreenStyles() {
         flex: 1,
         padding: boxes.boxPadding,
       },
-      headerLogoContainer: {
-        marginVertical: 24,
-        alignItems: 'center',
-      },
       migrateToL2Card: {
         marginBottom: 16,
       },
