@@ -19,9 +19,11 @@ import store, { persistedStore } from 'store/index';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
 import { useRegisterAndroidModules } from './hooks/useRegisterAndroidModules';
+import { useNotifications } from './notifications/hooks/useNotifications';
 
 export default function App() {
   useRegisterAndroidModules();
+  useNotifications();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
