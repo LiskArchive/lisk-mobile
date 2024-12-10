@@ -16,7 +16,6 @@ import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-// import CreateAccount from '../CreateAccountButton/CreateAccountButton';
 import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
@@ -57,16 +56,6 @@ export default function AuthMethod({ route }) {
     if (accounts.length && !route.params?.authRequired) {
       navigation.navigate('MigrateToL2Screen');
     }
-
-    // if (settings.showedIntro) {
-    //   setBiometricSensorType();
-    //   dispatch(settingsRetrieved());
-    //   if (accounts.length && !route.params?.authRequired) {
-    //     navigation.navigate('AccountsManagerScreen');
-    //   }
-    // } else {
-    //   navigation.push('Intro');
-    // }
   }, [settings.showedIntro, accounts.length, dispatch, navigation, route.params?.authRequired]);
 
   useEffect(() => {
@@ -113,11 +102,7 @@ export default function AuthMethod({ route }) {
     }
   };
 
-  // const handleCreateAccountClick = () => navigation.navigate('Register');
-
   const handleGoBackClick = () => navigation.navigate('MigrateToL2');
-
-  // const showBackButton = accounts.length > 0;
 
   if (!isScreenReady) {
     return <SafeAreaView style={[styles.container, styles.theme.container]} />;
@@ -152,8 +137,6 @@ export default function AuthMethod({ route }) {
           testID="restore-from-file"
         />
       </View>
-
-      {/* <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} /> */}
     </SafeAreaView>
   );
 }

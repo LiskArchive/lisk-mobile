@@ -29,6 +29,7 @@ allprojects {
     repositories {
         maven {
             credentials {
+                //Leave the username as "MAVEN"
                 username "MAVEN"
                 password "$MOBILEPROTECT_REPO_API_KEY"
             }

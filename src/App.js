@@ -15,7 +15,6 @@ import { toastConfig } from 'components/shared/Toast/Toast.config';
 import StatusBar from 'components/shared/StatusBar';
 import reactQueryClient from 'utilities/api/reactQueryClient';
 import store, { persistedStore } from 'store/index';
-// import BootstrapApp from './BootstrapApp';
 import i18n from '../locales';
 import WalletConnectProvider from '../libs/wcm/context/connectionProvider';
 import { useRegisterAndroidModules } from './hooks/useRegisterAndroidModules';
@@ -35,12 +34,10 @@ export default function App() {
                 <ApplicationsProvider>
                   <ThemeProvider>
                     <ModalProvider>
-                      {/* <BootstrapApp> */}
                       <Navigator>
                         <StatusBar />
                         <Toast config={toastConfig} />
                       </Navigator>
-                      {/* </BootstrapApp> */}
                     </ModalProvider>
                   </ThemeProvider>
                 </ApplicationsProvider>

@@ -8,11 +8,9 @@ PushNotification.configure({
   },
 
   onNotification: function (notification) {
-    // Required on iOS only
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
 
-  // IOS ONLY
   permissions: {
     alert: true,
     badge: true,
