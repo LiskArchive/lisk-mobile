@@ -16,7 +16,7 @@ export function useNotifications() {
         }
 
         await notificationsService.cancelAllNotifications(); // Reset notifications on mount
-        await notificationsService.scheduleWeeklyNotifications();
+        await notificationsService.scheduleBiWeeklyNotifications();
       } catch (error) {
         console.error('Failed to schedule notifications:', error);
       }

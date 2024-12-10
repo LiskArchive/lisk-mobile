@@ -57,32 +57,35 @@ export default class NotificationsService {
     );
   }
 
-  async scheduleWeeklyNotifications() {
+  async scheduleBiWeeklyNotifications() {
     try {
       const permissionGranted = await this.requestNotificationPermission();
       if (!permissionGranted) {
-        console.log('Notification permission denied');
         return;
       }
 
       const isScheduled = await AsyncStorage.getItem('notifications_scheduled');
-      console.log('Notifications scheduled status:', isScheduled);
 
       if (isScheduled) {
         console.log('Notifications already scheduled');
         return;
       }
 
-      const nextMinute = moment().add(1, 'minutes').startOf('minute').toDate();
-      console.log('Scheduling notification for:', nextMinute);
+      const nextTrigger = moment().add(1, 'minutes').startOf('minute');
+      const repeatTime = 1;
+      const repeatType = 'minute';
+      // @todo - Uncomment when ready to pass to production.
+      // const nextTrigger  moment().add(3, 'days').startOf('day').hour(12); // Start at noon, 3 days from now
+      // const repeatTime = 2;
+      // const repeatType = 'week';
 
       PushNotification.localNotificationSchedule({
         channelId: 'lisk-mobile-notifications',
         title: 'Migrate to Lisk L2',
         message: 'Migrate your Lisk accounts to the new L2 network on Lisk Portal.',
-        date: nextMinute,
-        repeatType: 'minute',
-        repeatTime: 1,
+        date: nextTrigger.toDate(),
+        repeatType,
+        repeatTime,
         allowWhileIdle: true,
         importance: 'high',
         priority: 'high',
@@ -92,7 +95,6 @@ export default class NotificationsService {
       });
 
       await AsyncStorage.setItem('notifications_scheduled', 'true');
-      console.log('Notification scheduled successfully');
     } catch (error) {
       console.error('Error scheduling notification:', error);
     }
@@ -102,7 +104,6 @@ export default class NotificationsService {
     try {
       PushNotification.cancelAllLocalNotifications();
       await AsyncStorage.removeItem('notifications_scheduled');
-      console.log('All notifications cancelled');
     } catch (error) {
       console.error('Error cancelling notifications:', error);
     }
