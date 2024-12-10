@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
 import NotificationsService from '../NotificationsService';
 
 export function useNotifications() {
@@ -7,6 +8,13 @@ export function useNotifications() {
 
     const initNotifications = async () => {
       try {
+        // Request permission before proceeding with notifications
+        const permissionGranted = await notificationsService.requestNotificationPermission();
+        if (!permissionGranted && Platform.OS === 'android' && Platform.Version >= 33) {
+          console.log('Notification permission not granted');
+          return;
+        }
+
         await notificationsService.cancelAllNotifications(); // Reset notifications on mount
         await notificationsService.scheduleWeeklyNotifications();
       } catch (error) {
