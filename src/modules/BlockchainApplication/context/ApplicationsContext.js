@@ -27,11 +27,9 @@ export function ApplicationsProvider({ children }) {
   const [pinsStatus, setPinsStatus] = useState(false);
   const [errorOnPins, setErrorOnPins] = useState();
 
-  const [currentApplication, setCurrentApplication] = useState();
+  const [, setCurrentApplication] = useState();
   const [currentApplicationStatus, setCurrentApplicationStatus] = useState();
   const [errorOnCurrentApplication, setErrorOnCurrentApplication] = useState();
-
-  console.log({ currentApplication: JSON.stringify(currentApplication) });
 
   return (
     <ApplicationsContext.Provider
