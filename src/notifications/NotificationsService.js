@@ -71,13 +71,9 @@ export default class NotificationsService {
         return;
       }
 
-      const nextTrigger = moment().add(1, 'minutes').startOf('minute');
-      const repeatTime = 1;
-      const repeatType = 'minute';
-      // @todo - Uncomment when ready to pass to production.
-      // const nextTrigger  moment().add(3, 'days').startOf('day').hour(12); // Start at noon, 3 days from now
-      // const repeatTime = 2;
-      // const repeatType = 'week';
+      const nextTrigger = moment().add(3, 'days').startOf('day').hour(12); // Start at noon, 3 days from now
+      const repeatTime = 2;
+      const repeatType = 'week';
 
       PushNotification.localNotificationSchedule({
         channelId: 'lisk-mobile-notifications',
