@@ -531,7 +531,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 3HV4Y7A4DX;
+						DevelopmentTeam = 58UK9RE9TP;
 						LastSwiftMigration = 1300;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1382,7 +1382,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CURRENT_PROJECT_VERSION = 74;
-				DEVELOPMENT_TEAM = 3HV4Y7A4DX;
+				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = arm64;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1412,7 +1412,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Lisk/Lisk.entitlements;
 				CURRENT_PROJECT_VERSION = 74;
-				DEVELOPMENT_TEAM = 3HV4Y7A4DX;
+				DEVELOPMENT_TEAM = 58UK9RE9TP;
 				EXCLUDED_ARCHS = arm64;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Lisk/Info.plist;
