@@ -39,7 +39,7 @@ Before you start, read the **[README.md](/README.md)** file for info on the proj
 
 ## Writing some code!
 
-Contributing to a project on Github is pretty straight forward. If this is you're first time, these are the steps you should take.
+Contributing to a project on Github is pretty straight forward. If this is your first time, these are the steps you should take.
 
 - Fork this repo.
 
