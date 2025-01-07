@@ -54,7 +54,7 @@
     "hoist-non-react-statics": "^3.3.2",
     "i18next": "^14.0.1",
     "lottie-ios": "3.4.0",
-    "lottie-react-native": "^7.1.0",
+    "lottie-react-native": "^5.1.4",
     "mobile-protect": "^22.6.0",
     "moment": "^2.29.1",
     "patch-package": "^6.4.7",
