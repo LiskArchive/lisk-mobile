@@ -36,13 +36,13 @@ export const LISK_MAINNET_APPLICATION = {
       url: 'https://mainnet.lisk.com',
       apiCertificatePublicKey:
         '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqiQIDBSSlqKeWo0st2Hy\nJRbDzqYgcZfQvOpttr4kMbDjAYnz6XvZe3kOHcnMM2ePWrAS66SHTqdVbEEiu9Kf\njEQQkmk/Xv7XSMQ5kwidv+ANNDjTaC9GRnUHQ3pH77ZZY5msq0kEvmDvyMljU9kD\neqpugQn7jQVTG7te7PyXnZxvzMq8tgDILEwRnkF2hUF6jCH5X763aOT7X6yKUKY5\nZSUqmStKGPt1i34E5Pvb2AumsApkyqXfST/N/h8NV3UXRTBQ/fwAEvtOj3IMNNrw\nRUZIYAvwPFxTLXF0Dfj0fEiLFQzq+VPk3jsD9EbH1FotHXPtgA7brvG0uHfWKNsQ\nIQIDAQAB\n-----END PUBLIC KEY-----',
-      maintainer: 'Lightcurve GmbH',
+      maintainer: 'Lisk Limited',
     },
     {
       url: 'wss://mainnet.lisk.com',
       apiCertificatePublicKey:
         '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqiQIDBSSlqKeWo0st2Hy\nJRbDzqYgcZfQvOpttr4kMbDjAYnz6XvZe3kOHcnMM2ePWrAS66SHTqdVbEEiu9Kf\njEQQkmk/Xv7XSMQ5kwidv+ANNDjTaC9GRnUHQ3pH77ZZY5msq0kEvmDvyMljU9kD\neqpugQn7jQVTG7te7PyXnZxvzMq8tgDILEwRnkF2hUF6jCH5X763aOT7X6yKUKY5\nZSUqmStKGPt1i34E5Pvb2AumsApkyqXfST/N/h8NV3UXRTBQ/fwAEvtOj3IMNNrw\nRUZIYAvwPFxTLXF0Dfj0fEiLFQzq+VPk3jsD9EbH1FotHXPtgA7brvG0uHfWKNsQ\nIQIDAQAB\n-----END PUBLIC KEY-----',
-      maintainer: 'Lightcurve GmbH',
+      maintainer: 'Lisk Limited',
     },
   ],
   backgroundColor: '#f7f9fb',
@@ -86,13 +86,13 @@ export const LISK_TESTNET_APPLICATION = {
       url: 'https://testnet.lisk.com',
       apiCertificatePublicKey:
         '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA55eVRxMsjgsakiSmRJGN\ng7u5XCO63BzbyFeUUuZ5YGRodFDw/cVAaIg9mWAtYRQM3FemJRt6zGcneFTbfmFC\nFcrGFbFqbcBssuHeyaBQroP8E5NcYVy7ZYJmZTaFBL9fpFzgrGdnLgjrlTkx7G+d\n95299QFRfX+mtSXuU0qzsSJzLaO9TsED3+I0aH80nJtxO8/ZI+RqjmomV5aAU0EO\n4S7a7npMZjxVKqwEcUcHeGf+4VLFGDc821IV45T4OZCxRG0sWgbc/AglY1xzRzJv\n1PTTWSYaukKM4rsuVEh6P12dAvMowh4wPGGPkQopXfS135xuHeefjnILl5/OcwHF\n3wIDAQAB\n-----END PUBLIC KEY-----',
-      maintainer: 'Lightcurve GmbH',
+      maintainer: 'Lisk Limited',
     },
     {
       url: 'wss://testnet.lisk.com',
       apiCertificatePublicKey:
         '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA55eVRxMsjgsakiSmRJGN\ng7u5XCO63BzbyFeUUuZ5YGRodFDw/cVAaIg9mWAtYRQM3FemJRt6zGcneFTbfmFC\nFcrGFbFqbcBssuHeyaBQroP8E5NcYVy7ZYJmZTaFBL9fpFzgrGdnLgjrlTkx7G+d\n95299QFRfX+mtSXuU0qzsSJzLaO9TsED3+I0aH80nJtxO8/ZI+RqjmomV5aAU0EO\n4S7a7npMZjxVKqwEcUcHeGf+4VLFGDc821IV45T4OZCxRG0sWgbc/AglY1xzRzJv\n1PTTWSYaukKM4rsuVEh6P12dAvMowh4wPGGPkQopXfS135xuHeefjnILl5/OcwHF\n3wIDAQAB\n-----END PUBLIC KEY-----',
-      maintainer: 'Lightcurve GmbH',
+      maintainer: 'Lisk Limited',
     },
   ],
   backgroundColor: '#f7f9fb',
