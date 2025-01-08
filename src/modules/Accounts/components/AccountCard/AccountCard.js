@@ -35,7 +35,11 @@ export default function AccountCard({ account }) {
 
   const isCurrentAccount = currentAccount.metadata.address === account.address;
 
-  const balance = fromBeddowsToLsk(legacyAccount?.token?.availableBalance || 0);
+  const availableBalance =
+    legacyAccount?.token?.lockedBalances.reduce((acc, curr) => acc + Number(curr.amount), 0) ?? 0;
+  const lockedBalance = legacyAccount?.token?.lockedBalance ?? 0;
+
+  const balance = fromBeddowsToLsk(availableBalance + lockedBalance);
 
   return (
     <LinearGradient
