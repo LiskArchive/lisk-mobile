@@ -24,7 +24,6 @@ export default class NotificationsService {
         );
         return granted === PermissionsAndroid.RESULTS.GRANTED;
       } catch (err) {
-        console.warn('Failed to request notification permission:', err);
         return false;
       }
     }
@@ -43,11 +42,9 @@ export default class NotificationsService {
         soundName: 'default',
       },
       (created) => {
-        console.log(`Channel created: ${created}`);
         if (!created) {
           // Check if channel already exists
           PushNotification.channelExists('lisk-mobile-notifications', (exists) => {
-            console.log('Channel exists:', exists);
             if (!exists) {
               console.error('Failed to create notification channel');
             }
@@ -67,7 +64,6 @@ export default class NotificationsService {
       const isScheduled = await AsyncStorage.getItem('notifications_scheduled');
 
       if (isScheduled) {
-        console.log('Notifications already scheduled');
         return;
       }
 
