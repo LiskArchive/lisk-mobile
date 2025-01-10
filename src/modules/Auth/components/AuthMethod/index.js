@@ -16,7 +16,6 @@ import { H2 } from 'components/shared/toolBox/typography';
 import HeaderLogo from 'components/shared/HeaderLogo/HeaderLogo';
 import RecoveryPhaseSvg from 'assets/svgs/RecoveryPhaseSvg';
 import UploadSvg from 'assets/svgs/UploadSvg';
-import CreateAccount from '../CreateAccountButton/CreateAccountButton';
 import AuthTypeItem from '../AuthType';
 
 import getStyles from './styles';
@@ -51,14 +50,11 @@ export default function AuthMethod({ route }) {
       }
     };
 
-    if (settings.showedIntro) {
-      setBiometricSensorType();
-      dispatch(settingsRetrieved());
-      if (accounts.length && !route.params?.authRequired) {
-        navigation.navigate('AccountsManagerScreen');
-      }
-    } else {
-      navigation.push('Intro');
+    setBiometricSensorType();
+    dispatch(settingsRetrieved());
+
+    if (accounts.length && !route.params?.authRequired) {
+      navigation.navigate('MigrateToL2Screen');
     }
   }, [settings.showedIntro, accounts.length, dispatch, navigation, route.params?.authRequired]);
 
@@ -106,11 +102,7 @@ export default function AuthMethod({ route }) {
     }
   };
 
-  const handleCreateAccountClick = () => navigation.navigate('Register');
-
-  const handleGoBackClick = () => navigation.navigate('AccountsManagerScreen');
-
-  const showBackButton = accounts.length > 0;
+  const handleGoBackClick = () => navigation.navigate('MigrateToL2');
 
   if (!isScreenReady) {
     return <SafeAreaView style={[styles.container, styles.theme.container]} />;
@@ -122,10 +114,10 @@ export default function AuthMethod({ route }) {
 
   return (
     <SafeAreaView style={[styles.container, styles.theme.container]} testID="auth-method-screen">
-      {showBackButton && <HeaderBackButton onPress={handleGoBackClick} />}
+      <HeaderBackButton onPress={handleGoBackClick} />
 
       <View style={[styles.body]}>
-        <HeaderLogo style={{ container: { marginTop: 40 } }} />
+        <HeaderLogo />
 
         <H2 style={[styles.title, styles.theme.title]} testID="add-account-title">
           {i18next.t('auth.setup.authMethodTitle')}
@@ -145,8 +137,6 @@ export default function AuthMethod({ route }) {
           testID="restore-from-file"
         />
       </View>
-
-      <CreateAccount onPress={handleCreateAccountClick} style={{ container: styles.footer }} />
     </SafeAreaView>
   );
 }

@@ -22,3 +22,6 @@ project(':react-native-interactable').projectDir = new File(rootProject.projectD
 
 include ':app'
 includeBuild('../node_modules/react-native-gradle-plugin')
+
+include ':react-native-push-notification'
+project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android')

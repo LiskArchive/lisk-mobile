@@ -5,6 +5,7 @@ export default function getAccountsListStyles() {
     common: {
       container: {
         flex: 1,
+        height: '100%',
       },
       title: {
         textAlign: 'center',

@@ -46,6 +46,7 @@ import navigationLinking from '../../navigation.linking';
 import { navigationDarkTabsStyle, navigationLightTabsStyle } from './Navigator.styles';
 import ExternalApplicationDetailsScreen from '../../../modules/BlockchainApplication/components/ExternalApplicationDetailsScreen/ExternalApplicationDetailsScreen';
 import SendTokenContainer from '../../../modules/SendToken/SendTokenContainer';
+import MigrateToL2Screen from '../../../modules/Auth/components/MigrateToL2Screen/MigrateToL2Screen';
 
 const StackNavigator = createStackNavigator();
 
@@ -78,7 +79,12 @@ export default function Navigator({ children }) {
   return (
     <SafeAreaProvider>
       <NavigationContainer linking={navigationLinking} theme={themeColors}>
-        <StackNavigator.Navigator initialRouteName="AuthMethod">
+        <StackNavigator.Navigator initialRouteName="MigrateToL2">
+          <StackNavigator.Screen
+            name="MigrateToL2"
+            component={MigrateToL2Screen}
+            options={navigationOptions.NoHeader}
+          />
           <StackNavigator.Screen
             name="Register"
             component={RegisterForm}

@@ -15,7 +15,7 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - boost (1.76.0)
-  - BVLinearGradient (2.7.3):
+  - BVLinearGradient (2.8.3):
     - React-Core
   - CatCrypto (0.3.2)
   - CocoaAsyncSocket (7.6.5)
@@ -367,13 +367,13 @@ PODS:
     - React-Core
   - react-native-camera/RN (3.43.0):
     - React-Core
-  - react-native-cameraroll (5.7.2):
+  - react-native-cameraroll (5.10.0):
     - React-Core
-  - react-native-document-picker (8.2.1):
+  - react-native-document-picker (8.2.2):
     - React-Core
   - react-native-fingerprint-scanner (6.0.0):
     - React
-  - react-native-get-random-values (1.9.0):
+  - react-native-get-random-values (1.11.0):
     - React-Core
   - react-native-image-picker (4.10.3):
     - React-Core
@@ -381,7 +381,7 @@ PODS:
     - React-Core
   - react-native-randombytes (3.6.1):
     - React-Core
-  - react-native-safe-area-context (4.7.2):
+  - react-native-safe-area-context (4.14.0):
     - React-Core
   - react-native-shake (5.3.2):
     - React
@@ -477,9 +477,11 @@ PODS:
     - React
   - ReactNativeKeyboardTrackingView (5.7.0):
     - React
-  - RNCAsyncStorage (1.19.0):
+  - RNCAsyncStorage (1.24.0):
     - React-Core
-  - RNCClipboard (1.11.2):
+  - RNCClipboard (1.15.0):
+    - React-Core
+  - RNCPushNotificationIOS (1.11.0):
     - React-Core
   - RNDeviceInfo (8.0.2):
     - React-Core
@@ -493,9 +495,9 @@ PODS:
     - React
   - RNOS (1.2.6):
     - React
-  - RNPermissions (3.8.3):
+  - RNPermissions (3.10.1):
     - React-Core
-  - RNQrGenerator (1.3.1):
+  - RNQrGenerator (1.4.2):
     - React
     - ZXingObjC
   - RNReactNativeHapticFeedback (1.11.0):
@@ -529,14 +531,15 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.25.0):
+  - RNScreens (3.35.0):
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTImage
   - RNScreenshotPrevent (1.0.5):
     - React
   - RNShare (7.9.1):
     - React-Core
-  - RNSslPinning (1.5.7):
+  - RNSslPinning (1.5.8):
     - AFNetworking (~> 4.0)
     - React
   - RNSVG (12.5.1):
@@ -633,6 +636,7 @@ DEPENDENCIES:
   - ReactNativeKeyboardTrackingView (from `../node_modules/react-native-keyboard-tracking-view`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -784,6 +788,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCClipboard:
     :path: "../node_modules/@react-native-clipboard/clipboard"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNFS:
@@ -822,7 +828,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
-  BVLinearGradient: fbe308a1d19a8133f69e033abc85d8008644f5e3
+  BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   CatCrypto: a477899b6be4954e75be4897e732da098cc0a5a8
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -863,14 +869,14 @@ SPEC CHECKSUMS:
   React-logger: 186dd536128ae5924bc38ed70932c00aa740cd5b
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-camera: f432fcf1b32b528bbf7c3543d3e3b1deb0c5b72a
-  react-native-cameraroll: 134805127580aed23403b8c2cb1548920dd77b3a
-  react-native-document-picker: 69ca2094d8780cfc1e7e613894d15290fdc54bba
+  react-native-cameraroll: 4701ae7c3dbcd3f5e9e150ca17f250a276154b35
+  react-native-document-picker: cd4d6b36a5207ad7a9e599ebb9eb0c2e84fa0b87
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
-  react-native-get-random-values: dee677497c6a740b71e5612e8dbd83e7539ed5bb
+  react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-image-picker: 60f4246eb5bb7187fc15638a8c1f13abd3820695
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
-  react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
+  react-native-safe-area-context: 4532f1a0c5d34a46b9324ccaaedcb5582a302b7d
   react-native-shake: 62aa5681863203090a087842da70183c442b97f8
   react-native-wasm: 6bb5d9915e8d4b9b7d080247d3fbf7354a582695
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
@@ -889,22 +895,23 @@ SPEC CHECKSUMS:
   ReactCommon: 08723d2ed328c5cbcb0de168f231bc7bae7f8aa1
   ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
   ReactNativeKeyboardTrackingView: 02137fac3b2ebd330d74fa54ead48b14750a2306
-  RNCAsyncStorage: 4b98ac3c64efa4e35c1197cb0c5ca5e9f5d4c666
-  RNCClipboard: 3f0451a8100393908bea5c5c5b16f96d45f30bfc
+  RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
+  RNCClipboard: 69ab8e51324d5b351f6ba72bbdb72478087a2c64
+  RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
   RNDeviceInfo: a9601119924a67d2479d3facf04cec7b658f44ed
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
   RNKeychain: b8e0711b959a19c5b057d1e970d3c83d159b6da5
   RNOpenAppSettings: 1169b90a275e9e18c5973e1608949f97d426e7f3
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
-  RNPermissions: 0ceda889ac0235adf5cbe157cf958a691c6c06b8
-  RNQrGenerator: 90461ba3ca88c1d38ef73da50fade35d9648215d
+  RNPermissions: d565c87d6aec90b4407f13bebec38d0b914f6a05
+  RNQrGenerator: 5c12ab86443a07e923735800679da7b6fcaaeb31
   RNReactNativeHapticFeedback: 653a8c126a0f5e88ce15ffe280b3ff37e1fbb285
   RNReanimated: 532818a3578a0832d95ea9d0a6a9dc0e73bbce29
-  RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
+  RNScreens: 50ad6e3dbea9023272b3aa753e3ee2720b0c9b8f
   RNScreenshotPrevent: 0526b14371b2d0545957070cf30bc0a29a5c4bf5
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
-  RNSslPinning: 373fddf38420bec9c591376f3e4a24df1051b39a
+  RNSslPinning: 34974c9f1fe4a3a518598e58d482e3eb97612861
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
@@ -912,6 +919,6 @@ SPEC CHECKSUMS:
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
-PODFILE CHECKSUM: 15948ed2eab00a8ddc2910ffdc1dfbe0adacd00c
+PODFILE CHECKSUM: 48a0b1ff73cf0c2403abad60976fba2e20c845c3
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.16.2

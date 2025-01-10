@@ -3,6 +3,7 @@ import './services/msw/init';
 import { AppRegistry, Text } from 'react-native';
 import '@walletconnect/react-native-compat';
 import { name as appName } from './app.json';
+import './src/notifications/NotificationsConfig';
 import App from './src/App';
 
 if (Text.defaultProps == null) Text.defaultProps = {};

@@ -62,7 +62,7 @@ export default function AccountList({
     if (mode === 'modal') {
       modal.close();
     }
-    navigation.navigate('AuthMethod', { authRequired: true });
+    navigation.navigate('AuthMethod', { authRequired: true, showBackButton: true });
   };
 
   const toggleDiscreteMode = () =>
@@ -72,17 +72,28 @@ export default function AccountList({
       })
     );
 
+  if (!accounts.length && mode === 'modal') {
+    return (
+      <View style={[styles.container, style?.container]}>
+        <P style={[styles.description, styles.theme.description, style?.description]}>
+          No accounts saved on this device.
+        </P>
+      </View>
+    );
+  }
+
   return (
     <View style={[styles.container, style?.container]}>
-      <H2 style={[styles.title, styles.theme.title, style?.title]}>
-        {i18next.t('accounts.accountsManager.title')}
-      </H2>
-
-      <P style={[styles.description, styles.theme.description, style?.description]}>
-        {mode === 'modal'
-          ? i18next.t('accounts.accountsManager.modalDescription')
-          : i18next.t('accounts.accountsManager.screenDescription')}
-      </P>
+      {mode === 'modal' && (
+        <>
+          <H2 style={[styles.title, styles.theme.title, style?.title]}>
+            {i18next.t('accounts.accountsManager.title')}
+          </H2>
+          <P style={[styles.description, styles.theme.description, style?.description]}>
+            {i18next.t('accounts.accountsManager.modalDescription')}
+          </P>
+        </>
+      )}
 
       <InfiniteScrollList
         data={accounts}

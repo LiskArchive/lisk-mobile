@@ -5,6 +5,7 @@ import {
   applicationsContextReducer,
   applicationPinsContextReducer,
 } from './ApplicationsContext.utils';
+import { LISK_MAINNET_APPLICATION } from './ApplicationsContext.constants';
 
 export const ApplicationsContext = createContext();
 
@@ -26,7 +27,7 @@ export function ApplicationsProvider({ children }) {
   const [pinsStatus, setPinsStatus] = useState(false);
   const [errorOnPins, setErrorOnPins] = useState();
 
-  const [currentApplication, setCurrentApplication] = useState();
+  const [, setCurrentApplication] = useState();
   const [currentApplicationStatus, setCurrentApplicationStatus] = useState();
   const [errorOnCurrentApplication, setErrorOnCurrentApplication] = useState();
 
@@ -52,7 +53,7 @@ export function ApplicationsProvider({ children }) {
           setError: setErrorOnPins,
         },
         currentApplication: {
-          data: currentApplication,
+          data: LISK_MAINNET_APPLICATION,
           setData: setCurrentApplication,
           status: currentApplicationStatus,
           setStatus: setCurrentApplicationStatus,

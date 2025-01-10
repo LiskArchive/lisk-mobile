@@ -8,6 +8,7 @@ export default function getAccountCardStyles() {
         backgroundColor: colors.light.ultramarineBlue,
         padding: 24,
         borderRadius: 20,
+        minHeight: 210,
       },
       row: {
         flexDirection: 'row',
@@ -71,6 +72,18 @@ export default function getAccountCardStyles() {
       sendButtonText: {
         color: colors.light.ultramarineBlue,
       },
+      balanceContainer: {
+        marginTop: 24,
+      },
+      balanceLabel: {
+        fontFamily: fonts.family.context,
+        fontWeight: '600',
+        fontSize: fonts.size.small,
+      },
+      balanceText: {
+        fontFamily: fonts.family.contextSemiBold,
+        fontSize: fonts.size.h1,
+      },
     },
     [themes.light]: {
       usernameText: {
@@ -79,12 +92,24 @@ export default function getAccountCardStyles() {
       addressText: {
         color: colors.light.platinumGray,
       },
+      balanceLabel: {
+        color: colors.light.platinumGray,
+      },
+      balanceText: {
+        color: colors.light.platinumGray,
+      },
     },
     [themes.dark]: {
       usernameText: {
         color: colors.light.platinumGray,
       },
       addressText: {
+        color: colors.light.platinumGray,
+      },
+      balanceLabel: {
+        color: colors.light.platinumGray,
+      },
+      balanceText: {
         color: colors.light.platinumGray,
       },
     },
