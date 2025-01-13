@@ -67,7 +67,7 @@
     "react-native": "0.71.11",
     "react-native-app-settings": "^2.0.1",
     "react-native-background-timer": "2.4.1",
-    "react-native-blur-overlay": "1.0.7",
+    "react-native-blur-overlay": "2.0.1",
     "react-native-camera": "3.43.0",
     "react-native-device-info": "8.0.2",
     "react-native-document-picker": "^8.1.1",
