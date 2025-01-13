@@ -175,7 +175,7 @@
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^13.0.3",
     "metro-react-native-babel-preset": "^0.73.10",
-    "msw": "0.48.0",
+    "msw": "2.7.0",
     "path-browserify": "0.0.0",
     "prettier": "^2.7.1",
     "punycode": "^1.2.4",
