@@ -180,7 +180,7 @@
     "prettier": "^2.7.1",
     "punycode": "^1.2.4",
     "react-devtools": "^4.25.0",
-    "react-native-codegen": "0.71.5",
+    "react-native-codegen": "0.71.6",
     "react-native-crypto": "^2.1.0",
     "react-native-randombytes": "^3.0.0",
     "react-test-renderer": "^18.2.0",
