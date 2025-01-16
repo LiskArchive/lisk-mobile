@@ -4,6 +4,11 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+import android.os.Build;
+import android.content.Intent;
+import android.content.Context;
+import android.net.Uri;
+import android.app.AlarmManager;
 
 public class MainActivity extends ReactActivity {
 
@@ -32,4 +37,18 @@ public class MainActivity extends ReactActivity {
       DefaultNewArchitectureEntryPoint.getConcurrentReactEnabled() // concurrentRootEnabled
     );
   }
+
+  @Override
+  protected void onResume() {
+      super.onResume();
+      // Check if the app can schedule exact alarms
+      AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+          // If not, request the SCHEDULE_EXACT_ALARM permission
+          Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+          intent.setData(Uri.fromParts("package", getPackageName(), null));
+          startActivity(intent);
+      }
+  }
+
 }
